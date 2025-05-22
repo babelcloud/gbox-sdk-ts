@@ -24,7 +24,7 @@ export class Boxes extends APIResource {
    * ```ts
    * const box = await client.boxes.create({
    *   type: 'linux',
-   *   config: { cpu: 2, memory: 4096, disk: 20 },
+   *   config: { env: { FOO: 'bar' } },
    * });
    * ```
    */
@@ -66,12 +66,7 @@ export class Boxes extends APIResource {
    * @example
    * ```ts
    * const response = await client.boxes.createAndroid({
-   *   config: {
-   *     cpu: 2,
-   *     memory: 4096,
-   *     disk: 20,
-   *     androidVersion: '13.0',
-   *   },
+   *   config: { labels: { FOO: 'bar' }, envs: { FOO: 'bar' } },
    * });
    * ```
    */
@@ -86,13 +81,7 @@ export class Boxes extends APIResource {
    * @example
    * ```ts
    * const response = await client.boxes.createLinux({
-   *   config: {
-   *     cpu: 2,
-   *     memory: 4096,
-   *     disk: 20,
-   *     distribution: 'ubuntu',
-   *     version: '22.04',
-   *   },
+   *   config: { envs: { FOO: 'bar' } },
    * });
    * ```
    */
