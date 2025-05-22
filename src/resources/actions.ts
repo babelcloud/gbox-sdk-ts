@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../core/resource';
-import { APIPromise } from '../../core/api-promise';
-import { buildHeaders } from '../../internal/headers';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
+import { APIResource } from '../core/resource';
+import { APIPromise } from '../core/api-promise';
+import { buildHeaders } from '../internal/headers';
+import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.boxes.actions.click('id', {
+   * await client.actions.click('id', {
    *   type: 'click',
    *   x: 100,
    *   y: 200,
@@ -29,7 +29,7 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.boxes.actions.drag('id', {
+   * await client.actions.drag('id', {
    *   path: [{ x: 0, y: 0 }],
    *   type: 'drag',
    *   duration: '1000',
@@ -47,7 +47,7 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.boxes.actions.keypress('id', {
+   * await client.actions.keypress('id', {
    *   keys: ['string'],
    *   type: 'keypress',
    * });
@@ -64,7 +64,7 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.boxes.actions.move('id', {
+   * await client.actions.move('id', {
    *   type: 'move',
    *   x: 100,
    *   y: 200,
@@ -82,7 +82,7 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.boxes.actions.scroll('id', {
+   * await client.actions.scroll('id', {
    *   scrollX: 0,
    *   scrollY: 0,
    *   type: 'scroll',
@@ -102,7 +102,7 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.boxes.actions.touch('id', {
+   * await client.actions.touch('id', {
    *   points: [{ start: { x: 0, y: 0 } }],
    *   type: 'touch',
    * });
@@ -119,7 +119,7 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.boxes.actions.type('id', {
+   * await client.actions.type('id', {
    *   text: 'Hello World',
    *   type: 'type',
    * });
