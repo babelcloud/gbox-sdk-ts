@@ -10,22 +10,62 @@ import { path } from '../../internal/utils/path';
 export class Boxes extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
 
+  /**
+   * @example
+   * ```ts
+   * const box = await client.boxes.create({
+   *   type: 'linux',
+   *   config: { cpu: 2, memory: 4096, disk: 20 },
+   * });
+   * ```
+   */
   create(body: BoxCreateParams, options?: RequestOptions): APIPromise<BoxCreateResponse> {
     return this._client.post('/boxes', { body, ...options });
   }
 
+  /**
+   * @example
+   * ```ts
+   * const box = await client.boxes.retrieve('id');
+   * ```
+   */
   retrieve(id: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
     return this._client.get(path`/boxes/${id}`, options);
   }
 
+  /**
+   * @example
+   * ```ts
+   * const boxes = await client.boxes.list();
+   * ```
+   */
   list(options?: RequestOptions): APIPromise<BoxListResponse> {
     return this._client.get('/boxes', options);
   }
 
+  /**
+   * @example
+   * ```ts
+   * const box = await client.boxes.delete('id');
+   * ```
+   */
   delete(id: string, options?: RequestOptions): APIPromise<BoxDeleteResponse> {
     return this._client.delete(path`/boxes/${id}`, options);
   }
 
+  /**
+   * @example
+   * ```ts
+   * const response = await client.boxes.createAndroid({
+   *   config: {
+   *     cpu: 2,
+   *     memory: 4096,
+   *     disk: 20,
+   *     androidVersion: '13.0',
+   *   },
+   * });
+   * ```
+   */
   createAndroid(
     body: BoxCreateAndroidParams | null | undefined = {},
     options?: RequestOptions,
@@ -33,6 +73,20 @@ export class Boxes extends APIResource {
     return this._client.post('/boxes/android', { body, ...options });
   }
 
+  /**
+   * @example
+   * ```ts
+   * const response = await client.boxes.createLinux({
+   *   config: {
+   *     cpu: 2,
+   *     memory: 4096,
+   *     disk: 20,
+   *     distribution: 'ubuntu',
+   *     version: '22.04',
+   *   },
+   * });
+   * ```
+   */
   createLinux(
     body: BoxCreateLinuxParams | null | undefined = {},
     options?: RequestOptions,
@@ -40,10 +94,22 @@ export class Boxes extends APIResource {
     return this._client.post('/boxes/linux', { body, ...options });
   }
 
+  /**
+   * @example
+   * ```ts
+   * const response = await client.boxes.start('id');
+   * ```
+   */
   start(id: string, options?: RequestOptions): APIPromise<BoxStartResponse> {
     return this._client.post(path`/boxes/${id}/start`, options);
   }
 
+  /**
+   * @example
+   * ```ts
+   * const response = await client.boxes.stop('id');
+   * ```
+   */
   stop(id: string, options?: RequestOptions): APIPromise<BoxStopResponse> {
     return this._client.post(path`/boxes/${id}/stop`, options);
   }
