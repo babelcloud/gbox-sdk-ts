@@ -81,7 +81,7 @@ describe('resource boxes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.boxes.createAndroid(
-        { config: { envs: { foo: 'string' }, expiresIn: 'expiresIn', labels: { foo: 'string' } } },
+        { config: { envs: { FOO: 'bar' }, expiresIn: 'expiresIn', labels: { FOO: 'bar' } } },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxSDK.NotFoundError);
@@ -104,7 +104,7 @@ describe('resource boxes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.boxes.createLinux(
-        { config: { envs: { foo: 'string' }, expiresIn: 'expiresIn', labels: { foo: 'string' } } },
+        { config: { envs: { FOO: 'bar' }, expiresIn: 'expiresIn', labels: { foo: 'string' } } },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxSDK.NotFoundError);
