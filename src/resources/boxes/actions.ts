@@ -7,6 +7,17 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Actions extends APIResource {
+  /**
+   * @example
+   * ```ts
+   * await client.boxes.actions.click('id', {
+   *   type: 'click',
+   *   x: 100,
+   *   y: 200,
+   *   button: 'left',
+   * });
+   * ```
+   */
   click(id: string, body: ActionClickParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/boxes/${id}/actions/click`, {
       body,

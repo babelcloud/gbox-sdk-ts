@@ -10,7 +10,7 @@ const client = new GboxSDK({
 describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('click: only required params', async () => {
-    const responsePromise = client.boxes.actions.click('id', { type: 'click', x: 0, y: 0 });
+    const responsePromise = client.boxes.actions.click('id', { type: 'click', x: 100, y: 200 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,8 +24,8 @@ describe('resource actions', () => {
   test.skip('click: required and optional params', async () => {
     const response = await client.boxes.actions.click('id', {
       type: 'click',
-      x: 0,
-      y: 0,
+      x: 100,
+      y: 200,
       button: 'left',
       double: true,
     });
