@@ -26,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import GboxSDK from 'gbox-sdk';
 
 const client = new GboxSDK({
-  apiKey: process.env['GBOX_SDK_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
@@ -45,7 +45,7 @@ This library includes TypeScript definitions for all request params and response
 import GboxSDK from 'gbox-sdk';
 
 const client = new GboxSDK({
-  apiKey: process.env['GBOX_SDK_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
