@@ -1,6 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Actions, type ActionClickParams } from './actions';
+export {
+  Actions,
+  type ActionClickParams,
+  type ActionDragParams,
+  type ActionKeypressParams,
+  type ActionMoveParams,
+  type ActionScrollParams,
+  type ActionTouchParams,
+  type ActionTypeParams,
+} from './actions';
 export {
   Boxes,
   type BoxCreateResponse,

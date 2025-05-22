@@ -2,7 +2,16 @@
 
 import { APIResource } from '../../core/resource';
 import * as ActionsAPI from './actions';
-import { ActionClickParams, Actions } from './actions';
+import {
+  ActionClickParams,
+  ActionDragParams,
+  ActionKeypressParams,
+  ActionMoveParams,
+  ActionScrollParams,
+  ActionTouchParams,
+  ActionTypeParams,
+  Actions,
+} from './actions';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -1895,5 +1904,14 @@ export declare namespace Boxes {
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
   };
 
-  export { Actions as Actions, type ActionClickParams as ActionClickParams };
+  export {
+    Actions as Actions,
+    type ActionClickParams as ActionClickParams,
+    type ActionDragParams as ActionDragParams,
+    type ActionKeypressParams as ActionKeypressParams,
+    type ActionMoveParams as ActionMoveParams,
+    type ActionScrollParams as ActionScrollParams,
+    type ActionTouchParams as ActionTouchParams,
+    type ActionTypeParams as ActionTypeParams,
+  };
 }
