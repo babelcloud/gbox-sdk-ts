@@ -27,3 +27,9 @@ Methods:
 Methods:
 
 - <code title="post /boxes/{id}/actions/click">client.boxes.actions.<a href="./src/resources/boxes/actions.ts">click</a>(id, { ...params }) -> void</code>
+- <code title="post /boxes/{id}/actions/drag">client.boxes.actions.<a href="./src/resources/boxes/actions.ts">drag</a>(id, { ...params }) -> void</code>
+- <code title="post /boxes/{id}/actions/keypress">client.boxes.actions.<a href="./src/resources/boxes/actions.ts">keypress</a>(id, { ...params }) -> void</code>
+- <code title="post /boxes/{id}/actions/move">client.boxes.actions.<a href="./src/resources/boxes/actions.ts">move</a>(id, { ...params }) -> void</code>
+- <code title="post /boxes/{id}/actions/scroll">client.boxes.actions.<a href="./src/resources/boxes/actions.ts">scroll</a>(id, { ...params }) -> void</code>
+- <code title="post /boxes/{id}/actions/touch">client.boxes.actions.<a href="./src/resources/boxes/actions.ts">touch</a>(id, { ...params }) -> void</code>
+- <code title="post /boxes/{id}/actions/type">client.boxes.actions.<a href="./src/resources/boxes/actions.ts">type</a>(id, { ...params }) -> void</code>
