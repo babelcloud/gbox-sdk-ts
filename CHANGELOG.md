@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-05-23)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* add custom method ([e68ef11](https://github.com/babelcloud/gbox-sdk-ts/commit/e68ef11681132e671a7c166ddc209257fa0bf860))
+
 ## 0.1.0-alpha.1 (2025-05-23)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
