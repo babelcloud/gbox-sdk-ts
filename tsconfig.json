@@ -9,8 +9,8 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "gbox-sdk/*": ["src/*"],
-      "gbox-sdk": ["src/index.ts"]
+      "gbox-sdk-example/*": ["src/*"],
+      "gbox-sdk-example": ["src/index.ts"]
     },
     "noEmit": true,
 

@@ -1,12 +1,12 @@
 {
-  "name": "gbox-sdk",
-  "version": "0.0.1-alpha.0",
+  "name": "gbox-sdk-example",
+  "version": "0.1.0-alpha.1",
   "description": "The official TypeScript library for the Gbox SDK API",
   "author": "Gbox SDK <>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/gbox-sdk-typescript",
+  "repository": "github:babelcloud/gbox-sdk-ts",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [
@@ -50,8 +50,8 @@
     "synckit": "0.8.8"
   },
   "imports": {
-    "gbox-sdk": ".",
-    "gbox-sdk/*": "./src/*"
+    "gbox-sdk-example": ".",
+    "gbox-sdk-example/*": "./src/*"
   },
   "exports": {
     ".": {
