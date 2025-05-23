@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'gbox-sdk/internal/uploads';
-import { toFile } from 'gbox-sdk/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'gbox-sdk-example/internal/uploads';
+import { toFile } from 'gbox-sdk-example/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
