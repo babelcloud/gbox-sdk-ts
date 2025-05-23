@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GboxSDK from 'gbox-sdk';
+import GboxSDK from 'gbox-sdk-example';
 
 const client = new GboxSDK({
   apiKey: 'My API Key',
