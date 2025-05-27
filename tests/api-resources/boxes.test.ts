@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GboxSDK from 'gbox-sdk-example';
+import GboxClient from 'gbox-sdk-example';
 
-const client = new GboxSDK({
+const client = new GboxClient({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
@@ -84,7 +84,7 @@ describe('resource boxes', () => {
         { config: { envs: { FOO: 'bar' }, expiresIn: 'expiresIn', labels: { FOO: 'bar' } } },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GboxSDK.NotFoundError);
+    ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -107,7 +107,7 @@ describe('resource boxes', () => {
         { config: { envs: { FOO: 'bar' }, expiresIn: 'expiresIn', labels: { foo: 'string' } } },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GboxSDK.NotFoundError);
+    ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
