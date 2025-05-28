@@ -9,10 +9,10 @@ export class Invite extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.invite.createLink();
+   * await client.api.v1.invite.createInviteLink();
    * ```
    */
-  createLink(body: InviteCreateLinkParams, options?: RequestOptions): APIPromise<void> {
+  createInviteLink(body: InviteCreateInviteLinkParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/invite/create_invite_link', {
       body,
       ...options,
@@ -23,10 +23,10 @@ export class Invite extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.invite.deleteLink();
+   * await client.api.v1.invite.deleteInviteLink();
    * ```
    */
-  deleteLink(body: InviteDeleteLinkParams, options?: RequestOptions): APIPromise<void> {
+  deleteInviteLink(body: InviteDeleteInviteLinkParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/invite/delete_invite_link', {
       body,
       ...options,
@@ -37,10 +37,10 @@ export class Invite extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.invite.getLink();
+   * await client.api.v1.invite.getInviteLink();
    * ```
    */
-  getLink(body: InviteGetLinkParams, options?: RequestOptions): APIPromise<void> {
+  getInviteLink(body: InviteGetInviteLinkParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/invite/get_invite_link', {
       body,
       ...options,
@@ -49,16 +49,16 @@ export class Invite extends APIResource {
   }
 }
 
-export interface InviteCreateLinkParams {}
+export interface InviteCreateInviteLinkParams {}
 
-export interface InviteDeleteLinkParams {}
+export interface InviteDeleteInviteLinkParams {}
 
-export interface InviteGetLinkParams {}
+export interface InviteGetInviteLinkParams {}
 
 export declare namespace Invite {
   export {
-    type InviteCreateLinkParams as InviteCreateLinkParams,
-    type InviteDeleteLinkParams as InviteDeleteLinkParams,
-    type InviteGetLinkParams as InviteGetLinkParams,
+    type InviteCreateInviteLinkParams as InviteCreateInviteLinkParams,
+    type InviteDeleteInviteLinkParams as InviteDeleteInviteLinkParams,
+    type InviteGetInviteLinkParams as InviteGetInviteLinkParams,
   };
 }

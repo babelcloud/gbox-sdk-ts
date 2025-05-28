@@ -1,34 +1,32 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { APIKey, type APIKeyCreateParams, type APIKeyDeleteParams, type APIKeyGetAllParams } from './api-key';
+export {
+  APIKey,
+  type APIKeyCreateAnAPIKeyParams,
+  type APIKeyDeleteAnAPIKeyParams,
+  type APIKeyGetAllAPIKeyParams,
+} from './api-key';
 export { Auth } from './auth/index';
 export { Gbox, type GboxStopParams } from './gbox/index';
 export {
   Invite,
-  type InviteCreateLinkParams,
-  type InviteDeleteLinkParams,
-  type InviteGetLinkParams,
+  type InviteCreateInviteLinkParams,
+  type InviteDeleteInviteLinkParams,
+  type InviteGetInviteLinkParams,
 } from './invite';
 export {
   Organization,
-  type OrganizationCreateOrganizationParams,
-  type OrganizationDeleteOrganizationParams,
-  type OrganizationGetMemberListParams,
-  type OrganizationJoinOrganizationByInviteParams,
+  type OrganizationCreateAnOrganizationParams,
+  type OrganizationDeleteAnOrganizationParams,
+  type OrganizationGetOrganizationMemberListParams,
+  type OrganizationJoinOrganizationByInviteLinkParams,
   type OrganizationQuitOrganizationParams,
-  type OrganizationRemoveMemberParams,
-  type OrganizationTransferOwnershipParams,
-  type OrganizationUpdateMemberRoleParams,
+  type OrganizationRemoveOrganizationMemberParams,
+  type OrganizationTransferOrganizationOwnershipParams,
+  type OrganizationUpdateOrganizationMemberRoleParams,
 } from './organization';
-export {
-  Proxy,
-  type ProxyUpdateParams,
-  type ProxyDeleteParams,
-  type ProxyGetParams,
-  type ProxyPatchParams,
-  type ProxyPostParams,
-} from './proxy';
-export { Sandbox, type SandboxDeleteParams, type SandboxGetListParams } from './sandbox';
+export { Proxy, type ProxyRetrieveParams, type ProxyUpdateParams, type ProxyDeleteParams } from './proxy';
+export { Sandbox, type SandboxDeleteSandboxParams, type SandboxGetSandboxListParams } from './sandbox';
 export { Template } from './template';
 export { User, type UserUpdateUserInfoParams, type UserUseInviteCodeParams } from './user';
 export { V1 } from './v1';

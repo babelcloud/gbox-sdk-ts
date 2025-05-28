@@ -9,13 +9,13 @@ export class Sandbox extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.sandbox.delete({
+   * await client.api.v1.sandbox.deleteSandbox({
    *   organizationId: 'organizationId',
    *   sandboxId: 'sandboxId',
    * });
    * ```
    */
-  delete(body: SandboxDeleteParams, options?: RequestOptions): APIPromise<void> {
+  deleteSandbox(body: SandboxDeleteSandboxParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/sandbox/delete_sandbox', {
       body,
       ...options,
@@ -26,14 +26,14 @@ export class Sandbox extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.sandbox.getList({
+   * await client.api.v1.sandbox.getSandboxList({
    *   organizationId: 'organizationId',
    *   page: 0,
    *   pageSize: 0,
    * });
    * ```
    */
-  getList(body: SandboxGetListParams, options?: RequestOptions): APIPromise<void> {
+  getSandboxList(body: SandboxGetSandboxListParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/sandbox/get_sandbox_list', {
       body,
       ...options,
@@ -42,7 +42,7 @@ export class Sandbox extends APIResource {
   }
 }
 
-export interface SandboxDeleteParams {
+export interface SandboxDeleteSandboxParams {
   /**
    * 组织 ID
    */
@@ -54,7 +54,7 @@ export interface SandboxDeleteParams {
   sandboxId: string;
 }
 
-export interface SandboxGetListParams {
+export interface SandboxGetSandboxListParams {
   /**
    * 组织 ID
    */
@@ -73,7 +73,7 @@ export interface SandboxGetListParams {
 
 export declare namespace Sandbox {
   export {
-    type SandboxDeleteParams as SandboxDeleteParams,
-    type SandboxGetListParams as SandboxGetListParams,
+    type SandboxDeleteSandboxParams as SandboxDeleteSandboxParams,
+    type SandboxGetSandboxListParams as SandboxGetSandboxListParams,
   };
 }

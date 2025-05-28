@@ -7,6 +7,24 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Android extends APIResource {
   /**
+   * 创建 android 容器
+   *
+   * @example
+   * ```ts
+   * await client.api.v1.gbox.android.create({
+   *   architecture: 'arm',
+   * });
+   * ```
+   */
+  create(body: AndroidCreateParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/api/v1/gbox/android/create', {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * 点击 android 设备
    *
    * @example
@@ -27,17 +45,17 @@ export class Android extends APIResource {
   }
 
   /**
-   * 创建 android 容器
+   * 获取 android 设备屏幕尺寸
    *
    * @example
    * ```ts
-   * await client.api.v1.gbox.android.createContainer({
-   *   architecture: 'arm',
+   * await client.api.v1.gbox.android.deviceScreenSize({
+   *   uid: 'uid-1',
    * });
    * ```
    */
-  createContainer(body: AndroidCreateContainerParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post('/api/v1/gbox/android/create', {
+  deviceScreenSize(body: AndroidDeviceScreenSizeParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/api/v1/gbox/android/deviceScreenSize', {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -68,42 +86,6 @@ export class Android extends APIResource {
   }
 
   /**
-   * 获取 android 设备屏幕尺寸
-   *
-   * @example
-   * ```ts
-   * await client.api.v1.gbox.android.getScreenSize({
-   *   uid: 'uid-1',
-   * });
-   * ```
-   */
-  getScreenSize(body: AndroidGetScreenSizeParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post('/api/v1/gbox/android/deviceScreenSize', {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * 获取 android 截图
-   *
-   * @example
-   * ```ts
-   * await client.api.v1.gbox.android.getScreenshot({
-   *   uid: 'uid-1',
-   * });
-   * ```
-   */
-  getScreenshot(body: AndroidGetScreenshotParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post('/api/v1/gbox/android/screenshot', {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
    * 按下 android 设备按键
    *
    * @example
@@ -127,14 +109,32 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.gbox.android.runCommand({
+   * await client.api.v1.gbox.android.run({
    *   command: 'ls -l',
    *   uid: 'uid-1',
    * });
    * ```
    */
-  runCommand(body: AndroidRunCommandParams, options?: RequestOptions): APIPromise<void> {
+  run(body: AndroidRunParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/gbox/android/run', {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * 获取 android 截图
+   *
+   * @example
+   * ```ts
+   * await client.api.v1.gbox.android.screenshot({
+   *   uid: 'uid-1',
+   * });
+   * ```
+   */
+  screenshot(body: AndroidScreenshotParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/api/v1/gbox/android/screenshot', {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -168,19 +168,26 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.gbox.android.typeText({
+   * await client.api.v1.gbox.android.type({
    *   text: 'Hello, World!',
    *   uid: 'uid-1',
    * });
    * ```
    */
-  typeText(body: AndroidTypeTextParams, options?: RequestOptions): APIPromise<void> {
+  type(body: AndroidTypeParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/gbox/android/type', {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
+}
+
+export interface AndroidCreateParams {
+  /**
+   * architecture
+   */
+  architecture: string;
 }
 
 export interface AndroidClickParams {
@@ -200,11 +207,11 @@ export interface AndroidClickParams {
   y: number;
 }
 
-export interface AndroidCreateContainerParams {
+export interface AndroidDeviceScreenSizeParams {
   /**
-   * architecture
+   * uid
    */
-  architecture: string;
+  uid: string;
 }
 
 export interface AndroidDragParams {
@@ -239,20 +246,6 @@ export interface AndroidDragParams {
   uid: string;
 }
 
-export interface AndroidGetScreenSizeParams {
-  /**
-   * uid
-   */
-  uid: string;
-}
-
-export interface AndroidGetScreenshotParams {
-  /**
-   * uid
-   */
-  uid: string;
-}
-
 export interface AndroidKeyPressParams {
   /**
    * key
@@ -265,12 +258,19 @@ export interface AndroidKeyPressParams {
   uid: string;
 }
 
-export interface AndroidRunCommandParams {
+export interface AndroidRunParams {
   /**
    * command
    */
   command: string;
 
+  /**
+   * uid
+   */
+  uid: string;
+}
+
+export interface AndroidScreenshotParams {
   /**
    * uid
    */
@@ -304,7 +304,7 @@ export interface AndroidScrollParams {
   uid: string;
 }
 
-export interface AndroidTypeTextParams {
+export interface AndroidTypeParams {
   /**
    * text
    */
@@ -318,14 +318,14 @@ export interface AndroidTypeTextParams {
 
 export declare namespace Android {
   export {
+    type AndroidCreateParams as AndroidCreateParams,
     type AndroidClickParams as AndroidClickParams,
-    type AndroidCreateContainerParams as AndroidCreateContainerParams,
+    type AndroidDeviceScreenSizeParams as AndroidDeviceScreenSizeParams,
     type AndroidDragParams as AndroidDragParams,
-    type AndroidGetScreenSizeParams as AndroidGetScreenSizeParams,
-    type AndroidGetScreenshotParams as AndroidGetScreenshotParams,
     type AndroidKeyPressParams as AndroidKeyPressParams,
-    type AndroidRunCommandParams as AndroidRunCommandParams,
+    type AndroidRunParams as AndroidRunParams,
+    type AndroidScreenshotParams as AndroidScreenshotParams,
     type AndroidScrollParams as AndroidScrollParams,
-    type AndroidTypeTextParams as AndroidTypeTextParams,
+    type AndroidTypeParams as AndroidTypeParams,
   };
 }
