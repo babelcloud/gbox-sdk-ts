@@ -9,15 +9,12 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.createAnOrganization({
+   * await client.api.v1.organization.createOrganization({
    *   name: 'name',
    * });
    * ```
    */
-  createAnOrganization(
-    body: OrganizationCreateAnOrganizationParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
+  createOrganization(body: OrganizationCreateOrganizationParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/organization/create_an_organization', {
       body,
       ...options,
@@ -28,15 +25,12 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.deleteAnOrganization({
+   * await client.api.v1.organization.deleteOrganization({
    *   organizationId: 'organizationId',
    * });
    * ```
    */
-  deleteAnOrganization(
-    body: OrganizationDeleteAnOrganizationParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
+  deleteOrganization(body: OrganizationDeleteOrganizationParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/organization/delete_an_organization', {
       body,
       ...options,
@@ -47,13 +41,24 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.getOrganizationMemberList();
+   * await client.api.v1.organization.joinByInviteLink();
    * ```
    */
-  getOrganizationMemberList(
-    body: OrganizationGetOrganizationMemberListParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
+  joinByInviteLink(body: OrganizationJoinByInviteLinkParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/api/v1/organization/join_organization_by_invite_link', {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * @example
+   * ```ts
+   * await client.api.v1.organization.listMembers();
+   * ```
+   */
+  listMembers(body: OrganizationListMembersParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/organization/get_organization_member_list', {
       body,
       ...options,
@@ -64,15 +69,11 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.joinOrganizationByInviteLink();
+   * await client.api.v1.organization.listMyOrganizations();
    * ```
    */
-  joinOrganizationByInviteLink(
-    body: OrganizationJoinOrganizationByInviteLinkParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.post('/api/v1/organization/join_organization_by_invite_link', {
-      body,
+  listMyOrganizations(options?: RequestOptions): APIPromise<void> {
+    return this._client.get('/api/v1/organization/get_my_organization_list', {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -95,13 +96,10 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.removeOrganizationMember();
+   * await client.api.v1.organization.removeMember();
    * ```
    */
-  removeOrganizationMember(
-    body: OrganizationRemoveOrganizationMemberParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
+  removeMember(body: OrganizationRemoveMemberParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/organization/remove_organization_member', {
       body,
       ...options,
@@ -112,26 +110,10 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.retrieveGetMyOrganizationList();
+   * await client.api.v1.organization.transferOwnership();
    * ```
    */
-  retrieveGetMyOrganizationList(options?: RequestOptions): APIPromise<void> {
-    return this._client.get('/api/v1/organization/get_my_organization_list', {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * @example
-   * ```ts
-   * await client.api.v1.organization.transferOrganizationOwnership();
-   * ```
-   */
-  transferOrganizationOwnership(
-    body: OrganizationTransferOrganizationOwnershipParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
+  transferOwnership(body: OrganizationTransferOwnershipParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/organization/transfer_organization_ownership', {
       body,
       ...options,
@@ -142,13 +124,10 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.updateOrganizationMemberRole();
+   * await client.api.v1.organization.updateMemberRole();
    * ```
    */
-  updateOrganizationMemberRole(
-    body: OrganizationUpdateOrganizationMemberRoleParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
+  updateMemberRole(body: OrganizationUpdateMemberRoleParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/organization/update_organization_member_role', {
       body,
       ...options,
@@ -157,41 +136,41 @@ export class Organization extends APIResource {
   }
 }
 
-export interface OrganizationCreateAnOrganizationParams {
+export interface OrganizationCreateOrganizationParams {
   /**
    * organization name
    */
   name: string;
 }
 
-export interface OrganizationDeleteAnOrganizationParams {
+export interface OrganizationDeleteOrganizationParams {
   /**
    * organization id
    */
   organizationId: string;
 }
 
-export interface OrganizationGetOrganizationMemberListParams {}
+export interface OrganizationJoinByInviteLinkParams {}
 
-export interface OrganizationJoinOrganizationByInviteLinkParams {}
+export interface OrganizationListMembersParams {}
 
 export interface OrganizationQuitOrganizationParams {}
 
-export interface OrganizationRemoveOrganizationMemberParams {}
+export interface OrganizationRemoveMemberParams {}
 
-export interface OrganizationTransferOrganizationOwnershipParams {}
+export interface OrganizationTransferOwnershipParams {}
 
-export interface OrganizationUpdateOrganizationMemberRoleParams {}
+export interface OrganizationUpdateMemberRoleParams {}
 
 export declare namespace Organization {
   export {
-    type OrganizationCreateAnOrganizationParams as OrganizationCreateAnOrganizationParams,
-    type OrganizationDeleteAnOrganizationParams as OrganizationDeleteAnOrganizationParams,
-    type OrganizationGetOrganizationMemberListParams as OrganizationGetOrganizationMemberListParams,
-    type OrganizationJoinOrganizationByInviteLinkParams as OrganizationJoinOrganizationByInviteLinkParams,
+    type OrganizationCreateOrganizationParams as OrganizationCreateOrganizationParams,
+    type OrganizationDeleteOrganizationParams as OrganizationDeleteOrganizationParams,
+    type OrganizationJoinByInviteLinkParams as OrganizationJoinByInviteLinkParams,
+    type OrganizationListMembersParams as OrganizationListMembersParams,
     type OrganizationQuitOrganizationParams as OrganizationQuitOrganizationParams,
-    type OrganizationRemoveOrganizationMemberParams as OrganizationRemoveOrganizationMemberParams,
-    type OrganizationTransferOrganizationOwnershipParams as OrganizationTransferOrganizationOwnershipParams,
-    type OrganizationUpdateOrganizationMemberRoleParams as OrganizationUpdateOrganizationMemberRoleParams,
+    type OrganizationRemoveMemberParams as OrganizationRemoveMemberParams,
+    type OrganizationTransferOwnershipParams as OrganizationTransferOwnershipParams,
+    type OrganizationUpdateMemberRoleParams as OrganizationUpdateMemberRoleParams,
   };
 }

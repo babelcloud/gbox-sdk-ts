@@ -2,31 +2,38 @@
 
 export {
   APIKey,
-  type APIKeyCreateAnAPIKeyParams,
-  type APIKeyDeleteAnAPIKeyParams,
-  type APIKeyGetAllAPIKeyParams,
+  type APIKeyCreateAPIKeyParams,
+  type APIKeyDeleteAPIKeyParams,
+  type APIKeyListAllParams,
 } from './api-key';
 export { Auth } from './auth/index';
-export { Gbox, type GboxStopParams } from './gbox/index';
+export { Gbox, type GboxStopContainerParams } from './gbox/index';
 export {
   Invite,
   type InviteCreateInviteLinkParams,
   type InviteDeleteInviteLinkParams,
-  type InviteGetInviteLinkParams,
+  type InviteRetrieveInviteLinkParams,
 } from './invite';
 export {
   Organization,
-  type OrganizationCreateAnOrganizationParams,
-  type OrganizationDeleteAnOrganizationParams,
-  type OrganizationGetOrganizationMemberListParams,
-  type OrganizationJoinOrganizationByInviteLinkParams,
+  type OrganizationCreateOrganizationParams,
+  type OrganizationDeleteOrganizationParams,
+  type OrganizationJoinByInviteLinkParams,
+  type OrganizationListMembersParams,
   type OrganizationQuitOrganizationParams,
-  type OrganizationRemoveOrganizationMemberParams,
-  type OrganizationTransferOrganizationOwnershipParams,
-  type OrganizationUpdateOrganizationMemberRoleParams,
+  type OrganizationRemoveMemberParams,
+  type OrganizationTransferOwnershipParams,
+  type OrganizationUpdateMemberRoleParams,
 } from './organization';
-export { Proxy, type ProxyRetrieveParams, type ProxyUpdateParams, type ProxyDeleteParams } from './proxy';
-export { Sandbox, type SandboxDeleteSandboxParams, type SandboxGetSandboxListParams } from './sandbox';
+export {
+  Proxy,
+  type ProxyDeleteProxyParams,
+  type ProxyForwardRequestParams,
+  type ProxyPatchProxyParams,
+  type ProxyRetrieveProxyParams,
+  type ProxyUpdateProxyParams,
+} from './proxy';
+export { Sandbox, type SandboxDeleteSandboxParams, type SandboxListSandboxesParams } from './sandbox';
 export { Template } from './template';
 export { User, type UserUpdateUserInfoParams, type UserUseInviteCodeParams } from './user';
 export { V1 } from './v1';

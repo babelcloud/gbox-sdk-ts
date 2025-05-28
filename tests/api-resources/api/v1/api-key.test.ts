@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 
-const client = new GboxClient({
+const client = new GboxSDK({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource apiKey', () => {
   // skipped: tests are disabled for the time being
-  test.skip('createAnAPIKey: only required params', async () => {
-    const responsePromise = client.api.v1.apiKey.createAnAPIKey({
+  test.skip('createAPIKey: only required params', async () => {
+    const responsePromise = client.api.v1.apiKey.createAPIKey({
       name: 'name',
       organizationId: 'organizationId',
     });
@@ -24,16 +24,16 @@ describe('resource apiKey', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('createAnAPIKey: required and optional params', async () => {
-    const response = await client.api.v1.apiKey.createAnAPIKey({
+  test.skip('createAPIKey: required and optional params', async () => {
+    const response = await client.api.v1.apiKey.createAPIKey({
       name: 'name',
       organizationId: 'organizationId',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('deleteAnAPIKey: only required params', async () => {
-    const responsePromise = client.api.v1.apiKey.deleteAnAPIKey({
+  test.skip('deleteAPIKey: only required params', async () => {
+    const responsePromise = client.api.v1.apiKey.deleteAPIKey({
       apiKeyId: 'apiKeyId',
       organizationId: 'organizationId',
     });
@@ -47,16 +47,16 @@ describe('resource apiKey', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('deleteAnAPIKey: required and optional params', async () => {
-    const response = await client.api.v1.apiKey.deleteAnAPIKey({
+  test.skip('deleteAPIKey: required and optional params', async () => {
+    const response = await client.api.v1.apiKey.deleteAPIKey({
       apiKeyId: 'apiKeyId',
       organizationId: 'organizationId',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('getAllAPIKey: only required params', async () => {
-    const responsePromise = client.api.v1.apiKey.getAllAPIKey({ organizationId: 'organizationId' });
+  test.skip('listAll: only required params', async () => {
+    const responsePromise = client.api.v1.apiKey.listAll({ organizationId: 'organizationId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -67,7 +67,7 @@ describe('resource apiKey', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('getAllAPIKey: required and optional params', async () => {
-    const response = await client.api.v1.apiKey.getAllAPIKey({ organizationId: 'organizationId' });
+  test.skip('listAll: required and optional params', async () => {
+    const response = await client.api.v1.apiKey.listAll({ organizationId: 'organizationId' });
   });
 });

@@ -9,10 +9,10 @@ export class Template extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.template.retrieveGetAllTemplates();
+   * await client.api.v1.template.listAllTemplates();
    * ```
    */
-  retrieveGetAllTemplates(options?: RequestOptions): APIPromise<void> {
+  listAllTemplates(options?: RequestOptions): APIPromise<void> {
     return this._client.get('/api/v1/template/get_all_templates', {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),

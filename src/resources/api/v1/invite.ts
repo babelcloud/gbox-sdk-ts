@@ -37,10 +37,10 @@ export class Invite extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.invite.getInviteLink();
+   * await client.api.v1.invite.retrieveInviteLink();
    * ```
    */
-  getInviteLink(body: InviteGetInviteLinkParams, options?: RequestOptions): APIPromise<void> {
+  retrieveInviteLink(body: InviteRetrieveInviteLinkParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/invite/get_invite_link', {
       body,
       ...options,
@@ -53,12 +53,12 @@ export interface InviteCreateInviteLinkParams {}
 
 export interface InviteDeleteInviteLinkParams {}
 
-export interface InviteGetInviteLinkParams {}
+export interface InviteRetrieveInviteLinkParams {}
 
 export declare namespace Invite {
   export {
     type InviteCreateInviteLinkParams as InviteCreateInviteLinkParams,
     type InviteDeleteInviteLinkParams as InviteDeleteInviteLinkParams,
-    type InviteGetInviteLinkParams as InviteGetInviteLinkParams,
+    type InviteRetrieveInviteLinkParams as InviteRetrieveInviteLinkParams,
   };
 }

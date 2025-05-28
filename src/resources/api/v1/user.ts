@@ -22,10 +22,10 @@ export class User extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.user.retrieveGetCurrentUserInfo();
+   * await client.api.v1.user.retrieveCurrentUserInfo();
    * ```
    */
-  retrieveGetCurrentUserInfo(options?: RequestOptions): APIPromise<void> {
+  retrieveCurrentUserInfo(options?: RequestOptions): APIPromise<void> {
     return this._client.get('/api/v1/user/get_current_user_info', {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),

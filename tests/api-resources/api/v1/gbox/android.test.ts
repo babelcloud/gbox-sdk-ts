@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 
-const client = new GboxClient({
+const client = new GboxSDK({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource android', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.api.v1.gbox.android.create({ architecture: 'arm' });
+  test.skip('captureScreenshot: only required params', async () => {
+    const responsePromise = client.api.v1.gbox.android.captureScreenshot({ uid: 'uid-1' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,13 +21,13 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.api.v1.gbox.android.create({ architecture: 'arm' });
+  test.skip('captureScreenshot: required and optional params', async () => {
+    const response = await client.api.v1.gbox.android.captureScreenshot({ uid: 'uid-1' });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('click: only required params', async () => {
-    const responsePromise = client.api.v1.gbox.android.click({ uid: 'uid-1', x: 100, y: 100 });
+  test.skip('clickDevice: only required params', async () => {
+    const responsePromise = client.api.v1.gbox.android.clickDevice({ uid: 'uid-1', x: 100, y: 100 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -38,13 +38,13 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('click: required and optional params', async () => {
-    const response = await client.api.v1.gbox.android.click({ uid: 'uid-1', x: 100, y: 100 });
+  test.skip('clickDevice: required and optional params', async () => {
+    const response = await client.api.v1.gbox.android.clickDevice({ uid: 'uid-1', x: 100, y: 100 });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('deviceScreenSize: only required params', async () => {
-    const responsePromise = client.api.v1.gbox.android.deviceScreenSize({ uid: 'uid-1' });
+  test.skip('createContainer: only required params', async () => {
+    const responsePromise = client.api.v1.gbox.android.createContainer({ architecture: 'arm' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -55,13 +55,13 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('deviceScreenSize: required and optional params', async () => {
-    const response = await client.api.v1.gbox.android.deviceScreenSize({ uid: 'uid-1' });
+  test.skip('createContainer: required and optional params', async () => {
+    const response = await client.api.v1.gbox.android.createContainer({ architecture: 'arm' });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('drag: only required params', async () => {
-    const responsePromise = client.api.v1.gbox.android.drag({
+  test.skip('dragDevice: only required params', async () => {
+    const responsePromise = client.api.v1.gbox.android.dragDevice({
       endX: 100,
       endY: 100,
       ms: 1000,
@@ -79,8 +79,8 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('drag: required and optional params', async () => {
-    const response = await client.api.v1.gbox.android.drag({
+  test.skip('dragDevice: required and optional params', async () => {
+    const response = await client.api.v1.gbox.android.dragDevice({
       endX: 100,
       endY: 100,
       ms: 1000,
@@ -91,8 +91,8 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('keyPress: only required params', async () => {
-    const responsePromise = client.api.v1.gbox.android.keyPress({ key: 'enter', uid: 'uid-1' });
+  test.skip('getDeviceScreenSize: only required params', async () => {
+    const responsePromise = client.api.v1.gbox.android.getDeviceScreenSize({ uid: 'uid-1' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -103,13 +103,13 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('keyPress: required and optional params', async () => {
-    const response = await client.api.v1.gbox.android.keyPress({ key: 'enter', uid: 'uid-1' });
+  test.skip('getDeviceScreenSize: required and optional params', async () => {
+    const response = await client.api.v1.gbox.android.getDeviceScreenSize({ uid: 'uid-1' });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('run: only required params', async () => {
-    const responsePromise = client.api.v1.gbox.android.run({ command: 'ls -l', uid: 'uid-1' });
+  test.skip('pressKey: only required params', async () => {
+    const responsePromise = client.api.v1.gbox.android.pressKey({ key: 'enter', uid: 'uid-1' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -120,13 +120,13 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('run: required and optional params', async () => {
-    const response = await client.api.v1.gbox.android.run({ command: 'ls -l', uid: 'uid-1' });
+  test.skip('pressKey: required and optional params', async () => {
+    const response = await client.api.v1.gbox.android.pressKey({ key: 'enter', uid: 'uid-1' });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('screenshot: only required params', async () => {
-    const responsePromise = client.api.v1.gbox.android.screenshot({ uid: 'uid-1' });
+  test.skip('runCommand: only required params', async () => {
+    const responsePromise = client.api.v1.gbox.android.runCommand({ command: 'ls -l', uid: 'uid-1' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -137,13 +137,13 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('screenshot: required and optional params', async () => {
-    const response = await client.api.v1.gbox.android.screenshot({ uid: 'uid-1' });
+  test.skip('runCommand: required and optional params', async () => {
+    const response = await client.api.v1.gbox.android.runCommand({ command: 'ls -l', uid: 'uid-1' });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('scroll: only required params', async () => {
-    const responsePromise = client.api.v1.gbox.android.scroll({
+  test.skip('scrollDevice: only required params', async () => {
+    const responsePromise = client.api.v1.gbox.android.scrollDevice({
       endX: 100,
       endY: 100,
       startX: 100,
@@ -160,8 +160,8 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('scroll: required and optional params', async () => {
-    const response = await client.api.v1.gbox.android.scroll({
+  test.skip('scrollDevice: required and optional params', async () => {
+    const response = await client.api.v1.gbox.android.scrollDevice({
       endX: 100,
       endY: 100,
       startX: 100,
@@ -171,8 +171,8 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('type: only required params', async () => {
-    const responsePromise = client.api.v1.gbox.android.type({ text: 'Hello, World!', uid: 'uid-1' });
+  test.skip('typeText: only required params', async () => {
+    const responsePromise = client.api.v1.gbox.android.typeText({ text: 'Hello, World!', uid: 'uid-1' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -183,7 +183,7 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('type: required and optional params', async () => {
-    const response = await client.api.v1.gbox.android.type({ text: 'Hello, World!', uid: 'uid-1' });
+  test.skip('typeText: required and optional params', async () => {
+    const response = await client.api.v1.gbox.android.typeText({ text: 'Hello, World!', uid: 'uid-1' });
   });
 });

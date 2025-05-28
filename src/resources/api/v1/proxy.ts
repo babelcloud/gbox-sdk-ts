@@ -12,12 +12,14 @@ export class Proxy extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.proxy.retrieve('path', { uid: 'uid' });
+   * await client.api.v1.proxy.deleteProxy('path', {
+   *   uid: 'uid',
+   * });
    * ```
    */
-  retrieve(path_: string, params: ProxyRetrieveParams, options?: RequestOptions): APIPromise<void> {
+  deleteProxy(path_: string, params: ProxyDeleteProxyParams, options?: RequestOptions): APIPromise<void> {
     const { uid } = params;
-    return this._client.get(path`/api/v1/proxy/${uid}/${path_}`, {
+    return this._client.delete(path`/api/v1/proxy/${uid}/${path_}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -28,10 +30,34 @@ export class Proxy extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.proxy.update('path', { uid: 'uid' });
+   * await client.api.v1.proxy.forwardRequest('path', {
+   *   uid: 'uid',
+   * });
    * ```
    */
-  update(path_: string, params: ProxyUpdateParams, options?: RequestOptions): APIPromise<void> {
+  forwardRequest(
+    path_: string,
+    params: ProxyForwardRequestParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { uid } = params;
+    return this._client.post(path`/api/v1/proxy/${uid}/${path_}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * 转发请求到 Android 设备
+   *
+   * @example
+   * ```ts
+   * await client.api.v1.proxy.patchProxy('path', {
+   *   uid: 'uid',
+   * });
+   * ```
+   */
+  patchProxy(path_: string, params: ProxyPatchProxyParams, options?: RequestOptions): APIPromise<void> {
     const { uid } = params;
     return this._client.patch(path`/api/v1/proxy/${uid}/${path_}`, {
       ...options,
@@ -44,34 +70,64 @@ export class Proxy extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.proxy.delete('path', { uid: 'uid' });
+   * await client.api.v1.proxy.retrieveProxy('path', {
+   *   uid: 'uid',
+   * });
    * ```
    */
-  delete(path_: string, params: ProxyDeleteParams, options?: RequestOptions): APIPromise<void> {
+  retrieveProxy(path_: string, params: ProxyRetrieveProxyParams, options?: RequestOptions): APIPromise<void> {
     const { uid } = params;
-    return this._client.delete(path`/api/v1/proxy/${uid}/${path_}`, {
+    return this._client.get(path`/api/v1/proxy/${uid}/${path_}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * 转发请求到 Android 设备
+   *
+   * @example
+   * ```ts
+   * await client.api.v1.proxy.updateProxy('path', {
+   *   uid: 'uid',
+   * });
+   * ```
+   */
+  updateProxy(path_: string, params: ProxyUpdateProxyParams, options?: RequestOptions): APIPromise<void> {
+    const { uid } = params;
+    return this._client.put(path`/api/v1/proxy/${uid}/${path_}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 }
 
-export interface ProxyRetrieveParams {
+export interface ProxyDeleteProxyParams {
   uid: string;
 }
 
-export interface ProxyUpdateParams {
+export interface ProxyForwardRequestParams {
   uid: string;
 }
 
-export interface ProxyDeleteParams {
+export interface ProxyPatchProxyParams {
+  uid: string;
+}
+
+export interface ProxyRetrieveProxyParams {
+  uid: string;
+}
+
+export interface ProxyUpdateProxyParams {
   uid: string;
 }
 
 export declare namespace Proxy {
   export {
-    type ProxyRetrieveParams as ProxyRetrieveParams,
-    type ProxyUpdateParams as ProxyUpdateParams,
-    type ProxyDeleteParams as ProxyDeleteParams,
+    type ProxyDeleteProxyParams as ProxyDeleteProxyParams,
+    type ProxyForwardRequestParams as ProxyForwardRequestParams,
+    type ProxyPatchProxyParams as ProxyPatchProxyParams,
+    type ProxyRetrieveProxyParams as ProxyRetrieveProxyParams,
+    type ProxyUpdateProxyParams as ProxyUpdateProxyParams,
   };
 }

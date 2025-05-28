@@ -4,18 +4,18 @@ import { APIResource } from '../../../../core/resource';
 import * as AndroidAPI from './android';
 import {
   Android,
-  AndroidClickParams,
-  AndroidCreateParams,
-  AndroidDeviceScreenSizeParams,
-  AndroidDragParams,
-  AndroidKeyPressParams,
-  AndroidRunParams,
-  AndroidScreenshotParams,
-  AndroidScrollParams,
-  AndroidTypeParams,
+  AndroidCaptureScreenshotParams,
+  AndroidClickDeviceParams,
+  AndroidCreateContainerParams,
+  AndroidDragDeviceParams,
+  AndroidGetDeviceScreenSizeParams,
+  AndroidPressKeyParams,
+  AndroidRunCommandParams,
+  AndroidScrollDeviceParams,
+  AndroidTypeTextParams,
 } from './android';
 import * as TerminalAPI from './terminal';
-import { Terminal, TerminalRunCodeParams, TerminalRunParams } from './terminal';
+import { Terminal, TerminalRunCodeParams, TerminalRunCommandParams } from './terminal';
 import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -29,10 +29,10 @@ export class Gbox extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.gbox.stop({ uid: 'uid-1' });
+   * await client.api.v1.gbox.stopContainer({ uid: 'uid-1' });
    * ```
    */
-  stop(body: GboxStopParams, options?: RequestOptions): APIPromise<void> {
+  stopContainer(body: GboxStopContainerParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/gbox/stop', {
       body,
       ...options,
@@ -41,7 +41,7 @@ export class Gbox extends APIResource {
   }
 }
 
-export interface GboxStopParams {
+export interface GboxStopContainerParams {
   /**
    * uid
    */
@@ -52,24 +52,24 @@ Gbox.Terminal = Terminal;
 Gbox.Android = Android;
 
 export declare namespace Gbox {
-  export { type GboxStopParams as GboxStopParams };
+  export { type GboxStopContainerParams as GboxStopContainerParams };
 
   export {
     Terminal as Terminal,
-    type TerminalRunParams as TerminalRunParams,
     type TerminalRunCodeParams as TerminalRunCodeParams,
+    type TerminalRunCommandParams as TerminalRunCommandParams,
   };
 
   export {
     Android as Android,
-    type AndroidCreateParams as AndroidCreateParams,
-    type AndroidClickParams as AndroidClickParams,
-    type AndroidDeviceScreenSizeParams as AndroidDeviceScreenSizeParams,
-    type AndroidDragParams as AndroidDragParams,
-    type AndroidKeyPressParams as AndroidKeyPressParams,
-    type AndroidRunParams as AndroidRunParams,
-    type AndroidScreenshotParams as AndroidScreenshotParams,
-    type AndroidScrollParams as AndroidScrollParams,
-    type AndroidTypeParams as AndroidTypeParams,
+    type AndroidCaptureScreenshotParams as AndroidCaptureScreenshotParams,
+    type AndroidClickDeviceParams as AndroidClickDeviceParams,
+    type AndroidCreateContainerParams as AndroidCreateContainerParams,
+    type AndroidDragDeviceParams as AndroidDragDeviceParams,
+    type AndroidGetDeviceScreenSizeParams as AndroidGetDeviceScreenSizeParams,
+    type AndroidPressKeyParams as AndroidPressKeyParams,
+    type AndroidRunCommandParams as AndroidRunCommandParams,
+    type AndroidScrollDeviceParams as AndroidScrollDeviceParams,
+    type AndroidTypeTextParams as AndroidTypeTextParams,
   };
 }
