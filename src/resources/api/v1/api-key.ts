@@ -9,13 +9,13 @@ export class APIKey extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.apiKey.createAnAPIKey({
+   * await client.api.v1.apiKey.createAPIKey({
    *   name: 'name',
    *   organizationId: 'organizationId',
    * });
    * ```
    */
-  createAnAPIKey(body: APIKeyCreateAnAPIKeyParams, options?: RequestOptions): APIPromise<void> {
+  createAPIKey(body: APIKeyCreateAPIKeyParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/api_key/create_an_api_key', {
       body,
       ...options,
@@ -26,13 +26,13 @@ export class APIKey extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.apiKey.deleteAnAPIKey({
+   * await client.api.v1.apiKey.deleteAPIKey({
    *   apiKeyId: 'apiKeyId',
    *   organizationId: 'organizationId',
    * });
    * ```
    */
-  deleteAnAPIKey(body: APIKeyDeleteAnAPIKeyParams, options?: RequestOptions): APIPromise<void> {
+  deleteAPIKey(body: APIKeyDeleteAPIKeyParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/api_key/delete_an_api_key', {
       body,
       ...options,
@@ -43,12 +43,12 @@ export class APIKey extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.apiKey.getAllAPIKey({
+   * await client.api.v1.apiKey.listAll({
    *   organizationId: 'organizationId',
    * });
    * ```
    */
-  getAllAPIKey(body: APIKeyGetAllAPIKeyParams, options?: RequestOptions): APIPromise<void> {
+  listAll(body: APIKeyListAllParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/api_key/get_all_api_key', {
       body,
       ...options,
@@ -57,7 +57,7 @@ export class APIKey extends APIResource {
   }
 }
 
-export interface APIKeyCreateAnAPIKeyParams {
+export interface APIKeyCreateAPIKeyParams {
   /**
    * api key name
    */
@@ -69,7 +69,7 @@ export interface APIKeyCreateAnAPIKeyParams {
   organizationId: string;
 }
 
-export interface APIKeyDeleteAnAPIKeyParams {
+export interface APIKeyDeleteAPIKeyParams {
   /**
    * api key id
    */
@@ -81,7 +81,7 @@ export interface APIKeyDeleteAnAPIKeyParams {
   organizationId: string;
 }
 
-export interface APIKeyGetAllAPIKeyParams {
+export interface APIKeyListAllParams {
   /**
    * organization id
    */
@@ -90,8 +90,8 @@ export interface APIKeyGetAllAPIKeyParams {
 
 export declare namespace APIKey {
   export {
-    type APIKeyCreateAnAPIKeyParams as APIKeyCreateAnAPIKeyParams,
-    type APIKeyDeleteAnAPIKeyParams as APIKeyDeleteAnAPIKeyParams,
-    type APIKeyGetAllAPIKeyParams as APIKeyGetAllAPIKeyParams,
+    type APIKeyCreateAPIKeyParams as APIKeyCreateAPIKeyParams,
+    type APIKeyDeleteAPIKeyParams as APIKeyDeleteAPIKeyParams,
+    type APIKeyListAllParams as APIKeyListAllParams,
   };
 }

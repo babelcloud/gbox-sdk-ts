@@ -1,8 +1,8 @@
-# Gbox Client TypeScript API Library
+# Gbox SDK TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/gbox-sdk-example.svg)](https://npmjs.org/package/gbox-sdk-example) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gbox-sdk-example)
+[![NPM version](https://img.shields.io/npm/v/gbox-sdk.svg)](https://npmjs.org/package/gbox-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gbox-sdk)
 
-This library provides convenient access to the Gbox Client REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Gbox SDK REST API from server-side TypeScript or JavaScript.
 
 The full API of this library can be found in [api.md](api.md).
 
@@ -11,8 +11,11 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install gbox-sdk-example
+npm install git+ssh://git@github.com:babelcloud/gbox-sdk-ts.git
 ```
+
+> [!NOTE]
+> Once this package is [published to npm](https://app.stainless.com/docs/guides/publish), this will become: `npm install gbox-sdk`
 
 ## Usage
 
@@ -20,12 +23,14 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 
-const client = new GboxClient();
+const client = new GboxSDK({
+  apiKey: process.env['GBOX_SDK_API_KEY'], // This is the default and can be omitted
+});
 
 async function main() {
-  await client.api.v1.auth.retrieveGetLoginClientID();
+  await client.api.v1.auth.github.createTest({ code: '123456' });
 }
 
 main();
@@ -37,12 +42,15 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 
-const client = new GboxClient();
+const client = new GboxSDK({
+  apiKey: process.env['GBOX_SDK_API_KEY'], // This is the default and can be omitted
+});
 
 async function main() {
-  await client.api.v1.auth.retrieveGetLoginClientID();
+  const params: GboxSDK.API.V1.Auth.GitHubCreateTestParams = { code: '123456' };
+  await client.api.v1.auth.github.createTest(params);
 }
 
 main();
@@ -59,8 +67,8 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const response = await client.api.v1.auth.retrieveGetLoginClientID().catch(async (err) => {
-    if (err instanceof GboxClient.APIError) {
+  const response = await client.api.v1.auth.github.createTest({ code: '123456' }).catch(async (err) => {
+    if (err instanceof GboxSDK.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
       console.log(err.headers); // {server: 'nginx', ...}
@@ -97,13 +105,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new GboxClient({
-  apiKey: 'My API Key',
+const client = new GboxSDK({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.api.v1.auth.retrieveGetLoginClientID({
+await client.api.v1.auth.github.createTest({ code: '123456' }, {
   maxRetries: 5,
 });
 ```
@@ -115,13 +122,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new GboxClient({
-  apiKey: 'My API Key',
+const client = new GboxSDK({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await client.api.v1.auth.retrieveGetLoginClientID({
+await client.api.v1.auth.github.createTest({ code: '123456' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -142,13 +148,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 
 <!-- prettier-ignore -->
 ```ts
-const client = new GboxClient();
+const client = new GboxSDK();
 
-const response = await client.api.v1.auth.retrieveGetLoginClientID().asResponse();
+const response = await client.api.v1.auth.github.createTest({ code: '123456' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: result, response: raw } = await client.api.v1.auth.retrieveGetLoginClientID().withResponse();
+const { data: result, response: raw } = await client.api.v1.auth.github
+  .createTest({ code: '123456' })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(result);
 ```
@@ -163,13 +171,13 @@ console.log(result);
 
 The log level can be configured in two ways:
 
-1. Via the `GBOX_CLIENT_LOG` environment variable
+1. Via the `GBOX_SDK_LOG` environment variable
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 
-const client = new GboxClient({
+const client = new GboxSDK({
   logLevel: 'debug', // Show all log messages
 });
 ```
@@ -195,13 +203,13 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 import pino from 'pino';
 
 const logger = pino();
 
-const client = new GboxClient({
-  logger: logger.child({ name: 'GboxClient' }),
+const client = new GboxSDK({
+  logger: logger.child({ name: 'GboxSDK' }),
   logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
@@ -265,10 +273,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 import fetch from 'my-fetch';
 
-const client = new GboxClient({ fetch });
+const client = new GboxSDK({ fetch });
 ```
 
 ### Fetch options
@@ -276,9 +284,9 @@ const client = new GboxClient({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 
-const client = new GboxClient({
+const client = new GboxSDK({
   fetchOptions: {
     // `RequestInit` options
   },
@@ -293,11 +301,11 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new GboxClient({
+const client = new GboxSDK({
   fetchOptions: {
     dispatcher: proxyAgent,
   },
@@ -307,9 +315,9 @@ const client = new GboxClient({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 
-const client = new GboxClient({
+const client = new GboxSDK({
   fetchOptions: {
     proxy: 'http://localhost:8888',
   },
@@ -319,10 +327,10 @@ const client = new GboxClient({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import GboxClient from 'npm:gbox-sdk-example';
+import GboxSDK from 'npm:gbox-sdk';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new GboxClient({
+const client = new GboxSDK({
   fetchOptions: {
     client: httpClient,
   },

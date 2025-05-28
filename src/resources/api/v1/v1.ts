@@ -2,35 +2,37 @@
 
 import { APIResource } from '../../../core/resource';
 import * as APIKeyAPI from './api-key';
-import {
-  APIKey,
-  APIKeyCreateAnAPIKeyParams,
-  APIKeyDeleteAnAPIKeyParams,
-  APIKeyGetAllAPIKeyParams,
-} from './api-key';
+import { APIKey, APIKeyCreateAPIKeyParams, APIKeyDeleteAPIKeyParams, APIKeyListAllParams } from './api-key';
 import * as InviteAPI from './invite';
 import {
   Invite,
   InviteCreateInviteLinkParams,
   InviteDeleteInviteLinkParams,
-  InviteGetInviteLinkParams,
+  InviteRetrieveInviteLinkParams,
 } from './invite';
 import * as OrganizationAPI from './organization';
 import {
   Organization,
-  OrganizationCreateAnOrganizationParams,
-  OrganizationDeleteAnOrganizationParams,
-  OrganizationGetOrganizationMemberListParams,
-  OrganizationJoinOrganizationByInviteLinkParams,
+  OrganizationCreateOrganizationParams,
+  OrganizationDeleteOrganizationParams,
+  OrganizationJoinByInviteLinkParams,
+  OrganizationListMembersParams,
   OrganizationQuitOrganizationParams,
-  OrganizationRemoveOrganizationMemberParams,
-  OrganizationTransferOrganizationOwnershipParams,
-  OrganizationUpdateOrganizationMemberRoleParams,
+  OrganizationRemoveMemberParams,
+  OrganizationTransferOwnershipParams,
+  OrganizationUpdateMemberRoleParams,
 } from './organization';
 import * as ProxyAPI from './proxy';
-import { Proxy, ProxyDeleteParams, ProxyRetrieveParams, ProxyUpdateParams } from './proxy';
+import {
+  Proxy,
+  ProxyDeleteProxyParams,
+  ProxyForwardRequestParams,
+  ProxyPatchProxyParams,
+  ProxyRetrieveProxyParams,
+  ProxyUpdateProxyParams,
+} from './proxy';
 import * as SandboxAPI from './sandbox';
-import { Sandbox, SandboxDeleteSandboxParams, SandboxGetSandboxListParams } from './sandbox';
+import { Sandbox, SandboxDeleteSandboxParams, SandboxListSandboxesParams } from './sandbox';
 import * as TemplateAPI from './template';
 import { Template } from './template';
 import * as UserAPI from './user';
@@ -40,7 +42,7 @@ import { Vm, VmRunCodeParams } from './vm';
 import * as AuthAPI from './auth/auth';
 import { Auth } from './auth/auth';
 import * as GboxAPI from './gbox/gbox';
-import { Gbox, GboxStopParams } from './gbox/gbox';
+import { Gbox, GboxStopContainerParams } from './gbox/gbox';
 
 export class V1 extends APIResource {
   auth: AuthAPI.Auth = new AuthAPI.Auth(this._client);
@@ -77,45 +79,47 @@ export declare namespace V1 {
 
   export {
     Organization as Organization,
-    type OrganizationCreateAnOrganizationParams as OrganizationCreateAnOrganizationParams,
-    type OrganizationDeleteAnOrganizationParams as OrganizationDeleteAnOrganizationParams,
-    type OrganizationGetOrganizationMemberListParams as OrganizationGetOrganizationMemberListParams,
-    type OrganizationJoinOrganizationByInviteLinkParams as OrganizationJoinOrganizationByInviteLinkParams,
+    type OrganizationCreateOrganizationParams as OrganizationCreateOrganizationParams,
+    type OrganizationDeleteOrganizationParams as OrganizationDeleteOrganizationParams,
+    type OrganizationJoinByInviteLinkParams as OrganizationJoinByInviteLinkParams,
+    type OrganizationListMembersParams as OrganizationListMembersParams,
     type OrganizationQuitOrganizationParams as OrganizationQuitOrganizationParams,
-    type OrganizationRemoveOrganizationMemberParams as OrganizationRemoveOrganizationMemberParams,
-    type OrganizationTransferOrganizationOwnershipParams as OrganizationTransferOrganizationOwnershipParams,
-    type OrganizationUpdateOrganizationMemberRoleParams as OrganizationUpdateOrganizationMemberRoleParams,
+    type OrganizationRemoveMemberParams as OrganizationRemoveMemberParams,
+    type OrganizationTransferOwnershipParams as OrganizationTransferOwnershipParams,
+    type OrganizationUpdateMemberRoleParams as OrganizationUpdateMemberRoleParams,
   };
 
   export {
     APIKey as APIKey,
-    type APIKeyCreateAnAPIKeyParams as APIKeyCreateAnAPIKeyParams,
-    type APIKeyDeleteAnAPIKeyParams as APIKeyDeleteAnAPIKeyParams,
-    type APIKeyGetAllAPIKeyParams as APIKeyGetAllAPIKeyParams,
+    type APIKeyCreateAPIKeyParams as APIKeyCreateAPIKeyParams,
+    type APIKeyDeleteAPIKeyParams as APIKeyDeleteAPIKeyParams,
+    type APIKeyListAllParams as APIKeyListAllParams,
   };
 
   export {
     Invite as Invite,
     type InviteCreateInviteLinkParams as InviteCreateInviteLinkParams,
     type InviteDeleteInviteLinkParams as InviteDeleteInviteLinkParams,
-    type InviteGetInviteLinkParams as InviteGetInviteLinkParams,
+    type InviteRetrieveInviteLinkParams as InviteRetrieveInviteLinkParams,
   };
 
-  export { Gbox as Gbox, type GboxStopParams as GboxStopParams };
+  export { Gbox as Gbox, type GboxStopContainerParams as GboxStopContainerParams };
 
   export { Template as Template };
 
   export {
     Sandbox as Sandbox,
     type SandboxDeleteSandboxParams as SandboxDeleteSandboxParams,
-    type SandboxGetSandboxListParams as SandboxGetSandboxListParams,
+    type SandboxListSandboxesParams as SandboxListSandboxesParams,
   };
 
   export {
     Proxy as Proxy,
-    type ProxyRetrieveParams as ProxyRetrieveParams,
-    type ProxyUpdateParams as ProxyUpdateParams,
-    type ProxyDeleteParams as ProxyDeleteParams,
+    type ProxyDeleteProxyParams as ProxyDeleteProxyParams,
+    type ProxyForwardRequestParams as ProxyForwardRequestParams,
+    type ProxyPatchProxyParams as ProxyPatchProxyParams,
+    type ProxyRetrieveProxyParams as ProxyRetrieveProxyParams,
+    type ProxyUpdateProxyParams as ProxyUpdateProxyParams,
   };
 
   export { Vm as Vm, type VmRunCodeParams as VmRunCodeParams };

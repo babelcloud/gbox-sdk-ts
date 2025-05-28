@@ -26,14 +26,14 @@ export class Sandbox extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.sandbox.getSandboxList({
+   * await client.api.v1.sandbox.listSandboxes({
    *   organizationId: 'organizationId',
    *   page: 0,
    *   pageSize: 0,
    * });
    * ```
    */
-  getSandboxList(body: SandboxGetSandboxListParams, options?: RequestOptions): APIPromise<void> {
+  listSandboxes(body: SandboxListSandboxesParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/sandbox/get_sandbox_list', {
       body,
       ...options,
@@ -54,7 +54,7 @@ export interface SandboxDeleteSandboxParams {
   sandboxId: string;
 }
 
-export interface SandboxGetSandboxListParams {
+export interface SandboxListSandboxesParams {
   /**
    * 组织 ID
    */
@@ -74,6 +74,6 @@ export interface SandboxGetSandboxListParams {
 export declare namespace Sandbox {
   export {
     type SandboxDeleteSandboxParams as SandboxDeleteSandboxParams,
-    type SandboxGetSandboxListParams as SandboxGetSandboxListParams,
+    type SandboxListSandboxesParams as SandboxListSandboxesParams,
   };
 }

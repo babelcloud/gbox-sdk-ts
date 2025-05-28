@@ -11,30 +11,11 @@ export class Terminal extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.gbox.terminal.create();
+   * await client.api.v1.gbox.terminal.createTerminal();
    * ```
    */
-  create(options?: RequestOptions): APIPromise<void> {
+  createTerminal(options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/gbox/terminal/create', {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * 执行命令
-   *
-   * @example
-   * ```ts
-   * await client.api.v1.gbox.terminal.run({
-   *   command: 'ls -l',
-   *   uid: 'uid-1',
-   * });
-   * ```
-   */
-  run(body: TerminalRunParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post('/api/v1/gbox/terminal/run', {
-      body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -59,18 +40,25 @@ export class Terminal extends APIResource {
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
-}
-
-export interface TerminalRunParams {
-  /**
-   * command
-   */
-  command: string;
 
   /**
-   * uid
+   * 执行命令
+   *
+   * @example
+   * ```ts
+   * await client.api.v1.gbox.terminal.runCommand({
+   *   command: 'ls -l',
+   *   uid: 'uid-1',
+   * });
+   * ```
    */
-  uid: string;
+  runCommand(body: TerminalRunCommandParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/api/v1/gbox/terminal/run', {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
 }
 
 export interface TerminalRunCodeParams {
@@ -90,6 +78,21 @@ export interface TerminalRunCodeParams {
   uid: string;
 }
 
+export interface TerminalRunCommandParams {
+  /**
+   * command
+   */
+  command: string;
+
+  /**
+   * uid
+   */
+  uid: string;
+}
+
 export declare namespace Terminal {
-  export { type TerminalRunParams as TerminalRunParams, type TerminalRunCodeParams as TerminalRunCodeParams };
+  export {
+    type TerminalRunCodeParams as TerminalRunCodeParams,
+    type TerminalRunCommandParams as TerminalRunCommandParams,
+  };
 }
