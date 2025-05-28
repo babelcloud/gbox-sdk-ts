@@ -5,14 +5,14 @@ import * as AndroidAPI from './android';
 import {
   Android,
   AndroidClickParams,
-  AndroidCreateContainerParams,
+  AndroidCreateParams,
+  AndroidDeviceScreenSizeParams,
   AndroidDragParams,
-  AndroidGetScreenSizeParams,
-  AndroidGetScreenshotParams,
   AndroidKeyPressParams,
-  AndroidRunCommandParams,
+  AndroidRunParams,
+  AndroidScreenshotParams,
   AndroidScrollParams,
-  AndroidTypeTextParams,
+  AndroidTypeParams,
 } from './android';
 import * as TerminalAPI from './terminal';
 import { Terminal, TerminalRunCodeParams, TerminalRunParams } from './terminal';
@@ -62,14 +62,14 @@ export declare namespace Gbox {
 
   export {
     Android as Android,
+    type AndroidCreateParams as AndroidCreateParams,
     type AndroidClickParams as AndroidClickParams,
-    type AndroidCreateContainerParams as AndroidCreateContainerParams,
+    type AndroidDeviceScreenSizeParams as AndroidDeviceScreenSizeParams,
     type AndroidDragParams as AndroidDragParams,
-    type AndroidGetScreenSizeParams as AndroidGetScreenSizeParams,
-    type AndroidGetScreenshotParams as AndroidGetScreenshotParams,
     type AndroidKeyPressParams as AndroidKeyPressParams,
-    type AndroidRunCommandParams as AndroidRunCommandParams,
+    type AndroidRunParams as AndroidRunParams,
+    type AndroidScreenshotParams as AndroidScreenshotParams,
     type AndroidScrollParams as AndroidScrollParams,
-    type AndroidTypeTextParams as AndroidTypeTextParams,
+    type AndroidTypeParams as AndroidTypeParams,
   };
 }

@@ -11,12 +11,12 @@ export class Google extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.auth.google.createTest({
+   * await client.api.v1.auth.google.callback({
    *   code: '123456',
    * });
    * ```
    */
-  createTest(body: GoogleCreateTestParams, options?: RequestOptions): APIPromise<void> {
+  callback(body: GoogleCallbackParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/auth/google/callback', {
       body,
       ...options,
@@ -25,7 +25,7 @@ export class Google extends APIResource {
   }
 }
 
-export interface GoogleCreateTestParams {
+export interface GoogleCallbackParams {
   /**
    * code
    */
@@ -33,5 +33,5 @@ export interface GoogleCreateTestParams {
 }
 
 export declare namespace Google {
-  export { type GoogleCreateTestParams as GoogleCreateTestParams };
+  export { type GoogleCallbackParams as GoogleCallbackParams };
 }

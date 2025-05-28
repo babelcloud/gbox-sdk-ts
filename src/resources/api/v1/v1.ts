@@ -2,32 +2,35 @@
 
 import { APIResource } from '../../../core/resource';
 import * as APIKeyAPI from './api-key';
-import { APIKey, APIKeyCreateParams, APIKeyDeleteParams, APIKeyGetAllParams } from './api-key';
+import {
+  APIKey,
+  APIKeyCreateAnAPIKeyParams,
+  APIKeyDeleteAnAPIKeyParams,
+  APIKeyGetAllAPIKeyParams,
+} from './api-key';
 import * as InviteAPI from './invite';
-import { Invite, InviteCreateLinkParams, InviteDeleteLinkParams, InviteGetLinkParams } from './invite';
+import {
+  Invite,
+  InviteCreateInviteLinkParams,
+  InviteDeleteInviteLinkParams,
+  InviteGetInviteLinkParams,
+} from './invite';
 import * as OrganizationAPI from './organization';
 import {
   Organization,
-  OrganizationCreateOrganizationParams,
-  OrganizationDeleteOrganizationParams,
-  OrganizationGetMemberListParams,
-  OrganizationJoinOrganizationByInviteParams,
+  OrganizationCreateAnOrganizationParams,
+  OrganizationDeleteAnOrganizationParams,
+  OrganizationGetOrganizationMemberListParams,
+  OrganizationJoinOrganizationByInviteLinkParams,
   OrganizationQuitOrganizationParams,
-  OrganizationRemoveMemberParams,
-  OrganizationTransferOwnershipParams,
-  OrganizationUpdateMemberRoleParams,
+  OrganizationRemoveOrganizationMemberParams,
+  OrganizationTransferOrganizationOwnershipParams,
+  OrganizationUpdateOrganizationMemberRoleParams,
 } from './organization';
 import * as ProxyAPI from './proxy';
-import {
-  Proxy,
-  ProxyDeleteParams,
-  ProxyGetParams,
-  ProxyPatchParams,
-  ProxyPostParams,
-  ProxyUpdateParams,
-} from './proxy';
+import { Proxy, ProxyDeleteParams, ProxyRetrieveParams, ProxyUpdateParams } from './proxy';
 import * as SandboxAPI from './sandbox';
-import { Sandbox, SandboxDeleteParams, SandboxGetListParams } from './sandbox';
+import { Sandbox, SandboxDeleteSandboxParams, SandboxGetSandboxListParams } from './sandbox';
 import * as TemplateAPI from './template';
 import { Template } from './template';
 import * as UserAPI from './user';
@@ -74,28 +77,28 @@ export declare namespace V1 {
 
   export {
     Organization as Organization,
-    type OrganizationCreateOrganizationParams as OrganizationCreateOrganizationParams,
-    type OrganizationDeleteOrganizationParams as OrganizationDeleteOrganizationParams,
-    type OrganizationGetMemberListParams as OrganizationGetMemberListParams,
-    type OrganizationJoinOrganizationByInviteParams as OrganizationJoinOrganizationByInviteParams,
+    type OrganizationCreateAnOrganizationParams as OrganizationCreateAnOrganizationParams,
+    type OrganizationDeleteAnOrganizationParams as OrganizationDeleteAnOrganizationParams,
+    type OrganizationGetOrganizationMemberListParams as OrganizationGetOrganizationMemberListParams,
+    type OrganizationJoinOrganizationByInviteLinkParams as OrganizationJoinOrganizationByInviteLinkParams,
     type OrganizationQuitOrganizationParams as OrganizationQuitOrganizationParams,
-    type OrganizationRemoveMemberParams as OrganizationRemoveMemberParams,
-    type OrganizationTransferOwnershipParams as OrganizationTransferOwnershipParams,
-    type OrganizationUpdateMemberRoleParams as OrganizationUpdateMemberRoleParams,
+    type OrganizationRemoveOrganizationMemberParams as OrganizationRemoveOrganizationMemberParams,
+    type OrganizationTransferOrganizationOwnershipParams as OrganizationTransferOrganizationOwnershipParams,
+    type OrganizationUpdateOrganizationMemberRoleParams as OrganizationUpdateOrganizationMemberRoleParams,
   };
 
   export {
     APIKey as APIKey,
-    type APIKeyCreateParams as APIKeyCreateParams,
-    type APIKeyDeleteParams as APIKeyDeleteParams,
-    type APIKeyGetAllParams as APIKeyGetAllParams,
+    type APIKeyCreateAnAPIKeyParams as APIKeyCreateAnAPIKeyParams,
+    type APIKeyDeleteAnAPIKeyParams as APIKeyDeleteAnAPIKeyParams,
+    type APIKeyGetAllAPIKeyParams as APIKeyGetAllAPIKeyParams,
   };
 
   export {
     Invite as Invite,
-    type InviteCreateLinkParams as InviteCreateLinkParams,
-    type InviteDeleteLinkParams as InviteDeleteLinkParams,
-    type InviteGetLinkParams as InviteGetLinkParams,
+    type InviteCreateInviteLinkParams as InviteCreateInviteLinkParams,
+    type InviteDeleteInviteLinkParams as InviteDeleteInviteLinkParams,
+    type InviteGetInviteLinkParams as InviteGetInviteLinkParams,
   };
 
   export { Gbox as Gbox, type GboxStopParams as GboxStopParams };
@@ -104,17 +107,15 @@ export declare namespace V1 {
 
   export {
     Sandbox as Sandbox,
-    type SandboxDeleteParams as SandboxDeleteParams,
-    type SandboxGetListParams as SandboxGetListParams,
+    type SandboxDeleteSandboxParams as SandboxDeleteSandboxParams,
+    type SandboxGetSandboxListParams as SandboxGetSandboxListParams,
   };
 
   export {
     Proxy as Proxy,
+    type ProxyRetrieveParams as ProxyRetrieveParams,
     type ProxyUpdateParams as ProxyUpdateParams,
     type ProxyDeleteParams as ProxyDeleteParams,
-    type ProxyGetParams as ProxyGetParams,
-    type ProxyPatchParams as ProxyPatchParams,
-    type ProxyPostParams as ProxyPostParams,
   };
 
   export { Vm as Vm, type VmRunCodeParams as VmRunCodeParams };

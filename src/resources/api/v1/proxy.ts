@@ -12,12 +12,28 @@ export class Proxy extends APIResource {
    *
    * @example
    * ```ts
+   * await client.api.v1.proxy.retrieve('path', { uid: 'uid' });
+   * ```
+   */
+  retrieve(path_: string, params: ProxyRetrieveParams, options?: RequestOptions): APIPromise<void> {
+    const { uid } = params;
+    return this._client.get(path`/api/v1/proxy/${uid}/${path_}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * 转发请求到 Android 设备
+   *
+   * @example
+   * ```ts
    * await client.api.v1.proxy.update('path', { uid: 'uid' });
    * ```
    */
   update(path_: string, params: ProxyUpdateParams, options?: RequestOptions): APIPromise<void> {
     const { uid } = params;
-    return this._client.put(path`/api/v1/proxy/${uid}/${path_}`, {
+    return this._client.patch(path`/api/v1/proxy/${uid}/${path_}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -38,54 +54,10 @@ export class Proxy extends APIResource {
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
+}
 
-  /**
-   * 转发请求到 Android 设备
-   *
-   * @example
-   * ```ts
-   * await client.api.v1.proxy.get('path', { uid: 'uid' });
-   * ```
-   */
-  get(path_: string, params: ProxyGetParams, options?: RequestOptions): APIPromise<void> {
-    const { uid } = params;
-    return this._client.get(path`/api/v1/proxy/${uid}/${path_}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * 转发请求到 Android 设备
-   *
-   * @example
-   * ```ts
-   * await client.api.v1.proxy.patch('path', { uid: 'uid' });
-   * ```
-   */
-  patch(path_: string, params: ProxyPatchParams, options?: RequestOptions): APIPromise<void> {
-    const { uid } = params;
-    return this._client.patch(path`/api/v1/proxy/${uid}/${path_}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * 转发请求到 Android 设备
-   *
-   * @example
-   * ```ts
-   * await client.api.v1.proxy.post('path', { uid: 'uid' });
-   * ```
-   */
-  post(path_: string, params: ProxyPostParams, options?: RequestOptions): APIPromise<void> {
-    const { uid } = params;
-    return this._client.post(path`/api/v1/proxy/${uid}/${path_}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
+export interface ProxyRetrieveParams {
+  uid: string;
 }
 
 export interface ProxyUpdateParams {
@@ -96,24 +68,10 @@ export interface ProxyDeleteParams {
   uid: string;
 }
 
-export interface ProxyGetParams {
-  uid: string;
-}
-
-export interface ProxyPatchParams {
-  uid: string;
-}
-
-export interface ProxyPostParams {
-  uid: string;
-}
-
 export declare namespace Proxy {
   export {
+    type ProxyRetrieveParams as ProxyRetrieveParams,
     type ProxyUpdateParams as ProxyUpdateParams,
     type ProxyDeleteParams as ProxyDeleteParams,
-    type ProxyGetParams as ProxyGetParams,
-    type ProxyPatchParams as ProxyPatchParams,
-    type ProxyPostParams as ProxyPostParams,
   };
 }

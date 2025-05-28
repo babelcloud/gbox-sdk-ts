@@ -11,12 +11,12 @@ export class GitHub extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.auth.github.createTest({
+   * await client.api.v1.auth.github.callback({
    *   code: '123456',
    * });
    * ```
    */
-  createTest(body: GitHubCreateTestParams, options?: RequestOptions): APIPromise<void> {
+  callback(body: GitHubCallbackParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/api/v1/auth/github/callback', {
       body,
       ...options,
@@ -25,7 +25,7 @@ export class GitHub extends APIResource {
   }
 }
 
-export interface GitHubCreateTestParams {
+export interface GitHubCallbackParams {
   /**
    * code
    */
@@ -33,5 +33,5 @@ export interface GitHubCreateTestParams {
 }
 
 export declare namespace GitHub {
-  export { type GitHubCreateTestParams as GitHubCreateTestParams };
+  export { type GitHubCallbackParams as GitHubCallbackParams };
 }

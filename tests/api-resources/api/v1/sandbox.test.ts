@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GboxSDK from 'gbox-sdk';
+import GboxClient from 'gbox-sdk-example';
 
-const client = new GboxSDK({
+const client = new GboxClient({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource sandbox', () => {
   // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.api.v1.sandbox.delete({
+  test.skip('deleteSandbox: only required params', async () => {
+    const responsePromise = client.api.v1.sandbox.deleteSandbox({
       organizationId: 'organizationId',
       sandboxId: 'sandboxId',
     });
@@ -24,16 +24,16 @@ describe('resource sandbox', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.api.v1.sandbox.delete({
+  test.skip('deleteSandbox: required and optional params', async () => {
+    const response = await client.api.v1.sandbox.deleteSandbox({
       organizationId: 'organizationId',
       sandboxId: 'sandboxId',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('getList: only required params', async () => {
-    const responsePromise = client.api.v1.sandbox.getList({
+  test.skip('getSandboxList: only required params', async () => {
+    const responsePromise = client.api.v1.sandbox.getSandboxList({
       organizationId: 'organizationId',
       page: 0,
       pageSize: 0,
@@ -48,8 +48,8 @@ describe('resource sandbox', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('getList: required and optional params', async () => {
-    const response = await client.api.v1.sandbox.getList({
+  test.skip('getSandboxList: required and optional params', async () => {
+    const response = await client.api.v1.sandbox.getSandboxList({
       organizationId: 'organizationId',
       page: 0,
       pageSize: 0,

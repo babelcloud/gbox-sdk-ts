@@ -2,15 +2,15 @@
 
 export {
   Android,
+  type AndroidCreateParams,
   type AndroidClickParams,
-  type AndroidCreateContainerParams,
+  type AndroidDeviceScreenSizeParams,
   type AndroidDragParams,
-  type AndroidGetScreenSizeParams,
-  type AndroidGetScreenshotParams,
   type AndroidKeyPressParams,
-  type AndroidRunCommandParams,
+  type AndroidRunParams,
+  type AndroidScreenshotParams,
   type AndroidScrollParams,
-  type AndroidTypeTextParams,
+  type AndroidTypeParams,
 } from './android';
 export { Gbox, type GboxStopParams } from './gbox';
 export { Terminal, type TerminalRunParams, type TerminalRunCodeParams } from './terminal';

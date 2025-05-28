@@ -9,12 +9,15 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.createOrganization({
+   * await client.api.v1.organization.createAnOrganization({
    *   name: 'name',
    * });
    * ```
    */
-  createOrganization(body: OrganizationCreateOrganizationParams, options?: RequestOptions): APIPromise<void> {
+  createAnOrganization(
+    body: OrganizationCreateAnOrganizationParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
     return this._client.post('/api/v1/organization/create_an_organization', {
       body,
       ...options,
@@ -25,12 +28,15 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.deleteOrganization({
+   * await client.api.v1.organization.deleteAnOrganization({
    *   organizationId: 'organizationId',
    * });
    * ```
    */
-  deleteOrganization(body: OrganizationDeleteOrganizationParams, options?: RequestOptions): APIPromise<void> {
+  deleteAnOrganization(
+    body: OrganizationDeleteAnOrganizationParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
     return this._client.post('/api/v1/organization/delete_an_organization', {
       body,
       ...options,
@@ -41,10 +47,13 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.getMemberList();
+   * await client.api.v1.organization.getOrganizationMemberList();
    * ```
    */
-  getMemberList(body: OrganizationGetMemberListParams, options?: RequestOptions): APIPromise<void> {
+  getOrganizationMemberList(
+    body: OrganizationGetOrganizationMemberListParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
     return this._client.post('/api/v1/organization/get_organization_member_list', {
       body,
       ...options,
@@ -55,24 +64,11 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.getMyOrganizationList();
+   * await client.api.v1.organization.joinOrganizationByInviteLink();
    * ```
    */
-  getMyOrganizationList(options?: RequestOptions): APIPromise<void> {
-    return this._client.get('/api/v1/organization/get_my_organization_list', {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * @example
-   * ```ts
-   * await client.api.v1.organization.joinOrganizationByInvite();
-   * ```
-   */
-  joinOrganizationByInvite(
-    body: OrganizationJoinOrganizationByInviteParams,
+  joinOrganizationByInviteLink(
+    body: OrganizationJoinOrganizationByInviteLinkParams,
     options?: RequestOptions,
   ): APIPromise<void> {
     return this._client.post('/api/v1/organization/join_organization_by_invite_link', {
@@ -99,10 +95,13 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.removeMember();
+   * await client.api.v1.organization.removeOrganizationMember();
    * ```
    */
-  removeMember(body: OrganizationRemoveMemberParams, options?: RequestOptions): APIPromise<void> {
+  removeOrganizationMember(
+    body: OrganizationRemoveOrganizationMemberParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
     return this._client.post('/api/v1/organization/remove_organization_member', {
       body,
       ...options,
@@ -113,10 +112,26 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.transferOwnership();
+   * await client.api.v1.organization.retrieveGetMyOrganizationList();
    * ```
    */
-  transferOwnership(body: OrganizationTransferOwnershipParams, options?: RequestOptions): APIPromise<void> {
+  retrieveGetMyOrganizationList(options?: RequestOptions): APIPromise<void> {
+    return this._client.get('/api/v1/organization/get_my_organization_list', {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * @example
+   * ```ts
+   * await client.api.v1.organization.transferOrganizationOwnership();
+   * ```
+   */
+  transferOrganizationOwnership(
+    body: OrganizationTransferOrganizationOwnershipParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
     return this._client.post('/api/v1/organization/transfer_organization_ownership', {
       body,
       ...options,
@@ -127,10 +142,13 @@ export class Organization extends APIResource {
   /**
    * @example
    * ```ts
-   * await client.api.v1.organization.updateMemberRole();
+   * await client.api.v1.organization.updateOrganizationMemberRole();
    * ```
    */
-  updateMemberRole(body: OrganizationUpdateMemberRoleParams, options?: RequestOptions): APIPromise<void> {
+  updateOrganizationMemberRole(
+    body: OrganizationUpdateOrganizationMemberRoleParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
     return this._client.post('/api/v1/organization/update_organization_member_role', {
       body,
       ...options,
@@ -139,41 +157,41 @@ export class Organization extends APIResource {
   }
 }
 
-export interface OrganizationCreateOrganizationParams {
+export interface OrganizationCreateAnOrganizationParams {
   /**
    * organization name
    */
   name: string;
 }
 
-export interface OrganizationDeleteOrganizationParams {
+export interface OrganizationDeleteAnOrganizationParams {
   /**
    * organization id
    */
   organizationId: string;
 }
 
-export interface OrganizationGetMemberListParams {}
+export interface OrganizationGetOrganizationMemberListParams {}
 
-export interface OrganizationJoinOrganizationByInviteParams {}
+export interface OrganizationJoinOrganizationByInviteLinkParams {}
 
 export interface OrganizationQuitOrganizationParams {}
 
-export interface OrganizationRemoveMemberParams {}
+export interface OrganizationRemoveOrganizationMemberParams {}
 
-export interface OrganizationTransferOwnershipParams {}
+export interface OrganizationTransferOrganizationOwnershipParams {}
 
-export interface OrganizationUpdateMemberRoleParams {}
+export interface OrganizationUpdateOrganizationMemberRoleParams {}
 
 export declare namespace Organization {
   export {
-    type OrganizationCreateOrganizationParams as OrganizationCreateOrganizationParams,
-    type OrganizationDeleteOrganizationParams as OrganizationDeleteOrganizationParams,
-    type OrganizationGetMemberListParams as OrganizationGetMemberListParams,
-    type OrganizationJoinOrganizationByInviteParams as OrganizationJoinOrganizationByInviteParams,
+    type OrganizationCreateAnOrganizationParams as OrganizationCreateAnOrganizationParams,
+    type OrganizationDeleteAnOrganizationParams as OrganizationDeleteAnOrganizationParams,
+    type OrganizationGetOrganizationMemberListParams as OrganizationGetOrganizationMemberListParams,
+    type OrganizationJoinOrganizationByInviteLinkParams as OrganizationJoinOrganizationByInviteLinkParams,
     type OrganizationQuitOrganizationParams as OrganizationQuitOrganizationParams,
-    type OrganizationRemoveMemberParams as OrganizationRemoveMemberParams,
-    type OrganizationTransferOwnershipParams as OrganizationTransferOwnershipParams,
-    type OrganizationUpdateMemberRoleParams as OrganizationUpdateMemberRoleParams,
+    type OrganizationRemoveOrganizationMemberParams as OrganizationRemoveOrganizationMemberParams,
+    type OrganizationTransferOrganizationOwnershipParams as OrganizationTransferOrganizationOwnershipParams,
+    type OrganizationUpdateOrganizationMemberRoleParams as OrganizationUpdateOrganizationMemberRoleParams,
   };
 }

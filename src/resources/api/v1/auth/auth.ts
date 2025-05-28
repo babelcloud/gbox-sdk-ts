@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as GitHubAPI from './github';
-import { GitHub, GitHubCreateTestParams } from './github';
+import { GitHub, GitHubCallbackParams } from './github';
 import * as GoogleAPI from './google';
-import { Google, GoogleCreateTestParams } from './google';
+import { Google, GoogleCallbackParams } from './google';
 import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -18,10 +18,10 @@ export class Auth extends APIResource {
    *
    * @example
    * ```ts
-   * await client.api.v1.auth.getLoginClientID();
+   * await client.api.v1.auth.retrieveGetLoginClientID();
    * ```
    */
-  getLoginClientID(options?: RequestOptions): APIPromise<void> {
+  retrieveGetLoginClientID(options?: RequestOptions): APIPromise<void> {
     return this._client.get('/api/v1/auth/get_login_client_id', {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -33,7 +33,7 @@ Auth.GitHub = GitHub;
 Auth.Google = Google;
 
 export declare namespace Auth {
-  export { GitHub as GitHub, type GitHubCreateTestParams as GitHubCreateTestParams };
+  export { GitHub as GitHub, type GitHubCallbackParams as GitHubCallbackParams };
 
-  export { Google as Google, type GoogleCreateTestParams as GoogleCreateTestParams };
+  export { Google as Google, type GoogleCallbackParams as GoogleCallbackParams };
 }
