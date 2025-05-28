@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 
-const client = new GboxClient({
+const client = new GboxSDK({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource boxes', () => {
+describe('resource organization', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.boxes.create({ type: 'linux' });
+  test.skip('createOrganization: only required params', async () => {
+    const responsePromise = client.api.v1.organization.createOrganization({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,16 +21,34 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.boxes.create({
-      type: 'linux',
-      config: { envs: { foo: 'string' }, expiresIn: 'expiresIn', labels: { foo: 'string' } },
+  test.skip('createOrganization: required and optional params', async () => {
+    const response = await client.api.v1.organization.createOrganization({ name: 'name' });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('deleteOrganization: only required params', async () => {
+    const responsePromise = client.api.v1.organization.deleteOrganization({
+      organizationId: 'organizationId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('deleteOrganization: required and optional params', async () => {
+    const response = await client.api.v1.organization.deleteOrganization({
+      organizationId: 'organizationId',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = client.boxes.retrieve('id');
+  test.skip('getMemberList', async () => {
+    const responsePromise = client.api.v1.organization.getMemberList({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -41,8 +59,8 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = client.boxes.list();
+  test.skip('getMyOrganizationList', async () => {
+    const responsePromise = client.api.v1.organization.getMyOrganizationList();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,8 +71,8 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = client.boxes.delete('id');
+  test.skip('joinOrganizationByInvite', async () => {
+    const responsePromise = client.api.v1.organization.joinOrganizationByInvite({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,8 +83,8 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('createAndroid', async () => {
-    const responsePromise = client.boxes.createAndroid();
+  test.skip('quitOrganization', async () => {
+    const responsePromise = client.api.v1.organization.quitOrganization({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,19 +95,8 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('createAndroid: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.boxes.createAndroid(
-        { config: { envs: { FOO: 'bar' }, expiresIn: 'expiresIn', labels: { FOO: 'bar' } } },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(GboxClient.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('createLinux', async () => {
-    const responsePromise = client.boxes.createLinux();
+  test.skip('removeMember', async () => {
+    const responsePromise = client.api.v1.organization.removeMember({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -100,19 +107,8 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('createLinux: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.boxes.createLinux(
-        { config: { envs: { FOO: 'bar' }, expiresIn: 'expiresIn', labels: { foo: 'string' } } },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(GboxClient.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('start', async () => {
-    const responsePromise = client.boxes.start('id');
+  test.skip('transferOwnership', async () => {
+    const responsePromise = client.api.v1.organization.transferOwnership({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -123,8 +119,8 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('stop', async () => {
-    const responsePromise = client.boxes.stop('id');
+  test.skip('updateMemberRole', async () => {
+    const responsePromise = client.api.v1.organization.updateMemberRole({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
