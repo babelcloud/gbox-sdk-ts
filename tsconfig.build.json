@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "gbox-sdk-example/*": ["dist/src/*"],
-      "gbox-sdk-example": ["dist/src/index.ts"]
+      "gbox-sdk/*": ["dist/src/*"],
+      "gbox-sdk": ["dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
