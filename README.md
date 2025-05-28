@@ -1,8 +1,8 @@
-# Gbox SDK TypeScript API Library
+# Gbox Client TypeScript API Library
 
 [![NPM version](https://img.shields.io/npm/v/gbox-sdk.svg)](https://npmjs.org/package/gbox-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gbox-sdk)
 
-This library provides convenient access to the Gbox SDK REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Gbox Client REST API from server-side TypeScript or JavaScript.
 
 The full API of this library can be found in [api.md](api.md).
 
@@ -23,9 +23,9 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import GboxSDK from 'gbox-sdk';
+import GboxClient from 'gbox-sdk';
 
-const client = new GboxSDK({
+const client = new GboxClient({
   apiKey: process.env['GBOX_SDK_API_KEY'], // This is the default and can be omitted
 });
 
@@ -42,14 +42,14 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import GboxSDK from 'gbox-sdk';
+import GboxClient from 'gbox-sdk';
 
-const client = new GboxSDK({
+const client = new GboxClient({
   apiKey: process.env['GBOX_SDK_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const params: GboxSDK.API.V1.Auth.GitHubCreateTestParams = { code: '123456' };
+  const params: GboxClient.API.V1.Auth.GitHubCreateTestParams = { code: '123456' };
   await client.api.v1.auth.github.createTest(params);
 }
 
@@ -68,7 +68,7 @@ a subclass of `APIError` will be thrown:
 ```ts
 async function main() {
   const response = await client.api.v1.auth.github.createTest({ code: '123456' }).catch(async (err) => {
-    if (err instanceof GboxSDK.APIError) {
+    if (err instanceof GboxClient.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
       console.log(err.headers); // {server: 'nginx', ...}
@@ -105,7 +105,7 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new GboxSDK({
+const client = new GboxClient({
   maxRetries: 0, // default is 2
 });
 
@@ -122,7 +122,7 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new GboxSDK({
+const client = new GboxClient({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
@@ -148,7 +148,7 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 
 <!-- prettier-ignore -->
 ```ts
-const client = new GboxSDK();
+const client = new GboxClient();
 
 const response = await client.api.v1.auth.github.createTest({ code: '123456' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -171,13 +171,13 @@ console.log(result);
 
 The log level can be configured in two ways:
 
-1. Via the `GBOX_SDK_LOG` environment variable
+1. Via the `GBOX_CLIENT_LOG` environment variable
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import GboxSDK from 'gbox-sdk';
+import GboxClient from 'gbox-sdk';
 
-const client = new GboxSDK({
+const client = new GboxClient({
   logLevel: 'debug', // Show all log messages
 });
 ```
@@ -203,13 +203,13 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import GboxSDK from 'gbox-sdk';
+import GboxClient from 'gbox-sdk';
 import pino from 'pino';
 
 const logger = pino();
 
-const client = new GboxSDK({
-  logger: logger.child({ name: 'GboxSDK' }),
+const client = new GboxClient({
+  logger: logger.child({ name: 'GboxClient' }),
   logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
@@ -273,10 +273,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import GboxSDK from 'gbox-sdk';
+import GboxClient from 'gbox-sdk';
 import fetch from 'my-fetch';
 
-const client = new GboxSDK({ fetch });
+const client = new GboxClient({ fetch });
 ```
 
 ### Fetch options
@@ -284,9 +284,9 @@ const client = new GboxSDK({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import GboxSDK from 'gbox-sdk';
+import GboxClient from 'gbox-sdk';
 
-const client = new GboxSDK({
+const client = new GboxClient({
   fetchOptions: {
     // `RequestInit` options
   },
@@ -301,11 +301,11 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import GboxSDK from 'gbox-sdk';
+import GboxClient from 'gbox-sdk';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new GboxSDK({
+const client = new GboxClient({
   fetchOptions: {
     dispatcher: proxyAgent,
   },
@@ -315,9 +315,9 @@ const client = new GboxSDK({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import GboxSDK from 'gbox-sdk';
+import GboxClient from 'gbox-sdk';
 
-const client = new GboxSDK({
+const client = new GboxClient({
   fetchOptions: {
     proxy: 'http://localhost:8888',
   },
@@ -327,10 +327,10 @@ const client = new GboxSDK({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import GboxSDK from 'npm:gbox-sdk';
+import GboxClient from 'npm:gbox-sdk';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new GboxSDK({
+const client = new GboxClient({
   fetchOptions: {
     client: httpClient,
   },
