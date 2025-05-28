@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { GboxSDK as default } from './client';
+export { GboxClient as default } from './client';
 
 export { type Uploadable, toFile } from './core/uploads';
 export { APIPromise } from './core/api-promise';
-export { GboxSDK, type ClientOptions } from './client';
+export { GboxClient, type ClientOptions } from './client';
 export {
-  GboxSDKError,
+  GboxClientError,
   APIError,
   APIConnectionError,
   APIConnectionTimeoutError,

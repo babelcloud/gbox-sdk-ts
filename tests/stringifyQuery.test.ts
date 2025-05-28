@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { GboxSDK } from 'gbox-sdk';
+import { GboxClient } from 'gbox-sdk';
 
-const { stringifyQuery } = GboxSDK.prototype as any;
+const { stringifyQuery } = GboxClient.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [

@@ -35,7 +35,7 @@ export interface ClientOptions {
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['GBOX_SDK_BASE_URL'].
+   * Defaults to process.env['GBOX_CLIENT_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -87,7 +87,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['GBOX_SDK_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['GBOX_CLIENT_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -100,9 +100,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Gbox SDK API.
+ * API Client for interfacing with the Gbox Client API.
  */
-export class GboxSDK {
+export class GboxClient {
   apiKey: string;
 
   baseURL: string;
@@ -118,10 +118,10 @@ export class GboxSDK {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Gbox SDK API.
+   * API Client for interfacing with the Gbox Client API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['GBOX_SDK_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['GBOX_SDK_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['GBOX_CLIENT_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -130,13 +130,13 @@ export class GboxSDK {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('GBOX_SDK_BASE_URL'),
+    baseURL = readEnv('GBOX_CLIENT_BASE_URL'),
     apiKey = readEnv('GBOX_SDK_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
-      throw new Errors.GboxSDKError(
-        "The GBOX_SDK_API_KEY environment variable is missing or empty; either provide it, or instantiate the GboxSDK client with an apiKey option, like new GboxSDK({ apiKey: 'My API Key' }).",
+      throw new Errors.GboxClientError(
+        "The GBOX_SDK_API_KEY environment variable is missing or empty; either provide it, or instantiate the GboxClient client with an apiKey option, like new GboxClient({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -147,14 +147,14 @@ export class GboxSDK {
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? GboxSDK.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? GboxClient.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('GBOX_SDK_LOG'), "process.env['GBOX_SDK_LOG']", this) ??
+      parseLogLevel(readEnv('GBOX_CLIENT_LOG'), "process.env['GBOX_CLIENT_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -208,7 +208,7 @@ export class GboxSDK {
         if (value === null) {
           return `${encodeURIComponent(key)}=`;
         }
-        throw new Errors.GboxSDKError(
+        throw new Errors.GboxClientError(
           `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
         );
       })
@@ -673,10 +673,10 @@ export class GboxSDK {
     }
   }
 
-  static GboxSDK = this;
+  static GboxClient = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static GboxSDKError = Errors.GboxSDKError;
+  static GboxClientError = Errors.GboxClientError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -695,9 +695,9 @@ export class GboxSDK {
   api: API.API = new API.API(this);
   health: API.Health = new API.Health(this);
 }
-GboxSDK.API = ApiapiAPI;
-GboxSDK.Health = Health;
-export declare namespace GboxSDK {
+GboxClient.API = ApiapiAPI;
+GboxClient.Health = Health;
+export declare namespace GboxClient {
   export type RequestOptions = Opts.RequestOptions;
 
   export { ApiapiAPI as API };
