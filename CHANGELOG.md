@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2025-05-28)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Features
+
+* **api:** update via SDK Studio ([869340d](https://github.com/babelcloud/gbox-sdk-ts/commit/869340d83fd6134d3d13c6c79ab1f1e604dd0468))
+* **api:** update via SDK Studio ([bc01ec7](https://github.com/babelcloud/gbox-sdk-ts/commit/bc01ec75bea5c818e4236bcd1fb6ba0a5b47054f))
+* **api:** update via SDK Studio ([811d460](https://github.com/babelcloud/gbox-sdk-ts/commit/811d460299e213fcd79235f5c725780af765f2d5))
+* **api:** update via SDK Studio ([f733a8d](https://github.com/babelcloud/gbox-sdk-ts/commit/f733a8d79d3b6fdd534422715530bc349f1692ed))
+* **api:** update via SDK Studio ([5b012eb](https://github.com/babelcloud/gbox-sdk-ts/commit/5b012eb9a8f1945dcc4f8390e03beba65ba10a80))
+
+
+### Chores
+
+* improve publish-npm script --latest tag logic ([9826b36](https://github.com/babelcloud/gbox-sdk-ts/commit/9826b36210580a25a631347804d6efae02db39a0))
+
 ## 0.1.0-alpha.2 (2025-05-23)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
