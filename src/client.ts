@@ -20,9 +20,11 @@ import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
+import { Health } from './resources/health';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
+import { API as ApiapiAPI } from './resources/api/api';
 import { V1 } from './resources/v1/v1';
 
 export interface ClientOptions {
@@ -120,7 +122,7 @@ export class GboxClient {
    * API Client for interfacing with the Gbox Client API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['GBOX_SDK_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['GBOX_CLIENT_BASE_URL'] ?? https://gbox.cloud/api/v1/] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['GBOX_CLIENT_BASE_URL'] ?? https://gbox.cloud/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -142,7 +144,7 @@ export class GboxClient {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://gbox.cloud/api/v1/`,
+      baseURL: baseURL || `https://gbox.cloud/`,
     };
 
     this.baseURL = options.baseURL!;
@@ -691,11 +693,19 @@ export class GboxClient {
 
   static toFile = Uploads.toFile;
 
+  api: API.API = new API.API(this);
+  health: API.Health = new API.Health(this);
   v1: API.V1 = new API.V1(this);
 }
+GboxClient.API = ApiapiAPI;
+GboxClient.Health = Health;
 GboxClient.V1 = V1;
 export declare namespace GboxClient {
   export type RequestOptions = Opts.RequestOptions;
+
+  export { ApiapiAPI as API };
+
+  export { Health as Health };
 
   export { V1 as V1 };
 }
