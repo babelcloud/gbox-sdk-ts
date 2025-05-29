@@ -34,3 +34,12 @@ export {
   type BoxExecuteCommandsParams,
   type BoxRunCodeParams,
 } from './boxes';
+export {
+  Fs,
+  type FListResponse,
+  type FReadResponse,
+  type FWriteResponse,
+  type FListParams,
+  type FReadParams,
+  type FWriteParams,
+} from './fs';
