@@ -1,5 +1,5 @@
 {
-  "name": "gbox-sdk-example",
+  "name": "gbox-sdk",
   "version": "0.1.0-alpha.2",
   "description": "The official TypeScript library for the Gbox Client API",
   "author": "Gbox Client <>",
@@ -50,8 +50,8 @@
     "synckit": "0.8.8"
   },
   "imports": {
-    "gbox-sdk-example": ".",
-    "gbox-sdk-example/*": "./src/*"
+    "gbox-sdk": ".",
+    "gbox-sdk/*": "./src/*"
   },
   "exports": {
     ".": {

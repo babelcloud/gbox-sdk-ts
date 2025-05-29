@@ -1,71 +1,49 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as BoxAPI from './box';
+import * as BoxesAPI from './boxes/boxes';
 import {
-  ActionResult,
-  AndroidBox,
-  Box,
-  BoxClickParams,
   BoxCreateAndroidParams,
+  BoxCreateAndroidResponse,
   BoxCreateLinuxParams,
+  BoxCreateLinuxResponse,
   BoxCreateParams,
   BoxCreateResponse,
-  BoxDragParams,
   BoxExecuteCommandsParams,
   BoxExecuteCommandsResponse,
-  BoxKeypressParams,
   BoxListParams,
   BoxListResponse,
-  BoxMoveParams,
   BoxRetrieveResponse,
   BoxRunCodeParams,
   BoxRunCodeResponse,
-  BoxScreenshotParams,
-  BoxScreenshotResponse,
-  BoxScrollParams,
-  BoxTouchParams,
-  BoxTypeParams,
-  CreateAndroidBox,
-  CreateBoxConfig,
-  CreateLinuxBox,
-  LinuxBox,
-} from './box';
+  BoxStartResponse,
+  BoxStopResponse,
+  Boxes,
+} from './boxes/boxes';
 
 export class V1 extends APIResource {
-  box: BoxAPI.Box = new BoxAPI.Box(this._client);
+  boxes: BoxesAPI.Boxes = new BoxesAPI.Boxes(this._client);
 }
 
-V1.Box = Box;
+V1.Boxes = Boxes;
 
 export declare namespace V1 {
   export {
-    Box as Box,
-    type ActionResult as ActionResult,
-    type AndroidBox as AndroidBox,
-    type CreateAndroidBox as CreateAndroidBox,
-    type CreateBoxConfig as CreateBoxConfig,
-    type CreateLinuxBox as CreateLinuxBox,
-    type LinuxBox as LinuxBox,
+    Boxes as Boxes,
     type BoxCreateResponse as BoxCreateResponse,
     type BoxRetrieveResponse as BoxRetrieveResponse,
     type BoxListResponse as BoxListResponse,
+    type BoxCreateAndroidResponse as BoxCreateAndroidResponse,
+    type BoxCreateLinuxResponse as BoxCreateLinuxResponse,
     type BoxExecuteCommandsResponse as BoxExecuteCommandsResponse,
     type BoxRunCodeResponse as BoxRunCodeResponse,
-    type BoxScreenshotResponse as BoxScreenshotResponse,
+    type BoxStartResponse as BoxStartResponse,
+    type BoxStopResponse as BoxStopResponse,
     type BoxCreateParams as BoxCreateParams,
     type BoxListParams as BoxListParams,
-    type BoxClickParams as BoxClickParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
-    type BoxDragParams as BoxDragParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,
-    type BoxKeypressParams as BoxKeypressParams,
-    type BoxMoveParams as BoxMoveParams,
     type BoxRunCodeParams as BoxRunCodeParams,
-    type BoxScreenshotParams as BoxScreenshotParams,
-    type BoxScrollParams as BoxScrollParams,
-    type BoxTouchParams as BoxTouchParams,
-    type BoxTypeParams as BoxTypeParams,
   };
 }

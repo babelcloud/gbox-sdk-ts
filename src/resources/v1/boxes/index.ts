@@ -1,6 +1,25 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Actions,
+  type ActionClickResponse,
+  type ActionDragResponse,
+  type ActionKeypressResponse,
+  type ActionMoveResponse,
+  type ActionScreenshotResponse,
+  type ActionScrollResponse,
+  type ActionTouchResponse,
+  type ActionTypeResponse,
+  type ActionClickParams,
+  type ActionDragParams,
+  type ActionKeypressParams,
+  type ActionMoveParams,
+  type ActionScreenshotParams,
+  type ActionScrollParams,
+  type ActionTouchParams,
+  type ActionTypeParams,
+} from './actions';
+export {
   Boxes,
   type BoxCreateResponse,
   type BoxRetrieveResponse,
@@ -17,5 +36,4 @@ export {
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,
   type BoxRunCodeParams,
-} from './boxes/index';
-export { V1 } from './v1';
+} from './boxes';
