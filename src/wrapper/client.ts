@@ -66,22 +66,4 @@ export class GboxSDK extends GboxClient {
       }
     });
   }
-
-  async get(id: string): Promise<AndroidBox | LinuxBox> {
-    const res = await this.v1.boxes.retrieve(id);
-    if (isAndroidBox(res)) {
-      return new CreateAndroidResponse(res);
-    } else if (isLinuxBox(res)) {
-      return new CreateLinuxResponse(res);
-    }
-  }
-
-  async update(id: string, body: UpdateAndroid | UpdateLinux): Promise<AndroidBox | LinuxBox> {
-    const { type } = body;
-    if (type === 'android') {
-      return this.v1.boxes.updateAndroid(id, body).then((res) => new CreateAndroidResponse(res));
-    } else if (type === 'linux') {
-      return this.v1.boxes.updateLinux(id, body).then((res) => new CreateLinuxResponse(res));
-    }
-  }
 }
