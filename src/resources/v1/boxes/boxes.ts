@@ -15,12 +15,23 @@ import {
   ActionTypeParams,
   Actions,
 } from './actions';
+import * as FsAPI from './fs';
+import {
+  FListParams,
+  FListResponse,
+  FReadParams,
+  FReadResponse,
+  FWriteParams,
+  FWriteResponse,
+  Fs,
+} from './fs';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Boxes extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
+  fs: FsAPI.Fs = new FsAPI.Fs(this._client);
 
   /**
    * @example
@@ -576,6 +587,7 @@ export interface BoxRunCodeParams {
 }
 
 Boxes.Actions = Actions;
+Boxes.Fs = Fs;
 
 export declare namespace Boxes {
   export {
@@ -611,5 +623,15 @@ export declare namespace Boxes {
     type ActionScrollParams as ActionScrollParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
+  };
+
+  export {
+    Fs as Fs,
+    type FListResponse as FListResponse,
+    type FReadResponse as FReadResponse,
+    type FWriteResponse as FWriteResponse,
+    type FListParams as FListParams,
+    type FReadParams as FReadParams,
+    type FWriteParams as FWriteParams,
   };
 }

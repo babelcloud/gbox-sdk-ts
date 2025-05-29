@@ -46,3 +46,17 @@ Methods:
 - <code title="post /api/v1/boxes/{id}/actions/scroll">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">scroll</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /api/v1/boxes/{id}/actions/touch">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">touch</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /api/v1/boxes/{id}/actions/type">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">type</a>(id, { ...params }) -> ActionResult</code>
+
+### Fs
+
+Types:
+
+- <code><a href="./src/resources/v1/boxes/fs.ts">FListResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/fs.ts">FReadResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/fs.ts">FWriteResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1/boxes/{id}/fs/list">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">list</a>(id, { ...params }) -> FListResponse</code>
+- <code title="get /api/v1/boxes/{id}/fs/read">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">read</a>(id, { ...params }) -> FReadResponse</code>
+- <code title="post /api/v1/boxes/{id}/fs/write">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">write</a>(id, { ...params }) -> FWriteResponse</code>
