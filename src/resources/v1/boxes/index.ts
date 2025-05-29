@@ -2,14 +2,8 @@
 
 export {
   Actions,
-  type ActionClickResponse,
-  type ActionDragResponse,
-  type ActionKeypressResponse,
-  type ActionMoveResponse,
+  type ActionResult,
   type ActionScreenshotResponse,
-  type ActionScrollResponse,
-  type ActionTouchResponse,
-  type ActionTypeResponse,
   type ActionClickParams,
   type ActionDragParams,
   type ActionKeypressParams,
@@ -21,11 +15,14 @@ export {
 } from './actions';
 export {
   Boxes,
+  type AndroidBox,
+  type CreateAndroidBox,
+  type CreateBoxConfig,
+  type CreateLinuxBox,
+  type LinuxBox,
   type BoxCreateResponse,
   type BoxRetrieveResponse,
   type BoxListResponse,
-  type BoxCreateAndroidResponse,
-  type BoxCreateLinuxResponse,
   type BoxExecuteCommandsResponse,
   type BoxRunCodeResponse,
   type BoxStartResponse,
