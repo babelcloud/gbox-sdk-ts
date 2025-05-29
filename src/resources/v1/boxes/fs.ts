@@ -49,7 +49,53 @@ export interface FListResponse {
   /**
    * A box instance that can be either Linux or Android type
    */
-  data: Array<unknown>;
+  data: Array<FListResponse.File | FListResponse.Dir>;
+}
+
+export namespace FListResponse {
+  export interface File {
+    /**
+     * Last modified time of the file
+     */
+    lastModified: string;
+
+    /**
+     * Name of the file
+     */
+    name: string;
+
+    /**
+     * Full path to the file
+     */
+    path: string;
+
+    /**
+     * Size of the file
+     */
+    size: string;
+
+    /**
+     * File type indicator
+     */
+    type: 'file';
+  }
+
+  export interface Dir {
+    /**
+     * Name of the directory
+     */
+    name: string;
+
+    /**
+     * Full path to the directory
+     */
+    path: string;
+
+    /**
+     * Directory type indicator
+     */
+    type: 'dir';
+  }
 }
 
 export interface FReadResponse {
