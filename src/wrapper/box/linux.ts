@@ -1,8 +1,8 @@
-import type { BoxCreateLinuxParams, BoxCreateLinuxResponse } from '../../resources/boxes';
+import type { BoxCreateLinuxParams, LinuxBox } from '../../resources/v1/boxes';
 import { BaseBox } from './base';
 
 export interface CreateLinux extends BoxCreateLinuxParams {
   type: 'linux';
 }
 
-export class LinuxBox extends BaseBox<BoxCreateLinuxResponse> {}
+export class CreateLinuxResponse extends BaseBox<LinuxBox> {}

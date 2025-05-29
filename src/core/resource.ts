@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { GboxSDK } from '../client';
+import type { GboxClient } from '../client';
 
 export class APIResource {
-  protected _client: GboxSDK;
+  protected _client: GboxClient;
 
-  constructor(client: GboxSDK) {
+  constructor(client: GboxClient) {
     this._client = client;
   }
 }

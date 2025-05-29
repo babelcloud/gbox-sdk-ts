@@ -1,10 +1,17 @@
-import { GboxSDK as GboxSDKBase } from '../client';
-import { APIPromise } from '../core/api-promise';
-import { BoxDeleteResponse, BoxRetrieveResponse } from '../resources/boxes';
-import { AndroidBox, CreateAndroid } from './box/android';
-import { CreateLinux, LinuxBox } from './box/linux';
+import { GboxClient } from '../client';
+import { BoxListParams } from '../resources/v1/boxes';
+import { CreateAndroid, CreateAndroidResponse } from './box/android';
+import { CreateLinux, CreateLinuxResponse } from './box/linux';
+import { AndroidBox, LinuxBox } from '../resources/v1/boxes';
 
-export class GboxSDK extends GboxSDKBase {
+function isAndroidBox(box: AndroidBox | LinuxBox): box is AndroidBox {
+  return box.type === 'android';
+}
+function isLinuxBox(box: AndroidBox | LinuxBox): box is LinuxBox {
+  return box.type === 'linux';
+}
+
+export class GboxSDK extends GboxClient {
   /**
    * @example
    * ```ts
@@ -14,7 +21,7 @@ export class GboxSDK extends GboxSDKBase {
    * });
    * ```
    */
-  async create(body: CreateAndroid): Promise<AndroidBox>;
+  async create(body: CreateAndroid): Promise<CreateAndroidResponse>;
   /**
    * @example
    * ```ts
@@ -24,7 +31,7 @@ export class GboxSDK extends GboxSDKBase {
    * });
    * ```
    */
-  async create(body: CreateLinux): Promise<LinuxBox>;
+  async create(body: CreateLinux): Promise<CreateLinuxResponse>;
   /**
    * @example
    * ```ts
@@ -39,35 +46,24 @@ export class GboxSDK extends GboxSDKBase {
 
     switch (type) {
       case 'android':
-        return this.boxes.createAndroid(body).then((res) => new AndroidBox(res));
+        return this.v1.boxes.createAndroid(body).then((res) => new CreateAndroidResponse(res));
       case 'linux':
-        return this.boxes.createLinux(body).then((res) => new LinuxBox(res));
+        return this.v1.boxes.createLinux(body).then((res) => new CreateLinuxResponse(res));
       default:
         throw new Error(`Invalid box type: ${type}`);
     }
   }
 
-  async list(): Promise<Array<AndroidBox | LinuxBox>> {
-    const res = await this.boxes.list();
-    return res.map((box) => {
-      const { type } = box;
-      switch (type) {
-        case 'android':
-          return new AndroidBox(box);
-        case 'linux':
-          return new LinuxBox(box);
-        default:
-          throw new Error(`Invalid box type: ${type}`);
+  async list(query: BoxListParams): Promise<Array<AndroidBox | LinuxBox>> {
+    const res = await this.v1.boxes.list(query);
+    return res.data.map((box) => {
+      if (isAndroidBox(box)) {
+        return new CreateAndroidResponse(box);
+      } else if (isLinuxBox(box)) {
+        return new CreateLinuxResponse(box);
+      } else {
+        throw new Error(`Invalid box type: ${(box as any).type}`);
       }
     });
-  }
-
-  // FIXME: name conflict with GboxSDKBase.get
-  retrieve(id: string): APIPromise<BoxRetrieveResponse> {
-    return this.boxes.retrieve(id);
-  }
-  // FIXME: name conflict with GboxSDKBase.delete
-  remove(id: string): APIPromise<BoxDeleteResponse> {
-    return this.boxes.delete(id);
   }
 }
