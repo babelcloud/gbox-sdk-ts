@@ -42,15 +42,15 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ npm install git+ssh://git@github.com:babelcloud/gbox-sdk-ts.git
+$ npm install git+ssh://git@github.com:stainless-sdks/gbox-sdk-typescript.git
 ```
 
 Alternatively, to link a local copy of the repo:
 
 ```sh
 # Clone
-$ git clone https://www.github.com/babelcloud/gbox-sdk-ts
-$ cd gbox-sdk-ts
+$ git clone https://www.github.com/stainless-sdks/gbox-sdk-typescript
+$ cd gbox-sdk-typescript
 
 # With yarn
 $ yarn link
