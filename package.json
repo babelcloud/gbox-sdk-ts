@@ -1,12 +1,12 @@
 {
   "name": "gbox-sdk",
   "version": "0.1.0-alpha.2",
-  "description": "The official TypeScript library for the Gbox Client API",
-  "author": "Gbox Client <>",
+  "description": "The official TypeScript library for the Gbox SDK API",
+  "author": "Gbox SDK <>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:babelcloud/gbox-sdk-ts",
+  "repository": "github:stainless-sdks/gbox-sdk-typescript",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [
