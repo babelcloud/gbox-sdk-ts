@@ -1,8 +1,8 @@
-import { BoxCreateAndroidParams, BoxCreateAndroidResponse } from '../../resources/boxes';
+import { BoxCreateAndroidParams, AndroidBox } from '../../resources/v1/box';
 import { BaseBox } from './base';
 
 export interface CreateAndroid extends BoxCreateAndroidParams {
   type: 'android';
 }
 
-export class AndroidBox extends BaseBox<BoxCreateAndroidResponse> {}
+export class CreateAndroidResponse extends BaseBox<AndroidBox> {}

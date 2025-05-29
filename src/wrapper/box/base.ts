@@ -1,16 +1,25 @@
-import type { BoxCreateResponse } from '../../resources/boxes';
-import { GboxSDK, type ClientOptions } from '../../client';
-import {
+import type {
+  AndroidBox,
+  LinuxBox,
   ActionClickParams,
   ActionDragParams,
   ActionKeypressParams,
   ActionMoveParams,
+  ActionScreenshotParams,
   ActionScrollParams,
   ActionTouchParams,
-} from '../../resources/actions';
+  ActionTypeParams,
+  BoxStartResponse,
+  BoxStopResponse,
+  BoxExecuteCommandsResponse,
+  BoxExecuteCommandsParams,
+  BoxRunCodeParams,
+  BoxRunCodeResponse,
+} from '../../resources/v1/boxes';
+import { GboxClient, type ClientOptions } from '../../client';
 
-export class BaseBox<T extends BoxCreateResponse> {
-  private client: GboxSDK;
+export class BaseBox<T extends LinuxBox | AndroidBox> {
+  private client: GboxClient;
   public data: T;
   public action: InterfaceActions;
 
@@ -23,7 +32,7 @@ export class BaseBox<T extends BoxCreateResponse> {
   public config: T['config'];
 
   constructor(data: T, clientOptions?: ClientOptions) {
-    this.client = new GboxSDK(clientOptions);
+    this.client = new GboxClient(clientOptions);
     this.data = data;
 
     this.id = data.id;
@@ -38,45 +47,67 @@ export class BaseBox<T extends BoxCreateResponse> {
     this.action = new InterfaceActions(this.client, this.id);
   }
 
-  async start() {
-    await this.client.boxes.start(this.id);
+  /**
+   * @example
+   * ```ts
+   * const box = await client.v1.box.retrieve('id');
+   * ```
+   */
+  start(id: string): Promise<BoxStartResponse> {
+    return this.client.v1.boxes.start(id);
   }
 
-  async stop() {
-    await this.client.boxes.stop(this.id);
+  stop(id: string): Promise<BoxStopResponse> {
+    return this.client.v1.boxes.stop(id);
+  }
+
+  command(id: string, body: BoxExecuteCommandsParams): Promise<BoxExecuteCommandsResponse> {
+    return this.client.v1.boxes.executeCommands(id, body);
+  }
+
+  runCode(id: string, body: BoxRunCodeParams): Promise<BoxRunCodeResponse> {
+    return this.client.v1.boxes.runCode(id, body);
   }
 }
 
 class InterfaceActions {
-  private client: GboxSDK;
+  private client: GboxClient;
   private boxId: string;
 
-  constructor(client: GboxSDK, boxId: string) {
+  constructor(client: GboxClient, boxId: string) {
     this.client = client;
     this.boxId = boxId;
   }
 
   async click(body: ActionClickParams) {
-    await this.client.actions.click(this.boxId, body);
+    await this.client.v1.boxes.actions.click(this.boxId, body);
   }
 
   async drag(body: ActionDragParams) {
-    await this.client.actions.drag(this.boxId, body);
+    await this.client.v1.boxes.actions.drag(this.boxId, body);
   }
 
   async keypress(body: ActionKeypressParams) {
-    await this.client.actions.keypress(this.boxId, body);
+    await this.client.v1.boxes.actions.keypress(this.boxId, body);
   }
 
   async move(body: ActionMoveParams) {
-    await this.client.actions.move(this.boxId, body);
+    await this.client.v1.boxes.actions.move(this.boxId, body);
   }
 
   async scroll(body: ActionScrollParams) {
-    await this.client.actions.scroll(this.boxId, body);
+    await this.client.v1.boxes.actions.scroll(this.boxId, body);
   }
 
   async touch(body: ActionTouchParams) {
-    await this.client.actions.touch(this.boxId, body);
+    await this.client.v1.boxes.actions.touch(this.boxId, body);
+  }
+
+  async type(body: ActionTypeParams) {
+    await this.client.v1.boxes.actions.type(this.boxId, body);
+  }
+
+  async screenshot(body: ActionScreenshotParams) {
+    await this.client.v1.boxes.actions.screenshot(this.boxId, body);
   }
 }
