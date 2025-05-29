@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^gbox-sdk(/.*)?',
+              regex: '^gbox-sdk-example(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],
