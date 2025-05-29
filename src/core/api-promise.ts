@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type GboxSDK } from '../client';
+import { type GboxClient } from '../client';
 
 import { type PromiseOrValue } from '../internal/types';
 import { APIResponseProps, defaultParseResponse } from '../internal/parse';
@@ -11,13 +11,13 @@ import { APIResponseProps, defaultParseResponse } from '../internal/parse';
  */
 export class APIPromise<T> extends Promise<T> {
   private parsedPromise: Promise<T> | undefined;
-  #client: GboxSDK;
+  #client: GboxClient;
 
   constructor(
-    client: GboxSDK,
+    client: GboxClient,
     private responsePromise: Promise<APIResponseProps>,
     private parseResponse: (
-      client: GboxSDK,
+      client: GboxClient,
       props: APIResponseProps,
     ) => PromiseOrValue<T> = defaultParseResponse,
   ) {
