@@ -3,10 +3,9 @@
 import { APIResource } from '../../core/resource';
 import * as BoxesAPI from './boxes/boxes';
 import {
+  AndroidBox,
   BoxCreateAndroidParams,
-  BoxCreateAndroidResponse,
   BoxCreateLinuxParams,
-  BoxCreateLinuxResponse,
   BoxCreateParams,
   BoxCreateResponse,
   BoxExecuteCommandsParams,
@@ -19,6 +18,10 @@ import {
   BoxStartResponse,
   BoxStopResponse,
   Boxes,
+  CreateAndroidBox,
+  CreateBoxConfig,
+  CreateLinuxBox,
+  LinuxBox,
 } from './boxes/boxes';
 
 export class V1 extends APIResource {
@@ -30,11 +33,14 @@ V1.Boxes = Boxes;
 export declare namespace V1 {
   export {
     Boxes as Boxes,
+    type AndroidBox as AndroidBox,
+    type CreateAndroidBox as CreateAndroidBox,
+    type CreateBoxConfig as CreateBoxConfig,
+    type CreateLinuxBox as CreateLinuxBox,
+    type LinuxBox as LinuxBox,
     type BoxCreateResponse as BoxCreateResponse,
     type BoxRetrieveResponse as BoxRetrieveResponse,
     type BoxListResponse as BoxListResponse,
-    type BoxCreateAndroidResponse as BoxCreateAndroidResponse,
-    type BoxCreateLinuxResponse as BoxCreateLinuxResponse,
     type BoxExecuteCommandsResponse as BoxExecuteCommandsResponse,
     type BoxRunCodeResponse as BoxRunCodeResponse,
     type BoxStartResponse as BoxStartResponse,

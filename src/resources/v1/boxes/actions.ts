@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as BoxesAPI from './boxes';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -9,61 +10,59 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.click('id', {
+   * const linuxBox = await client.v1.boxes.actions.click('id', {
    *   type: {},
    *   x: 100,
    *   y: 100,
    * });
    * ```
    */
-  click(id: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionClickResponse> {
+  click(id: string, body: ActionClickParams, options?: RequestOptions): APIPromise<BoxesAPI.LinuxBox> {
     return this._client.post(path`/api/v1/boxes/${id}/actions/click`, { body, ...options });
   }
 
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.drag('id', {
-   *   path: [
-   *     { x: 100, y: 100 },
-   *     { x: 200, y: 200 },
-   *   ],
-   *   type: {},
-   * });
+   * const actionResult = await client.v1.boxes.actions.drag(
+   *   'id',
+   *   {
+   *     path: [
+   *       { x: 100, y: 100 },
+   *       { x: 200, y: 200 },
+   *     ],
+   *     type: {},
+   *   },
+   * );
    * ```
    */
-  drag(id: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionDragResponse> {
+  drag(id: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/api/v1/boxes/${id}/actions/drag`, { body, ...options });
   }
 
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.keypress(
+   * const actionResult = await client.v1.boxes.actions.keypress(
    *   'id',
    *   { keys: ['Enter'], type: {} },
    * );
    * ```
    */
-  keypress(
-    id: string,
-    body: ActionKeypressParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionKeypressResponse> {
+  keypress(id: string, body: ActionKeypressParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/api/v1/boxes/${id}/actions/keypress`, { body, ...options });
   }
 
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.move('id', {
-   *   type: {},
-   *   x: 200,
-   *   y: 300,
-   * });
+   * const actionResult = await client.v1.boxes.actions.move(
+   *   'id',
+   *   { type: {}, x: 200, y: 300 },
+   * );
    * ```
    */
-  move(id: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionMoveResponse> {
+  move(id: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/api/v1/boxes/${id}/actions/move`, { body, ...options });
   }
 
@@ -87,284 +86,51 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.scroll(
+   * const actionResult = await client.v1.boxes.actions.scroll(
    *   'id',
    *   { scrollX: 0, scrollY: 100, type: {}, x: 100, y: 100 },
    * );
    * ```
    */
-  scroll(id: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionScrollResponse> {
+  scroll(id: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/api/v1/boxes/${id}/actions/scroll`, { body, ...options });
   }
 
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.touch('id', {
-   *   points: [{ start: { x: 0, y: 0 } }],
-   *   type: {},
-   * });
+   * const actionResult = await client.v1.boxes.actions.touch(
+   *   'id',
+   *   { points: [{ start: { x: 0, y: 0 } }], type: {} },
+   * );
    * ```
    */
-  touch(id: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionTouchResponse> {
+  touch(id: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/api/v1/boxes/${id}/actions/touch`, { body, ...options });
   }
 
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.type('id', {
-   *   text: 'Hello World',
-   *   type: {},
-   * });
+   * const actionResult = await client.v1.boxes.actions.type(
+   *   'id',
+   *   { text: 'Hello World', type: {} },
+   * );
    * ```
    */
-  type(id: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionTypeResponse> {
+  type(id: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/api/v1/boxes/${id}/actions/type`, { body, ...options });
   }
 }
 
-export interface ActionClickResponse {
-  /**
-   * Unique identifier for the box
-   */
-  id: string;
-
-  /**
-   * Configuration for a Linux box instance
-   */
-  config: ActionClickResponse.Config;
-
-  /**
-   * Creation timestamp of the box
-   */
-  createdAt: string;
-
-  /**
-   * Expiration timestamp of the box
-   */
-  expiresAt: string;
-
-  /**
-   * The current status of a box instance
-   */
-  status: 'pending' | 'running' | 'stopped' | 'error';
-
-  /**
-   * Box type is Linux
-   */
-  type: 'linux' | 'android';
-
-  /**
-   * Last update timestamp of the box
-   */
-  updatedAt: string;
-}
-
-export namespace ActionClickResponse {
-  /**
-   * Configuration for a Linux box instance
-   */
-  export interface Config {
-    /**
-     * Browser configuration
-     */
-    browser: Config.Browser;
-
-    /**
-     * CPU cores allocated to the box
-     */
-    cpu: number;
-
-    /**
-     * Environment variables for the box
-     */
-    envs: unknown;
-
-    /**
-     * Key-value pairs of labels for the box
-     */
-    labels: unknown;
-
-    /**
-     * Memory allocated to the box in MB
-     */
-    memory: number;
-
-    /**
-     * Operating system configuration
-     */
-    os: Config.Os;
-
-    /**
-     * Storage allocated to the box in GB.
-     */
-    storage: number;
-
-    /**
-     * Working directory path for the box
-     */
-    workingDir: string;
-  }
-
-  export namespace Config {
-    /**
-     * Browser configuration
-     */
-    export interface Browser {
-      /**
-       * Supported browser types for Linux boxes
-       */
-      type: 'chromium' | 'firefox' | 'webkit';
-
-      /**
-       * Browser version string (e.g. '12')
-       */
-      version: string;
-    }
-
-    /**
-     * Operating system configuration
-     */
-    export interface Os {
-      /**
-       * OS version string (e.g. 'ubuntu-20.04')
-       */
-      version: string;
-    }
-  }
-}
-
-export interface ActionDragResponse {
+export interface ActionResult {
   /**
    * screenshot
    */
-  screenshot: ActionDragResponse.Screenshot;
+  screenshot: ActionResult.Screenshot;
 }
 
-export namespace ActionDragResponse {
-  /**
-   * screenshot
-   */
-  export interface Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    after: Screenshot.After;
-
-    /**
-     * URI of the screenshot before the action
-     */
-    before: Screenshot.Before;
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    highlight: Screenshot.Highlight;
-  }
-
-  export namespace Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    export interface Highlight {
-      /**
-       * URI of the screenshot before the action with highlight
-       */
-      uri: string;
-    }
-  }
-}
-
-export interface ActionKeypressResponse {
-  /**
-   * screenshot
-   */
-  screenshot: ActionKeypressResponse.Screenshot;
-}
-
-export namespace ActionKeypressResponse {
-  /**
-   * screenshot
-   */
-  export interface Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    after: Screenshot.After;
-
-    /**
-     * URI of the screenshot before the action
-     */
-    before: Screenshot.Before;
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    highlight: Screenshot.Highlight;
-  }
-
-  export namespace Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    export interface Highlight {
-      /**
-       * URI of the screenshot before the action with highlight
-       */
-      uri: string;
-    }
-  }
-}
-
-export interface ActionMoveResponse {
-  /**
-   * screenshot
-   */
-  screenshot: ActionMoveResponse.Screenshot;
-}
-
-export namespace ActionMoveResponse {
+export namespace ActionResult {
   /**
    * screenshot
    */
@@ -423,189 +189,6 @@ export interface ActionScreenshotResponse {
    * URL of the screenshot
    */
   uri: string;
-}
-
-export interface ActionScrollResponse {
-  /**
-   * screenshot
-   */
-  screenshot: ActionScrollResponse.Screenshot;
-}
-
-export namespace ActionScrollResponse {
-  /**
-   * screenshot
-   */
-  export interface Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    after: Screenshot.After;
-
-    /**
-     * URI of the screenshot before the action
-     */
-    before: Screenshot.Before;
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    highlight: Screenshot.Highlight;
-  }
-
-  export namespace Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    export interface Highlight {
-      /**
-       * URI of the screenshot before the action with highlight
-       */
-      uri: string;
-    }
-  }
-}
-
-export interface ActionTouchResponse {
-  /**
-   * screenshot
-   */
-  screenshot: ActionTouchResponse.Screenshot;
-}
-
-export namespace ActionTouchResponse {
-  /**
-   * screenshot
-   */
-  export interface Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    after: Screenshot.After;
-
-    /**
-     * URI of the screenshot before the action
-     */
-    before: Screenshot.Before;
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    highlight: Screenshot.Highlight;
-  }
-
-  export namespace Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    export interface Highlight {
-      /**
-       * URI of the screenshot before the action with highlight
-       */
-      uri: string;
-    }
-  }
-}
-
-export interface ActionTypeResponse {
-  /**
-   * screenshot
-   */
-  screenshot: ActionTypeResponse.Screenshot;
-}
-
-export namespace ActionTypeResponse {
-  /**
-   * screenshot
-   */
-  export interface Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    after: Screenshot.After;
-
-    /**
-     * URI of the screenshot before the action
-     */
-    before: Screenshot.Before;
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    highlight: Screenshot.Highlight;
-  }
-
-  export namespace Screenshot {
-    /**
-     * URI of the screenshot after the action
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-    }
-
-    /**
-     * URI of the screenshot before the action with highlight
-     */
-    export interface Highlight {
-      /**
-       * URI of the screenshot before the action with highlight
-       */
-      uri: string;
-    }
-  }
 }
 
 export interface ActionClickParams {
@@ -858,14 +441,8 @@ export interface ActionTypeParams {
 
 export declare namespace Actions {
   export {
-    type ActionClickResponse as ActionClickResponse,
-    type ActionDragResponse as ActionDragResponse,
-    type ActionKeypressResponse as ActionKeypressResponse,
-    type ActionMoveResponse as ActionMoveResponse,
+    type ActionResult as ActionResult,
     type ActionScreenshotResponse as ActionScreenshotResponse,
-    type ActionScrollResponse as ActionScrollResponse,
-    type ActionTouchResponse as ActionTouchResponse,
-    type ActionTypeResponse as ActionTypeResponse,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionKeypressParams as ActionKeypressParams,
