@@ -7,7 +7,7 @@ export { APIPromise } from './core/api-promise';
 export { type ClientOptions } from './client';
 export { GboxSDK } from './wrapper/client';
 export {
-  GboxSDKError,
+  GboxClientError,
   APIError,
   APIConnectionError,
   APIConnectionTimeoutError,
