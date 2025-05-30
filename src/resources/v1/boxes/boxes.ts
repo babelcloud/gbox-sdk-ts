@@ -34,6 +34,8 @@ export class Boxes extends APIResource {
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
 
   /**
+   * Create box
+   *
    * @example
    * ```ts
    * const box = await client.v1.boxes.create({ type: 'linux' });
@@ -44,6 +46,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Get box detail
+   *
    * @example
    * ```ts
    * const box = await client.v1.boxes.retrieve('id');
@@ -54,6 +58,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * List box
+   *
    * @example
    * ```ts
    * const boxes = await client.v1.boxes.list({
@@ -67,6 +73,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Create android box
+   *
    * @example
    * ```ts
    * const androidBox = await client.v1.boxes.createAndroid({
@@ -79,6 +87,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Create linux box
+   *
    * @example
    * ```ts
    * const linuxBox = await client.v1.boxes.createLinux({
@@ -121,6 +131,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Start box
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.start('id');
@@ -131,6 +143,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Stop box
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.stop('id');

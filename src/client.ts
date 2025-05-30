@@ -27,7 +27,7 @@ import { V1 } from './resources/v1/v1';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['GBOX_SDK_API_KEY'].
+   * Defaults to process.env['GBOX_API_KEY'].
    */
   apiKey?: string | undefined;
 
@@ -119,7 +119,7 @@ export class GboxClient {
   /**
    * API Client for interfacing with the Gbox Client API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['GBOX_SDK_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['GBOX_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['GBOX_CLIENT_BASE_URL'] ?? https://gbox.cloud/api/v1/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -130,12 +130,12 @@ export class GboxClient {
    */
   constructor({
     baseURL = readEnv('GBOX_CLIENT_BASE_URL'),
-    apiKey = readEnv('GBOX_SDK_API_KEY'),
+    apiKey = readEnv('GBOX_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.GboxClientError(
-        "The GBOX_SDK_API_KEY environment variable is missing or empty; either provide it, or instantiate the GboxClient client with an apiKey option, like new GboxClient({ apiKey: 'My API Key' }).",
+        "The GBOX_API_KEY environment variable is missing or empty; either provide it, or instantiate the GboxClient client with an apiKey option, like new GboxClient({ apiKey: 'My API Key' }).",
       );
     }
 

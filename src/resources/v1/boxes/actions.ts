@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as BoxesAPI from './boxes';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -10,14 +9,13 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * const linuxBox = await client.v1.boxes.actions.click('id', {
-   *   type: {},
-   *   x: 100,
-   *   y: 100,
-   * });
+   * const actionResult = await client.v1.boxes.actions.click(
+   *   'id',
+   *   { type: {}, x: 100, y: 100 },
+   * );
    * ```
    */
-  click(id: string, body: ActionClickParams, options?: RequestOptions): APIPromise<BoxesAPI.LinuxBox> {
+  click(id: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/api/v1/boxes/${id}/actions/click`, { body, ...options });
   }
 
