@@ -60,3 +60,15 @@ Methods:
 - <code title="get /api/v1/boxes/{id}/fs/list">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">list</a>(id, { ...params }) -> FListResponse</code>
 - <code title="get /api/v1/boxes/{id}/fs/read">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">read</a>(id, { ...params }) -> FReadResponse</code>
 - <code title="post /api/v1/boxes/{id}/fs/write">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">write</a>(id, { ...params }) -> FWriteResponse</code>
+
+### Browser
+
+Types:
+
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserCdpURLResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserConnectURLResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1/boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">cdpURL</a>(id) -> string</code>
+- <code title="get /api/v1/boxes/{id}/browser/connect-url">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">connectURL</a>(id) -> BrowserConnectURLResponse</code>

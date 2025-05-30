@@ -34,6 +34,7 @@ export {
   type BoxExecuteCommandsParams,
   type BoxRunCodeParams,
 } from './boxes';
+export { Browser, type BrowserCdpURLResponse, type BrowserConnectURLResponse } from './browser';
 export {
   Fs,
   type FListResponse,
