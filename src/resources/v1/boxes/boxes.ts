@@ -15,6 +15,8 @@ import {
   ActionTypeParams,
   Actions,
 } from './actions';
+import * as BrowserAPI from './browser';
+import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse, BrowserConnectURLResponse } from './browser';
 import * as FsAPI from './fs';
 import {
   FListParams,
@@ -32,6 +34,7 @@ import { path } from '../../../internal/utils/path';
 export class Boxes extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
+  browser: BrowserAPI.Browser = new BrowserAPI.Browser(this._client);
 
   /**
    * Create box
@@ -602,6 +605,7 @@ export interface BoxRunCodeParams {
 
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
+Boxes.Browser = BrowserAPIBrowser;
 
 export declare namespace Boxes {
   export {
@@ -647,5 +651,11 @@ export declare namespace Boxes {
     type FListParams as FListParams,
     type FReadParams as FReadParams,
     type FWriteParams as FWriteParams,
+  };
+
+  export {
+    BrowserAPIBrowser as Browser,
+    type BrowserCdpURLResponse as BrowserCdpURLResponse,
+    type BrowserConnectURLResponse as BrowserConnectURLResponse,
   };
 }
