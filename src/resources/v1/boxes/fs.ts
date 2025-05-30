@@ -10,7 +10,6 @@ export class Fs extends APIResource {
    * @example
    * ```ts
    * const fs = await client.v1.boxes.fs.list('id', {
-   *   depth: 0,
    *   path: 'path',
    * });
    * ```
@@ -114,14 +113,14 @@ export interface FWriteResponse {
 
 export interface FListParams {
   /**
-   * Depth of the directory
-   */
-  depth: number;
-
-  /**
    * Path to the directory
    */
   path: string;
+
+  /**
+   * Depth of the directory
+   */
+  depth?: number;
 }
 
 export interface FReadParams {
