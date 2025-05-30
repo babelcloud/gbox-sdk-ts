@@ -40,8 +40,8 @@ Methods:
 
 - <code title="post /api/v1/boxes/{id}/actions/click">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">click</a>(id, { ...params }) -> LinuxBox</code>
 - <code title="post /api/v1/boxes/{id}/actions/drag">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">drag</a>(id, { ...params }) -> ActionResult</code>
-- <code title="post /api/v1/boxes/{id}/actions/keypress">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">keypress</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /api/v1/boxes/{id}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(id, { ...params }) -> ActionResult</code>
+- <code title="post /api/v1/boxes/{id}/actions/press">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">press</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /api/v1/boxes/{id}/actions/screenshot">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenshot</a>(id, { ...params }) -> ActionScreenshotResponse</code>
 - <code title="post /api/v1/boxes/{id}/actions/scroll">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">scroll</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /api/v1/boxes/{id}/actions/touch">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">touch</a>(id, { ...params }) -> ActionResult</code>

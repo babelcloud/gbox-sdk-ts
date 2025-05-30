@@ -3,7 +3,7 @@
 import { APIPromise } from 'gbox-sdk-example/core/api-promise';
 
 import util from 'node:util';
-import GboxClient from 'gbox-sdk-example';
+import { GboxClient } from 'gbox-sdk-example';
 import { APIUserAbortError } from 'gbox-sdk-example';
 const defaultFetch = fetch;
 
