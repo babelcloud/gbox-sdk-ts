@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2025-05-30)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Chores
+
+* **internal:** version bump ([cdd32a7](https://github.com/babelcloud/gbox-sdk-ts/commit/cdd32a7d77393dc50393f413adcd766b2549ba9b))
+
 ## 0.1.0-alpha.4 (2025-05-30)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)

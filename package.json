@@ -1,6 +1,6 @@
 {
   "name": "gbox-sdk-example",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.5",
   "description": "The official TypeScript library for the Gbox Client API",
   "author": "Gbox Client <>",
   "types": "dist/index.d.ts",
