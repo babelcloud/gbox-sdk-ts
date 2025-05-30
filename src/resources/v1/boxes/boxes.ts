@@ -15,6 +15,8 @@ import {
   ActionTypeParams,
   Actions,
 } from './actions';
+import * as BrowserAPI from './browser';
+import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse, BrowserConnectURLResponse } from './browser';
 import * as FsAPI from './fs';
 import {
   FListParams,
@@ -32,8 +34,11 @@ import { path } from '../../../internal/utils/path';
 export class Boxes extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
+  browser: BrowserAPI.Browser = new BrowserAPI.Browser(this._client);
 
   /**
+   * Create box
+   *
    * @example
    * ```ts
    * const box = await client.v1.boxes.create({ type: 'linux' });
@@ -44,6 +49,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Get box detail
+   *
    * @example
    * ```ts
    * const box = await client.v1.boxes.retrieve('id');
@@ -54,6 +61,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * List box
+   *
    * @example
    * ```ts
    * const boxes = await client.v1.boxes.list({
@@ -67,6 +76,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Create android box
+   *
    * @example
    * ```ts
    * const androidBox = await client.v1.boxes.createAndroid({
@@ -79,6 +90,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Create linux box
+   *
    * @example
    * ```ts
    * const linuxBox = await client.v1.boxes.createLinux({
@@ -121,6 +134,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Start box
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.start('id');
@@ -131,6 +146,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Stop box
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.stop('id');
@@ -588,6 +605,7 @@ export interface BoxRunCodeParams {
 
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
+Boxes.Browser = BrowserAPIBrowser;
 
 export declare namespace Boxes {
   export {
@@ -633,5 +651,11 @@ export declare namespace Boxes {
     type FListParams as FListParams,
     type FReadParams as FReadParams,
     type FWriteParams as FWriteParams,
+  };
+
+  export {
+    BrowserAPIBrowser as Browser,
+    type BrowserCdpURLResponse as BrowserCdpURLResponse,
+    type BrowserConnectURLResponse as BrowserConnectURLResponse,
   };
 }
