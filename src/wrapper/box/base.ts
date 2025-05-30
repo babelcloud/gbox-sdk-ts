@@ -3,7 +3,6 @@ import type {
   LinuxBox,
   ActionClickParams,
   ActionDragParams,
-  ActionKeypressParams,
   ActionMoveParams,
   ActionScreenshotParams,
   ActionScrollParams,
@@ -15,6 +14,7 @@ import type {
   BoxExecuteCommandsParams,
   BoxRunCodeParams,
   BoxRunCodeResponse,
+  ActionPressParams,
 } from '../../resources/v1/boxes';
 import { GboxClient, type ClientOptions } from '../../client';
 
@@ -87,8 +87,8 @@ class InterfaceActions {
     await this.client.v1.boxes.actions.drag(this.boxId, body);
   }
 
-  async keypress(body: ActionKeypressParams) {
-    await this.client.v1.boxes.actions.keypress(this.boxId, body);
+  async press(body: ActionPressParams) {
+    await this.client.v1.boxes.actions.press(this.boxId, body);
   }
 
   async move(body: ActionMoveParams) {

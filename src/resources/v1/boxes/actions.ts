@@ -43,19 +43,6 @@ export class Actions extends APIResource {
   /**
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.keypress(
-   *   'id',
-   *   { keys: ['Enter'], type: {} },
-   * );
-   * ```
-   */
-  keypress(id: string, body: ActionKeypressParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/keypress`, { body, ...options });
-  }
-
-  /**
-   * @example
-   * ```ts
    * const actionResult = await client.v1.boxes.actions.move(
    *   'id',
    *   { type: {}, x: 200, y: 300 },
@@ -64,6 +51,19 @@ export class Actions extends APIResource {
    */
   move(id: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/api/v1/boxes/${id}/actions/move`, { body, ...options });
+  }
+
+  /**
+   * @example
+   * ```ts
+   * const actionResult = await client.v1.boxes.actions.press(
+   *   'id',
+   *   { keys: ['Enter'], type: {} },
+   * );
+   * ```
+   */
+  press(id: string, body: ActionPressParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/api/v1/boxes/${id}/actions/press`, { body, ...options });
   }
 
   /**
@@ -259,23 +259,6 @@ export namespace ActionDragParams {
   }
 }
 
-export interface ActionKeypressParams {
-  /**
-   * Array of keys to press
-   */
-  keys: Array<string>;
-
-  /**
-   * Action type for keyboard key press
-   */
-  type: unknown;
-
-  /**
-   * Type of the URI
-   */
-  outputFormat?: 'base64' | 'storageKey';
-}
-
 export interface ActionMoveParams {
   /**
    * Action type for cursor movement
@@ -291,6 +274,23 @@ export interface ActionMoveParams {
    * Y coordinate to move to
    */
   y: number;
+
+  /**
+   * Type of the URI
+   */
+  outputFormat?: 'base64' | 'storageKey';
+}
+
+export interface ActionPressParams {
+  /**
+   * Array of keys to press
+   */
+  keys: Array<string>;
+
+  /**
+   * Action type for keyboard key press
+   */
+  type: unknown;
 
   /**
    * Type of the URI
@@ -445,8 +445,8 @@ export declare namespace Actions {
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
-    type ActionKeypressParams as ActionKeypressParams,
     type ActionMoveParams as ActionMoveParams,
+    type ActionPressParams as ActionPressParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionTouchParams as ActionTouchParams,
