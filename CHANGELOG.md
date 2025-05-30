@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.1 (2025-05-30)
+
+Full Changelog: [v0.0.1-alpha...v0.0.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.0.1-alpha...v0.0.1)
+
+### Features
+
+* add example ([57afab3](https://github.com/babelcloud/gbox-sdk-ts/commit/57afab3189c0f36c44130d4883ca15a6e19e2e40))
+
 ## 0.0.1-alpha (2025-05-30)
 
 Full Changelog: [v0.1.0...v0.0.1-alpha](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.0...v0.0.1-alpha)
