@@ -1,4 +1,4 @@
-import { GboxClient } from '../client';
+import { ClientOptions, GboxClient } from '../client';
 import { BoxListParams } from '../resources/v1/boxes';
 import { CreateAndroid, CreateAndroidResponse } from './box/android';
 import { CreateLinux, CreateLinuxResponse } from './box/linux';
@@ -14,8 +14,8 @@ function isLinuxBox(box: AndroidBox | LinuxBox): box is LinuxBox {
 export class GboxSDK {
   private client: GboxClient;
 
-  constructor(client: GboxClient) {
-    this.client = client;
+  constructor(clientOptions: ClientOptions = {}) {
+    this.client = new GboxClient(clientOptions);
   }
 
   /**
