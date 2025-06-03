@@ -81,7 +81,7 @@ export class Boxes extends APIResource {
    * @example
    * ```ts
    * const androidBox = await client.v1.boxes.createAndroid({
-   *   type: 'linux',
+   *   type: 'android',
    * });
    * ```
    */
@@ -187,7 +187,7 @@ export interface AndroidBox {
   /**
    * Box type is Android
    */
-  type: 'linux' | 'android';
+  type: 'android';
 
   /**
    * Last update timestamp of the box
@@ -273,7 +273,7 @@ export interface CreateAndroidBox {
   /**
    * Box type is Android
    */
-  type: 'linux' | 'android';
+  type: 'android';
 
   /**
    * Configuration for an Android box instance
@@ -302,7 +302,7 @@ export interface CreateLinuxBox {
   /**
    * Box type is Linux
    */
-  type: 'linux' | 'android';
+  type: 'linux';
 
   /**
    * Configuration for a Linux box instance
@@ -339,7 +339,7 @@ export interface LinuxBox {
   /**
    * Box type is Linux
    */
-  type: 'linux' | 'android';
+  type: 'linux';
 
   /**
    * Last update timestamp of the box
@@ -492,7 +492,7 @@ export declare namespace BoxCreateParams {
     /**
      * Box type is Linux
      */
-    type: 'linux' | 'android';
+    type: 'linux';
 
     /**
      * Configuration for a Linux box instance
@@ -504,7 +504,7 @@ export declare namespace BoxCreateParams {
     /**
      * Box type is Android
      */
-    type: 'linux' | 'android';
+    type: 'android';
 
     /**
      * Configuration for an Android box instance
@@ -529,7 +529,7 @@ export interface BoxCreateAndroidParams {
   /**
    * Box type is Android
    */
-  type: 'linux' | 'android';
+  type: 'android';
 
   /**
    * Configuration for an Android box instance
@@ -541,7 +541,7 @@ export interface BoxCreateLinuxParams {
   /**
    * Box type is Linux
    */
-  type: 'linux' | 'android';
+  type: 'linux';
 
   /**
    * Configuration for a Linux box instance
