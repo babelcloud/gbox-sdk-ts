@@ -231,6 +231,11 @@ export namespace AndroidBox {
     os: Config.Os;
 
     /**
+     * Resolution of the box
+     */
+    resolution: Config.Resolution;
+
+    /**
      * Storage allocated to the box in GB
      */
     storage: number;
@@ -265,6 +270,21 @@ export namespace AndroidBox {
        * Supported Android versions
        */
       version: '12' | '13';
+    }
+
+    /**
+     * Resolution of the box
+     */
+    export interface Resolution {
+      /**
+       * Height of the box
+       */
+      height: number;
+
+      /**
+       * Width of the box
+       */
+      width: number;
     }
   }
 }
@@ -383,6 +403,11 @@ export namespace LinuxBox {
     os: Config.Os;
 
     /**
+     * Resolution of the box
+     */
+    resolution: Config.Resolution;
+
+    /**
      * Storage allocated to the box in GB.
      */
     storage: number;
@@ -417,6 +442,21 @@ export namespace LinuxBox {
        * OS version string (e.g. 'ubuntu-20.04')
        */
       version: string;
+    }
+
+    /**
+     * Resolution of the box
+     */
+    export interface Resolution {
+      /**
+       * Height of the box
+       */
+      height: number;
+
+      /**
+       * Width of the box
+       */
+      width: number;
     }
   }
 }
