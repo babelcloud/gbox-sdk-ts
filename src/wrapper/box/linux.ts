@@ -5,4 +5,4 @@ export interface CreateLinux extends BoxCreateLinuxParams {
   type: 'linux';
 }
 
-export class CreateLinuxResponse extends BaseBox<LinuxBox> {}
+export class LinuxBoxOperator extends BaseBox<LinuxBox> {}
