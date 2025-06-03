@@ -8,8 +8,6 @@ import type {
   ActionScrollParams,
   ActionTouchParams,
   ActionTypeParams,
-  BoxStartResponse,
-  BoxStopResponse,
   BoxExecuteCommandsResponse,
   BoxExecuteCommandsParams,
   BoxRunCodeParams,
@@ -56,20 +54,38 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
     this.browser = new InterfaceBrowser(this.client, this.id);
   }
 
+  private async syncData() {
+    const res = await this.client.v1.boxes.retrieve(this.id);
+
+    this.data = res as T;
+
+    this.id = res.id;
+    this.type = res.type;
+    this.status = res.status;
+    this.createdAt = res.createdAt;
+    this.updatedAt = res.updatedAt;
+    this.expiresAt = res.expiresAt;
+    this.config = res.config;
+  }
+
   /**
    * @example
    * const response = await gbox.start();
    */
-  start(): Promise<BoxStartResponse> {
-    return this.client.v1.boxes.start(this.id);
+  async start(): Promise<this> {
+    await this.client.v1.boxes.start(this.id);
+    await this.syncData();
+    return this;
   }
 
   /**
    * @example
    * const response = await gbox.stop();
    */
-  stop(): Promise<BoxStopResponse> {
-    return this.client.v1.boxes.stop(this.id);
+  async stop(): Promise<this> {
+    await this.client.v1.boxes.stop(this.id);
+    await this.syncData();
+    return this;
   }
 
   /**
