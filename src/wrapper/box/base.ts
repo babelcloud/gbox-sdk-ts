@@ -22,7 +22,7 @@ import type {
   FWriteResponse,
   FReadResponse,
 } from '../../resources/v1/boxes';
-import { GboxClient, type ClientOptions } from '../../client';
+import { GboxClient } from '../../client';
 
 export class BaseBox<T extends LinuxBox | AndroidBox> {
   private client: GboxClient;
@@ -39,8 +39,8 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
   public expiresAt: T['expiresAt'];
   public config: T['config'];
 
-  constructor(data: T, clientOptions?: ClientOptions) {
-    this.client = new GboxClient(clientOptions);
+  constructor(data: T, client: GboxClient) {
+    this.client = client;
     this.data = data;
 
     this.id = data.id;

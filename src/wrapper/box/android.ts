@@ -5,4 +5,4 @@ export interface CreateAndroid extends BoxCreateAndroidParams {
   type: 'android';
 }
 
-export class CreateAndroidResponse extends BaseBox<AndroidBox> {}
+export class AndroidBoxOperator extends BaseBox<AndroidBox> {}
