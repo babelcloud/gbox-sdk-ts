@@ -59,7 +59,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('createAndroid: only required params', async () => {
-    const responsePromise = client.v1.boxes.createAndroid({ type: 'linux' });
+    const responsePromise = client.v1.boxes.createAndroid({ type: 'android' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -72,7 +72,7 @@ describe('resource boxes', () => {
   // skipped: tests are disabled for the time being
   test.skip('createAndroid: required and optional params', async () => {
     const response = await client.v1.boxes.createAndroid({
-      type: 'linux',
+      type: 'android',
       config: { envs: {}, expiresIn: 'expiresIn', labels: {} },
     });
   });
