@@ -1,59 +1,115 @@
-# Gbox Client TypeScript API Library
+# Gbox TypeScript SDK
 
-[![NPM version](https://img.shields.io/npm/v/gbox-sdk-example.svg)](https://npmjs.org/package/gbox-sdk-example) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gbox-sdk-example)
+[![NPM version](https://img.shields.io/npm/v/gbox-sdk.svg)](https://npmjs.org/package/gbox-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gbox-sdk)
 
-This library provides convenient access to the Gbox Client REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Gbox SDK from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+## Table of Contents
 
-It is generated with [Stainless](https://www.stainless.com/).
+- [Installation](#installation)
+- [Usage](#usage)
+- [Feature](#feature)
+  - [Create a box](#create-a-box)
+  - [Stop a box](#stop-a-box)
+  - [Action](#action)
+  - [Run Code](#run-code)
+  - [Run Command](#run-command)
+  - [List Boxes](#list-boxes)
+- [Handling errors](#handling-errors)
+  - [Retries](#retries)
+  - [Timeouts](#timeouts)
+- [Advanced Usage](#advanced-usage)
+  - [Logging](#logging)
+    - [Log levels](#log-levels)
+    - [Custom logger](#custom-logger)
+  - [Customizing the fetch client](#customizing-the-fetch-client)
+  - [Fetch options](#fetch-options)
+    - [Configuring proxies](#configuring-proxies)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Semantic versioning](#semantic-versioning)
+- [Requirements](#requirements)
+- [Contributing](#contributing)
 
 ## Installation
 
 ```sh
-npm install gbox-sdk-example
+npm install gbox-sdk
 ```
 
 ## Usage
 
-The full API of this library can be found in [api.md](api.md).
-
 <!-- prettier-ignore -->
 ```js
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from 'gbox-sdk';
 
-const client = new GboxClient({
+const gboxSDK = new GboxSDK({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const box = await client.v1.boxes.create({ type: 'linux' });
+  const box = await gboxSDK.create({type: 'android'})
 }
 
 main();
 ```
 
-### Request & Response types
+## Feature
 
-This library includes TypeScript definitions for all request params and response fields. You may import and use them like so:
+### Create a box
 
-<!-- prettier-ignore -->
 ```ts
-import GboxClient from 'gbox-sdk-example';
+const box = await gboxSDK.create({ type: "android" });
 
-const client = new GboxClient({
-  apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
-});
-
-async function main() {
-  const params: GboxClient.V1.BoxCreateParams = { type: 'linux' };
-  const box: GboxClient.V1.BoxCreateResponse = await client.v1.boxes.create(params);
-}
-
-main();
+// box.config is the config of the box (e.g. OS version, screen size, etc.)
+console.log(box.config);
 ```
 
-Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
+### Stop a box
+
+```ts
+await box.stop();
+```
+
+### Action
+
+```ts
+await box.click({
+  x: 100,
+  y: 100
+});
+```
+
+### Run Code
+
+```ts
+await box.runCode({
+  code: "print('Hello, world!')"
+  // language: "python" // default is "python"
+});
+```
+
+### Run Command
+
+```ts
+await box.command({
+  commands: "echo HELLO $MY_ENV_VAR"
+  envs: {
+    MY_ENV_VAR: "Gbox"
+  }
+});
+```
+
+### List Boxes
+
+```ts
+const gboxSDK = new GboxSDK({
+  apiKey: process.env["GBOX_API_KEY"] // This is the default and can be omitted
+});
+
+await gboxSDK.list();
+
+await gboxSDK.get("d26bbff6-2277-4c34-b00c-d1f1d5a501ae");
+```
 
 ## Handling errors
 
@@ -64,8 +120,8 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const box = await client.v1.boxes.create({ type: 'linux' }).catch(async (err) => {
-    if (err instanceof GboxClient.APIError) {
+  const box = await gboxSDK.create({ type: 'android' }).catch(async (err) => {
+    if (err instanceof GboxSDK.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
       console.log(err.headers); // {server: 'nginx', ...}
@@ -102,12 +158,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new GboxClient({
+const gboxSDK = new GboxSDK({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.v1.boxes.create({ type: 'linux' }, {
+await gboxSDK.create({ type: 'android' }, {
   maxRetries: 5,
 });
 ```
@@ -119,12 +175,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new GboxClient({
+const gboxSDK = new GboxSDK({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await client.v1.boxes.create({ type: 'linux' }, {
+await gboxSDK.create({ type: 'linux' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -134,27 +190,6 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 Note that requests which time out will be [retried twice by default](#retries).
 
 ## Advanced Usage
-
-### Accessing raw Response data (e.g., headers)
-
-The "raw" `Response` returned by `fetch()` can be accessed through the `.asResponse()` method on the `APIPromise` type that all methods return.
-This method returns as soon as the headers for a successful response are received and does not consume the response body, so you are free to write custom parsing or streaming logic.
-
-You can also use the `.withResponse()` method to get the raw `Response` along with the parsed data.
-Unlike `.asResponse()` this method consumes the body, returning once it is parsed.
-
-<!-- prettier-ignore -->
-```ts
-const client = new GboxClient();
-
-const response = await client.v1.boxes.create({ type: 'linux' }).asResponse();
-console.log(response.headers.get('X-My-Header'));
-console.log(response.statusText); // access the underlying Response object
-
-const { data: box, response: raw } = await client.v1.boxes.create({ type: 'linux' }).withResponse();
-console.log(raw.headers.get('X-My-Header'));
-console.log(box);
-```
 
 ### Logging
 
@@ -170,10 +205,10 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from "gbox-sdk";
 
-const client = new GboxClient({
-  logLevel: 'debug', // Show all log messages
+const gboxSDK = new GboxSDK({
+  logLevel: "debug" // Show all log messages
 });
 ```
 
@@ -198,60 +233,16 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
-import pino from 'pino';
+import GboxSDK from "gbox-sdk";
+import pino from "pino";
 
 const logger = pino();
 
-const client = new GboxClient({
-  logger: logger.child({ name: 'GboxClient' }),
-  logLevel: 'debug', // Send all messages to pino, allowing it to filter
+const gboxSDK = new GboxSDK({
+  logger: logger.child({ name: "GboxClient" }),
+  logLevel: "debug" // Send all messages to pino, allowing it to filter
 });
 ```
-
-### Making custom/undocumented requests
-
-This library is typed for convenient access to the documented API. If you need to access undocumented
-endpoints, params, or response properties, the library can still be used.
-
-#### Undocumented endpoints
-
-To make requests to undocumented endpoints, you can use `client.get`, `client.post`, and other HTTP verbs.
-Options on the client, such as retries, will be respected when making these requests.
-
-```ts
-await client.post('/some/path', {
-  body: { some_prop: 'foo' },
-  query: { some_query_arg: 'bar' },
-});
-```
-
-#### Undocumented request params
-
-To make requests using undocumented parameters, you may use `// @ts-expect-error` on the undocumented
-parameter. This library doesn't validate at runtime that the request matches the type, so any extra values you
-send will be sent as-is.
-
-```ts
-client.foo.create({
-  foo: 'my_param',
-  bar: 12,
-  // @ts-expect-error baz is not yet public
-  baz: 'undocumented option',
-});
-```
-
-For requests with the `GET` verb, any extra params will be in the query, all other requests will send the
-extra param in the body.
-
-If you want to explicitly send an extra argument, you can do so with the `query`, `body`, and `headers` request
-options.
-
-#### Undocumented response properties
-
-To access undocumented response properties, you may access the response object with `// @ts-expect-error` on
-the response object, or cast the response object to the requisite type. Like the request params, we do not
-validate or strip extra properties from the response from the API.
 
 ### Customizing the fetch client
 
@@ -260,7 +251,7 @@ By default, this library expects a global `fetch` function is defined.
 If you want to use a different `fetch` function, you can either polyfill the global:
 
 ```ts
-import fetch from 'my-fetch';
+import fetch from "my-fetch";
 
 globalThis.fetch = fetch;
 ```
@@ -268,10 +259,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
-import fetch from 'my-fetch';
+import GboxSDK from "gbox-sdk";
+import fetch from "my-fetch";
 
-const client = new GboxClient({ fetch });
+const gboxSDK = new GboxSDK({ fetch });
 ```
 
 ### Fetch options
@@ -279,12 +270,12 @@ const client = new GboxClient({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from "gbox-sdk";
 
-const client = new GboxClient({
+const gboxSDK = new GboxSDK({
   fetchOptions: {
     // `RequestInit` options
-  },
+  }
 });
 ```
 
@@ -296,39 +287,39 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
-import * as undici from 'undici';
+import GboxSDK from "gbox-sdk";
+import * as undici from "undici";
 
-const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new GboxClient({
+const proxyAgent = new undici.ProxyAgent("http://localhost:8888");
+const gboxSDK = new GboxSDK({
   fetchOptions: {
-    dispatcher: proxyAgent,
-  },
+    dispatcher: proxyAgent
+  }
 });
 ```
 
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import GboxClient from 'gbox-sdk-example';
+import GboxSDK from "gbox-sdk";
 
-const client = new GboxClient({
+const gboxSDK = new GboxSDK({
   fetchOptions: {
-    proxy: 'http://localhost:8888',
-  },
+    proxy: "http://localhost:8888"
+  }
 });
 ```
 
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import GboxClient from 'npm:gbox-sdk-example';
+import GboxSDK from "npm:gbox-sdk";
 
-const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new GboxClient({
+const httpClient = Deno.createHttpClient({ proxy: { url: "http://localhost:8888" } });
+const gboxSDK = new GboxSDK({
   fetchOptions: {
-    client: httpClient,
-  },
+    client: httpClient
+  }
 });
 ```
 
