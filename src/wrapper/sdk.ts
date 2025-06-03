@@ -46,9 +46,9 @@ export class GboxSDK {
 
     switch (type) {
       case 'android':
-        return this.client.v1.boxes.createAndroid(body).then((res) => new CreateAndroidResponse(res));
+        return this.client.v1.boxes.createAndroid(body);
       case 'linux':
-        return this.client.v1.boxes.createLinux(body).then((res) => new CreateLinuxResponse(res));
+        return this.client.v1.boxes.createLinux(body);
       default:
         throw new Error(`Invalid box type: ${type}`);
     }
