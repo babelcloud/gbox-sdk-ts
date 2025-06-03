@@ -49,7 +49,6 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
     this.expiresAt = data.expiresAt;
     this.config = data.config;
 
-    // 初始化 action 对象
     this.action = new InterfaceActions(this.client, this.id);
   }
 
@@ -57,56 +56,80 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * @example
    * const response = await gbox.start();
    */
-  start(id: string): Promise<BoxStartResponse> {
-    return this.client.v1.boxes.start(id);
+  start(): Promise<BoxStartResponse> {
+    return this.client.v1.boxes.start(this.id);
   }
 
   /**
    * @example
    * const response = await gbox.stop();
    */
-  stop(id: string): Promise<BoxStopResponse> {
-    return this.client.v1.boxes.stop(id);
+  stop(): Promise<BoxStopResponse> {
+    return this.client.v1.boxes.stop(this.id);
   }
 
   /**
    * @example
-   * const response = await gbox.command('id', { commands: ['ls', '-l'] } );
+   * const response = await gbox.command('ls -l');
+   * or
+   * const response = await gbox.command({ commands: ['ls', '-l'] } );
    */
-  command(id: string, body: BoxExecuteCommandsParams): Promise<BoxExecuteCommandsResponse> {
-    return this.client.v1.boxes.executeCommands(id, body);
+  command(body: BoxExecuteCommandsParams | string): Promise<BoxExecuteCommandsResponse> {
+    if (typeof body === 'string') {
+      return this.client.v1.boxes.executeCommands(this.id, { commands: body.split(' ') });
+    } else {
+      return this.client.v1.boxes.executeCommands(this.id, body);
+    }
   }
 
   /**
    * @example
-   * const response = await gbox.runCode('id', { code: 'print("Hello, World!")', type: 'bash' });
+   * const response = await gbox.runCode('print("Hello, World!")');
+   * or
+   * const response = await gbox.runCode({ code: 'print("Hello, World!")', type: 'bash' });
    */
-  runCode(id: string, body: BoxRunCodeParams): Promise<BoxRunCodeResponse> {
-    return this.client.v1.boxes.runCode(id, body);
+  runCode(body: BoxRunCodeParams | string): Promise<BoxRunCodeResponse> {
+    if (typeof body === 'string') {
+      return this.client.v1.boxes.runCode(this.id, { code: body, type: 'python3' });
+    } else {
+      return this.client.v1.boxes.runCode(this.id, body);
+    }
   }
 
   /**
    * @example
-   * const response = await gbox.fs('id', { path: '/tmp' });
+   * const response = await gbox.fs('/tmp');
+   * or
+   * const response = await gbox.fs({ path: '/tmp' });
    */
-  fs(id: string, body: FListParams): Promise<FListResponse> {
-    return this.client.v1.boxes.fs.list(id, body);
+  fs(body: FListParams | string): Promise<FListResponse> {
+    if (typeof body === 'string') {
+      return this.client.v1.boxes.fs.list(this.id, { path: body });
+    } else {
+      return this.client.v1.boxes.fs.list(this.id, body);
+    }
   }
 
   /**
    * @example
-   * const response = await gbox.read('id', { path: '/tmp/file.txt' });
+   * const response = await gbox.read('/tmp/file.txt');
+   * or
+   * const response = await gbox.read({ path: '/tmp/file.txt' });
    */
-  read(id: string, body: FReadParams): Promise<FReadResponse> {
-    return this.client.v1.boxes.fs.read(id, body);
+  read(body: FReadParams | string): Promise<FReadResponse> {
+    if (typeof body === 'string') {
+      return this.client.v1.boxes.fs.read(this.id, { path: body });
+    } else {
+      return this.client.v1.boxes.fs.read(this.id, body);
+    }
   }
 
   /**
    * @example
-   * const response = await gbox.write('id', { path: '/tmp/file.txt', content: 'Hello, World!' });
+   * const response = await gbox.write({ path: '/tmp/file.txt', content: 'Hello, World!' });
    */
-  write(id: string, body: FWriteParams): Promise<FWriteResponse> {
-    return this.client.v1.boxes.fs.write(id, body);
+  write(body: FWriteParams): Promise<FWriteResponse> {
+    return this.client.v1.boxes.fs.write(this.id, body);
   }
 }
 
