@@ -1,5 +1,5 @@
 import { ClientOptions, GboxClient } from '../client';
-import { BoxListParams } from '../resources/v1/boxes';
+import { BoxListParams, BoxStopResponse } from '../resources/v1/boxes';
 import { CreateAndroid, CreateAndroidResponse } from './box/android';
 import { CreateLinux, CreateLinuxResponse } from './box/linux';
 import { AndroidBox, LinuxBox } from '../resources/v1/boxes';
@@ -87,5 +87,13 @@ export class GboxSDK {
     } else {
       throw new Error(`Invalid box type: ${(res as any).type}`);
     }
+  }
+
+  /**
+   * @example
+   * const response = await gboxSDK.delete('box_id');
+   */
+  delete(id: string): Promise<BoxStopResponse> {
+    return this.client.v1.boxes.stop(id);
   }
 }

@@ -28,6 +28,8 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
   private client: GboxClient;
   public data: T;
   public action: InterfaceActions;
+  public fs: InterfaceFs;
+  public browser: InterfaceBrowser;
 
   public id: T['id'];
   public type: T['type'];
@@ -50,6 +52,8 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
     this.config = data.config;
 
     this.action = new InterfaceActions(this.client, this.id);
+    this.fs = new InterfaceFs(this.client, this.id);
+    this.browser = new InterfaceBrowser(this.client, this.id);
   }
 
   /**
@@ -94,42 +98,6 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
     } else {
       return this.client.v1.boxes.runCode(this.id, body);
     }
-  }
-
-  /**
-   * @example
-   * const response = await gbox.fs('/tmp');
-   * or
-   * const response = await gbox.fs({ path: '/tmp' });
-   */
-  fs(body: FListParams | string): Promise<FListResponse> {
-    if (typeof body === 'string') {
-      return this.client.v1.boxes.fs.list(this.id, { path: body });
-    } else {
-      return this.client.v1.boxes.fs.list(this.id, body);
-    }
-  }
-
-  /**
-   * @example
-   * const response = await gbox.read('/tmp/file.txt');
-   * or
-   * const response = await gbox.read({ path: '/tmp/file.txt' });
-   */
-  read(body: FReadParams | string): Promise<FReadResponse> {
-    if (typeof body === 'string') {
-      return this.client.v1.boxes.fs.read(this.id, { path: body });
-    } else {
-      return this.client.v1.boxes.fs.read(this.id, body);
-    }
-  }
-
-  /**
-   * @example
-   * const response = await gbox.write({ path: '/tmp/file.txt', content: 'Hello, World!' });
-   */
-  write(body: FWriteParams): Promise<FWriteResponse> {
-    return this.client.v1.boxes.fs.write(this.id, body);
   }
 }
 
@@ -212,5 +180,77 @@ class InterfaceActions {
    */
   async screenshot(body: ActionScreenshotParams) {
     await this.client.v1.boxes.actions.screenshot(this.boxId, body);
+  }
+}
+
+class InterfaceFs {
+  private client: GboxClient;
+  private boxId: string;
+
+  constructor(client: GboxClient, boxId: string) {
+    this.client = client;
+    this.boxId = boxId;
+  }
+
+  /**
+   * @example
+   * const response = await gbox.fs.list('/tmp');
+   * or
+   * const response = await gbox.fs.list({ path: '/tmp', depth: 1 });
+   */
+  list(body: FListParams | string): Promise<FListResponse> {
+    if (typeof body === 'string') {
+      return this.client.v1.boxes.fs.list(this.boxId, { path: body });
+    } else {
+      return this.client.v1.boxes.fs.list(this.boxId, body);
+    }
+  }
+
+  /**
+   * @example
+   * const response = await gbox.fs.read('/tmp/file.txt');
+   * or
+   * const response = await gbox.fs.read({ path: '/tmp/file.txt' });
+   */
+  read(body: FReadParams | string): Promise<FReadResponse> {
+    if (typeof body === 'string') {
+      return this.client.v1.boxes.fs.read(this.boxId, { path: body });
+    } else {
+      return this.client.v1.boxes.fs.read(this.boxId, body);
+    }
+  }
+
+  /**
+   * @example
+   * const response = await gbox.fs.write({ path: '/tmp/file.txt', content: 'Hello, World!' });
+   */
+  write(body: FWriteParams): Promise<FWriteResponse> {
+    return this.client.v1.boxes.fs.write(this.boxId, body);
+  }
+}
+
+class InterfaceBrowser {
+  private client: GboxClient;
+  private boxId: string;
+
+  constructor(client: GboxClient, boxId: string) {
+    this.client = client;
+    this.boxId = boxId;
+  }
+
+  /**
+   * @example
+   * const response = await gbox.browser.connectUrl();
+   */
+  async connectUrl() {
+    await this.client.v1.boxes.browser.connectURL(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await gbox.browser.cdpUrl();
+   */
+  async cdpUrl() {
+    await this.client.v1.boxes.browser.cdpURL(this.boxId);
   }
 }
