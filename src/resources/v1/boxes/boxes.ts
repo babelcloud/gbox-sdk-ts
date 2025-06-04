@@ -45,7 +45,7 @@ export class Boxes extends APIResource {
    * ```
    */
   create(body: BoxCreateParams, options?: RequestOptions): APIPromise<BoxCreateResponse> {
-    return this._client.post('/api/v1/boxes', { body, ...options });
+    return this._client.post('/boxes', { body, ...options });
   }
 
   /**
@@ -57,7 +57,7 @@ export class Boxes extends APIResource {
    * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
-    return this._client.get(path`/api/v1/boxes/${id}`, options);
+    return this._client.get(path`/boxes/${id}`, options);
   }
 
   /**
@@ -72,7 +72,7 @@ export class Boxes extends APIResource {
    * ```
    */
   list(query: BoxListParams, options?: RequestOptions): APIPromise<BoxListResponse> {
-    return this._client.get('/api/v1/boxes', { query, ...options });
+    return this._client.get('/boxes', { query, ...options });
   }
 
   /**
@@ -86,7 +86,7 @@ export class Boxes extends APIResource {
    * ```
    */
   createAndroid(body: BoxCreateAndroidParams, options?: RequestOptions): APIPromise<AndroidBox> {
-    return this._client.post('/api/v1/boxes/android', { body, ...options });
+    return this._client.post('/boxes/android', { body, ...options });
   }
 
   /**
@@ -100,7 +100,7 @@ export class Boxes extends APIResource {
    * ```
    */
   createLinux(body: BoxCreateLinuxParams, options?: RequestOptions): APIPromise<LinuxBox> {
-    return this._client.post('/api/v1/boxes/linux', { body, ...options });
+    return this._client.post('/boxes/linux', { body, ...options });
   }
 
   /**
@@ -117,7 +117,7 @@ export class Boxes extends APIResource {
     body: BoxExecuteCommandsParams,
     options?: RequestOptions,
   ): APIPromise<BoxExecuteCommandsResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/commands`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/commands`, { body, ...options });
   }
 
   /**
@@ -130,7 +130,7 @@ export class Boxes extends APIResource {
    * ```
    */
   runCode(id: string, body: BoxRunCodeParams, options?: RequestOptions): APIPromise<BoxRunCodeResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/run-code`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/run-code`, { body, ...options });
   }
 
   /**
@@ -142,7 +142,7 @@ export class Boxes extends APIResource {
    * ```
    */
   start(id: string, options?: RequestOptions): APIPromise<BoxStartResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/start`, options);
+    return this._client.post(path`/boxes/${id}/start`, options);
   }
 
   /**
@@ -154,7 +154,7 @@ export class Boxes extends APIResource {
    * ```
    */
   stop(id: string, options?: RequestOptions): APIPromise<BoxStopResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/stop`, options);
+    return this._client.post(path`/boxes/${id}/stop`, options);
   }
 }
 

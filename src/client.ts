@@ -120,7 +120,7 @@ export class GboxClient {
    * API Client for interfacing with the Gbox Client API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['GBOX_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['GBOX_CLIENT_BASE_URL'] ?? https://gbox.cloud/api/v1/] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['GBOX_CLIENT_BASE_URL'] ?? https://alpha.gbox.cloud/api/v1/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -142,7 +142,7 @@ export class GboxClient {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://gbox.cloud/api/v1/`,
+      baseURL: baseURL || `https://alpha.gbox.cloud/api/v1/`,
     };
 
     this.baseURL = options.baseURL!;

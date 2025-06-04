@@ -8,7 +8,7 @@ node scripts/utils/check-version.cjs
 
 # Build into dist and will publish the package from there,
 # so that src/resources/foo.ts becomes <package root>/resources/foo.js
-# This way importing from `"gbox-sdk-example/resources/foo"` works
+# This way importing from `"gbox-sdk/resources/foo"` works
 # even with `"moduleResolution": "node"`
 
 rm -rf dist; mkdir dist
@@ -37,13 +37,15 @@ npm exec tsc-multi
 # when building .mjs
 node scripts/utils/fix-index-exports.cjs
 cp tsconfig.dist-src.json dist/src/tsconfig.json
+cp src/internal/shim-types.d.ts dist/internal/shim-types.d.ts
+cp src/internal/shim-types.d.ts dist/internal/shim-types.d.mts
 
 node scripts/utils/postprocess-files.cjs
 
 # make sure that nothing crashes when we require the output CJS or
 # import the output ESM
-(cd dist && node -e 'require("gbox-sdk-example")')
-(cd dist && node -e 'import("gbox-sdk-example")' --input-type=module)
+(cd dist && node -e 'require("gbox-sdk")')
+(cd dist && node -e 'import("gbox-sdk")' --input-type=module)
 
 if [ -e ./scripts/build-deno ]
 then
