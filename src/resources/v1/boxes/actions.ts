@@ -16,7 +16,7 @@ export class Actions extends APIResource {
    * ```
    */
   click(id: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/click`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/click`, { body, ...options });
   }
 
   /**
@@ -34,7 +34,7 @@ export class Actions extends APIResource {
    * ```
    */
   drag(id: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/drag`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/drag`, { body, ...options });
   }
 
   /**
@@ -47,7 +47,7 @@ export class Actions extends APIResource {
    * ```
    */
   move(id: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/move`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/move`, { body, ...options });
   }
 
   /**
@@ -60,7 +60,7 @@ export class Actions extends APIResource {
    * ```
    */
   press(id: string, body: ActionPressParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/press`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/press`, { body, ...options });
   }
 
   /**
@@ -76,7 +76,7 @@ export class Actions extends APIResource {
     body: ActionScreenshotParams,
     options?: RequestOptions,
   ): APIPromise<ActionScreenshotResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/screenshot`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/screenshot`, { body, ...options });
   }
 
   /**
@@ -89,7 +89,7 @@ export class Actions extends APIResource {
    * ```
    */
   scroll(id: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/scroll`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/scroll`, { body, ...options });
   }
 
   /**
@@ -102,7 +102,7 @@ export class Actions extends APIResource {
    * ```
    */
   touch(id: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/touch`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/touch`, { body, ...options });
   }
 
   /**
@@ -115,7 +115,7 @@ export class Actions extends APIResource {
    * ```
    */
   type(id: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/type`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/type`, { body, ...options });
   }
 }
 

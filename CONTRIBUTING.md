@@ -55,12 +55,12 @@ $ cd gbox-sdk-ts
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link gbox-sdk-example
+$ yarn link gbox-sdk
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global gbox-sdk-example
+$ pnpm link -—global gbox-sdk
 ```
 
 ## Running tests

@@ -58,7 +58,7 @@ main();
 ### Create a box
 
 ```ts
-const box = await gboxSDK.create({ type: "android" });
+const box = await gboxSDK.create({ type: 'android' });
 
 // box.config is the config of the box (e.g. OS version, screen size, etc.)
 console.log(box.config);
@@ -75,7 +75,7 @@ await box.stop();
 ```ts
 await box.click({
   x: 100,
-  y: 100
+  y: 100,
 });
 ```
 
@@ -83,7 +83,7 @@ await box.click({
 
 ```ts
 await box.runCode({
-  code: "print('Hello, world!')"
+  code: "print('Hello, world!')",
   // language: "python" // default is "python"
 });
 ```
@@ -103,12 +103,12 @@ await box.command({
 
 ```ts
 const gboxSDK = new GboxSDK({
-  apiKey: process.env["GBOX_API_KEY"] // This is the default and can be omitted
+  apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
 await gboxSDK.list();
 
-await gboxSDK.get("d26bbff6-2277-4c34-b00c-d1f1d5a501ae");
+await gboxSDK.get('d26bbff6-2277-4c34-b00c-d1f1d5a501ae');
 ```
 
 ## Handling errors
@@ -205,10 +205,10 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import GboxSDK from "gbox-sdk";
+import GboxSDK from 'gbox-sdk';
 
 const gboxSDK = new GboxSDK({
-  logLevel: "debug" // Show all log messages
+  logLevel: 'debug', // Show all log messages
 });
 ```
 
@@ -233,14 +233,14 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import GboxSDK from "gbox-sdk";
-import pino from "pino";
+import GboxSDK from 'gbox-sdk';
+import pino from 'pino';
 
 const logger = pino();
 
 const gboxSDK = new GboxSDK({
-  logger: logger.child({ name: "GboxClient" }),
-  logLevel: "debug" // Send all messages to pino, allowing it to filter
+  logger: logger.child({ name: 'GboxClient' }),
+  logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
 
@@ -251,7 +251,7 @@ By default, this library expects a global `fetch` function is defined.
 If you want to use a different `fetch` function, you can either polyfill the global:
 
 ```ts
-import fetch from "my-fetch";
+import fetch from 'my-fetch';
 
 globalThis.fetch = fetch;
 ```
@@ -259,8 +259,8 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import GboxSDK from "gbox-sdk";
-import fetch from "my-fetch";
+import GboxSDK from 'gbox-sdk';
+import fetch from 'my-fetch';
 
 const gboxSDK = new GboxSDK({ fetch });
 ```
@@ -270,12 +270,12 @@ const gboxSDK = new GboxSDK({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import GboxSDK from "gbox-sdk";
+import GboxSDK from 'gbox-sdk';
 
 const gboxSDK = new GboxSDK({
   fetchOptions: {
     // `RequestInit` options
-  }
+  },
 });
 ```
 
@@ -287,39 +287,39 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import GboxSDK from "gbox-sdk";
-import * as undici from "undici";
+import GboxSDK from 'gbox-sdk';
+import * as undici from 'undici';
 
-const proxyAgent = new undici.ProxyAgent("http://localhost:8888");
+const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
 const gboxSDK = new GboxSDK({
   fetchOptions: {
-    dispatcher: proxyAgent
-  }
+    dispatcher: proxyAgent,
+  },
 });
 ```
 
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import GboxSDK from "gbox-sdk";
+import GboxSDK from 'gbox-sdk';
 
 const gboxSDK = new GboxSDK({
   fetchOptions: {
-    proxy: "http://localhost:8888"
-  }
+    proxy: 'http://localhost:8888',
+  },
 });
 ```
 
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import GboxSDK from "npm:gbox-sdk";
+import GboxSDK from 'npm:gbox-sdk';
 
-const httpClient = Deno.createHttpClient({ proxy: { url: "http://localhost:8888" } });
+const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const gboxSDK = new GboxSDK({
   fetchOptions: {
-    client: httpClient
-  }
+    client: httpClient,
+  },
 });
 ```
 
