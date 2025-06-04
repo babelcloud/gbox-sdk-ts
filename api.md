@@ -22,6 +22,7 @@ Methods:
 - <code title="post /boxes">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">create</a>({ ...params }) -> BoxCreateResponse</code>
 - <code title="get /boxes/{id}">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">retrieve</a>(id) -> BoxRetrieveResponse</code>
 - <code title="get /boxes">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">list</a>({ ...params }) -> BoxListResponse</code>
+- <code title="delete /boxes/{id}">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">delete</a>(id) -> void</code>
 - <code title="post /boxes/android">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">createAndroid</a>({ ...params }) -> AndroidBox</code>
 - <code title="post /boxes/linux">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">createLinux</a>({ ...params }) -> LinuxBox</code>
 - <code title="post /boxes/{id}/commands">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">executeCommands</a>(id, { ...params }) -> BoxExecuteCommandsResponse</code>
