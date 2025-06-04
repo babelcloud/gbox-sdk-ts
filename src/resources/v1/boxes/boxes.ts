@@ -603,9 +603,9 @@ export interface BoxCreateLinuxParams {
 
 export interface BoxExecuteCommandsParams {
   /**
-   * The command to run
+   * The command to run. Can be a single string or an array of strings
    */
-  commands: Array<string>;
+  commands: string | Array<string>;
 
   /**
    * The environment variables to run the command
