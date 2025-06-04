@@ -147,7 +147,7 @@ class InterfaceActions {
    * );
    */
   async drag(body: ActionDragParams) {
-    await this.client.v1.boxes.actions.drag(this.boxId, body);
+    return this.client.v1.boxes.actions.drag(this.boxId, body);
   }
 
   /**
@@ -155,7 +155,7 @@ class InterfaceActions {
    * const response = await gbox.press({ keys: ['Enter'], type: {} });
    */
   async press(body: ActionPressParams) {
-    await this.client.v1.boxes.actions.press(this.boxId, body);
+    return this.client.v1.boxes.actions.press(this.boxId, body);
   }
 
   /**
@@ -163,7 +163,7 @@ class InterfaceActions {
    * const response = await gbox.move({ type: {}, x: 200, y: 300 });
    */
   async move(body: ActionMoveParams) {
-    await this.client.v1.boxes.actions.move(this.boxId, body);
+    return this.client.v1.boxes.actions.move(this.boxId, body);
   }
 
   /**
@@ -171,7 +171,7 @@ class InterfaceActions {
    * const response = await gbox.scroll({ scrollX: 0, scrollY: 100, type: {}, x: 100, y: 100 });
    */
   async scroll(body: ActionScrollParams) {
-    await this.client.v1.boxes.actions.scroll(this.boxId, body);
+    return this.client.v1.boxes.actions.scroll(this.boxId, body);
   }
 
   /**
@@ -179,7 +179,7 @@ class InterfaceActions {
    * const response = await gbox.touch({ points: [{ start: { x: 0, y: 0 } }], type: {} });
    */
   async touch(body: ActionTouchParams) {
-    await this.client.v1.boxes.actions.touch(this.boxId, body);
+    return this.client.v1.boxes.actions.touch(this.boxId, body);
   }
 
   /**
@@ -187,7 +187,7 @@ class InterfaceActions {
    * const response = await gbox.type({ text: 'Hello, World!' });
    */
   async type(body: ActionTypeParams) {
-    await this.client.v1.boxes.actions.type(this.boxId, body);
+    return this.client.v1.boxes.actions.type(this.boxId, body);
   }
 
   /**
@@ -195,7 +195,7 @@ class InterfaceActions {
    * const response = await gbox.screenshot({ type: 'png' });
    */
   async screenshot(body: ActionScreenshotParams) {
-    await this.client.v1.boxes.actions.screenshot(this.boxId, body);
+    return this.client.v1.boxes.actions.screenshot(this.boxId, body);
   }
 }
 
@@ -259,7 +259,7 @@ class InterfaceBrowser {
    * const response = await gbox.browser.connectUrl();
    */
   async connectUrl() {
-    await this.client.v1.boxes.browser.connectURL(this.boxId);
+    return this.client.v1.boxes.browser.connectURL(this.boxId);
   }
 
   /**
@@ -267,6 +267,6 @@ class InterfaceBrowser {
    * const response = await gbox.browser.cdpUrl();
    */
   async cdpUrl() {
-    await this.client.v1.boxes.browser.cdpURL(this.boxId);
+    return this.client.v1.boxes.browser.cdpURL(this.boxId);
   }
 }
