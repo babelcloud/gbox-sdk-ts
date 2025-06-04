@@ -28,6 +28,7 @@ import {
   Fs,
 } from './fs';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -70,6 +71,21 @@ export class Boxes extends APIResource {
    */
   list(query: BoxListParams | null | undefined = {}, options?: RequestOptions): APIPromise<BoxListResponse> {
     return this._client.get('/boxes', { query, ...options });
+  }
+
+  /**
+   * Delete box
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.delete('id');
+   * ```
+   */
+  delete(id: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/boxes/${id}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
