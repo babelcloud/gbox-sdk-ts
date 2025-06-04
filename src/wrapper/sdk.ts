@@ -54,7 +54,7 @@ export class GboxSDK {
    *   pageSize: 10,
    * });
    */
-  async list(query: BoxListParams): Promise<Array<AndroidBox | LinuxBox>> {
+  async list(query: BoxListParams): Promise<Array<AndroidBoxOperator | LinuxBoxOperator>> {
     const res = await this.client.v1.boxes.list(query);
     return res.data.map((box) => {
       if (isAndroidBox(box)) {
@@ -71,7 +71,7 @@ export class GboxSDK {
    * @example
    * const response = await gboxSDK.get('box_id');
    */
-  async get(id: string): Promise<AndroidBox | LinuxBox> {
+  async get(id: string): Promise<AndroidBoxOperator | LinuxBoxOperator> {
     const res = await this.client.v1.boxes.retrieve(id);
     if (isAndroidBox(res)) {
       return new AndroidBoxOperator(res, this.client);
