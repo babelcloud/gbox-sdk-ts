@@ -45,7 +45,7 @@ export class Boxes extends APIResource {
    * ```
    */
   create(body: BoxCreateParams, options?: RequestOptions): APIPromise<BoxCreateResponse> {
-    return this._client.post('/api/v1/boxes', { body, ...options });
+    return this._client.post('/boxes', { body, ...options });
   }
 
   /**
@@ -57,7 +57,7 @@ export class Boxes extends APIResource {
    * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
-    return this._client.get(path`/api/v1/boxes/${id}`, options);
+    return this._client.get(path`/boxes/${id}`, options);
   }
 
   /**
@@ -72,7 +72,7 @@ export class Boxes extends APIResource {
    * ```
    */
   list(query: BoxListParams, options?: RequestOptions): APIPromise<BoxListResponse> {
-    return this._client.get('/api/v1/boxes', { query, ...options });
+    return this._client.get('/boxes', { query, ...options });
   }
 
   /**
@@ -81,12 +81,12 @@ export class Boxes extends APIResource {
    * @example
    * ```ts
    * const androidBox = await client.v1.boxes.createAndroid({
-   *   type: 'linux',
+   *   type: 'android',
    * });
    * ```
    */
   createAndroid(body: BoxCreateAndroidParams, options?: RequestOptions): APIPromise<AndroidBox> {
-    return this._client.post('/api/v1/boxes/android', { body, ...options });
+    return this._client.post('/boxes/android', { body, ...options });
   }
 
   /**
@@ -100,7 +100,7 @@ export class Boxes extends APIResource {
    * ```
    */
   createLinux(body: BoxCreateLinuxParams, options?: RequestOptions): APIPromise<LinuxBox> {
-    return this._client.post('/api/v1/boxes/linux', { body, ...options });
+    return this._client.post('/boxes/linux', { body, ...options });
   }
 
   /**
@@ -117,7 +117,7 @@ export class Boxes extends APIResource {
     body: BoxExecuteCommandsParams,
     options?: RequestOptions,
   ): APIPromise<BoxExecuteCommandsResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/commands`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/commands`, { body, ...options });
   }
 
   /**
@@ -130,7 +130,7 @@ export class Boxes extends APIResource {
    * ```
    */
   runCode(id: string, body: BoxRunCodeParams, options?: RequestOptions): APIPromise<BoxRunCodeResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/run-code`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/run-code`, { body, ...options });
   }
 
   /**
@@ -142,7 +142,7 @@ export class Boxes extends APIResource {
    * ```
    */
   start(id: string, options?: RequestOptions): APIPromise<BoxStartResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/start`, options);
+    return this._client.post(path`/boxes/${id}/start`, options);
   }
 
   /**
@@ -154,7 +154,7 @@ export class Boxes extends APIResource {
    * ```
    */
   stop(id: string, options?: RequestOptions): APIPromise<BoxStopResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/stop`, options);
+    return this._client.post(path`/boxes/${id}/stop`, options);
   }
 }
 
@@ -187,7 +187,7 @@ export interface AndroidBox {
   /**
    * Box type is Android
    */
-  type: 'linux' | 'android';
+  type: 'android';
 
   /**
    * Last update timestamp of the box
@@ -231,6 +231,11 @@ export namespace AndroidBox {
     os: Config.Os;
 
     /**
+     * Resolution of the box
+     */
+    resolution: Config.Resolution;
+
+    /**
      * Storage allocated to the box in GB
      */
     storage: number;
@@ -266,6 +271,21 @@ export namespace AndroidBox {
        */
       version: '12' | '13';
     }
+
+    /**
+     * Resolution of the box
+     */
+    export interface Resolution {
+      /**
+       * Height of the box
+       */
+      height: number;
+
+      /**
+       * Width of the box
+       */
+      width: number;
+    }
   }
 }
 
@@ -273,7 +293,7 @@ export interface CreateAndroidBox {
   /**
    * Box type is Android
    */
-  type: 'linux' | 'android';
+  type: 'android';
 
   /**
    * Configuration for an Android box instance
@@ -302,7 +322,7 @@ export interface CreateLinuxBox {
   /**
    * Box type is Linux
    */
-  type: 'linux' | 'android';
+  type: 'linux';
 
   /**
    * Configuration for a Linux box instance
@@ -339,7 +359,7 @@ export interface LinuxBox {
   /**
    * Box type is Linux
    */
-  type: 'linux' | 'android';
+  type: 'linux';
 
   /**
    * Last update timestamp of the box
@@ -383,6 +403,11 @@ export namespace LinuxBox {
     os: Config.Os;
 
     /**
+     * Resolution of the box
+     */
+    resolution: Config.Resolution;
+
+    /**
      * Storage allocated to the box in GB.
      */
     storage: number;
@@ -417,6 +442,21 @@ export namespace LinuxBox {
        * OS version string (e.g. 'ubuntu-20.04')
        */
       version: string;
+    }
+
+    /**
+     * Resolution of the box
+     */
+    export interface Resolution {
+      /**
+       * Height of the box
+       */
+      height: number;
+
+      /**
+       * Width of the box
+       */
+      width: number;
     }
   }
 }
@@ -492,7 +532,7 @@ export declare namespace BoxCreateParams {
     /**
      * Box type is Linux
      */
-    type: 'linux' | 'android';
+    type: 'linux';
 
     /**
      * Configuration for a Linux box instance
@@ -504,7 +544,7 @@ export declare namespace BoxCreateParams {
     /**
      * Box type is Android
      */
-    type: 'linux' | 'android';
+    type: 'android';
 
     /**
      * Configuration for an Android box instance
@@ -529,7 +569,7 @@ export interface BoxCreateAndroidParams {
   /**
    * Box type is Android
    */
-  type: 'linux' | 'android';
+  type: 'android';
 
   /**
    * Configuration for an Android box instance
@@ -541,7 +581,7 @@ export interface BoxCreateLinuxParams {
   /**
    * Box type is Linux
    */
-  type: 'linux' | 'android';
+  type: 'linux';
 
   /**
    * Configuration for a Linux box instance

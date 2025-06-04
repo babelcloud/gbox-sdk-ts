@@ -13,7 +13,7 @@ export class Browser extends APIResource {
    * ```
    */
   cdpURL(id: string, options?: RequestOptions): APIPromise<string> {
-    return this._client.get(path`/api/v1/boxes/${id}/browser/connect-url/cdp`, options);
+    return this._client.get(path`/boxes/${id}/browser/connect-url/cdp`, options);
   }
 
   /**
@@ -25,7 +25,7 @@ export class Browser extends APIResource {
    * ```
    */
   connectURL(id: string, options?: RequestOptions): APIPromise<BrowserConnectURLResponse> {
-    return this._client.get(path`/api/v1/boxes/${id}/browser/connect-url`, options);
+    return this._client.get(path`/boxes/${id}/browser/connect-url`, options);
   }
 }
 

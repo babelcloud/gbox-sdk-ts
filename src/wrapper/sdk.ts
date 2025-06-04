@@ -1,7 +1,7 @@
-import { GboxClient } from '../client';
-import { BoxListParams } from '../resources/v1/boxes';
-import { CreateAndroid, CreateAndroidResponse } from './box/android';
-import { CreateLinux, CreateLinuxResponse } from './box/linux';
+import { ClientOptions, GboxClient } from '../client';
+import { BoxListParams, BoxStopResponse } from '../resources/v1/boxes';
+import { CreateAndroid, AndroidBoxOperator } from './box/android';
+import { CreateLinux, LinuxBoxOperator } from './box/linux';
 import { AndroidBox, LinuxBox } from '../resources/v1/boxes';
 
 function isAndroidBox(box: AndroidBox | LinuxBox): box is AndroidBox {
@@ -14,8 +14,8 @@ function isLinuxBox(box: AndroidBox | LinuxBox): box is LinuxBox {
 export class GboxSDK {
   private client: GboxClient;
 
-  constructor(client: GboxClient) {
-    this.client = client;
+  constructor(clientOptions: ClientOptions = {}) {
+    this.client = new GboxClient(clientOptions);
   }
 
   /**
@@ -25,7 +25,7 @@ export class GboxSDK {
    *   config: { labels: { FOO: 'bar' }, envs: { FOO: 'bar' } },
    * });
    */
-  async create(body: CreateAndroid): Promise<CreateAndroidResponse>;
+  async create(body: CreateAndroid): Promise<AndroidBoxOperator>;
   /**
    * @example
    * const response = await gboxSDK.create({
@@ -33,24 +33,17 @@ export class GboxSDK {
    *   config: { envs: { FOO: 'bar' } },
    * });
    */
-  async create(body: CreateLinux): Promise<CreateLinuxResponse>;
-  /**
-   * @example
-   * const response = await gboxSDK.create({
-   *   type: 'linux',
-   *   config: { envs: { FOO: 'bar' } },
-   * });
-   */
-  async create(body: CreateAndroid | CreateLinux): Promise<AndroidBox | LinuxBox> {
-    const { type } = body;
-
-    switch (type) {
-      case 'android':
-        return this.client.v1.boxes.createAndroid(body).then((res) => new CreateAndroidResponse(res));
-      case 'linux':
-        return this.client.v1.boxes.createLinux(body).then((res) => new CreateLinuxResponse(res));
-      default:
-        throw new Error(`Invalid box type: ${type}`);
+  async create(body: CreateLinux): Promise<LinuxBoxOperator>;
+  // 实现签名
+  async create(body: CreateAndroid | CreateLinux): Promise<AndroidBoxOperator | LinuxBoxOperator> {
+    if (body.type === 'android') {
+      const res = await this.client.v1.boxes.createAndroid(body as CreateAndroid);
+      return new AndroidBoxOperator(res, this.client);
+    } else if (body.type === 'linux') {
+      const res = await this.client.v1.boxes.createLinux(body as CreateLinux);
+      return new LinuxBoxOperator(res, this.client);
+    } else {
+      throw new Error(`Unsupported box type: ${(body as any).type}`);
     }
   }
 
@@ -61,13 +54,13 @@ export class GboxSDK {
    *   pageSize: 10,
    * });
    */
-  async list(query: BoxListParams): Promise<Array<AndroidBox | LinuxBox>> {
+  async list(query: BoxListParams): Promise<Array<AndroidBoxOperator | LinuxBoxOperator>> {
     const res = await this.client.v1.boxes.list(query);
     return res.data.map((box) => {
       if (isAndroidBox(box)) {
-        return new CreateAndroidResponse(box);
+        return new AndroidBoxOperator(box, this.client);
       } else if (isLinuxBox(box)) {
-        return new CreateLinuxResponse(box);
+        return new LinuxBoxOperator(box, this.client);
       } else {
         throw new Error(`Invalid box type: ${(box as any).type}`);
       }
@@ -78,14 +71,22 @@ export class GboxSDK {
    * @example
    * const response = await gboxSDK.get('box_id');
    */
-  async get(id: string): Promise<AndroidBox | LinuxBox> {
+  async get(id: string): Promise<AndroidBoxOperator | LinuxBoxOperator> {
     const res = await this.client.v1.boxes.retrieve(id);
     if (isAndroidBox(res)) {
-      return new CreateAndroidResponse(res);
+      return new AndroidBoxOperator(res, this.client);
     } else if (isLinuxBox(res)) {
-      return new CreateLinuxResponse(res);
+      return new LinuxBoxOperator(res, this.client);
     } else {
       throw new Error(`Invalid box type: ${(res as any).type}`);
     }
+  }
+
+  /**
+   * @example
+   * const response = await gboxSDK.delete('box_id');
+   */
+  delete(id: string): Promise<BoxStopResponse> {
+    return this.client.v1.boxes.stop(id);
   }
 }

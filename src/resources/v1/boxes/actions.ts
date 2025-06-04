@@ -11,12 +11,12 @@ export class Actions extends APIResource {
    * ```ts
    * const actionResult = await client.v1.boxes.actions.click(
    *   'id',
-   *   { type: {}, x: 100, y: 100 },
+   *   { x: 100, y: 100 },
    * );
    * ```
    */
   click(id: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/click`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/click`, { body, ...options });
   }
 
   /**
@@ -29,13 +29,12 @@ export class Actions extends APIResource {
    *       { x: 100, y: 100 },
    *       { x: 200, y: 200 },
    *     ],
-   *     type: {},
    *   },
    * );
    * ```
    */
   drag(id: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/drag`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/drag`, { body, ...options });
   }
 
   /**
@@ -43,12 +42,12 @@ export class Actions extends APIResource {
    * ```ts
    * const actionResult = await client.v1.boxes.actions.move(
    *   'id',
-   *   { type: {}, x: 200, y: 300 },
+   *   { x: 200, y: 300 },
    * );
    * ```
    */
   move(id: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/move`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/move`, { body, ...options });
   }
 
   /**
@@ -56,12 +55,12 @@ export class Actions extends APIResource {
    * ```ts
    * const actionResult = await client.v1.boxes.actions.press(
    *   'id',
-   *   { keys: ['Enter'], type: {} },
+   *   { keys: ['Enter'] },
    * );
    * ```
    */
   press(id: string, body: ActionPressParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/press`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/press`, { body, ...options });
   }
 
   /**
@@ -69,7 +68,6 @@ export class Actions extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.actions.screenshot(
    *   'id',
-   *   { type: 'png' },
    * );
    * ```
    */
@@ -78,7 +76,7 @@ export class Actions extends APIResource {
     body: ActionScreenshotParams,
     options?: RequestOptions,
   ): APIPromise<ActionScreenshotResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/screenshot`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/screenshot`, { body, ...options });
   }
 
   /**
@@ -86,12 +84,12 @@ export class Actions extends APIResource {
    * ```ts
    * const actionResult = await client.v1.boxes.actions.scroll(
    *   'id',
-   *   { scrollX: 0, scrollY: 100, type: {}, x: 100, y: 100 },
+   *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
    * );
    * ```
    */
   scroll(id: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/scroll`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/scroll`, { body, ...options });
   }
 
   /**
@@ -99,12 +97,12 @@ export class Actions extends APIResource {
    * ```ts
    * const actionResult = await client.v1.boxes.actions.touch(
    *   'id',
-   *   { points: [{ start: { x: 0, y: 0 } }], type: {} },
+   *   { points: [{ start: { x: 0, y: 0 } }] },
    * );
    * ```
    */
   touch(id: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/touch`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/touch`, { body, ...options });
   }
 
   /**
@@ -112,12 +110,12 @@ export class Actions extends APIResource {
    * ```ts
    * const actionResult = await client.v1.boxes.actions.type(
    *   'id',
-   *   { text: 'Hello World', type: {} },
+   *   { text: 'Hello World' },
    * );
    * ```
    */
   type(id: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/api/v1/boxes/${id}/actions/type`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/actions/type`, { body, ...options });
   }
 }
 
@@ -191,11 +189,6 @@ export interface ActionScreenshotResponse {
 
 export interface ActionClickParams {
   /**
-   * Action type for mouse click
-   */
-  type: unknown;
-
-  /**
    * X coordinate of the click
    */
   x: number;
@@ -228,11 +221,6 @@ export interface ActionDragParams {
   path: Array<ActionDragParams.Path>;
 
   /**
-   * Action type for drag interaction
-   */
-  type: unknown;
-
-  /**
    * Time interval between points (e.g. "50ms")
    */
   duration?: string;
@@ -259,11 +247,6 @@ export namespace ActionDragParams {
 
 export interface ActionMoveParams {
   /**
-   * Action type for cursor movement
-   */
-  type: unknown;
-
-  /**
    * X coordinate to move to
    */
   x: number;
@@ -286,11 +269,6 @@ export interface ActionPressParams {
   keys: Array<string>;
 
   /**
-   * Action type for keyboard key press
-   */
-  type: unknown;
-
-  /**
    * Type of the URI
    */
   outputFormat?: 'base64' | 'storageKey';
@@ -306,11 +284,6 @@ export interface ActionScreenshotParams {
    * Type of the URI
    */
   outputFormat?: 'base64' | 'storageKey';
-
-  /**
-   * Action type for screenshot
-   */
-  type?: 'png' | 'jpeg';
 }
 
 export namespace ActionScreenshotParams {
@@ -352,11 +325,6 @@ export interface ActionScrollParams {
   scrollY: number;
 
   /**
-   * Action type for scroll interaction
-   */
-  type: unknown;
-
-  /**
    * X coordinate of the scroll position
    */
   x: number;
@@ -377,11 +345,6 @@ export interface ActionTouchParams {
    * Array of touch points and their actions
    */
   points: Array<ActionTouchParams.Point>;
-
-  /**
-   * Action type for touch interaction
-   */
-  type: unknown;
 
   /**
    * Type of the URI
@@ -425,11 +388,6 @@ export interface ActionTypeParams {
    * Text to type
    */
   text: string;
-
-  /**
-   * Action type for typing text
-   */
-  type: unknown;
 
   /**
    * Type of the URI

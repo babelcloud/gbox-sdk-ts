@@ -7,14 +7,15 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^gbox-sdk-example$': '<rootDir>/src/index.ts',
-    '^gbox-sdk-example/(.*)$': '<rootDir>/src/$1',
+    '^gbox-sdk$': '<rootDir>/src/index.ts',
+    '^gbox-sdk/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',
     '<rootDir>/dist/',
     '<rootDir>/deno/',
     '<rootDir>/deno_tests/',
+    '<rootDir>/packages/',
   ],
   testPathIgnorePatterns: ['scripts'],
 };

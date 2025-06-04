@@ -1,10 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'gbox-sdk-example/core/api-promise';
+import { APIPromise } from 'gbox-sdk/core/api-promise';
 
 import util from 'node:util';
-import { GboxClient } from 'gbox-sdk-example';
-import { APIUserAbortError } from 'gbox-sdk-example';
+
+import { GboxClient, APIUserAbortError } from 'gbox-sdk';
+
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
@@ -306,13 +307,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = ''; // empty
       const client = new GboxClient({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://gbox.cloud/api/v1/');
+      expect(client.baseURL).toEqual('https://alpha.gbox.cloud/api/v1/');
     });
 
     test('blank env variable', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = '  '; // blank
       const client = new GboxClient({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://gbox.cloud/api/v1/');
+      expect(client.baseURL).toEqual('https://alpha.gbox.cloud/api/v1/');
     });
   });
 

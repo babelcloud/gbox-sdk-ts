@@ -15,7 +15,7 @@ export class Fs extends APIResource {
    * ```
    */
   list(id: string, query: FListParams, options?: RequestOptions): APIPromise<FListResponse> {
-    return this._client.get(path`/api/v1/boxes/${id}/fs/list`, { query, ...options });
+    return this._client.get(path`/boxes/${id}/fs/list`, { query, ...options });
   }
 
   /**
@@ -27,7 +27,7 @@ export class Fs extends APIResource {
    * ```
    */
   read(id: string, query: FReadParams, options?: RequestOptions): APIPromise<FReadResponse> {
-    return this._client.get(path`/api/v1/boxes/${id}/fs/read`, { query, ...options });
+    return this._client.get(path`/boxes/${id}/fs/read`, { query, ...options });
   }
 
   /**
@@ -40,7 +40,7 @@ export class Fs extends APIResource {
    * ```
    */
   write(id: string, body: FWriteParams, options?: RequestOptions): APIPromise<FWriteResponse> {
-    return this._client.post(path`/api/v1/boxes/${id}/fs/write`, { body, ...options });
+    return this._client.post(path`/boxes/${id}/fs/write`, { body, ...options });
   }
 }
 
