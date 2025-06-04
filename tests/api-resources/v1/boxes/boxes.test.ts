@@ -41,8 +41,8 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.v1.boxes.list({ page: 0, pageSize: 0 });
+  test.skip('list', async () => {
+    const responsePromise = client.v1.boxes.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,8 +53,11 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await client.v1.boxes.list({ page: 0, pageSize: 0 });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.list({ page: 0, pageSize: 0 }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -121,7 +124,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('runCode: only required params', async () => {
-    const responsePromise = client.v1.boxes.runCode('id', { code: 'print("Hello, World!")', type: 'bash' });
+    const responsePromise = client.v1.boxes.runCode('id', { code: 'print("Hello, World!")' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -135,9 +138,9 @@ describe('resource boxes', () => {
   test.skip('runCode: required and optional params', async () => {
     const response = await client.v1.boxes.runCode('id', {
       code: 'print("Hello, World!")',
-      type: 'bash',
       argv: ['string'],
       envs: {},
+      language: 'bash',
       timeout: 'timeout',
       workingDir: 'workingDir',
     });

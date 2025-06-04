@@ -65,13 +65,10 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const boxes = await client.v1.boxes.list({
-   *   page: 0,
-   *   pageSize: 0,
-   * });
+   * const boxes = await client.v1.boxes.list();
    * ```
    */
-  list(query: BoxListParams, options?: RequestOptions): APIPromise<BoxListResponse> {
+  list(query: BoxListParams | null | undefined = {}, options?: RequestOptions): APIPromise<BoxListResponse> {
     return this._client.get('/boxes', { query, ...options });
   }
 
@@ -125,7 +122,6 @@ export class Boxes extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.runCode('id', {
    *   code: 'print("Hello, World!")',
-   *   type: 'bash',
    * });
    * ```
    */
@@ -557,12 +553,12 @@ export interface BoxListParams {
   /**
    * Page number
    */
-  page: number;
+  page?: number;
 
   /**
    * Page size
    */
-  pageSize: number;
+  pageSize?: number;
 }
 
 export interface BoxCreateAndroidParams {
@@ -618,11 +614,6 @@ export interface BoxRunCodeParams {
   code: string;
 
   /**
-   * The type of the code.
-   */
-  type: 'bash' | 'python3' | 'typescript';
-
-  /**
    * The arguments to run the code. e.g. ["-h"]
    */
   argv?: Array<string>;
@@ -631,6 +622,11 @@ export interface BoxRunCodeParams {
    * The environment variables to run the code
    */
   envs?: unknown;
+
+  /**
+   * The language of the code.
+   */
+  language?: 'bash' | 'python3' | 'typescript';
 
   /**
    * The timeout of the code. e.g. "30s"
