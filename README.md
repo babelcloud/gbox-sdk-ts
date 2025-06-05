@@ -26,11 +26,7 @@ const client = new GboxClient({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const box = await client.v1.boxes.create({ type: 'linux' });
-}
-
-main();
+const box = await client.v1.boxes.create({ type: 'linux' });
 ```
 
 ### Request & Response types
@@ -45,12 +41,8 @@ const client = new GboxClient({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const params: GboxClient.V1.BoxCreateParams = { type: 'linux' };
-  const box: GboxClient.V1.BoxCreateResponse = await client.v1.boxes.create(params);
-}
-
-main();
+const params: GboxClient.V1.BoxCreateParams = { type: 'linux' };
+const box: GboxClient.V1.BoxCreateResponse = await client.v1.boxes.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -63,19 +55,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const box = await client.v1.boxes.create({ type: 'linux' }).catch(async (err) => {
-    if (err instanceof GboxClient.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
-}
-
-main();
+const box = await client.v1.boxes.create({ type: 'linux' }).catch(async (err) => {
+  if (err instanceof GboxClient.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
