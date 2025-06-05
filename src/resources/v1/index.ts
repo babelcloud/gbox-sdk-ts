@@ -16,6 +16,7 @@ export {
   type BoxStopResponse,
   type BoxCreateParams,
   type BoxListParams,
+  type BoxDeleteParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,

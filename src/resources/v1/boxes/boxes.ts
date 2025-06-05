@@ -81,8 +81,9 @@ export class Boxes extends APIResource {
    * await client.v1.boxes.delete('id');
    * ```
    */
-  delete(id: string, options?: RequestOptions): APIPromise<void> {
+  delete(id: string, body: BoxDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/boxes/${id}`, {
+      body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -311,6 +312,16 @@ export interface CreateAndroidBox {
    * Configuration for an Android box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
 }
 
 export interface CreateBoxConfig {
@@ -340,6 +351,16 @@ export interface CreateLinuxBox {
    * Configuration for a Linux box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
 }
 
 export interface LinuxBox {
@@ -550,6 +571,16 @@ export declare namespace BoxCreateParams {
      * Configuration for a Linux box instance
      */
     config?: CreateBoxConfig;
+
+    /**
+     * Timeout for the box operation to be completed, default is 30s
+     */
+    timeout?: string;
+
+    /**
+     * Wait for the box operation to be completed, default is true
+     */
+    wait?: boolean;
   }
 
   export interface CreateAndroidBox {
@@ -562,6 +593,16 @@ export declare namespace BoxCreateParams {
      * Configuration for an Android box instance
      */
     config?: CreateBoxConfig;
+
+    /**
+     * Timeout for the box operation to be completed, default is 30s
+     */
+    timeout?: string;
+
+    /**
+     * Wait for the box operation to be completed, default is true
+     */
+    wait?: boolean;
   }
 }
 
@@ -577,6 +618,18 @@ export interface BoxListParams {
   pageSize?: number;
 }
 
+export interface BoxDeleteParams {
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
+}
+
 export interface BoxCreateAndroidParams {
   /**
    * Box type is Android
@@ -587,6 +640,16 @@ export interface BoxCreateAndroidParams {
    * Configuration for an Android box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
 }
 
 export interface BoxCreateLinuxParams {
@@ -599,6 +662,16 @@ export interface BoxCreateLinuxParams {
    * Configuration for a Linux box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
 }
 
 export interface BoxExecuteCommandsParams {
@@ -675,6 +748,7 @@ export declare namespace Boxes {
     type BoxStopResponse as BoxStopResponse,
     type BoxCreateParams as BoxCreateParams,
     type BoxListParams as BoxListParams,
+    type BoxDeleteParams as BoxDeleteParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,

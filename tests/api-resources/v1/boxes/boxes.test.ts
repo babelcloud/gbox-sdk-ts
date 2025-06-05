@@ -25,6 +25,8 @@ describe('resource boxes', () => {
     const response = await client.v1.boxes.create({
       type: 'linux',
       config: { envs: {}, expiresIn: 'expiresIn', labels: {} },
+      timeout: 'timeout',
+      wait: true,
     });
   });
 
@@ -62,7 +64,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = client.v1.boxes.delete('id');
+    const responsePromise = client.v1.boxes.delete('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -89,6 +91,8 @@ describe('resource boxes', () => {
     const response = await client.v1.boxes.createAndroid({
       type: 'android',
       config: { envs: {}, expiresIn: 'expiresIn', labels: {} },
+      timeout: 'timeout',
+      wait: true,
     });
   });
 
@@ -109,6 +113,8 @@ describe('resource boxes', () => {
     const response = await client.v1.boxes.createLinux({
       type: 'linux',
       config: { envs: {}, expiresIn: 'expiresIn', labels: {} },
+      timeout: 'timeout',
+      wait: true,
     });
   });
 
