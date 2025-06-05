@@ -2,13 +2,13 @@
 
 [![NPM version](https://img.shields.io/npm/v/gbox-sdk.svg)](https://npmjs.org/package/gbox-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gbox-sdk)
 
-This library provides convenient access to the Gbox SDK from server-side TypeScript or JavaScript.
+This library provides convenient access to the Gbox API from TypeScript or JavaScript.
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Feature](#feature)
+- [Features](#features)
   - [Create a box](#create-a-box)
   - [Stop a box](#stop-a-box)
   - [Action](#action)
@@ -53,7 +53,7 @@ async function main() {
 main();
 ```
 
-## Feature
+## Features
 
 ### Create a box
 

@@ -94,9 +94,9 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * or
    * const response = await gbox.command({ commands: ['ls', '-l'] } );
    */
-  command(body: BoxExecuteCommandsParams | string): Promise<BoxExecuteCommandsResponse> {
-    if (typeof body === 'string') {
-      return this.client.v1.boxes.executeCommands(this.id, { commands: body.split(' ') });
+  command(body: BoxExecuteCommandsParams | string | string[]): Promise<BoxExecuteCommandsResponse> {
+    if (typeof body === 'string' || Array.isArray(body)) {
+      return this.client.v1.boxes.executeCommands(this.id, { commands: body });
     } else {
       return this.client.v1.boxes.executeCommands(this.id, body);
     }
@@ -110,7 +110,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    */
   runCode(body: BoxRunCodeParams | string): Promise<BoxRunCodeResponse> {
     if (typeof body === 'string') {
-      return this.client.v1.boxes.runCode(this.id, { code: body, type: 'python3' });
+      return this.client.v1.boxes.runCode(this.id, { code: body });
     } else {
       return this.client.v1.boxes.runCode(this.id, body);
     }
