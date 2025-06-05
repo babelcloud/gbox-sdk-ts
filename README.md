@@ -10,6 +10,7 @@ This library provides convenient access to the Gbox API from TypeScript or JavaS
 - [Usage](#usage)
 - [Features](#features)
   - [Create a box](#create-a-box)
+  - [Stop a box](#stop-a-box)
   - [Action](#action)
   - [Run Code](#run-code)
   - [Run Command](#run-command)
@@ -57,16 +58,22 @@ main();
 ### Create a box
 
 ```ts
-const myBox = await gboxSDK.create({ type: 'android' });
+const box = await gboxSDK.create({ type: 'android' });
 
 // box.config is the config of the box (e.g. OS version, screen size, etc.)
-console.log(myBox.config);
+console.log(box.config);
+```
+
+### Stop a box
+
+```ts
+await box.stop();
 ```
 
 ### Action
 
 ```ts
-await myBox.click({
+await box.click({
   x: 100,
   y: 100,
 });
@@ -75,7 +82,7 @@ await myBox.click({
 ### Run Code
 
 ```ts
-await myBox.runCode({
+await box.runCode({
   code: "print('Hello, world!')",
   // language: "python" // default is "python"
 });
@@ -84,7 +91,7 @@ await myBox.runCode({
 ### Run Command
 
 ```ts
-await myBox.command({
+await box.command({
   commands: "echo HELLO $MY_ENV_VAR"
   envs: {
     MY_ENV_VAR: "Gbox"
@@ -95,13 +102,13 @@ await myBox.command({
 ### List Boxes
 
 ```ts
-const gbox = new GboxSDK({
+const gboxSDK = new GboxSDK({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
-await gbox.list();
+await gboxSDK.list();
 
-await gbox.get('d26bbff6-2277-4c34-b00c-d1f1d5a501ae');
+await gboxSDK.get('d26bbff6-2277-4c34-b00c-d1f1d5a501ae');
 ```
 
 ## Handling errors
@@ -113,7 +120,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const myBox = await gbox.create({ type: 'android' }).catch(async (err) => {
+  const box = await gboxSDK.create({ type: 'android' }).catch(async (err) => {
     if (err instanceof GboxSDK.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
