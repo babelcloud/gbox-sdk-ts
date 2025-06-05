@@ -195,7 +195,7 @@ export interface AndroidBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error';
+  status: 'pending' | 'running' | 'stopped' | 'error' | 'deleted';
 
   /**
    * Box type is Android
@@ -387,7 +387,7 @@ export interface LinuxBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error';
+  status: 'pending' | 'running' | 'stopped' | 'error' | 'deleted';
 
   /**
    * Box type is Linux
@@ -616,6 +616,11 @@ export interface BoxListParams {
    * Page size
    */
   pageSize?: number;
+
+  /**
+   * Filter boxes by their current status (pending, running, stopped, error, deleted)
+   */
+  status?: string;
 }
 
 export interface BoxDeleteParams {
