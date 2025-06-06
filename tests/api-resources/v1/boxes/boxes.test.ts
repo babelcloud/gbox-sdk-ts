@@ -32,7 +32,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.v1.boxes.retrieve('id');
+    const responsePromise = client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,7 +64,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = client.v1.boxes.delete('id', {});
+    const responsePromise = client.v1.boxes.delete('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -120,7 +120,9 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('executeCommands: only required params', async () => {
-    const responsePromise = client.v1.boxes.executeCommands('id', { commands: ['ls', '-l'] });
+    const responsePromise = client.v1.boxes.executeCommands('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      commands: ['ls', '-l'],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -132,7 +134,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('executeCommands: required and optional params', async () => {
-    const response = await client.v1.boxes.executeCommands('id', {
+    const response = await client.v1.boxes.executeCommands('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       commands: ['ls', '-l'],
       envs: {},
       timeout: '30s',
@@ -142,7 +144,9 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('runCode: only required params', async () => {
-    const responsePromise = client.v1.boxes.runCode('id', { code: 'print("Hello, World!")' });
+    const responsePromise = client.v1.boxes.runCode('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      code: 'print("Hello, World!")',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -154,7 +158,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('runCode: required and optional params', async () => {
-    const response = await client.v1.boxes.runCode('id', {
+    const response = await client.v1.boxes.runCode('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       code: 'print("Hello, World!")',
       argv: ['string'],
       envs: {},
@@ -166,7 +170,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('start', async () => {
-    const responsePromise = client.v1.boxes.start('id');
+    const responsePromise = client.v1.boxes.start('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -178,7 +182,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('stop', async () => {
-    const responsePromise = client.v1.boxes.stop('id');
+    const responsePromise = client.v1.boxes.stop('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

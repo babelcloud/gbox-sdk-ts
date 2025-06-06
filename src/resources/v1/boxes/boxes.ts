@@ -15,6 +15,15 @@ import {
   ActionTypeParams,
   Actions,
 } from './actions';
+import * as AndroidAPI from './android';
+import {
+  Android,
+  AndroidApp,
+  AndroidGetParams,
+  AndroidInstallParams,
+  AndroidListResponse,
+  AndroidUninstallParams,
+} from './android';
 import * as BrowserAPI from './browser';
 import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse, BrowserConnectURLResponse } from './browser';
 import * as FsAPI from './fs';
@@ -36,6 +45,7 @@ export class Boxes extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
   browser: BrowserAPI.Browser = new BrowserAPI.Browser(this._client);
+  android: AndroidAPI.Android = new AndroidAPI.Android(this._client);
 
   /**
    * Create box
@@ -54,7 +64,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const box = await client.v1.boxes.retrieve('id');
+   * const box = await client.v1.boxes.retrieve(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
@@ -78,7 +90,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.delete('id');
+   * await client.v1.boxes.delete(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   delete(id: string, body: BoxDeleteParams, options?: RequestOptions): APIPromise<void> {
@@ -121,7 +135,7 @@ export class Boxes extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.executeCommands(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { commands: ['ls', '-l'] },
    * );
    * ```
@@ -137,9 +151,10 @@ export class Boxes extends APIResource {
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.runCode('id', {
-   *   code: 'print("Hello, World!")',
-   * });
+   * const response = await client.v1.boxes.runCode(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { code: 'print("Hello, World!")' },
+   * );
    * ```
    */
   runCode(id: string, body: BoxRunCodeParams, options?: RequestOptions): APIPromise<BoxRunCodeResponse> {
@@ -151,7 +166,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.start('id');
+   * const response = await client.v1.boxes.start(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   start(id: string, options?: RequestOptions): APIPromise<BoxStartResponse> {
@@ -163,7 +180,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.stop('id');
+   * const response = await client.v1.boxes.stop(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   stop(id: string, options?: RequestOptions): APIPromise<BoxStopResponse> {
@@ -736,6 +755,7 @@ export interface BoxRunCodeParams {
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
 Boxes.Browser = BrowserAPIBrowser;
+Boxes.Android = Android;
 
 export declare namespace Boxes {
   export {
@@ -788,5 +808,14 @@ export declare namespace Boxes {
     BrowserAPIBrowser as Browser,
     type BrowserCdpURLResponse as BrowserCdpURLResponse,
     type BrowserConnectURLResponse as BrowserConnectURLResponse,
+  };
+
+  export {
+    Android as Android,
+    type AndroidApp as AndroidApp,
+    type AndroidListResponse as AndroidListResponse,
+    type AndroidGetParams as AndroidGetParams,
+    type AndroidInstallParams as AndroidInstallParams,
+    type AndroidUninstallParams as AndroidUninstallParams,
   };
 }
