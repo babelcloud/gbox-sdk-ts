@@ -73,3 +73,17 @@ Methods:
 
 - <code title="get /boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">cdpURL</a>(id) -> string</code>
 - <code title="get /boxes/{id}/browser/connect-url">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">connectURL</a>(id) -> BrowserConnectURLResponse</code>
+
+### Android
+
+Types:
+
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidApp</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidListResponse</a></code>
+
+Methods:
+
+- <code title="get /boxes/{id}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">list</a>(id) -> AndroidListResponse</code>
+- <code title="get /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">get</a>(packageName, { ...params }) -> AndroidApp</code>
+- <code title="post /boxes/{id}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">install</a>(id, { ...params }) -> void</code>
+- <code title="delete /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">uninstall</a>(packageName, { ...params }) -> void</code>

@@ -9,7 +9,9 @@ export class Browser extends APIResource {
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.browser.cdpURL('id');
+   * const response = await client.v1.boxes.browser.cdpURL(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   cdpURL(id: string, options?: RequestOptions): APIPromise<string> {
@@ -20,7 +22,7 @@ export class Browser extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.browser.connectURL(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */

@@ -9,9 +9,10 @@ export class Fs extends APIResource {
   /**
    * @example
    * ```ts
-   * const fs = await client.v1.boxes.fs.list('id', {
-   *   path: 'path',
-   * });
+   * const fs = await client.v1.boxes.fs.list(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { path: 'path' },
+   * );
    * ```
    */
   list(id: string, query: FListParams, options?: RequestOptions): APIPromise<FListResponse> {
@@ -21,9 +22,10 @@ export class Fs extends APIResource {
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.fs.read('id', {
-   *   path: 'path',
-   * });
+   * const response = await client.v1.boxes.fs.read(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { path: 'path' },
+   * );
    * ```
    */
   read(id: string, query: FReadParams, options?: RequestOptions): APIPromise<FReadResponse> {
@@ -33,10 +35,10 @@ export class Fs extends APIResource {
   /**
    * @example
    * ```ts
-   * const response = await client.v1.boxes.fs.write('id', {
-   *   content: 'content',
-   *   path: 'path',
-   * });
+   * const response = await client.v1.boxes.fs.write(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { content: 'content', path: 'path' },
+   * );
    * ```
    */
   write(id: string, body: FWriteParams, options?: RequestOptions): APIPromise<FWriteResponse> {
