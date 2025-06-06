@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GboxClient, { toFile } from 'gbox-sdk';
+import { GboxClient, toFile } from 'gbox-sdk';
 
 const client = new GboxClient({
   apiKey: 'My API Key',
