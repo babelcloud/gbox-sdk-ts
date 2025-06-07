@@ -80,6 +80,9 @@ export class Android extends APIResource {
   }
 }
 
+/**
+ * Android app information
+ */
 export interface AndroidApp {
   /**
    * Android app apk path
@@ -102,6 +105,9 @@ export interface AndroidApp {
   version: string;
 }
 
+/**
+ * Response containing list of Android apps
+ */
 export interface AndroidListResponse {
   /**
    * Android app list
@@ -118,7 +124,7 @@ export interface AndroidGetParams {
 
 export type AndroidInstallParams =
   | AndroidInstallParams.InstallAndroidAppByFile
-  | AndroidInstallParams.InstallAndroidAppByURLDto;
+  | AndroidInstallParams.InstallAndroidAppByURL;
 
 export declare namespace AndroidInstallParams {
   export interface InstallAndroidAppByFile {
@@ -128,7 +134,7 @@ export declare namespace AndroidInstallParams {
     apk: Uploadable;
   }
 
-  export interface InstallAndroidAppByURLDto {
+  export interface InstallAndroidAppByURL {
     /**
      * HTTP URL to download APK file (max file size: 200MB)
      */

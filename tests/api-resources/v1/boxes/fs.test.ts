@@ -10,7 +10,9 @@ const client = new GboxClient({
 describe('resource fs', () => {
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = client.v1.boxes.fs.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', { path: 'path' });
+    const responsePromise = client.v1.boxes.fs.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      path: '/home/user/documents',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,14 +25,16 @@ describe('resource fs', () => {
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
     const response = await client.v1.boxes.fs.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      path: 'path',
-      depth: 0,
+      path: '/home/user/documents',
+      depth: 2,
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('read: only required params', async () => {
-    const responsePromise = client.v1.boxes.fs.read('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', { path: 'path' });
+    const responsePromise = client.v1.boxes.fs.read('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      path: '/home/user/documents/config.json',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,14 +46,16 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('read: required and optional params', async () => {
-    const response = await client.v1.boxes.fs.read('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', { path: 'path' });
+    const response = await client.v1.boxes.fs.read('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      path: '/home/user/documents/config.json',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('write: only required params', async () => {
     const responsePromise = client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      content: 'content',
-      path: 'path',
+      content: 'Hello, World!\nThis is file content.',
+      path: '/home/user/documents/output.txt',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -63,8 +69,8 @@ describe('resource fs', () => {
   // skipped: tests are disabled for the time being
   test.skip('write: required and optional params', async () => {
     const response = await client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      content: 'content',
-      path: 'path',
+      content: 'Hello, World!\nThis is file content.',
+      path: '/home/user/documents/output.txt',
     });
   });
 });

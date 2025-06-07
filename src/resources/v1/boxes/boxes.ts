@@ -132,6 +132,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Exec command
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.executeCommands(
@@ -149,6 +151,8 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Run code on the box
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.runCode(
@@ -190,6 +194,9 @@ export class Boxes extends APIResource {
   }
 }
 
+/**
+ * Android box instance with full configuration and status
+ */
 export interface AndroidBox {
   /**
    * Unique identifier for the box
@@ -197,7 +204,7 @@ export interface AndroidBox {
   id: string;
 
   /**
-   * Configuration for an Android box instance
+   * Complete configuration for Android box instance
    */
   config: AndroidBox.Config;
 
@@ -229,11 +236,11 @@ export interface AndroidBox {
 
 export namespace AndroidBox {
   /**
-   * Configuration for an Android box instance
+   * Complete configuration for Android box instance
    */
   export interface Config {
     /**
-     * Browser configuration
+     * Android browser configuration settings
      */
     browser: Config.Browser;
 
@@ -263,7 +270,7 @@ export namespace AndroidBox {
     os: Config.Os;
 
     /**
-     * Resolution of the box
+     * Box display resolution configuration
      */
     resolution: Config.Resolution;
 
@@ -280,7 +287,7 @@ export namespace AndroidBox {
 
   export namespace Config {
     /**
-     * Browser configuration
+     * Android browser configuration settings
      */
     export interface Browser {
       /**
@@ -305,7 +312,7 @@ export namespace AndroidBox {
     }
 
     /**
-     * Resolution of the box
+     * Box display resolution configuration
      */
     export interface Resolution {
       /**
@@ -321,6 +328,9 @@ export namespace AndroidBox {
   }
 }
 
+/**
+ * Request body for creating a new Android box instance
+ */
 export interface CreateAndroidBox {
   /**
    * Box type is Android
@@ -328,7 +338,7 @@ export interface CreateAndroidBox {
   type: 'android';
 
   /**
-   * Configuration for an Android box instance
+   * Configuration for a box instance
    */
   config?: CreateBoxConfig;
 
@@ -343,6 +353,9 @@ export interface CreateAndroidBox {
   wait?: boolean;
 }
 
+/**
+ * Configuration for a box instance
+ */
 export interface CreateBoxConfig {
   /**
    * Environment variables for the box
@@ -360,6 +373,9 @@ export interface CreateBoxConfig {
   labels?: unknown;
 }
 
+/**
+ * Request body for creating a new Linux box instance
+ */
 export interface CreateLinuxBox {
   /**
    * Box type is Linux
@@ -367,7 +383,7 @@ export interface CreateLinuxBox {
   type: 'linux';
 
   /**
-   * Configuration for a Linux box instance
+   * Configuration for a box instance
    */
   config?: CreateBoxConfig;
 
@@ -382,6 +398,9 @@ export interface CreateLinuxBox {
   wait?: boolean;
 }
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export interface LinuxBox {
   /**
    * Unique identifier for the box
@@ -389,7 +408,7 @@ export interface LinuxBox {
   id: string;
 
   /**
-   * Configuration for a Linux box instance
+   * Complete configuration for Linux box instance
    */
   config: LinuxBox.Config;
 
@@ -421,11 +440,11 @@ export interface LinuxBox {
 
 export namespace LinuxBox {
   /**
-   * Configuration for a Linux box instance
+   * Complete configuration for Linux box instance
    */
   export interface Config {
     /**
-     * Browser configuration
+     * Linux browser configuration settings
      */
     browser: Config.Browser;
 
@@ -450,12 +469,12 @@ export namespace LinuxBox {
     memory: number;
 
     /**
-     * Operating system configuration
+     * Linux operating system configuration
      */
     os: Config.Os;
 
     /**
-     * Resolution of the box
+     * Box display resolution configuration
      */
     resolution: Config.Resolution;
 
@@ -472,7 +491,7 @@ export namespace LinuxBox {
 
   export namespace Config {
     /**
-     * Browser configuration
+     * Linux browser configuration settings
      */
     export interface Browser {
       /**
@@ -487,7 +506,7 @@ export namespace LinuxBox {
     }
 
     /**
-     * Operating system configuration
+     * Linux operating system configuration
      */
     export interface Os {
       /**
@@ -497,7 +516,7 @@ export namespace LinuxBox {
     }
 
     /**
-     * Resolution of the box
+     * Box display resolution configuration
      */
     export interface Resolution {
       /**
@@ -513,10 +532,19 @@ export namespace LinuxBox {
   }
 }
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export type BoxCreateResponse = LinuxBox | AndroidBox;
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export type BoxRetrieveResponse = LinuxBox | AndroidBox;
 
+/**
+ * Response containing paginated list of box instances
+ */
 export interface BoxListResponse {
   /**
    * A box instance that can be either Linux or Android type
@@ -539,6 +567,9 @@ export interface BoxListResponse {
   total: number;
 }
 
+/**
+ * Result of command execution
+ */
 export interface BoxExecuteCommandsResponse {
   /**
    * The exit code of the command
@@ -556,6 +587,9 @@ export interface BoxExecuteCommandsResponse {
   stdout: string;
 }
 
+/**
+ * Result of code execution
+ */
 export interface BoxRunCodeResponse {
   /**
    * The exit code of the code
@@ -573,8 +607,14 @@ export interface BoxRunCodeResponse {
   stdout: string;
 }
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export type BoxStartResponse = LinuxBox | AndroidBox;
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export type BoxStopResponse = LinuxBox | AndroidBox;
 
 export type BoxCreateParams = BoxCreateParams.CreateLinuxBox | BoxCreateParams.CreateAndroidBox;
@@ -587,7 +627,7 @@ export declare namespace BoxCreateParams {
     type: 'linux';
 
     /**
-     * Configuration for a Linux box instance
+     * Configuration for a box instance
      */
     config?: CreateBoxConfig;
 
@@ -609,7 +649,7 @@ export declare namespace BoxCreateParams {
     type: 'android';
 
     /**
-     * Configuration for an Android box instance
+     * Configuration for a box instance
      */
     config?: CreateBoxConfig;
 
@@ -661,7 +701,7 @@ export interface BoxCreateAndroidParams {
   type: 'android';
 
   /**
-   * Configuration for an Android box instance
+   * Configuration for a box instance
    */
   config?: CreateBoxConfig;
 
@@ -683,7 +723,7 @@ export interface BoxCreateLinuxParams {
   type: 'linux';
 
   /**
-   * Configuration for a Linux box instance
+   * Configuration for a box instance
    */
   config?: CreateBoxConfig;
 
