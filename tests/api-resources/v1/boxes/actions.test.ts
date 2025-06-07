@@ -29,7 +29,7 @@ describe('resource actions', () => {
       x: 100,
       y: 100,
       button: 'left',
-      double: true,
+      double: false,
       outputFormat: 'base64',
     });
   });
@@ -58,7 +58,7 @@ describe('resource actions', () => {
         { x: 100, y: 100 },
         { x: 200, y: 200 },
       ],
-      duration: 'duration',
+      duration: '50ms',
       outputFormat: 'base64',
     });
   });
@@ -152,7 +152,7 @@ describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('touch: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      points: [{ start: { x: 0, y: 0 } }],
+      points: [{ start: { x: 100, y: 150 } }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -166,7 +166,12 @@ describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('touch: required and optional params', async () => {
     const response = await client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      points: [{ start: { x: 0, y: 0 }, actions: [{}] }],
+      points: [
+        {
+          start: { x: 100, y: 150 },
+          actions: [{ x: 400, y: 300, duration: '200ms' }, { duration: '500ms' }],
+        },
+      ],
       outputFormat: 'base64',
     });
   });

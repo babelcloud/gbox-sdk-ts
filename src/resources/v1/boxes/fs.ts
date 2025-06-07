@@ -7,11 +7,13 @@ import { path } from '../../../internal/utils/path';
 
 export class Fs extends APIResource {
   /**
+   * List box files
+   *
    * @example
    * ```ts
    * const fs = await client.v1.boxes.fs.list(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { path: 'path' },
+   *   { path: '/home/user/documents' },
    * );
    * ```
    */
@@ -20,11 +22,13 @@ export class Fs extends APIResource {
   }
 
   /**
+   * Read box file
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.fs.read(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { path: 'path' },
+   *   { path: '/home/user/documents/config.json' },
    * );
    * ```
    */
@@ -33,11 +37,16 @@ export class Fs extends APIResource {
   }
 
   /**
+   * Write box file
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.fs.write(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { content: 'content', path: 'path' },
+   *   {
+   *     content: 'Hello, World!\nThis is file content.',
+   *     path: '/home/user/documents/output.txt',
+   *   },
    * );
    * ```
    */
@@ -46,14 +55,20 @@ export class Fs extends APIResource {
   }
 }
 
+/**
+ * Response containing directory listing results
+ */
 export interface FListResponse {
   /**
-   * A box instance that can be either Linux or Android type
+   * Array of files and directories
    */
   data: Array<FListResponse.File | FListResponse.Dir>;
 }
 
 export namespace FListResponse {
+  /**
+   * File system file representation
+   */
   export interface File {
     /**
      * Last modified time of the file
@@ -81,6 +96,9 @@ export namespace FListResponse {
     type: 'file';
   }
 
+  /**
+   * File system directory representation
+   */
   export interface Dir {
     /**
      * Name of the directory
@@ -99,6 +117,9 @@ export namespace FListResponse {
   }
 }
 
+/**
+ * Response containing file content
+ */
 export interface FReadResponse {
   /**
    * Content of the file
@@ -106,6 +127,9 @@ export interface FReadResponse {
   content: string;
 }
 
+/**
+ * Response after writing file content
+ */
 export interface FWriteResponse {
   /**
    * Success message

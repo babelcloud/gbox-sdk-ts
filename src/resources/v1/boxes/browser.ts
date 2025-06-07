@@ -7,6 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Browser extends APIResource {
   /**
+   * Get browser CDP url
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.browser.cdpURL(
@@ -19,6 +21,8 @@ export class Browser extends APIResource {
   }
 
   /**
+   * Get browser connect url
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.browser.connectURL(
@@ -33,6 +37,9 @@ export class Browser extends APIResource {
 
 export type BrowserCdpURLResponse = string;
 
+/**
+ * Browser connection URL information
+ */
 export interface BrowserConnectURLResponse {
   /**
    * CDP URL

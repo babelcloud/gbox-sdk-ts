@@ -24,8 +24,12 @@ describe('resource boxes', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.v1.boxes.create({
       type: 'linux',
-      config: { envs: {}, expiresIn: 'expiresIn', labels: {} },
-      timeout: 'timeout',
+      config: {
+        envs: { DEBUG: 'true', API_URL: 'https://api.example.com' },
+        expiresIn: '10m',
+        labels: { project: 'web-automation', environment: 'testing' },
+      },
+      timeout: '30s',
       wait: true,
     });
   });
@@ -58,7 +62,10 @@ describe('resource boxes', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.boxes.list({ page: 0, pageSize: 0, status: 'status' }, { path: '/_stainless_unknown_path' }),
+      client.v1.boxes.list(
+        { page: 1, pageSize: 10, status: 'running' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
@@ -90,8 +97,12 @@ describe('resource boxes', () => {
   test.skip('createAndroid: required and optional params', async () => {
     const response = await client.v1.boxes.createAndroid({
       type: 'android',
-      config: { envs: {}, expiresIn: 'expiresIn', labels: {} },
-      timeout: 'timeout',
+      config: {
+        envs: { ANDROID_LOG_TAGS: '*:V', ADB_TRACE: 'all' },
+        expiresIn: '15m',
+        labels: { app: 'mobile-testing', version: 'v1.0' },
+      },
+      timeout: '30s',
       wait: true,
     });
   });
@@ -112,8 +123,12 @@ describe('resource boxes', () => {
   test.skip('createLinux: required and optional params', async () => {
     const response = await client.v1.boxes.createLinux({
       type: 'linux',
-      config: { envs: {}, expiresIn: 'expiresIn', labels: {} },
-      timeout: 'timeout',
+      config: {
+        envs: { DEBUG: 'true', API_URL: 'https://api.example.com' },
+        expiresIn: '10m',
+        labels: { project: 'web-automation', environment: 'testing' },
+      },
+      timeout: '30s',
       wait: true,
     });
   });
@@ -136,9 +151,9 @@ describe('resource boxes', () => {
   test.skip('executeCommands: required and optional params', async () => {
     const response = await client.v1.boxes.executeCommands('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       commands: ['ls', '-l'],
-      envs: {},
+      envs: { PATH: '/usr/bin:/bin', NODE_ENV: 'production' },
       timeout: '30s',
-      workingDir: 'workingDir',
+      workingDir: '/home/user/projects',
     });
   });
 
@@ -160,11 +175,11 @@ describe('resource boxes', () => {
   test.skip('runCode: required and optional params', async () => {
     const response = await client.v1.boxes.runCode('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       code: 'print("Hello, World!")',
-      argv: ['string'],
-      envs: {},
-      language: 'bash',
+      argv: ['-v', '--help'],
+      envs: { PYTHONPATH: '/usr/lib/python3', DEBUG: 'true' },
+      language: 'python3',
       timeout: 'timeout',
-      workingDir: 'workingDir',
+      workingDir: '/home/user/scripts',
     });
   });
 
