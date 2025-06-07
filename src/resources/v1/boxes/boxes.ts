@@ -15,6 +15,15 @@ import {
   ActionTypeParams,
   Actions,
 } from './actions';
+import * as AndroidAPI from './android';
+import {
+  Android,
+  AndroidApp,
+  AndroidGetParams,
+  AndroidInstallParams,
+  AndroidListResponse,
+  AndroidUninstallParams,
+} from './android';
 import * as BrowserAPI from './browser';
 import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse, BrowserConnectURLResponse } from './browser';
 import * as FsAPI from './fs';
@@ -28,6 +37,7 @@ import {
   Fs,
 } from './fs';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -35,6 +45,7 @@ export class Boxes extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
   browser: BrowserAPI.Browser = new BrowserAPI.Browser(this._client);
+  android: AndroidAPI.Android = new AndroidAPI.Android(this._client);
 
   /**
    * Create box
@@ -53,7 +64,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const box = await client.v1.boxes.retrieve('id');
+   * const box = await client.v1.boxes.retrieve(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
@@ -65,14 +78,29 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const boxes = await client.v1.boxes.list({
-   *   page: 0,
-   *   pageSize: 0,
-   * });
+   * const boxes = await client.v1.boxes.list();
    * ```
    */
-  list(query: BoxListParams, options?: RequestOptions): APIPromise<BoxListResponse> {
+  list(query: BoxListParams | null | undefined = {}, options?: RequestOptions): APIPromise<BoxListResponse> {
     return this._client.get('/boxes', { query, ...options });
+  }
+
+  /**
+   * Delete box
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.delete(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  delete(id: string, body: BoxDeleteParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/boxes/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -104,10 +132,12 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Exec command
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.executeCommands(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { commands: ['ls', '-l'] },
    * );
    * ```
@@ -121,12 +151,14 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Run code on the box
+   *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.runCode('id', {
-   *   code: 'print("Hello, World!")',
-   *   type: 'bash',
-   * });
+   * const response = await client.v1.boxes.runCode(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { code: 'print("Hello, World!")' },
+   * );
    * ```
    */
   runCode(id: string, body: BoxRunCodeParams, options?: RequestOptions): APIPromise<BoxRunCodeResponse> {
@@ -138,7 +170,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.start('id');
+   * const response = await client.v1.boxes.start(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   start(id: string, options?: RequestOptions): APIPromise<BoxStartResponse> {
@@ -150,7 +184,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.stop('id');
+   * const response = await client.v1.boxes.stop(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   stop(id: string, options?: RequestOptions): APIPromise<BoxStopResponse> {
@@ -158,6 +194,9 @@ export class Boxes extends APIResource {
   }
 }
 
+/**
+ * Android box instance with full configuration and status
+ */
 export interface AndroidBox {
   /**
    * Unique identifier for the box
@@ -165,7 +204,7 @@ export interface AndroidBox {
   id: string;
 
   /**
-   * Configuration for an Android box instance
+   * Complete configuration for Android box instance
    */
   config: AndroidBox.Config;
 
@@ -182,7 +221,7 @@ export interface AndroidBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error';
+  status: 'pending' | 'running' | 'stopped' | 'error' | 'deleted';
 
   /**
    * Box type is Android
@@ -197,11 +236,11 @@ export interface AndroidBox {
 
 export namespace AndroidBox {
   /**
-   * Configuration for an Android box instance
+   * Complete configuration for Android box instance
    */
   export interface Config {
     /**
-     * Browser configuration
+     * Android browser configuration settings
      */
     browser: Config.Browser;
 
@@ -231,7 +270,7 @@ export namespace AndroidBox {
     os: Config.Os;
 
     /**
-     * Resolution of the box
+     * Box display resolution configuration
      */
     resolution: Config.Resolution;
 
@@ -248,7 +287,7 @@ export namespace AndroidBox {
 
   export namespace Config {
     /**
-     * Browser configuration
+     * Android browser configuration settings
      */
     export interface Browser {
       /**
@@ -273,7 +312,7 @@ export namespace AndroidBox {
     }
 
     /**
-     * Resolution of the box
+     * Box display resolution configuration
      */
     export interface Resolution {
       /**
@@ -289,6 +328,9 @@ export namespace AndroidBox {
   }
 }
 
+/**
+ * Request body for creating a new Android box instance
+ */
 export interface CreateAndroidBox {
   /**
    * Box type is Android
@@ -296,11 +338,24 @@ export interface CreateAndroidBox {
   type: 'android';
 
   /**
-   * Configuration for an Android box instance
+   * Configuration for a box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
 }
 
+/**
+ * Configuration for a box instance
+ */
 export interface CreateBoxConfig {
   /**
    * Environment variables for the box
@@ -318,6 +373,9 @@ export interface CreateBoxConfig {
   labels?: unknown;
 }
 
+/**
+ * Request body for creating a new Linux box instance
+ */
 export interface CreateLinuxBox {
   /**
    * Box type is Linux
@@ -325,11 +383,24 @@ export interface CreateLinuxBox {
   type: 'linux';
 
   /**
-   * Configuration for a Linux box instance
+   * Configuration for a box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
 }
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export interface LinuxBox {
   /**
    * Unique identifier for the box
@@ -337,7 +408,7 @@ export interface LinuxBox {
   id: string;
 
   /**
-   * Configuration for a Linux box instance
+   * Complete configuration for Linux box instance
    */
   config: LinuxBox.Config;
 
@@ -354,7 +425,7 @@ export interface LinuxBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error';
+  status: 'pending' | 'running' | 'stopped' | 'error' | 'deleted';
 
   /**
    * Box type is Linux
@@ -369,11 +440,11 @@ export interface LinuxBox {
 
 export namespace LinuxBox {
   /**
-   * Configuration for a Linux box instance
+   * Complete configuration for Linux box instance
    */
   export interface Config {
     /**
-     * Browser configuration
+     * Linux browser configuration settings
      */
     browser: Config.Browser;
 
@@ -398,12 +469,12 @@ export namespace LinuxBox {
     memory: number;
 
     /**
-     * Operating system configuration
+     * Linux operating system configuration
      */
     os: Config.Os;
 
     /**
-     * Resolution of the box
+     * Box display resolution configuration
      */
     resolution: Config.Resolution;
 
@@ -420,7 +491,7 @@ export namespace LinuxBox {
 
   export namespace Config {
     /**
-     * Browser configuration
+     * Linux browser configuration settings
      */
     export interface Browser {
       /**
@@ -435,7 +506,7 @@ export namespace LinuxBox {
     }
 
     /**
-     * Operating system configuration
+     * Linux operating system configuration
      */
     export interface Os {
       /**
@@ -445,7 +516,7 @@ export namespace LinuxBox {
     }
 
     /**
-     * Resolution of the box
+     * Box display resolution configuration
      */
     export interface Resolution {
       /**
@@ -461,10 +532,19 @@ export namespace LinuxBox {
   }
 }
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export type BoxCreateResponse = LinuxBox | AndroidBox;
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export type BoxRetrieveResponse = LinuxBox | AndroidBox;
 
+/**
+ * Response containing paginated list of box instances
+ */
 export interface BoxListResponse {
   /**
    * A box instance that can be either Linux or Android type
@@ -487,6 +567,9 @@ export interface BoxListResponse {
   total: number;
 }
 
+/**
+ * Result of command execution
+ */
 export interface BoxExecuteCommandsResponse {
   /**
    * The exit code of the command
@@ -504,6 +587,9 @@ export interface BoxExecuteCommandsResponse {
   stdout: string;
 }
 
+/**
+ * Result of code execution
+ */
 export interface BoxRunCodeResponse {
   /**
    * The exit code of the code
@@ -521,8 +607,14 @@ export interface BoxRunCodeResponse {
   stdout: string;
 }
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export type BoxStartResponse = LinuxBox | AndroidBox;
 
+/**
+ * Linux box instance with full configuration and status
+ */
 export type BoxStopResponse = LinuxBox | AndroidBox;
 
 export type BoxCreateParams = BoxCreateParams.CreateLinuxBox | BoxCreateParams.CreateAndroidBox;
@@ -535,9 +627,19 @@ export declare namespace BoxCreateParams {
     type: 'linux';
 
     /**
-     * Configuration for a Linux box instance
+     * Configuration for a box instance
      */
     config?: CreateBoxConfig;
+
+    /**
+     * Timeout for the box operation to be completed, default is 30s
+     */
+    timeout?: string;
+
+    /**
+     * Wait for the box operation to be completed, default is true
+     */
+    wait?: boolean;
   }
 
   export interface CreateAndroidBox {
@@ -547,9 +649,19 @@ export declare namespace BoxCreateParams {
     type: 'android';
 
     /**
-     * Configuration for an Android box instance
+     * Configuration for a box instance
      */
     config?: CreateBoxConfig;
+
+    /**
+     * Timeout for the box operation to be completed, default is 30s
+     */
+    timeout?: string;
+
+    /**
+     * Wait for the box operation to be completed, default is true
+     */
+    wait?: boolean;
   }
 }
 
@@ -557,12 +669,29 @@ export interface BoxListParams {
   /**
    * Page number
    */
-  page: number;
+  page?: number;
 
   /**
    * Page size
    */
-  pageSize: number;
+  pageSize?: number;
+
+  /**
+   * Filter boxes by their current status (pending, running, stopped, error, deleted)
+   */
+  status?: string;
+}
+
+export interface BoxDeleteParams {
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
 }
 
 export interface BoxCreateAndroidParams {
@@ -572,9 +701,19 @@ export interface BoxCreateAndroidParams {
   type: 'android';
 
   /**
-   * Configuration for an Android box instance
+   * Configuration for a box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
 }
 
 export interface BoxCreateLinuxParams {
@@ -584,16 +723,26 @@ export interface BoxCreateLinuxParams {
   type: 'linux';
 
   /**
-   * Configuration for a Linux box instance
+   * Configuration for a box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
 }
 
 export interface BoxExecuteCommandsParams {
   /**
-   * The command to run
+   * The command to run. Can be a single string or an array of strings
    */
-  commands: Array<string>;
+  commands: string | Array<string>;
 
   /**
    * The environment variables to run the command
@@ -618,11 +767,6 @@ export interface BoxRunCodeParams {
   code: string;
 
   /**
-   * The type of the code.
-   */
-  type: 'bash' | 'python3' | 'typescript';
-
-  /**
    * The arguments to run the code. e.g. ["-h"]
    */
   argv?: Array<string>;
@@ -631,6 +775,11 @@ export interface BoxRunCodeParams {
    * The environment variables to run the code
    */
   envs?: unknown;
+
+  /**
+   * The language of the code.
+   */
+  language?: 'bash' | 'python3' | 'typescript';
 
   /**
    * The timeout of the code. e.g. "30s"
@@ -646,6 +795,7 @@ export interface BoxRunCodeParams {
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
 Boxes.Browser = BrowserAPIBrowser;
+Boxes.Android = Android;
 
 export declare namespace Boxes {
   export {
@@ -663,6 +813,7 @@ export declare namespace Boxes {
     type BoxStopResponse as BoxStopResponse,
     type BoxCreateParams as BoxCreateParams,
     type BoxListParams as BoxListParams,
+    type BoxDeleteParams as BoxDeleteParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,
@@ -697,5 +848,14 @@ export declare namespace Boxes {
     BrowserAPIBrowser as Browser,
     type BrowserCdpURLResponse as BrowserCdpURLResponse,
     type BrowserConnectURLResponse as BrowserConnectURLResponse,
+  };
+
+  export {
+    Android as Android,
+    type AndroidApp as AndroidApp,
+    type AndroidListResponse as AndroidListResponse,
+    type AndroidGetParams as AndroidGetParams,
+    type AndroidInstallParams as AndroidInstallParams,
+    type AndroidUninstallParams as AndroidUninstallParams,
   };
 }
