@@ -26,7 +26,7 @@ const client = new GboxClient({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
-const box = await client.v1.boxes.create({ type: 'linux' });
+const box = await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
 ```
 
 ### Request & Response types
@@ -41,8 +41,9 @@ const client = new GboxClient({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
-const params: GboxClient.V1.BoxCreateParams = { type: 'linux' };
-const box: GboxClient.V1.BoxCreateResponse = await client.v1.boxes.create(params);
+const box: GboxClient.V1.BoxRetrieveResponse = await client.v1.boxes.retrieve(
+  'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -94,7 +95,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const box = await client.v1.boxes.create({ type: 'linux' }).catch(async (err) => {
+const box = await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d').catch(async (err) => {
   if (err instanceof GboxClient.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -134,7 +135,7 @@ const client = new GboxClient({
 });
 
 // Or, configure per-request:
-await client.v1.boxes.create({ type: 'linux' }, {
+await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
   maxRetries: 5,
 });
 ```
@@ -151,7 +152,7 @@ const client = new GboxClient({
 });
 
 // Override per-request:
-await client.v1.boxes.create({ type: 'linux' }, {
+await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
   timeout: 5 * 1000,
 });
 ```
@@ -174,11 +175,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new GboxClient();
 
-const response = await client.v1.boxes.create({ type: 'linux' }).asResponse();
+const response = await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d').asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: box, response: raw } = await client.v1.boxes.create({ type: 'linux' }).withResponse();
+const { data: box, response: raw } = await client.v1.boxes
+  .retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d')
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(box);
 ```

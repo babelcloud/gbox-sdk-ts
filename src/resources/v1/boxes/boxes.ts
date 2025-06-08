@@ -48,19 +48,7 @@ export class Boxes extends APIResource {
   android: AndroidAPI.Android = new AndroidAPI.Android(this._client);
 
   /**
-   * Create box
-   *
-   * @example
-   * ```ts
-   * const box = await client.v1.boxes.create({ type: 'linux' });
-   * ```
-   */
-  create(body: BoxCreateParams, options?: RequestOptions): APIPromise<BoxCreateResponse> {
-    return this._client.post('/boxes', { body, ...options });
-  }
-
-  /**
-   * Get box detail
+   * Get box info
    *
    * @example
    * ```ts
@@ -108,9 +96,7 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const androidBox = await client.v1.boxes.createAndroid({
-   *   type: 'android',
-   * });
+   * const androidBox = await client.v1.boxes.createAndroid();
    * ```
    */
   createAndroid(body: BoxCreateAndroidParams, options?: RequestOptions): APIPromise<AndroidBox> {
@@ -122,9 +108,7 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const linuxBox = await client.v1.boxes.createLinux({
-   *   type: 'linux',
-   * });
+   * const linuxBox = await client.v1.boxes.createLinux();
    * ```
    */
   createLinux(body: BoxCreateLinuxParams, options?: RequestOptions): APIPromise<LinuxBox> {
@@ -175,8 +159,8 @@ export class Boxes extends APIResource {
    * );
    * ```
    */
-  start(id: string, options?: RequestOptions): APIPromise<BoxStartResponse> {
-    return this._client.post(path`/boxes/${id}/start`, options);
+  start(id: string, body: BoxStartParams, options?: RequestOptions): APIPromise<BoxStartResponse> {
+    return this._client.post(path`/boxes/${id}/start`, { body, ...options });
   }
 
   /**
@@ -189,8 +173,8 @@ export class Boxes extends APIResource {
    * );
    * ```
    */
-  stop(id: string, options?: RequestOptions): APIPromise<BoxStopResponse> {
-    return this._client.post(path`/boxes/${id}/stop`, options);
+  stop(id: string, body: BoxStopParams, options?: RequestOptions): APIPromise<BoxStopResponse> {
+    return this._client.post(path`/boxes/${id}/stop`, { body, ...options });
   }
 }
 
@@ -333,11 +317,6 @@ export namespace AndroidBox {
  */
 export interface CreateAndroidBox {
   /**
-   * Box type is Android
-   */
-  type: 'android';
-
-  /**
    * Configuration for a box instance
    */
   config?: CreateBoxConfig;
@@ -377,11 +356,6 @@ export interface CreateBoxConfig {
  * Request body for creating a new Linux box instance
  */
 export interface CreateLinuxBox {
-  /**
-   * Box type is Linux
-   */
-  type: 'linux';
-
   /**
    * Configuration for a box instance
    */
@@ -535,11 +509,6 @@ export namespace LinuxBox {
 /**
  * Linux box instance with full configuration and status
  */
-export type BoxCreateResponse = LinuxBox | AndroidBox;
-
-/**
- * Linux box instance with full configuration and status
- */
 export type BoxRetrieveResponse = LinuxBox | AndroidBox;
 
 /**
@@ -617,54 +586,6 @@ export type BoxStartResponse = LinuxBox | AndroidBox;
  */
 export type BoxStopResponse = LinuxBox | AndroidBox;
 
-export type BoxCreateParams = BoxCreateParams.CreateLinuxBox | BoxCreateParams.CreateAndroidBox;
-
-export declare namespace BoxCreateParams {
-  export interface CreateLinuxBox {
-    /**
-     * Box type is Linux
-     */
-    type: 'linux';
-
-    /**
-     * Configuration for a box instance
-     */
-    config?: CreateBoxConfig;
-
-    /**
-     * Timeout for the box operation to be completed, default is 30s
-     */
-    timeout?: string;
-
-    /**
-     * Wait for the box operation to be completed, default is true
-     */
-    wait?: boolean;
-  }
-
-  export interface CreateAndroidBox {
-    /**
-     * Box type is Android
-     */
-    type: 'android';
-
-    /**
-     * Configuration for a box instance
-     */
-    config?: CreateBoxConfig;
-
-    /**
-     * Timeout for the box operation to be completed, default is 30s
-     */
-    timeout?: string;
-
-    /**
-     * Wait for the box operation to be completed, default is true
-     */
-    wait?: boolean;
-  }
-}
-
 export interface BoxListParams {
   /**
    * Page number
@@ -680,6 +601,11 @@ export interface BoxListParams {
    * Filter boxes by their current status (pending, running, stopped, error, deleted)
    */
   status?: string;
+
+  /**
+   * Filter boxes by their type (linux, android etc.) , default is all
+   */
+  type?: string;
 }
 
 export interface BoxDeleteParams {
@@ -695,11 +621,6 @@ export interface BoxDeleteParams {
 }
 
 export interface BoxCreateAndroidParams {
-  /**
-   * Box type is Android
-   */
-  type: 'android';
-
   /**
    * Configuration for a box instance
    */
@@ -717,11 +638,6 @@ export interface BoxCreateAndroidParams {
 }
 
 export interface BoxCreateLinuxParams {
-  /**
-   * Box type is Linux
-   */
-  type: 'linux';
-
   /**
    * Configuration for a box instance
    */
@@ -792,6 +708,30 @@ export interface BoxRunCodeParams {
   workingDir?: string;
 }
 
+export interface BoxStartParams {
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
+}
+
+export interface BoxStopParams {
+  /**
+   * Timeout for the box operation to be completed, default is 30s
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
+}
+
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
 Boxes.Browser = BrowserAPIBrowser;
@@ -804,20 +744,20 @@ export declare namespace Boxes {
     type CreateBoxConfig as CreateBoxConfig,
     type CreateLinuxBox as CreateLinuxBox,
     type LinuxBox as LinuxBox,
-    type BoxCreateResponse as BoxCreateResponse,
     type BoxRetrieveResponse as BoxRetrieveResponse,
     type BoxListResponse as BoxListResponse,
     type BoxExecuteCommandsResponse as BoxExecuteCommandsResponse,
     type BoxRunCodeResponse as BoxRunCodeResponse,
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
-    type BoxCreateParams as BoxCreateParams,
     type BoxListParams as BoxListParams,
     type BoxDeleteParams as BoxDeleteParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,
     type BoxRunCodeParams as BoxRunCodeParams,
+    type BoxStartParams as BoxStartParams,
+    type BoxStopParams as BoxStopParams,
   };
 
   export {
