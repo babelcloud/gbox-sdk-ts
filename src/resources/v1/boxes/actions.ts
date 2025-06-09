@@ -140,14 +140,14 @@ export class Actions extends APIResource {
  */
 export interface ActionResult {
   /**
-   * Complete screenshot result with highlight, before and after images
+   * Complete screenshot result with operation trace, before and after images
    */
   screenshot: ActionResult.Screenshot;
 }
 
 export namespace ActionResult {
   /**
-   * Complete screenshot result with highlight, before and after images
+   * Complete screenshot result with operation trace, before and after images
    */
   export interface Screenshot {
     /**
@@ -161,9 +161,9 @@ export namespace ActionResult {
     before: Screenshot.Before;
 
     /**
-     * Screenshot with action highlight
+     * Screenshot with action operation trace
      */
-    highlight: Screenshot.Highlight;
+    trace: Screenshot.Trace;
   }
 
   export namespace Screenshot {
@@ -188,11 +188,11 @@ export namespace ActionResult {
     }
 
     /**
-     * Screenshot with action highlight
+     * Screenshot with action operation trace
      */
-    export interface Highlight {
+    export interface Trace {
       /**
-       * URI of the screenshot before the action with highlight
+       * URI of the screenshot with operation trace
        */
       uri: string;
     }
