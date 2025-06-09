@@ -14,25 +14,34 @@ export {
   type ActionTypeParams,
 } from './actions';
 export {
+  Android,
+  type AndroidApp,
+  type AndroidListResponse,
+  type AndroidGetParams,
+  type AndroidInstallParams,
+  type AndroidUninstallParams,
+} from './android';
+export {
   Boxes,
   type AndroidBox,
   type CreateAndroidBox,
   type CreateBoxConfig,
   type CreateLinuxBox,
   type LinuxBox,
-  type BoxCreateResponse,
   type BoxRetrieveResponse,
   type BoxListResponse,
   type BoxExecuteCommandsResponse,
   type BoxRunCodeResponse,
   type BoxStartResponse,
   type BoxStopResponse,
-  type BoxCreateParams,
   type BoxListParams,
+  type BoxDeleteParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,
   type BoxRunCodeParams,
+  type BoxStartParams,
+  type BoxStopParams,
 } from './boxes';
 export { Browser, type BrowserCdpURLResponse, type BrowserConnectURLResponse } from './browser';
 export {

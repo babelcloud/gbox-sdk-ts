@@ -7,10 +7,12 @@ import { path } from '../../../internal/utils/path';
 
 export class Actions extends APIResource {
   /**
+   * Click
+   *
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.click(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 100, y: 100 },
    * );
    * ```
@@ -20,10 +22,12 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Drag
+   *
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.drag(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   {
    *     path: [
    *       { x: 100, y: 100 },
@@ -38,10 +42,12 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Move to position
+   *
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.move(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 200, y: 300 },
    * );
    * ```
@@ -51,10 +57,12 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Press key
+   *
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.press(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { keys: ['Enter'] },
    * );
    * ```
@@ -64,10 +72,12 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Take screenshot
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.actions.screenshot(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
@@ -80,10 +90,12 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Scroll
+   *
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.scroll(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
    * );
    * ```
@@ -93,11 +105,13 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Touch
+   *
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.touch(
-   *   'id',
-   *   { points: [{ start: { x: 0, y: 0 } }] },
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { points: [{ start: { x: 100, y: 150 } }] },
    * );
    * ```
    */
@@ -106,10 +120,12 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Type text
+   *
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.type(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { text: 'Hello World' },
    * );
    * ```
@@ -119,37 +135,40 @@ export class Actions extends APIResource {
   }
 }
 
+/**
+ * Result of an UI action execution
+ */
 export interface ActionResult {
   /**
-   * screenshot
+   * Complete screenshot result with highlight, before and after images
    */
   screenshot: ActionResult.Screenshot;
 }
 
 export namespace ActionResult {
   /**
-   * screenshot
+   * Complete screenshot result with highlight, before and after images
    */
   export interface Screenshot {
     /**
-     * URI of the screenshot after the action
+     * Screenshot taken after action execution
      */
     after: Screenshot.After;
 
     /**
-     * URI of the screenshot before the action
+     * Screenshot taken before action execution
      */
     before: Screenshot.Before;
 
     /**
-     * URI of the screenshot before the action with highlight
+     * Screenshot with action highlight
      */
     highlight: Screenshot.Highlight;
   }
 
   export namespace Screenshot {
     /**
-     * URI of the screenshot after the action
+     * Screenshot taken after action execution
      */
     export interface After {
       /**
@@ -159,7 +178,7 @@ export namespace ActionResult {
     }
 
     /**
-     * URI of the screenshot before the action
+     * Screenshot taken before action execution
      */
     export interface Before {
       /**
@@ -169,7 +188,7 @@ export namespace ActionResult {
     }
 
     /**
-     * URI of the screenshot before the action with highlight
+     * Screenshot with action highlight
      */
     export interface Highlight {
       /**
@@ -180,6 +199,9 @@ export namespace ActionResult {
   }
 }
 
+/**
+ * Result of screenshot capture action
+ */
 export interface ActionScreenshotResponse {
   /**
    * URL of the screenshot
@@ -232,6 +254,9 @@ export interface ActionDragParams {
 }
 
 export namespace ActionDragParams {
+  /**
+   * Single point in a drag path
+   */
   export interface Path {
     /**
      * X coordinate of a point in the drag path
@@ -276,7 +301,7 @@ export interface ActionPressParams {
 
 export interface ActionScreenshotParams {
   /**
-   * clip of the screenshot
+   * Clipping region for screenshot capture
    */
   clip?: ActionScreenshotParams.Clip;
 
@@ -288,7 +313,7 @@ export interface ActionScreenshotParams {
 
 export namespace ActionScreenshotParams {
   /**
-   * clip of the screenshot
+   * Clipping region for screenshot capture
    */
   export interface Clip {
     /**
@@ -353,9 +378,12 @@ export interface ActionTouchParams {
 }
 
 export namespace ActionTouchParams {
+  /**
+   * Touch point configuration with start position and actions
+   */
   export interface Point {
     /**
-     * Starting position for touch
+     * Initial touch point position
      */
     start: Point.Start;
 
@@ -367,7 +395,7 @@ export namespace ActionTouchParams {
 
   export namespace Point {
     /**
-     * Starting position for touch
+     * Initial touch point position
      */
     export interface Start {
       /**

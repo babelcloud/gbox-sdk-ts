@@ -1,5 +1,5 @@
 import { ClientOptions, GboxClient } from '../client';
-import { BoxListParams, BoxStopResponse } from '../resources/v1/boxes';
+import { BoxDeleteParams, BoxListParams } from '../resources/v1/boxes';
 import { CreateAndroid, AndroidBoxOperator } from './box/android';
 import { CreateLinux, LinuxBoxOperator } from './box/linux';
 import { AndroidBox, LinuxBox } from '../resources/v1/boxes';
@@ -49,12 +49,19 @@ export class GboxSDK {
 
   /**
    * @example
+   * const response = await gboxSDK.list();
+   * or
    * const response = await gboxSDK.list({
    *   page: 1,
    *   pageSize: 10,
    * });
    */
-  async list(query: BoxListParams): Promise<Array<AndroidBoxOperator | LinuxBoxOperator>> {
+  async list(
+    query: BoxListParams = {
+      page: 1,
+      pageSize: 10,
+    },
+  ): Promise<Array<AndroidBoxOperator | LinuxBoxOperator>> {
     const res = await this.client.v1.boxes.list(query);
     return res.data.map((box) => {
       if (isAndroidBox(box)) {
@@ -86,7 +93,7 @@ export class GboxSDK {
    * @example
    * const response = await gboxSDK.delete('box_id');
    */
-  delete(id: string): Promise<BoxStopResponse> {
-    return this.client.v1.boxes.stop(id);
+  delete(id: string, body?: BoxDeleteParams): Promise<void> {
+    return this.client.v1.boxes.delete(id, body || {});
   }
 }

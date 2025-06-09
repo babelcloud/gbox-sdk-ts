@@ -7,9 +7,13 @@ import { path } from '../../../internal/utils/path';
 
 export class Browser extends APIResource {
   /**
+   * Get browser CDP url
+   *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.browser.cdpURL('id');
+   * const response = await client.v1.boxes.browser.cdpURL(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   cdpURL(id: string, options?: RequestOptions): APIPromise<string> {
@@ -17,10 +21,12 @@ export class Browser extends APIResource {
   }
 
   /**
+   * Get browser connect url
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.browser.connectURL(
-   *   'id',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
@@ -31,6 +37,9 @@ export class Browser extends APIResource {
 
 export type BrowserCdpURLResponse = string;
 
+/**
+ * Browser connection address information
+ */
 export interface BrowserConnectURLResponse {
   /**
    * CDP URL

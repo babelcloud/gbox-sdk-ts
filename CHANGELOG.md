@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.1.1 (2025-06-09)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.0...v0.1.1)
+
+### Features
+
+* **android:** add install, uninstall, and listApps methods to AndroidBoxOperator ([c891632](https://github.com/babelcloud/gbox-sdk-ts/commit/c89163238564f47546be662479fb91c70a58d0d2))
+* **api:** api update ([0fb9728](https://github.com/babelcloud/gbox-sdk-ts/commit/0fb97289919ce1cf46a1eb953cba72b8eae5ee97))
+* **api:** api update ([2bfe8b1](https://github.com/babelcloud/gbox-sdk-ts/commit/2bfe8b13807178010b801e979853f466ad23e3c7))
+* **api:** api update ([c67a3fc](https://github.com/babelcloud/gbox-sdk-ts/commit/c67a3fc427e7beb70a5fbfdfdca6ce3f41103b2f))
+* **api:** api update ([84e710a](https://github.com/babelcloud/gbox-sdk-ts/commit/84e710af2e848638856108f75cc3caff9671d715))
+* **api:** api update ([bd42abf](https://github.com/babelcloud/gbox-sdk-ts/commit/bd42abf6c58929a825596ecb4fab189130a7ab58))
+* **api:** api update ([cfbee01](https://github.com/babelcloud/gbox-sdk-ts/commit/cfbee01d4c0ac856b966451a250ece4e157ea07a))
+* **api:** api update ([a20cba5](https://github.com/babelcloud/gbox-sdk-ts/commit/a20cba50569024e7844e575e7533f23db6f075fa))
+* **api:** api update ([3dd1418](https://github.com/babelcloud/gbox-sdk-ts/commit/3dd14189e5b63a6b505b597fc1846e4c17bb99ee))
+* **api:** api update ([c4ccd09](https://github.com/babelcloud/gbox-sdk-ts/commit/c4ccd095f9a1cd5b1b715673ad3c164371376f31))
+* **api:** api update ([a720dcb](https://github.com/babelcloud/gbox-sdk-ts/commit/a720dcb1263b51d39412ba9505624142937bcff5))
+* **api:** api update ([24bb0b4](https://github.com/babelcloud/gbox-sdk-ts/commit/24bb0b418da3f1dd0c2b1d4676ad4ae10853fd3d))
+
+
+### Bug Fixes
+
+* box delete method ([039414f](https://github.com/babelcloud/gbox-sdk-ts/commit/039414fb329e8ec190fa2c29af4e8f33a21fb145))
+* **docs:** correct section title from Feature to Features in README.md; update runCode method to remove hardcoded type in base.ts ([2b8a37c](https://github.com/babelcloud/gbox-sdk-ts/commit/2b8a37c4e1022feb50ee3e92cd76a4560ec8eaef))
+* test case ([9c00c9e](https://github.com/babelcloud/gbox-sdk-ts/commit/9c00c9ed2f7a2af2150afdeb3f234d44d2f8e8f5))
+* uninstall type ([d24a72a](https://github.com/babelcloud/gbox-sdk-ts/commit/d24a72aa999b07fc531efb9001d2a528c75a7866))
+
+
+### Chores
+
+* avoid type error in certain environments ([9ff4349](https://github.com/babelcloud/gbox-sdk-ts/commit/9ff4349741a2c82aae05403eb9653f8edd0e4f6f))
+* **internal:** codegen related update ([4a0d1e7](https://github.com/babelcloud/gbox-sdk-ts/commit/4a0d1e76ad6c53bf9eb3de887065039456db4704))
+* optimize SDK API usage ([5ac2a94](https://github.com/babelcloud/gbox-sdk-ts/commit/5ac2a942a9e73c262f9cc80d8fc928420ebd37a4))
+* support box delete body param ([a83796f](https://github.com/babelcloud/gbox-sdk-ts/commit/a83796f8e3b5bbc541d868161f218f16f6684d1a))
+
 ## 0.1.0 (2025-06-04)
 
 Full Changelog: [v0.1.0...v0.1.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.0...v0.1.0)

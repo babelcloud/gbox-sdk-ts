@@ -10,7 +10,10 @@ const client = new GboxClient({
 describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('click: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.click('id', { x: 100, y: 100 });
+    const responsePromise = client.v1.boxes.actions.click('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      x: 100,
+      y: 100,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,18 +25,18 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('click: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.click('id', {
+    const response = await client.v1.boxes.actions.click('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 100,
       y: 100,
       button: 'left',
-      double: true,
+      double: false,
       outputFormat: 'base64',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('drag: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.drag('id', {
+    const responsePromise = client.v1.boxes.actions.drag('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: [
         { x: 100, y: 100 },
         { x: 200, y: 200 },
@@ -50,19 +53,22 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('drag: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.drag('id', {
+    const response = await client.v1.boxes.actions.drag('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: [
         { x: 100, y: 100 },
         { x: 200, y: 200 },
       ],
-      duration: 'duration',
+      duration: '50ms',
       outputFormat: 'base64',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('move: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.move('id', { x: 200, y: 300 });
+    const responsePromise = client.v1.boxes.actions.move('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      x: 200,
+      y: 300,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,12 +80,18 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('move: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.move('id', { x: 200, y: 300, outputFormat: 'base64' });
+    const response = await client.v1.boxes.actions.move('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      x: 200,
+      y: 300,
+      outputFormat: 'base64',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('press: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.press('id', { keys: ['Enter'] });
+    const responsePromise = client.v1.boxes.actions.press('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      keys: ['Enter'],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -91,12 +103,15 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('press: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.press('id', { keys: ['Enter'], outputFormat: 'base64' });
+    const response = await client.v1.boxes.actions.press('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      keys: ['Enter'],
+      outputFormat: 'base64',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('screenshot', async () => {
-    const responsePromise = client.v1.boxes.actions.screenshot('id', {});
+    const responsePromise = client.v1.boxes.actions.screenshot('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -108,7 +123,7 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('scroll: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.scroll('id', {
+    const responsePromise = client.v1.boxes.actions.scroll('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       scrollX: 0,
       scrollY: 100,
       x: 100,
@@ -125,7 +140,7 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('scroll: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.scroll('id', {
+    const response = await client.v1.boxes.actions.scroll('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       scrollX: 0,
       scrollY: 100,
       x: 100,
@@ -136,7 +151,9 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('touch: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.touch('id', { points: [{ start: { x: 0, y: 0 } }] });
+    const responsePromise = client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      points: [{ start: { x: 100, y: 150 } }],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -148,15 +165,22 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('touch: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.touch('id', {
-      points: [{ start: { x: 0, y: 0 }, actions: [{}] }],
+    const response = await client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      points: [
+        {
+          start: { x: 100, y: 150 },
+          actions: [{ x: 400, y: 300, duration: '200ms' }, { duration: '500ms' }],
+        },
+      ],
       outputFormat: 'base64',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('type: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.type('id', { text: 'Hello World' });
+    const responsePromise = client.v1.boxes.actions.type('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      text: 'Hello World',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -168,7 +192,7 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('type: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.type('id', {
+    const response = await client.v1.boxes.actions.type('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       text: 'Hello World',
       outputFormat: 'base64',
     });
