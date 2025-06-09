@@ -29,7 +29,7 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
    * await myAndroidBox.uninstall('com.example.app');
    */
   async uninstall(packageName: string) {
-    return this.client.v1.boxes.android.uninstall(packageName, { id: this.id });
+    return this.client.v1.boxes.android.uninstall(packageName, { id: this.id, keepData: true });
   }
   /**
    * @example
