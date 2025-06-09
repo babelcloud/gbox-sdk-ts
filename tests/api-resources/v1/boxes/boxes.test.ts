@@ -9,32 +9,6 @@ const client = new GboxClient({
 
 describe('resource boxes', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.v1.boxes.create({ type: 'linux' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.v1.boxes.create({
-      type: 'linux',
-      config: {
-        envs: { DEBUG: 'true', API_URL: 'https://api.example.com' },
-        expiresIn: '10m',
-        labels: { project: 'web-automation', environment: 'testing' },
-      },
-      timeout: '30s',
-      wait: true,
-    });
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
     const responsePromise = client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -63,7 +37,7 @@ describe('resource boxes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.boxes.list(
-        { page: 1, pageSize: 10, status: 'running' },
+        { page: 1, pageSize: 10, status: 'running', type: 'linux' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);
@@ -82,8 +56,8 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('createAndroid: only required params', async () => {
-    const responsePromise = client.v1.boxes.createAndroid({ type: 'android' });
+  test.skip('createAndroid', async () => {
+    const responsePromise = client.v1.boxes.createAndroid({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -94,22 +68,8 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('createAndroid: required and optional params', async () => {
-    const response = await client.v1.boxes.createAndroid({
-      type: 'android',
-      config: {
-        envs: { ANDROID_LOG_TAGS: '*:V', ADB_TRACE: 'all' },
-        expiresIn: '15m',
-        labels: { app: 'mobile-testing', version: 'v1.0' },
-      },
-      timeout: '30s',
-      wait: true,
-    });
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('createLinux: only required params', async () => {
-    const responsePromise = client.v1.boxes.createLinux({ type: 'linux' });
+  test.skip('createLinux', async () => {
+    const responsePromise = client.v1.boxes.createLinux({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -117,20 +77,6 @@ describe('resource boxes', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('createLinux: required and optional params', async () => {
-    const response = await client.v1.boxes.createLinux({
-      type: 'linux',
-      config: {
-        envs: { DEBUG: 'true', API_URL: 'https://api.example.com' },
-        expiresIn: '10m',
-        labels: { project: 'web-automation', environment: 'testing' },
-      },
-      timeout: '30s',
-      wait: true,
-    });
   });
 
   // skipped: tests are disabled for the time being
@@ -185,7 +131,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('start', async () => {
-    const responsePromise = client.v1.boxes.start('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const responsePromise = client.v1.boxes.start('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -197,7 +143,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('stop', async () => {
-    const responsePromise = client.v1.boxes.stop('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const responsePromise = client.v1.boxes.stop('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

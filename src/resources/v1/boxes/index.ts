@@ -28,20 +28,20 @@ export {
   type CreateBoxConfig,
   type CreateLinuxBox,
   type LinuxBox,
-  type BoxCreateResponse,
   type BoxRetrieveResponse,
   type BoxListResponse,
   type BoxExecuteCommandsResponse,
   type BoxRunCodeResponse,
   type BoxStartResponse,
   type BoxStopResponse,
-  type BoxCreateParams,
   type BoxListParams,
   type BoxDeleteParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,
   type BoxRunCodeParams,
+  type BoxStartParams,
+  type BoxStopParams,
 } from './boxes';
 export { Browser, type BrowserCdpURLResponse, type BrowserConnectURLResponse } from './browser';
 export {
