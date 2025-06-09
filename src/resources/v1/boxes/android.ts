@@ -67,13 +67,17 @@ export class Android extends APIResource {
    * ```ts
    * await client.v1.boxes.android.uninstall(
    *   'com.example.myapp',
-   *   { id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   *   {
+   *     id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     keepData: true,
+   *   },
    * );
    * ```
    */
   uninstall(packageName: string, params: AndroidUninstallParams, options?: RequestOptions): APIPromise<void> {
-    const { id } = params;
+    const { id, ...body } = params;
     return this._client.delete(path`/boxes/${id}/android/apps/${packageName}`, {
+      body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -144,9 +148,14 @@ export declare namespace AndroidInstallParams {
 
 export interface AndroidUninstallParams {
   /**
-   * Box ID
+   * Path param: Box ID
    */
   id: string;
+
+  /**
+   * Body param: uninstalls the application while retaining the data/cache
+   */
+  keepData: boolean;
 }
 
 export declare namespace Android {

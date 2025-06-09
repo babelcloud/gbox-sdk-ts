@@ -38,7 +38,7 @@ export class Browser extends APIResource {
 export type BrowserCdpURLResponse = string;
 
 /**
- * Browser connection URL information
+ * Browser connection address information
  */
 export interface BrowserConnectURLResponse {
   /**

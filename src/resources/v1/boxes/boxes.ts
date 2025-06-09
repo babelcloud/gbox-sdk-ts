@@ -48,7 +48,7 @@ export class Boxes extends APIResource {
   android: AndroidAPI.Android = new AndroidAPI.Android(this._client);
 
   /**
-   * Get box info
+   * Get box
    *
    * @example
    * ```ts
@@ -232,6 +232,11 @@ export namespace AndroidBox {
      * CPU cores allocated to the box
      */
     cpu: number;
+
+    /**
+     * Device type - virtual or physical Android device
+     */
+    deviceType: 'virtual' | 'physical';
 
     /**
      * Environment variables for the box
