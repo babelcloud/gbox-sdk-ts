@@ -45,7 +45,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = client.v1.boxes.delete('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
+    const responsePromise = client.v1.boxes.delete('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,6 +53,18 @@ describe('resource boxes', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.delete(
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+        { timeout: '30s', wait: true },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -131,7 +143,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('start', async () => {
-    const responsePromise = client.v1.boxes.start('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
+    const responsePromise = client.v1.boxes.start('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -142,8 +154,20 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('start: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.start(
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+        { timeout: '30s', wait: true },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('stop', async () => {
-    const responsePromise = client.v1.boxes.stop('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
+    const responsePromise = client.v1.boxes.stop('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -151,5 +175,17 @@ describe('resource boxes', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('stop: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.stop(
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+        { timeout: '30s', wait: true },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
   });
 });
