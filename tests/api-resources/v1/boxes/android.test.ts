@@ -66,7 +66,6 @@ describe('resource android', () => {
   test.skip('uninstall: only required params', async () => {
     const responsePromise = client.v1.boxes.android.uninstall('com.example.myapp', {
       id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-      keepData: true,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
