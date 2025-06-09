@@ -1,5 +1,5 @@
 import { ClientOptions, GboxClient } from '../client';
-import { BoxDeleteParams, BoxListParams, BoxStopResponse } from '../resources/v1/boxes';
+import { BoxDeleteParams, BoxListParams } from '../resources/v1/boxes';
 import { CreateAndroid, AndroidBoxOperator } from './box/android';
 import { CreateLinux, LinuxBoxOperator } from './box/linux';
 import { AndroidBox, LinuxBox } from '../resources/v1/boxes';
@@ -93,7 +93,7 @@ export class GboxSDK {
    * @example
    * const response = await gboxSDK.delete('box_id');
    */
-  delete(id: string, body?: BoxDeleteParams): Promise<BoxStopResponse> {
-    return this.client.v1.boxes.stop(id, body || {});
+  delete(id: string, body?: BoxDeleteParams): Promise<void> {
+    return this.client.v1.boxes.delete(id, body || {});
   }
 }
