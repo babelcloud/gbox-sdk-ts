@@ -49,12 +49,19 @@ export class GboxSDK {
 
   /**
    * @example
+   * const response = await gboxSDK.list();
+   * or
    * const response = await gboxSDK.list({
    *   page: 1,
    *   pageSize: 10,
    * });
    */
-  async list(query: BoxListParams): Promise<Array<AndroidBoxOperator | LinuxBoxOperator>> {
+  async list(
+    query: BoxListParams = {
+      page: 1,
+      pageSize: 10,
+    },
+  ): Promise<Array<AndroidBoxOperator | LinuxBoxOperator>> {
     const res = await this.client.v1.boxes.list(query);
     return res.data.map((box) => {
       if (isAndroidBox(box)) {
