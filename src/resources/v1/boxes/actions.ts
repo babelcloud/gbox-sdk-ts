@@ -136,7 +136,7 @@ export class Actions extends APIResource {
 }
 
 /**
- * Result of an interface action execution
+ * Result of an UI action execution
  */
 export interface ActionResult {
   /**
