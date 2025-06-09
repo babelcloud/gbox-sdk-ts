@@ -26,7 +26,9 @@ const client = new GboxClient({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
-const box = await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+const androidBox = await client.v1.boxes.createAndroid();
+
+console.log(androidBox.id);
 ```
 
 ### Request & Response types
@@ -41,9 +43,7 @@ const client = new GboxClient({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
 });
 
-const box: GboxClient.V1.BoxRetrieveResponse = await client.v1.boxes.retrieve(
-  'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-);
+const androidBox: GboxClient.V1.AndroidBox = await client.v1.boxes.createAndroid();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -95,7 +95,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const box = await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d').catch(async (err) => {
+const androidBox = await client.v1.boxes.createAndroid().catch(async (err) => {
   if (err instanceof GboxClient.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -135,7 +135,7 @@ const client = new GboxClient({
 });
 
 // Or, configure per-request:
-await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+await client.v1.boxes.createAndroid({
   maxRetries: 5,
 });
 ```
@@ -152,7 +152,7 @@ const client = new GboxClient({
 });
 
 // Override per-request:
-await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+await client.v1.boxes.createAndroid({
   timeout: 5 * 1000,
 });
 ```
@@ -175,15 +175,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new GboxClient();
 
-const response = await client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d').asResponse();
+const response = await client.v1.boxes.createAndroid().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: box, response: raw } = await client.v1.boxes
-  .retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d')
-  .withResponse();
+const { data: androidBox, response: raw } = await client.v1.boxes.createAndroid().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(box);
+console.log(androidBox.id);
 ```
 
 ### Logging
