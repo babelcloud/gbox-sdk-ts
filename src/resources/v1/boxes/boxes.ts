@@ -83,7 +83,11 @@ export class Boxes extends APIResource {
    * );
    * ```
    */
-  delete(id: string, body: BoxDeleteParams, options?: RequestOptions): APIPromise<void> {
+  delete(
+    id: string,
+    body: BoxDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
     return this._client.delete(path`/boxes/${id}`, {
       body,
       ...options,
@@ -159,7 +163,11 @@ export class Boxes extends APIResource {
    * );
    * ```
    */
-  start(id: string, body: BoxStartParams, options?: RequestOptions): APIPromise<BoxStartResponse> {
+  start(
+    id: string,
+    body: BoxStartParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BoxStartResponse> {
     return this._client.post(path`/boxes/${id}/start`, { body, ...options });
   }
 
@@ -173,7 +181,11 @@ export class Boxes extends APIResource {
    * );
    * ```
    */
-  stop(id: string, body: BoxStopParams, options?: RequestOptions): APIPromise<BoxStopResponse> {
+  stop(
+    id: string,
+    body: BoxStopParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BoxStopResponse> {
     return this._client.post(path`/boxes/${id}/stop`, { body, ...options });
   }
 }
