@@ -10,7 +10,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Android extends APIResource {
   /**
-   * List Android app
+   * List android app
    *
    * @example
    * ```ts
@@ -24,7 +24,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Get Android app
+   * Get android app
    *
    * @example
    * ```ts
@@ -40,7 +40,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Install Android app
+   * Install android app
    *
    * @example
    * ```ts
@@ -61,7 +61,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Uninstall Android app
+   * Uninstall android app
    *
    * @example
    * ```ts
