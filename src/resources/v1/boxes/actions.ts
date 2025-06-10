@@ -289,7 +289,7 @@ export interface ActionMoveParams {
 
 export interface ActionPressParams {
   /**
-   * Array of keys to press
+   * This is an array of strings, each representing a key
    */
   keys: Array<string>;
 
@@ -416,6 +416,11 @@ export interface ActionTypeParams {
    * Text to type
    */
   text: string;
+
+  /**
+   * Time to wait between key presses. Defaults to 0ms.
+   */
+  delay?: string;
 
   /**
    * Type of the URI

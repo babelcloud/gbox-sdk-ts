@@ -246,11 +246,6 @@ export namespace AndroidBox {
     cpu: number;
 
     /**
-     * Device type - virtual or physical Android device
-     */
-    deviceType: 'virtual' | 'physical';
-
-    /**
      * Environment variables for the box
      */
     envs: unknown;
@@ -284,6 +279,11 @@ export namespace AndroidBox {
      * Working directory path for the box
      */
     workingDir: string;
+
+    /**
+     * Device type - virtual or physical Android device
+     */
+    deviceType?: 'virtual' | 'physical';
   }
 
   export namespace Config {

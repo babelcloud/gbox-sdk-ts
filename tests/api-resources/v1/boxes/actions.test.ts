@@ -194,6 +194,7 @@ describe('resource actions', () => {
   test.skip('type: required and optional params', async () => {
     const response = await client.v1.boxes.actions.type('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       text: 'Hello World',
+      delay: '100ms',
       outputFormat: 'base64',
     });
   });
