@@ -21,6 +21,7 @@ import {
   AndroidApp,
   AndroidGetParams,
   AndroidInstallParams,
+  AndroidListParams,
   AndroidListResponse,
   AndroidUninstallParams,
 } from './android';
@@ -816,6 +817,7 @@ export declare namespace Boxes {
     Android as Android,
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
+    type AndroidListParams as AndroidListParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
     type AndroidUninstallParams as AndroidUninstallParams,

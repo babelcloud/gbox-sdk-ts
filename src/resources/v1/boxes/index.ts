@@ -17,6 +17,7 @@ export {
   Android,
   type AndroidApp,
   type AndroidListResponse,
+  type AndroidListParams,
   type AndroidGetParams,
   type AndroidInstallParams,
   type AndroidUninstallParams,
