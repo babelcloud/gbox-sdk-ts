@@ -605,6 +605,11 @@ export type BoxStopResponse = LinuxBox | AndroidBox;
 
 export interface BoxListParams {
   /**
+   * Filter boxes by their labels, default is all
+   */
+  labels?: unknown;
+
+  /**
    * Page number
    */
   page?: number;
