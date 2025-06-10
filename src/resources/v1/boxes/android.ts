@@ -19,8 +19,12 @@ export class Android extends APIResource {
    * );
    * ```
    */
-  list(id: string, options?: RequestOptions): APIPromise<AndroidListResponse> {
-    return this._client.get(path`/boxes/${id}/android/apps`, options);
+  list(
+    id: string,
+    query: AndroidListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AndroidListResponse> {
+    return this._client.get(path`/boxes/${id}/android/apps`, { query, ...options });
   }
 
   /**
@@ -91,6 +95,16 @@ export interface AndroidApp {
   apkPath: string;
 
   /**
+   * Application type: system or third-party
+   */
+  appType: 'system' | 'third-party';
+
+  /**
+   * Whether the application is currently running
+   */
+  isRunning: boolean;
+
+  /**
    * Android app name
    */
   name: string;
@@ -114,6 +128,18 @@ export interface AndroidListResponse {
    * Android app list
    */
   data: Array<AndroidApp>;
+}
+
+export interface AndroidListParams {
+  /**
+   * Application type: system or third-party, default is all
+   */
+  appType?: 'system' | 'third-party';
+
+  /**
+   * Whether to include running apps, default is all
+   */
+  isRunning?: boolean;
 }
 
 export interface AndroidGetParams {
@@ -159,6 +185,7 @@ export declare namespace Android {
   export {
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
+    type AndroidListParams as AndroidListParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
     type AndroidUninstallParams as AndroidUninstallParams,
