@@ -57,20 +57,37 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Simulates pressing a specific key by triggering the complete physical key event
-   * chain (keydown, keypress, keyup). Use this to activate physical key event
+   * Press button on the device. like power button, volume up button, volume down
+   * button, etc.
+   *
+   * @example
+   * ```ts
+   * const actionResult =
+   *   await client.v1.boxes.actions.pressButton(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { buttons: ['power'] },
+   *   );
+   * ```
+   */
+  pressButton(id: string, body: ActionPressButtonParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${id}/actions/press-button`, { body, ...options });
+  }
+
+  /**
+   * Simulates pressing a specific key by triggering the complete keyboard key event
+   * chain (keydown, keypress, keyup). Use this to activate keyboard key event
    * listeners such as shortcuts or form submissions.
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.press(
+   * const actionResult = await client.v1.boxes.actions.pressKey(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { keys: ['enter'] },
    * );
    * ```
    */
-  press(id: string, body: ActionPressParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/press`, { body, ...options });
+  pressKey(id: string, body: ActionPressKeyParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${id}/actions/press-key`, { body, ...options });
   }
 
   /**
@@ -291,9 +308,21 @@ export interface ActionMoveParams {
   outputFormat?: 'base64' | 'storageKey';
 }
 
-export interface ActionPressParams {
+export interface ActionPressButtonParams {
   /**
-   * This is an array of physical keys to press. Supports cross-platform
+   * Button to press
+   */
+  buttons: Array<string>;
+
+  /**
+   * Type of the URI
+   */
+  outputFormat?: 'base64' | 'storageKey';
+}
+
+export interface ActionPressKeyParams {
+  /**
+   * This is an array of keyboard keys to press. Supports cross-platform
    * compatibility.
    */
   keys: Array<
@@ -546,7 +575,8 @@ export declare namespace Actions {
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionMoveParams as ActionMoveParams,
-    type ActionPressParams as ActionPressParams,
+    type ActionPressButtonParams as ActionPressButtonParams,
+    type ActionPressKeyParams as ActionPressKeyParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionTouchParams as ActionTouchParams,

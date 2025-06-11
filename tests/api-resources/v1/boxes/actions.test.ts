@@ -88,8 +88,30 @@ describe('resource actions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('press: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.press('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+  test.skip('pressButton: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.pressButton('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      buttons: ['power'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('pressButton: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.pressButton('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      buttons: ['power'],
+      outputFormat: 'base64',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('pressKey: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.pressKey('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       keys: ['enter'],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -102,8 +124,8 @@ describe('resource actions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('press: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.press('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+  test.skip('pressKey: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.pressKey('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       keys: ['enter'],
       outputFormat: 'base64',
     });
