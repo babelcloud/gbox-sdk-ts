@@ -20,10 +20,13 @@ import * as AndroidAPI from './android';
 import {
   Android,
   AndroidApp,
+  AndroidCloseParams,
   AndroidGetParams,
   AndroidInstallParams,
   AndroidListParams,
   AndroidListResponse,
+  AndroidOpenParams,
+  AndroidRestartParams,
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
@@ -820,8 +823,11 @@ export declare namespace Boxes {
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
     type AndroidListParams as AndroidListParams,
+    type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
+    type AndroidOpenParams as AndroidOpenParams,
+    type AndroidRestartParams as AndroidRestartParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }

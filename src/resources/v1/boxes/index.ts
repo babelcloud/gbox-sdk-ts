@@ -19,8 +19,11 @@ export {
   type AndroidApp,
   type AndroidListResponse,
   type AndroidListParams,
+  type AndroidCloseParams,
   type AndroidGetParams,
   type AndroidInstallParams,
+  type AndroidOpenParams,
+  type AndroidRestartParams,
   type AndroidUninstallParams,
 } from './android';
 export {
