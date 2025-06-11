@@ -90,7 +90,7 @@ describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('press: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.press('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      keys: ['Enter'],
+      keys: ['enter'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -104,7 +104,7 @@ describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('press: required and optional params', async () => {
     const response = await client.v1.boxes.actions.press('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      keys: ['Enter'],
+      keys: ['enter'],
       outputFormat: 'base64',
     });
   });
@@ -194,7 +194,6 @@ describe('resource actions', () => {
   test.skip('type: required and optional params', async () => {
     const response = await client.v1.boxes.actions.type('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       text: 'Hello World',
-      delay: '100ms',
       outputFormat: 'base64',
     });
   });

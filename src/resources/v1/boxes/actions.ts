@@ -57,13 +57,15 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Press key
+   * Simulates pressing a specific key by triggering the complete physical key event
+   * chain (keydown, keypress, keyup). Use this to activate physical key event
+   * listeners such as shortcuts or form submissions.
    *
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.press(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { keys: ['Enter'] },
+   *   { keys: ['enter'] },
    * );
    * ```
    */
@@ -120,7 +122,9 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Type text
+   * Directly inputs text content without triggering physical key events (keydown,
+   * etc.), ideal for quickly filling large amounts of text when intermediate input
+   * events aren't needed.
    *
    * @example
    * ```ts
@@ -289,9 +293,121 @@ export interface ActionMoveParams {
 
 export interface ActionPressParams {
   /**
-   * This is an array of strings, each representing a key
+   * This is an array of physical keys to press. Supports cross-platform
+   * compatibility.
    */
-  keys: Array<string>;
+  keys: Array<
+    | 'a'
+    | 'b'
+    | 'c'
+    | 'd'
+    | 'e'
+    | 'f'
+    | 'g'
+    | 'h'
+    | 'i'
+    | 'j'
+    | 'k'
+    | 'l'
+    | 'm'
+    | 'n'
+    | 'o'
+    | 'p'
+    | 'q'
+    | 'r'
+    | 's'
+    | 't'
+    | 'u'
+    | 'v'
+    | 'w'
+    | 'x'
+    | 'y'
+    | 'z'
+    | '0'
+    | '1'
+    | '2'
+    | '3'
+    | '4'
+    | '5'
+    | '6'
+    | '7'
+    | '8'
+    | '9'
+    | 'f1'
+    | 'f2'
+    | 'f3'
+    | 'f4'
+    | 'f5'
+    | 'f6'
+    | 'f7'
+    | 'f8'
+    | 'f9'
+    | 'f10'
+    | 'f11'
+    | 'f12'
+    | 'control'
+    | 'alt'
+    | 'shift'
+    | 'meta'
+    | 'win'
+    | 'cmd'
+    | 'option'
+    | 'arrowUp'
+    | 'arrowDown'
+    | 'arrowLeft'
+    | 'arrowRight'
+    | 'home'
+    | 'end'
+    | 'pageUp'
+    | 'pageDown'
+    | 'enter'
+    | 'space'
+    | 'tab'
+    | 'escape'
+    | 'backspace'
+    | 'delete'
+    | 'insert'
+    | 'capsLock'
+    | 'numLock'
+    | 'scrollLock'
+    | 'pause'
+    | 'printScreen'
+    | ';'
+    | '='
+    | ','
+    | '-'
+    | '.'
+    | '/'
+    | '`'
+    | '['
+    | '\\'
+    | ']'
+    | "'"
+    | 'numpad0'
+    | 'numpad1'
+    | 'numpad2'
+    | 'numpad3'
+    | 'numpad4'
+    | 'numpad5'
+    | 'numpad6'
+    | 'numpad7'
+    | 'numpad8'
+    | 'numpad9'
+    | 'numpadAdd'
+    | 'numpadSubtract'
+    | 'numpadMultiply'
+    | 'numpadDivide'
+    | 'numpadDecimal'
+    | 'numpadEnter'
+    | 'numpadEqual'
+    | 'volumeUp'
+    | 'volumeDown'
+    | 'volumeMute'
+    | 'mediaPlayPause'
+    | 'mediaStop'
+    | 'mediaNextTrack'
+    | 'mediaPreviousTrack'
+  >;
 
   /**
    * Type of the URI
@@ -416,11 +532,6 @@ export interface ActionTypeParams {
    * Text to type
    */
   text: string;
-
-  /**
-   * Time to wait between key presses. Defaults to 0ms.
-   */
-  delay?: string;
 
   /**
    * Type of the URI
