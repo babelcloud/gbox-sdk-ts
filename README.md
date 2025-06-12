@@ -4,17 +4,13 @@
 
 This library provides convenient access to the Gbox API from TypeScript or JavaScript.
 
+[Documentation](https://docs.gbox.cloud/api-reference)
+
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Features](#features)
-  - [Create a box](#create-a-box)
-  - [Stop a box](#stop-a-box)
-  - [Action](#action)
-  - [Run Code](#run-code)
-  - [Run Command](#run-command)
-  - [List Boxes](#list-boxes)
+- [Quick Start](#quick-start)
 - [Handling errors](#handling-errors)
   - [Retries](#retries)
   - [Timeouts](#timeouts)
@@ -53,62 +49,13 @@ async function main() {
 main();
 ```
 
-## Features
-
-### Create a box
+## Quick Start
 
 ```ts
 const box = await gboxSDK.create({ type: 'android' });
 
 // box.config is the config of the box (e.g. OS version, screen size, etc.)
 console.log(box.config);
-```
-
-### Stop a box
-
-```ts
-await box.stop();
-```
-
-### Action
-
-```ts
-await box.click({
-  x: 100,
-  y: 100,
-});
-```
-
-### Run Code
-
-```ts
-await box.runCode({
-  code: "print('Hello, world!')",
-  // language: "python" // default is "python"
-});
-```
-
-### Run Command
-
-```ts
-await box.command({
-  commands: "echo HELLO $MY_ENV_VAR"
-  envs: {
-    MY_ENV_VAR: "Gbox"
-  }
-});
-```
-
-### List Boxes
-
-```ts
-const gboxSDK = new GboxSDK({
-  apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
-});
-
-await gboxSDK.list();
-
-await gboxSDK.get('d26bbff6-2277-4c34-b00c-d1f1d5a501ae');
 ```
 
 ## File uploads
