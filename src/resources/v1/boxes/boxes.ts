@@ -20,7 +20,6 @@ import * as AndroidAPI from './android';
 import {
   Android,
   AndroidApp,
-  AndroidCloseAllParams,
   AndroidCloseParams,
   AndroidGetParams,
   AndroidInstallParams,
@@ -825,7 +824,6 @@ export declare namespace Boxes {
     type AndroidListResponse as AndroidListResponse,
     type AndroidListParams as AndroidListParams,
     type AndroidCloseParams as AndroidCloseParams,
-    type AndroidCloseAllParams as AndroidCloseAllParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
     type AndroidOpenParams as AndroidOpenParams,

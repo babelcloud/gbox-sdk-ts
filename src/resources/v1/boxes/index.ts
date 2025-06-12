@@ -20,7 +20,6 @@ export {
   type AndroidListResponse,
   type AndroidListParams,
   type AndroidCloseParams,
-  type AndroidCloseAllParams,
   type AndroidGetParams,
   type AndroidInstallParams,
   type AndroidOpenParams,
