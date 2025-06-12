@@ -46,6 +46,25 @@ export class Android extends APIResource {
   }
 
   /**
+   * Close all apps
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.android.closeAll(
+   *   'com.example.myapp',
+   *   { id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   * );
+   * ```
+   */
+  closeAll(packageName: string, params: AndroidCloseAllParams, options?: RequestOptions): APIPromise<void> {
+    const { id } = params;
+    return this._client.post(path`/boxes/${id}/android/apps/${packageName}/close-all`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Get app
    *
    * @example
@@ -204,6 +223,13 @@ export interface AndroidCloseParams {
   id: string;
 }
 
+export interface AndroidCloseAllParams {
+  /**
+   * Box ID
+   */
+  id: string;
+}
+
 export interface AndroidGetParams {
   /**
    * Box ID
@@ -268,6 +294,7 @@ export declare namespace Android {
     type AndroidListResponse as AndroidListResponse,
     type AndroidListParams as AndroidListParams,
     type AndroidCloseParams as AndroidCloseParams,
+    type AndroidCloseAllParams as AndroidCloseAllParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
     type AndroidOpenParams as AndroidOpenParams,
