@@ -75,9 +75,9 @@ export class GboxSDK {
 
   /**
    * @example
-   * const box = await gboxSDK.connect('975fed9f-bb28-4718-a2c5-e01f72864bd1');
+   * const box = await gboxSDK.attach('975fed9f-bb28-4718-a2c5-e01f72864bd1');
    */
-  async connect(id: string): Promise<AndroidBoxOperator | LinuxBoxOperator> {
+  async attach(id: string): Promise<AndroidBoxOperator | LinuxBoxOperator> {
     const res = await this.client.v1.boxes.retrieve(id);
     if (isAndroidBox(res)) {
       return new AndroidBoxOperator(res, this.client);

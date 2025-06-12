@@ -12,13 +12,14 @@ import type {
   BoxExecuteCommandsParams,
   BoxRunCodeParams,
   BoxRunCodeResponse,
-  ActionPressParams,
   FListParams,
   FWriteParams,
   FReadParams,
   FListResponse,
   FWriteResponse,
   FReadResponse,
+  ActionPressKeyParams,
+  ActionPressButtonParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 
@@ -29,43 +30,19 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
   public fs: InterfaceFs;
   public browser: InterfaceBrowser;
 
-  public id: T['id'];
-  public type: T['type'];
-  public status: T['status'];
-  public createdAt: T['createdAt'];
-  public updatedAt: T['updatedAt'];
-  public expiresAt: T['expiresAt'];
-  public config: T['config'];
-
   constructor(data: T, client: GboxClient) {
     this.client = client;
     this.data = data;
 
-    this.id = data.id;
-    this.type = data.type;
-    this.status = data.status;
-    this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
-    this.expiresAt = data.expiresAt;
-    this.config = data.config;
-
-    this.action = new InterfaceActions(this.client, this.id);
-    this.fs = new InterfaceFs(this.client, this.id);
-    this.browser = new InterfaceBrowser(this.client, this.id);
+    this.action = new InterfaceActions(this.client, this.data.id);
+    this.fs = new InterfaceFs(this.client, this.data.id);
+    this.browser = new InterfaceBrowser(this.client, this.data.id);
   }
 
   private async syncData() {
-    const res = await this.client.v1.boxes.retrieve(this.id);
+    const res = await this.client.v1.boxes.retrieve(this.data.id);
 
     this.data = res as T;
-
-    this.id = res.id;
-    this.type = res.type;
-    this.status = res.status;
-    this.createdAt = res.createdAt;
-    this.updatedAt = res.updatedAt;
-    this.expiresAt = res.expiresAt;
-    this.config = res.config;
   }
 
   /**
@@ -73,7 +50,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * const response = await myBox.start();
    */
   async start(): Promise<this> {
-    await this.client.v1.boxes.start(this.id);
+    await this.client.v1.boxes.start(this.data.id);
     await this.syncData();
     return this;
   }
@@ -83,7 +60,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * const response = await myBox.stop();
    */
   async stop(): Promise<this> {
-    await this.client.v1.boxes.stop(this.id);
+    await this.client.v1.boxes.stop(this.data.id);
     await this.syncData();
     return this;
   }
@@ -96,9 +73,9 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    */
   command(body: BoxExecuteCommandsParams | string | string[]): Promise<BoxExecuteCommandsResponse> {
     if (typeof body === 'string' || Array.isArray(body)) {
-      return this.client.v1.boxes.executeCommands(this.id, { commands: body });
+      return this.client.v1.boxes.executeCommands(this.data.id, { commands: body });
     } else {
-      return this.client.v1.boxes.executeCommands(this.id, body);
+      return this.client.v1.boxes.executeCommands(this.data.id, body);
     }
   }
 
@@ -110,9 +87,9 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    */
   runCode(body: BoxRunCodeParams | string): Promise<BoxRunCodeResponse> {
     if (typeof body === 'string') {
-      return this.client.v1.boxes.runCode(this.id, { code: body });
+      return this.client.v1.boxes.runCode(this.data.id, { code: body });
     } else {
-      return this.client.v1.boxes.runCode(this.id, body);
+      return this.client.v1.boxes.runCode(this.data.id, body);
     }
   }
 }
@@ -128,10 +105,10 @@ class InterfaceActions {
 
   /**
    * @example
-   * const response = await myBox.action.click({ x: 100, y: 100, type: {} });
+   * const response = await myBox.action.click({ x: 100, y: 100 });
    */
   async click(body: ActionClickParams) {
-    await this.client.v1.boxes.actions.click(this.boxId, body);
+    return this.client.v1.boxes.actions.click(this.boxId, body);
   }
 
   /**
@@ -142,7 +119,6 @@ class InterfaceActions {
    *       { x: 100, y: 100 },
    *       { x: 200, y: 200 },
    *     ],
-   *     type: {},
    *   }
    * );
    */
@@ -152,15 +128,22 @@ class InterfaceActions {
 
   /**
    * @example
-   * const response = await myBox.action.press({ keys: ['Enter'], type: {} });
+   * const response = await myBox.action.pressKey({ keys: ['enter'] });
    */
-  async press(body: ActionPressParams) {
-    return this.client.v1.boxes.actions.press(this.boxId, body);
+  async pressKey(body: ActionPressKeyParams) {
+    return this.client.v1.boxes.actions.pressKey(this.boxId, body);
   }
 
   /**
    * @example
-   * const response = await myBox.action.move({ type: {}, x: 200, y: 300 });
+   * const response = await myBox.action.pressButton({ buttons: ['power']});
+   */
+  async pressButton(body: ActionPressButtonParams) {
+    return this.client.v1.boxes.actions.pressButton(this.boxId, body);
+  }
+  /**
+   * @example
+   * const response = await myBox.action.move({ x: 200, y: 300 });
    */
   async move(body: ActionMoveParams) {
     return this.client.v1.boxes.actions.move(this.boxId, body);
@@ -168,7 +151,7 @@ class InterfaceActions {
 
   /**
    * @example
-   * const response = await myBox.action.scroll({ scrollX: 0, scrollY: 100, type: {}, x: 100, y: 100 });
+   * const response = await myBox.action.scroll({ scrollX: 0, scrollY: 100, x: 100, y: 100 });
    */
   async scroll(body: ActionScrollParams) {
     return this.client.v1.boxes.actions.scroll(this.boxId, body);
@@ -176,7 +159,7 @@ class InterfaceActions {
 
   /**
    * @example
-   * const response = await myBox.action.touch({ points: [{ start: { x: 0, y: 0 } }], type: {} });
+   * const response = await myBox.action.touch({ points: [{ start: { x: 0, y: 0 } }] });
    */
   async touch(body: ActionTouchParams) {
     return this.client.v1.boxes.actions.touch(this.boxId, body);
