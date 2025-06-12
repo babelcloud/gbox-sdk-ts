@@ -241,11 +241,6 @@ export namespace AndroidBox {
    */
   export interface Config {
     /**
-     * Android browser configuration settings
-     */
-    browser: Config.Browser;
-
-    /**
      * CPU cores allocated to the box
      */
     cpu: number;
@@ -281,32 +276,22 @@ export namespace AndroidBox {
     storage: number;
 
     /**
-     * Working directory path for the box
+     * Android browser configuration settings
      */
-    workingDir: string;
+    browser?: Config.Browser;
 
     /**
      * Device type - virtual or physical Android device
      */
     deviceType?: 'virtual' | 'physical';
+
+    /**
+     * Working directory path for the box
+     */
+    workingDir?: string;
   }
 
   export namespace Config {
-    /**
-     * Android browser configuration settings
-     */
-    export interface Browser {
-      /**
-       * Supported browser types for Android boxes
-       */
-      type: 'Chrome for Android' | 'UC Browser for Android';
-
-      /**
-       * Browser version string (e.g. '136')
-       */
-      version: string;
-    }
-
     /**
      * Android operating system configuration
      */
@@ -330,6 +315,21 @@ export namespace AndroidBox {
        * Width of the box
        */
       width: number;
+    }
+
+    /**
+     * Android browser configuration settings
+     */
+    export interface Browser {
+      /**
+       * Supported browser types for Android boxes
+       */
+      type: 'Chrome for Android' | 'UC Browser for Android';
+
+      /**
+       * Browser version string (e.g. '136')
+       */
+      version: string;
     }
   }
 }
@@ -440,11 +440,6 @@ export namespace LinuxBox {
    */
   export interface Config {
     /**
-     * Linux browser configuration settings
-     */
-    browser: Config.Browser;
-
-    /**
      * CPU cores allocated to the box
      */
     cpu: number;
@@ -480,27 +475,17 @@ export namespace LinuxBox {
     storage: number;
 
     /**
+     * Linux browser configuration settings
+     */
+    browser?: Config.Browser;
+
+    /**
      * Working directory path for the box
      */
-    workingDir: string;
+    workingDir?: string;
   }
 
   export namespace Config {
-    /**
-     * Linux browser configuration settings
-     */
-    export interface Browser {
-      /**
-       * Supported browser types for Linux boxes
-       */
-      type: 'chromium' | 'firefox' | 'webkit';
-
-      /**
-       * Browser version string (e.g. '12')
-       */
-      version: string;
-    }
-
     /**
      * Linux operating system configuration
      */
@@ -524,6 +509,21 @@ export namespace LinuxBox {
        * Width of the box
        */
       width: number;
+    }
+
+    /**
+     * Linux browser configuration settings
+     */
+    export interface Browser {
+      /**
+       * Supported browser types for Linux boxes
+       */
+      type: 'chromium' | 'firefox' | 'webkit';
+
+      /**
+       * Browser version string (e.g. '12')
+       */
+      version: string;
     }
   }
 }
