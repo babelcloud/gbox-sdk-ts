@@ -21,6 +21,39 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.android.list(
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+        { appType: 'third-party', isRunning: true },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('close: only required params', async () => {
+    const responsePromise = client.v1.boxes.android.close('com.example.myapp', {
+      id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('close: required and optional params', async () => {
+    const response = await client.v1.boxes.android.close('com.example.myapp', {
+      id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
     const responsePromise = client.v1.boxes.android.get('com.example.myapp', {
       id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -63,10 +96,52 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('open: only required params', async () => {
+    const responsePromise = client.v1.boxes.android.open('com.example.myapp', {
+      id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('open: required and optional params', async () => {
+    const response = await client.v1.boxes.android.open('com.example.myapp', {
+      id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      activityName: 'com.android.settings.Settings',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('restart: only required params', async () => {
+    const responsePromise = client.v1.boxes.android.restart('com.example.myapp', {
+      id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('restart: required and optional params', async () => {
+    const response = await client.v1.boxes.android.restart('com.example.myapp', {
+      id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('uninstall: only required params', async () => {
     const responsePromise = client.v1.boxes.android.uninstall('com.example.myapp', {
       id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-      keepData: true,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

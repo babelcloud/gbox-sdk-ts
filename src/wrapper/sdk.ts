@@ -1,5 +1,5 @@
 import { ClientOptions, GboxClient } from '../client';
-import { BoxDeleteParams, BoxListParams } from '../resources/v1/boxes';
+import { BoxDeleteParams, BoxListParams, BoxListResponse, BoxRetrieveResponse } from '../resources/v1/boxes';
 import { CreateAndroid, AndroidBoxOperator } from './box/android';
 import { CreateLinux, LinuxBoxOperator } from './box/linux';
 import { AndroidBox, LinuxBox } from '../resources/v1/boxes';
@@ -20,7 +20,7 @@ export class GboxSDK {
 
   /**
    * @example
-   * const response = await gboxSDK.create({
+   * const box = await gboxSDK.create({
    *   type: 'android',
    *   config: { labels: { FOO: 'bar' }, envs: { FOO: 'bar' } },
    * });
@@ -28,7 +28,7 @@ export class GboxSDK {
   async create(body: CreateAndroid): Promise<AndroidBoxOperator>;
   /**
    * @example
-   * const response = await gboxSDK.create({
+   * const box = await gboxSDK.create({
    *   type: 'linux',
    *   config: { envs: { FOO: 'bar' } },
    * });
@@ -49,9 +49,9 @@ export class GboxSDK {
 
   /**
    * @example
-   * const response = await gboxSDK.list();
+   * const boxes = await gboxSDK.list();
    * or
-   * const response = await gboxSDK.list({
+   * const boxes = await gboxSDK.list({
    *   page: 1,
    *   pageSize: 10,
    * });
@@ -61,24 +61,23 @@ export class GboxSDK {
       page: 1,
       pageSize: 10,
     },
-  ): Promise<Array<AndroidBoxOperator | LinuxBoxOperator>> {
-    const res = await this.client.v1.boxes.list(query);
-    return res.data.map((box) => {
-      if (isAndroidBox(box)) {
-        return new AndroidBoxOperator(box, this.client);
-      } else if (isLinuxBox(box)) {
-        return new LinuxBoxOperator(box, this.client);
-      } else {
-        throw new Error(`Invalid box type: ${(box as any).type}`);
-      }
-    });
+  ): Promise<BoxListResponse> {
+    return this.client.v1.boxes.list(query);
   }
 
   /**
    * @example
-   * const response = await gboxSDK.get('box_id');
+   * const boxInfo = await gboxSDK.get('975fed9f-bb28-4718-a2c5-e01f72864bd1');
    */
-  async get(id: string): Promise<AndroidBoxOperator | LinuxBoxOperator> {
+  async get(id: string): Promise<BoxRetrieveResponse> {
+    return this.client.v1.boxes.retrieve(id);
+  }
+
+  /**
+   * @example
+   * const box = await gboxSDK.attach('975fed9f-bb28-4718-a2c5-e01f72864bd1');
+   */
+  async attach(id: string): Promise<AndroidBoxOperator | LinuxBoxOperator> {
     const res = await this.client.v1.boxes.retrieve(id);
     if (isAndroidBox(res)) {
       return new AndroidBoxOperator(res, this.client);

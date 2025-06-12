@@ -57,18 +57,37 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Press key
+   * Press button on the device. like power button, volume up button, volume down
+   * button, etc.
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.press(
+   * const actionResult =
+   *   await client.v1.boxes.actions.pressButton(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { buttons: ['power'] },
+   *   );
+   * ```
+   */
+  pressButton(id: string, body: ActionPressButtonParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${id}/actions/press-button`, { body, ...options });
+  }
+
+  /**
+   * Simulates pressing a specific key by triggering the complete keyboard key event
+   * chain (keydown, keypress, keyup). Use this to activate keyboard key event
+   * listeners such as shortcuts or form submissions.
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.v1.boxes.actions.pressKey(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { keys: ['Enter'] },
+   *   { keys: ['enter'] },
    * );
    * ```
    */
-  press(id: string, body: ActionPressParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/press`, { body, ...options });
+  pressKey(id: string, body: ActionPressKeyParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${id}/actions/press-key`, { body, ...options });
   }
 
   /**
@@ -120,7 +139,9 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Type text
+   * Directly inputs text content without triggering physical key events (keydown,
+   * etc.), ideal for quickly filling large amounts of text when intermediate input
+   * events aren't needed.
    *
    * @example
    * ```ts
@@ -140,14 +161,14 @@ export class Actions extends APIResource {
  */
 export interface ActionResult {
   /**
-   * Complete screenshot result with highlight, before and after images
+   * Complete screenshot result with operation trace, before and after images
    */
   screenshot: ActionResult.Screenshot;
 }
 
 export namespace ActionResult {
   /**
-   * Complete screenshot result with highlight, before and after images
+   * Complete screenshot result with operation trace, before and after images
    */
   export interface Screenshot {
     /**
@@ -161,9 +182,9 @@ export namespace ActionResult {
     before: Screenshot.Before;
 
     /**
-     * Screenshot with action highlight
+     * Screenshot with action operation trace
      */
-    highlight: Screenshot.Highlight;
+    trace: Screenshot.Trace;
   }
 
   export namespace Screenshot {
@@ -188,11 +209,11 @@ export namespace ActionResult {
     }
 
     /**
-     * Screenshot with action highlight
+     * Screenshot with action operation trace
      */
-    export interface Highlight {
+    export interface Trace {
       /**
-       * URI of the screenshot before the action with highlight
+       * URI of the screenshot with operation trace
        */
       uri: string;
     }
@@ -287,11 +308,135 @@ export interface ActionMoveParams {
   outputFormat?: 'base64' | 'storageKey';
 }
 
-export interface ActionPressParams {
+export interface ActionPressButtonParams {
   /**
-   * Array of keys to press
+   * Button to press
    */
-  keys: Array<string>;
+  buttons: Array<string>;
+
+  /**
+   * Type of the URI
+   */
+  outputFormat?: 'base64' | 'storageKey';
+}
+
+export interface ActionPressKeyParams {
+  /**
+   * This is an array of keyboard keys to press. Supports cross-platform
+   * compatibility.
+   */
+  keys: Array<
+    | 'a'
+    | 'b'
+    | 'c'
+    | 'd'
+    | 'e'
+    | 'f'
+    | 'g'
+    | 'h'
+    | 'i'
+    | 'j'
+    | 'k'
+    | 'l'
+    | 'm'
+    | 'n'
+    | 'o'
+    | 'p'
+    | 'q'
+    | 'r'
+    | 's'
+    | 't'
+    | 'u'
+    | 'v'
+    | 'w'
+    | 'x'
+    | 'y'
+    | 'z'
+    | '0'
+    | '1'
+    | '2'
+    | '3'
+    | '4'
+    | '5'
+    | '6'
+    | '7'
+    | '8'
+    | '9'
+    | 'f1'
+    | 'f2'
+    | 'f3'
+    | 'f4'
+    | 'f5'
+    | 'f6'
+    | 'f7'
+    | 'f8'
+    | 'f9'
+    | 'f10'
+    | 'f11'
+    | 'f12'
+    | 'control'
+    | 'alt'
+    | 'shift'
+    | 'meta'
+    | 'win'
+    | 'cmd'
+    | 'option'
+    | 'arrowUp'
+    | 'arrowDown'
+    | 'arrowLeft'
+    | 'arrowRight'
+    | 'home'
+    | 'end'
+    | 'pageUp'
+    | 'pageDown'
+    | 'enter'
+    | 'space'
+    | 'tab'
+    | 'escape'
+    | 'backspace'
+    | 'delete'
+    | 'insert'
+    | 'capsLock'
+    | 'numLock'
+    | 'scrollLock'
+    | 'pause'
+    | 'printScreen'
+    | ';'
+    | '='
+    | ','
+    | '-'
+    | '.'
+    | '/'
+    | '`'
+    | '['
+    | '\\'
+    | ']'
+    | "'"
+    | 'numpad0'
+    | 'numpad1'
+    | 'numpad2'
+    | 'numpad3'
+    | 'numpad4'
+    | 'numpad5'
+    | 'numpad6'
+    | 'numpad7'
+    | 'numpad8'
+    | 'numpad9'
+    | 'numpadAdd'
+    | 'numpadSubtract'
+    | 'numpadMultiply'
+    | 'numpadDivide'
+    | 'numpadDecimal'
+    | 'numpadEnter'
+    | 'numpadEqual'
+    | 'volumeUp'
+    | 'volumeDown'
+    | 'volumeMute'
+    | 'mediaPlayPause'
+    | 'mediaStop'
+    | 'mediaNextTrack'
+    | 'mediaPreviousTrack'
+  >;
 
   /**
    * Type of the URI
@@ -430,7 +575,8 @@ export declare namespace Actions {
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionMoveParams as ActionMoveParams,
-    type ActionPressParams as ActionPressParams,
+    type ActionPressButtonParams as ActionPressButtonParams,
+    type ActionPressKeyParams as ActionPressKeyParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionTouchParams as ActionTouchParams,

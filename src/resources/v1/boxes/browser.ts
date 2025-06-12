@@ -7,7 +7,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Browser extends APIResource {
   /**
-   * Get browser CDP url
+   * Get CDP url
    *
    * @example
    * ```ts
@@ -21,7 +21,7 @@ export class Browser extends APIResource {
   }
 
   /**
-   * Get browser connect url
+   * Get connect url
    *
    * @example
    * ```ts

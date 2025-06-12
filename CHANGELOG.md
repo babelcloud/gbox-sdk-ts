@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.0 (2025-06-12)
+
+Full Changelog: [v0.1.1...v0.2.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.1...v0.2.0)
+
+### Features
+
+* **api:** api update ([048d346](https://github.com/babelcloud/gbox-sdk-ts/commit/048d346d45f5532f6501955bf85ca42e92909b21))
+* **api:** api update ([845f970](https://github.com/babelcloud/gbox-sdk-ts/commit/845f9707e89dee4a36c0191d9c0beb41fbeea035))
+* **api:** api update ([b53aca8](https://github.com/babelcloud/gbox-sdk-ts/commit/b53aca8b81ed648c2d12c18a0dcc1df01695f1f1))
+* **api:** api update ([91efaf3](https://github.com/babelcloud/gbox-sdk-ts/commit/91efaf35903bb22a0ef64fcac873b0c14d54978f))
+* **api:** api update ([011430c](https://github.com/babelcloud/gbox-sdk-ts/commit/011430c863a249f08d6624a7396a9166163a666a))
+* **api:** api update ([c772f6d](https://github.com/babelcloud/gbox-sdk-ts/commit/c772f6db48b985fca71abc3b353648b69465306a))
+* **api:** api update ([99aecf9](https://github.com/babelcloud/gbox-sdk-ts/commit/99aecf9845298d4db2fe5a26742209735855fecf))
+* **api:** api update ([6860acb](https://github.com/babelcloud/gbox-sdk-ts/commit/6860acbe2ff0d05b26bc1a0652c034d2fdf096ab))
+* **api:** api update ([d72b54a](https://github.com/babelcloud/gbox-sdk-ts/commit/d72b54ac7f2ec963abc041311b03e7c6c3901d46))
+* **api:** api update ([1a655ae](https://github.com/babelcloud/gbox-sdk-ts/commit/1a655aedbf5e727f2f2fd51a25ac5adb2f6f1ec3))
+* **api:** enhance GboxSDK with new response types and improved method examples ([788f45e](https://github.com/babelcloud/gbox-sdk-ts/commit/788f45ec398cc5b10278157f0d0e9c3c30690103))
+
 ## 0.1.1 (2025-06-09)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.0...v0.1.1)

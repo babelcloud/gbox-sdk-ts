@@ -10,7 +10,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Android extends APIResource {
   /**
-   * List Android app
+   * List apps
    *
    * @example
    * ```ts
@@ -19,12 +19,34 @@ export class Android extends APIResource {
    * );
    * ```
    */
-  list(id: string, options?: RequestOptions): APIPromise<AndroidListResponse> {
-    return this._client.get(path`/boxes/${id}/android/apps`, options);
+  list(
+    id: string,
+    query: AndroidListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AndroidListResponse> {
+    return this._client.get(path`/boxes/${id}/android/apps`, { query, ...options });
   }
 
   /**
-   * Get Android app
+   * Close app
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.android.close('com.example.myapp', {
+   *   id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * });
+   * ```
+   */
+  close(packageName: string, params: AndroidCloseParams, options?: RequestOptions): APIPromise<void> {
+    const { id } = params;
+    return this._client.post(path`/boxes/${id}/android/apps/${packageName}/close`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Get app
    *
    * @example
    * ```ts
@@ -40,7 +62,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Install Android app
+   * Install app
    *
    * @example
    * ```ts
@@ -61,16 +83,50 @@ export class Android extends APIResource {
   }
 
   /**
-   * Uninstall Android app
+   * Open app
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.android.open('com.example.myapp', {
+   *   id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * });
+   * ```
+   */
+  open(packageName: string, params: AndroidOpenParams, options?: RequestOptions): APIPromise<void> {
+    const { id, ...body } = params;
+    return this._client.post(path`/boxes/${id}/android/apps/${packageName}/open`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Restart app
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.android.restart('com.example.myapp', {
+   *   id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * });
+   * ```
+   */
+  restart(packageName: string, params: AndroidRestartParams, options?: RequestOptions): APIPromise<void> {
+    const { id } = params;
+    return this._client.post(path`/boxes/${id}/android/apps/${packageName}/restart`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Uninstall app
    *
    * @example
    * ```ts
    * await client.v1.boxes.android.uninstall(
    *   'com.example.myapp',
-   *   {
-   *     id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     keepData: true,
-   *   },
+   *   { id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
    */
@@ -92,6 +148,16 @@ export interface AndroidApp {
    * Android app apk path
    */
   apkPath: string;
+
+  /**
+   * Application type: system or third-party
+   */
+  appType: 'system' | 'third-party';
+
+  /**
+   * Whether the application is currently running
+   */
+  isRunning: boolean;
 
   /**
    * Android app name
@@ -117,6 +183,25 @@ export interface AndroidListResponse {
    * Android app list
    */
   data: Array<AndroidApp>;
+}
+
+export interface AndroidListParams {
+  /**
+   * Application type: system or third-party, default is all
+   */
+  appType?: 'system' | 'third-party';
+
+  /**
+   * Whether to include running apps, default is all
+   */
+  isRunning?: boolean;
+}
+
+export interface AndroidCloseParams {
+  /**
+   * Box ID
+   */
+  id: string;
 }
 
 export interface AndroidGetParams {
@@ -146,6 +231,25 @@ export declare namespace AndroidInstallParams {
   }
 }
 
+export interface AndroidOpenParams {
+  /**
+   * Path param: Box ID
+   */
+  id: string;
+
+  /**
+   * Body param: Activity name, default is the main activity.
+   */
+  activityName?: string;
+}
+
+export interface AndroidRestartParams {
+  /**
+   * Box ID
+   */
+  id: string;
+}
+
 export interface AndroidUninstallParams {
   /**
    * Path param: Box ID
@@ -155,15 +259,19 @@ export interface AndroidUninstallParams {
   /**
    * Body param: uninstalls the application while retaining the data/cache
    */
-  keepData: boolean;
+  keepData?: boolean;
 }
 
 export declare namespace Android {
   export {
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
+    type AndroidListParams as AndroidListParams,
+    type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
+    type AndroidOpenParams as AndroidOpenParams,
+    type AndroidRestartParams as AndroidRestartParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }

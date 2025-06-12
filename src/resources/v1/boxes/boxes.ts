@@ -6,7 +6,8 @@ import {
   ActionClickParams,
   ActionDragParams,
   ActionMoveParams,
-  ActionPressParams,
+  ActionPressButtonParams,
+  ActionPressKeyParams,
   ActionResult,
   ActionScreenshotParams,
   ActionScreenshotResponse,
@@ -19,9 +20,13 @@ import * as AndroidAPI from './android';
 import {
   Android,
   AndroidApp,
+  AndroidCloseParams,
   AndroidGetParams,
   AndroidInstallParams,
+  AndroidListParams,
   AndroidListResponse,
+  AndroidOpenParams,
+  AndroidRestartParams,
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
@@ -246,11 +251,6 @@ export namespace AndroidBox {
     cpu: number;
 
     /**
-     * Device type - virtual or physical Android device
-     */
-    deviceType: 'virtual' | 'physical';
-
-    /**
      * Environment variables for the box
      */
     envs: unknown;
@@ -284,6 +284,11 @@ export namespace AndroidBox {
      * Working directory path for the box
      */
     workingDir: string;
+
+    /**
+     * Device type - virtual or physical Android device
+     */
+    deviceType?: 'virtual' | 'physical';
   }
 
   export namespace Config {
@@ -605,6 +610,11 @@ export type BoxStopResponse = LinuxBox | AndroidBox;
 
 export interface BoxListParams {
   /**
+   * Filter boxes by their labels, default is all
+   */
+  labels?: unknown;
+
+  /**
    * Page number
    */
   page?: number;
@@ -784,7 +794,8 @@ export declare namespace Boxes {
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionMoveParams as ActionMoveParams,
-    type ActionPressParams as ActionPressParams,
+    type ActionPressButtonParams as ActionPressButtonParams,
+    type ActionPressKeyParams as ActionPressKeyParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionTouchParams as ActionTouchParams,
@@ -811,8 +822,12 @@ export declare namespace Boxes {
     Android as Android,
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
+    type AndroidListParams as AndroidListParams,
+    type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
+    type AndroidOpenParams as AndroidOpenParams,
+    type AndroidRestartParams as AndroidRestartParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }
