@@ -79,6 +79,21 @@ export class Android extends APIResource {
   }
 
   /**
+   * Get connect address
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.android.getConnectAddress(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  getConnectAddress(id: string, options?: RequestOptions): APIPromise<AndroidGetConnectAddressResponse> {
+    return this._client.get(path`/boxes/${id}/android/connect-address`, options);
+  }
+
+  /**
    * Install app
    *
    * @example
@@ -202,6 +217,17 @@ export interface AndroidListResponse {
   data: Array<AndroidApp>;
 }
 
+/**
+ * Android connection information
+ */
+export interface AndroidGetConnectAddressResponse {
+  /**
+   * Android adb connect address. use `adb connect <adbConnectAddress>` to connect to
+   * the Android device
+   */
+  adb: string;
+}
+
 export interface AndroidListParams {
   /**
    * Application type: system or third-party, default is all
@@ -283,6 +309,7 @@ export declare namespace Android {
   export {
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
+    type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidListParams as AndroidListParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
