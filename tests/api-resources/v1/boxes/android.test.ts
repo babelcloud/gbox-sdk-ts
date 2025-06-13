@@ -87,6 +87,18 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('getConnectAddress', async () => {
+    const responsePromise = client.v1.boxes.android.getConnectAddress('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('install: only required params', async () => {
     const responsePromise = client.v1.boxes.android.install('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       apk: await toFile(Buffer.from('# my file contents'), 'README.md'),
