@@ -3,11 +3,13 @@ import {
   BoxCreateAndroidParams,
   AndroidBox,
   AndroidInstallParams,
-  AndroidListResponse,
   AndroidApp,
   AndroidOpenParams,
   AndroidRestartParams,
   AndroidCloseParams,
+  AndroidListParams,
+  AndroidUninstallParams,
+  AndroidListResponse,
 } from '../../resources/v1/boxes';
 import { BaseBox } from './base';
 
@@ -16,70 +18,48 @@ export interface CreateAndroid extends BoxCreateAndroidParams {
 }
 
 export class AndroidBoxOperator extends BaseBox<AndroidBox> {
-  public app: InterfaceAndroidApp = new InterfaceAndroidApp(this.client, this.data.id);
-}
-
-class InterfaceAndroidApp {
-  private client: GboxClient;
-  private boxId: string;
-
-  constructor(client: GboxClient, boxId: string) {
-    this.client = client;
-    this.boxId = boxId;
-  }
-
-  /**
-   * @example
-   * const response = await myBox.app.install({ apk: fs.readFileSync("path/to/your/app.apk") });
-   * or
-   * const response = await myBox.app.install({ apk: "https://example.com/path/to/app.apk" });
-   */
-  async install(body: AndroidInstallParams) {
-    return this.client.v1.boxes.android.install(this.boxId, body);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.app.uninstall('com.example.myapp');
-   */
-  async uninstall(packageName: string) {
-    return this.client.v1.boxes.android.uninstall(packageName, { id: this.boxId, keepData: true });
-  }
-
-  /**
-   * @example
-   * const response = await myBox.app.list();
-   */
-  async list(): Promise<AndroidListResponse> {
-    return this.client.v1.boxes.android.list(this.boxId);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.app.get('com.example.myapp');
-   */
-  async get(packageName: string) {
-    return this.client.v1.boxes.android.get(packageName, { id: this.boxId });
-  }
-
-  /**
-   * @example
-   * const myApp = await myBox.app.attach('com.example.myapp');
-   */
-  async attach(packageName: string) {
-    return new AndroidAppOperator(
-      await this.client.v1.boxes.android.get(packageName, { id: this.boxId }),
-      this.client,
-    );
-  }
-
-  /**
-   * @example
-   * const response = await myBox.app.closeAll();
-   */
-  async closeAll() {
-    return this.client.v1.boxes.android.closeAll(this.boxId);
-  }
+  public app = {
+    /**
+     * @example
+     * const response = await myBox.app.install({ apk: fs.readFileSync("path/to/your/app.apk") });
+     * or
+     * const response = await myBox.app.install({ apk: "https://example.com/path/to/app.apk" });
+     */
+    install: (body: AndroidInstallParams): Promise<void> =>
+      this.client.v1.boxes.android.install(this.data.id, body),
+    /**
+     * @example
+     * const response = await myBox.app.uninstall('com.example.myapp');
+     */
+    uninstall: (packageName: string, params: Omit<AndroidUninstallParams, 'id'>): Promise<void> =>
+      this.client.v1.boxes.android.uninstall(packageName, { ...params, id: this.data.id }),
+    /**
+     * @example
+     * const response = await myBox.app.list();
+     */
+    list: (params: AndroidListParams): Promise<AndroidListResponse> =>
+      this.client.v1.boxes.android.list(this.data.id, params),
+    /**
+     * @example
+     * const response = await myBox.app.geInfo('com.example.myapp');
+     */
+    getInfo: (packageName: string): Promise<AndroidApp> =>
+      this.client.v1.boxes.android.get(packageName, { id: this.data.id }),
+    /**
+     * @example
+     * const myApp = await myBox.app.get('com.example.myapp');
+     */
+    get: async (packageName: string) =>
+      new AndroidAppOperator(
+        await this.client.v1.boxes.android.get(packageName, { id: this.data.id }),
+        this.client,
+      ),
+    /**
+     * @example
+     * const response = await myBox.app.closeAll();
+     */
+    closeAll: (): Promise<void> => this.client.v1.boxes.android.closeAll(this.data.id),
+  };
 }
 
 class AndroidAppOperator {
