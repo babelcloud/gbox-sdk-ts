@@ -48,6 +48,22 @@ export class FileSystemOperator {
       }
     });
   }
+
+  /**
+   * @example
+   * const response = await myBox.fs.read({ path: '/tmp/file.txt' });
+   */
+  async read(body: FReadParams): Promise<FReadResponse> {
+    return this.client.v1.boxes.fs.read(this.boxId, body);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.fs.write({ path: '/tmp/file.txt', content: 'Hello, World!' });
+   */
+  async write(body: FWriteParams): Promise<FWriteResponse> {
+    return this.client.v1.boxes.fs.write(this.boxId, body);
+  }
 }
 
 export class FileOperator {
@@ -87,5 +103,33 @@ export class DirectoryOperator {
     this.client = client;
     this.boxId = boxId;
     this.data = data;
+  }
+
+  /**
+   * @example
+   * const response = await myDir.listInfo();
+   * or
+   * const response = await myDir.listInfo({ depth: 1 });
+   */
+  listInfo(body?: Omit<FListParams, 'path'>): Promise<FListResponse> {
+    return this.client.v1.boxes.fs.list(this.boxId, { path: this.data.path, ...body });
+  }
+
+  /**
+   * @example
+   * const response = await myDir.list();
+   * or
+   * const response = await myDir.list({ depth: 1 });
+   */
+  async list(body?: Omit<FListParams, 'path'>): Promise<Array<FileOperator | DirectoryOperator>> {
+    const res = await this.listInfo(body);
+
+    return res.data.map((r) => {
+      if (r.type === 'file') {
+        return new FileOperator(this.client, this.boxId, r);
+      } else {
+        return new DirectoryOperator(this.client, this.boxId, r);
+      }
+    });
   }
 }
