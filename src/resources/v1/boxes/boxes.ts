@@ -34,6 +34,8 @@ import * as BrowserAPI from './browser';
 import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse, BrowserConnectURLResponse } from './browser';
 import * as FsAPI from './fs';
 import {
+  FExistsParams,
+  FExistsResponse,
   FListParams,
   FListResponse,
   FReadParams,
@@ -811,11 +813,13 @@ export declare namespace Boxes {
   export {
     Fs as Fs,
     type FListResponse as FListResponse,
+    type FExistsResponse as FExistsResponse,
     type FReadResponse as FReadResponse,
     type FRemoveResponse as FRemoveResponse,
     type FRenameResponse as FRenameResponse,
     type FWriteResponse as FWriteResponse,
     type FListParams as FListParams,
+    type FExistsParams as FExistsParams,
     type FReadParams as FReadParams,
     type FRemoveParams as FRemoveParams,
     type FRenameParams as FRenameParams,
