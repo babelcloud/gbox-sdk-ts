@@ -53,11 +53,13 @@ export { Browser, type BrowserCdpURLResponse, type BrowserConnectURLResponse } f
 export {
   Fs,
   type FListResponse,
+  type FExistsResponse,
   type FReadResponse,
   type FRemoveResponse,
   type FRenameResponse,
   type FWriteResponse,
   type FListParams,
+  type FExistsParams,
   type FReadParams,
   type FRemoveParams,
   type FRenameParams,

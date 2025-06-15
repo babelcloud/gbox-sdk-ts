@@ -22,6 +22,21 @@ export class Fs extends APIResource {
   }
 
   /**
+   * Check if file exists
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.fs.exists(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { path: '/home/user/documents/output.txt' },
+   * );
+   * ```
+   */
+  exists(id: string, body: FExistsParams, options?: RequestOptions): APIPromise<FExistsResponse> {
+    return this._client.post(path`/boxes/${id}/fs/exists`, { body, ...options });
+  }
+
+  /**
    * Read box file
    *
    * @example
@@ -167,6 +182,16 @@ export namespace FListResponse {
 }
 
 /**
+ * Response after checking if a file/directory exists
+ */
+export interface FExistsResponse {
+  /**
+   * Exists
+   */
+  exists: boolean;
+}
+
+/**
  * Response containing file content
  */
 export interface FReadResponse {
@@ -218,6 +243,13 @@ export interface FListParams {
   depth?: number;
 }
 
+export interface FExistsParams {
+  /**
+   * Path to the file/directory
+   */
+  path: string;
+}
+
 export interface FReadParams {
   /**
    * Path to the file
@@ -259,11 +291,13 @@ export interface FWriteParams {
 export declare namespace Fs {
   export {
     type FListResponse as FListResponse,
+    type FExistsResponse as FExistsResponse,
     type FReadResponse as FReadResponse,
     type FRemoveResponse as FRemoveResponse,
     type FRenameResponse as FRenameResponse,
     type FWriteResponse as FWriteResponse,
     type FListParams as FListParams,
+    type FExistsParams as FExistsParams,
     type FReadParams as FReadParams,
     type FRemoveParams as FRemoveParams,
     type FRenameParams as FRenameParams,
