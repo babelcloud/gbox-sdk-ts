@@ -37,6 +37,39 @@ export class Fs extends APIResource {
   }
 
   /**
+   * Delete box file/directory
+   *
+   * @example
+   * ```ts
+   * const f = await client.v1.boxes.fs.remove(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { path: '/home/user/documents/output.txt' },
+   * );
+   * ```
+   */
+  remove(id: string, body: FRemoveParams, options?: RequestOptions): APIPromise<FRemoveResponse> {
+    return this._client.delete(path`/boxes/${id}/fs`, { body, ...options });
+  }
+
+  /**
+   * Rename box file
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.fs.rename(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   {
+   *     newPath: '/home/user/documents/new-name.txt',
+   *     oldPath: '/home/user/documents/output.txt',
+   *   },
+   * );
+   * ```
+   */
+  rename(id: string, body: FRenameParams, options?: RequestOptions): APIPromise<FRenameResponse> {
+    return this._client.post(path`/boxes/${id}/fs/rename`, { body, ...options });
+  }
+
+  /**
    * Creates or overwrites a file. Creates necessary directories in the path if they
    * don't exist.
    *
@@ -144,6 +177,26 @@ export interface FReadResponse {
 }
 
 /**
+ * Response after deleting file/directory
+ */
+export interface FRemoveResponse {
+  /**
+   * Success message
+   */
+  message: string;
+}
+
+/**
+ * Response after renaming file/directory
+ */
+export interface FRenameResponse {
+  /**
+   * Success message
+   */
+  message: string;
+}
+
+/**
  * Response after writing file content
  */
 export interface FWriteResponse {
@@ -172,6 +225,25 @@ export interface FReadParams {
   path: string;
 }
 
+export interface FRemoveParams {
+  /**
+   * Path to the file/directory
+   */
+  path: string;
+}
+
+export interface FRenameParams {
+  /**
+   * New path for the file/directory
+   */
+  newPath: string;
+
+  /**
+   * Old path to the file/directory
+   */
+  oldPath: string;
+}
+
 export interface FWriteParams {
   /**
    * Content of the file
@@ -188,9 +260,13 @@ export declare namespace Fs {
   export {
     type FListResponse as FListResponse,
     type FReadResponse as FReadResponse,
+    type FRemoveResponse as FRemoveResponse,
+    type FRenameResponse as FRenameResponse,
     type FWriteResponse as FWriteResponse,
     type FListParams as FListParams,
     type FReadParams as FReadParams,
+    type FRemoveParams as FRemoveParams,
+    type FRenameParams as FRenameParams,
     type FWriteParams as FWriteParams,
   };
 }
