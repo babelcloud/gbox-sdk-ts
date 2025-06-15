@@ -16,7 +16,7 @@ export interface CreateAndroid extends BoxCreateAndroidParams {
 }
 
 export class AndroidBoxOperator extends BaseBox<AndroidBox> {
-  private app: InterfaceAndroidApp = new InterfaceAndroidApp(this.client, this.data.id);
+  public app: InterfaceAndroidApp = new InterfaceAndroidApp(this.client, this.data.id);
 }
 
 class InterfaceAndroidApp {
@@ -48,9 +48,9 @@ class InterfaceAndroidApp {
 
   /**
    * @example
-   * const response = await myBox.app.listApps();
+   * const response = await myBox.app.list();
    */
-  async listApps(): Promise<AndroidListResponse> {
+  async list(): Promise<AndroidListResponse> {
     return this.client.v1.boxes.android.list(this.boxId);
   }
 
@@ -71,6 +71,14 @@ class InterfaceAndroidApp {
       await this.client.v1.boxes.android.get(packageName, { id: this.boxId }),
       this.client,
     );
+  }
+
+  /**
+   * @example
+   * const response = await myBox.app.closeAll();
+   */
+  async closeAll() {
+    return this.client.v1.boxes.android.closeAll(this.boxId);
   }
 }
 

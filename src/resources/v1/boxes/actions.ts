@@ -312,7 +312,7 @@ export interface ActionPressButtonParams {
   /**
    * Button to press
    */
-  buttons: Array<string>;
+  buttons: Array<'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu'>;
 
   /**
    * Type of the URI

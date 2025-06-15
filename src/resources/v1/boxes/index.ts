@@ -18,6 +18,7 @@ export {
   Android,
   type AndroidApp,
   type AndroidListResponse,
+  type AndroidGetConnectAddressResponse,
   type AndroidListParams,
   type AndroidCloseParams,
   type AndroidGetParams,

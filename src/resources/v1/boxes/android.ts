@@ -46,6 +46,23 @@ export class Android extends APIResource {
   }
 
   /**
+   * Close all apps
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.android.closeAll(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  closeAll(id: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${id}/android/apps/close-all`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Get app
    *
    * @example
@@ -59,6 +76,21 @@ export class Android extends APIResource {
   get(packageName: string, params: AndroidGetParams, options?: RequestOptions): APIPromise<AndroidApp> {
     const { id } = params;
     return this._client.get(path`/boxes/${id}/android/apps/${packageName}`, options);
+  }
+
+  /**
+   * Get connect address
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.android.getConnectAddress(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  getConnectAddress(id: string, options?: RequestOptions): APIPromise<AndroidGetConnectAddressResponse> {
+    return this._client.get(path`/boxes/${id}/android/connect-address`, options);
   }
 
   /**
@@ -185,6 +217,17 @@ export interface AndroidListResponse {
   data: Array<AndroidApp>;
 }
 
+/**
+ * Android connection information
+ */
+export interface AndroidGetConnectAddressResponse {
+  /**
+   * Android adb connect address. use `adb connect <adbConnectAddress>` to connect to
+   * the Android device
+   */
+  adb: string;
+}
+
 export interface AndroidListParams {
   /**
    * Application type: system or third-party, default is all
@@ -266,6 +309,7 @@ export declare namespace Android {
   export {
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
+    type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidListParams as AndroidListParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
