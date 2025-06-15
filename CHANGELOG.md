@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.3.0 (2025-06-15)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** api update ([ebec36a](https://github.com/babelcloud/gbox-sdk-ts/commit/ebec36a290d20d43d777658521ae7df0cd952337))
+* **api:** api update ([c2fc3b0](https://github.com/babelcloud/gbox-sdk-ts/commit/c2fc3b03d3f801a6e99d73fa5b8c6aab28a05191))
+* **api:** api update ([05cff42](https://github.com/babelcloud/gbox-sdk-ts/commit/05cff429ff9d826d955d0091b1c590580539d426))
+* **api:** api update ([35617a4](https://github.com/babelcloud/gbox-sdk-ts/commit/35617a4eed567f000a9e46bfc9416d08b602d8d7))
+* **api:** api update ([6e4209c](https://github.com/babelcloud/gbox-sdk-ts/commit/6e4209ca2ce6833d5e33b2724b930d27d8c97555))
+* **api:** expose app property and rename listApps method to list in AndroidBoxOperator ([15bd9c2](https://github.com/babelcloud/gbox-sdk-ts/commit/15bd9c28d63beb4d3e98a1b2b232a8094b705519))
+
+
+### Bug Fixes
+
+* publish script — handle NPM errors correctly ([f0108e4](https://github.com/babelcloud/gbox-sdk-ts/commit/f0108e41e03dd1957a93d53a6feb3ef30bd6252b))
+
+
+### Chores
+
+* **internal:** add pure annotations, make base APIResource abstract ([c2cb166](https://github.com/babelcloud/gbox-sdk-ts/commit/c2cb1663b335f45df76107c2477aea8f6caf4b2a))
+
+
+### Documentation
+
+* update README ([86dbf6d](https://github.com/babelcloud/gbox-sdk-ts/commit/86dbf6d38965ccd7c815ca48eb78e71c4b281450))
+* update README.md ([be8341e](https://github.com/babelcloud/gbox-sdk-ts/commit/be8341e30fe777eec306f1c36fcc81d4c1d3f747))
+
 ## 0.2.0 (2025-06-12)
 
 Full Changelog: [v0.1.1...v0.2.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.1...v0.2.0)
