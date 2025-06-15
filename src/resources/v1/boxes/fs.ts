@@ -37,7 +37,8 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Write box file
+   * Creates or overwrites a file. Creates necessary directories in the path if they
+   * don't exist.
    *
    * @example
    * ```ts
@@ -76,6 +77,11 @@ export namespace FListResponse {
     lastModified: string;
 
     /**
+     * File metadata
+     */
+    mode: string;
+
+    /**
      * Name of the file
      */
     name: string;
@@ -100,6 +106,16 @@ export namespace FListResponse {
    * File system directory representation
    */
   export interface Dir {
+    /**
+     * Last modified time of the directory
+     */
+    lastModified: string;
+
+    /**
+     * Directory metadata
+     */
+    mode: string;
+
     /**
      * Name of the directory
      */
