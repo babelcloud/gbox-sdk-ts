@@ -9,7 +9,7 @@ import {
 } from '../resources/v1/boxes';
 import { CreateAndroid, AndroidBoxOperator } from './box/android';
 import { CreateLinux, LinuxBoxOperator } from './box/linux';
-import { BoxListOperatorResponse, BoxOperator } from './types';
+import { BoxListOperatorResponse, BoxOperator, TimeString } from './types';
 import { isAndroidBox, isLinuxBox } from './utils';
 
 export class GboxSDK {
@@ -107,7 +107,7 @@ export class GboxSDK {
    * @example
    * const response = await gboxSDK.delete('box_id');
    */
-  async delete(id: string, body?: BoxDeleteParams) {
+  async delete(id: string, body?: DeleteBox) {
     await this.client.v1.boxes.delete(id, body || {});
   }
 
@@ -122,4 +122,8 @@ export class GboxSDK {
 
     throw new Error(`Invalid box type: ${(data as any).type}`);
   }
+}
+
+export interface DeleteBox extends BoxDeleteParams {
+  timeout?: TimeString;
 }
