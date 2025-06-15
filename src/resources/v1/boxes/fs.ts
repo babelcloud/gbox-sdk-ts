@@ -245,35 +245,64 @@ export interface FListParams {
 
 export interface FExistsParams {
   /**
-   * Path to the file/directory
+   * Path to the file/directory. If the path is not start with '/', the
+   * file/directory will be checked from the working directory
    */
   path: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
 }
 
 export interface FReadParams {
   /**
-   * Path to the file
+   * Path to the file. If the path is not start with '/', the file will be read from
+   * the working directory.
    */
   path: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
 }
 
 export interface FRemoveParams {
   /**
-   * Path to the file/directory
+   * Path to the file/directory. If the path is not start with '/', the
+   * file/directory will be deleted from the working directory
    */
   path: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
 }
 
 export interface FRenameParams {
   /**
-   * New path for the file/directory
+   * New path for the file/directory. If the path is not start with '/', the
+   * file/directory will be renamed to the working directory
    */
   newPath: string;
 
   /**
-   * Old path to the file/directory
+   * Old path to the file/directory. If the path is not start with '/', the
+   * file/directory will be renamed from the working directory
    */
   oldPath: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
 }
 
 export interface FWriteParams {
@@ -283,9 +312,16 @@ export interface FWriteParams {
   content: string;
 
   /**
-   * Path to the file
+   * Path to the file. If the path is not start with '/', the file will be written to
+   * the working directory
    */
   path: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
 }
 
 export declare namespace Fs {
