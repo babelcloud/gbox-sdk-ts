@@ -11,10 +11,15 @@ import {
   AndroidUninstallParams,
   AndroidListResponse,
 } from '../../resources/v1/boxes';
+import { TimeString } from '../types';
 import { BaseBox } from './base';
 
 export interface CreateAndroid extends BoxCreateAndroidParams {
   type: 'android';
+  timeout?: TimeString;
+  config?: BoxCreateAndroidParams['config'] & {
+    expiresIn?: TimeString;
+  };
 }
 
 export class AndroidBoxOperator extends BaseBox<AndroidBox> {

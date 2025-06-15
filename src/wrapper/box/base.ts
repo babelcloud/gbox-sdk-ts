@@ -5,11 +5,30 @@ import type {
   BoxExecuteCommandsParams,
   BoxRunCodeParams,
   BoxRunCodeResponse,
+  BoxStartParams,
+  BoxStopParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { ActionOperator } from './action';
 import { FileSystemOperator } from './file-system';
 import { BrowserOperator } from './browser';
+import { TimeString } from '../types';
+
+export interface BoxStop extends BoxStopParams {
+  timeout?: TimeString;
+}
+
+export interface BoxStart extends BoxStartParams {
+  timeout?: TimeString;
+}
+
+export interface BoxExecuteCommands extends BoxExecuteCommandsParams {
+  timeout?: TimeString;
+}
+
+export interface BoxRunCode extends BoxRunCodeParams {
+  timeout?: TimeString;
+}
 
 export class BaseBox<T extends LinuxBox | AndroidBox> {
   protected client: GboxClient;
@@ -37,8 +56,8 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * @example
    * const response = await myBox.start();
    */
-  async start(): Promise<this> {
-    await this.client.v1.boxes.start(this.data.id);
+  async start(body?: BoxStart): Promise<this> {
+    await this.client.v1.boxes.start(this.data.id, body);
     await this.syncData();
     return this;
   }
@@ -47,8 +66,8 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * @example
    * const response = await myBox.stop();
    */
-  async stop(): Promise<this> {
-    await this.client.v1.boxes.stop(this.data.id);
+  async stop(body?: BoxStop): Promise<this> {
+    await this.client.v1.boxes.stop(this.data.id, body);
     await this.syncData();
     return this;
   }
@@ -59,7 +78,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * or
    * const response = await myBox.command({ commands: ['ls -l'] } );
    */
-  command(body: BoxExecuteCommandsParams | string | string[]): Promise<BoxExecuteCommandsResponse> {
+  command(body: BoxExecuteCommands | string | string[]): Promise<BoxExecuteCommandsResponse> {
     if (typeof body === 'string' || Array.isArray(body)) {
       return this.client.v1.boxes.executeCommands(this.data.id, { commands: body });
     } else {
@@ -73,7 +92,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * or
    * const response = await myBox.runCode({ code: 'print("Hello, World!")', language: 'bash' });
    */
-  runCode(body: BoxRunCodeParams | string): Promise<BoxRunCodeResponse> {
+  runCode(body: BoxRunCode | string): Promise<BoxRunCodeResponse> {
     if (typeof body === 'string') {
       return this.client.v1.boxes.runCode(this.data.id, { code: body });
     } else {
