@@ -5,6 +5,11 @@ import type {
   FWriteResponse,
   FReadResponse,
   FReadParams,
+  FRemoveParams,
+  FExistsParams,
+  FExistsResponse,
+  FRenameParams,
+  FRenameResponse,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 
@@ -64,6 +69,31 @@ export class FileSystemOperator {
   async write(body: FWriteParams): Promise<FWriteResponse> {
     return this.client.v1.boxes.fs.write(this.boxId, body);
   }
+
+  /**
+   * @example
+   * const response = await myBox.fs.remove({ path: '/tmp/file.txt' });
+   */
+  async remove(body: FRemoveParams): Promise<void> {
+    await this.client.v1.boxes.fs.remove(this.boxId, body);
+    return;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.fs.exists({ path: '/tmp/file.txt' });
+   */
+  async exists(body: FExistsParams): Promise<FExistsResponse> {
+    return this.client.v1.boxes.fs.exists(this.boxId, body);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.fs.rename({ oldPath: '/tmp/file.txt', newPath: '/tmp/file2.txt' });
+   */
+  async rename(body: FRenameParams): Promise<FRenameResponse> {
+    return this.client.v1.boxes.fs.rename(this.boxId, body);
+  }
 }
 
 export class FileOperator {
@@ -91,6 +121,14 @@ export class FileOperator {
    */
   read(body: Omit<FReadParams, 'path'> = {}): Promise<FReadResponse> {
     return this.client.v1.boxes.fs.read(this.boxId, { ...body, path: this.data.path });
+  }
+
+  /**
+   * @example
+   * const response = await myFile.rename({ newPath: '/tmp/file2.txt' });
+   */
+  async rename(body: Omit<FRenameParams, 'oldPath'>): Promise<FRenameResponse> {
+    return this.client.v1.boxes.fs.rename(this.boxId, { oldPath: this.data.path, ...body });
   }
 }
 
@@ -131,5 +169,13 @@ export class DirectoryOperator {
         return new DirectoryOperator(this.client, this.boxId, r);
       }
     });
+  }
+
+  /**
+   * @example
+   * const response = await myDir.rename({ newPath: '/tmp/dir2' });
+   */
+  async rename(body: Omit<FRenameParams, 'oldPath'>): Promise<FRenameResponse> {
+    return this.client.v1.boxes.fs.rename(this.boxId, { oldPath: this.data.path, ...body });
   }
 }
