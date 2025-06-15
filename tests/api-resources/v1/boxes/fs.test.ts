@@ -48,6 +48,7 @@ describe('resource fs', () => {
   test.skip('exists: required and optional params', async () => {
     const response = await client.v1.boxes.fs.exists('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/output.txt',
+      workingDir: '/home/user/documents',
     });
   });
 
@@ -69,6 +70,7 @@ describe('resource fs', () => {
   test.skip('read: required and optional params', async () => {
     const response = await client.v1.boxes.fs.read('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/config.json',
+      workingDir: '/home/user/documents',
     });
   });
 
@@ -90,6 +92,7 @@ describe('resource fs', () => {
   test.skip('remove: required and optional params', async () => {
     const response = await client.v1.boxes.fs.remove('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/output.txt',
+      workingDir: '/home/user/documents',
     });
   });
 
@@ -113,6 +116,7 @@ describe('resource fs', () => {
     const response = await client.v1.boxes.fs.rename('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       newPath: '/home/user/documents/new-name.txt',
       oldPath: '/home/user/documents/output.txt',
+      workingDir: '/home/user/documents',
     });
   });
 
@@ -136,6 +140,7 @@ describe('resource fs', () => {
     const response = await client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       content: 'Hello, World!\nThis is file content.',
       path: '/home/user/documents/output.txt',
+      workingDir: '/home/user/documents',
     });
   });
 });
