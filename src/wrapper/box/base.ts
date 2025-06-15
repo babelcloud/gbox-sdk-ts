@@ -1,42 +1,30 @@
 import type {
   AndroidBox,
   LinuxBox,
-  ActionClickParams,
-  ActionDragParams,
-  ActionMoveParams,
-  ActionScreenshotParams,
-  ActionScrollParams,
-  ActionTouchParams,
-  ActionTypeParams,
   BoxExecuteCommandsResponse,
   BoxExecuteCommandsParams,
   BoxRunCodeParams,
   BoxRunCodeResponse,
-  FListParams,
-  FWriteParams,
-  FReadParams,
-  FListResponse,
-  FWriteResponse,
-  FReadResponse,
-  ActionPressKeyParams,
-  ActionPressButtonParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
+import { ActionOperator } from './action';
+import { FileSystemOperator } from './file-system';
+import { BrowserOperator } from './browser';
 
 export class BaseBox<T extends LinuxBox | AndroidBox> {
   protected client: GboxClient;
   public data: T;
-  public action: InterfaceActions;
-  public fs: InterfaceFs;
-  public browser: InterfaceBrowser;
+  public action: ActionOperator;
+  public fs: FileSystemOperator;
+  public browser: BrowserOperator;
 
   constructor(data: T, client: GboxClient) {
     this.client = client;
     this.data = data;
 
-    this.action = new InterfaceActions(this.client, this.data.id);
-    this.fs = new InterfaceFs(this.client, this.data.id);
-    this.browser = new InterfaceBrowser(this.client, this.data.id);
+    this.action = new ActionOperator(this.client, this.data.id);
+    this.fs = new FileSystemOperator(this.client, this.data.id);
+    this.browser = new BrowserOperator(this.client, this.data.id);
   }
 
   private async syncData() {
@@ -83,7 +71,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * @example
    * const response = await myBox.runCode('print("Hello, World!")');
    * or
-   * const response = await myBox.runCode({ code: 'print("Hello, World!")', type: 'bash' });
+   * const response = await myBox.runCode({ code: 'print("Hello, World!")', language: 'bash' });
    */
   runCode(body: BoxRunCodeParams | string): Promise<BoxRunCodeResponse> {
     if (typeof body === 'string') {
@@ -91,167 +79,5 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
     } else {
       return this.client.v1.boxes.runCode(this.data.id, body);
     }
-  }
-}
-
-class InterfaceActions {
-  private client: GboxClient;
-  private boxId: string;
-
-  constructor(client: GboxClient, boxId: string) {
-    this.client = client;
-    this.boxId = boxId;
-  }
-
-  /**
-   * @example
-   * const response = await myBox.action.click({ x: 100, y: 100 });
-   */
-  async click(body: ActionClickParams) {
-    return this.client.v1.boxes.actions.click(this.boxId, body);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.action.drag(
-   *   {
-   *     path: [
-   *       { x: 100, y: 100 },
-   *       { x: 200, y: 200 },
-   *     ],
-   *   }
-   * );
-   */
-  async drag(body: ActionDragParams) {
-    return this.client.v1.boxes.actions.drag(this.boxId, body);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.action.pressKey({ keys: ['enter'] });
-   */
-  async pressKey(body: ActionPressKeyParams) {
-    return this.client.v1.boxes.actions.pressKey(this.boxId, body);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.action.pressButton({ buttons: ['power']});
-   */
-  async pressButton(body: ActionPressButtonParams) {
-    return this.client.v1.boxes.actions.pressButton(this.boxId, body);
-  }
-  /**
-   * @example
-   * const response = await myBox.action.move({ x: 200, y: 300 });
-   */
-  async move(body: ActionMoveParams) {
-    return this.client.v1.boxes.actions.move(this.boxId, body);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.action.scroll({ scrollX: 0, scrollY: 100, x: 100, y: 100 });
-   */
-  async scroll(body: ActionScrollParams) {
-    return this.client.v1.boxes.actions.scroll(this.boxId, body);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.action.touch({ points: [{ start: { x: 0, y: 0 } }] });
-   */
-  async touch(body: ActionTouchParams) {
-    return this.client.v1.boxes.actions.touch(this.boxId, body);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.action.type({ text: 'Hello, World!' });
-   */
-  async type(body: ActionTypeParams) {
-    return this.client.v1.boxes.actions.type(this.boxId, body);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.action.screenshot();
-   * or
-   * const response = await myBox.action.screenshot({ outputFormat: 'base64' });
-   */
-  async screenshot(body?: ActionScreenshotParams) {
-    return this.client.v1.boxes.actions.screenshot(this.boxId, body || { outputFormat: 'base64' });
-  }
-}
-
-class InterfaceFs {
-  private client: GboxClient;
-  private boxId: string;
-
-  constructor(client: GboxClient, boxId: string) {
-    this.client = client;
-    this.boxId = boxId;
-  }
-
-  /**
-   * @example
-   * const response = await myBox.fs.list('/tmp');
-   * or
-   * const response = await myBox.fs.list({ path: '/tmp', depth: 1 });
-   */
-  list(body: FListParams | string): Promise<FListResponse> {
-    if (typeof body === 'string') {
-      return this.client.v1.boxes.fs.list(this.boxId, { path: body });
-    } else {
-      return this.client.v1.boxes.fs.list(this.boxId, body);
-    }
-  }
-
-  /**
-   * @example
-   * const response = await myBox.fs.read('/tmp/file.txt');
-   * or
-   * const response = await myBox.fs.read({ path: '/tmp/file.txt' });
-   */
-  read(body: FReadParams | string): Promise<FReadResponse> {
-    if (typeof body === 'string') {
-      return this.client.v1.boxes.fs.read(this.boxId, { path: body });
-    } else {
-      return this.client.v1.boxes.fs.read(this.boxId, body);
-    }
-  }
-
-  /**
-   * @example
-   * const response = await myBox.fs.write({ path: '/tmp/file.txt', content: 'Hello, World!' });
-   */
-  write(body: FWriteParams): Promise<FWriteResponse> {
-    return this.client.v1.boxes.fs.write(this.boxId, body);
-  }
-}
-
-class InterfaceBrowser {
-  private client: GboxClient;
-  private boxId: string;
-
-  constructor(client: GboxClient, boxId: string) {
-    this.client = client;
-    this.boxId = boxId;
-  }
-
-  /**
-   * @example
-   * const response = await myBox.browser.connectUrl();
-   */
-  async connectUrl() {
-    return this.client.v1.boxes.browser.connectURL(this.boxId);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.browser.cdpUrl();
-   */
-  async cdpUrl() {
-    return this.client.v1.boxes.browser.cdpURL(this.boxId);
   }
 }
