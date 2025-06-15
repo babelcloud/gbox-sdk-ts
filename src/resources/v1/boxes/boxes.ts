@@ -711,7 +711,8 @@ export interface BoxRunCodeParams {
   code: string;
 
   /**
-   * The arguments to run the code. e.g. ["-h"]
+   * The arguments to run the code. For example, if you want to run "python index.py
+   * --help", you should pass ["--help"] as arguments.
    */
   argv?: Array<string>;
 

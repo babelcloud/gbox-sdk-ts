@@ -26,11 +26,26 @@ import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 import { V1 } from './resources/v1/v1';
 
+const environments = {
+  production: 'https://gbox.ai/api/v1/',
+  selfHost: 'http://localhost:28080/api/v1/',
+};
+type Environment = keyof typeof environments;
+
 export interface ClientOptions {
   /**
    * Defaults to process.env['GBOX_API_KEY'].
    */
   apiKey?: string | undefined;
+
+  /**
+   * Specifies the environment to use for the API.
+   *
+   * Each environment maps to a different base URL:
+   * - `production` corresponds to `https://gbox.ai/api/v1/`
+   * - `selfHost` corresponds to `http://localhost:28080/api/v1/`
+   */
+  environment?: Environment | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -121,7 +136,8 @@ export class GboxClient {
    * API Client for interfacing with the Gbox Client API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['GBOX_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['GBOX_CLIENT_BASE_URL'] ?? https://alpha.gbox.cloud/api/v1/] - Override the default base URL for the API.
+   * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
+   * @param {string} [opts.baseURL=process.env['GBOX_CLIENT_BASE_URL'] ?? https://gbox.ai/api/v1/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -143,10 +159,17 @@ export class GboxClient {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://alpha.gbox.cloud/api/v1/`,
+      baseURL,
+      environment: opts.environment ?? 'production',
     };
 
-    this.baseURL = options.baseURL!;
+    if (baseURL && opts.environment) {
+      throw new Errors.GboxClientError(
+        'Ambiguous URL; The `baseURL` option (or GBOX_CLIENT_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
+      );
+    }
+
+    this.baseURL = options.baseURL || environments[options.environment || 'production'];
     this.timeout = options.timeout ?? GboxClient.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
@@ -172,7 +195,8 @@ export class GboxClient {
   withOptions(options: Partial<ClientOptions>): this {
     return new (this.constructor as any as new (props: ClientOptions) => typeof this)({
       ...this._options,
-      baseURL: this.baseURL,
+      environment: options.environment ? options.environment : undefined,
+      baseURL: options.environment ? undefined : this.baseURL,
       maxRetries: this.maxRetries,
       timeout: this.timeout,
       logger: this.logger,
