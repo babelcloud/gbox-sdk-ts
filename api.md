@@ -53,12 +53,16 @@ Types:
 
 - <code><a href="./src/resources/v1/boxes/fs.ts">FListResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FReadResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/fs.ts">FRemoveResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/fs.ts">FRenameResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FWriteResponse</a></code>
 
 Methods:
 
 - <code title="get /boxes/{id}/fs/list">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">list</a>(id, { ...params }) -> FListResponse</code>
 - <code title="get /boxes/{id}/fs/read">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">read</a>(id, { ...params }) -> FReadResponse</code>
+- <code title="delete /boxes/{id}/fs">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">remove</a>(id, { ...params }) -> FRemoveResponse</code>
+- <code title="post /boxes/{id}/fs/rename">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">rename</a>(id, { ...params }) -> FRenameResponse</code>
 - <code title="post /boxes/{id}/fs/write">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">write</a>(id, { ...params }) -> FWriteResponse</code>
 
 ### Browser

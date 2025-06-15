@@ -54,8 +54,12 @@ export {
   Fs,
   type FListResponse,
   type FReadResponse,
+  type FRemoveResponse,
+  type FRenameResponse,
   type FWriteResponse,
   type FListParams,
   type FReadParams,
+  type FRemoveParams,
+  type FRenameParams,
   type FWriteParams,
 } from './fs';
