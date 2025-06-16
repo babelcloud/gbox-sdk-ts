@@ -529,21 +529,6 @@ export interface ActionScreenshotParams {
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
-
-  /**
-   * Delay after performing the action, before taking the final screenshot.
-   *
-   * Execution flow:
-   *
-   * 1. Take screenshot before action
-   * 2. Perform the action
-   * 3. Wait for screenshotDelay (this parameter)
-   * 4. Take screenshot after action
-   *
-   * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
-   */
-  screenshotDelay?: string;
 }
 
 export namespace ActionScreenshotParams {
