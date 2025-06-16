@@ -1,0 +1,7 @@
+{
+  "entryPoints": [
+    "src/index.ts"
+  ],
+  "json": "docs/sdk-docs.json",
+  "out": "docs"
+}

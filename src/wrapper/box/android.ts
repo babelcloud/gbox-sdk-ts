@@ -15,6 +15,9 @@ import { TimeString } from '../types';
 import { BaseBox } from './base';
 
 export interface CreateAndroid extends BoxCreateAndroidParams {
+  /**
+   * Box type is Android
+   */
   type: 'android';
   config?: BoxCreateAndroidParams['config'] & {
     expiresIn?: TimeString;
