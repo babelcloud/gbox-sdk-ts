@@ -48,7 +48,7 @@ export {
   type BoxStartParams,
   type BoxStopParams,
 } from './boxes';
-export { Browser, type BrowserCdpURLResponse, type BrowserConnectURLResponse } from './browser';
+export { Browser, type BrowserCdpURLResponse } from './browser';
 export {
   Fs,
   type FListResponse,

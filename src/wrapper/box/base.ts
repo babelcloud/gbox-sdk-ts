@@ -241,14 +241,6 @@ class InterfaceBrowser {
 
   /**
    * @example
-   * const response = await myBox.browser.connectUrl();
-   */
-  async connectUrl() {
-    return this.client.v1.boxes.browser.connectURL(this.boxId);
-  }
-
-  /**
-   * @example
    * const response = await myBox.browser.cdpUrl();
    */
   async cdpUrl() {
