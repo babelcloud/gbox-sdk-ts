@@ -115,6 +115,27 @@ export class Android extends APIResource {
   }
 
   /**
+   * Get app activities
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.android.listActivities(
+   *     'com.example.myapp',
+   *     { id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   *   );
+   * ```
+   */
+  listActivities(
+    packageName: string,
+    params: AndroidListActivitiesParams,
+    options?: RequestOptions,
+  ): APIPromise<AndroidListActivitiesResponse> {
+    const { id } = params;
+    return this._client.get(path`/boxes/${id}/android/apps/${packageName}/activities`, options);
+  }
+
+  /**
    * Open app
    *
    * @example
@@ -228,6 +249,45 @@ export interface AndroidGetConnectAddressResponse {
   adb: string;
 }
 
+export interface AndroidListActivitiesResponse {
+  /**
+   * Activity list
+   */
+  data: Array<AndroidListActivitiesResponse.Data>;
+}
+
+export namespace AndroidListActivitiesResponse {
+  /**
+   * Android app activity
+   */
+  export interface Data {
+    /**
+     * Activity class name
+     */
+    className: string;
+
+    /**
+     * Activity class name
+     */
+    isExported: boolean;
+
+    /**
+     * Whether the activity is the main activity
+     */
+    isMain: boolean;
+
+    /**
+     * Activity name
+     */
+    name: string;
+
+    /**
+     * Activity package name
+     */
+    packageName: string;
+  }
+}
+
 export interface AndroidListParams {
   /**
    * Application type: system or third-party, default is all
@@ -274,6 +334,13 @@ export declare namespace AndroidInstallParams {
   }
 }
 
+export interface AndroidListActivitiesParams {
+  /**
+   * Box ID
+   */
+  id: string;
+}
+
 export interface AndroidOpenParams {
   /**
    * Path param: Box ID
@@ -310,10 +377,12 @@ export declare namespace Android {
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
+    type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
     type AndroidListParams as AndroidListParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
+    type AndroidListActivitiesParams as AndroidListActivitiesParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidUninstallParams as AndroidUninstallParams,
