@@ -9,9 +9,16 @@ import {
 } from '../resources/v1/boxes';
 import { CreateAndroid, AndroidBoxOperator } from './box/android';
 import { CreateLinux, LinuxBoxOperator } from './box/linux';
-import { BoxListOperatorResponse, BoxOperator } from './types';
 import { isAndroidBox, isLinuxBox } from './utils';
 
+/*
+ * @example
+ * import GboxSDK from "gbox-sdk";
+ *
+ * const gboxSDK = new GboxSDK({
+ *   apiKey: process.env["GBOX_API_KEY"] // This is the default and can be omitted
+ * });
+ */
 export class GboxSDK {
   private client: GboxClient;
 
@@ -125,3 +132,26 @@ export class GboxSDK {
 }
 
 export interface DeleteBox extends BoxDeleteParams {}
+
+export interface BoxList extends BoxListParams {}
+
+export type BoxOperator = AndroidBoxOperator | LinuxBoxOperator;
+
+export type BoxListOperatorResponse = {
+  /**
+   * A box operator that can be either Linux or Android type
+   */
+  operators: BoxOperator[];
+  /**
+   * Page number
+   */
+  page: number;
+  /**
+   * Page size
+   */
+  pageSize: number;
+  /**
+   * Total number of items
+   */
+  total: number;
+};
