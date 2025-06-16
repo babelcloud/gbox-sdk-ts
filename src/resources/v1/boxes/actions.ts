@@ -252,9 +252,24 @@ export interface ActionClickParams {
   double?: boolean;
 
   /**
-   * Type of the URI
+   * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   */
+  screenshotDelay?: string;
 }
 
 export interface ActionDragParams {
@@ -269,9 +284,24 @@ export interface ActionDragParams {
   duration?: string;
 
   /**
-   * Type of the URI
+   * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   */
+  screenshotDelay?: string;
 }
 
 export namespace ActionDragParams {
@@ -303,9 +333,24 @@ export interface ActionMoveParams {
   y: number;
 
   /**
-   * Type of the URI
+   * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   */
+  screenshotDelay?: string;
 }
 
 export interface ActionPressButtonParams {
@@ -315,9 +360,24 @@ export interface ActionPressButtonParams {
   buttons: Array<'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu'>;
 
   /**
-   * Type of the URI
+   * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   */
+  screenshotDelay?: string;
 }
 
 export interface ActionPressKeyParams {
@@ -439,9 +499,24 @@ export interface ActionPressKeyParams {
   >;
 
   /**
-   * Type of the URI
+   * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   */
+  screenshotDelay?: string;
 }
 
 export interface ActionScreenshotParams {
@@ -451,9 +526,24 @@ export interface ActionScreenshotParams {
   clip?: ActionScreenshotParams.Clip;
 
   /**
-   * Type of the URI
+   * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   */
+  screenshotDelay?: string;
 }
 
 export namespace ActionScreenshotParams {
@@ -505,9 +595,24 @@ export interface ActionScrollParams {
   y: number;
 
   /**
-   * Type of the URI
+   * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   */
+  screenshotDelay?: string;
 }
 
 export interface ActionTouchParams {
@@ -517,9 +622,24 @@ export interface ActionTouchParams {
   points: Array<ActionTouchParams.Point>;
 
   /**
-   * Type of the URI
+   * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   */
+  screenshotDelay?: string;
 }
 
 export namespace ActionTouchParams {
@@ -563,9 +683,24 @@ export interface ActionTypeParams {
   text: string;
 
   /**
-   * Type of the URI
+   * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   */
+  screenshotDelay?: string;
 }
 
 export declare namespace Actions {
