@@ -14,13 +14,9 @@ import { FileSystemOperator } from './file-system';
 import { BrowserOperator } from './browser';
 import { TimeString } from '../types';
 
-export interface BoxStop extends BoxStopParams {
-  timeout?: TimeString;
-}
+export interface BoxStop extends BoxStopParams {}
 
-export interface BoxStart extends BoxStartParams {
-  timeout?: TimeString;
-}
+export interface BoxStart extends BoxStartParams {}
 
 export interface BoxExecuteCommands extends BoxExecuteCommandsParams {
   timeout?: TimeString;

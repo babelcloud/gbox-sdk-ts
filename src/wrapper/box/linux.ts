@@ -4,7 +4,6 @@ import { BaseBox } from './base';
 
 export interface CreateLinux extends BoxCreateLinuxParams {
   type: 'linux';
-  timeout?: TimeString;
   config?: BoxCreateLinuxParams['config'] & {
     expiresIn?: TimeString;
   };

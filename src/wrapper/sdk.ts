@@ -9,7 +9,7 @@ import {
 } from '../resources/v1/boxes';
 import { CreateAndroid, AndroidBoxOperator } from './box/android';
 import { CreateLinux, LinuxBoxOperator } from './box/linux';
-import { BoxListOperatorResponse, BoxOperator, TimeString } from './types';
+import { BoxListOperatorResponse, BoxOperator } from './types';
 import { isAndroidBox, isLinuxBox } from './utils';
 
 export class GboxSDK {
@@ -124,6 +124,4 @@ export class GboxSDK {
   }
 }
 
-export interface DeleteBox extends BoxDeleteParams {
-  timeout?: TimeString;
-}
+export interface DeleteBox extends BoxDeleteParams {}

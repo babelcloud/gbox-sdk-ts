@@ -16,7 +16,6 @@ import { BaseBox } from './base';
 
 export interface CreateAndroid extends BoxCreateAndroidParams {
   type: 'android';
-  timeout?: TimeString;
   config?: BoxCreateAndroidParams['config'] & {
     expiresIn?: TimeString;
   };
