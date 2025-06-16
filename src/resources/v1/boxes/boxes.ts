@@ -353,11 +353,6 @@ export interface CreateAndroidBox {
   config?: CreateBoxConfig;
 
   /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
-
-  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
@@ -391,11 +386,6 @@ export interface CreateLinuxBox {
    * Configuration for a box instance
    */
   config?: CreateBoxConfig;
-
-  /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -646,11 +636,6 @@ export interface BoxListParams {
 
 export interface BoxDeleteParams {
   /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
-
-  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
@@ -663,11 +648,6 @@ export interface BoxCreateAndroidParams {
   config?: CreateBoxConfig;
 
   /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
-
-  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
@@ -678,11 +658,6 @@ export interface BoxCreateLinuxParams {
    * Configuration for a box instance
    */
   config?: CreateBoxConfig;
-
-  /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -702,7 +677,9 @@ export interface BoxExecuteCommandsParams {
   envs?: unknown;
 
   /**
-   * The timeout of the command. e.g. '30s'
+   * The timeout of the command. e.g. '30s' or '1m' or '1h'. If the command times
+   * out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
+   * in exit code 124.
    */
   timeout?: string;
 
@@ -735,7 +712,8 @@ export interface BoxRunCodeParams {
   language?: 'bash' | 'python3' | 'typescript';
 
   /**
-   * The timeout of the code. e.g. "30s"
+   * The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
+   * execution times out, the exit code will be 124.
    */
   timeout?: string;
 
@@ -747,22 +725,12 @@ export interface BoxRunCodeParams {
 
 export interface BoxStartParams {
   /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
-
-  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
 }
 
 export interface BoxStopParams {
-  /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
-
   /**
    * Wait for the box operation to be completed, default is true
    */
