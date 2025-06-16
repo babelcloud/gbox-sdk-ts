@@ -19,37 +19,10 @@ export class Browser extends APIResource {
   cdpURL(id: string, options?: RequestOptions): APIPromise<string> {
     return this._client.get(path`/boxes/${id}/browser/connect-url/cdp`, options);
   }
-
-  /**
-   * Get connect url
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.boxes.browser.connectURL(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
-   * ```
-   */
-  connectURL(id: string, options?: RequestOptions): APIPromise<BrowserConnectURLResponse> {
-    return this._client.get(path`/boxes/${id}/browser/connect-url`, options);
-  }
 }
 
 export type BrowserCdpURLResponse = string;
 
-/**
- * Browser connection address information
- */
-export interface BrowserConnectURLResponse {
-  /**
-   * CDP URL
-   */
-  cdpUrl: string;
-}
-
 export declare namespace Browser {
-  export {
-    type BrowserCdpURLResponse as BrowserCdpURLResponse,
-    type BrowserConnectURLResponse as BrowserConnectURLResponse,
-  };
+  export { type BrowserCdpURLResponse as BrowserCdpURLResponse };
 }
