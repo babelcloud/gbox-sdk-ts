@@ -52,13 +52,19 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/boxes/fs.ts">FListResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/fs.ts">FExistsResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FReadResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/fs.ts">FRemoveResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/fs.ts">FRenameResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FWriteResponse</a></code>
 
 Methods:
 
 - <code title="get /boxes/{id}/fs/list">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">list</a>(id, { ...params }) -> FListResponse</code>
+- <code title="post /boxes/{id}/fs/exists">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">exists</a>(id, { ...params }) -> FExistsResponse</code>
 - <code title="get /boxes/{id}/fs/read">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">read</a>(id, { ...params }) -> FReadResponse</code>
+- <code title="delete /boxes/{id}/fs">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">remove</a>(id, { ...params }) -> FRemoveResponse</code>
+- <code title="post /boxes/{id}/fs/rename">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">rename</a>(id, { ...params }) -> FRenameResponse</code>
 - <code title="post /boxes/{id}/fs/write">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">write</a>(id, { ...params }) -> FWriteResponse</code>
 
 ### Browser
@@ -66,12 +72,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/boxes/browser.ts">BrowserCdpURLResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserConnectURLResponse</a></code>
 
 Methods:
 
 - <code title="get /boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">cdpURL</a>(id) -> string</code>
-- <code title="get /boxes/{id}/browser/connect-url">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">connectURL</a>(id) -> BrowserConnectURLResponse</code>
 
 ### Android
 
@@ -79,13 +83,18 @@ Types:
 
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidApp</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidListResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetConnectAddressResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidListActivitiesResponse</a></code>
 
 Methods:
 
 - <code title="get /boxes/{id}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">list</a>(id, { ...params }) -> AndroidListResponse</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/close">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">close</a>(packageName, { ...params }) -> void</code>
+- <code title="post /boxes/{id}/android/apps/close-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">closeAll</a>(id) -> void</code>
 - <code title="get /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">get</a>(packageName, { ...params }) -> AndroidApp</code>
+- <code title="get /boxes/{id}/android/connect-address">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">getConnectAddress</a>(id) -> AndroidGetConnectAddressResponse</code>
 - <code title="post /boxes/{id}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">install</a>(id, { ...params }) -> void</code>
+- <code title="get /boxes/{id}/android/apps/{packageName}/activities">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listActivities</a>(packageName, { ...params }) -> AndroidListActivitiesResponse</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/open">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">open</a>(packageName, { ...params }) -> void</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/restart">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restart</a>(packageName, { ...params }) -> void</code>
 - <code title="delete /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">uninstall</a>(packageName, { ...params }) -> void</code>

@@ -31,6 +31,7 @@ describe('resource actions', () => {
       button: 'left',
       double: false,
       outputFormat: 'base64',
+      screenshotDelay: '500ms',
     });
   });
 
@@ -60,6 +61,7 @@ describe('resource actions', () => {
       ],
       duration: '50ms',
       outputFormat: 'base64',
+      screenshotDelay: '500ms',
     });
   });
 
@@ -84,6 +86,7 @@ describe('resource actions', () => {
       x: 200,
       y: 300,
       outputFormat: 'base64',
+      screenshotDelay: '500ms',
     });
   });
 
@@ -106,6 +109,7 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.pressButton('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       buttons: ['power'],
       outputFormat: 'base64',
+      screenshotDelay: '500ms',
     });
   });
 
@@ -128,6 +132,7 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.pressKey('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       keys: ['enter'],
       outputFormat: 'base64',
+      screenshotDelay: '500ms',
     });
   });
 
@@ -168,6 +173,7 @@ describe('resource actions', () => {
       x: 100,
       y: 100,
       outputFormat: 'base64',
+      screenshotDelay: '500ms',
     });
   });
 
@@ -195,6 +201,7 @@ describe('resource actions', () => {
         },
       ],
       outputFormat: 'base64',
+      screenshotDelay: '500ms',
     });
   });
 
@@ -217,6 +224,7 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.type('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       text: 'Hello World',
       outputFormat: 'base64',
+      screenshotDelay: '500ms',
     });
   });
 });
