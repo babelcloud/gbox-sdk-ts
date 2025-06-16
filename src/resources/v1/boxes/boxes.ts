@@ -31,7 +31,7 @@ import {
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
-import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse, BrowserConnectURLResponse } from './browser';
+import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse } from './browser';
 import * as FsAPI from './fs';
 import {
   FExistsParams,
@@ -826,11 +826,7 @@ export declare namespace Boxes {
     type FWriteParams as FWriteParams,
   };
 
-  export {
-    BrowserAPIBrowser as Browser,
-    type BrowserCdpURLResponse as BrowserCdpURLResponse,
-    type BrowserConnectURLResponse as BrowserConnectURLResponse,
-  };
+  export { BrowserAPIBrowser as Browser, type BrowserCdpURLResponse as BrowserCdpURLResponse };
 
   export {
     Android as Android,
