@@ -48,3 +48,4 @@ export {
   type BoxStop,
   type BaseBox,
 } from './wrapper/box/base';
+export * from './wrapper/utils';

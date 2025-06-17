@@ -10,6 +10,7 @@ import type {
   FExistsResponse,
   FRenameParams,
   FRenameResponse,
+  FInfoParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 
@@ -46,11 +47,7 @@ export class FileSystemOperator {
     const res = await this.listInfo(body);
 
     return res.data.map((r) => {
-      if (r.type === 'file') {
-        return new FileOperator(this.client, this.boxId, r);
-      } else {
-        return new DirectoryOperator(this.client, this.boxId, r);
-      }
+      return this.dataToOperator(r);
     });
   }
 
@@ -93,6 +90,26 @@ export class FileSystemOperator {
    */
   async rename(body: FRenameParams): Promise<FRenameResponse> {
     return this.client.v1.boxes.fs.rename(this.boxId, body);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.fs.get({ path: '/tmp/file.txt' });
+   */
+  async get(body: FInfoParams): Promise<FileOperator | DirectoryOperator> {
+    const res = await this.client.v1.boxes.fs.info(this.boxId, body);
+
+    return this.dataToOperator(res);
+  }
+
+  private dataToOperator(data: FListResponse.File | FListResponse.Dir): FileOperator | DirectoryOperator {
+    if (data.type === 'file') {
+      return new FileOperator(this.client, this.boxId, data);
+    } else if (data.type === 'dir') {
+      return new DirectoryOperator(this.client, this.boxId, data);
+    } else {
+      throw new Error(`Invalid file system data type: ${(data as any).type}`);
+    }
   }
 }
 
