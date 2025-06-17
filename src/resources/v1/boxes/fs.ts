@@ -207,20 +207,75 @@ export interface FExistsResponse {
 }
 
 /**
- * Request parameters for getting a file/directory info
+ * File system file representation
  */
-export interface FInfoResponse {
+export type FInfoResponse = FInfoResponse.File | FInfoResponse.Dir;
+
+export namespace FInfoResponse {
   /**
-   * Path to the file/directory. If the path is not start with '/', the
-   * file/directory will be checked from the working directory
+   * File system file representation
    */
-  path: string;
+  export interface File {
+    /**
+     * Last modified time of the file
+     */
+    lastModified: string;
+
+    /**
+     * File metadata
+     */
+    mode: string;
+
+    /**
+     * Name of the file
+     */
+    name: string;
+
+    /**
+     * Full path to the file
+     */
+    path: string;
+
+    /**
+     * Size of the file
+     */
+    size: string;
+
+    /**
+     * File type indicator
+     */
+    type: 'file';
+  }
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * File system directory representation
    */
-  workingDir?: string;
+  export interface Dir {
+    /**
+     * Last modified time of the directory
+     */
+    lastModified: string;
+
+    /**
+     * Directory metadata
+     */
+    mode: string;
+
+    /**
+     * Name of the directory
+     */
+    name: string;
+
+    /**
+     * Full path to the directory
+     */
+    path: string;
+
+    /**
+     * Directory type indicator
+     */
+    type: 'dir';
+  }
 }
 
 /**
