@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.3.0 (2025-06-17)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* add typeDoc ([a81a6f0](https://github.com/babelcloud/gbox-sdk-ts/commit/a81a6f0b584fba4cd3e28a6fe65d50d715fa855d))
+* **api:** add read and write methods to FileSystemOperator and enhance DirectoryOperator with listInfo and list methods ([579ea43](https://github.com/babelcloud/gbox-sdk-ts/commit/579ea43cc9b54fbfcb1bce7d392072b032761552))
+* **api:** api update ([1515295](https://github.com/babelcloud/gbox-sdk-ts/commit/151529521bee2515dbd315433f22346badc19d19))
+* **api:** api update ([152fb79](https://github.com/babelcloud/gbox-sdk-ts/commit/152fb7905fe614beb95f6ce236bca6b05cf37edf))
+* **api:** api update ([ca6b440](https://github.com/babelcloud/gbox-sdk-ts/commit/ca6b440105d373b4ae98da2762cdd08edecd0361))
+* **api:** api update ([91422c4](https://github.com/babelcloud/gbox-sdk-ts/commit/91422c490c67dd95ee6f54cdd6b11098cd8f15fd))
+* **api:** api update ([b1c6f3d](https://github.com/babelcloud/gbox-sdk-ts/commit/b1c6f3d26be5f7dbd1c55024ad2b5071a519ec31))
+* **api:** api update ([378355a](https://github.com/babelcloud/gbox-sdk-ts/commit/378355a7745e96a23d0f43360d7dd0daaf8663ea))
+* **api:** api update ([f5224e0](https://github.com/babelcloud/gbox-sdk-ts/commit/f5224e0c7f92dd601f5c599e672293a7347c2569))
+* **api:** api update ([2925ec7](https://github.com/babelcloud/gbox-sdk-ts/commit/2925ec7df7c52986449d2172eb46462c57032497))
+* **api:** api update ([22c87fc](https://github.com/babelcloud/gbox-sdk-ts/commit/22c87fc34830d68dbf959af573e29259575d3397))
+* **api:** api update ([ebec36a](https://github.com/babelcloud/gbox-sdk-ts/commit/ebec36a290d20d43d777658521ae7df0cd952337))
+* **api:** api update ([c2fc3b0](https://github.com/babelcloud/gbox-sdk-ts/commit/c2fc3b03d3f801a6e99d73fa5b8c6aab28a05191))
+* **api:** api update ([05cff42](https://github.com/babelcloud/gbox-sdk-ts/commit/05cff429ff9d826d955d0091b1c590580539d426))
+* **api:** api update ([35617a4](https://github.com/babelcloud/gbox-sdk-ts/commit/35617a4eed567f000a9e46bfc9416d08b602d8d7))
+* **api:** api update ([6e4209c](https://github.com/babelcloud/gbox-sdk-ts/commit/6e4209ca2ce6833d5e33b2724b930d27d8c97555))
+* **api:** enhance box interfaces with timeout support and update delete method ([3f9e5d0](https://github.com/babelcloud/gbox-sdk-ts/commit/3f9e5d0d542169a320ae7e59454fdc2a5b17358d))
+* **api:** expose app property and rename listApps method to list in AndroidBoxOperator ([15bd9c2](https://github.com/babelcloud/gbox-sdk-ts/commit/15bd9c28d63beb4d3e98a1b2b232a8094b705519))
+* **api:** extend action interfaces to include optional screenshotDelay parameter ([819ad3f](https://github.com/babelcloud/gbox-sdk-ts/commit/819ad3f8745f17e00c884d037982bbee8e4a9776))
+* **client:** add support for endpoint-specific base URLs ([d591c9f](https://github.com/babelcloud/gbox-sdk-ts/commit/d591c9fcf4f82391717533bc2eb0e4959424f7b6))
+* fs ([7d608f9](https://github.com/babelcloud/gbox-sdk-ts/commit/7d608f9daa895f63a77ed927894b58de94b490b1))
+
+
+### Bug Fixes
+
+* publish script — handle NPM errors correctly ([f0108e4](https://github.com/babelcloud/gbox-sdk-ts/commit/f0108e41e03dd1957a93d53a6feb3ef30bd6252b))
+* remove connect url ([9e5e7b1](https://github.com/babelcloud/gbox-sdk-ts/commit/9e5e7b1bccd6ed5af3398606d91a6cdeb430cb8c))
+* remove timeout ([63b66c0](https://github.com/babelcloud/gbox-sdk-ts/commit/63b66c0bfa43234c64e1624c5d5c7212a29112b3))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([9ce0800](https://github.com/babelcloud/gbox-sdk-ts/commit/9ce0800c0b3753fe13bcf19c82b919345b62cf36))
+* **client:** refactor imports ([729a4c7](https://github.com/babelcloud/gbox-sdk-ts/commit/729a4c7fe550a852c12b1736aab9e43639f00581))
+* **internal:** add pure annotations, make base APIResource abstract ([c2cb166](https://github.com/babelcloud/gbox-sdk-ts/commit/c2cb1663b335f45df76107c2477aea8f6caf4b2a))
+
+
+### Documentation
+
+* update README ([86dbf6d](https://github.com/babelcloud/gbox-sdk-ts/commit/86dbf6d38965ccd7c815ca48eb78e71c4b281450))
+* update README.md ([be8341e](https://github.com/babelcloud/gbox-sdk-ts/commit/be8341e30fe777eec306f1c36fcc81d4c1d3f747))
+
 ## 0.2.0 (2025-06-12)
 
 Full Changelog: [v0.1.1...v0.2.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.1.1...v0.2.0)
