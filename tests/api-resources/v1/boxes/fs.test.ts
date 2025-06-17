@@ -27,6 +27,7 @@ describe('resource fs', () => {
     const response = await client.v1.boxes.fs.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents',
       depth: 2,
+      workingDir: '/home/user/documents',
     });
   });
 
@@ -47,6 +48,28 @@ describe('resource fs', () => {
   // skipped: tests are disabled for the time being
   test.skip('exists: required and optional params', async () => {
     const response = await client.v1.boxes.fs.exists('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      path: '/home/user/documents/output.txt',
+      workingDir: '/home/user/documents',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('info: only required params', async () => {
+    const responsePromise = client.v1.boxes.fs.info('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      path: '/home/user/documents/output.txt',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('info: required and optional params', async () => {
+    const response = await client.v1.boxes.fs.info('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/output.txt',
       workingDir: '/home/user/documents',
     });
