@@ -372,6 +372,8 @@ export interface CreateBoxConfig {
    */
   expiresIn?: string;
 
+  isRealDevice?: boolean;
+
   /**
    * Key-value pairs of labels for the box
    */
