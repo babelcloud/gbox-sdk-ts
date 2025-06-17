@@ -18,10 +18,13 @@ export {
   Android,
   type AndroidApp,
   type AndroidListResponse,
+  type AndroidGetConnectAddressResponse,
+  type AndroidListActivitiesResponse,
   type AndroidListParams,
   type AndroidCloseParams,
   type AndroidGetParams,
   type AndroidInstallParams,
+  type AndroidListActivitiesParams,
   type AndroidOpenParams,
   type AndroidRestartParams,
   type AndroidUninstallParams,
@@ -48,13 +51,19 @@ export {
   type BoxStartParams,
   type BoxStopParams,
 } from './boxes';
-export { Browser, type BrowserCdpURLResponse, type BrowserConnectURLResponse } from './browser';
+export { Browser, type BrowserCdpURLResponse } from './browser';
 export {
   Fs,
   type FListResponse,
+  type FExistsResponse,
   type FReadResponse,
+  type FRemoveResponse,
+  type FRenameResponse,
   type FWriteResponse,
   type FListParams,
+  type FExistsParams,
   type FReadParams,
+  type FRemoveParams,
+  type FRenameParams,
   type FWriteParams,
 } from './fs';

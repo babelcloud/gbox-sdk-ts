@@ -61,7 +61,7 @@ describe('resource boxes', () => {
     await expect(
       client.v1.boxes.delete(
         'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { timeout: '30s', wait: true },
+        { wait: true },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);
@@ -133,7 +133,7 @@ describe('resource boxes', () => {
   test.skip('runCode: required and optional params', async () => {
     const response = await client.v1.boxes.runCode('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       code: 'print("Hello, World!")',
-      argv: ['-v', '--help'],
+      argv: ['--help'],
       envs: { PYTHONPATH: '/usr/lib/python3', DEBUG: 'true' },
       language: 'python3',
       timeout: 'timeout',
@@ -159,7 +159,7 @@ describe('resource boxes', () => {
     await expect(
       client.v1.boxes.start(
         'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { timeout: '30s', wait: true },
+        { wait: true },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);
@@ -183,7 +183,7 @@ describe('resource boxes', () => {
     await expect(
       client.v1.boxes.stop(
         'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { timeout: '30s', wait: true },
+        { wait: true },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);

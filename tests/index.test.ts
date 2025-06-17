@@ -307,13 +307,48 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = ''; // empty
       const client = new GboxClient({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://alpha.gbox.cloud/api/v1/');
+      expect(client.baseURL).toEqual('https://gbox.ai/api/v1/');
     });
 
     test('blank env variable', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = '  '; // blank
       const client = new GboxClient({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://alpha.gbox.cloud/api/v1/');
+      expect(client.baseURL).toEqual('https://gbox.ai/api/v1/');
+    });
+
+    test('env variable with environment', () => {
+      process.env['GBOX_CLIENT_BASE_URL'] = 'https://example.com/from_env';
+
+      expect(
+        () => new GboxClient({ apiKey: 'My API Key', environment: 'production' }),
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Ambiguous URL; The \`baseURL\` option (or GBOX_CLIENT_BASE_URL env var) and the \`environment\` option are given. If you want to use the environment you must pass baseURL: null"`,
+      );
+
+      const client = new GboxClient({ apiKey: 'My API Key', baseURL: null, environment: 'production' });
+      expect(client.baseURL).toEqual('https://gbox.ai/api/v1/');
+    });
+
+    test('in request options', () => {
+      const client = new GboxClient({ apiKey: 'My API Key' });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/option/foo',
+      );
+    });
+
+    test('in request options overridden by client options', () => {
+      const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'http://localhost:5000/client' });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/client/foo',
+      );
+    });
+
+    test('in request options overridden by env variable', () => {
+      process.env['GBOX_CLIENT_BASE_URL'] = 'http://localhost:5000/env';
+      const client = new GboxClient({ apiKey: 'My API Key' });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/env/foo',
+      );
     });
   });
 

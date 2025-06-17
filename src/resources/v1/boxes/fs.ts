@@ -22,6 +22,21 @@ export class Fs extends APIResource {
   }
 
   /**
+   * Check if file exists
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.fs.exists(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { path: '/home/user/documents/output.txt' },
+   * );
+   * ```
+   */
+  exists(id: string, body: FExistsParams, options?: RequestOptions): APIPromise<FExistsResponse> {
+    return this._client.post(path`/boxes/${id}/fs/exists`, { body, ...options });
+  }
+
+  /**
    * Read box file
    *
    * @example
@@ -37,7 +52,41 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Write box file
+   * Delete box file/directory
+   *
+   * @example
+   * ```ts
+   * const f = await client.v1.boxes.fs.remove(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { path: '/home/user/documents/output.txt' },
+   * );
+   * ```
+   */
+  remove(id: string, body: FRemoveParams, options?: RequestOptions): APIPromise<FRemoveResponse> {
+    return this._client.delete(path`/boxes/${id}/fs`, { body, ...options });
+  }
+
+  /**
+   * Rename box file
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.fs.rename(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   {
+   *     newPath: '/home/user/documents/new-name.txt',
+   *     oldPath: '/home/user/documents/output.txt',
+   *   },
+   * );
+   * ```
+   */
+  rename(id: string, body: FRenameParams, options?: RequestOptions): APIPromise<FRenameResponse> {
+    return this._client.post(path`/boxes/${id}/fs/rename`, { body, ...options });
+  }
+
+  /**
+   * Creates or overwrites a file. Creates necessary directories in the path if they
+   * don't exist.
    *
    * @example
    * ```ts
@@ -76,6 +125,11 @@ export namespace FListResponse {
     lastModified: string;
 
     /**
+     * File metadata
+     */
+    mode: string;
+
+    /**
      * Name of the file
      */
     name: string;
@@ -101,6 +155,16 @@ export namespace FListResponse {
    */
   export interface Dir {
     /**
+     * Last modified time of the directory
+     */
+    lastModified: string;
+
+    /**
+     * Directory metadata
+     */
+    mode: string;
+
+    /**
      * Name of the directory
      */
     name: string;
@@ -118,6 +182,16 @@ export namespace FListResponse {
 }
 
 /**
+ * Response after checking if a file/directory exists
+ */
+export interface FExistsResponse {
+  /**
+   * Exists
+   */
+  exists: boolean;
+}
+
+/**
  * Response containing file content
  */
 export interface FReadResponse {
@@ -125,6 +199,26 @@ export interface FReadResponse {
    * Content of the file
    */
   content: string;
+}
+
+/**
+ * Response after deleting file/directory
+ */
+export interface FRemoveResponse {
+  /**
+   * Success message
+   */
+  message: string;
+}
+
+/**
+ * Response after renaming file/directory
+ */
+export interface FRenameResponse {
+  /**
+   * Success message
+   */
+  message: string;
 }
 
 /**
@@ -149,11 +243,66 @@ export interface FListParams {
   depth?: number;
 }
 
-export interface FReadParams {
+export interface FExistsParams {
   /**
-   * Path to the file
+   * Path to the file/directory. If the path is not start with '/', the
+   * file/directory will be checked from the working directory
    */
   path: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
+}
+
+export interface FReadParams {
+  /**
+   * Path to the file. If the path is not start with '/', the file will be read from
+   * the working directory.
+   */
+  path: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
+}
+
+export interface FRemoveParams {
+  /**
+   * Path to the file/directory. If the path is not start with '/', the
+   * file/directory will be deleted from the working directory
+   */
+  path: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
+}
+
+export interface FRenameParams {
+  /**
+   * New path for the file/directory. If the path is not start with '/', the
+   * file/directory will be renamed to the working directory
+   */
+  newPath: string;
+
+  /**
+   * Old path to the file/directory. If the path is not start with '/', the
+   * file/directory will be renamed from the working directory
+   */
+  oldPath: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
 }
 
 export interface FWriteParams {
@@ -163,18 +312,31 @@ export interface FWriteParams {
   content: string;
 
   /**
-   * Path to the file
+   * Path to the file. If the path is not start with '/', the file will be written to
+   * the working directory
    */
   path: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
 }
 
 export declare namespace Fs {
   export {
     type FListResponse as FListResponse,
+    type FExistsResponse as FExistsResponse,
     type FReadResponse as FReadResponse,
+    type FRemoveResponse as FRemoveResponse,
+    type FRenameResponse as FRenameResponse,
     type FWriteResponse as FWriteResponse,
     type FListParams as FListParams,
+    type FExistsParams as FExistsParams,
     type FReadParams as FReadParams,
+    type FRemoveParams as FRemoveParams,
+    type FRenameParams as FRenameParams,
     type FWriteParams as FWriteParams,
   };
 }

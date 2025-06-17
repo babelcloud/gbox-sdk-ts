@@ -21,8 +21,11 @@ import {
   Android,
   AndroidApp,
   AndroidCloseParams,
+  AndroidGetConnectAddressResponse,
   AndroidGetParams,
   AndroidInstallParams,
+  AndroidListActivitiesParams,
+  AndroidListActivitiesResponse,
   AndroidListParams,
   AndroidListResponse,
   AndroidOpenParams,
@@ -30,13 +33,19 @@ import {
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
-import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse, BrowserConnectURLResponse } from './browser';
+import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse } from './browser';
 import * as FsAPI from './fs';
 import {
+  FExistsParams,
+  FExistsResponse,
   FListParams,
   FListResponse,
   FReadParams,
   FReadResponse,
+  FRemoveParams,
+  FRemoveResponse,
+  FRenameParams,
+  FRenameResponse,
   FWriteParams,
   FWriteResponse,
   Fs,
@@ -241,11 +250,6 @@ export namespace AndroidBox {
    */
   export interface Config {
     /**
-     * Android browser configuration settings
-     */
-    browser: Config.Browser;
-
-    /**
      * CPU cores allocated to the box
      */
     cpu: number;
@@ -281,32 +285,22 @@ export namespace AndroidBox {
     storage: number;
 
     /**
-     * Working directory path for the box
+     * Android browser configuration settings
      */
-    workingDir: string;
+    browser?: Config.Browser;
 
     /**
      * Device type - virtual or physical Android device
      */
     deviceType?: 'virtual' | 'physical';
+
+    /**
+     * Working directory path for the box
+     */
+    workingDir?: string;
   }
 
   export namespace Config {
-    /**
-     * Android browser configuration settings
-     */
-    export interface Browser {
-      /**
-       * Supported browser types for Android boxes
-       */
-      type: 'Chrome for Android' | 'UC Browser for Android';
-
-      /**
-       * Browser version string (e.g. '136')
-       */
-      version: string;
-    }
-
     /**
      * Android operating system configuration
      */
@@ -331,6 +325,21 @@ export namespace AndroidBox {
        */
       width: number;
     }
+
+    /**
+     * Android browser configuration settings
+     */
+    export interface Browser {
+      /**
+       * Supported browser types for Android boxes
+       */
+      type: 'Chrome for Android' | 'UC Browser for Android';
+
+      /**
+       * Browser version string (e.g. '136')
+       */
+      version: string;
+    }
   }
 }
 
@@ -342,11 +351,6 @@ export interface CreateAndroidBox {
    * Configuration for a box instance
    */
   config?: CreateBoxConfig;
-
-  /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -382,11 +386,6 @@ export interface CreateLinuxBox {
    * Configuration for a box instance
    */
   config?: CreateBoxConfig;
-
-  /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -440,11 +439,6 @@ export namespace LinuxBox {
    */
   export interface Config {
     /**
-     * Linux browser configuration settings
-     */
-    browser: Config.Browser;
-
-    /**
      * CPU cores allocated to the box
      */
     cpu: number;
@@ -480,27 +474,17 @@ export namespace LinuxBox {
     storage: number;
 
     /**
+     * Linux browser configuration settings
+     */
+    browser?: Config.Browser;
+
+    /**
      * Working directory path for the box
      */
-    workingDir: string;
+    workingDir?: string;
   }
 
   export namespace Config {
-    /**
-     * Linux browser configuration settings
-     */
-    export interface Browser {
-      /**
-       * Supported browser types for Linux boxes
-       */
-      type: 'chromium' | 'firefox' | 'webkit';
-
-      /**
-       * Browser version string (e.g. '12')
-       */
-      version: string;
-    }
-
     /**
      * Linux operating system configuration
      */
@@ -524,6 +508,21 @@ export namespace LinuxBox {
        * Width of the box
        */
       width: number;
+    }
+
+    /**
+     * Linux browser configuration settings
+     */
+    export interface Browser {
+      /**
+       * Supported browser types for Linux boxes
+       */
+      type: 'chromium' | 'firefox' | 'webkit';
+
+      /**
+       * Browser version string (e.g. '12')
+       */
+      version: string;
     }
   }
 }
@@ -637,11 +636,6 @@ export interface BoxListParams {
 
 export interface BoxDeleteParams {
   /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
-
-  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
@@ -654,11 +648,6 @@ export interface BoxCreateAndroidParams {
   config?: CreateBoxConfig;
 
   /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
-
-  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
@@ -669,11 +658,6 @@ export interface BoxCreateLinuxParams {
    * Configuration for a box instance
    */
   config?: CreateBoxConfig;
-
-  /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -693,7 +677,9 @@ export interface BoxExecuteCommandsParams {
   envs?: unknown;
 
   /**
-   * The timeout of the command. e.g. '30s'
+   * The timeout of the command. e.g. '30s' or '1m' or '1h'. If the command times
+   * out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
+   * in exit code 124.
    */
   timeout?: string;
 
@@ -710,7 +696,8 @@ export interface BoxRunCodeParams {
   code: string;
 
   /**
-   * The arguments to run the code. e.g. ["-h"]
+   * The arguments to run the code. For example, if you want to run "python index.py
+   * --help", you should pass ["--help"] as arguments.
    */
   argv?: Array<string>;
 
@@ -725,7 +712,8 @@ export interface BoxRunCodeParams {
   language?: 'bash' | 'python3' | 'typescript';
 
   /**
-   * The timeout of the code. e.g. "30s"
+   * The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
+   * execution times out, the exit code will be 124.
    */
   timeout?: string;
 
@@ -737,22 +725,12 @@ export interface BoxRunCodeParams {
 
 export interface BoxStartParams {
   /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
-
-  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
 }
 
 export interface BoxStopParams {
-  /**
-   * Timeout for the box operation to be completed, default is 30s
-   */
-  timeout?: string;
-
   /**
    * Wait for the box operation to be completed, default is true
    */
@@ -805,27 +783,32 @@ export declare namespace Boxes {
   export {
     Fs as Fs,
     type FListResponse as FListResponse,
+    type FExistsResponse as FExistsResponse,
     type FReadResponse as FReadResponse,
+    type FRemoveResponse as FRemoveResponse,
+    type FRenameResponse as FRenameResponse,
     type FWriteResponse as FWriteResponse,
     type FListParams as FListParams,
+    type FExistsParams as FExistsParams,
     type FReadParams as FReadParams,
+    type FRemoveParams as FRemoveParams,
+    type FRenameParams as FRenameParams,
     type FWriteParams as FWriteParams,
   };
 
-  export {
-    BrowserAPIBrowser as Browser,
-    type BrowserCdpURLResponse as BrowserCdpURLResponse,
-    type BrowserConnectURLResponse as BrowserConnectURLResponse,
-  };
+  export { BrowserAPIBrowser as Browser, type BrowserCdpURLResponse as BrowserCdpURLResponse };
 
   export {
     Android as Android,
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
+    type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
+    type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
     type AndroidListParams as AndroidListParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
+    type AndroidListActivitiesParams as AndroidListActivitiesParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidUninstallParams as AndroidUninstallParams,
