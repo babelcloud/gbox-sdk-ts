@@ -1,10 +1,10 @@
 import { ClientOptions, GboxClient } from '../client';
 import {
   AndroidBox,
-  BoxDeleteParams,
   BoxListParams,
   BoxListResponse,
   BoxRetrieveResponse,
+  BoxTerminateParams,
   LinuxBox,
 } from '../resources/v1/boxes';
 import { CreateAndroid, AndroidBoxOperator } from './box/android';
@@ -112,10 +112,10 @@ export class GboxSDK {
 
   /**
    * @example
-   * const response = await gboxSDK.delete('box_id');
+   * const response = await gboxSDK.terminate('box_id');
    */
-  async delete(id: string, body?: DeleteBox) {
-    await this.client.v1.boxes.delete(id, body || {});
+  async terminate(id: string, body?: BoxTerminate) {
+    await this.client.v1.boxes.terminate(id, body || {});
   }
 
   private dataToOperator(data: AndroidBox | LinuxBox): BoxOperator {
@@ -131,7 +131,7 @@ export class GboxSDK {
   }
 }
 
-export interface DeleteBox extends BoxDeleteParams {}
+export interface BoxTerminate extends BoxTerminateParams {}
 
 export interface BoxList extends BoxListParams {}
 
