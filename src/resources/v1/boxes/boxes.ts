@@ -53,7 +53,6 @@ import {
   Fs,
 } from './fs';
 import { APIPromise } from '../../../core/api-promise';
-import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -87,28 +86,6 @@ export class Boxes extends APIResource {
    */
   list(query: BoxListParams | null | undefined = {}, options?: RequestOptions): APIPromise<BoxListResponse> {
     return this._client.get('/boxes', { query, ...options });
-  }
-
-  /**
-   * Delete box
-   *
-   * @example
-   * ```ts
-   * await client.v1.boxes.delete(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
-   * ```
-   */
-  delete(
-    id: string,
-    body: BoxDeleteParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.delete(path`/boxes/${id}`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
   }
 
   /**
@@ -247,7 +224,7 @@ export interface AndroidBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error' | 'deleted';
+  status: 'pending' | 'running' | 'stopped' | 'error' | 'terminated';
 
   /**
    * Box type is Android
@@ -441,7 +418,7 @@ export interface LinuxBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error' | 'deleted';
+  status: 'pending' | 'running' | 'stopped' | 'error' | 'terminated';
 
   /**
    * Box type is Linux
@@ -655,7 +632,8 @@ export interface BoxListParams {
   pageSize?: number;
 
   /**
-   * Filter boxes by their current status (pending, running, stopped, error, deleted)
+   * Filter boxes by their current status (pending, running, stopped, error,
+   * terminated)
    */
   status?: string;
 
@@ -663,13 +641,6 @@ export interface BoxListParams {
    * Filter boxes by their type (linux, android etc.) , default is all
    */
   type?: string;
-}
-
-export interface BoxDeleteParams {
-  /**
-   * Wait for the box operation to be completed, default is true
-   */
-  wait?: boolean;
 }
 
 export interface BoxCreateAndroidParams {
@@ -788,7 +759,6 @@ export declare namespace Boxes {
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
     type BoxListParams as BoxListParams,
-    type BoxDeleteParams as BoxDeleteParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,

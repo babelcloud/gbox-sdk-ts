@@ -44,7 +44,6 @@ export {
   type BoxStartResponse,
   type BoxStopResponse,
   type BoxListParams,
-  type BoxDeleteParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,
