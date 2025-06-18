@@ -38,6 +38,8 @@ import * as FsAPI from './fs';
 import {
   FExistsParams,
   FExistsResponse,
+  FInfoParams,
+  FInfoResponse,
   FListParams,
   FListResponse,
   FReadParams,
@@ -308,7 +310,7 @@ export namespace AndroidBox {
       /**
        * Supported Android versions
        */
-      version: '12' | '13';
+      version: '12' | '13' | '15';
     }
 
     /**
@@ -371,6 +373,8 @@ export interface CreateBoxConfig {
    * The box will be alive for the given duration (e.g. '10m')
    */
   expiresIn?: string;
+
+  isRealDevice?: boolean;
 
   /**
    * Key-value pairs of labels for the box
@@ -784,12 +788,14 @@ export declare namespace Boxes {
     Fs as Fs,
     type FListResponse as FListResponse,
     type FExistsResponse as FExistsResponse,
+    type FInfoResponse as FInfoResponse,
     type FReadResponse as FReadResponse,
     type FRemoveResponse as FRemoveResponse,
     type FRenameResponse as FRenameResponse,
     type FWriteResponse as FWriteResponse,
     type FListParams as FListParams,
     type FExistsParams as FExistsParams,
+    type FInfoParams as FInfoParams,
     type FReadParams as FReadParams,
     type FRemoveParams as FRemoveParams,
     type FRenameParams as FRenameParams,

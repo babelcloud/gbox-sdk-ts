@@ -1,6 +1,6 @@
 # Gbox TypeScript SDK
 
-[![NPM version](https://img.shields.io/npm/v/gbox-sdk.svg)](https://npmjs.org/package/gbox-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gbox-sdk)
+[![NPM version](<https://img.shields.io/npm/v/gbox-sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/gbox-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gbox-sdk)
 
 This library provides convenient access to the Gbox API from TypeScript or JavaScript.
 

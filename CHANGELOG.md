@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.1 (2025-06-18)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.3.0...v0.3.1)
+
+### Features
+
+* **api:** api update ([68fe9c3](https://github.com/babelcloud/gbox-sdk-ts/commit/68fe9c388ec894d599cb70b8daa6d88c36020c30))
+* **api:** api update ([2bafd4f](https://github.com/babelcloud/gbox-sdk-ts/commit/2bafd4f0e76a358468a4627530d6bbf33e12821e))
+* **api:** api update ([62b66bc](https://github.com/babelcloud/gbox-sdk-ts/commit/62b66bcc5d23ed4c59e543017ee2d333993c2fc8))
+* **api:** api update ([04d7710](https://github.com/babelcloud/gbox-sdk-ts/commit/04d77101bb1867c30321106183287f554e5213ea))
+* **api:** enhance file system operators and utility functions ([e1ad804](https://github.com/babelcloud/gbox-sdk-ts/commit/e1ad8041bb9e2251d3a648baffc3d5c4a7a193b0))
+
+
+### Chores
+
+* **readme:** update badges ([efcdf59](https://github.com/babelcloud/gbox-sdk-ts/commit/efcdf59890e5cc29c790fe56fa6d7868b9d9ee68))
+
 ## 0.3.0 (2025-06-17)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.2.0...v0.3.0)

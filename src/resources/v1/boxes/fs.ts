@@ -37,6 +37,21 @@ export class Fs extends APIResource {
   }
 
   /**
+   * Get file/directory
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.fs.info(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { path: '/home/user/documents/output.txt' },
+   * );
+   * ```
+   */
+  info(id: string, query: FInfoParams, options?: RequestOptions): APIPromise<FInfoResponse> {
+    return this._client.get(path`/boxes/${id}/fs/info`, { query, ...options });
+  }
+
+  /**
    * Read box file
    *
    * @example
@@ -86,7 +101,7 @@ export class Fs extends APIResource {
 
   /**
    * Creates or overwrites a file. Creates necessary directories in the path if they
-   * don't exist.
+   * don't exist. if the path is a directory, the write will be failed.
    *
    * @example
    * ```ts
@@ -192,6 +207,78 @@ export interface FExistsResponse {
 }
 
 /**
+ * File system file representation
+ */
+export type FInfoResponse = FInfoResponse.File | FInfoResponse.Dir;
+
+export namespace FInfoResponse {
+  /**
+   * File system file representation
+   */
+  export interface File {
+    /**
+     * Last modified time of the file
+     */
+    lastModified: string;
+
+    /**
+     * File metadata
+     */
+    mode: string;
+
+    /**
+     * Name of the file
+     */
+    name: string;
+
+    /**
+     * Full path to the file
+     */
+    path: string;
+
+    /**
+     * Size of the file
+     */
+    size: string;
+
+    /**
+     * File type indicator
+     */
+    type: 'file';
+  }
+
+  /**
+   * File system directory representation
+   */
+  export interface Dir {
+    /**
+     * Last modified time of the directory
+     */
+    lastModified: string;
+
+    /**
+     * Directory metadata
+     */
+    mode: string;
+
+    /**
+     * Name of the directory
+     */
+    name: string;
+
+    /**
+     * Full path to the directory
+     */
+    path: string;
+
+    /**
+     * Directory type indicator
+     */
+    type: 'dir';
+  }
+}
+
+/**
  * Response containing file content
  */
 export interface FReadResponse {
@@ -241,9 +328,29 @@ export interface FListParams {
    * Depth of the directory
    */
   depth?: number;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
 }
 
 export interface FExistsParams {
+  /**
+   * Path to the file/directory. If the path is not start with '/', the
+   * file/directory will be checked from the working directory
+   */
+  path: string;
+
+  /**
+   * Working directory. If not provided, the file will be read from the root
+   * directory.
+   */
+  workingDir?: string;
+}
+
+export interface FInfoParams {
   /**
    * Path to the file/directory. If the path is not start with '/', the
    * file/directory will be checked from the working directory
@@ -328,12 +435,14 @@ export declare namespace Fs {
   export {
     type FListResponse as FListResponse,
     type FExistsResponse as FExistsResponse,
+    type FInfoResponse as FInfoResponse,
     type FReadResponse as FReadResponse,
     type FRemoveResponse as FRemoveResponse,
     type FRenameResponse as FRenameResponse,
     type FWriteResponse as FWriteResponse,
     type FListParams as FListParams,
     type FExistsParams as FExistsParams,
+    type FInfoParams as FInfoParams,
     type FReadParams as FReadParams,
     type FRemoveParams as FRemoveParams,
     type FRenameParams as FRenameParams,
