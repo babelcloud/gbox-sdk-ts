@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 (2025-06-18)
+
+Full Changelog: [v0.3.1...v0.4.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.3.1...v0.4.0)
+
+### Features
+
+* **api:** api update ([97820d6](https://github.com/babelcloud/gbox-sdk-ts/commit/97820d62510cda2ec776889e7b77413a8154368a))
+* **workflow:** add GitHub Pages deployment workflow ([0069ae1](https://github.com/babelcloud/gbox-sdk-ts/commit/0069ae18c8332526eedcbcc1a3694735abac8341))
+
 ## 0.3.1 (2025-06-18)
 
 Full Changelog: [v0.3.0...v0.3.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.3.0...v0.3.1)
