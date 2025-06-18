@@ -310,7 +310,7 @@ export namespace AndroidBox {
       /**
        * Supported Android versions
        */
-      version: '12' | '13';
+      version: '12' | '13' | '15';
     }
 
     /**
