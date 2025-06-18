@@ -11,6 +11,8 @@ import type {
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
+import path from 'path';
+import fs from 'fs';
 
 export interface ActionClick extends ActionClickParams {
   screenshotDelay?: TimeString;
@@ -42,6 +44,14 @@ export interface ActionPressButton extends ActionPressButtonParams {
 
 export interface ActionPressKey extends ActionPressKeyParams {
   screenshotDelay?: TimeString;
+}
+
+export interface ActionScreenshot extends ActionScreenshotParams {
+  /**
+   * The path to save the screenshot to.
+   * If not provided, the screenshot will not be saved to the local file system.
+   */
+  path?: string;
 }
 
 export class ActionOperator {
@@ -129,7 +139,50 @@ export class ActionOperator {
    * or
    * const response = await myBox.action.screenshot({ outputFormat: 'base64' });
    */
-  async screenshot(body?: ActionScreenshotParams) {
-    return this.client.v1.boxes.actions.screenshot(this.boxId, body || { outputFormat: 'base64' });
+  async screenshot(body?: ActionScreenshot) {
+    const res = await this.client.v1.boxes.actions.screenshot(this.boxId, body || { outputFormat: 'base64' });
+
+    // Save screenshot to file if path is provided
+    if (body?.path) {
+      this.saveDataUrlToFile(res.uri, body.path);
+    }
+
+    return res;
+  }
+
+  /**
+   * Save base64 data in data URL format to a file
+   * @param dataUrl - data URL string, format like "data:image/png;base64,iVBORw0KGgoAAAA..."
+   * @param filePath - the file path to save to
+   */
+  private saveDataUrlToFile(dataUrl: string, filePath: string): void {
+    // Check if it's a valid data URL format
+    if (!dataUrl.startsWith('data:')) {
+      throw new Error('Invalid data URL format');
+    }
+
+    // Parse data URL
+    const matches = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
+    if (!matches) {
+      throw new Error('Invalid data URL format');
+    }
+
+    const [, base64Data] = matches;
+
+    if (!base64Data) {
+      throw new Error('Invalid data URL format');
+    }
+
+    // Convert base64 data to Buffer
+    const buffer = Buffer.from(base64Data, 'base64');
+
+    // Ensure directory exists
+    const dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    // Write to file
+    fs.writeFileSync(filePath, buffer);
   }
 }
