@@ -37,7 +37,7 @@ describe('resource boxes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.boxes.list(
-        { labels: {}, page: 1, pageSize: 10, status: 'running', type: 'linux' },
+        { labels: {}, page: 1, pageSize: 10, status: ['running'], type: ['linux'] },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);
