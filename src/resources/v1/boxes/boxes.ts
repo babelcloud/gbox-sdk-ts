@@ -656,14 +656,16 @@ export interface BoxListParams {
 
   /**
    * Filter boxes by their current status (pending, running, stopped, error,
-   * terminated).
+   * terminated, all). Must be an array of statuses. Use 'all' to get boxes with any
+   * status.
    */
-  status?: string;
+  status?: Array<'all' | 'pending' | 'running' | 'stopped' | 'error' | 'terminated'>;
 
   /**
-   * Filter boxes by their type (linux, android etc.) , default is all
+   * Filter boxes by their type (linux, android, all). Must be an array of types. Use
+   * 'all' to get boxes of any type.
    */
-  type?: string;
+  type?: Array<'all' | 'linux' | 'android'>;
 }
 
 export interface BoxCreateAndroidParams {
