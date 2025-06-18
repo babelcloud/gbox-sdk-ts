@@ -633,7 +633,7 @@ export interface BoxListParams {
 
   /**
    * Filter boxes by their current status (pending, running, stopped, error,
-   * terminated)
+   * terminated).
    */
   status?: string;
 
