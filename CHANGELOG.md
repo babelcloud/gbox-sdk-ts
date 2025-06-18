@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 (2025-06-18)
+
+Full Changelog: [v0.4.1...v0.5.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.4.1...v0.5.0)
+
+### Features
+
+* Enhance ActionOperator to support screenshot saving. Added ActionScreenshot interface with optional path property. Implemented saveDataUrlToFile method to handle file writing for screenshots. ([f36a8dd](https://github.com/babelcloud/gbox-sdk-ts/commit/f36a8dd55166c6b193971126642446fcaa3d0f3d))
+
 ## 0.4.1 (2025-06-18)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.4.0...v0.4.1)
