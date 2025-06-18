@@ -50,6 +50,7 @@ export {
   type BoxRunCodeParams,
   type BoxStartParams,
   type BoxStopParams,
+  type BoxTerminateParams,
 } from './boxes';
 export { Browser, type BrowserCdpURLResponse } from './browser';
 export {

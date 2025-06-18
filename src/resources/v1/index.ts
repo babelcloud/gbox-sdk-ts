@@ -21,5 +21,6 @@ export {
   type BoxRunCodeParams,
   type BoxStartParams,
   type BoxStopParams,
+  type BoxTerminateParams,
 } from './boxes/index';
 export { V1 } from './v1';

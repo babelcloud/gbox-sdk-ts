@@ -53,6 +53,7 @@ import {
   Fs,
 } from './fs';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -194,6 +195,28 @@ export class Boxes extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BoxStopResponse> {
     return this._client.post(path`/boxes/${id}/stop`, { body, ...options });
+  }
+
+  /**
+   * Terminate box
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.terminate(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  terminate(
+    id: string,
+    body: BoxTerminateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    return this._client.post(path`/boxes/${id}/terminate`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
@@ -739,6 +762,13 @@ export interface BoxStopParams {
   wait?: boolean;
 }
 
+export interface BoxTerminateParams {
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
+}
+
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
 Boxes.Browser = BrowserAPIBrowser;
@@ -765,6 +795,7 @@ export declare namespace Boxes {
     type BoxRunCodeParams as BoxRunCodeParams,
     type BoxStartParams as BoxStartParams,
     type BoxStopParams as BoxStopParams,
+    type BoxTerminateParams as BoxTerminateParams,
   };
 
   export {
