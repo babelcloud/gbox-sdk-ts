@@ -95,4 +95,12 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
       return this.client.v1.boxes.runCode(this.data.id, body);
     }
   }
+
+  /**
+   * @example
+   * const response = await myBox.liveView();
+   */
+  async liveView() {
+    return this.client.v1.boxes.liveViewURL(this.data.id);
+  }
 }
