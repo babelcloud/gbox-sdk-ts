@@ -155,6 +155,20 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Get live view url
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.liveViewURL(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  liveViewURL(id: string, options?: RequestOptions): APIPromise<BoxLiveViewURLResponse> {
+    return this._client.get(path`/boxes/${id}/live-view-url`, options);
+  }
+
+  /**
    * Run code on the box
    *
    * @example
@@ -585,6 +599,16 @@ export interface BoxExecuteCommandsResponse {
 }
 
 /**
+ * Live view configuration
+ */
+export interface BoxLiveViewURLResponse {
+  /**
+   * Live view url
+   */
+  url: string;
+}
+
+/**
  * Result of code execution
  */
 export interface BoxRunCodeResponse {
@@ -759,6 +783,7 @@ export declare namespace Boxes {
     type BoxRetrieveResponse as BoxRetrieveResponse,
     type BoxListResponse as BoxListResponse,
     type BoxExecuteCommandsResponse as BoxExecuteCommandsResponse,
+    type BoxLiveViewURLResponse as BoxLiveViewURLResponse,
     type BoxRunCodeResponse as BoxRunCodeResponse,
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
