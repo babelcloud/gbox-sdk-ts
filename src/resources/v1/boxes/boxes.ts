@@ -90,28 +90,6 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Delete box
-   *
-   * @example
-   * ```ts
-   * await client.v1.boxes.delete(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
-   * ```
-   */
-  delete(
-    id: string,
-    body: BoxDeleteParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.delete(path`/boxes/${id}`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
    * Create android box
    *
    * @example
@@ -218,6 +196,28 @@ export class Boxes extends APIResource {
   ): APIPromise<BoxStopResponse> {
     return this._client.post(path`/boxes/${id}/stop`, { body, ...options });
   }
+
+  /**
+   * Terminate box
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.terminate(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  terminate(
+    id: string,
+    body: BoxTerminateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    return this._client.post(path`/boxes/${id}/terminate`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
 }
 
 /**
@@ -247,7 +247,7 @@ export interface AndroidBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error' | 'deleted';
+  status: 'pending' | 'running' | 'stopped' | 'error' | 'terminated';
 
   /**
    * Box type is Android
@@ -441,7 +441,7 @@ export interface LinuxBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error' | 'deleted';
+  status: 'pending' | 'running' | 'stopped' | 'error' | 'terminated';
 
   /**
    * Box type is Linux
@@ -655,21 +655,17 @@ export interface BoxListParams {
   pageSize?: number;
 
   /**
-   * Filter boxes by their current status (pending, running, stopped, error, deleted)
+   * Filter boxes by their current status (pending, running, stopped, error,
+   * terminated, all). Must be an array of statuses. Use 'all' to get boxes with any
+   * status.
    */
-  status?: string;
+  status?: Array<'all' | 'pending' | 'running' | 'stopped' | 'error' | 'terminated'>;
 
   /**
-   * Filter boxes by their type (linux, android etc.) , default is all
+   * Filter boxes by their type (linux, android, all). Must be an array of types. Use
+   * 'all' to get boxes of any type.
    */
-  type?: string;
-}
-
-export interface BoxDeleteParams {
-  /**
-   * Wait for the box operation to be completed, default is true
-   */
-  wait?: boolean;
+  type?: Array<'all' | 'linux' | 'android'>;
 }
 
 export interface BoxCreateAndroidParams {
@@ -768,6 +764,13 @@ export interface BoxStopParams {
   wait?: boolean;
 }
 
+export interface BoxTerminateParams {
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
+}
+
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
 Boxes.Browser = BrowserAPIBrowser;
@@ -788,13 +791,13 @@ export declare namespace Boxes {
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
     type BoxListParams as BoxListParams,
-    type BoxDeleteParams as BoxDeleteParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,
     type BoxRunCodeParams as BoxRunCodeParams,
     type BoxStartParams as BoxStartParams,
     type BoxStopParams as BoxStopParams,
+    type BoxTerminateParams as BoxTerminateParams,
   };
 
   export {

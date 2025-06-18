@@ -21,7 +21,6 @@ Methods:
 
 - <code title="get /boxes/{id}">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">retrieve</a>(id) -> BoxRetrieveResponse</code>
 - <code title="get /boxes">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">list</a>({ ...params }) -> BoxListResponse</code>
-- <code title="delete /boxes/{id}">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">delete</a>(id, { ...params }) -> void</code>
 - <code title="post /boxes/android">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">createAndroid</a>({ ...params }) -> AndroidBox</code>
 - <code title="post /boxes/linux">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">createLinux</a>({ ...params }) -> LinuxBox</code>
 - <code title="post /boxes/{id}/commands">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">executeCommands</a>(id, { ...params }) -> BoxExecuteCommandsResponse</code>
@@ -29,6 +28,7 @@ Methods:
 - <code title="post /boxes/{id}/run-code">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">runCode</a>(id, { ...params }) -> BoxRunCodeResponse</code>
 - <code title="post /boxes/{id}/start">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">start</a>(id, { ...params }) -> BoxStartResponse</code>
 - <code title="post /boxes/{id}/stop">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">stop</a>(id, { ...params }) -> BoxStopResponse</code>
+- <code title="post /boxes/{id}/terminate">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">terminate</a>(id, { ...params }) -> void</code>
 
 ### Actions
 

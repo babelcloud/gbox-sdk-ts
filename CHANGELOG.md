@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.7.0 (2025-06-18)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** api update ([040a7fd](https://github.com/babelcloud/gbox-sdk-ts/commit/040a7fd8f62648fab6154319d3818179e8ff685e))
+* **api:** api update ([336d026](https://github.com/babelcloud/gbox-sdk-ts/commit/336d02638dd422843a6bf6748c6e107bde284df2))
+* **api:** api update ([31df437](https://github.com/babelcloud/gbox-sdk-ts/commit/31df43755cca43b251eda143012c502298804bec))
+* **api:** api update ([a72d960](https://github.com/babelcloud/gbox-sdk-ts/commit/a72d9606d1c9013aef14e591130442cc30c82829))
+
 ## 0.6.0 (2025-06-18)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.5.0...v0.6.0)

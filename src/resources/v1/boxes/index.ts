@@ -44,13 +44,13 @@ export {
   type BoxStartResponse,
   type BoxStopResponse,
   type BoxListParams,
-  type BoxDeleteParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,
   type BoxRunCodeParams,
   type BoxStartParams,
   type BoxStopParams,
+  type BoxTerminateParams,
 } from './boxes';
 export { Browser, type BrowserCdpURLResponse } from './browser';
 export {
