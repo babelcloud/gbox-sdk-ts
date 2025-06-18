@@ -365,6 +365,11 @@ export interface CreateAndroidBox {
  */
 export interface CreateBoxConfig {
   /**
+   * Device type - virtual or physical Android device
+   */
+  deviceType?: 'virtual' | 'physical';
+
+  /**
    * Environment variables for the box
    */
   envs?: unknown;
@@ -373,8 +378,6 @@ export interface CreateBoxConfig {
    * The box will be alive for the given duration (e.g. '10m')
    */
   expiresIn?: string;
-
-  isRealDevice?: boolean;
 
   /**
    * Key-value pairs of labels for the box
