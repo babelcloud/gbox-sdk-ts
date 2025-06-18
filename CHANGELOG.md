@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 (2025-06-18)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([5b33c67](https://github.com/babelcloud/gbox-sdk-ts/commit/5b33c67d2092d3dd86ceca8d51f547fcc23ad517))
+* **box:** add liveView method to retrieve live view URL ([7d44610](https://github.com/babelcloud/gbox-sdk-ts/commit/7d4461071a53f1feedc7b6f23a93471882c86b93))
+
 ## 0.5.0 (2025-06-18)
 
 Full Changelog: [v0.4.1...v0.5.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.4.1...v0.5.0)

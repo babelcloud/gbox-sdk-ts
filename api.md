@@ -12,6 +12,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxRetrieveResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxListResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxExecuteCommandsResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/boxes.ts">BoxLiveViewURLResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxRunCodeResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStartResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStopResponse</a></code>
@@ -24,6 +25,7 @@ Methods:
 - <code title="post /boxes/android">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">createAndroid</a>({ ...params }) -> AndroidBox</code>
 - <code title="post /boxes/linux">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">createLinux</a>({ ...params }) -> LinuxBox</code>
 - <code title="post /boxes/{id}/commands">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">executeCommands</a>(id, { ...params }) -> BoxExecuteCommandsResponse</code>
+- <code title="get /boxes/{id}/live-view-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">liveViewURL</a>(id) -> BoxLiveViewURLResponse</code>
 - <code title="post /boxes/{id}/run-code">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">runCode</a>(id, { ...params }) -> BoxRunCodeResponse</code>
 - <code title="post /boxes/{id}/start">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">start</a>(id, { ...params }) -> BoxStartResponse</code>
 - <code title="post /boxes/{id}/stop">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">stop</a>(id, { ...params }) -> BoxStopResponse</code>
