@@ -13,6 +13,7 @@ import { ActionOperator } from './action';
 import { FileSystemOperator } from './file-system';
 import { BrowserOperator } from './browser';
 import { TimeString } from '../types';
+import { BoxTerminate } from '../sdk';
 
 export interface BoxStop extends BoxStopParams {}
 
@@ -64,6 +65,16 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    */
   async stop(body?: BoxStop): Promise<this> {
     await this.client.v1.boxes.stop(this.data.id, body);
+    await this.syncData();
+    return this;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.terminate();
+   */
+  async terminate(body?: BoxTerminate): Promise<this> {
+    await this.client.v1.boxes.terminate(this.data.id, body);
     await this.syncData();
     return this;
   }
