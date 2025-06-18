@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 (2025-06-18)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.4.0...v0.4.1)
+
 ## 0.4.0 (2025-06-18)
 
 Full Changelog: [v0.3.1...v0.4.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.3.1...v0.4.0)
