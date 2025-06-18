@@ -28,6 +28,7 @@ Methods:
 - <code title="post /boxes/{id}/run-code">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">runCode</a>(id, { ...params }) -> BoxRunCodeResponse</code>
 - <code title="post /boxes/{id}/start">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">start</a>(id, { ...params }) -> BoxStartResponse</code>
 - <code title="post /boxes/{id}/stop">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">stop</a>(id, { ...params }) -> BoxStopResponse</code>
+- <code title="post /boxes/{id}/terminate">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">terminate</a>(id, { ...params }) -> void</code>
 
 ### Actions
 

@@ -18,6 +18,7 @@ import {
   BoxStartResponse,
   BoxStopParams,
   BoxStopResponse,
+  BoxTerminateParams,
   Boxes,
   CreateAndroidBox,
   CreateBoxConfig,
@@ -53,5 +54,6 @@ export declare namespace V1 {
     type BoxRunCodeParams as BoxRunCodeParams,
     type BoxStartParams as BoxStartParams,
     type BoxStopParams as BoxStopParams,
+    type BoxTerminateParams as BoxTerminateParams,
   };
 }
