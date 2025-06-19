@@ -12,6 +12,7 @@ import {
   ActionScreenshotParams,
   ActionScreenshotResponse,
   ActionScrollParams,
+  ActionSwipeParams,
   ActionTouchParams,
   ActionTypeParams,
   Actions,
@@ -812,6 +813,7 @@ export declare namespace Boxes {
     type ActionPressKeyParams as ActionPressKeyParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
+    type ActionSwipeParams as ActionSwipeParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
   };
