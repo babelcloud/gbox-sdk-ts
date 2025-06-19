@@ -13,6 +13,7 @@ import {
 } from '../../resources/v1/boxes';
 import { TimeString } from '../types';
 import { BaseBox } from './base';
+import fs from 'fs';
 
 export interface CreateAndroid extends BoxCreateAndroidParams {
   /**
@@ -28,12 +29,23 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
   public app = {
     /**
      * @example
-     * const response = await myBox.app.install({ apk: fs.readFileSync("path/to/your/app.apk") });
+     * const response = await myBox.app.install({ apk: fs.createReadStream("path/to/your/app.apk") });
      * or
      * const response = await myBox.app.install({ apk: "https://example.com/path/to/app.apk" });
      */
-    install: (body: AndroidInstallParams): Promise<void> =>
-      this.client.v1.boxes.android.install(this.data.id, body),
+    install: (body: AndroidInstallParams): Promise<void> => {
+      if (typeof body.apk === 'string' && !body.apk.startsWith('http')) {
+        const exists = fs.existsSync(body.apk);
+        if (!exists) {
+          throw new Error(`File ${body.apk} does not exist`);
+        }
+        const apkReadStream = fs.createReadStream(body.apk);
+        return this.client.v1.boxes.android.install(this.data.id, { apk: apkReadStream });
+      } else if (typeof body.apk === 'string' && body.apk.startsWith('http')) {
+        return this.client.v1.boxes.android.install(this.data.id, body);
+      }
+      return this.client.v1.boxes.android.install(this.data.id, body);
+    },
     /**
      * @example
      * const response = await myBox.app.uninstall('com.example.myapp');
@@ -44,7 +56,7 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * @example
      * const response = await myBox.app.list();
      */
-    list: (params: AndroidListParams): Promise<AndroidListResponse> =>
+    list: (params?: AndroidListParams): Promise<AndroidListResponse> =>
       this.client.v1.boxes.android.list(this.data.id, params),
     /**
      * @example
