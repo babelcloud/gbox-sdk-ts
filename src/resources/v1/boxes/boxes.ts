@@ -30,6 +30,7 @@ import {
   AndroidListResponse,
   AndroidOpenParams,
   AndroidRestartParams,
+  AndroidRotateScreenParams,
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
@@ -848,6 +849,7 @@ export declare namespace Boxes {
     type AndroidListActivitiesParams as AndroidListActivitiesParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
+    type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }

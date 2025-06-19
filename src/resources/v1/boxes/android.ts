@@ -173,6 +173,25 @@ export class Android extends APIResource {
   }
 
   /**
+   * Rotate screen
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.android.rotateScreen(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { angle: 90, direction: 'clockwise' },
+   * );
+   * ```
+   */
+  rotateScreen(id: string, body: AndroidRotateScreenParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${id}/android/screen/rotate`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Uninstall app
    *
    * @example
@@ -360,6 +379,18 @@ export interface AndroidRestartParams {
   id: string;
 }
 
+export interface AndroidRotateScreenParams {
+  /**
+   * Rotation angle in degrees
+   */
+  angle: 90 | 180 | 270;
+
+  /**
+   * Rotation direction
+   */
+  direction: 'clockwise' | 'counter-clockwise';
+}
+
 export interface AndroidUninstallParams {
   /**
    * Path param: Box ID
@@ -385,6 +416,7 @@ export declare namespace Android {
     type AndroidListActivitiesParams as AndroidListActivitiesParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
+    type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }
