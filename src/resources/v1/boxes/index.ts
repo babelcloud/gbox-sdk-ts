@@ -23,6 +23,7 @@ export {
   type AndroidListActivitiesResponse,
   type AndroidListSimpleResponse,
   type AndroidListParams,
+  type AndroidBackupParams,
   type AndroidCloseParams,
   type AndroidGetParams,
   type AndroidInstallParams,
@@ -30,6 +31,7 @@ export {
   type AndroidListSimpleParams,
   type AndroidOpenParams,
   type AndroidRestartParams,
+  type AndroidRestoreParams,
   type AndroidRotateScreenParams,
   type AndroidUninstallParams,
 } from './android';

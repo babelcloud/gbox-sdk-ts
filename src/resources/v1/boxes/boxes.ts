@@ -21,6 +21,7 @@ import * as AndroidAPI from './android';
 import {
   Android,
   AndroidApp,
+  AndroidBackupParams,
   AndroidCloseParams,
   AndroidGetConnectAddressResponse,
   AndroidGetParams,
@@ -33,6 +34,7 @@ import {
   AndroidListSimpleResponse,
   AndroidOpenParams,
   AndroidRestartParams,
+  AndroidRestoreParams,
   AndroidRotateScreenParams,
   AndroidUninstallParams,
 } from './android';
@@ -848,6 +850,7 @@ export declare namespace Boxes {
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
     type AndroidListSimpleResponse as AndroidListSimpleResponse,
     type AndroidListParams as AndroidListParams,
+    type AndroidBackupParams as AndroidBackupParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
@@ -855,6 +858,7 @@ export declare namespace Boxes {
     type AndroidListSimpleParams as AndroidListSimpleParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
+    type AndroidRestoreParams as AndroidRestoreParams,
     type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
