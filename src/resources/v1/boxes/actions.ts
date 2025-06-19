@@ -357,7 +357,7 @@ export interface ActionPressButtonParams {
   /**
    * Button to press
    */
-  buttons: Array<'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu'>;
+  buttons: Array<'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'>;
 
   /**
    * Type of the URI. default is base64.
