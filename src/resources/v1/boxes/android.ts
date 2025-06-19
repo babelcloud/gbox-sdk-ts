@@ -165,8 +165,9 @@ export class Android extends APIResource {
    * ```
    */
   restart(packageName: string, params: AndroidRestartParams, options?: RequestOptions): APIPromise<void> {
-    const { id } = params;
+    const { id, ...body } = params;
     return this._client.post(path`/boxes/${id}/android/apps/${packageName}/restart`, {
+      body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -374,9 +375,14 @@ export interface AndroidOpenParams {
 
 export interface AndroidRestartParams {
   /**
-   * Box ID
+   * Path param: Box ID
    */
   id: string;
+
+  /**
+   * Body param: Activity name, default is the main activity.
+   */
+  activityName?: string;
 }
 
 export interface AndroidRotateScreenParams {

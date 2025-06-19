@@ -180,6 +180,7 @@ describe('resource android', () => {
   test.skip('restart: required and optional params', async () => {
     const response = await client.v1.boxes.android.restart('com.example.myapp', {
       id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      activityName: 'com.android.settings.Settings',
     });
   });
 
