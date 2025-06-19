@@ -60,6 +60,7 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
       new AndroidAppOperator(
         await this.client.v1.boxes.android.get(packageName, { id: this.data.id }),
         this.client,
+        this.data,
       ),
     /**
      * @example
@@ -72,33 +73,35 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
 class AndroidAppOperator {
   private client: GboxClient;
   public data: AndroidApp;
+  public box: AndroidBox;
 
-  constructor(data: AndroidApp, client: GboxClient) {
+  constructor(data: AndroidApp, client: GboxClient, box: AndroidBox) {
     this.client = client;
     this.data = data;
+    this.box = box;
   }
 
   /**
    * @example
    * const response = await myApp.open();
    */
-  async open(params: AndroidOpenParams) {
-    return this.client.v1.boxes.android.open(this.data.packageName, params);
+  async open(params?: Omit<AndroidOpenParams, 'id'>) {
+    return this.client.v1.boxes.android.open(this.data.packageName, { id: this.box.id, ...params });
   }
 
   /**
    * @example
    * const response = await myApp.restart();
    */
-  async restart(params: AndroidRestartParams) {
-    return this.client.v1.boxes.android.restart(this.data.packageName, params);
+  async restart(params?: Omit<AndroidRestartParams, 'id'>) {
+    return this.client.v1.boxes.android.restart(this.data.packageName, { id: this.box.id, ...params });
   }
 
   /**
    * @example
    * const response = await myApp.close();
    */
-  async close(params: AndroidCloseParams) {
-    return this.client.v1.boxes.android.close(this.data.packageName, params);
+  async close(params?: Omit<AndroidCloseParams, 'id'>) {
+    return this.client.v1.boxes.android.close(this.data.packageName, { id: this.box.id, ...params });
   }
 }
