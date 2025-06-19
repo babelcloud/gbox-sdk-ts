@@ -27,6 +27,7 @@ export {
   type AndroidListActivitiesParams,
   type AndroidOpenParams,
   type AndroidRestartParams,
+  type AndroidRotateScreenParams,
   type AndroidUninstallParams,
 } from './android';
 export {
