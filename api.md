@@ -90,6 +90,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidListResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetConnectAddressResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidListActivitiesResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidListSimpleResponse</a></code>
 
 Methods:
 
@@ -100,6 +101,7 @@ Methods:
 - <code title="get /boxes/{id}/android/connect-address">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">getConnectAddress</a>(id) -> AndroidGetConnectAddressResponse</code>
 - <code title="post /boxes/{id}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">install</a>(id, { ...params }) -> void</code>
 - <code title="get /boxes/{id}/android/apps/{packageName}/activities">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listActivities</a>(packageName, { ...params }) -> AndroidListActivitiesResponse</code>
+- <code title="get /boxes/{id}/android/apps/simple">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listSimple</a>(id, { ...params }) -> AndroidListSimpleResponse</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/open">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">open</a>(packageName, { ...params }) -> void</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/restart">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restart</a>(packageName, { ...params }) -> void</code>
 - <code title="post /boxes/{id}/android/screen/rotate">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">rotateScreen</a>(id, { ...params }) -> void</code>

@@ -26,7 +26,7 @@ describe('resource android', () => {
     await expect(
       client.v1.boxes.android.list(
         'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { appType: 'third-party', isRunning: true },
+        { appType: 'system', isRunning: true },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);
@@ -138,6 +138,30 @@ describe('resource android', () => {
     const response = await client.v1.boxes.android.listActivities('com.example.myapp', {
       id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('listSimple', async () => {
+    const responsePromise = client.v1.boxes.android.listSimple('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('listSimple: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.android.listSimple(
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+        { appType: 'system' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being

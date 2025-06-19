@@ -136,6 +136,24 @@ export class Android extends APIResource {
   }
 
   /**
+   * List apps simple
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.android.listSimple(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  listSimple(
+    id: string,
+    query: AndroidListSimpleParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AndroidListSimpleResponse> {
+    return this._client.get(path`/boxes/${id}/android/apps/simple`, { query, ...options });
+  }
+
+  /**
    * Open app
    *
    * @example
@@ -308,9 +326,38 @@ export namespace AndroidListActivitiesResponse {
   }
 }
 
+/**
+ * Response containing list of Android apps
+ */
+export interface AndroidListSimpleResponse {
+  /**
+   * Android app simple list
+   */
+  data: Array<AndroidListSimpleResponse.Data>;
+}
+
+export namespace AndroidListSimpleResponse {
+  export interface Data {
+    /**
+     * Android app apk path
+     */
+    apkPath: string;
+
+    /**
+     * Application type: system or third-party
+     */
+    appType: 'system' | 'third-party';
+
+    /**
+     * Android app package name
+     */
+    packageName: string;
+  }
+}
+
 export interface AndroidListParams {
   /**
-   * Application type: system or third-party, default is all
+   * Application type: system or third-party, default is third-party
    */
   appType?: 'system' | 'third-party';
 
@@ -341,14 +388,14 @@ export type AndroidInstallParams =
 export declare namespace AndroidInstallParams {
   export interface InstallAndroidAppByFile {
     /**
-     * APK file to install (max file size: 200MB)
+     * APK file to install (max file size: 512MB)
      */
     apk: Uploadable;
   }
 
   export interface InstallAndroidAppByURL {
     /**
-     * HTTP URL to download APK file (max file size: 200MB)
+     * HTTP URL to download APK file (max file size: 512MB)
      */
     apk: string;
   }
@@ -359,6 +406,13 @@ export interface AndroidListActivitiesParams {
    * Box ID
    */
   id: string;
+}
+
+export interface AndroidListSimpleParams {
+  /**
+   * Application type: system or third-party, default is third-party
+   */
+  appType?: 'system' | 'third-party';
 }
 
 export interface AndroidOpenParams {
@@ -415,11 +469,13 @@ export declare namespace Android {
     type AndroidListResponse as AndroidListResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
+    type AndroidListSimpleResponse as AndroidListSimpleResponse,
     type AndroidListParams as AndroidListParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
     type AndroidListActivitiesParams as AndroidListActivitiesParams,
+    type AndroidListSimpleParams as AndroidListSimpleParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidRotateScreenParams as AndroidRotateScreenParams,
