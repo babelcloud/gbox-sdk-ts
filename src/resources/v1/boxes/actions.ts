@@ -130,13 +130,12 @@ export class Actions extends APIResource {
    * ```ts
    * const actionResult = await client.v1.boxes.actions.swipe(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { body: { direction: 'up' } },
+   *   { direction: 'up' },
    * );
    * ```
    */
-  swipe(id: string, params: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
-    const { body } = params;
-    return this._client.post(path`/boxes/${id}/actions/swipe`, { body: body, ...options });
+  swipe(id: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${id}/actions/swipe`, { body, ...options });
   }
 
   /**
@@ -616,8 +615,63 @@ export interface ActionScrollParams {
   screenshotDelay?: string;
 }
 
-export interface ActionSwipeParams {
-  body: unknown;
+export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.Swipe;
+
+export declare namespace ActionSwipeParams {
+  export interface SwipeSimple {
+    /**
+     * Direction of the swipe
+     */
+    direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
+
+    /**
+     * Distance of the swipe in pixels. If not provided, will use a default distance
+     * based on screen size
+     */
+    distance?: number;
+
+    /**
+     * Duration of the swipe
+     */
+    duration?: string;
+  }
+
+  export interface Swipe {
+    /**
+     * End point of the swipe path
+     */
+    end: unknown;
+
+    /**
+     * Start point of the swipe path
+     */
+    start: unknown;
+
+    /**
+     * Duration of the swipe
+     */
+    duration?: string;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     */
+    screenshotDelay?: string;
+  }
 }
 
 export interface ActionTouchParams {
