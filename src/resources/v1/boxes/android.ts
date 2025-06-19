@@ -28,6 +28,50 @@ export class Android extends APIResource {
   }
 
   /**
+   * Backup app
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.android.backup(
+   *   'com.example.myapp',
+   *   { id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
+   */
+  backup(packageName: string, params: AndroidBackupParams, options?: RequestOptions): APIPromise<Response> {
+    const { id } = params;
+    return this._client.post(path`/boxes/${id}/android/apps/${packageName}/backup`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  /**
+   * Backup all apps
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.android.backupAll(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
+   */
+  backupAll(id: string, options?: RequestOptions): APIPromise<Response> {
+    return this._client.post(path`/boxes/${id}/android/apps/backup-all`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  /**
    * Close app
    *
    * @example
@@ -185,6 +229,25 @@ export class Android extends APIResource {
   restart(packageName: string, params: AndroidRestartParams, options?: RequestOptions): APIPromise<void> {
     const { id, ...body } = params;
     return this._client.post(path`/boxes/${id}/android/apps/${packageName}/restart`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Restore app
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.android.restore(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { backup: fs.createReadStream('path/to/file') },
+   * );
+   * ```
+   */
+  restore(id: string, body: AndroidRestoreParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${id}/android/apps/restore`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -367,6 +430,13 @@ export interface AndroidListParams {
   isRunning?: boolean;
 }
 
+export interface AndroidBackupParams {
+  /**
+   * Box ID
+   */
+  id: string;
+}
+
 export interface AndroidCloseParams {
   /**
    * Box ID
@@ -439,6 +509,13 @@ export interface AndroidRestartParams {
   activityName?: string;
 }
 
+export interface AndroidRestoreParams {
+  /**
+   * Backup file to restore (max file size: 100MB)
+   */
+  backup: Uploadable;
+}
+
 export interface AndroidRotateScreenParams {
   /**
    * Rotation angle in degrees
@@ -471,6 +548,7 @@ export declare namespace Android {
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
     type AndroidListSimpleResponse as AndroidListSimpleResponse,
     type AndroidListParams as AndroidListParams,
+    type AndroidBackupParams as AndroidBackupParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
@@ -478,6 +556,7 @@ export declare namespace Android {
     type AndroidListSimpleParams as AndroidListSimpleParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
+    type AndroidRestoreParams as AndroidRestoreParams,
     type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };

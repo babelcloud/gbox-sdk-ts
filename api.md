@@ -95,6 +95,8 @@ Types:
 Methods:
 
 - <code title="get /boxes/{id}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">list</a>(id, { ...params }) -> AndroidListResponse</code>
+- <code title="post /boxes/{id}/android/apps/{packageName}/backup">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">backup</a>(packageName, { ...params }) -> Response</code>
+- <code title="post /boxes/{id}/android/apps/backup-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">backupAll</a>(id) -> Response</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/close">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">close</a>(packageName, { ...params }) -> void</code>
 - <code title="post /boxes/{id}/android/apps/close-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">closeAll</a>(id) -> void</code>
 - <code title="get /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">get</a>(packageName, { ...params }) -> AndroidApp</code>
@@ -104,5 +106,6 @@ Methods:
 - <code title="get /boxes/{id}/android/apps/simple">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listSimple</a>(id, { ...params }) -> AndroidListSimpleResponse</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/open">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">open</a>(packageName, { ...params }) -> void</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/restart">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restart</a>(packageName, { ...params }) -> void</code>
+- <code title="post /boxes/{id}/android/apps/restore">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restore</a>(id, { ...params }) -> void</code>
 - <code title="post /boxes/{id}/android/screen/rotate">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">rotateScreen</a>(id, { ...params }) -> void</code>
 - <code title="delete /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">uninstall</a>(packageName, { ...params }) -> void</code>
