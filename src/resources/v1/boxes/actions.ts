@@ -124,6 +124,22 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Performs a swipe in the specified direction
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.v1.boxes.actions.swipe(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { body: { direction: 'up' } },
+   * );
+   * ```
+   */
+  swipe(id: string, params: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
+    const { body } = params;
+    return this._client.post(path`/boxes/${id}/actions/swipe`, { body: body, ...options });
+  }
+
+  /**
    * Touch
    *
    * @example
@@ -600,6 +616,10 @@ export interface ActionScrollParams {
   screenshotDelay?: string;
 }
 
+export interface ActionSwipeParams {
+  body: unknown;
+}
+
 export interface ActionTouchParams {
   /**
    * Array of touch points and their actions
@@ -699,6 +719,7 @@ export declare namespace Actions {
     type ActionPressKeyParams as ActionPressKeyParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
+    type ActionSwipeParams as ActionSwipeParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
   };

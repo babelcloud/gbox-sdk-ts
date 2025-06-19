@@ -11,6 +11,7 @@ export {
   type ActionPressKeyParams,
   type ActionScreenshotParams,
   type ActionScrollParams,
+  type ActionSwipeParams,
   type ActionTouchParams,
   type ActionTypeParams,
 } from './actions';
