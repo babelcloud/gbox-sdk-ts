@@ -139,7 +139,7 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Get live view url
+   * Generate pre-signed live view url
    *
    * @example
    * ```ts
@@ -148,8 +148,12 @@ export class Boxes extends APIResource {
    * );
    * ```
    */
-  liveViewURL(id: string, options?: RequestOptions): APIPromise<BoxLiveViewURLResponse> {
-    return this._client.get(path`/boxes/${id}/live-view-url`, options);
+  liveViewURL(
+    id: string,
+    body: BoxLiveViewURLParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BoxLiveViewURLResponse> {
+    return this._client.post(path`/boxes/${id}/live-view-url`, { body, ...options });
   }
 
   /**
@@ -223,6 +227,24 @@ export class Boxes extends APIResource {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
+  }
+
+  /**
+   * Generate pre-signed web terminal url
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.webTerminalURL(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  webTerminalURL(
+    id: string,
+    body: BoxWebTerminalURLParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BoxWebTerminalURLResponse> {
+    return this._client.post(path`/boxes/${id}/web-terminal-url`, { body, ...options });
   }
 }
 
@@ -600,7 +622,7 @@ export interface BoxExecuteCommandsResponse {
 }
 
 /**
- * Live view configuration
+ * Live view result
  */
 export interface BoxLiveViewURLResponse {
   /**
@@ -638,6 +660,16 @@ export type BoxStartResponse = LinuxBox | AndroidBox;
  * Linux box instance with full configuration and status
  */
 export type BoxStopResponse = LinuxBox | AndroidBox;
+
+/**
+ * Web terminal result
+ */
+export interface BoxWebTerminalURLResponse {
+  /**
+   * Web terminal url
+   */
+  url: string;
+}
 
 export interface BoxListParams {
   /**
@@ -717,6 +749,14 @@ export interface BoxExecuteCommandsParams {
   workingDir?: string;
 }
 
+export interface BoxLiveViewURLParams {
+  /**
+   * The live view will be alive for the given duration (e.g. '10m' or '1h'). Default
+   * is 180m.
+   */
+  expiresIn?: string;
+}
+
 export interface BoxRunCodeParams {
   /**
    * The code to run
@@ -772,6 +812,14 @@ export interface BoxTerminateParams {
   wait?: boolean;
 }
 
+export interface BoxWebTerminalURLParams {
+  /**
+   * The web terminal will be alive for the given duration (e.g. '10m' or '1h').
+   * Default is 180m.
+   */
+  expiresIn?: string;
+}
+
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
 Boxes.Browser = BrowserAPIBrowser;
@@ -791,14 +839,17 @@ export declare namespace Boxes {
     type BoxRunCodeResponse as BoxRunCodeResponse,
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
+    type BoxWebTerminalURLResponse as BoxWebTerminalURLResponse,
     type BoxListParams as BoxListParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,
+    type BoxLiveViewURLParams as BoxLiveViewURLParams,
     type BoxRunCodeParams as BoxRunCodeParams,
     type BoxStartParams as BoxStartParams,
     type BoxStopParams as BoxStopParams,
     type BoxTerminateParams as BoxTerminateParams,
+    type BoxWebTerminalURLParams as BoxWebTerminalURLParams,
   };
 
   export {
