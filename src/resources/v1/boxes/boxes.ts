@@ -737,7 +737,7 @@ export interface BoxRunCodeParams {
   /**
    * The language of the code.
    */
-  language?: 'bash' | 'python3' | 'typescript';
+  language?: 'bash' | 'python' | 'typescript';
 
   /**
    * The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
