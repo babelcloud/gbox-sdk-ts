@@ -128,7 +128,9 @@ export class FileOperator {
    * @example
    * const response = await myFile.write({ content: 'Hello, World!' });
    */
-  write(body: Omit<FWriteParams, 'path'>): Promise<FWriteResponse> {
+  write(
+    body: Omit<FWriteParams.WriteFile, 'path'> | Omit<FWriteParams.WriteFileByBinary, 'path'>,
+  ): Promise<FWriteResponse> {
     return this.client.v1.boxes.fs.write(this.boxId, { ...body, path: this.data.path });
   }
 
