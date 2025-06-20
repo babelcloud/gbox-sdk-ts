@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.8.0 (2025-06-20)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **android:** enhance APK installation logic to support local file checks ([06b220d](https://github.com/babelcloud/gbox-sdk-ts/commit/06b220d84297ae56e847cf91ab35d5348f2023df))
+* **api:** api update ([de72a6d](https://github.com/babelcloud/gbox-sdk-ts/commit/de72a6d003add71e5ea518848769ff8312a11276))
+* **api:** api update ([e55165a](https://github.com/babelcloud/gbox-sdk-ts/commit/e55165a0739aeff1558e8dc0286b123e55c8e7ca))
+* **api:** api update ([ea845e7](https://github.com/babelcloud/gbox-sdk-ts/commit/ea845e7bf4651cfac70c3c3e44b35d02c43ec7f3))
+* **api:** api update ([87ff176](https://github.com/babelcloud/gbox-sdk-ts/commit/87ff176743514c12e365fe19b36afd07fcade599))
+* **api:** api update ([3066fcd](https://github.com/babelcloud/gbox-sdk-ts/commit/3066fcd755215644007a111cf9db87a0ad1f8bf4))
+* **api:** api update ([cd9fea3](https://github.com/babelcloud/gbox-sdk-ts/commit/cd9fea31300827f25fcfaf40bedc5814944255cf))
+* **api:** api update ([006e352](https://github.com/babelcloud/gbox-sdk-ts/commit/006e35224a00b242492689c2d32bd42e76e3ffd0))
+* **api:** api update ([064a367](https://github.com/babelcloud/gbox-sdk-ts/commit/064a367c9847df17e15c1cf547236684469519c0))
+* **api:** api update ([9f4a111](https://github.com/babelcloud/gbox-sdk-ts/commit/9f4a111174e08d8f21e845424da0d6043303e2bb))
+* **api:** api update ([a4bf097](https://github.com/babelcloud/gbox-sdk-ts/commit/a4bf097d99baa0b4e29653554b08bdcfda7e207a))
+
+
+### Bug Fixes
+
+* android apk open, restart and close ([243044f](https://github.com/babelcloud/gbox-sdk-ts/commit/243044f0b5bb1a219f4b06102b24734e100db802))
+* fs write type ([0750a08](https://github.com/babelcloud/gbox-sdk-ts/commit/0750a08d6ffd1708e701c6f173cd071a8b6ca891))
+
+
+### Chores
+
+* **internal:** codegen related update ([01656d2](https://github.com/babelcloud/gbox-sdk-ts/commit/01656d2a18789214d9e235b3f02d50cd63b410ce))
+* **internal:** codegen related update ([9a07d53](https://github.com/babelcloud/gbox-sdk-ts/commit/9a07d5356091ccef4c9bcba0ff5905b6e0880d74))
+* **readme:** use better example snippet for undocumented params ([48eb596](https://github.com/babelcloud/gbox-sdk-ts/commit/48eb596cf3dd34e2f45f2b89c1d0d08c8bc8230c))
+* update SDK settings ([fc60169](https://github.com/babelcloud/gbox-sdk-ts/commit/fc60169e88aa15a78087c0d3bbcf3f6211093ce7))
+
 ## 0.7.0 (2025-06-18)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.6.0...v0.7.0)
