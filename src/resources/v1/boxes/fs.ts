@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { type Uploadable } from '../../../core/uploads';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -330,8 +331,8 @@ export interface FListParams {
   depth?: number;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -344,8 +345,8 @@ export interface FExistsParams {
   path: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -358,8 +359,8 @@ export interface FInfoParams {
   path: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -372,8 +373,8 @@ export interface FReadParams {
   path: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -386,8 +387,8 @@ export interface FRemoveParams {
   path: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -406,29 +407,52 @@ export interface FRenameParams {
   oldPath: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
 
-export interface FWriteParams {
-  /**
-   * Content of the file
-   */
-  content: string;
+export type FWriteParams = FWriteParams.WriteFile | FWriteParams.WriteFileByBinary;
 
-  /**
-   * Path to the file. If the path is not start with '/', the file will be written to
-   * the working directory
-   */
-  path: string;
+export declare namespace FWriteParams {
+  export interface WriteFile {
+    /**
+     * Content of the file (Max size: 512MB)
+     */
+    content: string;
 
-  /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
-   */
-  workingDir?: string;
+    /**
+     * Path to the file. If the path is not start with '/', the file will be written to
+     * the working directory
+     */
+    path: string;
+
+    /**
+     * Working directory. If not provided, the file will be read from the
+     * `box.config.workingDir` directory.
+     */
+    workingDir?: string;
+  }
+
+  export interface WriteFileByBinary {
+    /**
+     * Binary content of the file (Max file size: 512MB)
+     */
+    content: Uploadable;
+
+    /**
+     * Path to the file. If the path is not start with '/', the file will be written to
+     * the working directory
+     */
+    path: string;
+
+    /**
+     * Working directory. If not provided, the file will be read from the
+     * `box.config.workingDir` directory.
+     */
+    workingDir?: string;
+  }
 }
 
 export declare namespace Fs {

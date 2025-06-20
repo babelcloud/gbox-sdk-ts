@@ -178,6 +178,29 @@ describe('resource actions', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('swipe: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.swipe('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      direction: 'up',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('swipe: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.swipe('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      direction: 'up',
+      distance: 300,
+      duration: '200ms',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('touch: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       points: [{ start: { x: 100, y: 150 } }],

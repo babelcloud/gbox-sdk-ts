@@ -124,6 +124,21 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Performs a swipe in the specified direction
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.v1.boxes.actions.swipe(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { direction: 'up' },
+   * );
+   * ```
+   */
+  swipe(id: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${id}/actions/swipe`, { body, ...options });
+  }
+
+  /**
    * Touch
    *
    * @example
@@ -357,7 +372,7 @@ export interface ActionPressButtonParams {
   /**
    * Button to press
    */
-  buttons: Array<'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu'>;
+  buttons: Array<'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'>;
 
   /**
    * Type of the URI. default is base64.
@@ -600,6 +615,65 @@ export interface ActionScrollParams {
   screenshotDelay?: string;
 }
 
+export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.Swipe;
+
+export declare namespace ActionSwipeParams {
+  export interface SwipeSimple {
+    /**
+     * Direction of the swipe
+     */
+    direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
+
+    /**
+     * Distance of the swipe in pixels. If not provided, will use a default distance
+     * based on screen size
+     */
+    distance?: number;
+
+    /**
+     * Duration of the swipe
+     */
+    duration?: string;
+  }
+
+  export interface Swipe {
+    /**
+     * End point of the swipe path
+     */
+    end: unknown;
+
+    /**
+     * Start point of the swipe path
+     */
+    start: unknown;
+
+    /**
+     * Duration of the swipe
+     */
+    duration?: string;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     */
+    screenshotDelay?: string;
+  }
+}
+
 export interface ActionTouchParams {
   /**
    * Array of touch points and their actions
@@ -699,6 +773,7 @@ export declare namespace Actions {
     type ActionPressKeyParams as ActionPressKeyParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
+    type ActionSwipeParams as ActionSwipeParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
   };

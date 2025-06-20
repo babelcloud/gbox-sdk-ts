@@ -104,6 +104,18 @@ describe('resource boxes', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('liveViewURL: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.liveViewURL(
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+        { expiresIn: '180m' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('runCode: only required params', async () => {
     const responsePromise = client.v1.boxes.runCode('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       code: 'print("Hello, World!")',
@@ -122,8 +134,8 @@ describe('resource boxes', () => {
     const response = await client.v1.boxes.runCode('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       code: 'print("Hello, World!")',
       argv: ['--help'],
-      envs: { PYTHONPATH: '/usr/lib/python3', DEBUG: 'true' },
-      language: 'python3',
+      envs: { PYTHONPATH: '/usr/lib/python', DEBUG: 'true' },
+      language: 'python',
       timeout: 'timeout',
       workingDir: '/home/user/scripts',
     });
@@ -196,6 +208,30 @@ describe('resource boxes', () => {
       client.v1.boxes.terminate(
         'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
         { wait: true },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('webTerminalURL', async () => {
+    const responsePromise = client.v1.boxes.webTerminalURL('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('webTerminalURL: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.webTerminalURL(
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+        { expiresIn: '180m' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);

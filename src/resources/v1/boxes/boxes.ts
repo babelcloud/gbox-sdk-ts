@@ -12,6 +12,7 @@ import {
   ActionScreenshotParams,
   ActionScreenshotResponse,
   ActionScrollParams,
+  ActionSwipeParams,
   ActionTouchParams,
   ActionTypeParams,
   Actions,
@@ -20,6 +21,7 @@ import * as AndroidAPI from './android';
 import {
   Android,
   AndroidApp,
+  AndroidBackupParams,
   AndroidCloseParams,
   AndroidGetConnectAddressResponse,
   AndroidGetParams,
@@ -28,8 +30,12 @@ import {
   AndroidListActivitiesResponse,
   AndroidListParams,
   AndroidListResponse,
+  AndroidListSimpleParams,
+  AndroidListSimpleResponse,
   AndroidOpenParams,
   AndroidRestartParams,
+  AndroidRestoreParams,
+  AndroidRotateScreenParams,
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
@@ -133,7 +139,7 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Get live view url
+   * Generate pre-signed live view url
    *
    * @example
    * ```ts
@@ -142,8 +148,12 @@ export class Boxes extends APIResource {
    * );
    * ```
    */
-  liveViewURL(id: string, options?: RequestOptions): APIPromise<BoxLiveViewURLResponse> {
-    return this._client.get(path`/boxes/${id}/live-view-url`, options);
+  liveViewURL(
+    id: string,
+    body: BoxLiveViewURLParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BoxLiveViewURLResponse> {
+    return this._client.post(path`/boxes/${id}/live-view-url`, { body, ...options });
   }
 
   /**
@@ -217,6 +227,24 @@ export class Boxes extends APIResource {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
+  }
+
+  /**
+   * Generate pre-signed web terminal url
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.webTerminalURL(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  webTerminalURL(
+    id: string,
+    body: BoxWebTerminalURLParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BoxWebTerminalURLResponse> {
+    return this._client.post(path`/boxes/${id}/web-terminal-url`, { body, ...options });
   }
 }
 
@@ -378,11 +406,6 @@ export interface CreateAndroidBox {
  * Configuration for a box instance
  */
 export interface CreateBoxConfig {
-  /**
-   * Device type - virtual or physical Android device
-   */
-  deviceType?: 'virtual' | 'physical';
-
   /**
    * Environment variables for the box
    */
@@ -599,7 +622,7 @@ export interface BoxExecuteCommandsResponse {
 }
 
 /**
- * Live view configuration
+ * Live view result
  */
 export interface BoxLiveViewURLResponse {
   /**
@@ -637,6 +660,16 @@ export type BoxStartResponse = LinuxBox | AndroidBox;
  * Linux box instance with full configuration and status
  */
 export type BoxStopResponse = LinuxBox | AndroidBox;
+
+/**
+ * Web terminal result
+ */
+export interface BoxWebTerminalURLResponse {
+  /**
+   * Web terminal url
+   */
+  url: string;
+}
 
 export interface BoxListParams {
   /**
@@ -711,9 +744,18 @@ export interface BoxExecuteCommandsParams {
   timeout?: string;
 
   /**
-   * The working directory of the command
+   * The working directory of the command. It not provided, the command will be run
+   * in the `box.config.workingDir` directory.
    */
   workingDir?: string;
+}
+
+export interface BoxLiveViewURLParams {
+  /**
+   * The live view will be alive for the given duration (e.g. '10m' or '1h'). Default
+   * is 180m.
+   */
+  expiresIn?: string;
 }
 
 export interface BoxRunCodeParams {
@@ -736,7 +778,7 @@ export interface BoxRunCodeParams {
   /**
    * The language of the code.
    */
-  language?: 'bash' | 'python3' | 'typescript';
+  language?: 'bash' | 'python' | 'typescript';
 
   /**
    * The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
@@ -745,7 +787,8 @@ export interface BoxRunCodeParams {
   timeout?: string;
 
   /**
-   * The working directory of the code.
+   * The working directory of the code. It not provided, the code will be run in the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -771,6 +814,14 @@ export interface BoxTerminateParams {
   wait?: boolean;
 }
 
+export interface BoxWebTerminalURLParams {
+  /**
+   * The web terminal will be alive for the given duration (e.g. '10m' or '1h').
+   * Default is 180m.
+   */
+  expiresIn?: string;
+}
+
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
 Boxes.Browser = BrowserAPIBrowser;
@@ -790,14 +841,17 @@ export declare namespace Boxes {
     type BoxRunCodeResponse as BoxRunCodeResponse,
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
+    type BoxWebTerminalURLResponse as BoxWebTerminalURLResponse,
     type BoxListParams as BoxListParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,
+    type BoxLiveViewURLParams as BoxLiveViewURLParams,
     type BoxRunCodeParams as BoxRunCodeParams,
     type BoxStartParams as BoxStartParams,
     type BoxStopParams as BoxStopParams,
     type BoxTerminateParams as BoxTerminateParams,
+    type BoxWebTerminalURLParams as BoxWebTerminalURLParams,
   };
 
   export {
@@ -811,6 +865,7 @@ export declare namespace Boxes {
     type ActionPressKeyParams as ActionPressKeyParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
+    type ActionSwipeParams as ActionSwipeParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
   };
@@ -841,13 +896,18 @@ export declare namespace Boxes {
     type AndroidListResponse as AndroidListResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
+    type AndroidListSimpleResponse as AndroidListSimpleResponse,
     type AndroidListParams as AndroidListParams,
+    type AndroidBackupParams as AndroidBackupParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
     type AndroidListActivitiesParams as AndroidListActivitiesParams,
+    type AndroidListSimpleParams as AndroidListSimpleParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
+    type AndroidRestoreParams as AndroidRestoreParams,
+    type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }

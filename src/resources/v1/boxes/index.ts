@@ -11,6 +11,7 @@ export {
   type ActionPressKeyParams,
   type ActionScreenshotParams,
   type ActionScrollParams,
+  type ActionSwipeParams,
   type ActionTouchParams,
   type ActionTypeParams,
 } from './actions';
@@ -20,13 +21,18 @@ export {
   type AndroidListResponse,
   type AndroidGetConnectAddressResponse,
   type AndroidListActivitiesResponse,
+  type AndroidListSimpleResponse,
   type AndroidListParams,
+  type AndroidBackupParams,
   type AndroidCloseParams,
   type AndroidGetParams,
   type AndroidInstallParams,
   type AndroidListActivitiesParams,
+  type AndroidListSimpleParams,
   type AndroidOpenParams,
   type AndroidRestartParams,
+  type AndroidRestoreParams,
+  type AndroidRotateScreenParams,
   type AndroidUninstallParams,
 } from './android';
 export {
@@ -43,14 +49,17 @@ export {
   type BoxRunCodeResponse,
   type BoxStartResponse,
   type BoxStopResponse,
+  type BoxWebTerminalURLResponse,
   type BoxListParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,
+  type BoxLiveViewURLParams,
   type BoxRunCodeParams,
   type BoxStartParams,
   type BoxStopParams,
   type BoxTerminateParams,
+  type BoxWebTerminalURLParams,
 } from './boxes';
 export { Browser, type BrowserCdpURLResponse } from './browser';
 export {
