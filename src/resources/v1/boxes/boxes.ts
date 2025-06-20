@@ -385,11 +385,6 @@ export interface CreateAndroidBox {
  */
 export interface CreateBoxConfig {
   /**
-   * Device type - virtual or physical Android device
-   */
-  deviceType?: 'virtual' | 'physical';
-
-  /**
    * Environment variables for the box
    */
   envs?: unknown;
