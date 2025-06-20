@@ -129,7 +129,20 @@ export class FileOperator {
    * const response = await myFile.write({ content: 'Hello, World!' });
    */
   write(body: Omit<FWriteParams, 'path'>): Promise<FWriteResponse> {
-    return this.client.v1.boxes.fs.write(this.boxId, { ...body, path: this.data.path });
+    const { content, ...rest } = body;
+    if (typeof content === 'string') {
+      return this.client.v1.boxes.fs.write(this.boxId, {
+        path: this.data.path,
+        ...rest,
+        content,
+      });
+    } else {
+      return this.client.v1.boxes.fs.write(this.boxId, {
+        path: this.data.path,
+        ...rest,
+        content,
+      });
+    }
   }
 
   /**
