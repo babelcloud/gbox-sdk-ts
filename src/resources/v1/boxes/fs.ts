@@ -331,8 +331,8 @@ export interface FListParams {
   depth?: number;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -345,8 +345,8 @@ export interface FExistsParams {
   path: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -359,8 +359,8 @@ export interface FInfoParams {
   path: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -373,8 +373,8 @@ export interface FReadParams {
   path: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -387,8 +387,8 @@ export interface FRemoveParams {
   path: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -407,8 +407,8 @@ export interface FRenameParams {
   oldPath: string;
 
   /**
-   * Working directory. If not provided, the file will be read from the root
-   * directory.
+   * Working directory. If not provided, the file will be read from the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -429,8 +429,8 @@ export declare namespace FWriteParams {
     path: string;
 
     /**
-     * Working directory. If not provided, the file will be read from the root
-     * directory.
+     * Working directory. If not provided, the file will be read from the
+     * `box.config.workingDir` directory.
      */
     workingDir?: string;
   }
@@ -448,8 +448,8 @@ export declare namespace FWriteParams {
     path: string;
 
     /**
-     * Working directory. If not provided, the file will be read from the root
-     * directory.
+     * Working directory. If not provided, the file will be read from the
+     * `box.config.workingDir` directory.
      */
     workingDir?: string;
   }

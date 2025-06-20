@@ -744,7 +744,8 @@ export interface BoxExecuteCommandsParams {
   timeout?: string;
 
   /**
-   * The working directory of the command
+   * The working directory of the command. It not provided, the command will be run
+   * in the `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
@@ -786,7 +787,8 @@ export interface BoxRunCodeParams {
   timeout?: string;
 
   /**
-   * The working directory of the code.
+   * The working directory of the code. It not provided, the code will be run in the
+   * `box.config.workingDir` directory.
    */
   workingDir?: string;
 }
