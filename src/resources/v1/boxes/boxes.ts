@@ -299,12 +299,16 @@ export namespace AndroidBox {
     cpu: number;
 
     /**
-     * Environment variables for the box
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
      */
     envs: unknown;
 
     /**
-     * Key-value pairs of labels for the box
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
      */
     labels: unknown;
 
@@ -339,7 +343,10 @@ export namespace AndroidBox {
     deviceType?: 'virtual' | 'physical';
 
     /**
-     * Working directory path for the box
+     * Working directory path for the box. This directory serves as the default
+     * starting point for all operations including command execution, code running, and
+     * file system operations. When you execute commands or run code, they will start
+     * from this directory unless explicitly specified otherwise.
      */
     workingDir?: string;
   }
@@ -407,7 +414,8 @@ export interface CreateAndroidBox {
  */
 export interface CreateBoxConfig {
   /**
-   * Environment variables for the box
+   * Environment variables for the box. These variables will be available in all
+   * operations including command execution, code running, and other box behaviors
    */
   envs?: unknown;
 
@@ -417,7 +425,10 @@ export interface CreateBoxConfig {
   expiresIn?: string;
 
   /**
-   * Key-value pairs of labels for the box
+   * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+   * help identify, categorize, and manage boxes. Common use cases include project
+   * names, environments, teams, applications, or any other organizational tags that
+   * help you organize and filter your boxes.
    */
   labels?: unknown;
 }
@@ -488,12 +499,16 @@ export namespace LinuxBox {
     cpu: number;
 
     /**
-     * Environment variables for the box
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
      */
     envs: unknown;
 
     /**
-     * Key-value pairs of labels for the box
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
      */
     labels: unknown;
 
@@ -523,7 +538,10 @@ export namespace LinuxBox {
     browser?: Config.Browser;
 
     /**
-     * Working directory path for the box
+     * Working directory path for the box. This directory serves as the default
+     * starting point for all operations including command execution, code running, and
+     * file system operations. When you execute commands or run code, they will start
+     * from this directory unless explicitly specified otherwise.
      */
     workingDir?: string;
   }
@@ -673,7 +691,10 @@ export interface BoxWebTerminalURLResponse {
 
 export interface BoxListParams {
   /**
-   * Filter boxes by their labels, default is all
+   * Filter boxes by their labels. Labels are key-value pairs that help identify and
+   * categorize boxes. Use this to filter boxes that match specific label criteria.
+   * For example, you can filter by project, environment, team, or any custom labels
+   * you've added to your boxes.
    */
   labels?: unknown;
 

@@ -10,7 +10,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Android extends APIResource {
   /**
-   * List apps
+   * Retrieve detailed information for all installed applications. This endpoint
+   * provides comprehensive app details
    *
    * @example
    * ```ts
@@ -180,7 +181,9 @@ export class Android extends APIResource {
   }
 
   /**
-   * List apps simple
+   * A faster endpoint to quickly retrieve basic app information. This API provides
+   * better performance for scenarios where you need to get essential app details
+   * quickly
    *
    * @example
    * ```ts
