@@ -14,13 +14,16 @@ export {
   type BoxRunCodeResponse,
   type BoxStartResponse,
   type BoxStopResponse,
+  type BoxWebTerminalURLResponse,
   type BoxListParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,
+  type BoxLiveViewURLParams,
   type BoxRunCodeParams,
   type BoxStartParams,
   type BoxStopParams,
   type BoxTerminateParams,
+  type BoxWebTerminalURLParams,
 } from './boxes/index';
 export { V1 } from './v1';

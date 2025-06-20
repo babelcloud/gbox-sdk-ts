@@ -49,14 +49,17 @@ export {
   type BoxRunCodeResponse,
   type BoxStartResponse,
   type BoxStopResponse,
+  type BoxWebTerminalURLResponse,
   type BoxListParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,
+  type BoxLiveViewURLParams,
   type BoxRunCodeParams,
   type BoxStartParams,
   type BoxStopParams,
   type BoxTerminateParams,
+  type BoxWebTerminalURLParams,
 } from './boxes';
 export { Browser, type BrowserCdpURLResponse } from './browser';
 export {
