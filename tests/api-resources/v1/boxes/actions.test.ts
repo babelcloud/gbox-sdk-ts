@@ -197,6 +197,8 @@ describe('resource actions', () => {
       direction: 'up',
       distance: 300,
       duration: '200ms',
+      outputFormat: 'base64',
+      screenshotDelay: '500ms',
     });
   });
 
