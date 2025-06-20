@@ -122,8 +122,8 @@ describe('resource boxes', () => {
     const response = await client.v1.boxes.runCode('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       code: 'print("Hello, World!")',
       argv: ['--help'],
-      envs: { PYTHONPATH: '/usr/lib/python3', DEBUG: 'true' },
-      language: 'python3',
+      envs: { PYTHONPATH: '/usr/lib/python', DEBUG: 'true' },
+      language: 'python',
       timeout: 'timeout',
       workingDir: '/home/user/scripts',
     });
