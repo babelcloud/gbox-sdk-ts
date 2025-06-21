@@ -91,6 +91,26 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Rotate screen
+   *
+   * @example
+   * ```ts
+   * const actionResult =
+   *   await client.v1.boxes.actions.screenRotation(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { angle: 90, direction: 'clockwise' },
+   *   );
+   * ```
+   */
+  screenRotation(
+    id: string,
+    body: ActionScreenRotationParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${id}/actions/screen-rotation`, { body, ...options });
+  }
+
+  /**
    * Take screenshot
    *
    * @example
@@ -534,6 +554,18 @@ export interface ActionPressKeyParams {
   screenshotDelay?: string;
 }
 
+export interface ActionScreenRotationParams {
+  /**
+   * Rotation angle in degrees
+   */
+  angle: 90 | 180 | 270;
+
+  /**
+   * Rotation direction
+   */
+  direction: 'clockwise' | 'counter-clockwise';
+}
+
 export interface ActionScreenshotParams {
   /**
    * Clipping region for screenshot capture
@@ -791,6 +823,7 @@ export declare namespace Actions {
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
+    type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionSwipeParams as ActionSwipeParams,

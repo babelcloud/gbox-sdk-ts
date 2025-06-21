@@ -46,6 +46,7 @@ Methods:
 - <code title="post /boxes/{id}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{id}/actions/press-button">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressButton</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{id}/actions/press-key">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressKey</a>(id, { ...params }) -> ActionResult</code>
+- <code title="post /boxes/{id}/actions/screen-rotation">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenRotation</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{id}/actions/screenshot">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenshot</a>(id, { ...params }) -> ActionScreenshotResponse</code>
 - <code title="post /boxes/{id}/actions/scroll">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">scroll</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{id}/actions/swipe">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">swipe</a>(id, { ...params }) -> ActionResult</code>
@@ -109,5 +110,4 @@ Methods:
 - <code title="post /boxes/{id}/android/apps/{packageName}/open">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">open</a>(packageName, { ...params }) -> void</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/restart">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restart</a>(packageName, { ...params }) -> void</code>
 - <code title="post /boxes/{id}/android/apps/restore">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restore</a>(id, { ...params }) -> void</code>
-- <code title="post /boxes/{id}/android/screen/rotate">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">rotateScreen</a>(id, { ...params }) -> void</code>
 - <code title="delete /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">uninstall</a>(packageName, { ...params }) -> void</code>
