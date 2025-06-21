@@ -9,6 +9,7 @@ import {
   ActionPressButtonParams,
   ActionPressKeyParams,
   ActionResult,
+  ActionScreenRotationParams,
   ActionScreenshotParams,
   ActionScreenshotResponse,
   ActionScrollParams,
@@ -35,7 +36,6 @@ import {
   AndroidOpenParams,
   AndroidRestartParams,
   AndroidRestoreParams,
-  AndroidRotateScreenParams,
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
@@ -884,6 +884,7 @@ export declare namespace Boxes {
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
+    type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionSwipeParams as ActionSwipeParams,
@@ -932,7 +933,6 @@ export declare namespace Boxes {
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidRestoreParams as AndroidRestoreParams,
-    type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }

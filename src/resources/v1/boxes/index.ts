@@ -9,6 +9,7 @@ export {
   type ActionMoveParams,
   type ActionPressButtonParams,
   type ActionPressKeyParams,
+  type ActionScreenRotationParams,
   type ActionScreenshotParams,
   type ActionScrollParams,
   type ActionSwipeParams,
@@ -32,7 +33,6 @@ export {
   type AndroidOpenParams,
   type AndroidRestartParams,
   type AndroidRestoreParams,
-  type AndroidRotateScreenParams,
   type AndroidUninstallParams,
 } from './android';
 export {
