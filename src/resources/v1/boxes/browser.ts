@@ -16,7 +16,11 @@ export class Browser extends APIResource {
    * );
    * ```
    */
-  cdpURL(id: string, body: BrowserCdpURLParams, options?: RequestOptions): APIPromise<string> {
+  cdpURL(
+    id: string,
+    body: BrowserCdpURLParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<string> {
     return this._client.post(path`/boxes/${id}/browser/connect-url/cdp`, { body, ...options });
   }
 }
