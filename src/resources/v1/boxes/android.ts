@@ -10,7 +10,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Android extends APIResource {
   /**
-   * List apps
+   * Retrieve detailed information for all installed applications. This endpoint
+   * provides comprehensive app details
    *
    * @example
    * ```ts
@@ -180,7 +181,9 @@ export class Android extends APIResource {
   }
 
   /**
-   * List apps simple
+   * A faster endpoint to quickly retrieve basic app information. This API provides
+   * better performance for scenarios where you need to get essential app details
+   * quickly
    *
    * @example
    * ```ts
@@ -248,25 +251,6 @@ export class Android extends APIResource {
    */
   restore(id: string, body: AndroidRestoreParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/boxes/${id}/android/apps/restore`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * Rotate screen
-   *
-   * @example
-   * ```ts
-   * await client.v1.boxes.android.rotateScreen(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { angle: 90, direction: 'clockwise' },
-   * );
-   * ```
-   */
-  rotateScreen(id: string, body: AndroidRotateScreenParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${id}/android/screen/rotate`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -516,18 +500,6 @@ export interface AndroidRestoreParams {
   backup: Uploadable;
 }
 
-export interface AndroidRotateScreenParams {
-  /**
-   * Rotation angle in degrees
-   */
-  angle: 90 | 180 | 270;
-
-  /**
-   * Rotation direction
-   */
-  direction: 'clockwise' | 'counter-clockwise';
-}
-
 export interface AndroidUninstallParams {
   /**
    * Path param: Box ID
@@ -557,7 +529,6 @@ export declare namespace Android {
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidRestoreParams as AndroidRestoreParams,
-    type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }

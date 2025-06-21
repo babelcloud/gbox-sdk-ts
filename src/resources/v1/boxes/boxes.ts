@@ -9,6 +9,7 @@ import {
   ActionPressButtonParams,
   ActionPressKeyParams,
   ActionResult,
+  ActionScreenRotationParams,
   ActionScreenshotParams,
   ActionScreenshotResponse,
   ActionScrollParams,
@@ -35,11 +36,10 @@ import {
   AndroidOpenParams,
   AndroidRestartParams,
   AndroidRestoreParams,
-  AndroidRotateScreenParams,
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
-import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse } from './browser';
+import { Browser as BrowserAPIBrowser, BrowserCdpURLParams, BrowserCdpURLResponse } from './browser';
 import * as FsAPI from './fs';
 import {
   FExistsParams,
@@ -299,12 +299,16 @@ export namespace AndroidBox {
     cpu: number;
 
     /**
-     * Environment variables for the box
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
      */
     envs: unknown;
 
     /**
-     * Key-value pairs of labels for the box
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
      */
     labels: unknown;
 
@@ -339,7 +343,10 @@ export namespace AndroidBox {
     deviceType?: 'virtual' | 'physical';
 
     /**
-     * Working directory path for the box
+     * Working directory path for the box. This directory serves as the default
+     * starting point for all operations including command execution, code running, and
+     * file system operations. When you execute commands or run code, they will start
+     * from this directory unless explicitly specified otherwise.
      */
     workingDir?: string;
   }
@@ -407,7 +414,8 @@ export interface CreateAndroidBox {
  */
 export interface CreateBoxConfig {
   /**
-   * Environment variables for the box
+   * Environment variables for the box. These variables will be available in all
+   * operations including command execution, code running, and other box behaviors
    */
   envs?: unknown;
 
@@ -417,7 +425,10 @@ export interface CreateBoxConfig {
   expiresIn?: string;
 
   /**
-   * Key-value pairs of labels for the box
+   * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+   * help identify, categorize, and manage boxes. Common use cases include project
+   * names, environments, teams, applications, or any other organizational tags that
+   * help you organize and filter your boxes.
    */
   labels?: unknown;
 }
@@ -488,12 +499,16 @@ export namespace LinuxBox {
     cpu: number;
 
     /**
-     * Environment variables for the box
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
      */
     envs: unknown;
 
     /**
-     * Key-value pairs of labels for the box
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
      */
     labels: unknown;
 
@@ -523,7 +538,10 @@ export namespace LinuxBox {
     browser?: Config.Browser;
 
     /**
-     * Working directory path for the box
+     * Working directory path for the box. This directory serves as the default
+     * starting point for all operations including command execution, code running, and
+     * file system operations. When you execute commands or run code, they will start
+     * from this directory unless explicitly specified otherwise.
      */
     workingDir?: string;
   }
@@ -673,7 +691,10 @@ export interface BoxWebTerminalURLResponse {
 
 export interface BoxListParams {
   /**
-   * Filter boxes by their labels, default is all
+   * Filter boxes by their labels. Labels are key-value pairs that help identify and
+   * categorize boxes. Use this to filter boxes that match specific label criteria.
+   * For example, you can filter by project, environment, team, or any custom labels
+   * you've added to your boxes.
    */
   labels?: unknown;
 
@@ -863,6 +884,7 @@ export declare namespace Boxes {
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
+    type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionSwipeParams as ActionSwipeParams,
@@ -888,7 +910,11 @@ export declare namespace Boxes {
     type FWriteParams as FWriteParams,
   };
 
-  export { BrowserAPIBrowser as Browser, type BrowserCdpURLResponse as BrowserCdpURLResponse };
+  export {
+    BrowserAPIBrowser as Browser,
+    type BrowserCdpURLResponse as BrowserCdpURLResponse,
+    type BrowserCdpURLParams as BrowserCdpURLParams,
+  };
 
   export {
     Android as Android,
@@ -907,7 +933,6 @@ export declare namespace Boxes {
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidRestoreParams as AndroidRestoreParams,
-    type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }
