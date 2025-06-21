@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.9.0 (2025-06-21)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** api update ([916ea15](https://github.com/babelcloud/gbox-sdk-ts/commit/916ea1538a726993f03d2f30c2adf1f0795d3550))
+* **api:** api update ([b032315](https://github.com/babelcloud/gbox-sdk-ts/commit/b032315d2c56a5c6d2ed983e599451945327294b))
+* **api:** api update ([84822ce](https://github.com/babelcloud/gbox-sdk-ts/commit/84822ce23087fe1efcd5c5dc368dd23b2c38b020))
+* **api:** api update ([48003d6](https://github.com/babelcloud/gbox-sdk-ts/commit/48003d6906167ddf505dc726b1871cd047cf7b59))
+* **api:** api update ([c65570c](https://github.com/babelcloud/gbox-sdk-ts/commit/c65570cae20bff8ab380d4f26977305c45629de5))
+
+
+### Bug Fixes
+
+* **client:** explicitly copy fetch in withOptions ([c3b8267](https://github.com/babelcloud/gbox-sdk-ts/commit/c3b826791329cfb2ef2ee8e1b1b5ae89bfc23d3b))
+
 ## 0.8.0 (2025-06-20)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.7.0...v0.8.0)
