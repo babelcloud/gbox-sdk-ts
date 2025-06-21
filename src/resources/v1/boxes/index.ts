@@ -61,7 +61,7 @@ export {
   type BoxTerminateParams,
   type BoxWebTerminalURLParams,
 } from './boxes';
-export { Browser, type BrowserCdpURLResponse } from './browser';
+export { Browser, type BrowserCdpURLResponse, type BrowserCdpURLParams } from './browser';
 export {
   Fs,
   type FListResponse,

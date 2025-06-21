@@ -82,7 +82,7 @@ Types:
 
 Methods:
 
-- <code title="get /boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">cdpURL</a>(id) -> string</code>
+- <code title="post /boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">cdpURL</a>(id, { ...params }) -> string</code>
 
 ### Android
 

@@ -7,7 +7,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Browser extends APIResource {
   /**
-   * Get CDP url
+   * Generate pre-signed CDP url
    *
    * @example
    * ```ts
@@ -16,13 +16,23 @@ export class Browser extends APIResource {
    * );
    * ```
    */
-  cdpURL(id: string, options?: RequestOptions): APIPromise<string> {
-    return this._client.get(path`/boxes/${id}/browser/connect-url/cdp`, options);
+  cdpURL(id: string, body: BrowserCdpURLParams, options?: RequestOptions): APIPromise<string> {
+    return this._client.post(path`/boxes/${id}/browser/connect-url/cdp`, { body, ...options });
   }
 }
 
 export type BrowserCdpURLResponse = string;
 
+export interface BrowserCdpURLParams {
+  /**
+   * The CDP url will be alive for the given duration (e.g. '120m')
+   */
+  expiresIn?: string;
+}
+
 export declare namespace Browser {
-  export { type BrowserCdpURLResponse as BrowserCdpURLResponse };
+  export {
+    type BrowserCdpURLResponse as BrowserCdpURLResponse,
+    type BrowserCdpURLParams as BrowserCdpURLParams,
+  };
 }
