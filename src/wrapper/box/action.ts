@@ -8,6 +8,7 @@ import type {
   ActionTypeParams,
   ActionPressKeyParams,
   ActionPressButtonParams,
+  ActionSwipeParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -43,6 +44,14 @@ export interface ActionPressButton extends ActionPressButtonParams {
 }
 
 export interface ActionPressKey extends ActionPressKeyParams {
+  screenshotDelay?: TimeString;
+}
+
+export interface ActionSwipeSimple extends ActionSwipeParams.SwipeSimple {
+  screenshotDelay?: TimeString;
+}
+
+export interface ActionSwipe extends ActionSwipeParams.Swipe {
   screenshotDelay?: TimeString;
 }
 
@@ -84,6 +93,10 @@ export class ActionOperator {
    */
   async drag(body: ActionDrag) {
     return this.client.v1.boxes.actions.drag(this.boxId, body);
+  }
+
+  async swipe(body: ActionSwipe | ActionSwipeSimple) {
+    return this.client.v1.boxes.actions.swipe(this.boxId, body);
   }
 
   /**
