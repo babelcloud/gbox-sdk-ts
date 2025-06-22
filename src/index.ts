@@ -43,6 +43,7 @@ export {
   type ActionScreenshot,
   type ActionSwipe,
   type ActionSwipeSimple,
+  type ActionSwipeAdvanced,
 } from './wrapper/box/action';
 export {
   type BoxExecuteCommands,
