@@ -92,6 +92,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidApp</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidListResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetConnectAddressResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidInstallResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidListActivitiesResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidListSimpleResponse</a></code>
 
@@ -104,7 +105,7 @@ Methods:
 - <code title="post /boxes/{boxId}/android/apps/close-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">closeAll</a>(boxID) -> void</code>
 - <code title="get /boxes/{boxId}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">get</a>(packageName, { ...params }) -> AndroidApp</code>
 - <code title="get /boxes/{boxId}/android/connect-address">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">getConnectAddress</a>(boxID) -> AndroidGetConnectAddressResponse</code>
-- <code title="post /boxes/{boxId}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">install</a>(boxID, { ...params }) -> void</code>
+- <code title="post /boxes/{boxId}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">install</a>(boxID, { ...params }) -> AndroidInstallResponse</code>
 - <code title="get /boxes/{boxId}/android/apps/{packageName}/activities">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listActivities</a>(packageName, { ...params }) -> AndroidListActivitiesResponse</code>
 - <code title="get /boxes/{boxId}/android/apps/simple">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listSimple</a>(boxID, { ...params }) -> AndroidListSimpleResponse</code>
 - <code title="post /boxes/{boxId}/android/apps/{packageName}/open">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">open</a>(packageName, { ...params }) -> void</code>

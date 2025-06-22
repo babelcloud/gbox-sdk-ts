@@ -21,6 +21,7 @@ export {
   type AndroidApp,
   type AndroidListResponse,
   type AndroidGetConnectAddressResponse,
+  type AndroidInstallResponse,
   type AndroidListActivitiesResponse,
   type AndroidListSimpleResponse,
   type AndroidListParams,
