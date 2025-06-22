@@ -74,7 +74,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const box = await client.v1.boxes.retrieve('boxId');
+   * const box = await client.v1.boxes.retrieve(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   retrieve(boxID: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
@@ -123,7 +125,7 @@ export class Boxes extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.executeCommands(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { commands: ['ls', '-l'] },
    * );
    * ```
@@ -141,7 +143,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.liveViewURL('boxId');
+   * const response = await client.v1.boxes.liveViewURL(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   liveViewURL(
@@ -157,9 +161,10 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.runCode('boxId', {
-   *   code: 'print("Hello, World!")',
-   * });
+   * const response = await client.v1.boxes.runCode(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { code: 'print("Hello, World!")' },
+   * );
    * ```
    */
   runCode(boxID: string, body: BoxRunCodeParams, options?: RequestOptions): APIPromise<BoxRunCodeResponse> {
@@ -171,7 +176,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.start('boxId');
+   * const response = await client.v1.boxes.start(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   start(
@@ -187,7 +194,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.stop('boxId');
+   * const response = await client.v1.boxes.stop(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   stop(
@@ -203,7 +212,9 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.terminate('boxId');
+   * await client.v1.boxes.terminate(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   terminate(
@@ -224,7 +235,7 @@ export class Boxes extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.webTerminalURL(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
