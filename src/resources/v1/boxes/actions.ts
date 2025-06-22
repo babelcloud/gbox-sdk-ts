@@ -651,7 +651,7 @@ export interface ActionScrollParams {
   screenshotDelay?: string;
 }
 
-export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.Swipe;
+export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.SwipeAdvanced;
 
 export declare namespace ActionSwipeParams {
   export interface SwipeSimple {
@@ -692,7 +692,7 @@ export declare namespace ActionSwipeParams {
     screenshotDelay?: string;
   }
 
-  export interface Swipe {
+  export interface SwipeAdvanced {
     /**
      * End point of the swipe path
      */
@@ -701,7 +701,7 @@ export declare namespace ActionSwipeParams {
     /**
      * Start point of the swipe path
      */
-    start: unknown;
+    start: SwipeAdvanced.Start;
 
     /**
      * Duration of the swipe
@@ -727,6 +727,23 @@ export declare namespace ActionSwipeParams {
      * screenshot.
      */
     screenshotDelay?: string;
+  }
+
+  export namespace SwipeAdvanced {
+    /**
+     * Start point of the swipe path
+     */
+    export interface Start {
+      /**
+       * Start/end x coordinate of the swipe path
+       */
+      x: number;
+
+      /**
+       * Start/end y coordinate of the swipe path
+       */
+      y: number;
+    }
   }
 }
 
