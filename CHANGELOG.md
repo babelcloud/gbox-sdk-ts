@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.9.0 (2025-06-22)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* add new android api ([c17dc8f](https://github.com/babelcloud/gbox-sdk-ts/commit/c17dc8f1e38a8cf44b56525d30a87740c3618801))
+* **api:** add screen rotation and web terminal functionality ([12697a2](https://github.com/babelcloud/gbox-sdk-ts/commit/12697a233a75379d2ca88ab6b08867dce8fe6773))
+* **api:** add swipe actions and update AndroidBoxOperator parameters ([c7faa88](https://github.com/babelcloud/gbox-sdk-ts/commit/c7faa88269d922b2d4222b5dfe2e235d9380d32a))
+* **api:** api update ([f0e5f73](https://github.com/babelcloud/gbox-sdk-ts/commit/f0e5f730b0a84339e8cabfcb70292ba5e570eaea))
+* **api:** api update ([4e9d098](https://github.com/babelcloud/gbox-sdk-ts/commit/4e9d0980fc06579d03f9891e12737d6487dcf11d))
+* **api:** api update ([50078f8](https://github.com/babelcloud/gbox-sdk-ts/commit/50078f826d37f1911f034cd8d9750f144c40854e))
+* **api:** api update ([8a56e1c](https://github.com/babelcloud/gbox-sdk-ts/commit/8a56e1c2b6ebab1c55d9ad16dafc85fff93bc6a5))
+* **api:** api update ([916ea15](https://github.com/babelcloud/gbox-sdk-ts/commit/916ea1538a726993f03d2f30c2adf1f0795d3550))
+* **api:** api update ([b032315](https://github.com/babelcloud/gbox-sdk-ts/commit/b032315d2c56a5c6d2ed983e599451945327294b))
+* **api:** api update ([84822ce](https://github.com/babelcloud/gbox-sdk-ts/commit/84822ce23087fe1efcd5c5dc368dd23b2c38b020))
+* **api:** api update ([48003d6](https://github.com/babelcloud/gbox-sdk-ts/commit/48003d6906167ddf505dc726b1871cd047cf7b59))
+* **api:** api update ([c65570c](https://github.com/babelcloud/gbox-sdk-ts/commit/c65570cae20bff8ab380d4f26977305c45629de5))
+* swipe ([61f5932](https://github.com/babelcloud/gbox-sdk-ts/commit/61f5932f9411b74ace072ee634e6643139802f29))
+
+
+### Bug Fixes
+
+* **client:** explicitly copy fetch in withOptions ([c3b8267](https://github.com/babelcloud/gbox-sdk-ts/commit/c3b826791329cfb2ef2ee8e1b1b5ae89bfc23d3b))
+* install app return ([583667f](https://github.com/babelcloud/gbox-sdk-ts/commit/583667f6097146a429663cd5aa58c7822c6f8cf7))
+* install app return ([9b6b0b3](https://github.com/babelcloud/gbox-sdk-ts/commit/9b6b0b3784be8913979b89f7777404c391e555fa))
+* screenshot ([e50a980](https://github.com/babelcloud/gbox-sdk-ts/commit/e50a9806e113858dcbb385a205f0e41bcb5cbeed))
+* type ([7be437d](https://github.com/babelcloud/gbox-sdk-ts/commit/7be437d99af2959804b42b2eb23f3c5946c2d03c))
+
 ## 0.8.0 (2025-06-20)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.7.0...v0.8.0)
