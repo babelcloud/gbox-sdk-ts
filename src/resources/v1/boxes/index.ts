@@ -9,6 +9,7 @@ export {
   type ActionMoveParams,
   type ActionPressButtonParams,
   type ActionPressKeyParams,
+  type ActionScreenRotationParams,
   type ActionScreenshotParams,
   type ActionScrollParams,
   type ActionSwipeParams,
@@ -20,6 +21,7 @@ export {
   type AndroidApp,
   type AndroidListResponse,
   type AndroidGetConnectAddressResponse,
+  type AndroidInstallResponse,
   type AndroidListActivitiesResponse,
   type AndroidListSimpleResponse,
   type AndroidListParams,
@@ -32,7 +34,6 @@ export {
   type AndroidOpenParams,
   type AndroidRestartParams,
   type AndroidRestoreParams,
-  type AndroidRotateScreenParams,
   type AndroidUninstallParams,
 } from './android';
 export {
@@ -61,7 +62,7 @@ export {
   type BoxTerminateParams,
   type BoxWebTerminalURLParams,
 } from './boxes';
-export { Browser, type BrowserCdpURLResponse } from './browser';
+export { Browser, type BrowserCdpURLResponse, type BrowserCdpURLParams } from './browser';
 export {
   Fs,
   type FListResponse,

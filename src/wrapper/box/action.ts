@@ -8,6 +8,8 @@ import type {
   ActionTypeParams,
   ActionPressKeyParams,
   ActionPressButtonParams,
+  ActionSwipeParams,
+  ActionScreenRotationParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -45,6 +47,16 @@ export interface ActionPressButton extends ActionPressButtonParams {
 export interface ActionPressKey extends ActionPressKeyParams {
   screenshotDelay?: TimeString;
 }
+
+export interface ActionSwipeSimple extends ActionSwipeParams.SwipeSimple {
+  screenshotDelay?: TimeString;
+}
+
+export interface ActionSwipeAdvanced extends ActionSwipeParams.SwipeAdvanced {
+  screenshotDelay?: TimeString;
+}
+
+export type ActionSwipe = ActionSwipeSimple | ActionSwipeAdvanced;
 
 export interface ActionScreenshot extends ActionScreenshotParams {
   /**
@@ -84,6 +96,14 @@ export class ActionOperator {
    */
   async drag(body: ActionDrag) {
     return this.client.v1.boxes.actions.drag(this.boxId, body);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.swipe({ direction: 'up' });
+   */
+  async swipe(body: ActionSwipe) {
+    return this.client.v1.boxes.actions.swipe(this.boxId, body);
   }
 
   /**
@@ -151,6 +171,14 @@ export class ActionOperator {
   }
 
   /**
+   * @example
+   * const response = await myBox.action.screenRotation({ angle: 90, direction: 'clockwise' });
+   */
+  async screenRotation(body: ActionScreenRotationParams) {
+    return this.client.v1.boxes.actions.screenRotation(this.boxId, body);
+  }
+
+  /**
    * Save base64 data in data URL format to a file
    * @param dataUrl - data URL string, format like "data:image/png;base64,iVBORw0KGgoAAAA..."
    * @param filePath - the file path to save to
@@ -161,20 +189,11 @@ export class ActionOperator {
       throw new Error('Invalid data URL format');
     }
 
-    // Parse data URL
-    const matches = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
-    if (!matches) {
-      throw new Error('Invalid data URL format');
-    }
-
-    const [, base64Data] = matches;
+    const base64Data = dataUrl.split(',')[1];
 
     if (!base64Data) {
       throw new Error('Invalid data URL format');
     }
-
-    // Convert base64 data to Buffer
-    const buffer = Buffer.from(base64Data, 'base64');
 
     // Ensure directory exists
     const dir = path.dirname(filePath);
@@ -183,6 +202,6 @@ export class ActionOperator {
     }
 
     // Write to file
-    fs.writeFileSync(filePath, buffer);
+    fs.writeFileSync(filePath, base64Data, 'base64');
   }
 }

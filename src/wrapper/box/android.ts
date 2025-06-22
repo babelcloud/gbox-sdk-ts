@@ -10,6 +10,10 @@ import {
   AndroidListParams,
   AndroidUninstallParams,
   AndroidListResponse,
+  AndroidBackupParams,
+  AndroidListActivitiesResponse,
+  AndroidListSimpleResponse,
+  AndroidInstallResponse,
 } from '../../resources/v1/boxes';
 import { TimeString } from '../types';
 import { BaseBox } from './base';
@@ -33,7 +37,7 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * or
      * const response = await myBox.app.install({ apk: "https://example.com/path/to/app.apk" });
      */
-    install: (body: AndroidInstallParams): Promise<void> => {
+    install: (body: AndroidInstallParams): Promise<AndroidInstallResponse> => {
       if (typeof body.apk === 'string' && !body.apk.startsWith('http')) {
         const exists = fs.existsSync(body.apk);
         if (!exists) {
@@ -50,8 +54,8 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * @example
      * const response = await myBox.app.uninstall('com.example.myapp');
      */
-    uninstall: (packageName: string, params: Omit<AndroidUninstallParams, 'id'>): Promise<void> =>
-      this.client.v1.boxes.android.uninstall(packageName, { ...params, id: this.data.id }),
+    uninstall: (packageName: string, params: Omit<AndroidUninstallParams, 'boxId'>): Promise<void> =>
+      this.client.v1.boxes.android.uninstall(packageName, { ...params, boxId: this.data.id }),
     /**
      * @example
      * const response = await myBox.app.list();
@@ -63,14 +67,14 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * const response = await myBox.app.geInfo('com.example.myapp');
      */
     getInfo: (packageName: string): Promise<AndroidApp> =>
-      this.client.v1.boxes.android.get(packageName, { id: this.data.id }),
+      this.client.v1.boxes.android.get(packageName, { boxId: this.data.id }),
     /**
      * @example
      * const myApp = await myBox.app.get('com.example.myapp');
      */
     get: async (packageName: string) =>
       new AndroidAppOperator(
-        await this.client.v1.boxes.android.get(packageName, { id: this.data.id }),
+        await this.client.v1.boxes.android.get(packageName, { boxId: this.data.id }),
         this.client,
         this.data,
       ),
@@ -79,6 +83,17 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * const response = await myBox.app.closeAll();
      */
     closeAll: (): Promise<void> => this.client.v1.boxes.android.closeAll(this.data.id),
+    /**
+     * @example
+     * const response = await myBox.app.backupAll();
+     */
+    backupAll: (): Promise<Response> => this.client.v1.boxes.android.backupAll(this.data.id),
+    /**
+     * @example
+     * const response = await myBox.app.listSimple();
+     */
+    listSimple: (): Promise<AndroidListSimpleResponse> =>
+      this.client.v1.boxes.android.listSimple(this.data.id),
   };
 }
 
@@ -97,23 +112,53 @@ class AndroidAppOperator {
    * @example
    * const response = await myApp.open();
    */
-  async open(params?: Omit<AndroidOpenParams, 'id'>) {
-    return this.client.v1.boxes.android.open(this.data.packageName, { id: this.box.id, ...params });
+  async open(params?: Omit<AndroidOpenParams, 'boxId'>) {
+    return this.client.v1.boxes.android.open(this.data.packageName, { boxId: this.box.id, ...params });
   }
 
   /**
    * @example
    * const response = await myApp.restart();
    */
-  async restart(params?: Omit<AndroidRestartParams, 'id'>) {
-    return this.client.v1.boxes.android.restart(this.data.packageName, { id: this.box.id, ...params });
+  async restart(params?: Omit<AndroidRestartParams, 'boxId'>) {
+    return this.client.v1.boxes.android.restart(this.data.packageName, { boxId: this.box.id, ...params });
   }
 
   /**
    * @example
    * const response = await myApp.close();
    */
-  async close(params?: Omit<AndroidCloseParams, 'id'>) {
-    return this.client.v1.boxes.android.close(this.data.packageName, { id: this.box.id, ...params });
+  async close(params?: Omit<AndroidCloseParams, 'boxId'>) {
+    return this.client.v1.boxes.android.close(this.data.packageName, { boxId: this.box.id, ...params });
+  }
+
+  /**
+   * @example
+   * const response = await myApp.backup();
+   */
+  async backup(params?: Omit<AndroidBackupParams, 'boxId'>): Promise<Response> {
+    return this.client.v1.boxes.android.backup(this.data.packageName, { boxId: this.box.id, ...params });
+  }
+
+  /**
+   * @example
+   * const response = await myApp.restore({
+   *   path: "path/to/your/backup.apk",
+   * });
+   */
+  async restore(params: { path: string }): Promise<void> {
+    const exists = fs.existsSync(params.path);
+    if (!exists) {
+      throw new Error(`File ${params.path} does not exist`);
+    }
+    const backupReadStream = fs.createReadStream(params.path);
+    return this.client.v1.boxes.android.restore(this.box.id, { backup: backupReadStream });
+  }
+  /**
+   * @example
+   * const response = await myApp.listActivities();
+   */
+  async listActivities(): Promise<AndroidListActivitiesResponse> {
+    return this.client.v1.boxes.android.listActivities(this.data.packageName, { boxId: this.box.id });
   }
 }

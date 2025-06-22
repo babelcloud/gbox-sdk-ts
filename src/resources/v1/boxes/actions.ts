@@ -17,8 +17,8 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  click(id: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/click`, { body, ...options });
+  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/click`, { body, ...options });
   }
 
   /**
@@ -37,8 +37,8 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  drag(id: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/drag`, { body, ...options });
+  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/drag`, { body, ...options });
   }
 
   /**
@@ -52,8 +52,8 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  move(id: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/move`, { body, ...options });
+  move(boxID: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/move`, { body, ...options });
   }
 
   /**
@@ -69,8 +69,12 @@ export class Actions extends APIResource {
    *   );
    * ```
    */
-  pressButton(id: string, body: ActionPressButtonParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/press-button`, { body, ...options });
+  pressButton(
+    boxID: string,
+    body: ActionPressButtonParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/press-button`, { body, ...options });
   }
 
   /**
@@ -86,8 +90,28 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  pressKey(id: string, body: ActionPressKeyParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/press-key`, { body, ...options });
+  pressKey(boxID: string, body: ActionPressKeyParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/press-key`, { body, ...options });
+  }
+
+  /**
+   * Rotate screen
+   *
+   * @example
+   * ```ts
+   * const actionResult =
+   *   await client.v1.boxes.actions.screenRotation(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { angle: 90, direction: 'clockwise' },
+   *   );
+   * ```
+   */
+  screenRotation(
+    boxID: string,
+    body: ActionScreenRotationParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/screen-rotation`, { body, ...options });
   }
 
   /**
@@ -101,11 +125,11 @@ export class Actions extends APIResource {
    * ```
    */
   screenshot(
-    id: string,
+    boxID: string,
     body: ActionScreenshotParams,
     options?: RequestOptions,
   ): APIPromise<ActionScreenshotResponse> {
-    return this._client.post(path`/boxes/${id}/actions/screenshot`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/actions/screenshot`, { body, ...options });
   }
 
   /**
@@ -119,8 +143,8 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  scroll(id: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/scroll`, { body, ...options });
+  scroll(boxID: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body, ...options });
   }
 
   /**
@@ -134,8 +158,8 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  swipe(id: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/swipe`, { body, ...options });
+  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/swipe`, { body, ...options });
   }
 
   /**
@@ -149,8 +173,8 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  touch(id: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/touch`, { body, ...options });
+  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/touch`, { body, ...options });
   }
 
   /**
@@ -166,8 +190,8 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  type(id: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/type`, { body, ...options });
+  type(boxID: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/type`, { body, ...options });
   }
 }
 
@@ -534,6 +558,18 @@ export interface ActionPressKeyParams {
   screenshotDelay?: string;
 }
 
+export interface ActionScreenRotationParams {
+  /**
+   * Rotation angle in degrees
+   */
+  angle: 90 | 180 | 270;
+
+  /**
+   * Rotation direction
+   */
+  direction: 'clockwise' | 'counter-clockwise';
+}
+
 export interface ActionScreenshotParams {
   /**
    * Clipping region for screenshot capture
@@ -615,37 +651,21 @@ export interface ActionScrollParams {
   screenshotDelay?: string;
 }
 
-export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.Swipe;
+export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.SwipeAdvanced;
 
 export declare namespace ActionSwipeParams {
   export interface SwipeSimple {
     /**
-     * Direction of the swipe
+     * Direction to swipe. The gesture will be performed from the center of the screen
+     * towards this direction.
      */
     direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
 
     /**
-     * Distance of the swipe in pixels. If not provided, will use a default distance
-     * based on screen size
+     * Distance of the swipe in pixels. If not provided, the swipe will be performed
+     * from the center of the screen to the screen edge
      */
     distance?: number;
-
-    /**
-     * Duration of the swipe
-     */
-    duration?: string;
-  }
-
-  export interface Swipe {
-    /**
-     * End point of the swipe path
-     */
-    end: unknown;
-
-    /**
-     * Start point of the swipe path
-     */
-    start: unknown;
 
     /**
      * Duration of the swipe
@@ -671,6 +691,75 @@ export declare namespace ActionSwipeParams {
      * screenshot.
      */
     screenshotDelay?: string;
+  }
+
+  export interface SwipeAdvanced {
+    /**
+     * End point of the swipe path
+     */
+    end: SwipeAdvanced.End;
+
+    /**
+     * Start point of the swipe path
+     */
+    start: SwipeAdvanced.Start;
+
+    /**
+     * Duration of the swipe
+     */
+    duration?: string;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     */
+    screenshotDelay?: string;
+  }
+
+  export namespace SwipeAdvanced {
+    /**
+     * End point of the swipe path
+     */
+    export interface End {
+      /**
+       * Start/end x coordinate of the swipe path
+       */
+      x: number;
+
+      /**
+       * Start/end y coordinate of the swipe path
+       */
+      y: number;
+    }
+
+    /**
+     * Start point of the swipe path
+     */
+    export interface Start {
+      /**
+       * Start/end x coordinate of the swipe path
+       */
+      x: number;
+
+      /**
+       * Start/end y coordinate of the swipe path
+       */
+      y: number;
+    }
   }
 }
 
@@ -771,6 +860,7 @@ export declare namespace Actions {
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
+    type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionSwipeParams as ActionSwipeParams,

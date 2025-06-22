@@ -9,6 +9,7 @@ import {
   ActionPressButtonParams,
   ActionPressKeyParams,
   ActionResult,
+  ActionScreenRotationParams,
   ActionScreenshotParams,
   ActionScreenshotResponse,
   ActionScrollParams,
@@ -26,6 +27,7 @@ import {
   AndroidGetConnectAddressResponse,
   AndroidGetParams,
   AndroidInstallParams,
+  AndroidInstallResponse,
   AndroidListActivitiesParams,
   AndroidListActivitiesResponse,
   AndroidListParams,
@@ -35,11 +37,10 @@ import {
   AndroidOpenParams,
   AndroidRestartParams,
   AndroidRestoreParams,
-  AndroidRotateScreenParams,
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
-import { Browser as BrowserAPIBrowser, BrowserCdpURLResponse } from './browser';
+import { Browser as BrowserAPIBrowser, BrowserCdpURLParams, BrowserCdpURLResponse } from './browser';
 import * as FsAPI from './fs';
 import {
   FExistsParams,
@@ -79,8 +80,8 @@ export class Boxes extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
-    return this._client.get(path`/boxes/${id}`, options);
+  retrieve(boxID: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
+    return this._client.get(path`/boxes/${boxID}`, options);
   }
 
   /**
@@ -131,11 +132,11 @@ export class Boxes extends APIResource {
    * ```
    */
   executeCommands(
-    id: string,
+    boxID: string,
     body: BoxExecuteCommandsParams,
     options?: RequestOptions,
   ): APIPromise<BoxExecuteCommandsResponse> {
-    return this._client.post(path`/boxes/${id}/commands`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/commands`, { body, ...options });
   }
 
   /**
@@ -149,11 +150,11 @@ export class Boxes extends APIResource {
    * ```
    */
   liveViewURL(
-    id: string,
+    boxID: string,
     body: BoxLiveViewURLParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BoxLiveViewURLResponse> {
-    return this._client.post(path`/boxes/${id}/live-view-url`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/live-view-url`, { body, ...options });
   }
 
   /**
@@ -167,8 +168,8 @@ export class Boxes extends APIResource {
    * );
    * ```
    */
-  runCode(id: string, body: BoxRunCodeParams, options?: RequestOptions): APIPromise<BoxRunCodeResponse> {
-    return this._client.post(path`/boxes/${id}/run-code`, { body, ...options });
+  runCode(boxID: string, body: BoxRunCodeParams, options?: RequestOptions): APIPromise<BoxRunCodeResponse> {
+    return this._client.post(path`/boxes/${boxID}/run-code`, { body, ...options });
   }
 
   /**
@@ -182,11 +183,11 @@ export class Boxes extends APIResource {
    * ```
    */
   start(
-    id: string,
+    boxID: string,
     body: BoxStartParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BoxStartResponse> {
-    return this._client.post(path`/boxes/${id}/start`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/start`, { body, ...options });
   }
 
   /**
@@ -200,11 +201,11 @@ export class Boxes extends APIResource {
    * ```
    */
   stop(
-    id: string,
+    boxID: string,
     body: BoxStopParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BoxStopResponse> {
-    return this._client.post(path`/boxes/${id}/stop`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/stop`, { body, ...options });
   }
 
   /**
@@ -218,11 +219,11 @@ export class Boxes extends APIResource {
    * ```
    */
   terminate(
-    id: string,
+    boxID: string,
     body: BoxTerminateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<void> {
-    return this._client.post(path`/boxes/${id}/terminate`, {
+    return this._client.post(path`/boxes/${boxID}/terminate`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -240,11 +241,11 @@ export class Boxes extends APIResource {
    * ```
    */
   webTerminalURL(
-    id: string,
+    boxID: string,
     body: BoxWebTerminalURLParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BoxWebTerminalURLResponse> {
-    return this._client.post(path`/boxes/${id}/web-terminal-url`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/web-terminal-url`, { body, ...options });
   }
 }
 
@@ -299,12 +300,16 @@ export namespace AndroidBox {
     cpu: number;
 
     /**
-     * Environment variables for the box
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
      */
     envs: unknown;
 
     /**
-     * Key-value pairs of labels for the box
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
      */
     labels: unknown;
 
@@ -339,7 +344,10 @@ export namespace AndroidBox {
     deviceType?: 'virtual' | 'physical';
 
     /**
-     * Working directory path for the box
+     * Working directory path for the box. This directory serves as the default
+     * starting point for all operations including command execution, code running, and
+     * file system operations. When you execute commands or run code, they will start
+     * from this directory unless explicitly specified otherwise.
      */
     workingDir?: string;
   }
@@ -407,7 +415,8 @@ export interface CreateAndroidBox {
  */
 export interface CreateBoxConfig {
   /**
-   * Environment variables for the box
+   * Environment variables for the box. These variables will be available in all
+   * operations including command execution, code running, and other box behaviors
    */
   envs?: unknown;
 
@@ -417,7 +426,10 @@ export interface CreateBoxConfig {
   expiresIn?: string;
 
   /**
-   * Key-value pairs of labels for the box
+   * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+   * help identify, categorize, and manage boxes. Common use cases include project
+   * names, environments, teams, applications, or any other organizational tags that
+   * help you organize and filter your boxes.
    */
   labels?: unknown;
 }
@@ -488,12 +500,16 @@ export namespace LinuxBox {
     cpu: number;
 
     /**
-     * Environment variables for the box
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
      */
     envs: unknown;
 
     /**
-     * Key-value pairs of labels for the box
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
      */
     labels: unknown;
 
@@ -523,7 +539,10 @@ export namespace LinuxBox {
     browser?: Config.Browser;
 
     /**
-     * Working directory path for the box
+     * Working directory path for the box. This directory serves as the default
+     * starting point for all operations including command execution, code running, and
+     * file system operations. When you execute commands or run code, they will start
+     * from this directory unless explicitly specified otherwise.
      */
     workingDir?: string;
   }
@@ -673,7 +692,10 @@ export interface BoxWebTerminalURLResponse {
 
 export interface BoxListParams {
   /**
-   * Filter boxes by their labels, default is all
+   * Filter boxes by their labels. Labels are key-value pairs that help identify and
+   * categorize boxes. Use this to filter boxes that match specific label criteria.
+   * For example, you can filter by project, environment, team, or any custom labels
+   * you've added to your boxes.
    */
   labels?: unknown;
 
@@ -863,6 +885,7 @@ export declare namespace Boxes {
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
+    type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionSwipeParams as ActionSwipeParams,
@@ -888,13 +911,18 @@ export declare namespace Boxes {
     type FWriteParams as FWriteParams,
   };
 
-  export { BrowserAPIBrowser as Browser, type BrowserCdpURLResponse as BrowserCdpURLResponse };
+  export {
+    BrowserAPIBrowser as Browser,
+    type BrowserCdpURLResponse as BrowserCdpURLResponse,
+    type BrowserCdpURLParams as BrowserCdpURLParams,
+  };
 
   export {
     Android as Android,
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
+    type AndroidInstallResponse as AndroidInstallResponse,
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
     type AndroidListSimpleResponse as AndroidListSimpleResponse,
     type AndroidListParams as AndroidListParams,
@@ -907,7 +935,6 @@ export declare namespace Boxes {
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidRestoreParams as AndroidRestoreParams,
-    type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }

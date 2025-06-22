@@ -10,7 +10,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Android extends APIResource {
   /**
-   * List apps
+   * Retrieve detailed information for all installed applications. This endpoint
+   * provides comprehensive app details
    *
    * @example
    * ```ts
@@ -20,11 +21,11 @@ export class Android extends APIResource {
    * ```
    */
   list(
-    id: string,
+    boxID: string,
     query: AndroidListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AndroidListResponse> {
-    return this._client.get(path`/boxes/${id}/android/apps`, { query, ...options });
+    return this._client.get(path`/boxes/${boxID}/android/apps`, { query, ...options });
   }
 
   /**
@@ -34,7 +35,7 @@ export class Android extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.android.backup(
    *   'com.example.myapp',
-   *   { id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    *
    * const content = await response.blob();
@@ -42,8 +43,8 @@ export class Android extends APIResource {
    * ```
    */
   backup(packageName: string, params: AndroidBackupParams, options?: RequestOptions): APIPromise<Response> {
-    const { id } = params;
-    return this._client.post(path`/boxes/${id}/android/apps/${packageName}/backup`, {
+    const { boxId } = params;
+    return this._client.post(path`/boxes/${boxId}/android/apps/${packageName}/backup`, {
       ...options,
       headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
       __binaryResponse: true,
@@ -63,8 +64,8 @@ export class Android extends APIResource {
    * console.log(content);
    * ```
    */
-  backupAll(id: string, options?: RequestOptions): APIPromise<Response> {
-    return this._client.post(path`/boxes/${id}/android/apps/backup-all`, {
+  backupAll(boxID: string, options?: RequestOptions): APIPromise<Response> {
+    return this._client.post(path`/boxes/${boxID}/android/apps/backup-all`, {
       ...options,
       headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
       __binaryResponse: true,
@@ -77,13 +78,13 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * await client.v1.boxes.android.close('com.example.myapp', {
-   *   id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * });
    * ```
    */
   close(packageName: string, params: AndroidCloseParams, options?: RequestOptions): APIPromise<void> {
-    const { id } = params;
-    return this._client.post(path`/boxes/${id}/android/apps/${packageName}/close`, {
+    const { boxId } = params;
+    return this._client.post(path`/boxes/${boxId}/android/apps/${packageName}/close`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -99,8 +100,8 @@ export class Android extends APIResource {
    * );
    * ```
    */
-  closeAll(id: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${id}/android/apps/close-all`, {
+  closeAll(boxID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/android/apps/close-all`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -113,13 +114,13 @@ export class Android extends APIResource {
    * ```ts
    * const androidApp = await client.v1.boxes.android.get(
    *   'com.example.myapp',
-   *   { id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
    */
   get(packageName: string, params: AndroidGetParams, options?: RequestOptions): APIPromise<AndroidApp> {
-    const { id } = params;
-    return this._client.get(path`/boxes/${id}/android/apps/${packageName}`, options);
+    const { boxId } = params;
+    return this._client.get(path`/boxes/${boxId}/android/apps/${packageName}`, options);
   }
 
   /**
@@ -133,8 +134,8 @@ export class Android extends APIResource {
    *   );
    * ```
    */
-  getConnectAddress(id: string, options?: RequestOptions): APIPromise<AndroidGetConnectAddressResponse> {
-    return this._client.get(path`/boxes/${id}/android/connect-address`, options);
+  getConnectAddress(boxID: string, options?: RequestOptions): APIPromise<AndroidGetConnectAddressResponse> {
+    return this._client.get(path`/boxes/${boxID}/android/connect-address`, options);
   }
 
   /**
@@ -142,19 +143,20 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.android.install(
+   * const response = await client.v1.boxes.android.install(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { apk: fs.createReadStream('path/to/file') },
    * );
    * ```
    */
-  install(id: string, body: AndroidInstallParams, options?: RequestOptions): APIPromise<void> {
+  install(
+    boxID: string,
+    body: AndroidInstallParams,
+    options?: RequestOptions,
+  ): APIPromise<AndroidInstallResponse> {
     return this._client.post(
-      path`/boxes/${id}/android/apps`,
-      multipartFormRequestOptions(
-        { body, ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
-        this._client,
-      ),
+      path`/boxes/${boxID}/android/apps`,
+      multipartFormRequestOptions({ body, ...options }, this._client),
     );
   }
 
@@ -166,7 +168,7 @@ export class Android extends APIResource {
    * const response =
    *   await client.v1.boxes.android.listActivities(
    *     'com.example.myapp',
-   *     { id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   *     { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    *   );
    * ```
    */
@@ -175,12 +177,14 @@ export class Android extends APIResource {
     params: AndroidListActivitiesParams,
     options?: RequestOptions,
   ): APIPromise<AndroidListActivitiesResponse> {
-    const { id } = params;
-    return this._client.get(path`/boxes/${id}/android/apps/${packageName}/activities`, options);
+    const { boxId } = params;
+    return this._client.get(path`/boxes/${boxId}/android/apps/${packageName}/activities`, options);
   }
 
   /**
-   * List apps simple
+   * A faster endpoint to quickly retrieve basic app information. This API provides
+   * better performance for scenarios where you need to get essential app details
+   * quickly
    *
    * @example
    * ```ts
@@ -190,11 +194,11 @@ export class Android extends APIResource {
    * ```
    */
   listSimple(
-    id: string,
+    boxID: string,
     query: AndroidListSimpleParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AndroidListSimpleResponse> {
-    return this._client.get(path`/boxes/${id}/android/apps/simple`, { query, ...options });
+    return this._client.get(path`/boxes/${boxID}/android/apps/simple`, { query, ...options });
   }
 
   /**
@@ -203,13 +207,13 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * await client.v1.boxes.android.open('com.example.myapp', {
-   *   id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * });
    * ```
    */
   open(packageName: string, params: AndroidOpenParams, options?: RequestOptions): APIPromise<void> {
-    const { id, ...body } = params;
-    return this._client.post(path`/boxes/${id}/android/apps/${packageName}/open`, {
+    const { boxId, ...body } = params;
+    return this._client.post(path`/boxes/${boxId}/android/apps/${packageName}/open`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -222,13 +226,13 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * await client.v1.boxes.android.restart('com.example.myapp', {
-   *   id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * });
    * ```
    */
   restart(packageName: string, params: AndroidRestartParams, options?: RequestOptions): APIPromise<void> {
-    const { id, ...body } = params;
-    return this._client.post(path`/boxes/${id}/android/apps/${packageName}/restart`, {
+    const { boxId, ...body } = params;
+    return this._client.post(path`/boxes/${boxId}/android/apps/${packageName}/restart`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -246,27 +250,8 @@ export class Android extends APIResource {
    * );
    * ```
    */
-  restore(id: string, body: AndroidRestoreParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${id}/android/apps/restore`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * Rotate screen
-   *
-   * @example
-   * ```ts
-   * await client.v1.boxes.android.rotateScreen(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { angle: 90, direction: 'clockwise' },
-   * );
-   * ```
-   */
-  rotateScreen(id: string, body: AndroidRotateScreenParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${id}/android/screen/rotate`, {
+  restore(boxID: string, body: AndroidRestoreParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/android/apps/restore`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -280,13 +265,13 @@ export class Android extends APIResource {
    * ```ts
    * await client.v1.boxes.android.uninstall(
    *   'com.example.myapp',
-   *   { id: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
    */
   uninstall(packageName: string, params: AndroidUninstallParams, options?: RequestOptions): APIPromise<void> {
-    const { id, ...body } = params;
-    return this._client.delete(path`/boxes/${id}/android/apps/${packageName}`, {
+    const { boxId, ...body } = params;
+    return this._client.delete(path`/boxes/${boxId}/android/apps/${packageName}`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -348,6 +333,63 @@ export interface AndroidGetConnectAddressResponse {
    * the Android device
    */
   adb: string;
+}
+
+/**
+ * Response containing the result of installing an Android app
+ */
+export interface AndroidInstallResponse {
+  /**
+   * Activity list
+   */
+  activities: Array<AndroidInstallResponse.Activity>;
+
+  /**
+   * Android app apk path
+   */
+  apkPath: string;
+
+  /**
+   * Application type: system or third-party
+   */
+  appType: 'system' | 'third-party';
+
+  /**
+   * Android app package name
+   */
+  packageName: string;
+}
+
+export namespace AndroidInstallResponse {
+  /**
+   * Android app activity
+   */
+  export interface Activity {
+    /**
+     * Activity class name
+     */
+    className: string;
+
+    /**
+     * Activity class name
+     */
+    isExported: boolean;
+
+    /**
+     * Whether the activity is the main activity
+     */
+    isMain: boolean;
+
+    /**
+     * Activity name
+     */
+    name: string;
+
+    /**
+     * Activity package name
+     */
+    packageName: string;
+  }
 }
 
 export interface AndroidListActivitiesResponse {
@@ -434,21 +476,21 @@ export interface AndroidBackupParams {
   /**
    * Box ID
    */
-  id: string;
+  boxId: string;
 }
 
 export interface AndroidCloseParams {
   /**
    * Box ID
    */
-  id: string;
+  boxId: string;
 }
 
 export interface AndroidGetParams {
   /**
    * Box ID
    */
-  id: string;
+  boxId: string;
 }
 
 export type AndroidInstallParams =
@@ -475,7 +517,7 @@ export interface AndroidListActivitiesParams {
   /**
    * Box ID
    */
-  id: string;
+  boxId: string;
 }
 
 export interface AndroidListSimpleParams {
@@ -489,7 +531,7 @@ export interface AndroidOpenParams {
   /**
    * Path param: Box ID
    */
-  id: string;
+  boxId: string;
 
   /**
    * Body param: Activity name, default is the main activity.
@@ -501,7 +543,7 @@ export interface AndroidRestartParams {
   /**
    * Path param: Box ID
    */
-  id: string;
+  boxId: string;
 
   /**
    * Body param: Activity name, default is the main activity.
@@ -516,23 +558,11 @@ export interface AndroidRestoreParams {
   backup: Uploadable;
 }
 
-export interface AndroidRotateScreenParams {
-  /**
-   * Rotation angle in degrees
-   */
-  angle: 90 | 180 | 270;
-
-  /**
-   * Rotation direction
-   */
-  direction: 'clockwise' | 'counter-clockwise';
-}
-
 export interface AndroidUninstallParams {
   /**
    * Path param: Box ID
    */
-  id: string;
+  boxId: string;
 
   /**
    * Body param: uninstalls the application while retaining the data/cache
@@ -545,6 +575,7 @@ export declare namespace Android {
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
+    type AndroidInstallResponse as AndroidInstallResponse,
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
     type AndroidListSimpleResponse as AndroidListSimpleResponse,
     type AndroidListParams as AndroidListParams,
@@ -557,7 +588,6 @@ export declare namespace Android {
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidRestoreParams as AndroidRestoreParams,
-    type AndroidRotateScreenParams as AndroidRotateScreenParams,
     type AndroidUninstallParams as AndroidUninstallParams,
   };
 }

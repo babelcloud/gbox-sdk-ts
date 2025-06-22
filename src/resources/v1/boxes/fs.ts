@@ -18,8 +18,8 @@ export class Fs extends APIResource {
    * );
    * ```
    */
-  list(id: string, query: FListParams, options?: RequestOptions): APIPromise<FListResponse> {
-    return this._client.get(path`/boxes/${id}/fs/list`, { query, ...options });
+  list(boxID: string, query: FListParams, options?: RequestOptions): APIPromise<FListResponse> {
+    return this._client.get(path`/boxes/${boxID}/fs/list`, { query, ...options });
   }
 
   /**
@@ -33,8 +33,8 @@ export class Fs extends APIResource {
    * );
    * ```
    */
-  exists(id: string, body: FExistsParams, options?: RequestOptions): APIPromise<FExistsResponse> {
-    return this._client.post(path`/boxes/${id}/fs/exists`, { body, ...options });
+  exists(boxID: string, body: FExistsParams, options?: RequestOptions): APIPromise<FExistsResponse> {
+    return this._client.post(path`/boxes/${boxID}/fs/exists`, { body, ...options });
   }
 
   /**
@@ -48,8 +48,8 @@ export class Fs extends APIResource {
    * );
    * ```
    */
-  info(id: string, query: FInfoParams, options?: RequestOptions): APIPromise<FInfoResponse> {
-    return this._client.get(path`/boxes/${id}/fs/info`, { query, ...options });
+  info(boxID: string, query: FInfoParams, options?: RequestOptions): APIPromise<FInfoResponse> {
+    return this._client.get(path`/boxes/${boxID}/fs/info`, { query, ...options });
   }
 
   /**
@@ -63,8 +63,8 @@ export class Fs extends APIResource {
    * );
    * ```
    */
-  read(id: string, query: FReadParams, options?: RequestOptions): APIPromise<FReadResponse> {
-    return this._client.get(path`/boxes/${id}/fs/read`, { query, ...options });
+  read(boxID: string, query: FReadParams, options?: RequestOptions): APIPromise<FReadResponse> {
+    return this._client.get(path`/boxes/${boxID}/fs/read`, { query, ...options });
   }
 
   /**
@@ -78,8 +78,8 @@ export class Fs extends APIResource {
    * );
    * ```
    */
-  remove(id: string, body: FRemoveParams, options?: RequestOptions): APIPromise<FRemoveResponse> {
-    return this._client.delete(path`/boxes/${id}/fs`, { body, ...options });
+  remove(boxID: string, body: FRemoveParams, options?: RequestOptions): APIPromise<FRemoveResponse> {
+    return this._client.delete(path`/boxes/${boxID}/fs`, { body, ...options });
   }
 
   /**
@@ -96,8 +96,8 @@ export class Fs extends APIResource {
    * );
    * ```
    */
-  rename(id: string, body: FRenameParams, options?: RequestOptions): APIPromise<FRenameResponse> {
-    return this._client.post(path`/boxes/${id}/fs/rename`, { body, ...options });
+  rename(boxID: string, body: FRenameParams, options?: RequestOptions): APIPromise<FRenameResponse> {
+    return this._client.post(path`/boxes/${boxID}/fs/rename`, { body, ...options });
   }
 
   /**
@@ -115,8 +115,8 @@ export class Fs extends APIResource {
    * );
    * ```
    */
-  write(id: string, body: FWriteParams, options?: RequestOptions): APIPromise<FWriteResponse> {
-    return this._client.post(path`/boxes/${id}/fs/write`, { body, ...options });
+  write(boxID: string, body: FWriteParams, options?: RequestOptions): APIPromise<FWriteResponse> {
+    return this._client.post(path`/boxes/${boxID}/fs/write`, { body, ...options });
   }
 }
 
