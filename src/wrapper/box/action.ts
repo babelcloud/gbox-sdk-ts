@@ -189,20 +189,11 @@ export class ActionOperator {
       throw new Error('Invalid data URL format');
     }
 
-    // Parse data URL
-    const matches = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
-    if (!matches) {
-      throw new Error('Invalid data URL format');
-    }
-
-    const [, base64Data] = matches;
+    const base64Data = dataUrl.split(',')[1];
 
     if (!base64Data) {
       throw new Error('Invalid data URL format');
     }
-
-    // Convert base64 data to Buffer
-    const buffer = Buffer.from(base64Data, 'base64');
 
     // Ensure directory exists
     const dir = path.dirname(filePath);
@@ -211,6 +202,6 @@ export class ActionOperator {
     }
 
     // Write to file
-    fs.writeFileSync(filePath, buffer);
+    fs.writeFileSync(filePath, base64Data, 'base64');
   }
 }
