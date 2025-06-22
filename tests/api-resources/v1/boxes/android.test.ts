@@ -10,7 +10,7 @@ const client = new GboxClient({
 describe('resource android', () => {
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.v1.boxes.android.list('boxId');
+    const responsePromise = client.v1.boxes.android.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,7 +25,7 @@ describe('resource android', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.boxes.android.list(
-        'boxId',
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
         { appType: 'system', isRunning: true },
         { path: '/_stainless_unknown_path' },
       ),
@@ -34,12 +34,16 @@ describe('resource android', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('backup: required and optional params', async () => {
-    const response = await client.v1.boxes.android.backup('com.example.myapp', { boxId: 'boxId' });
+    const response = await client.v1.boxes.android.backup('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('close: only required params', async () => {
-    const responsePromise = client.v1.boxes.android.close('com.example.myapp', { boxId: 'boxId' });
+    const responsePromise = client.v1.boxes.android.close('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,12 +55,14 @@ describe('resource android', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('close: required and optional params', async () => {
-    const response = await client.v1.boxes.android.close('com.example.myapp', { boxId: 'boxId' });
+    const response = await client.v1.boxes.android.close('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('closeAll', async () => {
-    const responsePromise = client.v1.boxes.android.closeAll('boxId');
+    const responsePromise = client.v1.boxes.android.closeAll('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -68,7 +74,9 @@ describe('resource android', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = client.v1.boxes.android.get('com.example.myapp', { boxId: 'boxId' });
+    const responsePromise = client.v1.boxes.android.get('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,12 +88,14 @@ describe('resource android', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await client.v1.boxes.android.get('com.example.myapp', { boxId: 'boxId' });
+    const response = await client.v1.boxes.android.get('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('getConnectAddress', async () => {
-    const responsePromise = client.v1.boxes.android.getConnectAddress('boxId');
+    const responsePromise = client.v1.boxes.android.getConnectAddress('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -97,7 +107,7 @@ describe('resource android', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('install: only required params', async () => {
-    const responsePromise = client.v1.boxes.android.install('boxId', {
+    const responsePromise = client.v1.boxes.android.install('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       apk: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
@@ -111,14 +121,16 @@ describe('resource android', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('install: required and optional params', async () => {
-    const response = await client.v1.boxes.android.install('boxId', {
+    const response = await client.v1.boxes.android.install('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       apk: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('listActivities: only required params', async () => {
-    const responsePromise = client.v1.boxes.android.listActivities('com.example.myapp', { boxId: 'boxId' });
+    const responsePromise = client.v1.boxes.android.listActivities('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -130,12 +142,14 @@ describe('resource android', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('listActivities: required and optional params', async () => {
-    const response = await client.v1.boxes.android.listActivities('com.example.myapp', { boxId: 'boxId' });
+    const response = await client.v1.boxes.android.listActivities('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('listSimple', async () => {
-    const responsePromise = client.v1.boxes.android.listSimple('boxId');
+    const responsePromise = client.v1.boxes.android.listSimple('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -150,7 +164,7 @@ describe('resource android', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.boxes.android.listSimple(
-        'boxId',
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
         { appType: 'system' },
         { path: '/_stainless_unknown_path' },
       ),
@@ -159,7 +173,9 @@ describe('resource android', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('open: only required params', async () => {
-    const responsePromise = client.v1.boxes.android.open('com.example.myapp', { boxId: 'boxId' });
+    const responsePromise = client.v1.boxes.android.open('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -172,14 +188,16 @@ describe('resource android', () => {
   // skipped: tests are disabled for the time being
   test.skip('open: required and optional params', async () => {
     const response = await client.v1.boxes.android.open('com.example.myapp', {
-      boxId: 'boxId',
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
       activityName: 'com.android.settings.Settings',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('restart: only required params', async () => {
-    const responsePromise = client.v1.boxes.android.restart('com.example.myapp', { boxId: 'boxId' });
+    const responsePromise = client.v1.boxes.android.restart('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -192,14 +210,14 @@ describe('resource android', () => {
   // skipped: tests are disabled for the time being
   test.skip('restart: required and optional params', async () => {
     const response = await client.v1.boxes.android.restart('com.example.myapp', {
-      boxId: 'boxId',
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
       activityName: 'com.android.settings.Settings',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('restore: only required params', async () => {
-    const responsePromise = client.v1.boxes.android.restore('boxId', {
+    const responsePromise = client.v1.boxes.android.restore('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       backup: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
@@ -213,14 +231,16 @@ describe('resource android', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('restore: required and optional params', async () => {
-    const response = await client.v1.boxes.android.restore('boxId', {
+    const response = await client.v1.boxes.android.restore('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       backup: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('uninstall: only required params', async () => {
-    const responsePromise = client.v1.boxes.android.uninstall('com.example.myapp', { boxId: 'boxId' });
+    const responsePromise = client.v1.boxes.android.uninstall('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -233,7 +253,7 @@ describe('resource android', () => {
   // skipped: tests are disabled for the time being
   test.skip('uninstall: required and optional params', async () => {
     const response = await client.v1.boxes.android.uninstall('com.example.myapp', {
-      boxId: 'boxId',
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
       keepData: true,
     });
   });

@@ -12,7 +12,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.click(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 100, y: 100 },
    * );
    * ```
@@ -27,7 +27,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.drag(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   {
    *     path: [
    *       { x: 100, y: 100 },
@@ -47,7 +47,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.move(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 200, y: 300 },
    * );
    * ```
@@ -63,9 +63,10 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult =
-   *   await client.v1.boxes.actions.pressButton('boxId', {
-   *     buttons: ['power'],
-   *   });
+   *   await client.v1.boxes.actions.pressButton(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { buttons: ['power'] },
+   *   );
    * ```
    */
   pressButton(
@@ -84,7 +85,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.pressKey(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { keys: ['enter'] },
    * );
    * ```
@@ -99,10 +100,10 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult =
-   *   await client.v1.boxes.actions.screenRotation('boxId', {
-   *     angle: 90,
-   *     direction: 'clockwise',
-   *   });
+   *   await client.v1.boxes.actions.screenRotation(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { angle: 90, direction: 'clockwise' },
+   *   );
    * ```
    */
   screenRotation(
@@ -119,7 +120,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.actions.screenshot(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
@@ -137,7 +138,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.scroll(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
    * );
    * ```
@@ -152,7 +153,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.swipe(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { direction: 'up' },
    * );
    * ```
@@ -167,7 +168,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.touch(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { points: [{ start: { x: 100, y: 150 } }] },
    * );
    * ```
@@ -184,7 +185,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.type(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { text: 'Hello World' },
    * );
    * ```

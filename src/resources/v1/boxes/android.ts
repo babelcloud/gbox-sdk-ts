@@ -16,7 +16,7 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * const androids = await client.v1.boxes.android.list(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
@@ -35,7 +35,7 @@ export class Android extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.android.backup(
    *   'com.example.myapp',
-   *   { boxId: 'boxId' },
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    *
    * const content = await response.blob();
@@ -57,7 +57,7 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.android.backupAll(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    *
    * const content = await response.blob();
@@ -78,7 +78,7 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * await client.v1.boxes.android.close('com.example.myapp', {
-   *   boxId: 'boxId',
+   *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * });
    * ```
    */
@@ -95,7 +95,9 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.android.closeAll('boxId');
+   * await client.v1.boxes.android.closeAll(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
   closeAll(boxID: string, options?: RequestOptions): APIPromise<void> {
@@ -112,7 +114,7 @@ export class Android extends APIResource {
    * ```ts
    * const androidApp = await client.v1.boxes.android.get(
    *   'com.example.myapp',
-   *   { boxId: 'boxId' },
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
    */
@@ -127,7 +129,9 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.boxes.android.getConnectAddress('boxId');
+   *   await client.v1.boxes.android.getConnectAddress(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
    * ```
    */
   getConnectAddress(boxID: string, options?: RequestOptions): APIPromise<AndroidGetConnectAddressResponse> {
@@ -139,9 +143,10 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.android.install('boxId', {
-   *   apk: fs.createReadStream('path/to/file'),
-   * });
+   * await client.v1.boxes.android.install(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { apk: fs.createReadStream('path/to/file') },
+   * );
    * ```
    */
   install(boxID: string, body: AndroidInstallParams, options?: RequestOptions): APIPromise<void> {
@@ -162,7 +167,7 @@ export class Android extends APIResource {
    * const response =
    *   await client.v1.boxes.android.listActivities(
    *     'com.example.myapp',
-   *     { boxId: 'boxId' },
+   *     { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    *   );
    * ```
    */
@@ -183,7 +188,7 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.android.listSimple(
-   *   'boxId',
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
@@ -201,7 +206,7 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * await client.v1.boxes.android.open('com.example.myapp', {
-   *   boxId: 'boxId',
+   *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * });
    * ```
    */
@@ -220,7 +225,7 @@ export class Android extends APIResource {
    * @example
    * ```ts
    * await client.v1.boxes.android.restart('com.example.myapp', {
-   *   boxId: 'boxId',
+   *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * });
    * ```
    */
@@ -238,9 +243,10 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.android.restore('boxId', {
-   *   backup: fs.createReadStream('path/to/file'),
-   * });
+   * await client.v1.boxes.android.restore(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { backup: fs.createReadStream('path/to/file') },
+   * );
    * ```
    */
   restore(boxID: string, body: AndroidRestoreParams, options?: RequestOptions): APIPromise<void> {
@@ -258,7 +264,7 @@ export class Android extends APIResource {
    * ```ts
    * await client.v1.boxes.android.uninstall(
    *   'com.example.myapp',
-   *   { boxId: 'boxId' },
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
    */
@@ -409,14 +415,23 @@ export interface AndroidListParams {
 }
 
 export interface AndroidBackupParams {
+  /**
+   * Box ID
+   */
   boxId: string;
 }
 
 export interface AndroidCloseParams {
+  /**
+   * Box ID
+   */
   boxId: string;
 }
 
 export interface AndroidGetParams {
+  /**
+   * Box ID
+   */
   boxId: string;
 }
 
@@ -441,6 +456,9 @@ export declare namespace AndroidInstallParams {
 }
 
 export interface AndroidListActivitiesParams {
+  /**
+   * Box ID
+   */
   boxId: string;
 }
 
@@ -453,7 +471,7 @@ export interface AndroidListSimpleParams {
 
 export interface AndroidOpenParams {
   /**
-   * Path param:
+   * Path param: Box ID
    */
   boxId: string;
 
@@ -465,7 +483,7 @@ export interface AndroidOpenParams {
 
 export interface AndroidRestartParams {
   /**
-   * Path param:
+   * Path param: Box ID
    */
   boxId: string;
 
@@ -484,7 +502,7 @@ export interface AndroidRestoreParams {
 
 export interface AndroidUninstallParams {
   /**
-   * Path param:
+   * Path param: Box ID
    */
   boxId: string;
 
