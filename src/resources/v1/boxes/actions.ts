@@ -12,13 +12,13 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.click(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    *   { x: 100, y: 100 },
    * );
    * ```
    */
-  click(id: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/click`, { body, ...options });
+  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/click`, { body, ...options });
   }
 
   /**
@@ -27,7 +27,7 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.drag(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    *   {
    *     path: [
    *       { x: 100, y: 100 },
@@ -37,8 +37,8 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  drag(id: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/drag`, { body, ...options });
+  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/drag`, { body, ...options });
   }
 
   /**
@@ -47,13 +47,13 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.move(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    *   { x: 200, y: 300 },
    * );
    * ```
    */
-  move(id: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/move`, { body, ...options });
+  move(boxID: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/move`, { body, ...options });
   }
 
   /**
@@ -63,14 +63,17 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult =
-   *   await client.v1.boxes.actions.pressButton(
-   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     { buttons: ['power'] },
-   *   );
+   *   await client.v1.boxes.actions.pressButton('boxId', {
+   *     buttons: ['power'],
+   *   });
    * ```
    */
-  pressButton(id: string, body: ActionPressButtonParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/press-button`, { body, ...options });
+  pressButton(
+    boxID: string,
+    body: ActionPressButtonParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/press-button`, { body, ...options });
   }
 
   /**
@@ -81,13 +84,13 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.pressKey(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    *   { keys: ['enter'] },
    * );
    * ```
    */
-  pressKey(id: string, body: ActionPressKeyParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/press-key`, { body, ...options });
+  pressKey(boxID: string, body: ActionPressKeyParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/press-key`, { body, ...options });
   }
 
   /**
@@ -96,18 +99,18 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult =
-   *   await client.v1.boxes.actions.screenRotation(
-   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     { angle: 90, direction: 'clockwise' },
-   *   );
+   *   await client.v1.boxes.actions.screenRotation('boxId', {
+   *     angle: 90,
+   *     direction: 'clockwise',
+   *   });
    * ```
    */
   screenRotation(
-    id: string,
+    boxID: string,
     body: ActionScreenRotationParams,
     options?: RequestOptions,
   ): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/screen-rotation`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/actions/screen-rotation`, { body, ...options });
   }
 
   /**
@@ -116,16 +119,16 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.actions.screenshot(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    * );
    * ```
    */
   screenshot(
-    id: string,
+    boxID: string,
     body: ActionScreenshotParams,
     options?: RequestOptions,
   ): APIPromise<ActionScreenshotResponse> {
-    return this._client.post(path`/boxes/${id}/actions/screenshot`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/actions/screenshot`, { body, ...options });
   }
 
   /**
@@ -134,13 +137,13 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.scroll(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
    * );
    * ```
    */
-  scroll(id: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/scroll`, { body, ...options });
+  scroll(boxID: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body, ...options });
   }
 
   /**
@@ -149,13 +152,13 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.swipe(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    *   { direction: 'up' },
    * );
    * ```
    */
-  swipe(id: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/swipe`, { body, ...options });
+  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/swipe`, { body, ...options });
   }
 
   /**
@@ -164,13 +167,13 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.touch(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    *   { points: [{ start: { x: 100, y: 150 } }] },
    * );
    * ```
    */
-  touch(id: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/touch`, { body, ...options });
+  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/touch`, { body, ...options });
   }
 
   /**
@@ -181,13 +184,13 @@ export class Actions extends APIResource {
    * @example
    * ```ts
    * const actionResult = await client.v1.boxes.actions.type(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    *   { text: 'Hello World' },
    * );
    * ```
    */
-  type(id: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/boxes/${id}/actions/type`, { body, ...options });
+  type(boxID: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/boxes/${boxID}/actions/type`, { body, ...options });
   }
 }
 

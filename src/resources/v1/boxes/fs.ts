@@ -12,14 +12,13 @@ export class Fs extends APIResource {
    *
    * @example
    * ```ts
-   * const fs = await client.v1.boxes.fs.list(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { path: '/home/user/documents' },
-   * );
+   * const fs = await client.v1.boxes.fs.list('boxId', {
+   *   path: '/home/user/documents',
+   * });
    * ```
    */
-  list(id: string, query: FListParams, options?: RequestOptions): APIPromise<FListResponse> {
-    return this._client.get(path`/boxes/${id}/fs/list`, { query, ...options });
+  list(boxID: string, query: FListParams, options?: RequestOptions): APIPromise<FListResponse> {
+    return this._client.get(path`/boxes/${boxID}/fs/list`, { query, ...options });
   }
 
   /**
@@ -27,14 +26,13 @@ export class Fs extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.fs.exists(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { path: '/home/user/documents/output.txt' },
-   * );
+   * const response = await client.v1.boxes.fs.exists('boxId', {
+   *   path: '/home/user/documents/output.txt',
+   * });
    * ```
    */
-  exists(id: string, body: FExistsParams, options?: RequestOptions): APIPromise<FExistsResponse> {
-    return this._client.post(path`/boxes/${id}/fs/exists`, { body, ...options });
+  exists(boxID: string, body: FExistsParams, options?: RequestOptions): APIPromise<FExistsResponse> {
+    return this._client.post(path`/boxes/${boxID}/fs/exists`, { body, ...options });
   }
 
   /**
@@ -42,14 +40,13 @@ export class Fs extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.fs.info(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { path: '/home/user/documents/output.txt' },
-   * );
+   * const response = await client.v1.boxes.fs.info('boxId', {
+   *   path: '/home/user/documents/output.txt',
+   * });
    * ```
    */
-  info(id: string, query: FInfoParams, options?: RequestOptions): APIPromise<FInfoResponse> {
-    return this._client.get(path`/boxes/${id}/fs/info`, { query, ...options });
+  info(boxID: string, query: FInfoParams, options?: RequestOptions): APIPromise<FInfoResponse> {
+    return this._client.get(path`/boxes/${boxID}/fs/info`, { query, ...options });
   }
 
   /**
@@ -57,14 +54,13 @@ export class Fs extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.fs.read(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { path: '/home/user/documents/config.json' },
-   * );
+   * const response = await client.v1.boxes.fs.read('boxId', {
+   *   path: '/home/user/documents/config.json',
+   * });
    * ```
    */
-  read(id: string, query: FReadParams, options?: RequestOptions): APIPromise<FReadResponse> {
-    return this._client.get(path`/boxes/${id}/fs/read`, { query, ...options });
+  read(boxID: string, query: FReadParams, options?: RequestOptions): APIPromise<FReadResponse> {
+    return this._client.get(path`/boxes/${boxID}/fs/read`, { query, ...options });
   }
 
   /**
@@ -72,14 +68,13 @@ export class Fs extends APIResource {
    *
    * @example
    * ```ts
-   * const f = await client.v1.boxes.fs.remove(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { path: '/home/user/documents/output.txt' },
-   * );
+   * const f = await client.v1.boxes.fs.remove('boxId', {
+   *   path: '/home/user/documents/output.txt',
+   * });
    * ```
    */
-  remove(id: string, body: FRemoveParams, options?: RequestOptions): APIPromise<FRemoveResponse> {
-    return this._client.delete(path`/boxes/${id}/fs`, { body, ...options });
+  remove(boxID: string, body: FRemoveParams, options?: RequestOptions): APIPromise<FRemoveResponse> {
+    return this._client.delete(path`/boxes/${boxID}/fs`, { body, ...options });
   }
 
   /**
@@ -87,17 +82,14 @@ export class Fs extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.fs.rename(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   {
-   *     newPath: '/home/user/documents/new-name.txt',
-   *     oldPath: '/home/user/documents/output.txt',
-   *   },
-   * );
+   * const response = await client.v1.boxes.fs.rename('boxId', {
+   *   newPath: '/home/user/documents/new-name.txt',
+   *   oldPath: '/home/user/documents/output.txt',
+   * });
    * ```
    */
-  rename(id: string, body: FRenameParams, options?: RequestOptions): APIPromise<FRenameResponse> {
-    return this._client.post(path`/boxes/${id}/fs/rename`, { body, ...options });
+  rename(boxID: string, body: FRenameParams, options?: RequestOptions): APIPromise<FRenameResponse> {
+    return this._client.post(path`/boxes/${boxID}/fs/rename`, { body, ...options });
   }
 
   /**
@@ -106,17 +98,14 @@ export class Fs extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.fs.write(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   {
-   *     content: 'Hello, World!\nThis is file content.',
-   *     path: '/home/user/documents/output.txt',
-   *   },
-   * );
+   * const response = await client.v1.boxes.fs.write('boxId', {
+   *   content: 'Hello, World!\nThis is file content.',
+   *   path: '/home/user/documents/output.txt',
+   * });
    * ```
    */
-  write(id: string, body: FWriteParams, options?: RequestOptions): APIPromise<FWriteResponse> {
-    return this._client.post(path`/boxes/${id}/fs/write`, { body, ...options });
+  write(boxID: string, body: FWriteParams, options?: RequestOptions): APIPromise<FWriteResponse> {
+    return this._client.post(path`/boxes/${boxID}/fs/write`, { body, ...options });
   }
 }
 

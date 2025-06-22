@@ -12,16 +12,16 @@ export class Browser extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.browser.cdpURL(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    * );
    * ```
    */
   cdpURL(
-    id: string,
+    boxID: string,
     body: BrowserCdpURLParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<string> {
-    return this._client.post(path`/boxes/${id}/browser/connect-url/cdp`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/browser/connect-url/cdp`, { body, ...options });
   }
 }
 

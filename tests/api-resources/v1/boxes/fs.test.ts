@@ -10,9 +10,7 @@ const client = new GboxClient({
 describe('resource fs', () => {
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = client.v1.boxes.fs.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      path: '/home/user/documents',
-    });
+    const responsePromise = client.v1.boxes.fs.list('boxId', { path: '/home/user/documents' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +22,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await client.v1.boxes.fs.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const response = await client.v1.boxes.fs.list('boxId', {
       path: '/home/user/documents',
       depth: 2,
       workingDir: '/home/user/documents',
@@ -33,9 +31,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('exists: only required params', async () => {
-    const responsePromise = client.v1.boxes.fs.exists('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      path: '/home/user/documents/output.txt',
-    });
+    const responsePromise = client.v1.boxes.fs.exists('boxId', { path: '/home/user/documents/output.txt' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,7 +43,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('exists: required and optional params', async () => {
-    const response = await client.v1.boxes.fs.exists('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const response = await client.v1.boxes.fs.exists('boxId', {
       path: '/home/user/documents/output.txt',
       workingDir: '/home/user/documents',
     });
@@ -55,9 +51,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('info: only required params', async () => {
-    const responsePromise = client.v1.boxes.fs.info('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      path: '/home/user/documents/output.txt',
-    });
+    const responsePromise = client.v1.boxes.fs.info('boxId', { path: '/home/user/documents/output.txt' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -69,7 +63,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('info: required and optional params', async () => {
-    const response = await client.v1.boxes.fs.info('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const response = await client.v1.boxes.fs.info('boxId', {
       path: '/home/user/documents/output.txt',
       workingDir: '/home/user/documents',
     });
@@ -77,9 +71,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('read: only required params', async () => {
-    const responsePromise = client.v1.boxes.fs.read('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      path: '/home/user/documents/config.json',
-    });
+    const responsePromise = client.v1.boxes.fs.read('boxId', { path: '/home/user/documents/config.json' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -91,7 +83,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('read: required and optional params', async () => {
-    const response = await client.v1.boxes.fs.read('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const response = await client.v1.boxes.fs.read('boxId', {
       path: '/home/user/documents/config.json',
       workingDir: '/home/user/documents',
     });
@@ -99,9 +91,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('remove: only required params', async () => {
-    const responsePromise = client.v1.boxes.fs.remove('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      path: '/home/user/documents/output.txt',
-    });
+    const responsePromise = client.v1.boxes.fs.remove('boxId', { path: '/home/user/documents/output.txt' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -113,7 +103,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('remove: required and optional params', async () => {
-    const response = await client.v1.boxes.fs.remove('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const response = await client.v1.boxes.fs.remove('boxId', {
       path: '/home/user/documents/output.txt',
       workingDir: '/home/user/documents',
     });
@@ -121,7 +111,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('rename: only required params', async () => {
-    const responsePromise = client.v1.boxes.fs.rename('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const responsePromise = client.v1.boxes.fs.rename('boxId', {
       newPath: '/home/user/documents/new-name.txt',
       oldPath: '/home/user/documents/output.txt',
     });
@@ -136,7 +126,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('rename: required and optional params', async () => {
-    const response = await client.v1.boxes.fs.rename('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const response = await client.v1.boxes.fs.rename('boxId', {
       newPath: '/home/user/documents/new-name.txt',
       oldPath: '/home/user/documents/output.txt',
       workingDir: '/home/user/documents',
@@ -145,7 +135,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('write: only required params', async () => {
-    const responsePromise = client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const responsePromise = client.v1.boxes.fs.write('boxId', {
       content: 'Hello, World!\nThis is file content.',
       path: '/home/user/documents/output.txt',
     });
@@ -160,7 +150,7 @@ describe('resource fs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('write: required and optional params', async () => {
-    const response = await client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const response = await client.v1.boxes.fs.write('boxId', {
       content: 'Hello, World!\nThis is file content.',
       path: '/home/user/documents/output.txt',
       workingDir: '/home/user/documents',
