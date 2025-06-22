@@ -66,29 +66,29 @@ import GboxClient, { toFile } from 'gbox-sdk';
 const client = new GboxClient();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+await client.v1.boxes.fs.write('boxId', {
   content: fs.createReadStream('/path/to/file'),
   path: '/home/user/documents/output.txt',
 });
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+await client.v1.boxes.fs.write('boxId', {
   content: new File(['my bytes'], 'file'),
   path: '/home/user/documents/output.txt',
 });
 
 // You can also pass a `fetch` `Response`:
-await client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+await client.v1.boxes.fs.write('boxId', {
   content: await fetch('https://somesite/file'),
   path: '/home/user/documents/output.txt',
 });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+await client.v1.boxes.fs.write('boxId', {
   content: await toFile(Buffer.from('my bytes'), 'file'),
   path: '/home/user/documents/output.txt',
 });
-await client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+await client.v1.boxes.fs.write('boxId', {
   content: await toFile(new Uint8Array([0, 1, 2]), 'file'),
   path: '/home/user/documents/output.txt',
 });

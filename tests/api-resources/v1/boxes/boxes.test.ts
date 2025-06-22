@@ -10,7 +10,7 @@ const client = new GboxClient({
 describe('resource boxes', () => {
   // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.v1.boxes.retrieve('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const responsePromise = client.v1.boxes.retrieve('boxId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -69,9 +69,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('executeCommands: only required params', async () => {
-    const responsePromise = client.v1.boxes.executeCommands('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      commands: ['ls', '-l'],
-    });
+    const responsePromise = client.v1.boxes.executeCommands('boxId', { commands: ['ls', '-l'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -83,7 +81,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('executeCommands: required and optional params', async () => {
-    const response = await client.v1.boxes.executeCommands('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const response = await client.v1.boxes.executeCommands('boxId', {
       commands: ['ls', '-l'],
       envs: { PATH: '/usr/bin:/bin', NODE_ENV: 'production' },
       timeout: '30s',
@@ -93,7 +91,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('liveViewURL', async () => {
-    const responsePromise = client.v1.boxes.liveViewURL('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const responsePromise = client.v1.boxes.liveViewURL('boxId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -107,19 +105,13 @@ describe('resource boxes', () => {
   test.skip('liveViewURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.boxes.liveViewURL(
-        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { expiresIn: '180m' },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.v1.boxes.liveViewURL('boxId', { expiresIn: '180m' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('runCode: only required params', async () => {
-    const responsePromise = client.v1.boxes.runCode('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      code: 'print("Hello, World!")',
-    });
+    const responsePromise = client.v1.boxes.runCode('boxId', { code: 'print("Hello, World!")' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -131,7 +123,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('runCode: required and optional params', async () => {
-    const response = await client.v1.boxes.runCode('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+    const response = await client.v1.boxes.runCode('boxId', {
       code: 'print("Hello, World!")',
       argv: ['--help'],
       envs: { PYTHONPATH: '/usr/lib/python', DEBUG: 'true' },
@@ -143,7 +135,7 @@ describe('resource boxes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('start', async () => {
-    const responsePromise = client.v1.boxes.start('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const responsePromise = client.v1.boxes.start('boxId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -157,17 +149,13 @@ describe('resource boxes', () => {
   test.skip('start: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.boxes.start(
-        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { wait: true },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.v1.boxes.start('boxId', { wait: true }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('stop', async () => {
-    const responsePromise = client.v1.boxes.stop('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const responsePromise = client.v1.boxes.stop('boxId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -181,17 +169,13 @@ describe('resource boxes', () => {
   test.skip('stop: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.boxes.stop(
-        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { wait: true },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.v1.boxes.stop('boxId', { wait: true }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('terminate', async () => {
-    const responsePromise = client.v1.boxes.terminate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const responsePromise = client.v1.boxes.terminate('boxId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -205,17 +189,13 @@ describe('resource boxes', () => {
   test.skip('terminate: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.boxes.terminate(
-        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { wait: true },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.v1.boxes.terminate('boxId', { wait: true }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('webTerminalURL', async () => {
-    const responsePromise = client.v1.boxes.webTerminalURL('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const responsePromise = client.v1.boxes.webTerminalURL('boxId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -229,11 +209,7 @@ describe('resource boxes', () => {
   test.skip('webTerminalURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.boxes.webTerminalURL(
-        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { expiresIn: '180m' },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.v1.boxes.webTerminalURL('boxId', { expiresIn: '180m' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(GboxClient.NotFoundError);
   });
 });

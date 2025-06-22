@@ -74,13 +74,11 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const box = await client.v1.boxes.retrieve(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
+   * const box = await client.v1.boxes.retrieve('boxId');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
-    return this._client.get(path`/boxes/${id}`, options);
+  retrieve(boxID: string, options?: RequestOptions): APIPromise<BoxRetrieveResponse> {
+    return this._client.get(path`/boxes/${boxID}`, options);
   }
 
   /**
@@ -125,17 +123,17 @@ export class Boxes extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.executeCommands(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    *   { commands: ['ls', '-l'] },
    * );
    * ```
    */
   executeCommands(
-    id: string,
+    boxID: string,
     body: BoxExecuteCommandsParams,
     options?: RequestOptions,
   ): APIPromise<BoxExecuteCommandsResponse> {
-    return this._client.post(path`/boxes/${id}/commands`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/commands`, { body, ...options });
   }
 
   /**
@@ -143,17 +141,15 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.liveViewURL(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
+   * const response = await client.v1.boxes.liveViewURL('boxId');
    * ```
    */
   liveViewURL(
-    id: string,
+    boxID: string,
     body: BoxLiveViewURLParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BoxLiveViewURLResponse> {
-    return this._client.post(path`/boxes/${id}/live-view-url`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/live-view-url`, { body, ...options });
   }
 
   /**
@@ -161,14 +157,13 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.runCode(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { code: 'print("Hello, World!")' },
-   * );
+   * const response = await client.v1.boxes.runCode('boxId', {
+   *   code: 'print("Hello, World!")',
+   * });
    * ```
    */
-  runCode(id: string, body: BoxRunCodeParams, options?: RequestOptions): APIPromise<BoxRunCodeResponse> {
-    return this._client.post(path`/boxes/${id}/run-code`, { body, ...options });
+  runCode(boxID: string, body: BoxRunCodeParams, options?: RequestOptions): APIPromise<BoxRunCodeResponse> {
+    return this._client.post(path`/boxes/${boxID}/run-code`, { body, ...options });
   }
 
   /**
@@ -176,17 +171,15 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.start(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
+   * const response = await client.v1.boxes.start('boxId');
    * ```
    */
   start(
-    id: string,
+    boxID: string,
     body: BoxStartParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BoxStartResponse> {
-    return this._client.post(path`/boxes/${id}/start`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/start`, { body, ...options });
   }
 
   /**
@@ -194,17 +187,15 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.stop(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
+   * const response = await client.v1.boxes.stop('boxId');
    * ```
    */
   stop(
-    id: string,
+    boxID: string,
     body: BoxStopParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BoxStopResponse> {
-    return this._client.post(path`/boxes/${id}/stop`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/stop`, { body, ...options });
   }
 
   /**
@@ -212,17 +203,15 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.terminate(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
+   * await client.v1.boxes.terminate('boxId');
    * ```
    */
   terminate(
-    id: string,
+    boxID: string,
     body: BoxTerminateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<void> {
-    return this._client.post(path`/boxes/${id}/terminate`, {
+    return this._client.post(path`/boxes/${boxID}/terminate`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -235,16 +224,16 @@ export class Boxes extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.webTerminalURL(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   'boxId',
    * );
    * ```
    */
   webTerminalURL(
-    id: string,
+    boxID: string,
     body: BoxWebTerminalURLParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BoxWebTerminalURLResponse> {
-    return this._client.post(path`/boxes/${id}/web-terminal-url`, { body, ...options });
+    return this._client.post(path`/boxes/${boxID}/web-terminal-url`, { body, ...options });
   }
 }
 
