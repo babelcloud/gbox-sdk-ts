@@ -23,7 +23,7 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Check if file exists
+   * Check if file/directory exists
    *
    * @example
    * ```ts
@@ -68,7 +68,8 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Delete box file/directory
+   * Delete a file or directory. If target path is not exists, the delete will be
+   * failed.
    *
    * @example
    * ```ts
@@ -83,7 +84,8 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Rename box file
+   * Rename a file or directory. If target newPath is already exists, the rename will
+   * be failed.
    *
    * @example
    * ```ts
@@ -102,7 +104,7 @@ export class Fs extends APIResource {
 
   /**
    * Creates or overwrites a file. Creates necessary directories in the path if they
-   * don't exist. if the path is a directory, the write will be failed.
+   * don't exist. If target path is already exists, the write will be failed.
    *
    * @example
    * ```ts
@@ -200,11 +202,33 @@ export namespace FListResponse {
 /**
  * Response after checking if a file/directory exists
  */
-export interface FExistsResponse {
+export type FExistsResponse = FExistsResponse.ExistsFileResult | FExistsResponse.NotExistsFileResult;
+
+export namespace FExistsResponse {
   /**
-   * Exists
+   * Response after checking if a file/directory exists
    */
-  exists: boolean;
+  export interface ExistsFileResult {
+    /**
+     * Exists
+     */
+    exists: boolean;
+
+    /**
+     * Type
+     */
+    type: string;
+  }
+
+  /**
+   * Response after checking if a file/directory not exists
+   */
+  export interface NotExistsFileResult {
+    /**
+     * Exists
+     */
+    exists: boolean;
+  }
 }
 
 /**
@@ -300,13 +324,75 @@ export interface FRemoveResponse {
 }
 
 /**
- * Response after renaming file/directory
+ * File system file representation
  */
-export interface FRenameResponse {
+export type FRenameResponse = FRenameResponse.File | FRenameResponse.Dir;
+
+export namespace FRenameResponse {
   /**
-   * Success message
+   * File system file representation
    */
-  message: string;
+  export interface File {
+    /**
+     * Last modified time of the file
+     */
+    lastModified: string;
+
+    /**
+     * File metadata
+     */
+    mode: string;
+
+    /**
+     * Name of the file
+     */
+    name: string;
+
+    /**
+     * Full path to the file
+     */
+    path: string;
+
+    /**
+     * Size of the file
+     */
+    size: string;
+
+    /**
+     * File type indicator
+     */
+    type: 'file';
+  }
+
+  /**
+   * File system directory representation
+   */
+  export interface Dir {
+    /**
+     * Last modified time of the directory
+     */
+    lastModified: string;
+
+    /**
+     * Directory metadata
+     */
+    mode: string;
+
+    /**
+     * Name of the directory
+     */
+    name: string;
+
+    /**
+     * Full path to the directory
+     */
+    path: string;
+
+    /**
+     * Directory type indicator
+     */
+    type: 'dir';
+  }
 }
 
 /**
@@ -382,7 +468,8 @@ export interface FReadParams {
 export interface FRemoveParams {
   /**
    * Path to the file/directory. If the path is not start with '/', the
-   * file/directory will be deleted from the working directory
+   * file/directory will be deleted from the working directory. If target path is not
+   * exists, the delete will be failed.
    */
   path: string;
 
@@ -396,13 +483,15 @@ export interface FRemoveParams {
 export interface FRenameParams {
   /**
    * New path for the file/directory. If the path is not start with '/', the
-   * file/directory will be renamed to the working directory
+   * file/directory will be renamed to the working directory. If target newPath is
+   * already exists, the rename will be failed.
    */
   newPath: string;
 
   /**
    * Old path to the file/directory. If the path is not start with '/', the
-   * file/directory will be renamed from the working directory
+   * file/directory will be renamed from the working directory. If target oldPath is
+   * not exists, the rename will be failed.
    */
   oldPath: string;
 
@@ -424,7 +513,8 @@ export declare namespace FWriteParams {
 
     /**
      * Path to the file. If the path is not start with '/', the file will be written to
-     * the working directory
+     * the working directory. Creates necessary directories in the path if they don't
+     * exist. If target path is already exists, the write will be failed.
      */
     path: string;
 
@@ -443,7 +533,8 @@ export declare namespace FWriteParams {
 
     /**
      * Path to the file. If the path is not start with '/', the file will be written to
-     * the working directory
+     * the working directory. Creates necessary directories in the path if they don't
+     * exist. If target path is already exists, the write will be failed.
      */
     path: string;
 
