@@ -36,7 +36,7 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * or
      * const response = await myBox.app.install({ apk: "https://example.com/path/to/app.apk" });
      */
-    install: (body: AndroidInstallParams): Promise<void> => {
+    install: (body: AndroidInstallParams) => {
       if (typeof body.apk === 'string' && !body.apk.startsWith('http')) {
         const exists = fs.existsSync(body.apk);
         if (!exists) {
