@@ -9,6 +9,7 @@ import type {
   ActionPressKeyParams,
   ActionPressButtonParams,
   ActionSwipeParams,
+  ActionScreenRotationParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -97,6 +98,10 @@ export class ActionOperator {
     return this.client.v1.boxes.actions.drag(this.boxId, body);
   }
 
+  /**
+   * @example
+   * const response = await myBox.action.swipe({ direction: 'up' });
+   */
   async swipe(body: ActionSwipe) {
     return this.client.v1.boxes.actions.swipe(this.boxId, body);
   }
@@ -163,6 +168,14 @@ export class ActionOperator {
     }
 
     return res;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.screenRotation({ angle: 90, direction: 'clockwise' });
+   */
+  async screenRotation(body: ActionScreenRotationParams) {
+    return this.client.v1.boxes.actions.screenRotation(this.boxId, body);
   }
 
   /**
