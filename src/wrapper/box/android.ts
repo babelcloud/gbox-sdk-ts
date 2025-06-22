@@ -50,8 +50,8 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * @example
      * const response = await myBox.app.uninstall('com.example.myapp');
      */
-    uninstall: (packageName: string, params: Omit<AndroidUninstallParams, 'id'>): Promise<void> =>
-      this.client.v1.boxes.android.uninstall(packageName, { ...params, id: this.data.id }),
+    uninstall: (packageName: string, params: Omit<AndroidUninstallParams, 'boxId'>): Promise<void> =>
+      this.client.v1.boxes.android.uninstall(packageName, { ...params, boxId: this.data.id }),
     /**
      * @example
      * const response = await myBox.app.list();
@@ -63,14 +63,14 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * const response = await myBox.app.geInfo('com.example.myapp');
      */
     getInfo: (packageName: string): Promise<AndroidApp> =>
-      this.client.v1.boxes.android.get(packageName, { id: this.data.id }),
+      this.client.v1.boxes.android.get(packageName, { boxId: this.data.id }),
     /**
      * @example
      * const myApp = await myBox.app.get('com.example.myapp');
      */
     get: async (packageName: string) =>
       new AndroidAppOperator(
-        await this.client.v1.boxes.android.get(packageName, { id: this.data.id }),
+        await this.client.v1.boxes.android.get(packageName, { boxId: this.data.id }),
         this.client,
         this.data,
       ),
@@ -97,23 +97,23 @@ class AndroidAppOperator {
    * @example
    * const response = await myApp.open();
    */
-  async open(params?: Omit<AndroidOpenParams, 'id'>) {
-    return this.client.v1.boxes.android.open(this.data.packageName, { id: this.box.id, ...params });
+  async open(params?: Omit<AndroidOpenParams, 'boxId'>) {
+    return this.client.v1.boxes.android.open(this.data.packageName, { boxId: this.box.id, ...params });
   }
 
   /**
    * @example
    * const response = await myApp.restart();
    */
-  async restart(params?: Omit<AndroidRestartParams, 'id'>) {
-    return this.client.v1.boxes.android.restart(this.data.packageName, { id: this.box.id, ...params });
+  async restart(params?: Omit<AndroidRestartParams, 'boxId'>) {
+    return this.client.v1.boxes.android.restart(this.data.packageName, { boxId: this.box.id, ...params });
   }
 
   /**
    * @example
    * const response = await myApp.close();
    */
-  async close(params?: Omit<AndroidCloseParams, 'id'>) {
-    return this.client.v1.boxes.android.close(this.data.packageName, { id: this.box.id, ...params });
+  async close(params?: Omit<AndroidCloseParams, 'boxId'>) {
+    return this.client.v1.boxes.android.close(this.data.packageName, { boxId: this.box.id, ...params });
   }
 }

@@ -40,6 +40,9 @@ export {
   type ActionType,
   type ActionPressButton,
   type ActionPressKey,
+  type ActionScreenshot,
+  type ActionSwipe,
+  type ActionSwipeSimple,
 } from './wrapper/box/action';
 export {
   type BoxExecuteCommands,
