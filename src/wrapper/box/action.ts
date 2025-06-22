@@ -51,9 +51,11 @@ export interface ActionSwipeSimple extends ActionSwipeParams.SwipeSimple {
   screenshotDelay?: TimeString;
 }
 
-export interface ActionSwipe extends ActionSwipeParams.Swipe {
+export interface ActionSwipeAdvanced extends ActionSwipeParams.SwipeAdvanced {
   screenshotDelay?: TimeString;
 }
+
+export type ActionSwipe = ActionSwipeSimple | ActionSwipeAdvanced;
 
 export interface ActionScreenshot extends ActionScreenshotParams {
   /**
@@ -95,7 +97,7 @@ export class ActionOperator {
     return this.client.v1.boxes.actions.drag(this.boxId, body);
   }
 
-  async swipe(body: ActionSwipe | ActionSwipeSimple) {
+  async swipe(body: ActionSwipe) {
     return this.client.v1.boxes.actions.swipe(this.boxId, body);
   }
 
