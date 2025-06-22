@@ -10,7 +10,6 @@ import {
   AndroidListParams,
   AndroidUninstallParams,
   AndroidListResponse,
-  AndroidRotateScreenParams,
   AndroidBackupParams,
   AndroidListActivitiesResponse,
   AndroidListSimpleResponse,
@@ -85,12 +84,6 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
     closeAll: (): Promise<void> => this.client.v1.boxes.android.closeAll(this.data.id),
     /**
      * @example
-     * const response = await myBox.app.rotateScreen({ angle: 90, direction: 'clockwise' });
-     */
-    rotateScreen: (params: AndroidRotateScreenParams): Promise<void> =>
-      this.client.v1.boxes.android.rotateScreen(this.data.id, params),
-    /**
-     * @example
      * const response = await myBox.app.backupAll();
      */
     backupAll: (): Promise<Response> => this.client.v1.boxes.android.backupAll(this.data.id),
@@ -142,8 +135,8 @@ class AndroidAppOperator {
    * @example
    * const response = await myApp.backup();
    */
-  async backup(params?: Omit<AndroidBackupParams, 'id'>): Promise<Response> {
-    return this.client.v1.boxes.android.backup(this.data.packageName, { id: this.box.id, ...params });
+  async backup(params?: Omit<AndroidBackupParams, 'boxId'>): Promise<Response> {
+    return this.client.v1.boxes.android.backup(this.data.packageName, { boxId: this.box.id, ...params });
   }
 
   /**
@@ -165,6 +158,6 @@ class AndroidAppOperator {
    * const response = await myApp.listActivities();
    */
   async listActivities(): Promise<AndroidListActivitiesResponse> {
-    return this.client.v1.boxes.android.listActivities(this.data.packageName, { id: this.box.id });
+    return this.client.v1.boxes.android.listActivities(this.data.packageName, { boxId: this.box.id });
   }
 }
