@@ -21,7 +21,12 @@ export {
   PermissionDeniedError,
   UnprocessableEntityError,
 } from './core/error';
-export { type AndroidBoxOperator, type CreateAndroid } from './wrapper/box/android';
+export {
+  type AndroidBoxOperator,
+  type AndroidAppOperator,
+  type CreateAndroid,
+  type AndroidInstall,
+} from './wrapper/box/android';
 export { type LinuxBoxOperator, type CreateLinux } from './wrapper/box/linux';
 export { type TimeString, type TimeUnit } from './wrapper/types';
 export {

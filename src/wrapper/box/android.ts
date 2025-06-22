@@ -19,6 +19,20 @@ import { TimeString } from '../types';
 import { BaseBox } from './base';
 import fs from 'fs';
 
+export interface InstallAndroidAppByFile extends AndroidInstallParams.InstallAndroidAppByFile {}
+
+export interface InstallAndroidAppByURL extends AndroidInstallParams.InstallAndroidAppByURL {}
+export interface InstallAndroidAppByLocalFile {
+  /**
+   * Local file path to install
+   * @example
+   * const response = await myBox.app.install({ apk: "path/to/your/app.apk" });
+   */
+  apk: string;
+}
+
+export type AndroidInstall = InstallAndroidAppByFile | InstallAndroidAppByURL | InstallAndroidAppByLocalFile;
+
 export interface CreateAndroid extends BoxCreateAndroidParams {
   /**
    * Box type is Android
@@ -37,7 +51,7 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * or
      * const response = await myBox.app.install({ apk: "https://example.com/path/to/app.apk" });
      */
-    install: (body: AndroidInstallParams): Promise<AndroidInstallResponse> => {
+    install: (body: AndroidInstall): Promise<AndroidInstallResponse> => {
       if (typeof body.apk === 'string' && !body.apk.startsWith('http')) {
         const exists = fs.existsSync(body.apk);
         if (!exists) {
@@ -97,7 +111,7 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
   };
 }
 
-class AndroidAppOperator {
+export class AndroidAppOperator {
   private client: GboxClient;
   public data: AndroidApp;
   public box: AndroidBox;
