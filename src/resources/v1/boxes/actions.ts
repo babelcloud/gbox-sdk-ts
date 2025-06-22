@@ -656,13 +656,14 @@ export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParam
 export declare namespace ActionSwipeParams {
   export interface SwipeSimple {
     /**
-     * Direction of the swipe
+     * Direction to swipe. The gesture will be performed from the center of the screen
+     * towards this direction.
      */
     direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
 
     /**
-     * Distance of the swipe in pixels. If not provided, will use a default distance
-     * based on screen size
+     * Distance of the swipe in pixels. If not provided, the swipe will be performed
+     * from the center of the screen to the screen edge
      */
     distance?: number;
 
@@ -696,7 +697,7 @@ export declare namespace ActionSwipeParams {
     /**
      * End point of the swipe path
      */
-    end: unknown;
+    end: SwipeAdvanced.End;
 
     /**
      * Start point of the swipe path
@@ -730,6 +731,21 @@ export declare namespace ActionSwipeParams {
   }
 
   export namespace SwipeAdvanced {
+    /**
+     * End point of the swipe path
+     */
+    export interface End {
+      /**
+       * Start/end x coordinate of the swipe path
+       */
+      x: number;
+
+      /**
+       * Start/end y coordinate of the swipe path
+       */
+      y: number;
+    }
+
     /**
      * Start point of the swipe path
      */

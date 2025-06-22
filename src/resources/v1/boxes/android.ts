@@ -143,19 +143,20 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.android.install(
+   * const response = await client.v1.boxes.android.install(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { apk: fs.createReadStream('path/to/file') },
    * );
    * ```
    */
-  install(boxID: string, body: AndroidInstallParams, options?: RequestOptions): APIPromise<void> {
+  install(
+    boxID: string,
+    body: AndroidInstallParams,
+    options?: RequestOptions,
+  ): APIPromise<AndroidInstallResponse> {
     return this._client.post(
       path`/boxes/${boxID}/android/apps`,
-      multipartFormRequestOptions(
-        { body, ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
-        this._client,
-      ),
+      multipartFormRequestOptions({ body, ...options }, this._client),
     );
   }
 
@@ -332,6 +333,63 @@ export interface AndroidGetConnectAddressResponse {
    * the Android device
    */
   adb: string;
+}
+
+/**
+ * Response containing the result of installing an Android app
+ */
+export interface AndroidInstallResponse {
+  /**
+   * Activity list
+   */
+  activities: Array<AndroidInstallResponse.Activity>;
+
+  /**
+   * Android app apk path
+   */
+  apkPath: string;
+
+  /**
+   * Application type: system or third-party
+   */
+  appType: 'system' | 'third-party';
+
+  /**
+   * Android app package name
+   */
+  packageName: string;
+}
+
+export namespace AndroidInstallResponse {
+  /**
+   * Android app activity
+   */
+  export interface Activity {
+    /**
+     * Activity class name
+     */
+    className: string;
+
+    /**
+     * Activity class name
+     */
+    isExported: boolean;
+
+    /**
+     * Whether the activity is the main activity
+     */
+    isMain: boolean;
+
+    /**
+     * Activity name
+     */
+    name: string;
+
+    /**
+     * Activity package name
+     */
+    packageName: string;
+  }
 }
 
 export interface AndroidListActivitiesResponse {
@@ -517,6 +575,7 @@ export declare namespace Android {
     type AndroidApp as AndroidApp,
     type AndroidListResponse as AndroidListResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
+    type AndroidInstallResponse as AndroidInstallResponse,
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
     type AndroidListSimpleResponse as AndroidListSimpleResponse,
     type AndroidListParams as AndroidListParams,
