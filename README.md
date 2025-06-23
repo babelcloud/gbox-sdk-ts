@@ -40,6 +40,7 @@ import GboxSDK from 'gbox-sdk';
 
 const gboxSDK = new GboxSDK({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
+  environment: 'selfHosting', // or 'production' | 'internal'; defaults to 'production'
 });
 
 async function main() {
@@ -52,6 +53,13 @@ main();
 ## Quick Start
 
 ```ts
+import GboxClient from 'gbox-sdk';
+
+const client = new GboxClient({
+  apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
+  environment: 'selfHosting', // or 'production' | 'internal'; defaults to 'production'
+});
+
 const box = await gboxSDK.create({ type: 'android' });
 
 // box.config is the config of the box (e.g. OS version, screen size, etc.)
