@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.1 (2025-06-23)
+
+Full Changelog: [v0.9.0...v0.9.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.9.0...v0.9.1)
+
+### Features
+
+* **api:** api update ([a8f292c](https://github.com/babelcloud/gbox-sdk-ts/commit/a8f292c97b91696fbba7693b78369eacdc36464f))
+* **api:** enhance Android installation types and update install method ([3501549](https://github.com/babelcloud/gbox-sdk-ts/commit/35015496245a955999515ca1c490a2e9a1fa4197))
+
 ## 0.9.0 (2025-06-22)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.8.0...v0.9.0)
