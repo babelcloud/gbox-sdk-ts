@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.2 (2025-06-23)
+
+Full Changelog: [v0.9.1...v0.9.2](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.9.1...v0.9.2)
+
+### Bug Fixes
+
+* export ([22bd6e4](https://github.com/babelcloud/gbox-sdk-ts/commit/22bd6e451ae58907db2f03563765ddcd1501747f))
+
 ## 0.9.1 (2025-06-23)
 
 Full Changelog: [v0.9.0...v0.9.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.9.0...v0.9.1)
