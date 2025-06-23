@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { type Uploadable } from '../../../core/uploads';
 import { RequestOptions } from '../../../internal/request-options';
+import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
 export class Fs extends APIResource {
@@ -118,7 +119,10 @@ export class Fs extends APIResource {
    * ```
    */
   write(boxID: string, body: FWriteParams, options?: RequestOptions): APIPromise<FWriteResponse> {
-    return this._client.post(path`/boxes/${boxID}/fs/write`, { body, ...options });
+    return this._client.post(
+      path`/boxes/${boxID}/fs/write`,
+      multipartFormRequestOptions({ body, ...options }, this._client),
+    );
   }
 }
 
@@ -153,7 +157,7 @@ export namespace FListResponse {
     name: string;
 
     /**
-     * Full path to the file
+     * Full path to the file in the box
      */
     path: string;
 
@@ -188,7 +192,7 @@ export namespace FListResponse {
     name: string;
 
     /**
-     * Full path to the directory
+     * Full path to the directory in the box
      */
     path: string;
 
@@ -257,7 +261,7 @@ export namespace FInfoResponse {
     name: string;
 
     /**
-     * Full path to the file
+     * Full path to the file in the box
      */
     path: string;
 
@@ -292,7 +296,7 @@ export namespace FInfoResponse {
     name: string;
 
     /**
-     * Full path to the directory
+     * Full path to the directory in the box
      */
     path: string;
 
@@ -349,7 +353,7 @@ export namespace FRenameResponse {
     name: string;
 
     /**
-     * Full path to the file
+     * Full path to the file in the box
      */
     path: string;
 
@@ -384,7 +388,7 @@ export namespace FRenameResponse {
     name: string;
 
     /**
-     * Full path to the directory
+     * Full path to the directory in the box
      */
     path: string;
 
@@ -407,7 +411,7 @@ export interface FWriteResponse {
 
 export interface FListParams {
   /**
-   * Path to the directory
+   * Target directory path in the box
    */
   path: string;
 
@@ -425,8 +429,8 @@ export interface FListParams {
 
 export interface FExistsParams {
   /**
-   * Path to the file/directory. If the path is not start with '/', the
-   * file/directory will be checked from the working directory
+   * Target path in the box. If the path does not start with '/', the file/directory
+   * will be checked relative to the working directory
    */
   path: string;
 
@@ -439,8 +443,8 @@ export interface FExistsParams {
 
 export interface FInfoParams {
   /**
-   * Path to the file/directory. If the path is not start with '/', the
-   * file/directory will be checked from the working directory
+   * Target path in the box. If the path does not start with '/', the file/directory
+   * will be checked relative to the working directory
    */
   path: string;
 
@@ -453,8 +457,8 @@ export interface FInfoParams {
 
 export interface FReadParams {
   /**
-   * Path to the file. If the path is not start with '/', the file will be read from
-   * the working directory.
+   * Target path in the box. If the path does not start with '/', the file will be
+   * read from the working directory.
    */
   path: string;
 
@@ -467,9 +471,9 @@ export interface FReadParams {
 
 export interface FRemoveParams {
   /**
-   * Path to the file/directory. If the path is not start with '/', the
-   * file/directory will be deleted from the working directory. If target path is not
-   * exists, the delete will be failed.
+   * Target path in the box. If the path does not start with '/', the file/directory
+   * will be deleted relative to the working directory. If the target path does not
+   * exist, the delete will fail.
    */
   path: string;
 
@@ -482,16 +486,16 @@ export interface FRemoveParams {
 
 export interface FRenameParams {
   /**
-   * New path for the file/directory. If the path is not start with '/', the
-   * file/directory will be renamed to the working directory. If target newPath is
-   * already exists, the rename will be failed.
+   * New path in the box. If the path does not start with '/', the file/directory
+   * will be renamed relative to the working directory. If the newPath already
+   * exists, the rename will fail.
    */
   newPath: string;
 
   /**
-   * Old path to the file/directory. If the path is not start with '/', the
-   * file/directory will be renamed from the working directory. If target oldPath is
-   * not exists, the rename will be failed.
+   * Old path in the box. If the path does not start with '/', the file/directory
+   * will be renamed relative to the working directory. If the oldPath does not
+   * exist, the rename will fail.
    */
   oldPath: string;
 
@@ -512,9 +516,10 @@ export declare namespace FWriteParams {
     content: string;
 
     /**
-     * Path to the file. If the path is not start with '/', the file will be written to
-     * the working directory. Creates necessary directories in the path if they don't
-     * exist. If target path is already exists, the write will be failed.
+     * Target path in the box. If the path does not start with '/', the file will be
+     * written relative to the working directory. Creates necessary directories in the
+     * path if they don't exist. If the target path already exists, the write will
+     * fail.
      */
     path: string;
 
@@ -532,9 +537,10 @@ export declare namespace FWriteParams {
     content: Uploadable;
 
     /**
-     * Path to the file. If the path is not start with '/', the file will be written to
-     * the working directory. Creates necessary directories in the path if they don't
-     * exist. If target path is already exists, the write will be failed.
+     * Target path in the box. If the path does not start with '/', the file will be
+     * written relative to the working directory. Creates necessary directories in the
+     * path if they don't exist. If the target path already exists, the write will
+     * fail.
      */
     path: string;
 
