@@ -24,7 +24,7 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Check if file/directory exists
+   * Check if file/dir exists
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Get file/directory
+   * Get file/dir
    *
    * @example
    * ```ts
@@ -69,8 +69,7 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Delete a file or directory. If target path is not exists, the delete will be
-   * failed.
+   * Delete a file or dir. If target path is not exists, the delete will be failed.
    *
    * @example
    * ```ts
@@ -85,8 +84,8 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Rename a file or directory. If target newPath is already exists, the rename will
-   * be failed.
+   * Rename a file or dir. If target newPath is already exists, the rename will be
+   * failed.
    *
    * @example
    * ```ts
