@@ -24,7 +24,7 @@ import GboxClient from 'gbox-sdk';
 
 const client = new GboxClient({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
-  environment: 'selfHost', // defaults to 'production'
+  environment: 'selfHosting', // or 'production' | 'internal'; defaults to 'production'
 });
 
 const androidBox = await client.v1.boxes.createAndroid();
@@ -42,7 +42,7 @@ import GboxClient from 'gbox-sdk';
 
 const client = new GboxClient({
   apiKey: process.env['GBOX_API_KEY'], // This is the default and can be omitted
-  environment: 'selfHost', // defaults to 'production'
+  environment: 'selfHosting', // or 'production' | 'internal'; defaults to 'production'
 });
 
 const androidBox: GboxClient.V1.AndroidBox = await client.v1.boxes.createAndroid();

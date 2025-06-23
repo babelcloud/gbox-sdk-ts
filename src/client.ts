@@ -33,7 +33,8 @@ import { isEmptyObj } from './internal/utils/values';
 
 const environments = {
   production: 'https://gbox.ai/api/v1/',
-  selfHost: 'http://localhost:28080/api/v1/',
+  selfHosting: 'http://localhost:28080/api/v1/',
+  internal: 'http://gru.localhost:2080/api/v1/',
 };
 type Environment = keyof typeof environments;
 
@@ -48,7 +49,8 @@ export interface ClientOptions {
    *
    * Each environment maps to a different base URL:
    * - `production` corresponds to `https://gbox.ai/api/v1/`
-   * - `selfHost` corresponds to `http://localhost:28080/api/v1/`
+   * - `selfHosting` corresponds to `http://localhost:28080/api/v1/`
+   * - `internal` corresponds to `http://gru.localhost:2080/api/v1/`
    */
   environment?: Environment | undefined;
 
