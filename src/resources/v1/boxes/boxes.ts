@@ -692,6 +692,11 @@ export interface BoxWebTerminalURLResponse {
 
 export interface BoxListParams {
   /**
+   * Filter boxes by their device type (virtual, physical)
+   */
+  deviceType?: string;
+
+  /**
    * Filter boxes by their labels. Labels are key-value pairs that help identify and
    * categorize boxes. Use this to filter boxes that match specific label criteria.
    * For example, you can filter by project, environment, team, or any custom labels
