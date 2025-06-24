@@ -291,7 +291,7 @@ export interface AndroidApp {
   /**
    * Application type: system or third-party
    */
-  appType: 'system' | 'third-party';
+  appType: 'system' | 'thirdParty';
 
   /**
    * Whether the application is currently running
@@ -352,7 +352,7 @@ export interface AndroidInstallResponse {
   /**
    * Application type: system or third-party
    */
-  appType: 'system' | 'third-party';
+  appType: 'system' | 'thirdParty';
 
   /**
    * Android app package name
@@ -465,7 +465,7 @@ export namespace AndroidListSimpleResponse {
     /**
      * Application type: system or third-party
      */
-    appType: 'system' | 'third-party';
+    appType: 'system' | 'thirdParty';
 
     /**
      * Android app package name
@@ -478,12 +478,13 @@ export interface AndroidListParams {
   /**
    * Application type: system or third-party, default is third-party
    */
-  appType?: 'system' | 'third-party';
+  appType?: Array<'system' | 'thirdParty'>;
 
   /**
-   * Whether to include running apps, default is all
+   * Filter apps by running status: running (show only running apps), notRunning
+   * (show only non-running apps). Default is all
    */
-  isRunning?: boolean;
+  runningFilter?: Array<'running' | 'notRunning'>;
 }
 
 export interface AndroidBackupParams {
@@ -538,7 +539,7 @@ export interface AndroidListSimpleParams {
   /**
    * Application type: system or third-party, default is third-party
    */
-  appType?: 'system' | 'third-party';
+  appType?: Array<'system' | 'thirdParty'>;
 }
 
 export interface AndroidOpenParams {
