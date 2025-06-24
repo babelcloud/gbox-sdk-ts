@@ -376,7 +376,14 @@ export namespace AndroidInstallResponse {
     isExported: boolean;
 
     /**
-     * Whether the activity is the main activity
+     * Whether the activity is a launcher activity. Launcher activities appear in the
+     * device's app launcher/home screen and can be directly launched by the user.
+     */
+    isLauncher: boolean;
+
+    /**
+     * Whether the activity is the main activity. Main activity is the entry point of
+     * the application and is typically launched when the app is started.
      */
     isMain: boolean;
 
@@ -415,7 +422,14 @@ export namespace AndroidListActivitiesResponse {
     isExported: boolean;
 
     /**
-     * Whether the activity is the main activity
+     * Whether the activity is a launcher activity. Launcher activities appear in the
+     * device's app launcher/home screen and can be directly launched by the user.
+     */
+    isLauncher: boolean;
+
+    /**
+     * Whether the activity is the main activity. Main activity is the entry point of
+     * the application and is typically launched when the app is started.
      */
     isMain: boolean;
 
