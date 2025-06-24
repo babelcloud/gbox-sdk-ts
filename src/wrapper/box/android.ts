@@ -76,8 +76,8 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * const response = await myBox.app.list();
      * or
      * const response = await myBox.app.list({
-     *   appType: 'system', // default is third-party
-     *   isRunning: true, // default is all
+     *   appType: ['system'], // default is third-party
+     *   runningFilter: ['running'], // default is all
      * });
      */
     list: (params?: AndroidListParams): Promise<AndroidListResponse> =>
@@ -113,7 +113,7 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
      * const response = await myBox.app.listSimple();
      * or
      * const response = await myBox.app.listSimple({
-     *   appType: 'system', // default is third-party
+     *   appType: ['system'], // default is third-party
      * });
      */
     listSimple: (params?: AndroidListSimpleParams): Promise<AndroidListSimpleResponse> =>
