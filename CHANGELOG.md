@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.11.0 (2025-06-24)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** api update ([a1f36e1](https://github.com/babelcloud/gbox-sdk-ts/commit/a1f36e10c7b85d2525c6c635e4b9f7d96af6db70))
+
+
+### Bug Fixes
+
+* **api:** update list parameters for AndroidBoxOperator ([2829d8f](https://github.com/babelcloud/gbox-sdk-ts/commit/2829d8fd8ea6ac6830a18f04bec498d96052d29c))
+
 ## 0.10.0 (2025-06-24)
 
 Full Changelog: [v0.9.2...v0.10.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.9.2...v0.10.0)
