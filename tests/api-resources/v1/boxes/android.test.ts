@@ -26,7 +26,7 @@ describe('resource android', () => {
     await expect(
       client.v1.boxes.android.list(
         'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { appType: 'system', isRunning: true },
+        { appType: ['thirdParty'], runningFilter: ['running', 'notRunning'] },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);
@@ -165,7 +165,7 @@ describe('resource android', () => {
     await expect(
       client.v1.boxes.android.listSimple(
         'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { appType: 'system' },
+        { appType: ['thirdParty'] },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);
