@@ -14,6 +14,7 @@ import {
   AndroidListActivitiesResponse,
   AndroidListSimpleResponse,
   AndroidInstallResponse,
+  AndroidListSimpleParams,
 } from '../../resources/v1/boxes';
 import { TimeString } from '../types';
 import { BaseBox } from './base';
@@ -73,6 +74,11 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
     /**
      * @example
      * const response = await myBox.app.list();
+     * or
+     * const response = await myBox.app.list({
+     *   appType: 'system', // default is third-party
+     *   isRunning: true, // default is all
+     * });
      */
     list: (params?: AndroidListParams): Promise<AndroidListResponse> =>
       this.client.v1.boxes.android.list(this.data.id, params),
@@ -105,9 +111,13 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
     /**
      * @example
      * const response = await myBox.app.listSimple();
+     * or
+     * const response = await myBox.app.listSimple({
+     *   appType: 'system', // default is third-party
+     * });
      */
-    listSimple: (): Promise<AndroidListSimpleResponse> =>
-      this.client.v1.boxes.android.listSimple(this.data.id),
+    listSimple: (params?: AndroidListSimpleParams): Promise<AndroidListSimpleResponse> =>
+      this.client.v1.boxes.android.listSimple(this.data.id, params),
   };
 }
 
