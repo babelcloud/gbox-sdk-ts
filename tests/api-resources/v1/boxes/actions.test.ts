@@ -30,6 +30,7 @@ describe('resource actions', () => {
       y: 100,
       button: 'left',
       double: false,
+      includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
@@ -60,6 +61,7 @@ describe('resource actions', () => {
         { x: 200, y: 200 },
       ],
       duration: '50ms',
+      includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
@@ -85,6 +87,7 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.move('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 200,
       y: 300,
+      includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
@@ -108,6 +111,7 @@ describe('resource actions', () => {
   test.skip('pressButton: required and optional params', async () => {
     const response = await client.v1.boxes.actions.pressButton('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       buttons: ['power'],
+      includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
@@ -131,6 +135,7 @@ describe('resource actions', () => {
   test.skip('pressKey: required and optional params', async () => {
     const response = await client.v1.boxes.actions.pressKey('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       keys: ['enter'],
+      includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
@@ -195,6 +200,7 @@ describe('resource actions', () => {
       scrollY: 100,
       x: 100,
       y: 100,
+      includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
@@ -220,6 +226,7 @@ describe('resource actions', () => {
       direction: 'up',
       distance: 300,
       duration: '500ms',
+      includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
@@ -248,6 +255,7 @@ describe('resource actions', () => {
           actions: [{ x: 400, y: 300, duration: '200ms' }, { duration: '500ms' }],
         },
       ],
+      includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
@@ -271,6 +279,7 @@ describe('resource actions', () => {
   test.skip('type: required and optional params', async () => {
     const response = await client.v1.boxes.actions.type('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       text: 'Hello World',
+      includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
