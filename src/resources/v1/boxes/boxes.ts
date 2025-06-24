@@ -400,14 +400,45 @@ export namespace AndroidBox {
  */
 export interface CreateAndroidBox {
   /**
-   * Configuration for a box instance
+   * Configuration for a Android box instance
    */
-  config?: CreateBoxConfig;
+  config?: CreateAndroidBox.Config;
 
   /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
+}
+
+export namespace CreateAndroidBox {
+  /**
+   * Configuration for a Android box instance
+   */
+  export interface Config {
+    /**
+     * Device type - virtual or physical Android device
+     */
+    deviceType?: 'virtual' | 'physical';
+
+    /**
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
+     */
+    envs?: unknown;
+
+    /**
+     * The box will be alive for the given duration (e.g. '10m')
+     */
+    expiresIn?: string;
+
+    /**
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
+     */
+    labels?: unknown;
+  }
 }
 
 /**
@@ -730,14 +761,45 @@ export interface BoxListParams {
 
 export interface BoxCreateAndroidParams {
   /**
-   * Configuration for a box instance
+   * Configuration for a Android box instance
    */
-  config?: CreateBoxConfig;
+  config?: BoxCreateAndroidParams.Config;
 
   /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
+}
+
+export namespace BoxCreateAndroidParams {
+  /**
+   * Configuration for a Android box instance
+   */
+  export interface Config {
+    /**
+     * Device type - virtual or physical Android device
+     */
+    deviceType?: 'virtual' | 'physical';
+
+    /**
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
+     */
+    envs?: unknown;
+
+    /**
+     * The box will be alive for the given duration (e.g. '10m')
+     */
+    expiresIn?: string;
+
+    /**
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
+     */
+    labels?: unknown;
+  }
 }
 
 export interface BoxCreateLinuxParams {
