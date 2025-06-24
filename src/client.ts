@@ -33,7 +33,8 @@ import { isEmptyObj } from './internal/utils/values';
 
 const environments = {
   production: 'https://gbox.ai/api/v1/',
-  selfHost: 'http://localhost:28080/api/v1/',
+  selfHosting: 'http://localhost:28080/api/v1/',
+  internal: 'http://gru.localhost:2080/api/v1/',
 };
 type Environment = keyof typeof environments;
 
@@ -48,7 +49,8 @@ export interface ClientOptions {
    *
    * Each environment maps to a different base URL:
    * - `production` corresponds to `https://gbox.ai/api/v1/`
-   * - `selfHost` corresponds to `http://localhost:28080/api/v1/`
+   * - `selfHosting` corresponds to `http://localhost:28080/api/v1/`
+   * - `internal` corresponds to `http://gru.localhost:2080/api/v1/`
    */
   environment?: Environment | undefined;
 
@@ -84,7 +86,7 @@ export interface ClientOptions {
    * The maximum number of times that the client will retry a request in case of a
    * temporary failure, like a network error or a 5XX error from the server.
    *
-   * @default 2
+   * @default 0
    */
   maxRetries?: number | undefined;
 
@@ -146,7 +148,7 @@ export class GboxClient {
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
-   * @param {number} [opts.maxRetries=2] - The maximum number of times the client will retry a request.
+   * @param {number} [opts.maxRetries=0] - The maximum number of times the client will retry a request.
    * @param {HeadersLike} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
@@ -185,7 +187,7 @@ export class GboxClient {
       parseLogLevel(readEnv('GBOX_CLIENT_LOG'), "process.env['GBOX_CLIENT_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
-    this.maxRetries = options.maxRetries ?? 2;
+    this.maxRetries = options.maxRetries ?? 0;
     this.fetch = options.fetch ?? Shims.getDefaultFetch();
     this.#encoder = Opts.FallbackEncoder;
 
@@ -584,8 +586,8 @@ export class GboxClient {
   }
 
   private calculateDefaultRetryTimeoutMillis(retriesRemaining: number, maxRetries: number): number {
-    const initialRetryDelay = 0.5;
-    const maxRetryDelay = 8.0;
+    const initialRetryDelay = 1.0;
+    const maxRetryDelay = 10.0;
 
     const numRetries = maxRetries - retriesRemaining;
 

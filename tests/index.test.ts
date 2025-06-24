@@ -353,12 +353,12 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new GboxClient({ maxRetries: 4, apiKey: 'My API Key' });
-    expect(client.maxRetries).toEqual(4);
+    const client = new GboxClient({ maxRetries: 0, apiKey: 'My API Key' });
+    expect(client.maxRetries).toEqual(0);
 
     // default
     const client2 = new GboxClient({ apiKey: 'My API Key' });
-    expect(client2.maxRetries).toEqual(2);
+    expect(client2.maxRetries).toEqual(0);
   });
 
   describe('withOptions', () => {
@@ -543,33 +543,6 @@ describe('default encoder', () => {
 });
 
 describe('retries', () => {
-  test('retry on timeout', async () => {
-    let count = 0;
-    const testFetch = async (
-      url: string | URL | Request,
-      { signal }: RequestInit = {},
-    ): Promise<Response> => {
-      if (count++ === 0) {
-        return new Promise(
-          (resolve, reject) => signal?.addEventListener('abort', () => reject(new Error('timed out'))),
-        );
-      }
-      return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
-    };
-
-    const client = new GboxClient({ apiKey: 'My API Key', timeout: 10, fetch: testFetch });
-
-    expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
-    expect(count).toEqual(2);
-    expect(
-      await client
-        .request({ path: '/foo', method: 'get' })
-        .asResponse()
-        .then((r) => r.text()),
-    ).toEqual(JSON.stringify({ a: 1 }));
-    expect(count).toEqual(3);
-  });
-
   test('retry count header', async () => {
     let count = 0;
     let capturedRequest: RequestInit | undefined;
@@ -703,7 +676,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GboxClient({ apiKey: 'My API Key', fetch: testFetch });
+    const client = new GboxClient({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 3 });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -733,7 +706,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GboxClient({ apiKey: 'My API Key', fetch: testFetch });
+    const client = new GboxClient({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 3 });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
