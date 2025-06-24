@@ -2,8 +2,17 @@
 
 export {
   Actions,
-  type ActionResult,
+  type ActionClickResponse,
+  type ActionDragResponse,
+  type ActionMoveResponse,
+  type ActionPressButtonResponse,
+  type ActionPressKeyResponse,
+  type ActionScreenRotationResponse,
   type ActionScreenshotResponse,
+  type ActionScrollResponse,
+  type ActionSwipeResponse,
+  type ActionTouchResponse,
+  type ActionTypeResponse,
   type ActionClickParams,
   type ActionDragParams,
   type ActionMoveParams,

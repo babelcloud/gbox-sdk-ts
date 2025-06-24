@@ -11,13 +11,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.click(
+   * const response = await client.v1.boxes.actions.click(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 100, y: 100 },
    * );
    * ```
    */
-  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
+  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionClickResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/click`, { body, ...options });
   }
 
@@ -26,7 +26,7 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.drag(
+   * const response = await client.v1.boxes.actions.drag(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   {
    *     path: [
@@ -37,7 +37,7 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
+  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionDragResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/drag`, { body, ...options });
   }
 
@@ -46,13 +46,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.move(
+   * const response = await client.v1.boxes.actions.move(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 200, y: 300 },
    * );
    * ```
    */
-  move(boxID: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
+  move(boxID: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionMoveResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/move`, { body, ...options });
   }
 
@@ -62,18 +62,17 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult =
-   *   await client.v1.boxes.actions.pressButton(
-   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     { buttons: ['power'] },
-   *   );
+   * const response = await client.v1.boxes.actions.pressButton(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { buttons: ['power'] },
+   * );
    * ```
    */
   pressButton(
     boxID: string,
     body: ActionPressButtonParams,
     options?: RequestOptions,
-  ): APIPromise<ActionResult> {
+  ): APIPromise<ActionPressButtonResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/press-button`, { body, ...options });
   }
 
@@ -84,13 +83,17 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.pressKey(
+   * const response = await client.v1.boxes.actions.pressKey(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { keys: ['enter'] },
    * );
    * ```
    */
-  pressKey(boxID: string, body: ActionPressKeyParams, options?: RequestOptions): APIPromise<ActionResult> {
+  pressKey(
+    boxID: string,
+    body: ActionPressKeyParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionPressKeyResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/press-key`, { body, ...options });
   }
 
@@ -99,7 +102,7 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult =
+   * const response =
    *   await client.v1.boxes.actions.screenRotation(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *     { angle: 90, direction: 'clockwise' },
@@ -110,7 +113,7 @@ export class Actions extends APIResource {
     boxID: string,
     body: ActionScreenRotationParams,
     options?: RequestOptions,
-  ): APIPromise<ActionResult> {
+  ): APIPromise<ActionScreenRotationResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/screen-rotation`, { body, ...options });
   }
 
@@ -137,13 +140,17 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.scroll(
+   * const response = await client.v1.boxes.actions.scroll(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
    * );
    * ```
    */
-  scroll(boxID: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
+  scroll(
+    boxID: string,
+    body: ActionScrollParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionScrollResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body, ...options });
   }
 
@@ -152,13 +159,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.swipe(
+   * const response = await client.v1.boxes.actions.swipe(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { direction: 'up' },
    * );
    * ```
    */
-  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
+  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionSwipeResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/swipe`, { body, ...options });
   }
 
@@ -167,13 +174,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.touch(
+   * const response = await client.v1.boxes.actions.touch(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { points: [{ start: { x: 100, y: 150 } }] },
    * );
    * ```
    */
-  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
+  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionTouchResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/touch`, { body, ...options });
   }
 
@@ -184,78 +191,512 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.type(
+   * const response = await client.v1.boxes.actions.type(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { text: 'Hello World' },
    * );
    * ```
    */
-  type(boxID: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
+  type(boxID: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionTypeResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/type`, { body, ...options });
   }
 }
 
 /**
- * Result of an UI action execution
+ * Result of an UI action execution with screenshots
  */
-export interface ActionResult {
+export type ActionClickResponse =
+  | ActionClickResponse.ActionIncludeScreenshotResult
+  | ActionClickResponse.ActionCommonResult;
+
+export namespace ActionClickResponse {
   /**
-   * Complete screenshot result with operation trace, before and after images
+   * Result of an UI action execution with screenshots
    */
-  screenshot: ActionResult.Screenshot;
-}
-
-export namespace ActionResult {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
+  export interface ActionIncludeScreenshotResult {
     /**
-     * Screenshot taken after action execution
+     * Complete screenshot result with operation trace, before and after images
      */
-    after: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace: Screenshot.Trace;
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
   }
 
-  export namespace Screenshot {
+  export namespace ActionIncludeScreenshotResult {
     /**
-     * Screenshot taken after action execution
+     * Complete screenshot result with operation trace, before and after images
      */
-    export interface After {
+    export interface Screenshot {
       /**
-       * URI of the screenshot after the action
+       * Screenshot taken after action execution
        */
-      uri: string;
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
     }
 
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
+    export namespace Screenshot {
       /**
-       * URI of the screenshot before the action
+       * Screenshot taken after action execution
        */
-      uri: string;
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionDragResponse =
+  | ActionDragResponse.ActionIncludeScreenshotResult
+  | ActionDragResponse.ActionCommonResult;
+
+export namespace ActionDragResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
     }
 
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
+    export namespace Screenshot {
       /**
-       * URI of the screenshot with operation trace
+       * Screenshot taken after action execution
        */
-      uri: string;
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
     }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionMoveResponse =
+  | ActionMoveResponse.ActionIncludeScreenshotResult
+  | ActionMoveResponse.ActionCommonResult;
+
+export namespace ActionMoveResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionPressButtonResponse =
+  | ActionPressButtonResponse.ActionIncludeScreenshotResult
+  | ActionPressButtonResponse.ActionCommonResult;
+
+export namespace ActionPressButtonResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionPressKeyResponse =
+  | ActionPressKeyResponse.ActionIncludeScreenshotResult
+  | ActionPressKeyResponse.ActionCommonResult;
+
+export namespace ActionPressKeyResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionScreenRotationResponse =
+  | ActionScreenRotationResponse.ActionIncludeScreenshotResult
+  | ActionScreenRotationResponse.ActionCommonResult;
+
+export namespace ActionScreenRotationResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
   }
 }
 
@@ -267,6 +708,338 @@ export interface ActionScreenshotResponse {
    * URL of the screenshot
    */
   uri: string;
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionScrollResponse =
+  | ActionScrollResponse.ActionIncludeScreenshotResult
+  | ActionScrollResponse.ActionCommonResult;
+
+export namespace ActionScrollResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionSwipeResponse =
+  | ActionSwipeResponse.ActionIncludeScreenshotResult
+  | ActionSwipeResponse.ActionCommonResult;
+
+export namespace ActionSwipeResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionTouchResponse =
+  | ActionTouchResponse.ActionIncludeScreenshotResult
+  | ActionTouchResponse.ActionCommonResult;
+
+export namespace ActionTouchResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionTypeResponse =
+  | ActionTypeResponse.ActionIncludeScreenshotResult
+  | ActionTypeResponse.ActionCommonResult;
+
+export namespace ActionTypeResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
 }
 
 export interface ActionClickParams {
@@ -291,6 +1064,12 @@ export interface ActionClickParams {
   double?: boolean;
 
   /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
@@ -306,7 +1085,7 @@ export interface ActionClickParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
+   * screenshot. Maximum allowed delay is 30s.
    */
   screenshotDelay?: string;
 }
@@ -323,6 +1102,12 @@ export interface ActionDragParams {
   duration?: string;
 
   /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
@@ -338,7 +1123,7 @@ export interface ActionDragParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
+   * screenshot. Maximum allowed delay is 30s.
    */
   screenshotDelay?: string;
 }
@@ -372,6 +1157,12 @@ export interface ActionMoveParams {
   y: number;
 
   /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
@@ -387,7 +1178,7 @@ export interface ActionMoveParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
+   * screenshot. Maximum allowed delay is 30s.
    */
   screenshotDelay?: string;
 }
@@ -399,6 +1190,12 @@ export interface ActionPressButtonParams {
   buttons: Array<'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'>;
 
   /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
@@ -414,7 +1211,7 @@ export interface ActionPressButtonParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
+   * screenshot. Maximum allowed delay is 30s.
    */
   screenshotDelay?: string;
 }
@@ -538,6 +1335,12 @@ export interface ActionPressKeyParams {
   >;
 
   /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
@@ -553,7 +1356,7 @@ export interface ActionPressKeyParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
+   * screenshot. Maximum allowed delay is 30s.
    */
   screenshotDelay?: string;
 }
@@ -631,6 +1434,12 @@ export interface ActionScrollParams {
   y: number;
 
   /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
@@ -646,7 +1455,7 @@ export interface ActionScrollParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
+   * screenshot. Maximum allowed delay is 30s.
    */
   screenshotDelay?: string;
 }
@@ -673,6 +1482,12 @@ export declare namespace ActionSwipeParams {
     duration?: string;
 
     /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
      * Type of the URI. default is base64.
      */
     outputFormat?: 'base64' | 'storageKey';
@@ -688,7 +1503,7 @@ export declare namespace ActionSwipeParams {
      * 4. Take screenshot after action
      *
      * Example: '500ms' means wait 500ms after the action before capturing the final
-     * screenshot.
+     * screenshot. Maximum allowed delay is 30s.
      */
     screenshotDelay?: string;
   }
@@ -710,6 +1525,12 @@ export declare namespace ActionSwipeParams {
     duration?: string;
 
     /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
      * Type of the URI. default is base64.
      */
     outputFormat?: 'base64' | 'storageKey';
@@ -725,7 +1546,7 @@ export declare namespace ActionSwipeParams {
      * 4. Take screenshot after action
      *
      * Example: '500ms' means wait 500ms after the action before capturing the final
-     * screenshot.
+     * screenshot. Maximum allowed delay is 30s.
      */
     screenshotDelay?: string;
   }
@@ -770,6 +1591,12 @@ export interface ActionTouchParams {
   points: Array<ActionTouchParams.Point>;
 
   /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
@@ -785,7 +1612,7 @@ export interface ActionTouchParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
+   * screenshot. Maximum allowed delay is 30s.
    */
   screenshotDelay?: string;
 }
@@ -831,6 +1658,12 @@ export interface ActionTypeParams {
   text: string;
 
   /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
@@ -846,15 +1679,24 @@ export interface ActionTypeParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
+   * screenshot. Maximum allowed delay is 30s.
    */
   screenshotDelay?: string;
 }
 
 export declare namespace Actions {
   export {
-    type ActionResult as ActionResult,
+    type ActionClickResponse as ActionClickResponse,
+    type ActionDragResponse as ActionDragResponse,
+    type ActionMoveResponse as ActionMoveResponse,
+    type ActionPressButtonResponse as ActionPressButtonResponse,
+    type ActionPressKeyResponse as ActionPressKeyResponse,
+    type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
+    type ActionScrollResponse as ActionScrollResponse,
+    type ActionSwipeResponse as ActionSwipeResponse,
+    type ActionTouchResponse as ActionTouchResponse,
+    type ActionTypeResponse as ActionTypeResponse,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionMoveParams as ActionMoveParams,
