@@ -219,7 +219,7 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.swipe('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       direction: 'up',
       distance: 300,
-      duration: '200ms',
+      duration: '500ms',
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });
