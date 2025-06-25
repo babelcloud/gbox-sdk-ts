@@ -113,17 +113,15 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.android.getApp('com.example.myapp', {
-   *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * });
+   * const androidApp = await client.v1.boxes.android.getApp(
+   *   'com.example.myapp',
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   * );
    * ```
    */
-  getApp(packageName: string, params: AndroidGetAppParams, options?: RequestOptions): APIPromise<void> {
+  getApp(packageName: string, params: AndroidGetAppParams, options?: RequestOptions): APIPromise<AndroidApp> {
     const { boxId } = params;
-    return this._client.get(path`/boxes/${boxId}/android/apps/${packageName}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.get(path`/boxes/${boxId}/android/apps/${packageName}`, options);
   }
 
   /**
