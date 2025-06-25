@@ -9,30 +9,6 @@ const client = new GboxClient({
 
 describe('resource android', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = client.v1.boxes.android.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.boxes.android.list(
-        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { appType: ['thirdParty'], runningFilter: ['running', 'notRunning'] },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(GboxClient.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('backup: required and optional params', async () => {
     const response = await client.v1.boxes.android.backup('com.example.myapp', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -94,6 +70,27 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('getApp: only required params', async () => {
+    const responsePromise = client.v1.boxes.android.getApp('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('getApp: required and optional params', async () => {
+    const response = await client.v1.boxes.android.getApp('com.example.myapp', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('getConnectAddress', async () => {
     const responsePromise = client.v1.boxes.android.getConnectAddress('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -148,8 +145,8 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('listSimple', async () => {
-    const responsePromise = client.v1.boxes.android.listSimple('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+  test.skip('listApp', async () => {
+    const responsePromise = client.v1.boxes.android.listApp('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -160,12 +157,48 @@ describe('resource android', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('listSimple: request options and params are passed correctly', async () => {
+  test.skip('listPkg', async () => {
+    const responsePromise = client.v1.boxes.android.listPkg('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('listPkg: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.boxes.android.listSimple(
+      client.v1.boxes.android.listPkg(
         'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-        { appType: ['thirdParty'] },
+        { pkgType: ['thirdParty'], runningFilter: ['running', 'notRunning'] },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('listPkgSimple', async () => {
+    const responsePromise = client.v1.boxes.android.listPkgSimple('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('listPkgSimple: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.android.listPkgSimple(
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+        { pkgType: ['thirdParty'] },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);

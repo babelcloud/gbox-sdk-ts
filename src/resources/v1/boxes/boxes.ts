@@ -4,18 +4,27 @@ import { APIResource } from '../../../core/resource';
 import * as ActionsAPI from './actions';
 import {
   ActionClickParams,
+  ActionClickResponse,
   ActionDragParams,
+  ActionDragResponse,
   ActionMoveParams,
+  ActionMoveResponse,
   ActionPressButtonParams,
+  ActionPressButtonResponse,
   ActionPressKeyParams,
-  ActionResult,
+  ActionPressKeyResponse,
   ActionScreenRotationParams,
+  ActionScreenRotationResponse,
   ActionScreenshotParams,
   ActionScreenshotResponse,
   ActionScrollParams,
+  ActionScrollResponse,
   ActionSwipeParams,
+  ActionSwipeResponse,
   ActionTouchParams,
+  ActionTouchResponse,
   ActionTypeParams,
+  ActionTypeResponse,
   Actions,
 } from './actions';
 import * as AndroidAPI from './android';
@@ -24,16 +33,19 @@ import {
   AndroidApp,
   AndroidBackupParams,
   AndroidCloseParams,
+  AndroidGetAppParams,
   AndroidGetConnectAddressResponse,
   AndroidGetParams,
+  AndroidGetResponse,
   AndroidInstallParams,
   AndroidInstallResponse,
   AndroidListActivitiesParams,
   AndroidListActivitiesResponse,
-  AndroidListParams,
-  AndroidListResponse,
-  AndroidListSimpleParams,
-  AndroidListSimpleResponse,
+  AndroidListAppResponse,
+  AndroidListPkgParams,
+  AndroidListPkgResponse,
+  AndroidListPkgSimpleParams,
+  AndroidListPkgSimpleResponse,
   AndroidOpenParams,
   AndroidRestartParams,
   AndroidRestoreParams,
@@ -276,7 +288,7 @@ export interface AndroidBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error' | 'terminated';
+  status: 'pending' | 'running' | 'error' | 'terminated';
 
   /**
    * Box type is Android
@@ -303,7 +315,7 @@ export namespace AndroidBox {
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
      */
-    envs: unknown;
+    envs: { [key: string]: string };
 
     /**
      * Key-value pairs of labels for the box. Labels are used to add custom metadata to
@@ -311,10 +323,10 @@ export namespace AndroidBox {
      * names, environments, teams, applications, or any other organizational tags that
      * help you organize and filter your boxes.
      */
-    labels: unknown;
+    labels: { [key: string]: string };
 
     /**
-     * Memory allocated to the box in MB
+     * Memory allocated to the box in MiB
      */
     memory: number;
 
@@ -329,7 +341,7 @@ export namespace AndroidBox {
     resolution: Config.Resolution;
 
     /**
-     * Storage allocated to the box in GB
+     * Storage allocated to the box in GiB
      */
     storage: number;
 
@@ -424,10 +436,13 @@ export namespace CreateAndroidBox {
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
      */
-    envs?: unknown;
+    envs?: { [key: string]: string };
 
     /**
-     * The box will be alive for the given duration (e.g. '10m')
+     * The box will be alive for the given duration
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
      */
     expiresIn?: string;
 
@@ -437,7 +452,7 @@ export namespace CreateAndroidBox {
      * names, environments, teams, applications, or any other organizational tags that
      * help you organize and filter your boxes.
      */
-    labels?: unknown;
+    labels?: { [key: string]: string };
   }
 }
 
@@ -449,12 +464,7 @@ export interface CreateBoxConfig {
    * Environment variables for the box. These variables will be available in all
    * operations including command execution, code running, and other box behaviors
    */
-  envs?: unknown;
-
-  /**
-   * The box will be alive for the given duration (e.g. '10m')
-   */
-  expiresIn?: string;
+  envs?: { [key: string]: string };
 
   /**
    * Key-value pairs of labels for the box. Labels are used to add custom metadata to
@@ -462,7 +472,7 @@ export interface CreateBoxConfig {
    * names, environments, teams, applications, or any other organizational tags that
    * help you organize and filter your boxes.
    */
-  labels?: unknown;
+  labels?: { [key: string]: string };
 }
 
 /**
@@ -473,6 +483,14 @@ export interface CreateLinuxBox {
    * Configuration for a box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * The box will be alive for the given duration
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
+   */
+  expiresIn?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -507,7 +525,7 @@ export interface LinuxBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error' | 'terminated';
+  status: 'pending' | 'running' | 'error' | 'terminated';
 
   /**
    * Box type is Linux
@@ -534,7 +552,7 @@ export namespace LinuxBox {
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
      */
-    envs: unknown;
+    envs: { [key: string]: string };
 
     /**
      * Key-value pairs of labels for the box. Labels are used to add custom metadata to
@@ -542,10 +560,10 @@ export namespace LinuxBox {
      * names, environments, teams, applications, or any other organizational tags that
      * help you organize and filter your boxes.
      */
-    labels: unknown;
+    labels: { [key: string]: string };
 
     /**
-     * Memory allocated to the box in MB
+     * Memory allocated to the box in MiB
      */
     memory: number;
 
@@ -560,7 +578,7 @@ export namespace LinuxBox {
     resolution: Config.Resolution;
 
     /**
-     * Storage allocated to the box in GB.
+     * Storage allocated to the box in GiB.
      */
     storage: number;
 
@@ -750,7 +768,7 @@ export interface BoxListParams {
    * terminated, all). Must be an array of statuses. Use 'all' to get boxes with any
    * status.
    */
-  status?: Array<'all' | 'pending' | 'running' | 'stopped' | 'error' | 'terminated'>;
+  status?: Array<'all' | 'pending' | 'running' | 'error' | 'terminated'>;
 
   /**
    * Filter boxes by their type (linux, android, all). Must be an array of types. Use
@@ -785,10 +803,13 @@ export namespace BoxCreateAndroidParams {
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
      */
-    envs?: unknown;
+    envs?: { [key: string]: string };
 
     /**
-     * The box will be alive for the given duration (e.g. '10m')
+     * The box will be alive for the given duration
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
      */
     expiresIn?: string;
 
@@ -798,7 +819,7 @@ export namespace BoxCreateAndroidParams {
      * names, environments, teams, applications, or any other organizational tags that
      * help you organize and filter your boxes.
      */
-    labels?: unknown;
+    labels?: { [key: string]: string };
   }
 }
 
@@ -807,6 +828,14 @@ export interface BoxCreateLinuxParams {
    * Configuration for a box instance
    */
   config?: CreateBoxConfig;
+
+  /**
+   * The box will be alive for the given duration
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
+   */
+  expiresIn?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -826,9 +855,11 @@ export interface BoxExecuteCommandsParams {
   envs?: unknown;
 
   /**
-   * The timeout of the command. e.g. '30s' or '1m' or '1h'. If the command times
-   * out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
-   * in exit code 124.
+   * The timeout of the command. If the command times out, the exit code will be 124.
+   * For example: 'timeout 5s sleep 10s' will result in exit code 124.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s
    */
   timeout?: string;
 
@@ -841,8 +872,10 @@ export interface BoxExecuteCommandsParams {
 
 export interface BoxLiveViewURLParams {
   /**
-   * The live view will be alive for the given duration (e.g. '10m' or '1h'). Default
-   * is 180m.
+   * The live view will be alive for the given duration
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 180m
    */
   expiresIn?: string;
 }
@@ -870,8 +903,11 @@ export interface BoxRunCodeParams {
   language?: 'bash' | 'python' | 'typescript';
 
   /**
-   * The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
-   * execution times out, the exit code will be 124.
+   * The timeout of the code execution. If the code execution times out, the exit
+   * code will be 124.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s
    */
   timeout?: string;
 
@@ -905,8 +941,10 @@ export interface BoxTerminateParams {
 
 export interface BoxWebTerminalURLParams {
   /**
-   * The web terminal will be alive for the given duration (e.g. '10m' or '1h').
-   * Default is 180m.
+   * The web terminal will be alive for the given duration
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 180m
    */
   expiresIn?: string;
 }
@@ -945,8 +983,17 @@ export declare namespace Boxes {
 
   export {
     Actions as Actions,
-    type ActionResult as ActionResult,
+    type ActionClickResponse as ActionClickResponse,
+    type ActionDragResponse as ActionDragResponse,
+    type ActionMoveResponse as ActionMoveResponse,
+    type ActionPressButtonResponse as ActionPressButtonResponse,
+    type ActionPressKeyResponse as ActionPressKeyResponse,
+    type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
+    type ActionScrollResponse as ActionScrollResponse,
+    type ActionSwipeResponse as ActionSwipeResponse,
+    type ActionTouchResponse as ActionTouchResponse,
+    type ActionTypeResponse as ActionTypeResponse,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionMoveParams as ActionMoveParams,
@@ -987,18 +1034,21 @@ export declare namespace Boxes {
   export {
     Android as Android,
     type AndroidApp as AndroidApp,
-    type AndroidListResponse as AndroidListResponse,
+    type AndroidGetResponse as AndroidGetResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidInstallResponse as AndroidInstallResponse,
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
-    type AndroidListSimpleResponse as AndroidListSimpleResponse,
-    type AndroidListParams as AndroidListParams,
+    type AndroidListAppResponse as AndroidListAppResponse,
+    type AndroidListPkgResponse as AndroidListPkgResponse,
+    type AndroidListPkgSimpleResponse as AndroidListPkgSimpleResponse,
     type AndroidBackupParams as AndroidBackupParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
+    type AndroidGetAppParams as AndroidGetAppParams,
     type AndroidInstallParams as AndroidInstallParams,
     type AndroidListActivitiesParams as AndroidListActivitiesParams,
-    type AndroidListSimpleParams as AndroidListSimpleParams,
+    type AndroidListPkgParams as AndroidListPkgParams,
+    type AndroidListPkgSimpleParams as AndroidListPkgSimpleParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidRestoreParams as AndroidRestoreParams,

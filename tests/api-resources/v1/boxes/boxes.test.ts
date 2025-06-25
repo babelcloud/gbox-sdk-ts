@@ -136,7 +136,7 @@ describe('resource boxes', () => {
       argv: ['--help'],
       envs: { PYTHONPATH: '/usr/lib/python', DEBUG: 'true' },
       language: 'python',
-      timeout: 'timeout',
+      timeout: '30s',
       workingDir: '/home/user/scripts',
     });
   });

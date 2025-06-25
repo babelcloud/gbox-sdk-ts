@@ -11,6 +11,7 @@ import type {
   FRenameParams,
   FRenameResponse,
   FInfoParams,
+  FRemoveResponse,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 
@@ -71,9 +72,8 @@ export class FileSystemOperator {
    * @example
    * const response = await myBox.fs.remove({ path: '/tmp/file.txt' });
    */
-  async remove(body: FRemoveParams): Promise<void> {
-    await this.client.v1.boxes.fs.remove(this.boxId, body);
-    return;
+  async remove(body: FRemoveParams): Promise<FRemoveResponse> {
+    return this.client.v1.boxes.fs.remove(this.boxId, body);
   }
 
   /**
