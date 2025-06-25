@@ -1537,12 +1537,12 @@ export declare namespace ActionSwipeParams {
 
   export interface SwipeAdvanced {
     /**
-     * End point of the swipe path
+     * Swipe path
      */
     end: SwipeAdvanced.End;
 
     /**
-     * Start point of the swipe path
+     * Swipe path
      */
     start: SwipeAdvanced.Start;
 
@@ -1586,7 +1586,7 @@ export declare namespace ActionSwipeParams {
 
   export namespace SwipeAdvanced {
     /**
-     * End point of the swipe path
+     * Swipe path
      */
     export interface End {
       /**
@@ -1601,7 +1601,7 @@ export declare namespace ActionSwipeParams {
     }
 
     /**
-     * Start point of the swipe path
+     * Swipe path
      */
     export interface Start {
       /**
