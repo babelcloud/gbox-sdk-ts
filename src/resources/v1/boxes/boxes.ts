@@ -312,7 +312,7 @@ export namespace AndroidBox {
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
      */
-    envs: Record<string, string>;
+    envs: { [key: string]: string };
 
     /**
      * Key-value pairs of labels for the box. Labels are used to add custom metadata to
@@ -320,7 +320,7 @@ export namespace AndroidBox {
      * names, environments, teams, applications, or any other organizational tags that
      * help you organize and filter your boxes.
      */
-    labels: Record<string, string>;
+    labels: { [key: string]: string };
 
     /**
      * Memory allocated to the box in MiB
@@ -433,7 +433,7 @@ export namespace CreateAndroidBox {
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
      */
-    envs?: Record<string, string>;
+    envs?: { [key: string]: string };
 
     /**
      * The box will be alive for the given duration
@@ -449,7 +449,7 @@ export namespace CreateAndroidBox {
      * names, environments, teams, applications, or any other organizational tags that
      * help you organize and filter your boxes.
      */
-    labels?: Record<string, string>;
+    labels?: { [key: string]: string };
   }
 }
 
@@ -461,7 +461,7 @@ export interface CreateBoxConfig {
    * Environment variables for the box. These variables will be available in all
    * operations including command execution, code running, and other box behaviors
    */
-  envs?: Record<string, string>;
+  envs?: { [key: string]: string };
 
   /**
    * Key-value pairs of labels for the box. Labels are used to add custom metadata to
@@ -469,7 +469,7 @@ export interface CreateBoxConfig {
    * names, environments, teams, applications, or any other organizational tags that
    * help you organize and filter your boxes.
    */
-  labels?: Record<string, string>;
+  labels?: { [key: string]: string };
 }
 
 /**
@@ -549,7 +549,7 @@ export namespace LinuxBox {
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
      */
-    envs: Record<string, string>;
+    envs: { [key: string]: string };
 
     /**
      * Key-value pairs of labels for the box. Labels are used to add custom metadata to
@@ -557,7 +557,7 @@ export namespace LinuxBox {
      * names, environments, teams, applications, or any other organizational tags that
      * help you organize and filter your boxes.
      */
-    labels: Record<string, string>;
+    labels: { [key: string]: string };
 
     /**
      * Memory allocated to the box in MiB
@@ -800,7 +800,7 @@ export namespace BoxCreateAndroidParams {
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
      */
-    envs?: Record<string, string>;
+    envs?: { [key: string]: string };
 
     /**
      * The box will be alive for the given duration
@@ -816,7 +816,7 @@ export namespace BoxCreateAndroidParams {
      * names, environments, teams, applications, or any other organizational tags that
      * help you organize and filter your boxes.
      */
-    labels?: Record<string, string>;
+    labels?: { [key: string]: string };
   }
 }
 
