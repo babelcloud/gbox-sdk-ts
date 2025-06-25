@@ -96,4 +96,20 @@ export class AndroidPkgManager {
   async getInfo(packageName: string): Promise<AndroidGetResponse> {
     return this.client.v1.boxes.android.get(packageName, { boxId: this.box.id });
   }
+
+  /**
+   * @example
+   * const response = await myBox.pkg.closeAll();
+   */
+  async closeAll(): Promise<void> {
+    return this.client.v1.boxes.android.closeAll(this.box.id);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.pkg.backupAll();
+   */
+  async backupAll(): Promise<Response> {
+    return this.client.v1.boxes.android.backupAll(this.box.id);
+  }
 }
