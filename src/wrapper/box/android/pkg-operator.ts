@@ -14,7 +14,7 @@ export class AndroidPkgOperator {
   public data: AndroidGetResponse;
   public box: AndroidBox;
 
-  constructor(data: AndroidGetResponse, client: GboxClient, box: AndroidBox) {
+  constructor(client: GboxClient, box: AndroidBox, data: AndroidGetResponse) {
     this.client = client;
     this.data = data;
     this.box = box;

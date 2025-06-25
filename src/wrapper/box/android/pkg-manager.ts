@@ -60,7 +60,7 @@ export class AndroidPkgManager {
   async list(): Promise<ListAndroidPkg> {
     const res = await this.client.v1.boxes.android.listPkg(this.box.id);
     return {
-      operators: res.data.map((pkg) => new AndroidPkgOperator(pkg, this.client, this.box)),
+      operators: res.data.map((pkg) => new AndroidPkgOperator(this.client, this.box, pkg)),
     };
   }
 
@@ -86,7 +86,7 @@ export class AndroidPkgManager {
    */
   async get(packageName: string): Promise<AndroidPkgOperator> {
     const pkgData = await this.client.v1.boxes.android.get(packageName, { boxId: this.box.id });
-    return new AndroidPkgOperator(pkgData, this.client, this.box);
+    return new AndroidPkgOperator(this.client, this.box, pkgData);
   }
 
   /**
