@@ -285,7 +285,7 @@ export interface AndroidBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error' | 'terminated';
+  status: 'pending' | 'running' | 'error' | 'terminated';
 
   /**
    * Box type is Android
@@ -522,7 +522,7 @@ export interface LinuxBox {
   /**
    * The current status of a box instance
    */
-  status: 'pending' | 'running' | 'stopped' | 'error' | 'terminated';
+  status: 'pending' | 'running' | 'error' | 'terminated';
 
   /**
    * Box type is Linux
@@ -765,7 +765,7 @@ export interface BoxListParams {
    * terminated, all). Must be an array of statuses. Use 'all' to get boxes with any
    * status.
    */
-  status?: Array<'all' | 'pending' | 'running' | 'stopped' | 'error' | 'terminated'>;
+  status?: Array<'all' | 'pending' | 'running' | 'error' | 'terminated'>;
 
   /**
    * Filter boxes by their type (linux, android, all). Must be an array of types. Use
