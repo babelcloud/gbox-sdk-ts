@@ -399,13 +399,38 @@ export namespace FRenameResponse {
 }
 
 /**
- * Response after writing file content
+ * File system file representation
  */
 export interface FWriteResponse {
   /**
-   * Success message
+   * Last modified time of the file
    */
-  message: string;
+  lastModified: string;
+
+  /**
+   * File metadata
+   */
+  mode: string;
+
+  /**
+   * Name of the file
+   */
+  name: string;
+
+  /**
+   * Full path to the file in the box
+   */
+  path: string;
+
+  /**
+   * Size of the file
+   */
+  size: string;
+
+  /**
+   * File type indicator
+   */
+  type: 'file';
 }
 
 export interface FListParams {
