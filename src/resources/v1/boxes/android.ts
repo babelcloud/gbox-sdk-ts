@@ -10,26 +10,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Android extends APIResource {
   /**
-   * Retrieve detailed information for all installed applications. This endpoint
-   * provides comprehensive app details
-   *
-   * @example
-   * ```ts
-   * const androids = await client.v1.boxes.android.list(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
-   * ```
-   */
-  list(
-    boxID: string,
-    query: AndroidListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AndroidListResponse> {
-    return this._client.get(path`/boxes/${boxID}/android/apps`, { query, ...options });
-  }
-
-  /**
-   * Backup app
+   * Backup
    *
    * @example
    * ```ts
@@ -44,7 +25,7 @@ export class Android extends APIResource {
    */
   backup(packageName: string, params: AndroidBackupParams, options?: RequestOptions): APIPromise<Response> {
     const { boxId } = params;
-    return this._client.post(path`/boxes/${boxId}/android/apps/${packageName}/backup`, {
+    return this._client.post(path`/boxes/${boxId}/android/packages/${packageName}/backup`, {
       ...options,
       headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
       __binaryResponse: true,
@@ -52,7 +33,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Backup all apps
+   * Backup all
    *
    * @example
    * ```ts
@@ -65,7 +46,7 @@ export class Android extends APIResource {
    * ```
    */
   backupAll(boxID: string, options?: RequestOptions): APIPromise<Response> {
-    return this._client.post(path`/boxes/${boxID}/android/apps/backup-all`, {
+    return this._client.post(path`/boxes/${boxID}/android/packages/backup-all`, {
       ...options,
       headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
       __binaryResponse: true,
@@ -84,7 +65,7 @@ export class Android extends APIResource {
    */
   close(packageName: string, params: AndroidCloseParams, options?: RequestOptions): APIPromise<void> {
     const { boxId } = params;
-    return this._client.post(path`/boxes/${boxId}/android/apps/${packageName}/close`, {
+    return this._client.post(path`/boxes/${boxId}/android/packages/${packageName}/close`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -101,7 +82,7 @@ export class Android extends APIResource {
    * ```
    */
   closeAll(boxID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${boxID}/android/apps/close-all`, {
+    return this._client.post(path`/boxes/${boxID}/android/packages/close-all`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -112,15 +93,19 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * const androidApp = await client.v1.boxes.android.get(
+   * const android = await client.v1.boxes.android.get(
    *   'com.example.myapp',
    *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
    */
-  get(packageName: string, params: AndroidGetParams, options?: RequestOptions): APIPromise<AndroidApp> {
+  get(
+    packageName: string,
+    params: AndroidGetParams,
+    options?: RequestOptions,
+  ): APIPromise<AndroidGetResponse> {
     const { boxId } = params;
-    return this._client.get(path`/boxes/${boxId}/android/apps/${packageName}`, options);
+    return this._client.get(path`/boxes/${boxId}/android/packages/${packageName}`, options);
   }
 
   /**
@@ -155,13 +140,13 @@ export class Android extends APIResource {
     options?: RequestOptions,
   ): APIPromise<AndroidInstallResponse> {
     return this._client.post(
-      path`/boxes/${boxID}/android/apps`,
+      path`/boxes/${boxID}/android/packages`,
       multipartFormRequestOptions({ body, ...options }, this._client),
     );
   }
 
   /**
-   * Get app activities
+   * Get pkg activities
    *
    * @example
    * ```ts
@@ -178,27 +163,61 @@ export class Android extends APIResource {
     options?: RequestOptions,
   ): APIPromise<AndroidListActivitiesResponse> {
     const { boxId } = params;
-    return this._client.get(path`/boxes/${boxId}/android/apps/${packageName}/activities`, options);
+    return this._client.get(path`/boxes/${boxId}/android/packages/${packageName}/activities`, options);
   }
 
   /**
-   * A faster endpoint to quickly retrieve basic app information. This API provides
-   * better performance for scenarios where you need to get essential app details
-   * quickly
+   * List apps
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.android.listSimple(
+   * const response = await client.v1.boxes.android.listApp(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
-  listSimple(
+  listApp(boxID: string, options?: RequestOptions): APIPromise<AndroidListAppResponse> {
+    return this._client.get(path`/boxes/${boxID}/android/apps`, options);
+  }
+
+  /**
+   * Retrieve detailed information for all installed pkgs. This endpoint provides
+   * comprehensive pkg details
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.android.listPkg(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  listPkg(
     boxID: string,
-    query: AndroidListSimpleParams | null | undefined = {},
+    query: AndroidListPkgParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<AndroidListSimpleResponse> {
-    return this._client.get(path`/boxes/${boxID}/android/apps/simple`, { query, ...options });
+  ): APIPromise<AndroidListPkgResponse> {
+    return this._client.get(path`/boxes/${boxID}/android/packages`, { query, ...options });
+  }
+
+  /**
+   * A faster endpoint to quickly retrieve basic pkg information. This API provides
+   * better performance for scenarios where you need to get essential pkg details
+   * quickly
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.android.listPkgSimple(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  listPkgSimple(
+    boxID: string,
+    query: AndroidListPkgSimpleParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AndroidListPkgSimpleResponse> {
+    return this._client.get(path`/boxes/${boxID}/android/packages/simple`, { query, ...options });
   }
 
   /**
@@ -213,7 +232,7 @@ export class Android extends APIResource {
    */
   open(packageName: string, params: AndroidOpenParams, options?: RequestOptions): APIPromise<void> {
     const { boxId, ...body } = params;
-    return this._client.post(path`/boxes/${boxId}/android/apps/${packageName}/open`, {
+    return this._client.post(path`/boxes/${boxId}/android/packages/${packageName}/open`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -232,7 +251,7 @@ export class Android extends APIResource {
    */
   restart(packageName: string, params: AndroidRestartParams, options?: RequestOptions): APIPromise<void> {
     const { boxId, ...body } = params;
-    return this._client.post(path`/boxes/${boxId}/android/apps/${packageName}/restart`, {
+    return this._client.post(path`/boxes/${boxId}/android/packages/${packageName}/restart`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -240,7 +259,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Restore app
+   * Restore
    *
    * @example
    * ```ts
@@ -251,7 +270,7 @@ export class Android extends APIResource {
    * ```
    */
   restore(boxID: string, body: AndroidRestoreParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${boxID}/android/apps/restore`, {
+    return this._client.post(path`/boxes/${boxID}/android/packages/restore`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -271,7 +290,7 @@ export class Android extends APIResource {
    */
   uninstall(packageName: string, params: AndroidUninstallParams, options?: RequestOptions): APIPromise<void> {
     const { boxId, ...body } = params;
-    return this._client.delete(path`/boxes/${boxId}/android/apps/${packageName}`, {
+    return this._client.delete(path`/boxes/${boxId}/android/packages/${packageName}`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -280,48 +299,38 @@ export class Android extends APIResource {
 }
 
 /**
- * Android app information
+ * Android pkg information
  */
-export interface AndroidApp {
+export interface AndroidGetResponse {
   /**
-   * Android app apk path
+   * Android apk path
    */
   apkPath: string;
 
   /**
-   * Application type: system or third-party
-   */
-  appType: 'system' | 'thirdParty';
-
-  /**
-   * Whether the application is currently running
+   * Whether the pkg is currently running
    */
   isRunning: boolean;
 
   /**
-   * Android app name
+   * Android pkg name
    */
   name: string;
 
   /**
-   * Android app package name
+   * Android package name
    */
   packageName: string;
 
   /**
-   * Android app version
+   * Package type: system or third-party
+   */
+  pkgType: 'system' | 'thirdParty';
+
+  /**
+   * Android pkg version
    */
   version: string;
-}
-
-/**
- * Response containing list of Android apps
- */
-export interface AndroidListResponse {
-  /**
-   * Android app list
-   */
-  data: Array<AndroidApp>;
 }
 
 /**
@@ -336,7 +345,7 @@ export interface AndroidGetConnectAddressResponse {
 }
 
 /**
- * Response containing the result of installing an Android app
+ * Response containing the result of installing an Android pkg
  */
 export interface AndroidInstallResponse {
   /**
@@ -345,24 +354,24 @@ export interface AndroidInstallResponse {
   activities: Array<AndroidInstallResponse.Activity>;
 
   /**
-   * Android app apk path
+   * Android apk path
    */
   apkPath: string;
 
   /**
-   * Application type: system or third-party
-   */
-  appType: 'system' | 'thirdParty';
-
-  /**
-   * Android app package name
+   * Android pkg package name
    */
   packageName: string;
+
+  /**
+   * Package type: system or third-party
+   */
+  pkgType: 'system' | 'thirdParty';
 }
 
 export namespace AndroidInstallResponse {
   /**
-   * Android app activity
+   * Android pkg activity
    */
   export interface Activity {
     /**
@@ -377,13 +386,13 @@ export namespace AndroidInstallResponse {
 
     /**
      * Whether the activity is a launcher activity. Launcher activities appear in the
-     * device's app launcher/home screen and can be directly launched by the user.
+     * device's pkg launcher/home screen and can be directly launched by the user.
      */
     isLauncher: boolean;
 
     /**
      * Whether the activity is the main activity. Main activity is the entry point of
-     * the application and is typically launched when the app is started.
+     * the pkg and is typically launched when the pkg is started.
      */
     isMain: boolean;
 
@@ -408,7 +417,7 @@ export interface AndroidListActivitiesResponse {
 
 export namespace AndroidListActivitiesResponse {
   /**
-   * Android app activity
+   * Android pkg activity
    */
   export interface Data {
     /**
@@ -423,13 +432,13 @@ export namespace AndroidListActivitiesResponse {
 
     /**
      * Whether the activity is a launcher activity. Launcher activities appear in the
-     * device's app launcher/home screen and can be directly launched by the user.
+     * device's pkg launcher/home screen and can be directly launched by the user.
      */
     isLauncher: boolean;
 
     /**
      * Whether the activity is the main activity. Main activity is the entry point of
-     * the application and is typically launched when the app is started.
+     * the pkg and is typically launched when the pkg is started.
      */
     isMain: boolean;
 
@@ -445,46 +454,124 @@ export namespace AndroidListActivitiesResponse {
   }
 }
 
-/**
- * Response containing list of Android apps
- */
-export interface AndroidListSimpleResponse {
+export interface AndroidListAppResponse {
   /**
-   * Android app simple list
+   * App list
    */
-  data: Array<AndroidListSimpleResponse.Data>;
+  data: Array<AndroidListAppResponse.Data>;
 }
 
-export namespace AndroidListSimpleResponse {
+export namespace AndroidListAppResponse {
+  /**
+   * Android pkg information
+   */
   export interface Data {
     /**
-     * Android app apk path
+     * Android apk path
      */
     apkPath: string;
 
     /**
-     * Application type: system or third-party
+     * Whether the pkg is currently running
      */
-    appType: 'system' | 'thirdParty';
+    isRunning: boolean;
 
     /**
-     * Android app package name
+     * Android pkg name
+     */
+    name: string;
+
+    /**
+     * Android package name
      */
     packageName: string;
+
+    /**
+     * Package type: system or third-party
+     */
+    pkgType: 'system' | 'thirdParty';
+
+    /**
+     * Android pkg version
+     */
+    version: string;
   }
 }
 
-export interface AndroidListParams {
+/**
+ * Response containing list of Android pkgs
+ */
+export interface AndroidListPkgResponse {
   /**
-   * Application type: system or third-party, default is third-party
+   * Android pkg list
    */
-  appType?: Array<'system' | 'thirdParty'>;
+  data: Array<AndroidListPkgResponse.Data>;
+}
 
+export namespace AndroidListPkgResponse {
   /**
-   * Filter apps by running status: running (show only running apps), notRunning
-   * (show only non-running apps). Default is all
+   * Android pkg information
    */
-  runningFilter?: Array<'running' | 'notRunning'>;
+  export interface Data {
+    /**
+     * Android apk path
+     */
+    apkPath: string;
+
+    /**
+     * Whether the pkg is currently running
+     */
+    isRunning: boolean;
+
+    /**
+     * Android pkg name
+     */
+    name: string;
+
+    /**
+     * Android package name
+     */
+    packageName: string;
+
+    /**
+     * Package type: system or third-party
+     */
+    pkgType: 'system' | 'thirdParty';
+
+    /**
+     * Android pkg version
+     */
+    version: string;
+  }
+}
+
+/**
+ * Response containing list of Android pkgs
+ */
+export interface AndroidListPkgSimpleResponse {
+  /**
+   * Android pkg simple list
+   */
+  data: Array<AndroidListPkgSimpleResponse.Data>;
+}
+
+export namespace AndroidListPkgSimpleResponse {
+  export interface Data {
+    /**
+     * Android apk path
+     */
+    apkPath: string;
+
+    /**
+     * Android pkg package name
+     */
+    packageName: string;
+
+    /**
+     * Package type: system or third-party
+     */
+    pkgType: 'system' | 'thirdParty';
+  }
 }
 
 export interface AndroidBackupParams {
@@ -509,18 +596,18 @@ export interface AndroidGetParams {
 }
 
 export type AndroidInstallParams =
-  | AndroidInstallParams.InstallAndroidAppByFile
-  | AndroidInstallParams.InstallAndroidAppByURL;
+  | AndroidInstallParams.InstallAndroidPkgByFile
+  | AndroidInstallParams.InstallAndroidPkgByURL;
 
 export declare namespace AndroidInstallParams {
-  export interface InstallAndroidAppByFile {
+  export interface InstallAndroidPkgByFile {
     /**
      * APK file to install (max file size: 512MB)
      */
     apk: Uploadable;
   }
 
-  export interface InstallAndroidAppByURL {
+  export interface InstallAndroidPkgByURL {
     /**
      * HTTP URL to download APK file (max file size: 512MB)
      */
@@ -535,11 +622,24 @@ export interface AndroidListActivitiesParams {
   boxId: string;
 }
 
-export interface AndroidListSimpleParams {
+export interface AndroidListPkgParams {
   /**
-   * Application type: system or third-party, default is third-party
+   * Package type: system or third-party, default is third-party
    */
-  appType?: Array<'system' | 'thirdParty'>;
+  pkgType?: Array<'system' | 'thirdParty'>;
+
+  /**
+   * Filter pkgs by running status: running (show only running pkgs), notRunning
+   * (show only non-running pkgs). Default is all
+   */
+  runningFilter?: Array<'running' | 'notRunning'>;
+}
+
+export interface AndroidListPkgSimpleParams {
+  /**
+   * Package type: system or third-party, default is third-party
+   */
+  pkgType?: Array<'system' | 'thirdParty'>;
 }
 
 export interface AndroidOpenParams {
@@ -580,26 +680,27 @@ export interface AndroidUninstallParams {
   boxId: string;
 
   /**
-   * Body param: uninstalls the application while retaining the data/cache
+   * Body param: uninstalls the pkg while retaining the data/cache
    */
   keepData?: boolean;
 }
 
 export declare namespace Android {
   export {
-    type AndroidApp as AndroidApp,
-    type AndroidListResponse as AndroidListResponse,
+    type AndroidGetResponse as AndroidGetResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidInstallResponse as AndroidInstallResponse,
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
-    type AndroidListSimpleResponse as AndroidListSimpleResponse,
-    type AndroidListParams as AndroidListParams,
+    type AndroidListAppResponse as AndroidListAppResponse,
+    type AndroidListPkgResponse as AndroidListPkgResponse,
+    type AndroidListPkgSimpleResponse as AndroidListPkgSimpleResponse,
     type AndroidBackupParams as AndroidBackupParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
     type AndroidInstallParams as AndroidInstallParams,
     type AndroidListActivitiesParams as AndroidListActivitiesParams,
-    type AndroidListSimpleParams as AndroidListSimpleParams,
+    type AndroidListPkgParams as AndroidListPkgParams,
+    type AndroidListPkgSimpleParams as AndroidListPkgSimpleParams,
     type AndroidOpenParams as AndroidOpenParams,
     type AndroidRestartParams as AndroidRestartParams,
     type AndroidRestoreParams as AndroidRestoreParams,

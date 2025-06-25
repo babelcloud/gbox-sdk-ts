@@ -98,26 +98,28 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/boxes/android.ts">AndroidApp</a></code>
-- <code><a href="./src/resources/v1/boxes/android.ts">AndroidListResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetConnectAddressResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidInstallResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidListActivitiesResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/android.ts">AndroidListSimpleResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidListAppResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidListPkgResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidListPkgSimpleResponse</a></code>
 
 Methods:
 
-- <code title="get /boxes/{boxId}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">list</a>(boxID, { ...params }) -> AndroidListResponse</code>
-- <code title="post /boxes/{boxId}/android/apps/{packageName}/backup">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">backup</a>(packageName, { ...params }) -> Response</code>
-- <code title="post /boxes/{boxId}/android/apps/backup-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">backupAll</a>(boxID) -> Response</code>
-- <code title="post /boxes/{boxId}/android/apps/{packageName}/close">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">close</a>(packageName, { ...params }) -> void</code>
-- <code title="post /boxes/{boxId}/android/apps/close-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">closeAll</a>(boxID) -> void</code>
-- <code title="get /boxes/{boxId}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">get</a>(packageName, { ...params }) -> AndroidApp</code>
+- <code title="post /boxes/{boxId}/android/packages/{packageName}/backup">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">backup</a>(packageName, { ...params }) -> Response</code>
+- <code title="post /boxes/{boxId}/android/packages/backup-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">backupAll</a>(boxID) -> Response</code>
+- <code title="post /boxes/{boxId}/android/packages/{packageName}/close">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">close</a>(packageName, { ...params }) -> void</code>
+- <code title="post /boxes/{boxId}/android/packages/close-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">closeAll</a>(boxID) -> void</code>
+- <code title="get /boxes/{boxId}/android/packages/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">get</a>(packageName, { ...params }) -> AndroidGetResponse</code>
 - <code title="get /boxes/{boxId}/android/connect-address">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">getConnectAddress</a>(boxID) -> AndroidGetConnectAddressResponse</code>
-- <code title="post /boxes/{boxId}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">install</a>(boxID, { ...params }) -> AndroidInstallResponse</code>
-- <code title="get /boxes/{boxId}/android/apps/{packageName}/activities">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listActivities</a>(packageName, { ...params }) -> AndroidListActivitiesResponse</code>
-- <code title="get /boxes/{boxId}/android/apps/simple">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listSimple</a>(boxID, { ...params }) -> AndroidListSimpleResponse</code>
-- <code title="post /boxes/{boxId}/android/apps/{packageName}/open">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">open</a>(packageName, { ...params }) -> void</code>
-- <code title="post /boxes/{boxId}/android/apps/{packageName}/restart">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restart</a>(packageName, { ...params }) -> void</code>
-- <code title="post /boxes/{boxId}/android/apps/restore">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restore</a>(boxID, { ...params }) -> void</code>
-- <code title="delete /boxes/{boxId}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">uninstall</a>(packageName, { ...params }) -> void</code>
+- <code title="post /boxes/{boxId}/android/packages">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">install</a>(boxID, { ...params }) -> AndroidInstallResponse</code>
+- <code title="get /boxes/{boxId}/android/packages/{packageName}/activities">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listActivities</a>(packageName, { ...params }) -> AndroidListActivitiesResponse</code>
+- <code title="get /boxes/{boxId}/android/apps">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listApp</a>(boxID) -> AndroidListAppResponse</code>
+- <code title="get /boxes/{boxId}/android/packages">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listPkg</a>(boxID, { ...params }) -> AndroidListPkgResponse</code>
+- <code title="get /boxes/{boxId}/android/packages/simple">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">listPkgSimple</a>(boxID, { ...params }) -> AndroidListPkgSimpleResponse</code>
+- <code title="post /boxes/{boxId}/android/packages/{packageName}/open">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">open</a>(packageName, { ...params }) -> void</code>
+- <code title="post /boxes/{boxId}/android/packages/{packageName}/restart">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restart</a>(packageName, { ...params }) -> void</code>
+- <code title="post /boxes/{boxId}/android/packages/restore">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">restore</a>(boxID, { ...params }) -> void</code>
+- <code title="delete /boxes/{boxId}/android/packages/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">uninstall</a>(packageName, { ...params }) -> void</code>
