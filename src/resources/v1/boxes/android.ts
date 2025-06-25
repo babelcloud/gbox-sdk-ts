@@ -299,6 +299,26 @@ export class Android extends APIResource {
 }
 
 /**
+ * Android app
+ */
+export interface AndroidApp {
+  /**
+   * Activity class name
+   */
+  activityClassName: string;
+
+  /**
+   * Activity name
+   */
+  activityName: string;
+
+  /**
+   * App package name
+   */
+  pkgName: string;
+}
+
+/**
  * Android pkg information
  */
 export interface AndroidGetResponse {
@@ -454,6 +474,9 @@ export namespace AndroidListActivitiesResponse {
   }
 }
 
+/**
+ * Android app list
+ */
 export interface AndroidListAppResponse {
   /**
    * App list
@@ -687,6 +710,7 @@ export interface AndroidUninstallParams {
 
 export declare namespace Android {
   export {
+    type AndroidApp as AndroidApp,
     type AndroidGetResponse as AndroidGetResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidInstallResponse as AndroidInstallResponse,

@@ -27,6 +27,7 @@ export {
 } from './actions';
 export {
   Android,
+  type AndroidApp,
   type AndroidGetResponse,
   type AndroidGetConnectAddressResponse,
   type AndroidInstallResponse,

@@ -98,6 +98,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidApp</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetConnectAddressResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidInstallResponse</a></code>
