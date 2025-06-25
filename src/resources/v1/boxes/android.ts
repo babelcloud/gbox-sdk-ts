@@ -343,7 +343,7 @@ export interface AndroidGetResponse {
   packageName: string;
 
   /**
-   * Package type: system or third-party
+   * Package type: system or thirdParty
    */
   pkgType: 'system' | 'thirdParty';
 
@@ -384,7 +384,7 @@ export interface AndroidInstallResponse {
   packageName: string;
 
   /**
-   * Package type: system or third-party
+   * Package type: system or thirdParty
    */
   pkgType: 'system' | 'thirdParty';
 }
@@ -510,7 +510,7 @@ export namespace AndroidListAppResponse {
     packageName: string;
 
     /**
-     * Package type: system or third-party
+     * Package type: system or thirdParty
      */
     pkgType: 'system' | 'thirdParty';
 
@@ -557,7 +557,7 @@ export namespace AndroidListPkgResponse {
     packageName: string;
 
     /**
-     * Package type: system or third-party
+     * Package type: system or thirdParty
      */
     pkgType: 'system' | 'thirdParty';
 
@@ -591,7 +591,7 @@ export namespace AndroidListPkgSimpleResponse {
     packageName: string;
 
     /**
-     * Package type: system or third-party
+     * Package type: system or thirdParty
      */
     pkgType: 'system' | 'thirdParty';
   }
@@ -647,7 +647,7 @@ export interface AndroidListActivitiesParams {
 
 export interface AndroidListPkgParams {
   /**
-   * Package type: system or third-party, default is third-party
+   * Package type: system or thirdParty, default is thirdParty
    */
   pkgType?: Array<'system' | 'thirdParty'>;
 
@@ -660,7 +660,7 @@ export interface AndroidListPkgParams {
 
 export interface AndroidListPkgSimpleParams {
   /**
-   * Package type: system or third-party, default is third-party
+   * Package type: system or thirdParty, default is thirdParty
    */
   pkgType?: Array<'system' | 'thirdParty'>;
 }
