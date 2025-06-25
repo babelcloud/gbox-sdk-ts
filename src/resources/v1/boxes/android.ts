@@ -428,6 +428,9 @@ export namespace AndroidInstallResponse {
   }
 }
 
+/**
+ * Android pkg activity list
+ */
 export interface AndroidListActivitiesResponse {
   /**
    * Activity list
@@ -579,6 +582,9 @@ export interface AndroidListPkgSimpleResponse {
 }
 
 export namespace AndroidListPkgSimpleResponse {
+  /**
+   * Android pkg simple
+   */
   export interface Data {
     /**
      * Android apk path
