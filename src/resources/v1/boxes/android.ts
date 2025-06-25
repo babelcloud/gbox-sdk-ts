@@ -500,44 +500,7 @@ export interface AndroidListAppResponse {
   /**
    * App list
    */
-  data: Array<AndroidListAppResponse.Data>;
-}
-
-export namespace AndroidListAppResponse {
-  /**
-   * Android pkg information
-   */
-  export interface Data {
-    /**
-     * Android apk path
-     */
-    apkPath: string;
-
-    /**
-     * Whether the pkg is currently running
-     */
-    isRunning: boolean;
-
-    /**
-     * Android pkg name
-     */
-    name: string;
-
-    /**
-     * Android package name
-     */
-    packageName: string;
-
-    /**
-     * Package type: system or thirdParty
-     */
-    pkgType: 'system' | 'thirdParty';
-
-    /**
-     * Android pkg version
-     */
-    version: string;
-  }
+  data: Array<AndroidApp>;
 }
 
 /**
