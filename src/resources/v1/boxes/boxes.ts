@@ -30,6 +30,7 @@ import {
 import * as AndroidAPI from './android';
 import {
   Android,
+  AndroidApp,
   AndroidBackupParams,
   AndroidCloseParams,
   AndroidGetConnectAddressResponse,
@@ -1031,6 +1032,7 @@ export declare namespace Boxes {
 
   export {
     Android as Android,
+    type AndroidApp as AndroidApp,
     type AndroidGetResponse as AndroidGetResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidInstallResponse as AndroidInstallResponse,
