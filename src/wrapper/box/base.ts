@@ -36,7 +36,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
   public fs: FileSystemOperator;
   public browser: BrowserOperator;
 
-  constructor(data: T, client: GboxClient) {
+  constructor(client: GboxClient, data: T) {
     this.client = client;
     this.data = data;
 

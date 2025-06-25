@@ -14,7 +14,7 @@ export class AndroidAppOperator {
   public data: AndroidApp;
   public box: AndroidBox;
 
-  constructor(data: AndroidApp, client: GboxClient, box: AndroidBox) {
+  constructor(client: GboxClient, box: AndroidBox, data: AndroidApp) {
     this.client = client;
     this.data = data;
     this.box = box;
