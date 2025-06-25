@@ -38,6 +38,7 @@ export {
   type AndroidBackupParams,
   type AndroidCloseParams,
   type AndroidGetParams,
+  type AndroidGetAppParams,
   type AndroidInstallParams,
   type AndroidListActivitiesParams,
   type AndroidListPkgParams,
