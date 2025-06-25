@@ -89,7 +89,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Get app
+   * Get pkg
    *
    * @example
    * ```ts
@@ -106,6 +106,24 @@ export class Android extends APIResource {
   ): APIPromise<AndroidGetResponse> {
     const { boxId } = params;
     return this._client.get(path`/boxes/${boxId}/android/packages/${packageName}`, options);
+  }
+
+  /**
+   * Get app
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.android.getApp('com.example.myapp', {
+   *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * });
+   * ```
+   */
+  getApp(packageName: string, params: AndroidGetAppParams, options?: RequestOptions): APIPromise<void> {
+    const { boxId } = params;
+    return this._client.get(path`/boxes/${boxId}/android/apps/${packageName}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -624,6 +642,13 @@ export interface AndroidGetParams {
   boxId: string;
 }
 
+export interface AndroidGetAppParams {
+  /**
+   * Box ID
+   */
+  boxId: string;
+}
+
 export type AndroidInstallParams =
   | AndroidInstallParams.InstallAndroidPkgByFile
   | AndroidInstallParams.InstallAndroidPkgByURL;
@@ -727,6 +752,7 @@ export declare namespace Android {
     type AndroidBackupParams as AndroidBackupParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
+    type AndroidGetAppParams as AndroidGetAppParams,
     type AndroidInstallParams as AndroidInstallParams,
     type AndroidListActivitiesParams as AndroidListActivitiesParams,
     type AndroidListPkgParams as AndroidListPkgParams,
