@@ -331,7 +331,7 @@ export interface AndroidApp {
   /**
    * App package name
    */
-  pkgName: string;
+  packageName: string;
 }
 
 /**
