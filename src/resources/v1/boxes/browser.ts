@@ -29,7 +29,10 @@ export type BrowserCdpURLResponse = string;
 
 export interface BrowserCdpURLParams {
   /**
-   * The CDP url will be alive for the given duration (e.g. '120m')
+   * The CDP url will be alive for the given duration
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 120m
    */
   expiresIn?: string;
 }

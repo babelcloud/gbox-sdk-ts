@@ -436,7 +436,10 @@ export namespace CreateAndroidBox {
     envs?: Record<string, string>;
 
     /**
-     * The box will be alive for the given duration (e.g. '10m')
+     * The box will be alive for the given duration
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
      */
     expiresIn?: string;
 
@@ -461,7 +464,10 @@ export interface CreateBoxConfig {
   envs?: Record<string, string>;
 
   /**
-   * The box will be alive for the given duration (e.g. '10m')
+   * The box will be alive for the given duration
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
    */
   expiresIn?: string;
 
@@ -797,7 +803,10 @@ export namespace BoxCreateAndroidParams {
     envs?: Record<string, string>;
 
     /**
-     * The box will be alive for the given duration (e.g. '10m')
+     * The box will be alive for the given duration
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
      */
     expiresIn?: string;
 
@@ -835,9 +844,11 @@ export interface BoxExecuteCommandsParams {
   envs?: unknown;
 
   /**
-   * The timeout of the command. e.g. '30s' or '1m' or '1h'. If the command times
-   * out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
-   * in exit code 124.
+   * The timeout of the command. If the command times out, the exit code will be 124.
+   * For example: 'timeout 5s sleep 10s' will result in exit code 124.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s
    */
   timeout?: string;
 
@@ -850,8 +861,10 @@ export interface BoxExecuteCommandsParams {
 
 export interface BoxLiveViewURLParams {
   /**
-   * The live view will be alive for the given duration (e.g. '10m' or '1h'). Default
-   * is 180m.
+   * The live view will be alive for the given duration
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 180m
    */
   expiresIn?: string;
 }
@@ -879,8 +892,11 @@ export interface BoxRunCodeParams {
   language?: 'bash' | 'python' | 'typescript';
 
   /**
-   * The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
-   * execution times out, the exit code will be 124.
+   * The timeout of the code execution. If the code execution times out, the exit
+   * code will be 124.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s
    */
   timeout?: string;
 
@@ -914,8 +930,10 @@ export interface BoxTerminateParams {
 
 export interface BoxWebTerminalURLParams {
   /**
-   * The web terminal will be alive for the given duration (e.g. '10m' or '1h').
-   * Default is 180m.
+   * The web terminal will be alive for the given duration
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 180m
    */
   expiresIn?: string;
 }
