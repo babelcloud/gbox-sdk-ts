@@ -323,7 +323,7 @@ export namespace AndroidBox {
     labels: Record<string, string>;
 
     /**
-     * Memory allocated to the box in MB
+     * Memory allocated to the box in MiB
      */
     memory: number;
 
@@ -338,7 +338,7 @@ export namespace AndroidBox {
     resolution: Config.Resolution;
 
     /**
-     * Storage allocated to the box in GB
+     * Storage allocated to the box in GiB
      */
     storage: number;
 
@@ -560,7 +560,7 @@ export namespace LinuxBox {
     labels: Record<string, string>;
 
     /**
-     * Memory allocated to the box in MB
+     * Memory allocated to the box in MiB
      */
     memory: number;
 
@@ -575,7 +575,7 @@ export namespace LinuxBox {
     resolution: Config.Resolution;
 
     /**
-     * Storage allocated to the box in GB.
+     * Storage allocated to the box in GiB.
      */
     storage: number;
 
