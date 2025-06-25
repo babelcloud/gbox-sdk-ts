@@ -1085,7 +1085,10 @@ export interface ActionClickParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot. Maximum allowed delay is 30s.
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
 }
@@ -1098,6 +1101,9 @@ export interface ActionDragParams {
 
   /**
    * Time interval between points (e.g. "50ms")
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
    */
   duration?: string;
 
@@ -1123,7 +1129,10 @@ export interface ActionDragParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot. Maximum allowed delay is 30s.
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
 }
@@ -1178,7 +1187,10 @@ export interface ActionMoveParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot. Maximum allowed delay is 30s.
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
 }
@@ -1211,7 +1223,10 @@ export interface ActionPressButtonParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot. Maximum allowed delay is 30s.
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
 }
@@ -1356,7 +1371,10 @@ export interface ActionPressKeyParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot. Maximum allowed delay is 30s.
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
 }
@@ -1455,7 +1473,10 @@ export interface ActionScrollParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot. Maximum allowed delay is 30s.
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
 }
@@ -1478,6 +1499,9 @@ export declare namespace ActionSwipeParams {
 
     /**
      * Duration of the swipe
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
      */
     duration?: string;
 
@@ -1503,7 +1527,10 @@ export declare namespace ActionSwipeParams {
      * 4. Take screenshot after action
      *
      * Example: '500ms' means wait 500ms after the action before capturing the final
-     * screenshot. Maximum allowed delay is 30s.
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
   }
@@ -1521,6 +1548,9 @@ export declare namespace ActionSwipeParams {
 
     /**
      * Duration of the swipe
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
      */
     duration?: string;
 
@@ -1546,7 +1576,10 @@ export declare namespace ActionSwipeParams {
      * 4. Take screenshot after action
      *
      * Example: '500ms' means wait 500ms after the action before capturing the final
-     * screenshot. Maximum allowed delay is 30s.
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
   }
@@ -1612,7 +1645,10 @@ export interface ActionTouchParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot. Maximum allowed delay is 30s.
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
 }
@@ -1679,7 +1715,10 @@ export interface ActionTypeParams {
    * 4. Take screenshot after action
    *
    * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot. Maximum allowed delay is 30s.
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
 }
