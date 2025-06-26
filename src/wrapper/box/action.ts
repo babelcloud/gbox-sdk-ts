@@ -10,6 +10,7 @@ import type {
   ActionPressButtonParams,
   ActionSwipeParams,
   ActionScreenRotationParams,
+  ActionAIParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -66,6 +67,10 @@ export interface ActionScreenshot extends ActionScreenshotParams {
   path?: string;
 }
 
+export interface ActionAI extends ActionAIParams {
+  screenshotDelay?: TimeString;
+}
+
 export class ActionOperator {
   private client: GboxClient;
   private boxId: string;
@@ -73,6 +78,18 @@ export class ActionOperator {
   constructor(client: GboxClient, boxId: string) {
     this.client = client;
     this.boxId = boxId;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.ai("Click on the login button");
+   */
+  async ai(body: string | ActionAI) {
+    if (typeof body === 'string') {
+      return this.client.v1.boxes.actions.ai(this.boxId, { instruction: body });
+    }
+
+    return this.client.v1.boxes.actions.ai(this.boxId, body);
   }
 
   /**
