@@ -4,7 +4,7 @@ import {
   AndroidUninstallParams,
   AndroidInstallResponse,
   AndroidListAppResponse,
-  AndroidGetResponse,
+  AndroidApp,
 } from '../../../resources/v1/boxes';
 import fs from 'fs';
 import { AndroidInstall, ListAndroidApp } from './types';
@@ -87,8 +87,8 @@ export class AndroidAppManager {
    * @example
    * const response = await myBox.app.getInfo('com.example.myapp');
    */
-  async getInfo(packageName: string): Promise<AndroidGetResponse> {
-    return this.client.v1.boxes.android.get(packageName, { boxId: this.box.id });
+  async getInfo(packageName: string): Promise<AndroidApp> {
+    return this.client.v1.boxes.android.getApp(packageName, { boxId: this.box.id });
   }
 
   /**
