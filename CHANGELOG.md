@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.14.0 (2025-06-26)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* **api:** api update ([4844a70](https://github.com/babelcloud/gbox-sdk-ts/commit/4844a70a756ba9772eaba60d4e4919de4cd98489))
+
+
+### Bug Fixes
+
+* get app info ([873c22b](https://github.com/babelcloud/gbox-sdk-ts/commit/873c22b986468752ac583b803eb1df471fc3443a))
+* pkg list params ([e396c4b](https://github.com/babelcloud/gbox-sdk-ts/commit/e396c4b4058347acfbee43da0cecd128e523d9c3))
+* update activity name reference in AndroidAppOperator ([0cda166](https://github.com/babelcloud/gbox-sdk-ts/commit/0cda16654254654c07697a585af9f411f18e4451))
+
+
+### Refactors
+
+* update constructor parameter order for box operators and related classes ([68e83b0](https://github.com/babelcloud/gbox-sdk-ts/commit/68e83b0cff336092e643309242f77cd2bd06f65f))
+
 ## 0.13.0 (2025-06-25)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.12.0...v0.13.0)
