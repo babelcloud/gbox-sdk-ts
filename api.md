@@ -11,6 +11,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/boxes.ts">LinuxBox</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxRetrieveResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxListResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/boxes.ts">BoxDisplayResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxExecuteCommandsResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxLiveViewURLResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxRunCodeResponse</a></code>
@@ -24,6 +25,7 @@ Methods:
 - <code title="get /boxes">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">list</a>({ ...params }) -> BoxListResponse</code>
 - <code title="post /boxes/android">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">createAndroid</a>({ ...params }) -> AndroidBox</code>
 - <code title="post /boxes/linux">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">createLinux</a>({ ...params }) -> LinuxBox</code>
+- <code title="get /boxes/{boxId}/display">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">display</a>(boxID) -> BoxDisplayResponse</code>
 - <code title="post /boxes/{boxId}/commands">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">executeCommands</a>(boxID, { ...params }) -> BoxExecuteCommandsResponse</code>
 - <code title="post /boxes/{boxId}/live-view-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">liveViewURL</a>(boxID, { ...params }) -> BoxLiveViewURLResponse</code>
 - <code title="post /boxes/{boxId}/run-code">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">runCode</a>(boxID, { ...params }) -> BoxRunCodeResponse</code>
@@ -36,6 +38,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionAIResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionClickResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionDragResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionMoveResponse</a></code>
@@ -50,6 +53,7 @@ Types:
 
 Methods:
 
+- <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">ai</a>(boxID, { ...params }) -> ActionAIResponse</code>
 - <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">click</a>(boxID, { ...params }) -> ActionClickResponse</code>
 - <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">drag</a>(boxID, { ...params }) -> ActionDragResponse</code>
 - <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(boxID, { ...params }) -> ActionMoveResponse</code>

@@ -3,6 +3,8 @@
 import { APIResource } from '../../../core/resource';
 import * as ActionsAPI from './actions';
 import {
+  ActionAIParams,
+  ActionAIResponse,
   ActionClickParams,
   ActionClickResponse,
   ActionDragParams,
@@ -52,7 +54,7 @@ import {
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
-import { Browser as BrowserAPIBrowser, BrowserCdpURLParams, BrowserCdpURLResponse } from './browser';
+import { Browser, BrowserCdpURLParams, BrowserCdpURLResponse } from './browser';
 import * as FsAPI from './fs';
 import {
   FExistsParams,
@@ -130,6 +132,20 @@ export class Boxes extends APIResource {
    */
   createLinux(body: BoxCreateLinuxParams, options?: RequestOptions): APIPromise<LinuxBox> {
     return this._client.post('/boxes/linux', { body, ...options });
+  }
+
+  /**
+   * Get box display
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.display(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  display(boxID: string, options?: RequestOptions): APIPromise<BoxDisplayResponse> {
+    return this._client.get(path`/boxes/${boxID}/display`, options);
   }
 
   /**
@@ -336,19 +352,9 @@ export namespace AndroidBox {
     os: Config.Os;
 
     /**
-     * Box display resolution configuration
-     */
-    resolution: Config.Resolution;
-
-    /**
      * Storage allocated to the box in GiB
      */
     storage: number;
-
-    /**
-     * Android browser configuration settings
-     */
-    browser?: Config.Browser;
 
     /**
      * Device type - virtual or physical Android device
@@ -373,36 +379,6 @@ export namespace AndroidBox {
        * Supported Android versions
        */
       version: '12' | '13' | '15';
-    }
-
-    /**
-     * Box display resolution configuration
-     */
-    export interface Resolution {
-      /**
-       * Height of the box
-       */
-      height: number;
-
-      /**
-       * Width of the box
-       */
-      width: number;
-    }
-
-    /**
-     * Android browser configuration settings
-     */
-    export interface Browser {
-      /**
-       * Supported browser types for Android boxes
-       */
-      type: 'Chrome for Android' | 'UC Browser for Android';
-
-      /**
-       * Browser version string (e.g. '136')
-       */
-      version: string;
     }
   }
 }
@@ -573,19 +549,9 @@ export namespace LinuxBox {
     os: Config.Os;
 
     /**
-     * Box display resolution configuration
-     */
-    resolution: Config.Resolution;
-
-    /**
      * Storage allocated to the box in GiB.
      */
     storage: number;
-
-    /**
-     * Linux browser configuration settings
-     */
-    browser?: Config.Browser;
 
     /**
      * Working directory path for the box. This directory serves as the default
@@ -603,36 +569,6 @@ export namespace LinuxBox {
     export interface Os {
       /**
        * OS version string (e.g. 'ubuntu-20.04')
-       */
-      version: string;
-    }
-
-    /**
-     * Box display resolution configuration
-     */
-    export interface Resolution {
-      /**
-       * Height of the box
-       */
-      height: number;
-
-      /**
-       * Width of the box
-       */
-      width: number;
-    }
-
-    /**
-     * Linux browser configuration settings
-     */
-    export interface Browser {
-      /**
-       * Supported browser types for Linux boxes
-       */
-      type: 'chromium' | 'firefox' | 'webkit';
-
-      /**
-       * Browser version string (e.g. '12')
        */
       version: string;
     }
@@ -667,6 +603,38 @@ export interface BoxListResponse {
    * Total number of items
    */
   total: number;
+}
+
+/**
+ * Box display
+ */
+export interface BoxDisplayResponse {
+  /**
+   * Orientation of the box
+   */
+  orientation: 'portrait' | 'landscape' | 'landscape-reverse' | 'portrait-reverse';
+
+  /**
+   * Box display resolution configuration
+   */
+  resolution: BoxDisplayResponse.Resolution;
+}
+
+export namespace BoxDisplayResponse {
+  /**
+   * Box display resolution configuration
+   */
+  export interface Resolution {
+    /**
+     * Height of the box
+     */
+    height: number;
+
+    /**
+     * Width of the box
+     */
+    width: number;
+  }
 }
 
 /**
@@ -951,7 +919,7 @@ export interface BoxWebTerminalURLParams {
 
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
-Boxes.Browser = BrowserAPIBrowser;
+Boxes.Browser = Browser;
 Boxes.Android = Android;
 
 export declare namespace Boxes {
@@ -963,6 +931,7 @@ export declare namespace Boxes {
     type LinuxBox as LinuxBox,
     type BoxRetrieveResponse as BoxRetrieveResponse,
     type BoxListResponse as BoxListResponse,
+    type BoxDisplayResponse as BoxDisplayResponse,
     type BoxExecuteCommandsResponse as BoxExecuteCommandsResponse,
     type BoxLiveViewURLResponse as BoxLiveViewURLResponse,
     type BoxRunCodeResponse as BoxRunCodeResponse,
@@ -983,6 +952,7 @@ export declare namespace Boxes {
 
   export {
     Actions as Actions,
+    type ActionAIResponse as ActionAIResponse,
     type ActionClickResponse as ActionClickResponse,
     type ActionDragResponse as ActionDragResponse,
     type ActionMoveResponse as ActionMoveResponse,
@@ -994,6 +964,7 @@ export declare namespace Boxes {
     type ActionSwipeResponse as ActionSwipeResponse,
     type ActionTouchResponse as ActionTouchResponse,
     type ActionTypeResponse as ActionTypeResponse,
+    type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionMoveParams as ActionMoveParams,
@@ -1026,7 +997,7 @@ export declare namespace Boxes {
   };
 
   export {
-    BrowserAPIBrowser as Browser,
+    Browser as Browser,
     type BrowserCdpURLResponse as BrowserCdpURLResponse,
     type BrowserCdpURLParams as BrowserCdpURLParams,
   };

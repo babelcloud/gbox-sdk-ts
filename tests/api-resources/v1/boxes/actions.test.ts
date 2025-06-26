@@ -9,6 +9,31 @@ const client = new GboxClient({
 
 describe('resource actions', () => {
   // skipped: tests are disabled for the time being
+  test.skip('ai: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.ai('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      instruction: 'click the login button',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('ai: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.ai('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      instruction: 'click the login button',
+      background: 'The user is on the login page',
+      includeScreenshot: false,
+      outputFormat: 'base64',
+      screenshotDelay: '500ms',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('click: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.click('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 100,

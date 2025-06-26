@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.15.0 (2025-06-26)
+
+Full Changelog: [v0.14.0...v0.15.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.14.0...v0.15.0)
+
+### Features
+
+* add ai action ([d5f3dcc](https://github.com/babelcloud/gbox-sdk-ts/commit/d5f3dcc9f5096ab255f9c1c366435e7a1615414f))
+* add display ([81f2830](https://github.com/babelcloud/gbox-sdk-ts/commit/81f2830cb0d412cbe2619a284fb95d1a96fe5a04))
+* **api:** api update ([732278d](https://github.com/babelcloud/gbox-sdk-ts/commit/732278d6166864534e42f1117986dc78b6f747da))
+* **api:** api update ([bc73216](https://github.com/babelcloud/gbox-sdk-ts/commit/bc73216bea3e1f8fee2e721a65458e8598ecc6e4))
+
 ## 0.14.0 (2025-06-26)
 
 Full Changelog: [v0.13.0...v0.14.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.13.0...v0.14.0)

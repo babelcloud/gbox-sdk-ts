@@ -2,6 +2,7 @@
 
 export {
   Actions,
+  type ActionAIResponse,
   type ActionClickResponse,
   type ActionDragResponse,
   type ActionMoveResponse,
@@ -13,6 +14,7 @@ export {
   type ActionSwipeResponse,
   type ActionTouchResponse,
   type ActionTypeResponse,
+  type ActionAIParams,
   type ActionClickParams,
   type ActionDragParams,
   type ActionMoveParams,
@@ -57,6 +59,7 @@ export {
   type LinuxBox,
   type BoxRetrieveResponse,
   type BoxListResponse,
+  type BoxDisplayResponse,
   type BoxExecuteCommandsResponse,
   type BoxLiveViewURLResponse,
   type BoxRunCodeResponse,
