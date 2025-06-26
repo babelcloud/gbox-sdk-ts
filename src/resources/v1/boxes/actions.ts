@@ -286,6 +286,9 @@ export namespace ActionAIResponse {
     }
 
     export namespace AIResponse {
+      /**
+       * Typed click action
+       */
       export interface TypedClickAction {
         /**
          * X coordinate of the click
@@ -337,6 +340,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed touch action
+       */
       export interface TypedTouchAction {
         /**
          * Array of touch points and their actions
@@ -407,6 +413,9 @@ export namespace ActionAIResponse {
         }
       }
 
+      /**
+       * Typed drag action
+       */
       export interface TypedDragAction {
         /**
          * Path of the drag action as a series of coordinates
@@ -468,6 +477,9 @@ export namespace ActionAIResponse {
         }
       }
 
+      /**
+       * Typed scroll action
+       */
       export interface TypedScrollAction {
         /**
          * Horizontal scroll amount
@@ -519,6 +531,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed swipe simple action
+       */
       export interface TypedSwipeSimpleAction {
         /**
          * Direction to swipe. The gesture will be performed from the center of the screen
@@ -570,6 +585,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed swipe advanced action
+       */
       export interface TypedSwipeAdvancedAction {
         /**
          * Swipe path
@@ -651,6 +669,9 @@ export namespace ActionAIResponse {
         }
       }
 
+      /**
+       * Typed press key action
+       */
       export interface TypedPressKeyAction {
         /**
          * This is an array of keyboard keys to press. Supports cross-platform
@@ -799,6 +820,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed press button action
+       */
       export interface TypedPressButtonAction {
         /**
          * Button to press
@@ -837,6 +861,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed type action
+       */
       export interface TypedTypeAction {
         /**
          * Text to type
@@ -873,6 +900,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed move action
+       */
       export interface TypedMoveAction {
         /**
          * X coordinate to move to
@@ -914,6 +944,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed screen rotation action
+       */
       export interface TypedScreenRotationAction {
         /**
          * Rotation angle in degrees
@@ -926,6 +959,9 @@ export namespace ActionAIResponse {
         direction: 'clockwise' | 'counter-clockwise';
       }
 
+      /**
+       * Typed screenshot action
+       */
       export interface TypedScreenshotAction {
         /**
          * Clipping region for screenshot capture
@@ -1073,6 +1109,9 @@ export namespace ActionAIResponse {
     }
 
     export namespace AIResponse {
+      /**
+       * Typed click action
+       */
       export interface TypedClickAction {
         /**
          * X coordinate of the click
@@ -1124,6 +1163,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed touch action
+       */
       export interface TypedTouchAction {
         /**
          * Array of touch points and their actions
@@ -1194,6 +1236,9 @@ export namespace ActionAIResponse {
         }
       }
 
+      /**
+       * Typed drag action
+       */
       export interface TypedDragAction {
         /**
          * Path of the drag action as a series of coordinates
@@ -1255,6 +1300,9 @@ export namespace ActionAIResponse {
         }
       }
 
+      /**
+       * Typed scroll action
+       */
       export interface TypedScrollAction {
         /**
          * Horizontal scroll amount
@@ -1306,6 +1354,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed swipe simple action
+       */
       export interface TypedSwipeSimpleAction {
         /**
          * Direction to swipe. The gesture will be performed from the center of the screen
@@ -1357,6 +1408,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed swipe advanced action
+       */
       export interface TypedSwipeAdvancedAction {
         /**
          * Swipe path
@@ -1438,6 +1492,9 @@ export namespace ActionAIResponse {
         }
       }
 
+      /**
+       * Typed press key action
+       */
       export interface TypedPressKeyAction {
         /**
          * This is an array of keyboard keys to press. Supports cross-platform
@@ -1586,6 +1643,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed press button action
+       */
       export interface TypedPressButtonAction {
         /**
          * Button to press
@@ -1624,6 +1684,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed type action
+       */
       export interface TypedTypeAction {
         /**
          * Text to type
@@ -1660,6 +1723,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed move action
+       */
       export interface TypedMoveAction {
         /**
          * X coordinate to move to
@@ -1701,6 +1767,9 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
+      /**
+       * Typed screen rotation action
+       */
       export interface TypedScreenRotationAction {
         /**
          * Rotation angle in degrees
@@ -1713,6 +1782,9 @@ export namespace ActionAIResponse {
         direction: 'clockwise' | 'counter-clockwise';
       }
 
+      /**
+       * Typed screenshot action
+       */
       export interface TypedScreenshotAction {
         /**
          * Clipping region for screenshot capture
