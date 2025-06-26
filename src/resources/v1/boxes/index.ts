@@ -57,6 +57,7 @@ export {
   type LinuxBox,
   type BoxRetrieveResponse,
   type BoxListResponse,
+  type BoxDisplayResponse,
   type BoxExecuteCommandsResponse,
   type BoxLiveViewURLResponse,
   type BoxRunCodeResponse,
