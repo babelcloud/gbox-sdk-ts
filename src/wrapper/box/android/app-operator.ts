@@ -27,7 +27,7 @@ export class AndroidAppOperator {
   async open(params?: Omit<AndroidOpenParams, 'boxId'>) {
     return this.client.v1.boxes.android.open(this.data.packageName, {
       boxId: this.box.id,
-      activityName: this.data.activityName,
+      activityName: this.data.activityClassName,
       ...params,
     });
   }
@@ -39,7 +39,7 @@ export class AndroidAppOperator {
   async restart(params?: Omit<AndroidRestartParams, 'boxId'>) {
     return this.client.v1.boxes.android.restart(this.data.packageName, {
       boxId: this.box.id,
-      activityName: this.data.activityName,
+      activityName: this.data.activityClassName,
       ...params,
     });
   }
