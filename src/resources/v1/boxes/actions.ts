@@ -224,7 +224,7 @@ export class Actions extends APIResource {
 /**
  * Result of AI action execution with screenshot
  */
-export type ActionAIResponse = ActionAIResponse.AIActionScreenshotResult | ActionAIResponse.AIActionResultDto;
+export type ActionAIResponse = ActionAIResponse.AIActionScreenshotResult | ActionAIResponse.AIActionResult;
 
 export namespace ActionAIResponse {
   /**
@@ -1019,11 +1019,14 @@ export namespace ActionAIResponse {
     }
   }
 
-  export interface AIActionResultDto {
+  /**
+   * Result of AI action execution
+   */
+  export interface AIActionResult {
     /**
      * Response of AI action execution
      */
-    aiResponse: AIActionResultDto.AIResponse;
+    aiResponse: AIActionResult.AIResponse;
 
     /**
      * message
@@ -1031,7 +1034,7 @@ export namespace ActionAIResponse {
     message: string;
   }
 
-  export namespace AIActionResultDto {
+  export namespace AIActionResult {
     /**
      * Response of AI action execution
      */
