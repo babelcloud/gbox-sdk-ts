@@ -197,7 +197,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Retrieve detailed information for all installed pkgs. This endpoint provides
+   * Retrieve detailed information for all installed pkg. This endpoint provides
    * comprehensive pkg details
    *
    * @example

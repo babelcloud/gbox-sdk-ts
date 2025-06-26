@@ -8,8 +8,8 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
   public app: AndroidAppManager;
   public pkg: AndroidPkgManager;
 
-  constructor(data: AndroidBox, client: GboxClient) {
-    super(data, client);
+  constructor(client: GboxClient, data: AndroidBox) {
+    super(client, data);
     this.app = new AndroidAppManager(client, data);
     this.pkg = new AndroidPkgManager(client, data);
   }

@@ -64,8 +64,9 @@ export class FileSystemOperator {
    * @example
    * const response = await myBox.fs.write({ path: '/tmp/file.txt', content: 'Hello, World!' });
    */
-  async write(body: FWriteParams): Promise<FWriteResponse> {
-    return this.client.v1.boxes.fs.write(this.boxId, body);
+  async write(body: FWriteParams): Promise<FileOperator> {
+    const res = await this.client.v1.boxes.fs.write(this.boxId, body);
+    return new FileOperator(this.client, this.boxId, res);
   }
 
   /**

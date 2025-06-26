@@ -47,12 +47,12 @@ export class GboxSDK {
 
     if (type === 'android') {
       const res = await this.client.v1.boxes.createAndroid(params);
-      return new AndroidBoxOperator(res, this.client);
+      return new AndroidBoxOperator(this.client, res);
     }
 
     if (type === 'linux') {
       const res = await this.client.v1.boxes.createLinux(params);
-      return new LinuxBoxOperator(res, this.client);
+      return new LinuxBoxOperator(this.client, res);
     }
 
     throw new Error(`Unsupported box type: ${(body as any).type}`);
@@ -120,11 +120,11 @@ export class GboxSDK {
 
   private dataToOperator(data: AndroidBox | LinuxBox): BoxOperator {
     if (isAndroidBox(data)) {
-      return new AndroidBoxOperator(data, this.client);
+      return new AndroidBoxOperator(this.client, data);
     }
 
     if (isLinuxBox(data)) {
-      return new LinuxBoxOperator(data, this.client);
+      return new LinuxBoxOperator(this.client, data);
     }
 
     throw new Error(`Invalid box type: ${(data as any).type}`);

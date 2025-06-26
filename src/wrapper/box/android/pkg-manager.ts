@@ -6,6 +6,8 @@ import {
   AndroidListPkgResponse,
   AndroidListPkgSimpleResponse,
   AndroidGetResponse,
+  AndroidListPkgParams,
+  AndroidListPkgSimpleParams,
 } from '../../../resources/v1/boxes';
 import fs from 'fs';
 import { AndroidInstall, ListAndroidPkg } from './types';
@@ -57,10 +59,10 @@ export class AndroidPkgManager {
    * @example
    * const response = await myBox.pkg.list();
    */
-  async list(): Promise<ListAndroidPkg> {
-    const res = await this.client.v1.boxes.android.listPkg(this.box.id);
+  async list(params?: AndroidListPkgParams): Promise<ListAndroidPkg> {
+    const res = await this.client.v1.boxes.android.listPkg(this.box.id, params);
     return {
-      operators: res.data.map((pkg) => new AndroidPkgOperator(pkg, this.client, this.box)),
+      operators: res.data.map((pkg) => new AndroidPkgOperator(this.client, this.box, pkg)),
     };
   }
 
@@ -68,16 +70,16 @@ export class AndroidPkgManager {
    * @example
    * const response = await myBox.pkg.listInfo();
    */
-  async listInfo(): Promise<AndroidListPkgResponse> {
-    return this.client.v1.boxes.android.listPkg(this.box.id);
+  async listInfo(params?: AndroidListPkgParams): Promise<AndroidListPkgResponse> {
+    return this.client.v1.boxes.android.listPkg(this.box.id, params);
   }
 
   /**
    * @example
    * const response = await myBox.pkg.listSimpleInfo();
    */
-  async listSimpleInfo(): Promise<AndroidListPkgSimpleResponse> {
-    return this.client.v1.boxes.android.listPkgSimple(this.box.id);
+  async listSimpleInfo(params?: AndroidListPkgSimpleParams): Promise<AndroidListPkgSimpleResponse> {
+    return this.client.v1.boxes.android.listPkgSimple(this.box.id, params);
   }
 
   /**
@@ -86,7 +88,7 @@ export class AndroidPkgManager {
    */
   async get(packageName: string): Promise<AndroidPkgOperator> {
     const pkgData = await this.client.v1.boxes.android.get(packageName, { boxId: this.box.id });
-    return new AndroidPkgOperator(pkgData, this.client, this.box);
+    return new AndroidPkgOperator(this.client, this.box, pkgData);
   }
 
   /**

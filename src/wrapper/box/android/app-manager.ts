@@ -4,7 +4,7 @@ import {
   AndroidUninstallParams,
   AndroidInstallResponse,
   AndroidListAppResponse,
-  AndroidGetResponse,
+  AndroidApp,
 } from '../../../resources/v1/boxes';
 import fs from 'fs';
 import { AndroidInstall, ListAndroidApp } from './types';
@@ -62,7 +62,7 @@ export class AndroidAppManager {
   async list(): Promise<ListAndroidApp> {
     const res = await this.client.v1.boxes.android.listApp(this.box.id);
     return {
-      operators: res.data.map((app) => new AndroidAppOperator(app, this.client, this.box)),
+      operators: res.data.map((app) => new AndroidAppOperator(this.client, this.box, app)),
     };
   }
 
@@ -80,15 +80,15 @@ export class AndroidAppManager {
    */
   async get(packageName: string): Promise<AndroidAppOperator> {
     const appData = await this.client.v1.boxes.android.getApp(packageName, { boxId: this.box.id });
-    return new AndroidAppOperator(appData, this.client, this.box);
+    return new AndroidAppOperator(this.client, this.box, appData);
   }
 
   /**
    * @example
    * const response = await myBox.app.getInfo('com.example.myapp');
    */
-  async getInfo(packageName: string): Promise<AndroidGetResponse> {
-    return this.client.v1.boxes.android.get(packageName, { boxId: this.box.id });
+  async getInfo(packageName: string): Promise<AndroidApp> {
+    return this.client.v1.boxes.android.getApp(packageName, { boxId: this.box.id });
   }
 
   /**
@@ -121,6 +121,6 @@ export class AndroidAppManager {
       activityClassName: activity.className,
     };
 
-    return new AndroidAppOperator(app, this.client, this.box);
+    return new AndroidAppOperator(this.client, this.box, app);
   }
 }
