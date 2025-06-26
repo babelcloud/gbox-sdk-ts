@@ -3,6 +3,8 @@
 import { APIResource } from '../../../core/resource';
 import * as ActionsAPI from './actions';
 import {
+  ActionAIParams,
+  ActionAIResponse,
   ActionClickParams,
   ActionClickResponse,
   ActionDragParams,
@@ -950,6 +952,7 @@ export declare namespace Boxes {
 
   export {
     Actions as Actions,
+    type ActionAIResponse as ActionAIResponse,
     type ActionClickResponse as ActionClickResponse,
     type ActionDragResponse as ActionDragResponse,
     type ActionMoveResponse as ActionMoveResponse,
@@ -961,6 +964,7 @@ export declare namespace Boxes {
     type ActionSwipeResponse as ActionSwipeResponse,
     type ActionTouchResponse as ActionTouchResponse,
     type ActionTypeResponse as ActionTypeResponse,
+    type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionMoveParams as ActionMoveParams,
