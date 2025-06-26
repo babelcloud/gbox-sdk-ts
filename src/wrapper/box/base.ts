@@ -9,6 +9,7 @@ import type {
   BoxStopParams,
   BoxWebTerminalURLParams,
   BoxLiveViewURLParams,
+  BoxDisplayResponse,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { ActionOperator } from './action';
@@ -79,6 +80,14 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
     await this.client.v1.boxes.terminate(this.data.id, body);
     await this.syncData();
     return this;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.display();
+   */
+  async display(): Promise<BoxDisplayResponse> {
+    return this.client.v1.boxes.display(this.data.id);
   }
 
   /**
