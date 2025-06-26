@@ -7,6 +7,25 @@ import { path } from '../../../internal/utils/path';
 
 export class Actions extends APIResource {
   /**
+   * Use natural language instructions to perform UI operations on the box. You can
+   * describe what you want to do in plain language (e.g., 'click the login button',
+   * 'scroll down to find settings', 'input my email address'), and the AI will
+   * automatically convert your instruction into the appropriate UI action and
+   * execute it on the box.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.ai(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { instruction: 'click the login button' },
+   * );
+   * ```
+   */
+  ai(boxID: string, body: ActionAIParams, options?: RequestOptions): APIPromise<ActionAIResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/ai`, { body, ...options });
+  }
+
+  /**
    * Click
    *
    * @example
@@ -199,6 +218,1537 @@ export class Actions extends APIResource {
    */
   type(boxID: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionTypeResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/type`, { body, ...options });
+  }
+}
+
+/**
+ * Result of AI action execution with screenshot
+ */
+export type ActionAIResponse = ActionAIResponse.AIActionScreenshotResult | ActionAIResponse.AIActionResultDto;
+
+export namespace ActionAIResponse {
+  /**
+   * Result of AI action execution with screenshot
+   */
+  export interface AIActionScreenshotResult {
+    /**
+     * Response of AI action execution
+     */
+    aiResponse: AIActionScreenshotResult.AIResponse;
+
+    /**
+     * message
+     */
+    message: string;
+
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: AIActionScreenshotResult.Screenshot;
+  }
+
+  export namespace AIActionScreenshotResult {
+    /**
+     * Response of AI action execution
+     */
+    export interface AIResponse {
+      /**
+       * Action to be executed by the AI with type identifier
+       */
+      action:
+        | AIResponse.TypedClickAction
+        | AIResponse.TypedTouchAction
+        | AIResponse.TypedDragAction
+        | AIResponse.TypedScrollAction
+        | AIResponse.TypedSwipeSimpleAction
+        | AIResponse.TypedSwipeAdvancedAction
+        | AIResponse.TypedPressKeyAction
+        | AIResponse.TypedPressButtonAction
+        | AIResponse.TypedTypeAction
+        | AIResponse.TypedMoveAction
+        | AIResponse.TypedScreenRotationAction
+        | AIResponse.TypedScreenshotAction;
+
+      /**
+       * message
+       */
+      messages: Array<Array<unknown>>;
+
+      /**
+       * model
+       */
+      model: string;
+
+      /**
+       * reasoning
+       */
+      reasoning?: string;
+    }
+
+    export namespace AIResponse {
+      export interface TypedClickAction {
+        /**
+         * X coordinate of the click
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the click
+         */
+        y: number;
+
+        /**
+         * Mouse button to click
+         */
+        button?: 'left' | 'right' | 'middle';
+
+        /**
+         * Whether to perform a double click
+         */
+        double?: boolean;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedTouchAction {
+        /**
+         * Array of touch points and their actions
+         */
+        points: Array<TypedTouchAction.Point>;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedTouchAction {
+        /**
+         * Touch point configuration with start position and actions
+         */
+        export interface Point {
+          /**
+           * Initial touch point position
+           */
+          start: Point.Start;
+
+          /**
+           * Sequence of actions to perform after initial touch
+           */
+          actions?: Array<unknown>;
+        }
+
+        export namespace Point {
+          /**
+           * Initial touch point position
+           */
+          export interface Start {
+            /**
+             * Starting X coordinate
+             */
+            x: number;
+
+            /**
+             * Starting Y coordinate
+             */
+            y: number;
+          }
+        }
+      }
+
+      export interface TypedDragAction {
+        /**
+         * Path of the drag action as a series of coordinates
+         */
+        path: Array<TypedDragAction.Path>;
+
+        /**
+         * Time interval between points (e.g. "50ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      export interface TypedScrollAction {
+        /**
+         * Horizontal scroll amount
+         */
+        scrollX: number;
+
+        /**
+         * Vertical scroll amount
+         */
+        scrollY: number;
+
+        /**
+         * X coordinate of the scroll position
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the scroll position
+         */
+        y: number;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedSwipeSimpleAction {
+        /**
+         * Direction to swipe. The gesture will be performed from the center of the screen
+         * towards this direction.
+         */
+        direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
+
+        /**
+         * Distance of the swipe in pixels. If not provided, the swipe will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number;
+
+        /**
+         * Duration of the swipe
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedSwipeAdvancedAction {
+        /**
+         * Swipe path
+         */
+        end: TypedSwipeAdvancedAction.End;
+
+        /**
+         * Swipe path
+         */
+        start: TypedSwipeAdvancedAction.Start;
+
+        /**
+         * Duration of the swipe
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedSwipeAdvancedAction {
+        /**
+         * Swipe path
+         */
+        export interface End {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+
+        /**
+         * Swipe path
+         */
+        export interface Start {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+      }
+
+      export interface TypedPressKeyAction {
+        /**
+         * This is an array of keyboard keys to press. Supports cross-platform
+         * compatibility.
+         */
+        keys: Array<
+          | 'a'
+          | 'b'
+          | 'c'
+          | 'd'
+          | 'e'
+          | 'f'
+          | 'g'
+          | 'h'
+          | 'i'
+          | 'j'
+          | 'k'
+          | 'l'
+          | 'm'
+          | 'n'
+          | 'o'
+          | 'p'
+          | 'q'
+          | 'r'
+          | 's'
+          | 't'
+          | 'u'
+          | 'v'
+          | 'w'
+          | 'x'
+          | 'y'
+          | 'z'
+          | '0'
+          | '1'
+          | '2'
+          | '3'
+          | '4'
+          | '5'
+          | '6'
+          | '7'
+          | '8'
+          | '9'
+          | 'f1'
+          | 'f2'
+          | 'f3'
+          | 'f4'
+          | 'f5'
+          | 'f6'
+          | 'f7'
+          | 'f8'
+          | 'f9'
+          | 'f10'
+          | 'f11'
+          | 'f12'
+          | 'control'
+          | 'alt'
+          | 'shift'
+          | 'meta'
+          | 'win'
+          | 'cmd'
+          | 'option'
+          | 'arrowUp'
+          | 'arrowDown'
+          | 'arrowLeft'
+          | 'arrowRight'
+          | 'home'
+          | 'end'
+          | 'pageUp'
+          | 'pageDown'
+          | 'enter'
+          | 'space'
+          | 'tab'
+          | 'escape'
+          | 'backspace'
+          | 'delete'
+          | 'insert'
+          | 'capsLock'
+          | 'numLock'
+          | 'scrollLock'
+          | 'pause'
+          | 'printScreen'
+          | ';'
+          | '='
+          | ','
+          | '-'
+          | '.'
+          | '/'
+          | '`'
+          | '['
+          | '\\'
+          | ']'
+          | "'"
+          | 'numpad0'
+          | 'numpad1'
+          | 'numpad2'
+          | 'numpad3'
+          | 'numpad4'
+          | 'numpad5'
+          | 'numpad6'
+          | 'numpad7'
+          | 'numpad8'
+          | 'numpad9'
+          | 'numpadAdd'
+          | 'numpadSubtract'
+          | 'numpadMultiply'
+          | 'numpadDivide'
+          | 'numpadDecimal'
+          | 'numpadEnter'
+          | 'numpadEqual'
+          | 'volumeUp'
+          | 'volumeDown'
+          | 'volumeMute'
+          | 'mediaPlayPause'
+          | 'mediaStop'
+          | 'mediaNextTrack'
+          | 'mediaPreviousTrack'
+        >;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedPressButtonAction {
+        /**
+         * Button to press
+         */
+        buttons: Array<
+          'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'
+        >;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedTypeAction {
+        /**
+         * Text to type
+         */
+        text: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedMoveAction {
+        /**
+         * X coordinate to move to
+         */
+        x: number;
+
+        /**
+         * Y coordinate to move to
+         */
+        y: number;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedScreenRotationAction {
+        /**
+         * Rotation angle in degrees
+         */
+        angle: 90 | 180 | 270;
+
+        /**
+         * Rotation direction
+         */
+        direction: 'clockwise' | 'counter-clockwise';
+      }
+
+      export interface TypedScreenshotAction {
+        /**
+         * Clipping region for screenshot capture
+         */
+        clip?: TypedScreenshotAction.Clip;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+      }
+
+      export namespace TypedScreenshotAction {
+        /**
+         * Clipping region for screenshot capture
+         */
+        export interface Clip {
+          /**
+           * Height of the clip
+           */
+          height: number;
+
+          /**
+           * Width of the clip
+           */
+          width: number;
+
+          /**
+           * X coordinate of the clip
+           */
+          x: number;
+
+          /**
+           * Y coordinate of the clip
+           */
+          y: number;
+        }
+      }
+    }
+
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  export interface AIActionResultDto {
+    /**
+     * Response of AI action execution
+     */
+    aiResponse: AIActionResultDto.AIResponse;
+
+    /**
+     * message
+     */
+    message: string;
+  }
+
+  export namespace AIActionResultDto {
+    /**
+     * Response of AI action execution
+     */
+    export interface AIResponse {
+      /**
+       * Action to be executed by the AI with type identifier
+       */
+      action:
+        | AIResponse.TypedClickAction
+        | AIResponse.TypedTouchAction
+        | AIResponse.TypedDragAction
+        | AIResponse.TypedScrollAction
+        | AIResponse.TypedSwipeSimpleAction
+        | AIResponse.TypedSwipeAdvancedAction
+        | AIResponse.TypedPressKeyAction
+        | AIResponse.TypedPressButtonAction
+        | AIResponse.TypedTypeAction
+        | AIResponse.TypedMoveAction
+        | AIResponse.TypedScreenRotationAction
+        | AIResponse.TypedScreenshotAction;
+
+      /**
+       * message
+       */
+      messages: Array<Array<unknown>>;
+
+      /**
+       * model
+       */
+      model: string;
+
+      /**
+       * reasoning
+       */
+      reasoning?: string;
+    }
+
+    export namespace AIResponse {
+      export interface TypedClickAction {
+        /**
+         * X coordinate of the click
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the click
+         */
+        y: number;
+
+        /**
+         * Mouse button to click
+         */
+        button?: 'left' | 'right' | 'middle';
+
+        /**
+         * Whether to perform a double click
+         */
+        double?: boolean;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedTouchAction {
+        /**
+         * Array of touch points and their actions
+         */
+        points: Array<TypedTouchAction.Point>;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedTouchAction {
+        /**
+         * Touch point configuration with start position and actions
+         */
+        export interface Point {
+          /**
+           * Initial touch point position
+           */
+          start: Point.Start;
+
+          /**
+           * Sequence of actions to perform after initial touch
+           */
+          actions?: Array<unknown>;
+        }
+
+        export namespace Point {
+          /**
+           * Initial touch point position
+           */
+          export interface Start {
+            /**
+             * Starting X coordinate
+             */
+            x: number;
+
+            /**
+             * Starting Y coordinate
+             */
+            y: number;
+          }
+        }
+      }
+
+      export interface TypedDragAction {
+        /**
+         * Path of the drag action as a series of coordinates
+         */
+        path: Array<TypedDragAction.Path>;
+
+        /**
+         * Time interval between points (e.g. "50ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      export interface TypedScrollAction {
+        /**
+         * Horizontal scroll amount
+         */
+        scrollX: number;
+
+        /**
+         * Vertical scroll amount
+         */
+        scrollY: number;
+
+        /**
+         * X coordinate of the scroll position
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the scroll position
+         */
+        y: number;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedSwipeSimpleAction {
+        /**
+         * Direction to swipe. The gesture will be performed from the center of the screen
+         * towards this direction.
+         */
+        direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
+
+        /**
+         * Distance of the swipe in pixels. If not provided, the swipe will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number;
+
+        /**
+         * Duration of the swipe
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedSwipeAdvancedAction {
+        /**
+         * Swipe path
+         */
+        end: TypedSwipeAdvancedAction.End;
+
+        /**
+         * Swipe path
+         */
+        start: TypedSwipeAdvancedAction.Start;
+
+        /**
+         * Duration of the swipe
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedSwipeAdvancedAction {
+        /**
+         * Swipe path
+         */
+        export interface End {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+
+        /**
+         * Swipe path
+         */
+        export interface Start {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+      }
+
+      export interface TypedPressKeyAction {
+        /**
+         * This is an array of keyboard keys to press. Supports cross-platform
+         * compatibility.
+         */
+        keys: Array<
+          | 'a'
+          | 'b'
+          | 'c'
+          | 'd'
+          | 'e'
+          | 'f'
+          | 'g'
+          | 'h'
+          | 'i'
+          | 'j'
+          | 'k'
+          | 'l'
+          | 'm'
+          | 'n'
+          | 'o'
+          | 'p'
+          | 'q'
+          | 'r'
+          | 's'
+          | 't'
+          | 'u'
+          | 'v'
+          | 'w'
+          | 'x'
+          | 'y'
+          | 'z'
+          | '0'
+          | '1'
+          | '2'
+          | '3'
+          | '4'
+          | '5'
+          | '6'
+          | '7'
+          | '8'
+          | '9'
+          | 'f1'
+          | 'f2'
+          | 'f3'
+          | 'f4'
+          | 'f5'
+          | 'f6'
+          | 'f7'
+          | 'f8'
+          | 'f9'
+          | 'f10'
+          | 'f11'
+          | 'f12'
+          | 'control'
+          | 'alt'
+          | 'shift'
+          | 'meta'
+          | 'win'
+          | 'cmd'
+          | 'option'
+          | 'arrowUp'
+          | 'arrowDown'
+          | 'arrowLeft'
+          | 'arrowRight'
+          | 'home'
+          | 'end'
+          | 'pageUp'
+          | 'pageDown'
+          | 'enter'
+          | 'space'
+          | 'tab'
+          | 'escape'
+          | 'backspace'
+          | 'delete'
+          | 'insert'
+          | 'capsLock'
+          | 'numLock'
+          | 'scrollLock'
+          | 'pause'
+          | 'printScreen'
+          | ';'
+          | '='
+          | ','
+          | '-'
+          | '.'
+          | '/'
+          | '`'
+          | '['
+          | '\\'
+          | ']'
+          | "'"
+          | 'numpad0'
+          | 'numpad1'
+          | 'numpad2'
+          | 'numpad3'
+          | 'numpad4'
+          | 'numpad5'
+          | 'numpad6'
+          | 'numpad7'
+          | 'numpad8'
+          | 'numpad9'
+          | 'numpadAdd'
+          | 'numpadSubtract'
+          | 'numpadMultiply'
+          | 'numpadDivide'
+          | 'numpadDecimal'
+          | 'numpadEnter'
+          | 'numpadEqual'
+          | 'volumeUp'
+          | 'volumeDown'
+          | 'volumeMute'
+          | 'mediaPlayPause'
+          | 'mediaStop'
+          | 'mediaNextTrack'
+          | 'mediaPreviousTrack'
+        >;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedPressButtonAction {
+        /**
+         * Button to press
+         */
+        buttons: Array<
+          'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'
+        >;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedTypeAction {
+        /**
+         * Text to type
+         */
+        text: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedMoveAction {
+        /**
+         * X coordinate to move to
+         */
+        x: number;
+
+        /**
+         * Y coordinate to move to
+         */
+        y: number;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export interface TypedScreenRotationAction {
+        /**
+         * Rotation angle in degrees
+         */
+        angle: 90 | 180 | 270;
+
+        /**
+         * Rotation direction
+         */
+        direction: 'clockwise' | 'counter-clockwise';
+      }
+
+      export interface TypedScreenshotAction {
+        /**
+         * Clipping region for screenshot capture
+         */
+        clip?: TypedScreenshotAction.Clip;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+      }
+
+      export namespace TypedScreenshotAction {
+        /**
+         * Clipping region for screenshot capture
+         */
+        export interface Clip {
+          /**
+           * Height of the clip
+           */
+          height: number;
+
+          /**
+           * Width of the clip
+           */
+          width: number;
+
+          /**
+           * X coordinate of the clip
+           */
+          x: number;
+
+          /**
+           * Y coordinate of the clip
+           */
+          y: number;
+        }
+      }
+    }
   }
 }
 
@@ -1042,6 +2592,50 @@ export namespace ActionTypeResponse {
   }
 }
 
+export interface ActionAIParams {
+  /**
+   * Direct instruction of the UI action to perform (e.g., 'click the login button',
+   * 'input username in the email field', 'scroll down', 'swipe left')
+   */
+  instruction: string;
+
+  /**
+   * The background of the UI action to perform. The purpose of background is to let
+   * the action executor to understand the context of why the instruction is given
+   * including important previous actions and observations
+   */
+  background?: string;
+
+  /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
+   * Type of the URI. default is base64.
+   */
+  outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+   */
+  screenshotDelay?: string;
+}
+
 export interface ActionClickParams {
   /**
    * X coordinate of the click
@@ -1725,6 +3319,7 @@ export interface ActionTypeParams {
 
 export declare namespace Actions {
   export {
+    type ActionAIResponse as ActionAIResponse,
     type ActionClickResponse as ActionClickResponse,
     type ActionDragResponse as ActionDragResponse,
     type ActionMoveResponse as ActionMoveResponse,
@@ -1736,6 +3331,7 @@ export declare namespace Actions {
     type ActionSwipeResponse as ActionSwipeResponse,
     type ActionTouchResponse as ActionTouchResponse,
     type ActionTypeResponse as ActionTypeResponse,
+    type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionMoveParams as ActionMoveParams,
