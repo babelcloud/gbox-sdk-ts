@@ -135,7 +135,9 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Get box display
+   * Retrieve the current display properties for a running box. This endpoint
+   * provides details about the box's screen resolution, orientation, and other
+   * visual properties
    *
    * @example
    * ```ts
@@ -149,7 +151,8 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Exec command
+   * Execute a command on a running box. This endpoint allows you to send commands to
+   * the box and receive the output
    *
    * @example
    * ```ts
@@ -168,7 +171,9 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Generate pre-signed live view url
+   * This endpoint allows you to generate a pre-signed URL for accessing the live
+   * view of a running box. The URL is valid for a limited time and can be used to
+   * view the box's live stream
    *
    * @example
    * ```ts
@@ -237,7 +242,7 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Terminate box
+   * Terminate a running box. This action will stop the box and release its resources
    *
    * @example
    * ```ts
@@ -259,7 +264,9 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Generate pre-signed web terminal url
+   * This endpoint allows you to generate a pre-signed URL for accessing the web
+   * terminal of a running box. The URL is valid for a limited time and can be used
+   * to access the box's terminal interface
    *
    * @example
    * ```ts
