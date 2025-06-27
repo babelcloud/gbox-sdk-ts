@@ -253,9 +253,9 @@ export namespace ActionAIResponse {
      */
     export interface AIResponse {
       /**
-       * Action to be executed by the AI with type identifier
+       * Actions to be executed by the AI with type identifier
        */
-      action:
+      actions: Array<
         | AIResponse.TypedClickAction
         | AIResponse.TypedTouchAction
         | AIResponse.TypedDragAction
@@ -267,12 +267,13 @@ export namespace ActionAIResponse {
         | AIResponse.TypedTypeAction
         | AIResponse.TypedMoveAction
         | AIResponse.TypedScreenRotationAction
-        | AIResponse.TypedScreenshotAction;
+        | AIResponse.TypedScreenshotAction
+      >;
 
       /**
-       * message
+       * messages
        */
-      messages: Array<Array<unknown>>;
+      messages: Array<string>;
 
       /**
        * model
@@ -1076,9 +1077,9 @@ export namespace ActionAIResponse {
      */
     export interface AIResponse {
       /**
-       * Action to be executed by the AI with type identifier
+       * Actions to be executed by the AI with type identifier
        */
-      action:
+      actions: Array<
         | AIResponse.TypedClickAction
         | AIResponse.TypedTouchAction
         | AIResponse.TypedDragAction
@@ -1090,12 +1091,13 @@ export namespace ActionAIResponse {
         | AIResponse.TypedTypeAction
         | AIResponse.TypedMoveAction
         | AIResponse.TypedScreenRotationAction
-        | AIResponse.TypedScreenshotAction;
+        | AIResponse.TypedScreenshotAction
+      >;
 
       /**
-       * message
+       * messages
        */
-      messages: Array<Array<unknown>>;
+      messages: Array<string>;
 
       /**
        * model
