@@ -109,7 +109,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Get app
+   * Get installed app info by package name
    *
    * @example
    * ```ts
@@ -183,7 +183,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * List apps
+   * List all installed apps on the launcher
    *
    * @example
    * ```ts
