@@ -61,6 +61,24 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Extract data from the UI interface using a JSON schema.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.extract(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   {
+   *     instruction:
+   *       'extract the product information including title, price, and availability status',
+   *   },
+   * );
+   * ```
+   */
+  extract(boxID: string, body: ActionExtractParams, options?: RequestOptions): APIPromise<unknown> {
+    return this._client.post(path`/boxes/${boxID}/actions/extract`, { body, ...options });
+  }
+
+  /**
    * Move to position
    *
    * @example
@@ -1995,6 +2013,8 @@ export namespace ActionDragResponse {
   }
 }
 
+export type ActionExtractResponse = unknown;
+
 /**
  * Result of an UI action execution with screenshots
  */
@@ -2825,6 +2845,27 @@ export namespace ActionDragParams {
   }
 }
 
+export interface ActionExtractParams {
+  /**
+   * The instruction of the action to extract data from the UI interface
+   */
+  instruction: string;
+
+  /**
+   * JSON Schema defining the structure of data to extract. Supports object, array,
+   * string, number, boolean types with validation rules.
+   *
+   * Common use cases:
+   *
+   * - Extract text content: { "type": "string" }
+   * - Extract structured data: { "type": "object", "properties": {...} }
+   * - Extract lists: { "type": "array", "items": {...} }
+   * - Extract with validation: Add constraints like "required", "enum", "pattern",
+   *   etc.
+   */
+  schema?: unknown;
+}
+
 export interface ActionMoveParams {
   /**
    * X coordinate to move to
@@ -3399,6 +3440,7 @@ export declare namespace Actions {
     type ActionAIResponse as ActionAIResponse,
     type ActionClickResponse as ActionClickResponse,
     type ActionDragResponse as ActionDragResponse,
+    type ActionExtractResponse as ActionExtractResponse,
     type ActionMoveResponse as ActionMoveResponse,
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
@@ -3411,6 +3453,7 @@ export declare namespace Actions {
     type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
+    type ActionExtractParams as ActionExtractParams,
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,

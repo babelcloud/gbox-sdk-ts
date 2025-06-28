@@ -93,6 +93,28 @@ describe('resource actions', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('extract: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.extract('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      instruction: 'extract the product information including title, price, and availability status',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('extract: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.extract('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      instruction: 'extract the product information including title, price, and availability status',
+      schema: {},
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('move: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.move('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 200,
