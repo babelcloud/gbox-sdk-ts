@@ -64,10 +64,8 @@ describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('drag: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.drag('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      path: [
-        { x: 100, y: 100 },
-        { x: 200, y: 200 },
-      ],
+      end: { x: 400, y: 300 },
+      start: { x: 100, y: 150 },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -81,14 +79,13 @@ describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('drag: required and optional params', async () => {
     const response = await client.v1.boxes.actions.drag('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      path: [
-        { x: 100, y: 100 },
-        { x: 200, y: 200 },
-      ],
-      duration: '50ms',
+      end: { x: 400, y: 300 },
+      start: { x: 100, y: 150 },
+      duration: '500ms',
       includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
+      wait: '500ms',
     });
   });
 
