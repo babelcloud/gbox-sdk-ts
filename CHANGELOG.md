@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.17.0 (2025-06-29)
+
+Full Changelog: [v0.16.0...v0.17.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.16.0...v0.17.0)
+
+### Features
+
+* **api:** api update ([6e5eca7](https://github.com/babelcloud/gbox-sdk-ts/commit/6e5eca785b2a8a248e2e63c3a57f641373e1fba9))
+* **api:** api update ([9811046](https://github.com/babelcloud/gbox-sdk-ts/commit/9811046e90d757e8433e0b5082afd3b330845475))
+* **api:** api update ([af2917f](https://github.com/babelcloud/gbox-sdk-ts/commit/af2917f6d8800b3fbea439e2874eade216d54cb7))
+* **api:** api update ([95d41b8](https://github.com/babelcloud/gbox-sdk-ts/commit/95d41b85068dd1a01dc1c99117e90ea50858302e))
+* **api:** api update ([198d302](https://github.com/babelcloud/gbox-sdk-ts/commit/198d302c5a705efa026f50ce5e8f8c91085dcc86))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([b23a4e5](https://github.com/babelcloud/gbox-sdk-ts/commit/b23a4e58bdf24cd583b34227352f96d9a3b31d9f))
+* **client:** get fetchOptions type more reliably ([19c796a](https://github.com/babelcloud/gbox-sdk-ts/commit/19c796ac15808a4a5b1b0d7399d9d5cf30b55b5f))
+
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([9a4462e](https://github.com/babelcloud/gbox-sdk-ts/commit/9a4462e5f4aa7a5dbd89d4e15ddc09744b6df5b4))
+
 ## 0.16.0 (2025-06-27)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.15.0...v0.16.0)

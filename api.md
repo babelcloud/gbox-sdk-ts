@@ -41,6 +41,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionAIResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionClickResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionDragResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionExtractResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionMoveResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionPressButtonResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionPressKeyResponse</a></code>
@@ -56,6 +57,7 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">ai</a>(boxID, { ...params }) -> ActionAIResponse</code>
 - <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">click</a>(boxID, { ...params }) -> ActionClickResponse</code>
 - <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">drag</a>(boxID, { ...params }) -> ActionDragResponse</code>
+- <code title="post /boxes/{boxId}/actions/extract">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">extract</a>(boxID, { ...params }) -> ActionExtractResponse</code>
 - <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(boxID, { ...params }) -> ActionMoveResponse</code>
 - <code title="post /boxes/{boxId}/actions/press-button">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressButton</a>(boxID, { ...params }) -> ActionPressButtonResponse</code>
 - <code title="post /boxes/{boxId}/actions/press-key">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressKey</a>(boxID, { ...params }) -> ActionPressKeyResponse</code>
