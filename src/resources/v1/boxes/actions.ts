@@ -255,9 +255,9 @@ export namespace ActionAIResponse {
     aiResponse: AIActionScreenshotResult.AIResponse;
 
     /**
-     * message
+     * output
      */
-    message: string;
+    output: string;
 
     /**
      * Complete screenshot result with operation trace, before and after images
@@ -289,12 +289,12 @@ export namespace ActionAIResponse {
       >;
 
       /**
-       * messages
+       * messages returned by the model
        */
       messages: Array<string>;
 
       /**
-       * model
+       * The name of the model that processed this request
        */
       model: string;
 
@@ -1084,9 +1084,9 @@ export namespace ActionAIResponse {
     aiResponse: AIActionResult.AIResponse;
 
     /**
-     * message
+     * output
      */
-    message: string;
+    output: string;
   }
 
   export namespace AIActionResult {
@@ -1113,12 +1113,12 @@ export namespace ActionAIResponse {
       >;
 
       /**
-       * messages
+       * messages returned by the model
        */
       messages: Array<string>;
 
       /**
-       * model
+       * The name of the model that processed this request
        */
       model: string;
 
