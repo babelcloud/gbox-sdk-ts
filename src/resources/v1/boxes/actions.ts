@@ -64,7 +64,7 @@ export class Actions extends APIResource {
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   {
    *     instruction:
-   *       'extract the product information including title, price, and availability status',
+   *       'Extract the email address from the UI interface',
    *   },
    * );
    * ```
@@ -212,7 +212,21 @@ export class Actions extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.actions.touch(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { points: [{ start: { x: 100, y: 150 } }] },
+   *   {
+   *     points: [
+   *       {
+   *         start: { x: 100, y: 150 },
+   *         actions: [
+   *           {
+   *             type: 'move',
+   *             x: 400,
+   *             y: 300,
+   *             duration: '200ms',
+   *           },
+   *         ],
+   *       },
+   *     ],
+   *   },
    * );
    * ```
    */
