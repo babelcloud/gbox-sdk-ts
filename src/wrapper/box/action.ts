@@ -21,9 +21,15 @@ export interface ActionClick extends ActionClickParams {
   screenshotDelay?: TimeString;
 }
 
-export interface ActionDrag extends ActionDragParams {
+export interface ActionDragSimple extends ActionDragParams.DragSimple {
   screenshotDelay?: TimeString;
 }
+
+export interface ActionDragAdvanced extends ActionDragParams.DragAdvanced {
+  screenshotDelay?: TimeString;
+}
+
+export type ActionDrag = ActionDragSimple | ActionDragAdvanced;
 
 export interface ActionMove extends ActionMoveParams {
   screenshotDelay?: TimeString;

@@ -7,6 +7,7 @@ import {
   AndroidApp,
 } from '../../../resources/v1/boxes';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 import { AndroidInstall, ListAndroidApp } from './types';
 import { AndroidAppOperator } from './app-operator';
 
@@ -29,20 +30,37 @@ export class AndroidAppManager {
    * const response = await myBox.app.install({ apk: "https://example.com/path/to/app.apk" });
    * or
    * const response = await myBox.app.install({ apk: "path/to/your/app.apk" });
+   * or
+   * const response = await myBox.app.install({ apk: "file:///path/to/your/app.apk" });
    */
   async install(body: AndroidInstall): Promise<AndroidAppOperator> {
-    if (typeof body.apk === 'string' && !body.apk.startsWith('http')) {
-      const exists = fs.existsSync(body.apk);
-      if (!exists) {
-        throw new Error(`File ${body.apk} does not exist`);
+    if (typeof body.apk === 'string') {
+      if (body.apk.startsWith('file://')) {
+        // Handle file:// protocol
+        const filePath = fileURLToPath(body.apk);
+        const exists = fs.existsSync(filePath);
+        if (!exists) {
+          throw new Error(`File ${filePath} does not exist`);
+        }
+        const apkReadStream = fs.createReadStream(filePath);
+        const res = await this.client.v1.boxes.android.install(this.box.id, { apk: apkReadStream });
+        return this.installResToOperator(res);
+      } else if (body.apk.startsWith('http')) {
+        // Handle http/https URLs
+        const res = await this.client.v1.boxes.android.install(this.box.id, body);
+        return this.installResToOperator(res);
+      } else {
+        // Handle local file paths
+        const exists = fs.existsSync(body.apk);
+        if (!exists) {
+          throw new Error(`File ${body.apk} does not exist`);
+        }
+        const apkReadStream = fs.createReadStream(body.apk);
+        const res = await this.client.v1.boxes.android.install(this.box.id, { apk: apkReadStream });
+        return this.installResToOperator(res);
       }
-      const apkReadStream = fs.createReadStream(body.apk);
-      const res = await this.client.v1.boxes.android.install(this.box.id, { apk: apkReadStream });
-      return this.installResToOperator(res);
-    } else if (typeof body.apk === 'string' && body.apk.startsWith('http')) {
-      const res = await this.client.v1.boxes.android.install(this.box.id, body);
-      return this.installResToOperator(res);
     }
+    // Handle ReadableStream or other types
     const res = await this.client.v1.boxes.android.install(this.box.id, body);
     return this.installResToOperator(res);
   }
