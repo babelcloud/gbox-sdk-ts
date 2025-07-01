@@ -361,6 +361,11 @@ export namespace AndroidBox {
     os: Config.Os;
 
     /**
+     * Resolution of the box
+     */
+    resolution: unknown;
+
+    /**
      * Storage allocated to the box in GiB
      */
     storage: number;
