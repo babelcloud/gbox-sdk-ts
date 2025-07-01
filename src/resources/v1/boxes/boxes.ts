@@ -568,7 +568,7 @@ export namespace LinuxBox {
      * file system operations. When you execute commands or run code, they will start
      * from this directory unless explicitly specified otherwise.
      */
-    workingDir?: string;
+    workingDir: string;
   }
 
   export namespace Config {
