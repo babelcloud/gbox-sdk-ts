@@ -10,6 +10,7 @@ import {
   AndroidListPkgSimpleParams,
 } from '../../../resources/v1/boxes';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 import { AndroidInstall, ListAndroidPkg } from './types';
 import { AndroidPkgOperator } from './pkg-operator';
 
@@ -32,18 +33,34 @@ export class AndroidPkgManager {
    * const response = await myBox.pkg.install({ apk: "https://example.com/path/to/app.apk" });
    * or
    * const response = await myBox.pkg.install({ apk: "path/to/your/app.apk" });
+   * or
+   * const response = await myBox.pkg.install({ apk: "file:///path/to/your/app.apk" });
    */
   async install(body: AndroidInstall): Promise<AndroidInstallResponse> {
-    if (typeof body.apk === 'string' && !body.apk.startsWith('http')) {
-      const exists = fs.existsSync(body.apk);
-      if (!exists) {
-        throw new Error(`File ${body.apk} does not exist`);
+    if (typeof body.apk === 'string') {
+      if (body.apk.startsWith('file://')) {
+        // Handle file:// protocol
+        const filePath = fileURLToPath(body.apk);
+        const exists = fs.existsSync(filePath);
+        if (!exists) {
+          throw new Error(`File ${filePath} does not exist`);
+        }
+        const apkReadStream = fs.createReadStream(filePath);
+        return this.client.v1.boxes.android.install(this.box.id, { apk: apkReadStream });
+      } else if (body.apk.startsWith('http')) {
+        // Handle http/https URLs
+        return this.client.v1.boxes.android.install(this.box.id, body);
+      } else {
+        // Handle local file paths
+        const exists = fs.existsSync(body.apk);
+        if (!exists) {
+          throw new Error(`File ${body.apk} does not exist`);
+        }
+        const apkReadStream = fs.createReadStream(body.apk);
+        return this.client.v1.boxes.android.install(this.box.id, { apk: apkReadStream });
       }
-      const apkReadStream = fs.createReadStream(body.apk);
-      return this.client.v1.boxes.android.install(this.box.id, { apk: apkReadStream });
-    } else if (typeof body.apk === 'string' && body.apk.startsWith('http')) {
-      return this.client.v1.boxes.android.install(this.box.id, body);
     }
+    // Handle ReadableStream or other types
     return this.client.v1.boxes.android.install(this.box.id, body);
   }
 

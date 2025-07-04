@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.17.0 (2025-07-03)
+
+Full Changelog: [v0.16.0...v0.17.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.16.0...v0.17.0)
+
+### Features
+
+* **android:** enhance APK installation handling with file URL support and refined ActionDrag interfaces ([d20bb46](https://github.com/babelcloud/gbox-sdk-ts/commit/d20bb465132e4865a9b272d74e0cb28d5ba0c7fb))
+* **api:** api update ([8874ce0](https://github.com/babelcloud/gbox-sdk-ts/commit/8874ce0b195bae8e69ebec7dd7c59f04253a7175))
+* **api:** api update ([5ff3d3c](https://github.com/babelcloud/gbox-sdk-ts/commit/5ff3d3cdf6a75c72400c25335e674373e4f97e9e))
+* **api:** api update ([6e5eca7](https://github.com/babelcloud/gbox-sdk-ts/commit/6e5eca785b2a8a248e2e63c3a57f641373e1fba9))
+* **api:** api update ([9811046](https://github.com/babelcloud/gbox-sdk-ts/commit/9811046e90d757e8433e0b5082afd3b330845475))
+* **api:** api update ([af2917f](https://github.com/babelcloud/gbox-sdk-ts/commit/af2917f6d8800b3fbea439e2874eade216d54cb7))
+* **api:** api update ([95d41b8](https://github.com/babelcloud/gbox-sdk-ts/commit/95d41b85068dd1a01dc1c99117e90ea50858302e))
+* **api:** api update ([198d302](https://github.com/babelcloud/gbox-sdk-ts/commit/198d302c5a705efa026f50ce5e8f8c91085dcc86))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([b23a4e5](https://github.com/babelcloud/gbox-sdk-ts/commit/b23a4e58bdf24cd583b34227352f96d9a3b31d9f))
+* **client:** get fetchOptions type more reliably ([19c796a](https://github.com/babelcloud/gbox-sdk-ts/commit/19c796ac15808a4a5b1b0d7399d9d5cf30b55b5f))
+
+
+### Chores
+
+* add docs to RequestOptions type ([ba82f15](https://github.com/babelcloud/gbox-sdk-ts/commit/ba82f157681990b8248bc6bd9d87331c5c98b3a2))
+* **ci:** only run for pushes and fork pull requests ([9a4462e](https://github.com/babelcloud/gbox-sdk-ts/commit/9a4462e5f4aa7a5dbd89d4e15ddc09744b6df5b4))
+* **client:** improve path param validation ([28777c5](https://github.com/babelcloud/gbox-sdk-ts/commit/28777c51ae2a5151839f1e62fadbca779b5445f8))
+
 ## 0.16.0 (2025-06-27)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.15.0...v0.16.0)

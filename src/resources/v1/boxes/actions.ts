@@ -47,17 +47,34 @@ export class Actions extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.actions.drag(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   {
-   *     path: [
-   *       { x: 100, y: 100 },
-   *       { x: 200, y: 200 },
-   *     ],
-   *   },
+   *   { end: { x: 200, y: 200 }, start: { x: 100, y: 100 } },
    * );
    * ```
    */
   drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionDragResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/drag`, { body, ...options });
+  }
+
+  /**
+   * Extract data from the UI interface using a JSON schema.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.extract(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   {
+   *     instruction:
+   *       'Extract the email address from the UI interface',
+   *   },
+   * );
+   * ```
+   */
+  extract(
+    boxID: string,
+    body: ActionExtractParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionExtractResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/extract`, { body, ...options });
   }
 
   /**
@@ -195,7 +212,21 @@ export class Actions extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.actions.touch(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { points: [{ start: { x: 100, y: 150 } }] },
+   *   {
+   *     points: [
+   *       {
+   *         start: { x: 100, y: 150 },
+   *         actions: [
+   *           {
+   *             type: 'move',
+   *             x: 400,
+   *             y: 300,
+   *             duration: '200ms',
+   *           },
+   *         ],
+   *       },
+   *     ],
+   *   },
    * );
    * ```
    */
@@ -237,9 +268,9 @@ export namespace ActionAIResponse {
     aiResponse: AIActionScreenshotResult.AIResponse;
 
     /**
-     * message
+     * output
      */
-    message: string;
+    output: string;
 
     /**
      * Complete screenshot result with operation trace, before and after images
@@ -268,15 +299,17 @@ export namespace ActionAIResponse {
         | AIResponse.TypedMoveAction
         | AIResponse.TypedScreenRotationAction
         | AIResponse.TypedScreenshotAction
+        | AIResponse.TypedDragSimpleAction
+        | AIResponse.TypedDragAdvancedAction
       >;
 
       /**
-       * messages
+       * messages returned by the model
        */
       messages: Array<string>;
 
       /**
-       * model
+       * The name of the model that processed this request
        */
       model: string;
 
@@ -997,6 +1030,162 @@ export namespace ActionAIResponse {
 
           /**
            * Y coordinate of the clip
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag simple action
+       */
+      export interface TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        end: TypedDragSimpleAction.End;
+
+        /**
+         * Single point in a drag path
+         */
+        start: TypedDragSimpleAction.Start;
+
+        /**
+         * Duration to complete the movement from start to end coordinates
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+
+        /**
+         * Time to wait at the start point after initial touch before beginning movement
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        wait?: string;
+      }
+
+      export namespace TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface End {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+
+        /**
+         * Single point in a drag path
+         */
+        export interface Start {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag advanced action
+       */
+      export interface TypedDragAdvancedAction {
+        /**
+         * Path of the drag action as a series of coordinates
+         */
+        path: Array<TypedDragAdvancedAction.Path>;
+
+        /**
+         * Time interval between points (e.g. "50ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragAdvancedAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
            */
           y: number;
         }
@@ -1066,9 +1255,9 @@ export namespace ActionAIResponse {
     aiResponse: AIActionResult.AIResponse;
 
     /**
-     * message
+     * output
      */
-    message: string;
+    output: string;
   }
 
   export namespace AIActionResult {
@@ -1092,15 +1281,17 @@ export namespace ActionAIResponse {
         | AIResponse.TypedMoveAction
         | AIResponse.TypedScreenRotationAction
         | AIResponse.TypedScreenshotAction
+        | AIResponse.TypedDragSimpleAction
+        | AIResponse.TypedDragAdvancedAction
       >;
 
       /**
-       * messages
+       * messages returned by the model
        */
       messages: Array<string>;
 
       /**
-       * model
+       * The name of the model that processed this request
        */
       model: string;
 
@@ -1821,6 +2012,162 @@ export namespace ActionAIResponse {
 
           /**
            * Y coordinate of the clip
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag simple action
+       */
+      export interface TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        end: TypedDragSimpleAction.End;
+
+        /**
+         * Single point in a drag path
+         */
+        start: TypedDragSimpleAction.Start;
+
+        /**
+         * Duration to complete the movement from start to end coordinates
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+
+        /**
+         * Time to wait at the start point after initial touch before beginning movement
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        wait?: string;
+      }
+
+      export namespace TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface End {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+
+        /**
+         * Single point in a drag path
+         */
+        export interface Start {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag advanced action
+       */
+      export interface TypedDragAdvancedAction {
+        /**
+         * Path of the drag action as a series of coordinates
+         */
+        path: Array<TypedDragAdvancedAction.Path>;
+
+        /**
+         * Time interval between points (e.g. "50ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragAdvancedAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
            */
           y: number;
         }
@@ -1993,6 +2340,23 @@ export namespace ActionDragResponse {
      */
     message: string;
   }
+}
+
+/**
+ * Result of extract action execution
+ */
+export interface ActionExtractResponse {
+  /**
+   * The extracted data structure that conforms to the provided JSON schema. The
+   * actual structure and content depend on the schema defined in the extract action
+   * request.
+   */
+  data: { [key: string]: unknown };
+
+  /**
+   * Base64-encoded screenshot of the UI interface at the time of extraction
+   */
+  screenshot: string;
 }
 
 /**
@@ -2764,65 +3128,179 @@ export interface ActionClickParams {
   screenshotDelay?: string;
 }
 
-export interface ActionDragParams {
-  /**
-   * Path of the drag action as a series of coordinates
-   */
-  path: Array<ActionDragParams.Path>;
+export type ActionDragParams = ActionDragParams.DragSimple | ActionDragParams.DragAdvanced;
 
-  /**
-   * Time interval between points (e.g. "50ms")
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
-   */
-  duration?: string;
+export declare namespace ActionDragParams {
+  export interface DragSimple {
+    /**
+     * Single point in a drag path
+     */
+    end: DragSimple.End;
 
-  /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
-   */
-  includeScreenshot?: boolean;
+    /**
+     * Single point in a drag path
+     */
+    start: DragSimple.Start;
 
-  /**
-   * Type of the URI. default is base64.
-   */
-  outputFormat?: 'base64' | 'storageKey';
+    /**
+     * Duration to complete the movement from start to end coordinates
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+     */
+    duration?: string;
 
-  /**
-   * Delay after performing the action, before taking the final screenshot.
-   *
-   * Execution flow:
-   *
-   * 1. Take screenshot before action
-   * 2. Perform the action
-   * 3. Wait for screenshotDelay (this parameter)
-   * 4. Take screenshot after action
-   *
-   * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-   */
-  screenshotDelay?: string;
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+
+    /**
+     * Time to wait at the start point after initial touch before beginning movement
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+     */
+    wait?: string;
+  }
+
+  export namespace DragSimple {
+    /**
+     * Single point in a drag path
+     */
+    export interface End {
+      /**
+       * X coordinate of a point in the drag path
+       */
+      x: number;
+
+      /**
+       * Y coordinate of a point in the drag path
+       */
+      y: number;
+    }
+
+    /**
+     * Single point in a drag path
+     */
+    export interface Start {
+      /**
+       * X coordinate of a point in the drag path
+       */
+      x: number;
+
+      /**
+       * Y coordinate of a point in the drag path
+       */
+      y: number;
+    }
+  }
+
+  export interface DragAdvanced {
+    /**
+     * Path of the drag action as a series of coordinates
+     */
+    path: Array<DragAdvanced.Path>;
+
+    /**
+     * Time interval between points (e.g. "50ms")
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+     */
+    duration?: string;
+
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
+
+  export namespace DragAdvanced {
+    /**
+     * Single point in a drag path
+     */
+    export interface Path {
+      /**
+       * X coordinate of a point in the drag path
+       */
+      x: number;
+
+      /**
+       * Y coordinate of a point in the drag path
+       */
+      y: number;
+    }
+  }
 }
 
-export namespace ActionDragParams {
+export interface ActionExtractParams {
   /**
-   * Single point in a drag path
+   * The instruction of the action to extract data from the UI interface
    */
-  export interface Path {
-    /**
-     * X coordinate of a point in the drag path
-     */
-    x: number;
+  instruction: string;
 
-    /**
-     * Y coordinate of a point in the drag path
-     */
-    y: number;
-  }
+  /**
+   * JSON Schema defining the structure of data to extract. Supports object, array,
+   * string, number, boolean types with validation rules.
+   *
+   * Common use cases:
+   *
+   * - Extract text content: { "type": "string" }
+   * - Extract structured data: { "type": "object", "properties": {...} }
+   * - Extract lists: { "type": "array", "items": {...} }
+   * - Extract with validation: Add constraints like "required", "enum", "pattern",
+   *   etc.
+   */
+  schema?: unknown;
 }
 
 export interface ActionMoveParams {
@@ -3399,6 +3877,7 @@ export declare namespace Actions {
     type ActionAIResponse as ActionAIResponse,
     type ActionClickResponse as ActionClickResponse,
     type ActionDragResponse as ActionDragResponse,
+    type ActionExtractResponse as ActionExtractResponse,
     type ActionMoveResponse as ActionMoveResponse,
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
@@ -3411,6 +3890,7 @@ export declare namespace Actions {
     type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
+    type ActionExtractParams as ActionExtractParams,
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,

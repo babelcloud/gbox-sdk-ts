@@ -9,6 +9,8 @@ import {
   ActionClickResponse,
   ActionDragParams,
   ActionDragResponse,
+  ActionExtractParams,
+  ActionExtractResponse,
   ActionMoveParams,
   ActionMoveResponse,
   ActionPressButtonParams,
@@ -359,6 +361,11 @@ export namespace AndroidBox {
     os: Config.Os;
 
     /**
+     * Resolution of the box
+     */
+    resolution: unknown;
+
+    /**
      * Storage allocated to the box in GiB
      */
     storage: number;
@@ -566,7 +573,7 @@ export namespace LinuxBox {
      * file system operations. When you execute commands or run code, they will start
      * from this directory unless explicitly specified otherwise.
      */
-    workingDir?: string;
+    workingDir: string;
   }
 
   export namespace Config {
@@ -962,6 +969,7 @@ export declare namespace Boxes {
     type ActionAIResponse as ActionAIResponse,
     type ActionClickResponse as ActionClickResponse,
     type ActionDragResponse as ActionDragResponse,
+    type ActionExtractResponse as ActionExtractResponse,
     type ActionMoveResponse as ActionMoveResponse,
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
@@ -974,6 +982,7 @@ export declare namespace Boxes {
     type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
+    type ActionExtractParams as ActionExtractParams,
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
