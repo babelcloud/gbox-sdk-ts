@@ -620,6 +620,14 @@ export declare namespace AndroidInstallParams {
      * APK file to install (max file size: 512MB)
      */
     apk: Uploadable;
+
+    /**
+     * Whether to open the app after installation. Will find and launch the launcher
+     * activity of the installed app. If there are multiple launcher activities, only
+     * one will be opened. If the installed APK has no launcher activity, this
+     * parameter will have no effect.
+     */
+    open?: boolean;
   }
 
   export interface InstallAndroidPkgByURL {
@@ -627,6 +635,14 @@ export declare namespace AndroidInstallParams {
      * HTTP URL to download APK file (max file size: 512MB)
      */
     apk: string;
+
+    /**
+     * Whether to open the app after installation. Will find and launch the launcher
+     * activity of the installed app. If there are multiple launcher activities, only
+     * one will be opened. If the installed APK has no launcher activity, this
+     * parameter will have no effect.
+     */
+    open?: boolean;
   }
 }
 

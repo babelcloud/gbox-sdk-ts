@@ -120,6 +120,7 @@ describe('resource android', () => {
   test.skip('install: required and optional params', async () => {
     const response = await client.v1.boxes.android.install('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       apk: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      open: false,
     });
   });
 
