@@ -85,7 +85,6 @@ describe('resource actions', () => {
       includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
-      wait: '500ms',
     });
   });
 
