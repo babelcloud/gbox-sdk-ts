@@ -306,11 +306,6 @@ export interface AndroidBox {
   createdAt: string;
 
   /**
-   * Expiration timestamp of the box
-   */
-  expiresAt: string;
-
-  /**
    * The current status of a box instance
    */
   status: 'pending' | 'running' | 'error' | 'terminated';
@@ -324,6 +319,11 @@ export interface AndroidBox {
    * Last update timestamp of the box
    */
   updatedAt: string;
+
+  /**
+   * Expiration timestamp of the box
+   */
+  expiresAt?: string;
 }
 
 export namespace AndroidBox {
@@ -508,11 +508,6 @@ export interface LinuxBox {
   createdAt: string;
 
   /**
-   * Expiration timestamp of the box
-   */
-  expiresAt: string;
-
-  /**
    * The current status of a box instance
    */
   status: 'pending' | 'running' | 'error' | 'terminated';
@@ -526,6 +521,11 @@ export interface LinuxBox {
    * Last update timestamp of the box
    */
   updatedAt: string;
+
+  /**
+   * Expiration timestamp of the box
+   */
+  expiresAt?: string;
 }
 
 export namespace LinuxBox {
