@@ -1085,14 +1085,6 @@ export namespace ActionAIResponse {
          * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
          */
         screenshotDelay?: string;
-
-        /**
-         * Time to wait at the start point after initial touch before beginning movement
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
-         */
-        wait?: string;
       }
 
       export namespace TypedDragSimpleAction {
@@ -2067,14 +2059,6 @@ export namespace ActionAIResponse {
          * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
          */
         screenshotDelay?: string;
-
-        /**
-         * Time to wait at the start point after initial touch before beginning movement
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
-         */
-        wait?: string;
       }
 
       export namespace TypedDragSimpleAction {
@@ -3178,14 +3162,6 @@ export declare namespace ActionDragParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
-
-    /**
-     * Time to wait at the start point after initial touch before beginning movement
-     *
-     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
-     */
-    wait?: string;
   }
 
   export namespace DragSimple {
