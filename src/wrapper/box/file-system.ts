@@ -103,6 +103,14 @@ export class FileSystemOperator {
     return this.dataToOperator(res);
   }
 
+  /**
+   * @example
+   * const response = await myBox.fs.getInfo({ path: '/tmp/file.txt' });
+   */
+  async getInfo(body: FInfoParams): Promise<FListResponse.File | FListResponse.Dir> {
+    return this.client.v1.boxes.fs.info(this.boxId, body);
+  }
+
   private dataToOperator(data: FListResponse.File | FListResponse.Dir): FileOperator | DirectoryOperator {
     if (data.type === 'file') {
       return new FileOperator(this.client, this.boxId, data);

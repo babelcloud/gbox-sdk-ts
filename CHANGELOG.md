@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.18.0 (2025-07-07)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* **api:** add getInfo method to FileSystemOperator ([e917a4f](https://github.com/babelcloud/gbox-sdk-ts/commit/e917a4fd23d7ca26be6a4915e3f46fb6d8f9adda))
+* **api:** api update ([d1f577c](https://github.com/babelcloud/gbox-sdk-ts/commit/d1f577c9152cdf8ba61202c233b18be40fbb3e0b))
+* **api:** api update ([5e73713](https://github.com/babelcloud/gbox-sdk-ts/commit/5e73713fb0a990c752e0480a7273898831cbae60))
+* **api:** api update ([967bd33](https://github.com/babelcloud/gbox-sdk-ts/commit/967bd3365d82eaca9c2f4bc86683f6b8a7287aa1))
+* **api:** api update ([5d210f9](https://github.com/babelcloud/gbox-sdk-ts/commit/5d210f9129c4f12dd32fe3107bd856442196c0fe))
+
 ## 0.17.0 (2025-07-03)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.16.0...v0.17.0)

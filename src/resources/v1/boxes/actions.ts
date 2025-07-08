@@ -1085,14 +1085,6 @@ export namespace ActionAIResponse {
          * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
          */
         screenshotDelay?: string;
-
-        /**
-         * Time to wait at the start point after initial touch before beginning movement
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
-         */
-        wait?: string;
       }
 
       export namespace TypedDragSimpleAction {
@@ -2067,14 +2059,6 @@ export namespace ActionAIResponse {
          * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
          */
         screenshotDelay?: string;
-
-        /**
-         * Time to wait at the start point after initial touch before beginning movement
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
-         */
-        wait?: string;
       }
 
       export namespace TypedDragSimpleAction {
@@ -3075,6 +3059,29 @@ export interface ActionAIParams {
    * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
+
+  /**
+   * AI action settings
+   */
+  settings?: ActionAIParams.Settings;
+}
+
+export namespace ActionAIParams {
+  /**
+   * AI action settings
+   */
+  export interface Settings {
+    /**
+     * System prompt that defines the AI's behavior and capabilities when executing UI
+     * actions. This prompt instructs the AI on how to interpret the screen, understand
+     * user instructions, and determine the appropriate UI actions to take. A
+     * well-crafted system prompt can significantly improve the accuracy and
+     * reliability of AI-driven UI automation. If not provided, uses the default
+     * computer use instruction template that includes basic screen interaction
+     * guidelines.
+     */
+    systemPrompt?: string;
+  }
 }
 
 export interface ActionClickParams {
@@ -3178,14 +3185,6 @@ export declare namespace ActionDragParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
-
-    /**
-     * Time to wait at the start point after initial touch before beginning movement
-     *
-     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
-     */
-    wait?: string;
   }
 
   export namespace DragSimple {

@@ -30,6 +30,10 @@ describe('resource actions', () => {
       includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
+      settings: {
+        systemPrompt:
+          'You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.',
+      },
     });
   });
 
@@ -85,7 +89,6 @@ describe('resource actions', () => {
       includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
-      wait: '500ms',
     });
   });
 
