@@ -25,7 +25,6 @@ import {
   BoxWebTerminalURLResponse,
   Boxes,
   CreateAndroidBox,
-  CreateBoxConfig,
   CreateLinuxBox,
   LinuxBox,
 } from './boxes/boxes';
@@ -41,7 +40,6 @@ export declare namespace V1 {
     Boxes as Boxes,
     type AndroidBox as AndroidBox,
     type CreateAndroidBox as CreateAndroidBox,
-    type CreateBoxConfig as CreateBoxConfig,
     type CreateLinuxBox as CreateLinuxBox,
     type LinuxBox as LinuxBox,
     type BoxRetrieveResponse as BoxRetrieveResponse,

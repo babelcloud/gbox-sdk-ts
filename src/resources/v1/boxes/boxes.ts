@@ -447,45 +447,47 @@ export namespace CreateAndroidBox {
 }
 
 /**
- * Configuration for a box instance
- */
-export interface CreateBoxConfig {
-  /**
-   * Environment variables for the box. These variables will be available in all
-   * operations including command execution, code running, and other box behaviors
-   */
-  envs?: { [key: string]: string };
-
-  /**
-   * Key-value pairs of labels for the box. Labels are used to add custom metadata to
-   * help identify, categorize, and manage boxes. Common use cases include project
-   * names, environments, teams, applications, or any other organizational tags that
-   * help you organize and filter your boxes.
-   */
-  labels?: { [key: string]: string };
-}
-
-/**
  * Request body for creating a new Linux box instance
  */
 export interface CreateLinuxBox {
   /**
-   * Configuration for a box instance
+   * Configuration for a Linux box instance
    */
-  config?: CreateBoxConfig;
-
-  /**
-   * The box will be alive for the given duration
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
-   */
-  expiresIn?: string;
+  config?: CreateLinuxBox.Config;
 
   /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
+}
+
+export namespace CreateLinuxBox {
+  /**
+   * Configuration for a Linux box instance
+   */
+  export interface Config {
+    /**
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
+     */
+    envs?: { [key: string]: string };
+
+    /**
+     * The box will be alive for the given duration
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
+     */
+    expiresIn?: string;
+
+    /**
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
+     */
+    labels?: { [key: string]: string };
+  }
 }
 
 /**
@@ -807,22 +809,43 @@ export namespace BoxCreateAndroidParams {
 
 export interface BoxCreateLinuxParams {
   /**
-   * Configuration for a box instance
+   * Configuration for a Linux box instance
    */
-  config?: CreateBoxConfig;
-
-  /**
-   * The box will be alive for the given duration
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
-   */
-  expiresIn?: string;
+  config?: BoxCreateLinuxParams.Config;
 
   /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
+}
+
+export namespace BoxCreateLinuxParams {
+  /**
+   * Configuration for a Linux box instance
+   */
+  export interface Config {
+    /**
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
+     */
+    envs?: { [key: string]: string };
+
+    /**
+     * The box will be alive for the given duration
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
+     */
+    expiresIn?: string;
+
+    /**
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
+     */
+    labels?: { [key: string]: string };
+  }
 }
 
 export interface BoxExecuteCommandsParams {
@@ -940,7 +963,6 @@ export declare namespace Boxes {
   export {
     type AndroidBox as AndroidBox,
     type CreateAndroidBox as CreateAndroidBox,
-    type CreateBoxConfig as CreateBoxConfig,
     type CreateLinuxBox as CreateLinuxBox,
     type LinuxBox as LinuxBox,
     type BoxRetrieveResponse as BoxRetrieveResponse,
