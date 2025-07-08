@@ -6,7 +6,6 @@ Types:
 
 - <code><a href="./src/resources/v1/boxes/boxes.ts">AndroidBox</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">CreateAndroidBox</a></code>
-- <code><a href="./src/resources/v1/boxes/boxes.ts">CreateBoxConfig</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">CreateLinuxBox</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">LinuxBox</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxRetrieveResponse</a></code>
