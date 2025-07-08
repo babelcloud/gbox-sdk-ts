@@ -4,7 +4,6 @@ export {
   Boxes,
   type AndroidBox,
   type CreateAndroidBox,
-  type CreateBoxConfig,
   type CreateLinuxBox,
   type LinuxBox,
   type BoxRetrieveResponse,
