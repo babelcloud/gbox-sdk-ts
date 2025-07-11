@@ -324,6 +324,11 @@ export interface AndroidBox {
    * Last update timestamp of the box
    */
   updatedAt: string;
+
+  /**
+   * The reason for the current status, if any
+   */
+  reason?: unknown;
 }
 
 export namespace AndroidBox {
@@ -523,6 +528,11 @@ export interface LinuxBox {
    * Last update timestamp of the box
    */
   updatedAt: string;
+
+  /**
+   * The reason for the current status, if any
+   */
+  reason?: unknown;
 }
 
 export namespace LinuxBox {
