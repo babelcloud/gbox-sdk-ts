@@ -329,7 +329,7 @@ export interface AndroidBox {
   /**
    * The reason for the current status, if any
    */
-  reason?: unknown;
+  reason?: unknown | null;
 }
 
 export namespace AndroidBox {
@@ -533,7 +533,7 @@ export interface LinuxBox {
   /**
    * The reason for the current status, if any
    */
-  reason?: unknown;
+  reason?: unknown | null;
 }
 
 export namespace LinuxBox {
