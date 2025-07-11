@@ -9,6 +9,7 @@ export {
   type ActionMoveResponse,
   type ActionPressButtonResponse,
   type ActionPressKeyResponse,
+  type ActionScreenLayoutResponse,
   type ActionScreenRotationResponse,
   type ActionScreenshotResponse,
   type ActionScrollResponse,

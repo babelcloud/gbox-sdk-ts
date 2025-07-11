@@ -44,6 +44,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionMoveResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionPressButtonResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionPressKeyResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenLayoutResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenRotationResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenshotResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScrollResponse</a></code>
@@ -60,6 +61,7 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(boxID, { ...params }) -> ActionMoveResponse</code>
 - <code title="post /boxes/{boxId}/actions/press-button">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressButton</a>(boxID, { ...params }) -> ActionPressButtonResponse</code>
 - <code title="post /boxes/{boxId}/actions/press-key">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressKey</a>(boxID, { ...params }) -> ActionPressKeyResponse</code>
+- <code title="get /boxes/{boxId}/actions/screen-layout">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenLayout</a>(boxID) -> ActionScreenLayoutResponse</code>
 - <code title="post /boxes/{boxId}/actions/screen-rotation">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenRotation</a>(boxID, { ...params }) -> ActionScreenRotationResponse</code>
 - <code title="post /boxes/{boxId}/actions/screenshot">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenshot</a>(boxID, { ...params }) -> ActionScreenshotResponse</code>
 - <code title="post /boxes/{boxId}/actions/scroll">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">scroll</a>(boxID, { ...params }) -> ActionScrollResponse</code>
