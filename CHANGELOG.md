@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.20.0 (2025-07-14)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** add screenLayout method to ActionOperator ([a33a2a9](https://github.com/babelcloud/gbox-sdk-ts/commit/a33a2a94816d79df9a47c2f4f0b26c12a6cd6c9c))
+* **api:** api update ([c3a99b7](https://github.com/babelcloud/gbox-sdk-ts/commit/c3a99b71b0b217c0777aedf7e1e6f1e5654f2aaf))
+* **api:** api update ([ce5982f](https://github.com/babelcloud/gbox-sdk-ts/commit/ce5982fd3da00f3b66dc184cd667cc1379f0f8a0))
+* **api:** api update ([607cd62](https://github.com/babelcloud/gbox-sdk-ts/commit/607cd62186b59ba821fb5d5ddb349e60b517521b))
+* **api:** api update ([ff5d300](https://github.com/babelcloud/gbox-sdk-ts/commit/ff5d3009addce268e74a85e2053387b2ad09ee9a))
+* **api:** api update ([d96068a](https://github.com/babelcloud/gbox-sdk-ts/commit/d96068a63a19c3cc370c5f64eeaf48de9012faf4))
+* **api:** api update ([b4dc415](https://github.com/babelcloud/gbox-sdk-ts/commit/b4dc415c12fec4a6bf90079dd9022e5b88ae795f))
+
+
+### Chores
+
+* make some internal functions async ([dafbdec](https://github.com/babelcloud/gbox-sdk-ts/commit/dafbdecb7c7878f6975e507357d6c21edd083b71))
+
 ## 0.19.0 (2025-07-08)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.18.0...v0.19.0)
