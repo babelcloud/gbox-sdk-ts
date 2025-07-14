@@ -17,6 +17,7 @@ import {
   ActionPressButtonResponse,
   ActionPressKeyParams,
   ActionPressKeyResponse,
+  ActionScreenLayoutResponse,
   ActionScreenRotationParams,
   ActionScreenRotationResponse,
   ActionScreenshotParams,
@@ -306,6 +307,11 @@ export interface AndroidBox {
   createdAt: string;
 
   /**
+   * Expiration timestamp of the box
+   */
+  expiresAt: string | null;
+
+  /**
    * The current status of a box instance
    */
   status: 'pending' | 'running' | 'error' | 'terminated';
@@ -321,9 +327,9 @@ export interface AndroidBox {
   updatedAt: string;
 
   /**
-   * Expiration timestamp of the box
+   * The reason for the current status, if any
    */
-  expiresAt?: string;
+  reason?: string | null;
 }
 
 export namespace AndroidBox {
@@ -359,11 +365,6 @@ export namespace AndroidBox {
      * Android operating system configuration
      */
     os: Config.Os;
-
-    /**
-     * Resolution of the box
-     */
-    resolution: unknown;
 
     /**
      * Storage allocated to the box in GiB
@@ -510,6 +511,11 @@ export interface LinuxBox {
   createdAt: string;
 
   /**
+   * Expiration timestamp of the box
+   */
+  expiresAt: string | null;
+
+  /**
    * The current status of a box instance
    */
   status: 'pending' | 'running' | 'error' | 'terminated';
@@ -525,9 +531,9 @@ export interface LinuxBox {
   updatedAt: string;
 
   /**
-   * Expiration timestamp of the box
+   * The reason for the current status, if any
    */
-  expiresAt?: string;
+  reason?: string | null;
 }
 
 export namespace LinuxBox {
@@ -995,6 +1001,7 @@ export declare namespace Boxes {
     type ActionMoveResponse as ActionMoveResponse,
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
+    type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionScrollResponse as ActionScrollResponse,

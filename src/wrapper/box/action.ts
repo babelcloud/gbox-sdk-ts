@@ -195,6 +195,14 @@ export class ActionOperator {
 
   /**
    * @example
+   * const response = await myBox.action.screenLayout();
+   */
+  async screenLayout() {
+    return this.client.v1.boxes.actions.screenLayout(this.boxId);
+  }
+
+  /**
+   * @example
    * const response = await myBox.action.screenRotation({ angle: 90, direction: 'clockwise' });
    */
   async screenRotation(body: ActionScreenRotationParams) {

@@ -134,6 +134,26 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Get the current structured screen layout information. This endpoint returns
+   * detailed structural information about the UI elements currently displayed on the
+   * screen, which can be used for UI automation, element analysis, and accessibility
+   * purposes. The format varies by box type: Android boxes return XML format with
+   * detailed UI hierarchy information including element bounds, text content,
+   * resource IDs, and properties, while other box types may return different
+   * structured formats.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.screenLayout(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  screenLayout(boxID: string, options?: RequestOptions): APIPromise<ActionScreenLayoutResponse> {
+    return this._client.get(path`/boxes/${boxID}/actions/screen-layout`, options);
+  }
+
+  /**
    * Rotate screen
    *
    * @example
@@ -2593,6 +2613,19 @@ export namespace ActionPressKeyResponse {
 }
 
 /**
+ * Screen layout content. The format varies by box type: Android boxes return XML
+ * format, while other box types may return different formats.
+ */
+export interface ActionScreenLayoutResponse {
+  /**
+   * Screen layout content. For Android boxes, this is XML content containing the UI
+   * hierarchy with detailed element information including bounds, text, resource
+   * IDs, and other properties. The format may vary for different box types.
+   */
+  content: string;
+}
+
+/**
  * Result of an UI action execution with screenshots
  */
 export type ActionScreenRotationResponse =
@@ -3880,6 +3913,7 @@ export declare namespace Actions {
     type ActionMoveResponse as ActionMoveResponse,
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
+    type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionScrollResponse as ActionScrollResponse,
