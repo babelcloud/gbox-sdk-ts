@@ -706,7 +706,14 @@ export interface BoxExecuteCommandsResponse {
  */
 export interface BoxLiveViewURLResponse {
   /**
-   * Live view url
+   * Raw live view url without additional layout content, typically used for
+   * embedding into your own application
+   */
+  rawUrl: string;
+
+  /**
+   * Live view url with Gbox interface and basic information, typically used for
+   * real-time observation of box usage status
    */
   url: string;
 }
