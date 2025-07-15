@@ -408,6 +408,17 @@ export interface CreateAndroidBox {
   config?: CreateAndroidBox.Config;
 
   /**
+   * Timeout for waiting the box to transition from pending to running state, default
+   * is 30s. If the box doesn't reach running state within this timeout, the API will
+   * return HTTP status code 408. The timed-out box will be automatically deleted and
+   * will not count towards your quota.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
+   */
+  timeout?: string;
+
+  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
@@ -455,6 +466,17 @@ export interface CreateLinuxBox {
    * Configuration for a Linux box instance
    */
   config?: CreateLinuxBox.Config;
+
+  /**
+   * Timeout for waiting the box to transition from pending to running state, default
+   * is 30s. If the box doesn't reach running state within this timeout, the API will
+   * return HTTP status code 408. The timed-out box will be automatically deleted and
+   * will not count towards your quota.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
+   */
+  timeout?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -774,6 +796,17 @@ export interface BoxCreateAndroidParams {
   config?: BoxCreateAndroidParams.Config;
 
   /**
+   * Timeout for waiting the box to transition from pending to running state, default
+   * is 30s. If the box doesn't reach running state within this timeout, the API will
+   * return HTTP status code 408. The timed-out box will be automatically deleted and
+   * will not count towards your quota.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
+   */
+  timeout?: string;
+
+  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
@@ -818,6 +851,17 @@ export interface BoxCreateLinuxParams {
    * Configuration for a Linux box instance
    */
   config?: BoxCreateLinuxParams.Config;
+
+  /**
+   * Timeout for waiting the box to transition from pending to running state, default
+   * is 30s. If the box doesn't reach running state within this timeout, the API will
+   * return HTTP status code 408. The timed-out box will be automatically deleted and
+   * will not count towards your quota.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
+   */
+  timeout?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
