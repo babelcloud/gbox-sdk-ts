@@ -57,7 +57,18 @@ import {
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
-import { Browser, BrowserCdpURLParams, BrowserCdpURLResponse } from './browser';
+import {
+  Browser,
+  BrowserCdpURLParams,
+  BrowserCdpURLResponse,
+  BrowserCloseTabParams,
+  BrowserCloseTabResponse,
+  BrowserGetTabsResponse,
+  BrowserOpenTabParams,
+  BrowserOpenTabResponse,
+  BrowserUpdateTabParams,
+  BrowserUpdateTabResponse,
+} from './browser';
 import * as FsAPI from './fs';
 import {
   FExistsParams,
@@ -1095,7 +1106,14 @@ export declare namespace Boxes {
   export {
     Browser as Browser,
     type BrowserCdpURLResponse as BrowserCdpURLResponse,
+    type BrowserCloseTabResponse as BrowserCloseTabResponse,
+    type BrowserGetTabsResponse as BrowserGetTabsResponse,
+    type BrowserOpenTabResponse as BrowserOpenTabResponse,
+    type BrowserUpdateTabResponse as BrowserUpdateTabResponse,
     type BrowserCdpURLParams as BrowserCdpURLParams,
+    type BrowserCloseTabParams as BrowserCloseTabParams,
+    type BrowserOpenTabParams as BrowserOpenTabParams,
+    type BrowserUpdateTabParams as BrowserUpdateTabParams,
   };
 
   export {
