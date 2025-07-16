@@ -96,10 +96,18 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/boxes/browser.ts">BrowserCdpURLResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserCloseTabResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserGetTabsResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserOpenTabResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserUpdateTabResponse</a></code>
 
 Methods:
 
 - <code title="post /boxes/{boxId}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">cdpURL</a>(boxID, { ...params }) -> string</code>
+- <code title="delete /boxes/{boxId}/browser/tabs/{tabIndex}">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">closeTab</a>(tabIndex, { ...params }) -> BrowserCloseTabResponse</code>
+- <code title="get /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">getTabs</a>(boxID) -> BrowserGetTabsResponse</code>
+- <code title="post /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">openTab</a>(boxID, { ...params }) -> BrowserOpenTabResponse</code>
+- <code title="put /boxes/{boxId}/browser/tabs/{tabIndex}">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">updateTab</a>(tabIndex, { ...params }) -> BrowserUpdateTabResponse</code>
 
 ### Android
 
