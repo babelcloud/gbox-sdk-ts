@@ -670,23 +670,23 @@ export interface BoxDisplayResponse {
   orientation: 'portrait' | 'landscape' | 'landscape-reverse' | 'portrait-reverse';
 
   /**
-   * Box display resolution configuration
+   * Resolution configuration
    */
   resolution: BoxDisplayResponse.Resolution;
 }
 
 export namespace BoxDisplayResponse {
   /**
-   * Box display resolution configuration
+   * Resolution configuration
    */
   export interface Resolution {
     /**
-     * Height of the box
+     * Height of the screen
      */
     height: number;
 
     /**
-     * Width of the box
+     * Width of the screen
      */
     width: number;
   }
