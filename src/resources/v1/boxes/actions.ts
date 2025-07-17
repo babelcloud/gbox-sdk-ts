@@ -2699,14 +2699,55 @@ export namespace ActionPressKeyResponse {
 }
 
 /**
- * Screen layout content. The format varies by box type: Android boxes return XML
- * format, while other box types may return different formats.
+ * Screen layout content.
+ *
+ * Android boxes (XML):
+ *
+ * ```xml
+ * <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+ * <hierarchy rotation="0">
+ *   <node ... />
+ * </hierarchy>
+ * ```
+ *
+ * Browser (Linux) boxes (HTML):
+ *
+ * ```html
+ * <html>
+ *   <head>
+ *     <title>Example</title>
+ *   </head>
+ *   <body>
+ *     <h1>Hello World</h1>
+ *   </body>
+ * </html>
+ * ```
  */
 export interface ActionScreenLayoutResponse {
   /**
-   * Screen layout content. For Android boxes, this is XML content containing the UI
-   * hierarchy with detailed element information including bounds, text, resource
-   * IDs, and other properties. The format may vary for different box types.
+   * Screen layout content.
+   *
+   * Android boxes (XML):
+   *
+   * ```xml
+   * <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+   * <hierarchy rotation="0">
+   *   <node ... />
+   * </hierarchy>
+   * ```
+   *
+   * Browser (Linux) boxes (HTML):
+   *
+   * ```html
+   * <html>
+   *   <head>
+   *     <title>Example</title>
+   *   </head>
+   *   <body>
+   *     <h1>Hello World</h1>
+   *   </body>
+   * </html>
+   * ```
    */
   content: string;
 }
