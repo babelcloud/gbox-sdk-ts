@@ -27,35 +27,32 @@ export class Browser extends APIResource {
   }
 
   /**
-   * Close a specific browser tab identified by its index. This endpoint will
-   * permanently close the tab and free up the associated resources. The tab index
-   * corresponds to the index returned when listing tabs or opening new tabs. After
-   * closing a tab, the indices of subsequent tabs may shift down to fill the gap.
-   * It's important to refresh the tab list after closing tabs to get the current
-   * indices. You cannot close the last remaining tab - at least one tab must remain
-   * open in the browser context.
+   * Close a specific browser tab identified by its id. This endpoint will
+   * permanently close the tab and free up the associated resources. After closing a
+   * tab, the ids of subsequent tabs may change. You cannot close the last remaining
+   * tab - at least one tab must remain open in the browser context.
    *
    * @example
    * ```ts
    * const response = await client.v1.boxes.browser.closeTab(
-   *   'tabIndex',
+   *   'tabId',
    *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
    */
   closeTab(
-    tabIndex: string,
+    tabID: string,
     params: BrowserCloseTabParams,
     options?: RequestOptions,
   ): APIPromise<BrowserCloseTabResponse> {
     const { boxId } = params;
-    return this._client.delete(path`/boxes/${boxId}/browser/tabs/${tabIndex}`, options);
+    return this._client.delete(path`/boxes/${boxId}/browser/tabs/${tabID}`, options);
   }
 
   /**
    * Retrieve a comprehensive list of all currently open browser tabs in the
    * specified box. This endpoint returns detailed information about each tab
-   * including its index, title, current URL, and favicon. The tab index can be used
+   * including its id, title, current URL, and favicon. The returned id can be used
    * for subsequent operations like navigation, closing, or updating tabs. This is
    * essential for managing multiple browser sessions and understanding the current
    * state of the browser environment.
@@ -74,8 +71,8 @@ export class Browser extends APIResource {
   /**
    * Create and open a new browser tab with the specified URL. This endpoint will
    * navigate to the provided URL and return the new tab's information including its
-   * assigned index, loaded title, final URL (after any redirects), and favicon. The
-   * returned tab index can be used for future operations on this specific tab. The
+   * assigned id, loaded title, final URL (after any redirects), and favicon. The
+   * returned tab id can be used for future operations on this specific tab. The
    * browser will attempt to load the page and will wait for the DOM content to be
    * loaded before returning the response. If the URL is invalid or unreachable, an
    * error will be returned.
@@ -100,16 +97,14 @@ export class Browser extends APIResource {
    * Navigate an existing browser tab to a new URL. This endpoint updates the
    * specified tab by navigating it to the provided URL and returns the updated tab
    * information. The browser will wait for the DOM content to be loaded before
-   * returning the response. This operation preserves the tab's position and index
-   * while updating its content. If the navigation fails due to an invalid URL or
-   * network issues, an error will be returned. The updated tab information will
-   * include the new title, final URL (after any redirects), and favicon from the new
-   * page.
+   * returning the response. If the navigation fails due to an invalid URL or network
+   * issues, an error will be returned. The updated tab information will include the
+   * new title, final URL (after any redirects), and favicon from the new page.
    *
    * @example
    * ```ts
    * const response = await client.v1.boxes.browser.updateTab(
-   *   'tabIndex',
+   *   'tabId',
    *   {
    *     boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *     url: 'https://www.google.com',
@@ -118,12 +113,12 @@ export class Browser extends APIResource {
    * ```
    */
   updateTab(
-    tabIndex: string,
+    tabID: string,
     params: BrowserUpdateTabParams,
     options?: RequestOptions,
   ): APIPromise<BrowserUpdateTabResponse> {
     const { boxId, ...body } = params;
-    return this._client.put(path`/boxes/${boxId}/browser/tabs/${tabIndex}`, { body, ...options });
+    return this._client.put(path`/boxes/${boxId}/browser/tabs/${tabID}`, { body, ...options });
   }
 }
 
@@ -149,14 +144,29 @@ export namespace BrowserGetTabsResponse {
    */
   export interface Tab {
     /**
+     * The tab id
+     */
+    id: string;
+
+    /**
+     * Whether the tab is the current active (frontmost) tab
+     */
+    active: boolean;
+
+    /**
      * The tab favicon
      */
     favicon: string;
 
     /**
-     * The tab index, starting from 0
+     * Whether the tab is currently in a loading state.
+     *
+     * The value is **true** while the browser is still navigating to the target URL or
+     * fetching sub-resources (i.e. `document.readyState` is not "complete"). It
+     * typically switches to **false** once the `load` event fires and all major
+     * network activity has settled.
      */
-    index: number;
+    loading: boolean;
 
     /**
      * The tab title
@@ -175,14 +185,29 @@ export namespace BrowserGetTabsResponse {
  */
 export interface BrowserOpenTabResponse {
   /**
+   * The tab id
+   */
+  id: string;
+
+  /**
+   * Whether the tab is the current active (frontmost) tab
+   */
+  active: boolean;
+
+  /**
    * The tab favicon
    */
   favicon: string;
 
   /**
-   * The tab index, starting from 0
+   * Whether the tab is currently in a loading state.
+   *
+   * The value is **true** while the browser is still navigating to the target URL or
+   * fetching sub-resources (i.e. `document.readyState` is not "complete"). It
+   * typically switches to **false** once the `load` event fires and all major
+   * network activity has settled.
    */
-  index: number;
+  loading: boolean;
 
   /**
    * The tab title
@@ -200,14 +225,29 @@ export interface BrowserOpenTabResponse {
  */
 export interface BrowserUpdateTabResponse {
   /**
+   * The tab id
+   */
+  id: string;
+
+  /**
+   * Whether the tab is the current active (frontmost) tab
+   */
+  active: boolean;
+
+  /**
    * The tab favicon
    */
   favicon: string;
 
   /**
-   * The tab index, starting from 0
+   * Whether the tab is currently in a loading state.
+   *
+   * The value is **true** while the browser is still navigating to the target URL or
+   * fetching sub-resources (i.e. `document.readyState` is not "complete"). It
+   * typically switches to **false** once the `load` event fires and all major
+   * network activity has settled.
    */
-  index: number;
+  loading: boolean;
 
   /**
    * The tab title
