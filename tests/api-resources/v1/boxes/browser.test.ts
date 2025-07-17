@@ -34,7 +34,7 @@ describe('resource browser', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('closeTab: only required params', async () => {
-    const responsePromise = client.v1.boxes.browser.closeTab('tabIndex', {
+    const responsePromise = client.v1.boxes.browser.closeTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -48,7 +48,7 @@ describe('resource browser', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('closeTab: required and optional params', async () => {
-    const response = await client.v1.boxes.browser.closeTab('tabIndex', {
+    const response = await client.v1.boxes.browser.closeTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
   });
@@ -88,7 +88,7 @@ describe('resource browser', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('updateTab: only required params', async () => {
-    const responsePromise = client.v1.boxes.browser.updateTab('tabIndex', {
+    const responsePromise = client.v1.boxes.browser.updateTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
       url: 'https://www.google.com',
     });
@@ -103,7 +103,7 @@ describe('resource browser', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('updateTab: required and optional params', async () => {
-    const response = await client.v1.boxes.browser.updateTab('tabIndex', {
+    const response = await client.v1.boxes.browser.updateTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
       url: 'https://www.google.com',
     });
