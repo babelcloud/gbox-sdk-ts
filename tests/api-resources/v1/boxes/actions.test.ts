@@ -183,6 +183,7 @@ describe('resource actions', () => {
   test.skip('pressKey: required and optional params', async () => {
     const response = await client.v1.boxes.actions.pressKey('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       keys: ['enter'],
+      combination: true,
       includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',
@@ -335,6 +336,7 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.type('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       text: 'Hello World',
       includeScreenshot: false,
+      mode: 'append',
       outputFormat: 'base64',
       screenshotDelay: '500ms',
     });

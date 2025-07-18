@@ -931,6 +931,13 @@ export namespace ActionAIResponse {
         >;
 
         /**
+         * Whether to press keys as combination (simultaneously) or sequentially. When
+         * true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+         * keys are pressed one by one in sequence.
+         */
+        combination?: boolean;
+
+        /**
          * Whether to include screenshots in the action response. If false, the screenshot
          * object will still be returned but with empty URIs. Default is false.
          */
@@ -1015,6 +1022,12 @@ export namespace ActionAIResponse {
          * object will still be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
+
+        /**
+         * Text input mode: 'append' to add text to existing content, 'replace' to replace
+         * all existing text
+         */
+        mode?: 'append' | 'replace';
 
         /**
          * Type of the URI. default is base64.
@@ -2033,6 +2046,13 @@ export namespace ActionAIResponse {
         >;
 
         /**
+         * Whether to press keys as combination (simultaneously) or sequentially. When
+         * true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+         * keys are pressed one by one in sequence.
+         */
+        combination?: boolean;
+
+        /**
          * Whether to include screenshots in the action response. If false, the screenshot
          * object will still be returned but with empty URIs. Default is false.
          */
@@ -2117,6 +2137,12 @@ export namespace ActionAIResponse {
          * object will still be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
+
+        /**
+         * Text input mode: 'append' to add text to existing content, 'replace' to replace
+         * all existing text
+         */
+        mode?: 'append' | 'replace';
 
         /**
          * Type of the URI. default is base64.
@@ -3833,6 +3859,13 @@ export interface ActionPressKeyParams {
   >;
 
   /**
+   * Whether to press keys as combination (simultaneously) or sequentially. When
+   * true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+   * keys are pressed one by one in sequence.
+   */
+  combination?: boolean;
+
+  /**
    * Whether to include screenshots in the action response. If false, the screenshot
    * object will still be returned but with empty URIs. Default is false.
    */
@@ -4181,6 +4214,12 @@ export interface ActionTypeParams {
    * object will still be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
+
+  /**
+   * Text input mode: 'append' to add text to existing content, 'replace' to replace
+   * all existing text
+   */
+  mode?: 'append' | 'replace';
 
   /**
    * Type of the URI. default is base64.
