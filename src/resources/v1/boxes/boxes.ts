@@ -296,6 +296,23 @@ export class Boxes extends APIResource {
   ): APIPromise<BoxWebTerminalURLResponse> {
     return this._client.post(path`/boxes/${boxID}/web-terminal-url`, { body, ...options });
   }
+
+  /**
+   * Get the websocket url for the box. This endpoint provides the WebSocket URLs for
+   * executing shell commands and running code snippets in the box environment. These
+   * URLs allow real-time communication and data exchange with the box, enabling
+   * interactive terminal sessions and code execution.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.websocketURL(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  websocketURL(boxID: string, options?: RequestOptions): APIPromise<BoxWebsocketURLResponse> {
+    return this._client.get(path`/boxes/${boxID}/websocket-url`, options);
+  }
 }
 
 /**
@@ -769,6 +786,22 @@ export interface BoxWebTerminalURLResponse {
   url: string;
 }
 
+export interface BoxWebsocketURLResponse {
+  /**
+   * WebSocket URL for executing shell commands in the box. This endpoint allows
+   * real-time command execution with streaming output, supporting interactive
+   * terminal sessions and long-running processes.
+   */
+  command: string;
+
+  /**
+   * WebSocket URL for running code snippets in the box environment. This endpoint
+   * enables execution of code in various programming languages with real-time output
+   * streaming, perfect for interactive coding sessions and script execution.
+   */
+  runCode: string;
+}
+
 export interface BoxListParams {
   /**
    * Filter boxes by their device type (virtual, physical)
@@ -1042,6 +1075,7 @@ export declare namespace Boxes {
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
     type BoxWebTerminalURLResponse as BoxWebTerminalURLResponse,
+    type BoxWebsocketURLResponse as BoxWebsocketURLResponse,
     type BoxListParams as BoxListParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,

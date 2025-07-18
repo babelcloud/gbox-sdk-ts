@@ -17,6 +17,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStartResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStopResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxWebTerminalURLResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/boxes.ts">BoxWebsocketURLResponse</a></code>
 
 Methods:
 
@@ -32,6 +33,7 @@ Methods:
 - <code title="post /boxes/{boxId}/stop">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">stop</a>(boxID, { ...params }) -> BoxStopResponse</code>
 - <code title="post /boxes/{boxId}/terminate">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">terminate</a>(boxID, { ...params }) -> void</code>
 - <code title="post /boxes/{boxId}/web-terminal-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">webTerminalURL</a>(boxID, { ...params }) -> BoxWebTerminalURLResponse</code>
+- <code title="get /boxes/{boxId}/websocket-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">websocketURL</a>(boxID) -> BoxWebsocketURLResponse</code>
 
 ### Actions
 
