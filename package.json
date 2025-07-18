@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "typedoc": "^0.28.5",
-    "typedoc-plugin-markdown": "^4.6.4"
+    "typedoc-plugin-markdown": "^4.6.4",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.0",
@@ -33,6 +34,7 @@
     "@swc/jest": "^0.2.29",
     "@types/jest": "^29.4.0",
     "@types/node": "^20.17.6",
+    "@types/ws": "^8.18.1",
     "@typescript-eslint/eslint-plugin": "8.31.1",
     "@typescript-eslint/parser": "8.31.1",
     "eslint": "^9.20.1",
