@@ -309,7 +309,8 @@ export namespace ActionAIResponse {
       actions: Array<
         | AIResponse.TypedClickAction
         | AIResponse.TypedTouchAction
-        | AIResponse.TypedDragAction
+        | AIResponse.TypedDragAdvancedAction
+        | AIResponse.TypedDragSimpleAction
         | AIResponse.TypedScrollAction
         | AIResponse.TypedSwipeSimpleAction
         | AIResponse.TypedSwipeAdvancedAction
@@ -321,6 +322,7 @@ export namespace ActionAIResponse {
         | AIResponse.TypedScreenshotAction
         | AIResponse.TypedDragSimpleAction
         | AIResponse.TypedDragAdvancedAction
+        | AIResponse.TypedWaitAction
       >;
 
       /**
@@ -468,13 +470,13 @@ export namespace ActionAIResponse {
       }
 
       /**
-       * Typed drag action
+       * Typed drag advanced action
        */
-      export interface TypedDragAction {
+      export interface TypedDragAdvancedAction {
         /**
          * Path of the drag action as a series of coordinates
          */
-        path: Array<TypedDragAction.Path>;
+        path: Array<TypedDragAdvancedAction.Path>;
 
         /**
          * Time interval between points (e.g. "50ms")
@@ -514,11 +516,95 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
-      export namespace TypedDragAction {
+      export namespace TypedDragAdvancedAction {
         /**
          * Single point in a drag path
          */
         export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag simple action
+       */
+      export interface TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        end: TypedDragSimpleAction.End;
+
+        /**
+         * Single point in a drag path
+         */
+        start: TypedDragSimpleAction.Start;
+
+        /**
+         * Duration to complete the movement from start to end coordinates
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface End {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+
+        /**
+         * Single point in a drag path
+         */
+        export interface Start {
           /**
            * X coordinate of a point in the drag path
            */
@@ -845,6 +931,13 @@ export namespace ActionAIResponse {
         >;
 
         /**
+         * Whether to press keys as combination (simultaneously) or sequentially. When
+         * true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+         * keys are pressed one by one in sequence.
+         */
+        combination?: boolean;
+
+        /**
          * Whether to include screenshots in the action response. If false, the screenshot
          * object will still be returned but with empty URIs. Default is false.
          */
@@ -929,6 +1022,12 @@ export namespace ActionAIResponse {
          * object will still be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
+
+        /**
+         * Text input mode: 'append' to add text to existing content, 'replace' to replace
+         * all existing text
+         */
+        mode?: 'append' | 'replace';
 
         /**
          * Type of the URI. default is base64.
@@ -1201,6 +1300,48 @@ export namespace ActionAIResponse {
            */
           y: number;
         }
+      }
+
+      /**
+       * Typed wait action
+       */
+      export interface TypedWaitAction {
+        /**
+         * Duration of the wait (e.g. '3s')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 3s
+         */
+        duration: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
       }
     }
 
@@ -1283,7 +1424,8 @@ export namespace ActionAIResponse {
       actions: Array<
         | AIResponse.TypedClickAction
         | AIResponse.TypedTouchAction
-        | AIResponse.TypedDragAction
+        | AIResponse.TypedDragAdvancedAction
+        | AIResponse.TypedDragSimpleAction
         | AIResponse.TypedScrollAction
         | AIResponse.TypedSwipeSimpleAction
         | AIResponse.TypedSwipeAdvancedAction
@@ -1295,6 +1437,7 @@ export namespace ActionAIResponse {
         | AIResponse.TypedScreenshotAction
         | AIResponse.TypedDragSimpleAction
         | AIResponse.TypedDragAdvancedAction
+        | AIResponse.TypedWaitAction
       >;
 
       /**
@@ -1442,13 +1585,13 @@ export namespace ActionAIResponse {
       }
 
       /**
-       * Typed drag action
+       * Typed drag advanced action
        */
-      export interface TypedDragAction {
+      export interface TypedDragAdvancedAction {
         /**
          * Path of the drag action as a series of coordinates
          */
-        path: Array<TypedDragAction.Path>;
+        path: Array<TypedDragAdvancedAction.Path>;
 
         /**
          * Time interval between points (e.g. "50ms")
@@ -1488,11 +1631,95 @@ export namespace ActionAIResponse {
         screenshotDelay?: string;
       }
 
-      export namespace TypedDragAction {
+      export namespace TypedDragAdvancedAction {
         /**
          * Single point in a drag path
          */
         export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag simple action
+       */
+      export interface TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        end: TypedDragSimpleAction.End;
+
+        /**
+         * Single point in a drag path
+         */
+        start: TypedDragSimpleAction.Start;
+
+        /**
+         * Duration to complete the movement from start to end coordinates
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface End {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+
+        /**
+         * Single point in a drag path
+         */
+        export interface Start {
           /**
            * X coordinate of a point in the drag path
            */
@@ -1819,6 +2046,13 @@ export namespace ActionAIResponse {
         >;
 
         /**
+         * Whether to press keys as combination (simultaneously) or sequentially. When
+         * true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+         * keys are pressed one by one in sequence.
+         */
+        combination?: boolean;
+
+        /**
          * Whether to include screenshots in the action response. If false, the screenshot
          * object will still be returned but with empty URIs. Default is false.
          */
@@ -1903,6 +2137,12 @@ export namespace ActionAIResponse {
          * object will still be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
+
+        /**
+         * Text input mode: 'append' to add text to existing content, 'replace' to replace
+         * all existing text
+         */
+        mode?: 'append' | 'replace';
 
         /**
          * Type of the URI. default is base64.
@@ -2175,6 +2415,48 @@ export namespace ActionAIResponse {
            */
           y: number;
         }
+      }
+
+      /**
+       * Typed wait action
+       */
+      export interface TypedWaitAction {
+        /**
+         * Duration of the wait (e.g. '3s')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 3s
+         */
+        duration: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
       }
     }
   }
@@ -2613,14 +2895,55 @@ export namespace ActionPressKeyResponse {
 }
 
 /**
- * Screen layout content. The format varies by box type: Android boxes return XML
- * format, while other box types may return different formats.
+ * Screen layout content.
+ *
+ * Android boxes (XML):
+ *
+ * ```xml
+ * <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+ * <hierarchy rotation="0">
+ *   <node ... />
+ * </hierarchy>
+ * ```
+ *
+ * Browser (Linux) boxes (HTML):
+ *
+ * ```html
+ * <html>
+ *   <head>
+ *     <title>Example</title>
+ *   </head>
+ *   <body>
+ *     <h1>Hello World</h1>
+ *   </body>
+ * </html>
+ * ```
  */
 export interface ActionScreenLayoutResponse {
   /**
-   * Screen layout content. For Android boxes, this is XML content containing the UI
-   * hierarchy with detailed element information including bounds, text, resource
-   * IDs, and other properties. The format may vary for different box types.
+   * Screen layout content.
+   *
+   * Android boxes (XML):
+   *
+   * ```xml
+   * <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+   * <hierarchy rotation="0">
+   *   <node ... />
+   * </hierarchy>
+   * ```
+   *
+   * Browser (Linux) boxes (HTML):
+   *
+   * ```html
+   * <html>
+   *   <head>
+   *     <title>Example</title>
+   *   </head>
+   *   <body>
+   *     <h1>Hello World</h1>
+   *   </body>
+   * </html>
+   * ```
    */
   content: string;
 }
@@ -3105,6 +3428,11 @@ export namespace ActionAIParams {
    */
   export interface Settings {
     /**
+     * Whether disable actions
+     */
+    disableActions?: Array<string>;
+
+    /**
      * System prompt that defines the AI's behavior and capabilities when executing UI
      * actions. This prompt instructs the AI on how to interpret the screen, understand
      * user instructions, and determine the appropriate UI actions to take. A
@@ -3531,6 +3859,13 @@ export interface ActionPressKeyParams {
   >;
 
   /**
+   * Whether to press keys as combination (simultaneously) or sequentially. When
+   * true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+   * keys are pressed one by one in sequence.
+   */
+  combination?: boolean;
+
+  /**
    * Whether to include screenshots in the action response. If false, the screenshot
    * object will still be returned but with empty URIs. Default is false.
    */
@@ -3879,6 +4214,12 @@ export interface ActionTypeParams {
    * object will still be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
+
+  /**
+   * Text input mode: 'append' to add text to existing content, 'replace' to replace
+   * all existing text
+   */
+  mode?: 'append' | 'replace';
 
   /**
    * Type of the URI. default is base64.
