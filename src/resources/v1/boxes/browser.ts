@@ -135,14 +135,14 @@ export interface BrowserGetTabsResponse {
   /**
    * The tabs
    */
-  tabs: Array<BrowserGetTabsResponse.Tab>;
+  data: Array<BrowserGetTabsResponse.Data>;
 }
 
 export namespace BrowserGetTabsResponse {
   /**
    * Browser tab
    */
-  export interface Tab {
+  export interface Data {
     /**
      * The tab id
      */
