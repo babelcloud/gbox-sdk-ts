@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.21.0 (2025-07-21)
+
+Full Changelog: [v0.20.0...v0.21.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.20.0...v0.21.0)
+
+### Features
+
+* **api:** api update ([55eba0f](https://github.com/babelcloud/gbox-sdk-ts/commit/55eba0f5d8e3fcc6fab027def0910e72a2055038))
+* **api:** api update ([a15d91d](https://github.com/babelcloud/gbox-sdk-ts/commit/a15d91d51966e5c0dcdf88d6abcfc04857543804))
+* **api:** api update ([8cee607](https://github.com/babelcloud/gbox-sdk-ts/commit/8cee60765fc07f86e4ec53846487d2d6d6d865ad))
+* **api:** api update ([8c23184](https://github.com/babelcloud/gbox-sdk-ts/commit/8c231845d37ef1dd81c943676c13d484e9de0adb))
+* **api:** api update ([bc3f560](https://github.com/babelcloud/gbox-sdk-ts/commit/bc3f5602dec4e4ba8d40d2923a24f17d00cd355e))
+* **api:** api update ([dd5e81e](https://github.com/babelcloud/gbox-sdk-ts/commit/dd5e81ed12caf250e2dea31805834c954615ee19))
+* **api:** api update ([721756b](https://github.com/babelcloud/gbox-sdk-ts/commit/721756bf34beba5f0bfc97d59857323b08564106))
+* **api:** api update ([10999aa](https://github.com/babelcloud/gbox-sdk-ts/commit/10999aae0b83d478762ae2d80b05efdab7fe1efb))
+* **api:** api update ([bd694e4](https://github.com/babelcloud/gbox-sdk-ts/commit/bd694e420127dba2f5b5d010f6970883f4f80043))
+* **api:** api update ([0c35a76](https://github.com/babelcloud/gbox-sdk-ts/commit/0c35a76531c26cbafdb959987e6f8134fb4c6ba8))
+* command and run code support streaming output ([1c3ddb8](https://github.com/babelcloud/gbox-sdk-ts/commit/1c3ddb81fd6c9a8400fbabeb7974607db9d49192))
+* sync data after android pkg open, close or restart ([75cea7f](https://github.com/babelcloud/gbox-sdk-ts/commit/75cea7fd71726796c5b1b07f942bbd0aa25cc35a))
+
 ## 0.20.0 (2025-07-14)
 
 Full Changelog: [v0.19.0...v0.20.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.19.0...v0.20.0)
