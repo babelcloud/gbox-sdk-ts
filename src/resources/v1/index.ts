@@ -15,6 +15,7 @@ export {
   type BoxStartResponse,
   type BoxStopResponse,
   type BoxWebTerminalURLResponse,
+  type BoxWebsocketURLResponse,
   type BoxListParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,

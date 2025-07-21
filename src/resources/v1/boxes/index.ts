@@ -68,6 +68,7 @@ export {
   type BoxStartResponse,
   type BoxStopResponse,
   type BoxWebTerminalURLResponse,
+  type BoxWebsocketURLResponse,
   type BoxListParams,
   type BoxCreateAndroidParams,
   type BoxCreateLinuxParams,
@@ -79,7 +80,18 @@ export {
   type BoxTerminateParams,
   type BoxWebTerminalURLParams,
 } from './boxes';
-export { Browser, type BrowserCdpURLResponse, type BrowserCdpURLParams } from './browser';
+export {
+  Browser,
+  type BrowserCdpURLResponse,
+  type BrowserCloseTabResponse,
+  type BrowserGetTabsResponse,
+  type BrowserOpenTabResponse,
+  type BrowserUpdateTabResponse,
+  type BrowserCdpURLParams,
+  type BrowserCloseTabParams,
+  type BrowserOpenTabParams,
+  type BrowserUpdateTabParams,
+} from './browser';
 export {
   Fs,
   type FListResponse,

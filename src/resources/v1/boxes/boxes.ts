@@ -57,7 +57,18 @@ import {
   AndroidUninstallParams,
 } from './android';
 import * as BrowserAPI from './browser';
-import { Browser, BrowserCdpURLParams, BrowserCdpURLResponse } from './browser';
+import {
+  Browser,
+  BrowserCdpURLParams,
+  BrowserCdpURLResponse,
+  BrowserCloseTabParams,
+  BrowserCloseTabResponse,
+  BrowserGetTabsResponse,
+  BrowserOpenTabParams,
+  BrowserOpenTabResponse,
+  BrowserUpdateTabParams,
+  BrowserUpdateTabResponse,
+} from './browser';
 import * as FsAPI from './fs';
 import {
   FExistsParams,
@@ -285,6 +296,23 @@ export class Boxes extends APIResource {
   ): APIPromise<BoxWebTerminalURLResponse> {
     return this._client.post(path`/boxes/${boxID}/web-terminal-url`, { body, ...options });
   }
+
+  /**
+   * Get the websocket url for the box. This endpoint provides the WebSocket URLs for
+   * executing shell commands and running code snippets in the box environment. These
+   * URLs allow real-time communication and data exchange with the box, enabling
+   * interactive terminal sessions and code execution.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.websocketURL(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  websocketURL(boxID: string, options?: RequestOptions): APIPromise<BoxWebsocketURLResponse> {
+    return this._client.get(path`/boxes/${boxID}/websocket-url`, options);
+  }
 }
 
 /**
@@ -408,6 +436,17 @@ export interface CreateAndroidBox {
   config?: CreateAndroidBox.Config;
 
   /**
+   * Timeout for waiting the box to transition from pending to running state, default
+   * is 30s. If the box doesn't reach running state within this timeout, the API will
+   * return HTTP status code 408. The timed-out box will be automatically deleted and
+   * will not count towards your quota.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
+   */
+  timeout?: string;
+
+  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
@@ -455,6 +494,17 @@ export interface CreateLinuxBox {
    * Configuration for a Linux box instance
    */
   config?: CreateLinuxBox.Config;
+
+  /**
+   * Timeout for waiting the box to transition from pending to running state, default
+   * is 30s. If the box doesn't reach running state within this timeout, the API will
+   * return HTTP status code 408. The timed-out box will be automatically deleted and
+   * will not count towards your quota.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
+   */
+  timeout?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -637,23 +687,23 @@ export interface BoxDisplayResponse {
   orientation: 'portrait' | 'landscape' | 'landscape-reverse' | 'portrait-reverse';
 
   /**
-   * Box display resolution configuration
+   * Resolution configuration
    */
   resolution: BoxDisplayResponse.Resolution;
 }
 
 export namespace BoxDisplayResponse {
   /**
-   * Box display resolution configuration
+   * Resolution configuration
    */
   export interface Resolution {
     /**
-     * Height of the box
+     * Height of the screen
      */
     height: number;
 
     /**
-     * Width of the box
+     * Width of the screen
      */
     width: number;
   }
@@ -684,7 +734,14 @@ export interface BoxExecuteCommandsResponse {
  */
 export interface BoxLiveViewURLResponse {
   /**
-   * Live view url
+   * Raw live view url without additional layout content, typically used for
+   * embedding into your own application
+   */
+  rawUrl: string;
+
+  /**
+   * Live view url with Gbox interface and basic information, typically used for
+   * real-time observation of box usage status
    */
   url: string;
 }
@@ -727,6 +784,22 @@ export interface BoxWebTerminalURLResponse {
    * Web terminal url
    */
   url: string;
+}
+
+export interface BoxWebsocketURLResponse {
+  /**
+   * WebSocket URL for executing shell commands in the box. This endpoint allows
+   * real-time command execution with streaming output, supporting interactive
+   * terminal sessions and long-running processes.
+   */
+  command: string;
+
+  /**
+   * WebSocket URL for running code snippets in the box environment. This endpoint
+   * enables execution of code in various programming languages with real-time output
+   * streaming, perfect for interactive coding sessions and script execution.
+   */
+  runCode: string;
 }
 
 export interface BoxListParams {
@@ -774,6 +847,17 @@ export interface BoxCreateAndroidParams {
   config?: BoxCreateAndroidParams.Config;
 
   /**
+   * Timeout for waiting the box to transition from pending to running state, default
+   * is 30s. If the box doesn't reach running state within this timeout, the API will
+   * return HTTP status code 408. The timed-out box will be automatically deleted and
+   * will not count towards your quota.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
+   */
+  timeout?: string;
+
+  /**
    * Wait for the box operation to be completed, default is true
    */
   wait?: boolean;
@@ -818,6 +902,17 @@ export interface BoxCreateLinuxParams {
    * Configuration for a Linux box instance
    */
   config?: BoxCreateLinuxParams.Config;
+
+  /**
+   * Timeout for waiting the box to transition from pending to running state, default
+   * is 30s. If the box doesn't reach running state within this timeout, the API will
+   * return HTTP status code 408. The timed-out box will be automatically deleted and
+   * will not count towards your quota.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
+   */
+  timeout?: string;
 
   /**
    * Wait for the box operation to be completed, default is true
@@ -980,6 +1075,7 @@ export declare namespace Boxes {
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
     type BoxWebTerminalURLResponse as BoxWebTerminalURLResponse,
+    type BoxWebsocketURLResponse as BoxWebsocketURLResponse,
     type BoxListParams as BoxListParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
@@ -1044,7 +1140,14 @@ export declare namespace Boxes {
   export {
     Browser as Browser,
     type BrowserCdpURLResponse as BrowserCdpURLResponse,
+    type BrowserCloseTabResponse as BrowserCloseTabResponse,
+    type BrowserGetTabsResponse as BrowserGetTabsResponse,
+    type BrowserOpenTabResponse as BrowserOpenTabResponse,
+    type BrowserUpdateTabResponse as BrowserUpdateTabResponse,
     type BrowserCdpURLParams as BrowserCdpURLParams,
+    type BrowserCloseTabParams as BrowserCloseTabParams,
+    type BrowserOpenTabParams as BrowserOpenTabParams,
+    type BrowserUpdateTabParams as BrowserUpdateTabParams,
   };
 
   export {

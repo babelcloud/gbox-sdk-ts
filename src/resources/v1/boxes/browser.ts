@@ -25,9 +25,240 @@ export class Browser extends APIResource {
   ): APIPromise<string> {
     return this._client.post(path`/boxes/${boxID}/browser/connect-url/cdp`, { body, ...options });
   }
+
+  /**
+   * Close a specific browser tab identified by its id. This endpoint will
+   * permanently close the tab and free up the associated resources. After closing a
+   * tab, the ids of subsequent tabs may change. You cannot close the last remaining
+   * tab - at least one tab must remain open in the browser context.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.browser.closeTab(
+   *   'tabId',
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   * );
+   * ```
+   */
+  closeTab(
+    tabID: string,
+    params: BrowserCloseTabParams,
+    options?: RequestOptions,
+  ): APIPromise<BrowserCloseTabResponse> {
+    const { boxId } = params;
+    return this._client.delete(path`/boxes/${boxId}/browser/tabs/${tabID}`, options);
+  }
+
+  /**
+   * Retrieve a comprehensive list of all currently open browser tabs in the
+   * specified box. This endpoint returns detailed information about each tab
+   * including its id, title, current URL, and favicon. The returned id can be used
+   * for subsequent operations like navigation, closing, or updating tabs. This is
+   * essential for managing multiple browser sessions and understanding the current
+   * state of the browser environment.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.browser.getTabs(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  getTabs(boxID: string, options?: RequestOptions): APIPromise<BrowserGetTabsResponse> {
+    return this._client.get(path`/boxes/${boxID}/browser/tabs`, options);
+  }
+
+  /**
+   * Create and open a new browser tab with the specified URL. This endpoint will
+   * navigate to the provided URL and return the new tab's information including its
+   * assigned id, loaded title, final URL (after any redirects), and favicon. The
+   * returned tab id can be used for future operations on this specific tab. The
+   * browser will attempt to load the page and will wait for the DOM content to be
+   * loaded before returning the response. If the URL is invalid or unreachable, an
+   * error will be returned.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.browser.openTab(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { url: 'https://www.google.com' },
+   * );
+   * ```
+   */
+  openTab(
+    boxID: string,
+    body: BrowserOpenTabParams,
+    options?: RequestOptions,
+  ): APIPromise<BrowserOpenTabResponse> {
+    return this._client.post(path`/boxes/${boxID}/browser/tabs`, { body, ...options });
+  }
+
+  /**
+   * Navigate an existing browser tab to a new URL. This endpoint updates the
+   * specified tab by navigating it to the provided URL and returns the updated tab
+   * information. The browser will wait for the DOM content to be loaded before
+   * returning the response. If the navigation fails due to an invalid URL or network
+   * issues, an error will be returned. The updated tab information will include the
+   * new title, final URL (after any redirects), and favicon from the new page.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.browser.updateTab(
+   *   'tabId',
+   *   {
+   *     boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     url: 'https://www.google.com',
+   *   },
+   * );
+   * ```
+   */
+  updateTab(
+    tabID: string,
+    params: BrowserUpdateTabParams,
+    options?: RequestOptions,
+  ): APIPromise<BrowserUpdateTabResponse> {
+    const { boxId, ...body } = params;
+    return this._client.put(path`/boxes/${boxId}/browser/tabs/${tabID}`, { body, ...options });
+  }
 }
 
 export type BrowserCdpURLResponse = string;
+
+export interface BrowserCloseTabResponse {
+  message?: string;
+}
+
+/**
+ * List tabs
+ */
+export interface BrowserGetTabsResponse {
+  /**
+   * The tabs
+   */
+  tabs: Array<BrowserGetTabsResponse.Tab>;
+}
+
+export namespace BrowserGetTabsResponse {
+  /**
+   * Browser tab
+   */
+  export interface Tab {
+    /**
+     * The tab id
+     */
+    id: string;
+
+    /**
+     * Whether the tab is the current active (frontmost) tab
+     */
+    active: boolean;
+
+    /**
+     * The tab favicon
+     */
+    favicon: string;
+
+    /**
+     * Whether the tab is currently in a loading state.
+     *
+     * The value is **true** while the browser is still navigating to the target URL or
+     * fetching sub-resources (i.e. `document.readyState` is not "complete"). It
+     * typically switches to **false** once the `load` event fires and all major
+     * network activity has settled.
+     */
+    loading: boolean;
+
+    /**
+     * The tab title
+     */
+    title: string;
+
+    /**
+     * The tab url
+     */
+    url: string;
+  }
+}
+
+/**
+ * Browser tab
+ */
+export interface BrowserOpenTabResponse {
+  /**
+   * The tab id
+   */
+  id: string;
+
+  /**
+   * Whether the tab is the current active (frontmost) tab
+   */
+  active: boolean;
+
+  /**
+   * The tab favicon
+   */
+  favicon: string;
+
+  /**
+   * Whether the tab is currently in a loading state.
+   *
+   * The value is **true** while the browser is still navigating to the target URL or
+   * fetching sub-resources (i.e. `document.readyState` is not "complete"). It
+   * typically switches to **false** once the `load` event fires and all major
+   * network activity has settled.
+   */
+  loading: boolean;
+
+  /**
+   * The tab title
+   */
+  title: string;
+
+  /**
+   * The tab url
+   */
+  url: string;
+}
+
+/**
+ * Browser tab
+ */
+export interface BrowserUpdateTabResponse {
+  /**
+   * The tab id
+   */
+  id: string;
+
+  /**
+   * Whether the tab is the current active (frontmost) tab
+   */
+  active: boolean;
+
+  /**
+   * The tab favicon
+   */
+  favicon: string;
+
+  /**
+   * Whether the tab is currently in a loading state.
+   *
+   * The value is **true** while the browser is still navigating to the target URL or
+   * fetching sub-resources (i.e. `document.readyState` is not "complete"). It
+   * typically switches to **false** once the `load` event fires and all major
+   * network activity has settled.
+   */
+  loading: boolean;
+
+  /**
+   * The tab title
+   */
+  title: string;
+
+  /**
+   * The tab url
+   */
+  url: string;
+}
 
 export interface BrowserCdpURLParams {
   /**
@@ -39,9 +270,42 @@ export interface BrowserCdpURLParams {
   expiresIn?: string;
 }
 
+export interface BrowserCloseTabParams {
+  /**
+   * Box ID
+   */
+  boxId: string;
+}
+
+export interface BrowserOpenTabParams {
+  /**
+   * The tab url
+   */
+  url: string;
+}
+
+export interface BrowserUpdateTabParams {
+  /**
+   * Path param: Box ID
+   */
+  boxId: string;
+
+  /**
+   * Body param: The tab new url
+   */
+  url: string;
+}
+
 export declare namespace Browser {
   export {
     type BrowserCdpURLResponse as BrowserCdpURLResponse,
+    type BrowserCloseTabResponse as BrowserCloseTabResponse,
+    type BrowserGetTabsResponse as BrowserGetTabsResponse,
+    type BrowserOpenTabResponse as BrowserOpenTabResponse,
+    type BrowserUpdateTabResponse as BrowserUpdateTabResponse,
     type BrowserCdpURLParams as BrowserCdpURLParams,
+    type BrowserCloseTabParams as BrowserCloseTabParams,
+    type BrowserOpenTabParams as BrowserOpenTabParams,
+    type BrowserUpdateTabParams as BrowserUpdateTabParams,
   };
 }

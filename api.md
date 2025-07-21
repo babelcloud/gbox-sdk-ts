@@ -17,6 +17,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStartResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStopResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxWebTerminalURLResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/boxes.ts">BoxWebsocketURLResponse</a></code>
 
 Methods:
 
@@ -32,6 +33,7 @@ Methods:
 - <code title="post /boxes/{boxId}/stop">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">stop</a>(boxID, { ...params }) -> BoxStopResponse</code>
 - <code title="post /boxes/{boxId}/terminate">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">terminate</a>(boxID, { ...params }) -> void</code>
 - <code title="post /boxes/{boxId}/web-terminal-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">webTerminalURL</a>(boxID, { ...params }) -> BoxWebTerminalURLResponse</code>
+- <code title="get /boxes/{boxId}/websocket-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">websocketURL</a>(boxID) -> BoxWebsocketURLResponse</code>
 
 ### Actions
 
@@ -96,10 +98,18 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/boxes/browser.ts">BrowserCdpURLResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserCloseTabResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserGetTabsResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserOpenTabResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/browser.ts">BrowserUpdateTabResponse</a></code>
 
 Methods:
 
 - <code title="post /boxes/{boxId}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">cdpURL</a>(boxID, { ...params }) -> string</code>
+- <code title="delete /boxes/{boxId}/browser/tabs/{tabId}">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">closeTab</a>(tabID, { ...params }) -> BrowserCloseTabResponse</code>
+- <code title="get /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">getTabs</a>(boxID) -> BrowserGetTabsResponse</code>
+- <code title="post /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">openTab</a>(boxID, { ...params }) -> BrowserOpenTabResponse</code>
+- <code title="put /boxes/{boxId}/browser/tabs/{tabId}">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">updateTab</a>(tabID, { ...params }) -> BrowserUpdateTabResponse</code>
 
 ### Android
 
