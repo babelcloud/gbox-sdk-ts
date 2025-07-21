@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.22.0 (2025-07-21)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* **browser:** add methods for tab management and introduce BrowserTabOperator class ([772cf2e](https://github.com/babelcloud/gbox-sdk-ts/commit/772cf2e5a790bb002bbd41e070970eae194c4173))
+
 ## 0.21.0 (2025-07-21)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.20.0...v0.21.0)
