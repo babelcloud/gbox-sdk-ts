@@ -66,6 +66,8 @@ import {
   BrowserGetTabsResponse,
   BrowserOpenTabParams,
   BrowserOpenTabResponse,
+  BrowserSwitchTabParams,
+  BrowserSwitchTabResponse,
   BrowserUpdateTabParams,
   BrowserUpdateTabResponse,
 } from './browser';
@@ -1143,10 +1145,12 @@ export declare namespace Boxes {
     type BrowserCloseTabResponse as BrowserCloseTabResponse,
     type BrowserGetTabsResponse as BrowserGetTabsResponse,
     type BrowserOpenTabResponse as BrowserOpenTabResponse,
+    type BrowserSwitchTabResponse as BrowserSwitchTabResponse,
     type BrowserUpdateTabResponse as BrowserUpdateTabResponse,
     type BrowserCdpURLParams as BrowserCdpURLParams,
     type BrowserCloseTabParams as BrowserCloseTabParams,
     type BrowserOpenTabParams as BrowserOpenTabParams,
+    type BrowserSwitchTabParams as BrowserSwitchTabParams,
     type BrowserUpdateTabParams as BrowserUpdateTabParams,
   };
 
