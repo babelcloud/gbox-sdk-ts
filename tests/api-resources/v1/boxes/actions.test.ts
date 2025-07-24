@@ -310,7 +310,7 @@ describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('touch: required and optional params', async () => {
     const response = await client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      points: [{ start: { x: 100, y: 150 }, actions: [{ type: 'move', x: 400, y: 300, duration: '200ms' }] }],
+      points: [{ start: { x: 100, y: 150 }, actions: [{ duration: '200ms', type: 'move', x: 400, y: 300 }] }],
       includeScreenshot: false,
       outputFormat: 'base64',
       screenshotDelay: '500ms',

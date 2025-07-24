@@ -448,7 +448,7 @@ export namespace ActionAIResponse {
           /**
            * Sequence of actions to perform after initial touch
            */
-          actions?: Array<unknown>;
+          actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitActionDto>;
         }
 
         export namespace Point {
@@ -465,6 +465,49 @@ export namespace ActionAIResponse {
              * Starting Y coordinate
              */
             y: number;
+          }
+
+          /**
+           * Touch point movement action configuration
+           */
+          export interface TouchPointMoveAction {
+            /**
+             * Duration of the movement (e.g. "200ms")
+             *
+             * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+             * Example formats: "500ms", "30s", "5m", "1h" Default: 200ms
+             */
+            duration: string;
+
+            /**
+             * Type of the action
+             */
+            type: string;
+
+            /**
+             * Target X coordinate
+             */
+            x: number;
+
+            /**
+             * Target Y coordinate
+             */
+            y: number;
+          }
+
+          export interface TouchPointWaitActionDto {
+            /**
+             * Duration to wait (e.g. "500ms")
+             *
+             * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+             * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+             */
+            duration: string;
+
+            /**
+             * Type of the action
+             */
+            type: string;
           }
         }
       }
@@ -1563,7 +1606,7 @@ export namespace ActionAIResponse {
           /**
            * Sequence of actions to perform after initial touch
            */
-          actions?: Array<unknown>;
+          actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitActionDto>;
         }
 
         export namespace Point {
@@ -1580,6 +1623,49 @@ export namespace ActionAIResponse {
              * Starting Y coordinate
              */
             y: number;
+          }
+
+          /**
+           * Touch point movement action configuration
+           */
+          export interface TouchPointMoveAction {
+            /**
+             * Duration of the movement (e.g. "200ms")
+             *
+             * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+             * Example formats: "500ms", "30s", "5m", "1h" Default: 200ms
+             */
+            duration: string;
+
+            /**
+             * Type of the action
+             */
+            type: string;
+
+            /**
+             * Target X coordinate
+             */
+            x: number;
+
+            /**
+             * Target Y coordinate
+             */
+            y: number;
+          }
+
+          export interface TouchPointWaitActionDto {
+            /**
+             * Duration to wait (e.g. "500ms")
+             *
+             * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+             * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+             */
+            duration: string;
+
+            /**
+             * Type of the action
+             */
+            type: string;
           }
         }
       }
@@ -4182,7 +4268,7 @@ export namespace ActionTouchParams {
     /**
      * Sequence of actions to perform after initial touch
      */
-    actions?: Array<unknown>;
+    actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitActionDto>;
   }
 
   export namespace Point {
@@ -4199,6 +4285,49 @@ export namespace ActionTouchParams {
        * Starting Y coordinate
        */
       y: number;
+    }
+
+    /**
+     * Touch point movement action configuration
+     */
+    export interface TouchPointMoveAction {
+      /**
+       * Duration of the movement (e.g. "200ms")
+       *
+       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+       * Example formats: "500ms", "30s", "5m", "1h" Default: 200ms
+       */
+      duration: string;
+
+      /**
+       * Type of the action
+       */
+      type: string;
+
+      /**
+       * Target X coordinate
+       */
+      x: number;
+
+      /**
+       * Target Y coordinate
+       */
+      y: number;
+    }
+
+    export interface TouchPointWaitActionDto {
+      /**
+       * Duration to wait (e.g. "500ms")
+       *
+       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+       */
+      duration: string;
+
+      /**
+       * Type of the action
+       */
+      type: string;
     }
   }
 }
