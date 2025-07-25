@@ -104,7 +104,6 @@ describe('resource browser', () => {
   test.skip('switchTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.switchTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-      id: '1',
     });
   });
 
