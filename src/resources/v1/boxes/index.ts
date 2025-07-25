@@ -86,10 +86,12 @@ export {
   type BrowserCloseTabResponse,
   type BrowserGetTabsResponse,
   type BrowserOpenTabResponse,
+  type BrowserSwitchTabResponse,
   type BrowserUpdateTabResponse,
   type BrowserCdpURLParams,
   type BrowserCloseTabParams,
   type BrowserOpenTabParams,
+  type BrowserSwitchTabParams,
   type BrowserUpdateTabParams,
 } from './browser';
 export {

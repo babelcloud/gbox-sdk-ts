@@ -29,8 +29,7 @@ export class Browser extends APIResource {
   /**
    * Close a specific browser tab identified by its id. This endpoint will
    * permanently close the tab and free up the associated resources. After closing a
-   * tab, the ids of subsequent tabs may change. You cannot close the last remaining
-   * tab - at least one tab must remain open in the browser context.
+   * tab, the ids of subsequent tabs may change.
    *
    * @example
    * ```ts
@@ -94,6 +93,30 @@ export class Browser extends APIResource {
   }
 
   /**
+   * Switch to a specific browser tab by bringing it to the foreground (making it the
+   * active/frontmost tab). This operation sets the specified tab as the currently
+   * active tab without changing its URL or content. The tab will receive focus and
+   * become visible to the user. This is useful for managing multiple browser
+   * sessions and controlling which tab is currently in focus.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.browser.switchTab(
+   *   'tabId',
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
+   * );
+   * ```
+   */
+  switchTab(
+    tabID: string,
+    params: BrowserSwitchTabParams,
+    options?: RequestOptions,
+  ): APIPromise<BrowserSwitchTabResponse> {
+    const { boxId } = params;
+    return this._client.post(path`/boxes/${boxId}/browser/tabs/${tabID}/switch`, options);
+  }
+
+  /**
    * Navigate an existing browser tab to a new URL. This endpoint updates the
    * specified tab by navigating it to the provided URL and returns the updated tab
    * information. The browser will wait for the DOM content to be loaded before
@@ -135,14 +158,14 @@ export interface BrowserGetTabsResponse {
   /**
    * The tabs
    */
-  tabs: Array<BrowserGetTabsResponse.Tab>;
+  data: Array<BrowserGetTabsResponse.Data>;
 }
 
 export namespace BrowserGetTabsResponse {
   /**
    * Browser tab
    */
-  export interface Tab {
+  export interface Data {
     /**
      * The tab id
      */
@@ -184,6 +207,46 @@ export namespace BrowserGetTabsResponse {
  * Browser tab
  */
 export interface BrowserOpenTabResponse {
+  /**
+   * The tab id
+   */
+  id: string;
+
+  /**
+   * Whether the tab is the current active (frontmost) tab
+   */
+  active: boolean;
+
+  /**
+   * The tab favicon
+   */
+  favicon: string;
+
+  /**
+   * Whether the tab is currently in a loading state.
+   *
+   * The value is **true** while the browser is still navigating to the target URL or
+   * fetching sub-resources (i.e. `document.readyState` is not "complete"). It
+   * typically switches to **false** once the `load` event fires and all major
+   * network activity has settled.
+   */
+  loading: boolean;
+
+  /**
+   * The tab title
+   */
+  title: string;
+
+  /**
+   * The tab url
+   */
+  url: string;
+}
+
+/**
+ * Browser tab
+ */
+export interface BrowserSwitchTabResponse {
   /**
    * The tab id
    */
@@ -284,6 +347,13 @@ export interface BrowserOpenTabParams {
   url: string;
 }
 
+export interface BrowserSwitchTabParams {
+  /**
+   * Box ID
+   */
+  boxId: string;
+}
+
 export interface BrowserUpdateTabParams {
   /**
    * Path param: Box ID
@@ -302,10 +372,12 @@ export declare namespace Browser {
     type BrowserCloseTabResponse as BrowserCloseTabResponse,
     type BrowserGetTabsResponse as BrowserGetTabsResponse,
     type BrowserOpenTabResponse as BrowserOpenTabResponse,
+    type BrowserSwitchTabResponse as BrowserSwitchTabResponse,
     type BrowserUpdateTabResponse as BrowserUpdateTabResponse,
     type BrowserCdpURLParams as BrowserCdpURLParams,
     type BrowserCloseTabParams as BrowserCloseTabParams,
     type BrowserOpenTabParams as BrowserOpenTabParams,
+    type BrowserSwitchTabParams as BrowserSwitchTabParams,
     type BrowserUpdateTabParams as BrowserUpdateTabParams,
   };
 }

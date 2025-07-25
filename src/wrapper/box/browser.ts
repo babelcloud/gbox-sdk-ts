@@ -24,7 +24,7 @@ export class BrowserOperator {
    */
   async listTab() {
     const tabInfo = await this.client.v1.boxes.browser.getTabs(this.boxId);
-    return tabInfo.tabs.map((tab) => new BrowserTabOperator(this.client, this.boxId, tab));
+    return tabInfo.data.map((tab) => new BrowserTabOperator(this.client, this.boxId, tab));
   }
 
   /**
@@ -55,9 +55,9 @@ export class BrowserOperator {
 export class BrowserTabOperator {
   private client: GboxClient;
   private boxId: string;
-  private data: BrowserGetTabsResponse.Tab;
+  private data: BrowserGetTabsResponse.Data;
 
-  constructor(client: GboxClient, boxId: string, data: BrowserGetTabsResponse.Tab) {
+  constructor(client: GboxClient, boxId: string, data: BrowserGetTabsResponse.Data) {
     this.client = client;
     this.boxId = boxId;
     this.data = data;
