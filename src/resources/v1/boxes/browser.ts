@@ -103,10 +103,7 @@ export class Browser extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.browser.switchTab(
    *   'tabId',
-   *   {
-   *     boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     id: '1',
-   *   },
+   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
    */
@@ -115,8 +112,8 @@ export class Browser extends APIResource {
     params: BrowserSwitchTabParams,
     options?: RequestOptions,
   ): APIPromise<BrowserSwitchTabResponse> {
-    const { boxId, ...body } = params;
-    return this._client.post(path`/boxes/${boxId}/browser/tabs/${tabID}/switch`, { body, ...options });
+    const { boxId } = params;
+    return this._client.post(path`/boxes/${boxId}/browser/tabs/${tabID}/switch`, options);
   }
 
   /**
@@ -352,14 +349,9 @@ export interface BrowserOpenTabParams {
 
 export interface BrowserSwitchTabParams {
   /**
-   * Path param: Box ID
+   * Box ID
    */
   boxId: string;
-
-  /**
-   * Body param: The tab id
-   */
-  id?: string;
 }
 
 export interface BrowserUpdateTabParams {
