@@ -16,6 +16,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxRunCodeResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStartResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStopResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStorageKeyResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxWebTerminalURLResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxWebsocketURLResponse</a></code>
 
@@ -31,6 +32,7 @@ Methods:
 - <code title="post /boxes/{boxId}/run-code">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">runCode</a>(boxID, { ...params }) -> BoxRunCodeResponse</code>
 - <code title="post /boxes/{boxId}/start">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">start</a>(boxID, { ...params }) -> BoxStartResponse</code>
 - <code title="post /boxes/{boxId}/stop">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">stop</a>(boxID, { ...params }) -> BoxStopResponse</code>
+- <code title="post /boxes/{boxId}/storage-key">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">storageKey</a>(boxID) -> string</code>
 - <code title="post /boxes/{boxId}/terminate">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">terminate</a>(boxID, { ...params }) -> void</code>
 - <code title="post /boxes/{boxId}/web-terminal-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">webTerminalURL</a>(boxID, { ...params }) -> BoxWebTerminalURLResponse</code>
 - <code title="get /boxes/{boxId}/websocket-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">websocketURL</a>(boxID) -> BoxWebsocketURLResponse</code>

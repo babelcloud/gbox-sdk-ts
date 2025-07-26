@@ -67,6 +67,7 @@ export {
   type BoxRunCodeResponse,
   type BoxStartResponse,
   type BoxStopResponse,
+  type BoxStorageKeyResponse,
   type BoxWebTerminalURLResponse,
   type BoxWebsocketURLResponse,
   type BoxListParams,

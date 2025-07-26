@@ -258,6 +258,18 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.storageKey(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  storageKey(boxID: string, options?: RequestOptions): APIPromise<string> {
+    return this._client.post(path`/boxes/${boxID}/storage-key`, options);
+  }
+
+  /**
    * Terminate a running box. This action will stop the box and release its resources
    *
    * @example
@@ -778,6 +790,8 @@ export type BoxStartResponse = LinuxBox | AndroidBox;
  */
 export type BoxStopResponse = LinuxBox | AndroidBox;
 
+export type BoxStorageKeyResponse = string;
+
 /**
  * Web terminal result
  */
@@ -1076,6 +1090,7 @@ export declare namespace Boxes {
     type BoxRunCodeResponse as BoxRunCodeResponse,
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
+    type BoxStorageKeyResponse as BoxStorageKeyResponse,
     type BoxWebTerminalURLResponse as BoxWebTerminalURLResponse,
     type BoxWebsocketURLResponse as BoxWebsocketURLResponse,
     type BoxListParams as BoxListParams,
