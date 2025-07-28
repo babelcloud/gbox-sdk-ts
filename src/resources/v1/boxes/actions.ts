@@ -378,6 +378,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -415,6 +423,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -541,6 +557,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -608,6 +632,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -696,6 +728,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -750,6 +790,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -800,6 +848,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -992,6 +1048,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1031,6 +1095,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -1078,6 +1150,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1120,6 +1200,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -1231,6 +1319,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1310,6 +1406,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1369,6 +1473,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1414,6 +1526,11 @@ export namespace ActionAIResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -1423,6 +1540,11 @@ export namespace ActionAIResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -1536,6 +1658,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1573,6 +1703,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -1699,6 +1837,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1766,6 +1912,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -1854,6 +2008,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1908,6 +2070,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1958,6 +2128,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -2150,6 +2328,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2189,6 +2375,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -2236,6 +2430,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2278,6 +2480,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -2389,6 +2599,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2468,6 +2686,14 @@ export namespace ActionAIResponse {
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2525,6 +2751,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -2593,6 +2827,11 @@ export namespace ActionClickResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -2602,6 +2841,11 @@ export namespace ActionClickResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -2676,6 +2920,11 @@ export namespace ActionDragResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -2685,6 +2934,11 @@ export namespace ActionDragResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -2776,6 +3030,11 @@ export namespace ActionMoveResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -2785,6 +3044,11 @@ export namespace ActionMoveResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -2859,6 +3123,11 @@ export namespace ActionPressButtonResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -2868,6 +3137,11 @@ export namespace ActionPressButtonResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -2942,6 +3216,11 @@ export namespace ActionPressKeyResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -2951,6 +3230,11 @@ export namespace ActionPressKeyResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -3079,6 +3363,11 @@ export namespace ActionScreenRotationResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -3088,6 +3377,11 @@ export namespace ActionScreenRotationResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -3125,6 +3419,11 @@ export interface ActionScreenshotResponse {
    * URL of the screenshot
    */
   uri: string;
+
+  /**
+   * Presigned url of the screenshot
+   */
+  presignedUrl?: string;
 }
 
 /**
@@ -3172,6 +3471,11 @@ export namespace ActionScrollResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -3181,6 +3485,11 @@ export namespace ActionScrollResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -3255,6 +3564,11 @@ export namespace ActionSwipeResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -3264,6 +3578,11 @@ export namespace ActionSwipeResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -3338,6 +3657,11 @@ export namespace ActionTouchResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -3347,6 +3671,11 @@ export namespace ActionTouchResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -3421,6 +3750,11 @@ export namespace ActionTypeResponse {
        */
       export interface After {
         /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
+        /**
          * URI of the screenshot after the action
          */
         uri: string;
@@ -3430,6 +3764,11 @@ export namespace ActionTypeResponse {
        * Screenshot taken before action execution
        */
       export interface Before {
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl: string;
+
         /**
          * URI of the screenshot before the action
          */
@@ -3483,6 +3822,14 @@ export interface ActionAIParams {
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
 
   /**
    * Delay after performing the action, before taking the final screenshot.
@@ -3564,6 +3911,14 @@ export interface ActionClickParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+
+  /**
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -3614,6 +3969,14 @@ export declare namespace ActionDragParams {
      * Type of the URI. default is base64.
      */
     outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
 
     /**
      * Delay after performing the action, before taking the final screenshot.
@@ -3690,6 +4053,14 @@ export declare namespace ActionDragParams {
      * Type of the URI. default is base64.
      */
     outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
 
     /**
      * Delay after performing the action, before taking the final screenshot.
@@ -3772,6 +4143,14 @@ export interface ActionMoveParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+
+  /**
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -3806,6 +4185,14 @@ export interface ActionPressButtonParams {
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
 
   /**
    * Delay after performing the action, before taking the final screenshot.
@@ -3963,6 +4350,14 @@ export interface ActionPressKeyParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+
+  /**
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -4065,6 +4460,14 @@ export interface ActionScrollParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+
+  /**
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -4119,6 +4522,14 @@ export declare namespace ActionSwipeParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -4166,6 +4577,14 @@ export declare namespace ActionSwipeParams {
      * Type of the URI. default is base64.
      */
     outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
 
     /**
      * Delay after performing the action, before taking the final screenshot.
@@ -4235,6 +4654,14 @@ export interface ActionTouchParams {
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
 
   /**
    * Delay after performing the action, before taking the final screenshot.
@@ -4354,6 +4781,14 @@ export interface ActionTypeParams {
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
 
   /**
    * Delay after performing the action, before taking the final screenshot.

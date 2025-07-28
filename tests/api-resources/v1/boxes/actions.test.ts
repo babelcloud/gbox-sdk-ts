@@ -29,6 +29,7 @@ describe('resource actions', () => {
       background: 'The user is on the login page',
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
       settings: {
         disableActions: ['swipe'],
@@ -62,6 +63,7 @@ describe('resource actions', () => {
       double: false,
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -89,6 +91,7 @@ describe('resource actions', () => {
       duration: '500ms',
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -137,6 +140,7 @@ describe('resource actions', () => {
       y: 300,
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -161,6 +165,7 @@ describe('resource actions', () => {
       buttons: ['power'],
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -186,6 +191,7 @@ describe('resource actions', () => {
       combination: true,
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -263,6 +269,7 @@ describe('resource actions', () => {
       y: 100,
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -289,6 +296,7 @@ describe('resource actions', () => {
       duration: '500ms',
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -313,6 +321,7 @@ describe('resource actions', () => {
       points: [{ start: { x: 100, y: 150 }, actions: [{ duration: '200ms', type: 'move', x: 400, y: 300 }] }],
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -338,6 +347,7 @@ describe('resource actions', () => {
       includeScreenshot: false,
       mode: 'append',
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
