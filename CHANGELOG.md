@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.24.0 (2025-07-29)
+
+Full Changelog: [v0.23.0...v0.24.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.23.0...v0.24.0)
+
+### Features
+
+* **api:** api update ([efaef98](https://github.com/babelcloud/gbox-sdk-ts/commit/efaef9813e24b8788695eee2f64ab72915c194b3))
+* **api:** api update ([7dc0497](https://github.com/babelcloud/gbox-sdk-ts/commit/7dc0497577f38a38176ecede0e80431f663ea9f4))
+* **api:** api update ([8e4eac5](https://github.com/babelcloud/gbox-sdk-ts/commit/8e4eac5e4310ca427238a325edc631748a9998d6))
+* **browser:** add switchTab method to BrowserOperator class ([21d6ad3](https://github.com/babelcloud/gbox-sdk-ts/commit/21d6ad39c071b9a4fd0cb4569b8aaa69c9127a8c))
+
 ## 0.23.0 (2025-07-25)
 
 Full Changelog: [v0.22.0...v0.23.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.22.0...v0.23.0)
