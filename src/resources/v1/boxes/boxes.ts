@@ -689,7 +689,7 @@ export interface BoxDisplayResponse {
   /**
    * Orientation of the box
    */
-  orientation: 'portrait' | 'landscape' | 'landscape-reverse' | 'portrait-reverse';
+  orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
   /**
    * Resolution configuration
