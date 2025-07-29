@@ -50,6 +50,14 @@ export class BrowserOperator {
   async closeTab(tabId: string) {
     return this.client.v1.boxes.browser.closeTab(tabId, { boxId: this.boxId });
   }
+
+  /**
+   * @example
+   * const response = await myBox.browser.switchTab('1');
+   */
+  async switchTab(tabId: string) {
+    return this.client.v1.boxes.browser.switchTab(tabId, { boxId: this.boxId });
+  }
 }
 
 export class BrowserTabOperator {

@@ -89,12 +89,15 @@ import {
   FWriteResponse,
   Fs,
 } from './fs';
+import * as StorageAPI from './storage';
+import { Storage, StoragePresignedURLParams, StoragePresignedURLResponse } from './storage';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Boxes extends APIResource {
+  storage: StorageAPI.Storage = new StorageAPI.Storage(this._client);
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
   browser: BrowserAPI.Browser = new BrowserAPI.Browser(this._client);
@@ -686,7 +689,7 @@ export interface BoxDisplayResponse {
   /**
    * Orientation of the box
    */
-  orientation: 'portrait' | 'landscape' | 'landscape-reverse' | 'portrait-reverse';
+  orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
   /**
    * Resolution configuration
@@ -788,6 +791,9 @@ export interface BoxWebTerminalURLResponse {
   url: string;
 }
 
+/**
+ * Box WebSocket Url
+ */
 export interface BoxWebsocketURLResponse {
   /**
    * WebSocket URL for executing shell commands in the box. This endpoint allows
@@ -1057,6 +1063,7 @@ export interface BoxWebTerminalURLParams {
   expiresIn?: string;
 }
 
+Boxes.Storage = Storage;
 Boxes.Actions = Actions;
 Boxes.Fs = Fs;
 Boxes.Browser = Browser;
@@ -1088,6 +1095,12 @@ export declare namespace Boxes {
     type BoxStopParams as BoxStopParams,
     type BoxTerminateParams as BoxTerminateParams,
     type BoxWebTerminalURLParams as BoxWebTerminalURLParams,
+  };
+
+  export {
+    Storage as Storage,
+    type StoragePresignedURLResponse as StoragePresignedURLResponse,
+    type StoragePresignedURLParams as StoragePresignedURLParams,
   };
 
   export {

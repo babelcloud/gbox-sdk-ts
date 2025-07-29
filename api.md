@@ -35,6 +35,16 @@ Methods:
 - <code title="post /boxes/{boxId}/web-terminal-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">webTerminalURL</a>(boxID, { ...params }) -> BoxWebTerminalURLResponse</code>
 - <code title="get /boxes/{boxId}/websocket-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">websocketURL</a>(boxID) -> BoxWebsocketURLResponse</code>
 
+### Storage
+
+Types:
+
+- <code><a href="./src/resources/v1/boxes/storage.ts">StoragePresignedURLResponse</a></code>
+
+Methods:
+
+- <code title="post /boxes/{boxId}/storage/presigned-url">client.v1.boxes.storage.<a href="./src/resources/v1/boxes/storage.ts">presignedURL</a>(boxID, { ...params }) -> string</code>
+
 ### Actions
 
 Types:

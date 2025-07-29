@@ -111,3 +111,4 @@ export {
   type FRenameParams,
   type FWriteParams,
 } from './fs';
+export { Storage, type StoragePresignedURLResponse, type StoragePresignedURLParams } from './storage';

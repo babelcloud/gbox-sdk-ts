@@ -29,6 +29,7 @@ describe('resource actions', () => {
       background: 'The user is on the login page',
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
       settings: {
         disableActions: ['swipe'],
@@ -62,6 +63,7 @@ describe('resource actions', () => {
       double: false,
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -89,6 +91,7 @@ describe('resource actions', () => {
       duration: '500ms',
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -137,6 +140,7 @@ describe('resource actions', () => {
       y: 300,
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -161,6 +165,7 @@ describe('resource actions', () => {
       buttons: ['power'],
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -186,6 +191,7 @@ describe('resource actions', () => {
       combination: true,
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -205,8 +211,7 @@ describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('screenRotation: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.screenRotation('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      angle: 90,
-      direction: 'clockwise',
+      orientation: 'landscapeLeft',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -220,8 +225,11 @@ describe('resource actions', () => {
   // skipped: tests are disabled for the time being
   test.skip('screenRotation: required and optional params', async () => {
     const response = await client.v1.boxes.actions.screenRotation('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      angle: 90,
-      direction: 'clockwise',
+      orientation: 'landscapeLeft',
+      includeScreenshot: false,
+      outputFormat: 'base64',
+      presignedExpiresIn: '30m',
+      screenshotDelay: '500ms',
     });
   });
 
@@ -263,6 +271,7 @@ describe('resource actions', () => {
       y: 100,
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -289,6 +298,7 @@ describe('resource actions', () => {
       duration: '500ms',
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -313,6 +323,7 @@ describe('resource actions', () => {
       points: [{ start: { x: 100, y: 150 }, actions: [{ duration: '200ms', type: 'move', x: 400, y: 300 }] }],
       includeScreenshot: false,
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
@@ -338,6 +349,7 @@ describe('resource actions', () => {
       includeScreenshot: false,
       mode: 'append',
       outputFormat: 'base64',
+      presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
   });
