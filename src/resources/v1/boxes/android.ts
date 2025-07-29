@@ -619,11 +619,11 @@ export declare namespace AndroidInstallParams {
     /**
      * APK file or ZIP archive to install (max file size: 512MB).
      *
-     * **Single APK mode (installMultiple: false):**
+     * **Single APK mode:**
      *
      * - Upload a single APK file (e.g., app.apk)
      *
-     * **Install-Multiple mode (installMultiple: true):**
+     * **Install-Multiple mode:**
      *
      * - Upload a ZIP archive containing multiple APK files
      * - ZIP filename example: com.reddit.frontpage-gplay.zip
@@ -637,15 +637,6 @@ export declare namespace AndroidInstallParams {
      * architecture, language, or screen density.
      */
     apk: Uploadable;
-
-    /**
-     * Whether to use 'adb install-multiple' command for installation. When true, uses
-     * install-multiple which is useful for split APKs or when installing multiple
-     * related packages. When false, uses standard 'adb install' command. Split APKs
-     * are commonly used for apps with different architecture variants, language packs,
-     * or modular components.
-     */
-    installMultiple?: boolean;
 
     /**
      * Whether to open the app after installation. Will find and launch the launcher
@@ -681,15 +672,6 @@ export declare namespace AndroidInstallParams {
      * architecture, language, or screen density.
      */
     apk: string;
-
-    /**
-     * Whether to use 'adb install-multiple' command for installation. When true, uses
-     * install-multiple which is useful for split APKs or when installing multiple
-     * related packages. When false, uses standard 'adb install' command. Split APKs
-     * are commonly used for apps with different architecture variants, language packs,
-     * or modular components.
-     */
-    installMultiple?: boolean;
 
     /**
      * Whether to open the app after installation. Will find and launch the launcher
