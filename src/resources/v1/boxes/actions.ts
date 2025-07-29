@@ -154,14 +154,16 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Rotate screen
+   * Rotate the screen orientation. Note that even after rotating the screen,
+   * applications or system layouts may not automatically adapt to the gravity sensor
+   * changes, so visual changes may not always occur.
    *
    * @example
    * ```ts
    * const response =
    *   await client.v1.boxes.actions.screenRotation(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     { angle: 90, direction: 'clockwise' },
+   *     { orientation: 'landscapeLeft' },
    *   );
    * ```
    */
@@ -1233,14 +1235,46 @@ export namespace ActionAIResponse {
        */
       export interface TypedScreenRotationAction {
         /**
-         * Rotation angle in degrees
+         * Target screen orientation
          */
-        angle: 90 | 180 | 270;
+        orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
         /**
-         * Rotation direction
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
          */
-        direction: 'clockwise' | 'counter-clockwise';
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
       }
 
       /**
@@ -2513,14 +2547,46 @@ export namespace ActionAIResponse {
        */
       export interface TypedScreenRotationAction {
         /**
-         * Rotation angle in degrees
+         * Target screen orientation
          */
-        angle: 90 | 180 | 270;
+        orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
         /**
-         * Rotation direction
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
          */
-        direction: 'clockwise' | 'counter-clockwise';
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
       }
 
       /**
@@ -4378,14 +4444,46 @@ export interface ActionPressKeyParams {
 
 export interface ActionScreenRotationParams {
   /**
-   * Rotation angle in degrees
+   * Target screen orientation
    */
-  angle: 90 | 180 | 270;
+  orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
   /**
-   * Rotation direction
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
    */
-  direction: 'clockwise' | 'counter-clockwise';
+  includeScreenshot?: boolean;
+
+  /**
+   * Type of the URI. default is base64.
+   */
+  outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+   */
+  screenshotDelay?: string;
 }
 
 export interface ActionScreenshotParams {
