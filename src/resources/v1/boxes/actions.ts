@@ -1560,14 +1560,14 @@ export namespace ActionAIResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -1575,14 +1575,14 @@ export namespace ActionAIResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -2893,14 +2893,14 @@ export namespace ActionClickResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -2908,14 +2908,14 @@ export namespace ActionClickResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -2986,14 +2986,14 @@ export namespace ActionDragResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3001,14 +3001,14 @@ export namespace ActionDragResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3096,14 +3096,14 @@ export namespace ActionMoveResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3111,14 +3111,14 @@ export namespace ActionMoveResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3189,14 +3189,14 @@ export namespace ActionPressButtonResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3204,14 +3204,14 @@ export namespace ActionPressButtonResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3282,14 +3282,14 @@ export namespace ActionPressKeyResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3297,14 +3297,14 @@ export namespace ActionPressKeyResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3429,14 +3429,14 @@ export namespace ActionScreenRotationResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3444,14 +3444,14 @@ export namespace ActionScreenRotationResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3537,14 +3537,14 @@ export namespace ActionScrollResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3552,14 +3552,14 @@ export namespace ActionScrollResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3630,14 +3630,14 @@ export namespace ActionSwipeResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3645,14 +3645,14 @@ export namespace ActionSwipeResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3723,14 +3723,14 @@ export namespace ActionTouchResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3738,14 +3738,14 @@ export namespace ActionTouchResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3816,14 +3816,14 @@ export namespace ActionTypeResponse {
        */
       export interface After {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot after the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
@@ -3831,14 +3831,14 @@ export namespace ActionTypeResponse {
        */
       export interface Before {
         /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl: string;
-
-        /**
          * URI of the screenshot before the action
          */
         uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
       }
 
       /**
