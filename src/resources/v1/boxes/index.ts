@@ -2,7 +2,6 @@
 
 export {
   Actions,
-  type ActionAIResponse,
   type ActionClickResponse,
   type ActionDragResponse,
   type ActionExtractResponse,

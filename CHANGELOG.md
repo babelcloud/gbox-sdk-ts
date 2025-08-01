@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.26.0 (2025-08-01)
+
+Full Changelog: [v0.25.0...v0.26.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.25.0...v0.26.0)
+
+### Features
+
+* **api:** api update ([ee99c92](https://github.com/babelcloud/gbox-sdk-ts/commit/ee99c92265f3954f5559f4c5dd75e7b343e8e672))
+
+
+### Chores
+
+* **internal:** remove redundant imports config ([966913b](https://github.com/babelcloud/gbox-sdk-ts/commit/966913bd986e40cd6bc78a9e493354fa1ac48cb2))
+
 ## 0.25.0 (2025-07-29)
 
 Full Changelog: [v0.24.0...v0.25.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.24.0...v0.25.0)
