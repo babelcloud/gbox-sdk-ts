@@ -166,6 +166,9 @@ export class ActionOperator {
           case 'result':
             result = JSON.parse(dataStr) as ActionAIResponse;
             break;
+          case 'error':
+            const errorData = JSON.parse(dataStr);
+            throw new Error(`AI action error: ${errorData.message || 'Unknown error'}`);
         }
       }
     }
