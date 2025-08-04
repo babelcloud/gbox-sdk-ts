@@ -115,7 +115,7 @@ export class ActionOperator {
     { onActionStarts, onActionEnds }: { onActionStarts?: () => void; onActionEnds?: () => void },
   ): Promise<ActionAIResponse> {
     const apiPromise = this.client.post(`/boxes/${encodeURIComponent(this.boxId)}/actions/ai`, {
-      body: params,
+      body: { ...params, stream: true },
       headers: { Accept: 'text/event-stream' },
       stream: true,
     });
