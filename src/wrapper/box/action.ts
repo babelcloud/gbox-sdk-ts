@@ -11,6 +11,7 @@ import type {
   ActionSwipeParams,
   ActionScreenRotationParams,
   ActionAIParams,
+  ActionAIResponse,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -90,14 +91,91 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.ai("Click on the login button");
    */
-  async ai(body: string | ActionAI) {
-    if (typeof body === 'string') {
-      return this.client.v1.boxes.actions.ai(this.boxId, { instruction: body });
+  async ai(
+    body: string | ActionAI,
+    { onActionStarts, onActionEnds }: { onActionStarts?: () => void; onActionEnds?: () => void } = {},
+  ): Promise<ActionAIResponse> {
+    const params: ActionAIParams = typeof body === 'string' ? { instruction: body } : body;
+
+    if (onActionStarts || onActionEnds) {
+      const hooks: { onActionStarts?: () => void; onActionEnds?: () => void } = {};
+      if (onActionStarts) hooks.onActionStarts = onActionStarts;
+      if (onActionEnds) hooks.onActionEnds = onActionEnds;
+      return this.aiStream(params, hooks);
     }
 
-    return this.client.v1.boxes.actions.ai(this.boxId, body);
+    return this.client.post<ActionAIResponse>(`/boxes/${encodeURIComponent(this.boxId)}/actions/ai`, {
+      body: params,
+      headers: { Accept: '*/*' },
+    });
   }
 
+  private async aiStream(
+    params: ActionAIParams,
+    { onActionStarts, onActionEnds }: { onActionStarts?: () => void; onActionEnds?: () => void },
+  ): Promise<ActionAIResponse> {
+    const apiPromise = this.client.post(`/boxes/${encodeURIComponent(this.boxId)}/actions/ai`, {
+      body: params,
+      headers: { Accept: 'text/event-stream' },
+      stream: true,
+    });
+
+    const response = await apiPromise.asResponse();
+
+    if (!response.body) {
+      throw new Error('Unable to obtain response body stream');
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let result: ActionAIResponse | null = null;
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+
+      let separatorIndex: number;
+      while ((separatorIndex = buffer.indexOf('\n\n')) !== -1) {
+        const rawEvent = buffer.slice(0, separatorIndex).trim();
+        buffer = buffer.slice(separatorIndex + 2);
+
+        if (!rawEvent) continue;
+
+        let eventName = '';
+        const dataLines: string[] = [];
+
+        for (const line of rawEvent.split('\n')) {
+          if (line.startsWith('event:')) {
+            eventName = line.slice('event:'.length).trim();
+          } else if (line.startsWith('data:')) {
+            dataLines.push(line.slice('data:'.length).trim());
+          }
+        }
+
+        const dataStr = dataLines.join('\n');
+
+        switch (eventName) {
+          case 'before':
+            onActionStarts?.();
+            break;
+          case 'after':
+            onActionEnds?.();
+            break;
+          case 'result':
+            result = JSON.parse(dataStr) as ActionAIResponse;
+            break;
+        }
+      }
+    }
+
+    if (result === null) {
+      throw new Error('No result event received from stream');
+    }
+
+    return result;
+  }
   /**
    * @example
    * const response = await myBox.action.click({ x: 100, y: 100 });
