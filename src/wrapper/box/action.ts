@@ -93,14 +93,14 @@ export class ActionOperator {
    */
   async ai(
     body: string | ActionAI,
-    { onActionStarts, onActionEnds }: { onActionStarts?: () => void; onActionEnds?: () => void } = {},
+    { onActionStart, onActionEnd }: { onActionStart?: () => void; onActionEnd?: () => void } = {},
   ): Promise<ActionAIResponse> {
     const params: ActionAIParams = typeof body === 'string' ? { instruction: body } : body;
 
-    if (onActionStarts || onActionEnds) {
-      const hooks: { onActionStarts?: () => void; onActionEnds?: () => void } = {};
-      if (onActionStarts) hooks.onActionStarts = onActionStarts;
-      if (onActionEnds) hooks.onActionEnds = onActionEnds;
+    if (onActionStart || onActionEnd) {
+      const hooks: { onActionStart?: () => void; onActionEnd?: () => void } = {};
+      if (onActionStart) hooks.onActionStart = onActionStart;
+      if (onActionEnd) hooks.onActionEnd = onActionEnd;
       return this.aiStream(params, hooks);
     }
 
@@ -112,7 +112,7 @@ export class ActionOperator {
 
   private async aiStream(
     params: ActionAIParams,
-    { onActionStarts, onActionEnds }: { onActionStarts?: () => void; onActionEnds?: () => void },
+    { onActionStart, onActionEnd }: { onActionStart?: () => void; onActionEnd?: () => void },
   ): Promise<ActionAIResponse> {
     const apiPromise = this.client.post(`/boxes/${encodeURIComponent(this.boxId)}/actions/ai`, {
       body: { ...params, stream: true },
@@ -158,10 +158,10 @@ export class ActionOperator {
 
         switch (eventName) {
           case 'before':
-            onActionStarts?.();
+            onActionStart?.();
             break;
           case 'after':
-            onActionEnds?.();
+            onActionEnd?.();
             break;
           case 'result':
             result = JSON.parse(dataStr) as ActionAIResponse;
