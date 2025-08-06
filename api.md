@@ -81,6 +81,26 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">touch</a>(boxID, { ...params }) -> ActionTouchResponse</code>
 - <code title="post /boxes/{boxId}/actions/type">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">type</a>(boxID, { ...params }) -> ActionTypeResponse</code>
 
+### Media
+
+Types:
+
+- <code><a href="./src/resources/v1/boxes/media.ts">MediaCreateAlbumResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/media.ts">MediaDownloadMediaResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/media.ts">MediaGetAlbumDetailResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/media.ts">MediaListAlbumsResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/media.ts">MediaUpdateAlbumResponse</a></code>
+
+Methods:
+
+- <code title="post /boxes/{boxId}/media/albums">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">createAlbum</a>(boxID, { ...params }) -> MediaCreateAlbumResponse</code>
+- <code title="delete /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">deleteAlbum</a>(albumName, { ...params }) -> void</code>
+- <code title="delete /boxes/{boxId}/media/albums/{albumName}/{mediaName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">deleteMedia</a>(mediaName, { ...params }) -> void</code>
+- <code title="get /boxes/{boxId}/media/albums/{albumName}/{mediaName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">downloadMedia</a>(mediaName, { ...params }) -> MediaDownloadMediaResponse</code>
+- <code title="get /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">getAlbumDetail</a>(albumName, { ...params }) -> MediaGetAlbumDetailResponse</code>
+- <code title="get /boxes/{boxId}/media/albums">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">listAlbums</a>(boxID) -> MediaListAlbumsResponse</code>
+- <code title="patch /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">updateAlbum</a>(albumName, { ...params }) -> MediaUpdateAlbumResponse</code>
+
 ### Fs
 
 Types:

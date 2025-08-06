@@ -111,4 +111,18 @@ export {
   type FRenameParams,
   type FWriteParams,
 } from './fs';
+export {
+  Media,
+  type MediaCreateAlbumResponse,
+  type MediaDownloadMediaResponse,
+  type MediaGetAlbumDetailResponse,
+  type MediaListAlbumsResponse,
+  type MediaUpdateAlbumResponse,
+  type MediaCreateAlbumParams,
+  type MediaDeleteAlbumParams,
+  type MediaDeleteMediaParams,
+  type MediaDownloadMediaParams,
+  type MediaGetAlbumDetailParams,
+  type MediaUpdateAlbumParams,
+} from './media';
 export { Storage, type StoragePresignedURLResponse, type StoragePresignedURLParams } from './storage';
