@@ -105,6 +105,29 @@ describe('resource media', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('getMedia: only required params', async () => {
+    const responsePromise = client.v1.boxes.media.getMedia('IMG_001.jpg', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      albumName: 'Pictures',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('getMedia: required and optional params', async () => {
+    const response = await client.v1.boxes.media.getMedia('IMG_001.jpg', {
+      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      albumName: 'Pictures',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('listAlbums', async () => {
     const responsePromise = client.v1.boxes.media.listAlbums('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
