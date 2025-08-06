@@ -104,6 +104,8 @@ import {
   MediaUpdateAlbumParams,
   MediaUpdateAlbumResponse,
 } from './media';
+import * as ProxyAPI from './proxy';
+import { Proxy, ProxySetParams } from './proxy';
 import * as StorageAPI from './storage';
 import { Storage, StoragePresignedURLParams, StoragePresignedURLResponse } from './storage';
 import { APIPromise } from '../../../core/api-promise';
@@ -114,6 +116,7 @@ import { path } from '../../../internal/utils/path';
 export class Boxes extends APIResource {
   storage: StorageAPI.Storage = new StorageAPI.Storage(this._client);
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
+  proxy: ProxyAPI.Proxy = new ProxyAPI.Proxy(this._client);
   media: MediaAPI.Media = new MediaAPI.Media(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
   browser: BrowserAPI.Browser = new BrowserAPI.Browser(this._client);
@@ -1081,6 +1084,7 @@ export interface BoxWebTerminalURLParams {
 
 Boxes.Storage = Storage;
 Boxes.Actions = Actions;
+Boxes.Proxy = Proxy;
 Boxes.Media = Media;
 Boxes.Fs = Fs;
 Boxes.Browser = Browser;
@@ -1150,6 +1154,8 @@ export declare namespace Boxes {
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
   };
+
+  export { Proxy as Proxy, type ProxySetParams as ProxySetParams };
 
   export {
     Media as Media,

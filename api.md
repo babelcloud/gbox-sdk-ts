@@ -81,6 +81,14 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">touch</a>(boxID, { ...params }) -> ActionTouchResponse</code>
 - <code title="post /boxes/{boxId}/actions/type">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">type</a>(boxID, { ...params }) -> ActionTypeResponse</code>
 
+### Proxy
+
+Methods:
+
+- <code title="delete /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/resources/v1/boxes/proxy.ts">clear</a>(boxID) -> void</code>
+- <code title="get /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/resources/v1/boxes/proxy.ts">get</a>(boxID) -> void</code>
+- <code title="post /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/resources/v1/boxes/proxy.ts">set</a>(boxID, { ...params }) -> void</code>
+
 ### Media
 
 Types:
