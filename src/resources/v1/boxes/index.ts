@@ -115,6 +115,7 @@ export {
   Media,
   type MediaCreateAlbumResponse,
   type MediaGetAlbumDetailResponse,
+  type MediaGetMediaResponse,
   type MediaListAlbumsResponse,
   type MediaListMediaResponse,
   type MediaUpdateAlbumResponse,
@@ -123,6 +124,7 @@ export {
   type MediaDeleteMediaParams,
   type MediaDownloadMediaParams,
   type MediaGetAlbumDetailParams,
+  type MediaGetMediaParams,
   type MediaListMediaParams,
   type MediaUpdateAlbumParams,
 } from './media';

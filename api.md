@@ -97,6 +97,7 @@ Types:
 
 - <code><a href="./src/resources/v1/boxes/media.ts">MediaCreateAlbumResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/media.ts">MediaGetAlbumDetailResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/media.ts">MediaGetMediaResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/media.ts">MediaListAlbumsResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/media.ts">MediaListMediaResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/media.ts">MediaUpdateAlbumResponse</a></code>
@@ -106,8 +107,9 @@ Methods:
 - <code title="post /boxes/{boxId}/media/albums">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">createAlbum</a>(boxID, { ...params }) -> MediaCreateAlbumResponse</code>
 - <code title="delete /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">deleteAlbum</a>(albumName, { ...params }) -> void</code>
 - <code title="delete /boxes/{boxId}/media/albums/{albumName}/media/{mediaName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">deleteMedia</a>(mediaName, { ...params }) -> void</code>
-- <code title="get /boxes/{boxId}/media/albums/{albumName}/media/{mediaName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">downloadMedia</a>(mediaName, { ...params }) -> Response</code>
+- <code title="get /boxes/{boxId}/media/albums/{albumName}/media/{mediaName}/download">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">downloadMedia</a>(mediaName, { ...params }) -> Response</code>
 - <code title="get /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">getAlbumDetail</a>(albumName, { ...params }) -> MediaGetAlbumDetailResponse</code>
+- <code title="get /boxes/{boxId}/media/albums/{albumName}/media/{mediaName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">getMedia</a>(mediaName, { ...params }) -> MediaGetMediaResponse</code>
 - <code title="get /boxes/{boxId}/media/albums">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">listAlbums</a>(boxID) -> MediaListAlbumsResponse</code>
 - <code title="get /boxes/{boxId}/media/albums/{albumName}/media">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">listMedia</a>(albumName, { ...params }) -> MediaListMediaResponse</code>
 - <code title="patch /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">updateAlbum</a>(albumName, { ...params }) -> MediaUpdateAlbumResponse</code>
