@@ -100,6 +100,8 @@ import {
   MediaGetAlbumDetailParams,
   MediaGetAlbumDetailResponse,
   MediaListAlbumsResponse,
+  MediaListMediaParams,
+  MediaListMediaResponse,
   MediaUpdateAlbumParams,
   MediaUpdateAlbumResponse,
 } from './media';
@@ -1161,12 +1163,14 @@ export declare namespace Boxes {
     type MediaCreateAlbumResponse as MediaCreateAlbumResponse,
     type MediaGetAlbumDetailResponse as MediaGetAlbumDetailResponse,
     type MediaListAlbumsResponse as MediaListAlbumsResponse,
+    type MediaListMediaResponse as MediaListMediaResponse,
     type MediaUpdateAlbumResponse as MediaUpdateAlbumResponse,
     type MediaCreateAlbumParams as MediaCreateAlbumParams,
     type MediaDeleteAlbumParams as MediaDeleteAlbumParams,
     type MediaDeleteMediaParams as MediaDeleteMediaParams,
     type MediaDownloadMediaParams as MediaDownloadMediaParams,
     type MediaGetAlbumDetailParams as MediaGetAlbumDetailParams,
+    type MediaListMediaParams as MediaListMediaParams,
     type MediaUpdateAlbumParams as MediaUpdateAlbumParams,
   };
 
