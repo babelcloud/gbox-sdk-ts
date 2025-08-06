@@ -39,7 +39,7 @@ export class Media extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.media.deleteAlbum('albumName', {
+   * await client.v1.boxes.media.deleteAlbum('Pictures', {
    *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * });
    * ```
@@ -57,9 +57,9 @@ export class Media extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.media.deleteMedia('mediaName', {
+   * await client.v1.boxes.media.deleteMedia('IMG_001.jpg', {
    *   boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   albumName: 'albumName',
+   *   albumName: 'Pictures',
    * });
    * ```
    */
@@ -77,10 +77,10 @@ export class Media extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.media.downloadMedia(
-   *   'mediaName',
+   *   'IMG_001.jpg',
    *   {
    *     boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     albumName: 'albumName',
+   *     albumName: 'Pictures',
    *   },
    * );
    *
@@ -107,7 +107,7 @@ export class Media extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.media.getAlbumDetail(
-   *   'albumName',
+   *   'Pictures',
    *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
@@ -141,7 +141,7 @@ export class Media extends APIResource {
    * @example
    * ```ts
    * const response = await client.v1.boxes.media.updateAlbum(
-   *   'albumName',
+   *   'Pictures',
    *   {
    *     boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *     media: [fs.createReadStream('path/to/file')],
@@ -500,6 +500,9 @@ export interface MediaDeleteMediaParams {
    */
   boxId: string;
 
+  /**
+   * Album name
+   */
   albumName: string;
 }
 
@@ -509,6 +512,9 @@ export interface MediaDownloadMediaParams {
    */
   boxId: string;
 
+  /**
+   * Album name
+   */
   albumName: string;
 }
 
