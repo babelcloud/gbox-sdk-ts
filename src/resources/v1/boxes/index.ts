@@ -116,12 +116,14 @@ export {
   type MediaCreateAlbumResponse,
   type MediaGetAlbumDetailResponse,
   type MediaListAlbumsResponse,
+  type MediaListMediaResponse,
   type MediaUpdateAlbumResponse,
   type MediaCreateAlbumParams,
   type MediaDeleteAlbumParams,
   type MediaDeleteMediaParams,
   type MediaDownloadMediaParams,
   type MediaGetAlbumDetailParams,
+  type MediaListMediaParams,
   type MediaUpdateAlbumParams,
 } from './media';
 export { Proxy, type ProxySetParams } from './proxy';
