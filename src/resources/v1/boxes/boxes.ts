@@ -89,6 +89,21 @@ import {
   FWriteResponse,
   Fs,
 } from './fs';
+import * as MediaAPI from './media';
+import {
+  Media,
+  MediaCreateAlbumParams,
+  MediaCreateAlbumResponse,
+  MediaDeleteAlbumParams,
+  MediaDeleteMediaParams,
+  MediaDownloadMediaParams,
+  MediaDownloadMediaResponse,
+  MediaGetAlbumDetailParams,
+  MediaGetAlbumDetailResponse,
+  MediaListAlbumsResponse,
+  MediaUpdateAlbumParams,
+  MediaUpdateAlbumResponse,
+} from './media';
 import * as StorageAPI from './storage';
 import { Storage, StoragePresignedURLParams, StoragePresignedURLResponse } from './storage';
 import { APIPromise } from '../../../core/api-promise';
@@ -99,6 +114,7 @@ import { path } from '../../../internal/utils/path';
 export class Boxes extends APIResource {
   storage: StorageAPI.Storage = new StorageAPI.Storage(this._client);
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
+  media: MediaAPI.Media = new MediaAPI.Media(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
   browser: BrowserAPI.Browser = new BrowserAPI.Browser(this._client);
   android: AndroidAPI.Android = new AndroidAPI.Android(this._client);
@@ -1065,6 +1081,7 @@ export interface BoxWebTerminalURLParams {
 
 Boxes.Storage = Storage;
 Boxes.Actions = Actions;
+Boxes.Media = Media;
 Boxes.Fs = Fs;
 Boxes.Browser = Browser;
 Boxes.Android = Android;
@@ -1132,6 +1149,21 @@ export declare namespace Boxes {
     type ActionSwipeParams as ActionSwipeParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
+  };
+
+  export {
+    Media as Media,
+    type MediaCreateAlbumResponse as MediaCreateAlbumResponse,
+    type MediaDownloadMediaResponse as MediaDownloadMediaResponse,
+    type MediaGetAlbumDetailResponse as MediaGetAlbumDetailResponse,
+    type MediaListAlbumsResponse as MediaListAlbumsResponse,
+    type MediaUpdateAlbumResponse as MediaUpdateAlbumResponse,
+    type MediaCreateAlbumParams as MediaCreateAlbumParams,
+    type MediaDeleteAlbumParams as MediaDeleteAlbumParams,
+    type MediaDeleteMediaParams as MediaDeleteMediaParams,
+    type MediaDownloadMediaParams as MediaDownloadMediaParams,
+    type MediaGetAlbumDetailParams as MediaGetAlbumDetailParams,
+    type MediaUpdateAlbumParams as MediaUpdateAlbumParams,
   };
 
   export {
