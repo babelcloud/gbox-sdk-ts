@@ -83,15 +83,22 @@ export class Media extends APIResource {
    *     albumName: 'albumName',
    *   },
    * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
    * ```
    */
   downloadMedia(
     mediaName: string,
     params: MediaDownloadMediaParams,
     options?: RequestOptions,
-  ): APIPromise<MediaDownloadMediaResponse> {
+  ): APIPromise<Response> {
     const { boxId, albumName } = params;
-    return this._client.get(path`/boxes/${boxId}/media/albums/${albumName}/${mediaName}`, options);
+    return this._client.get(path`/boxes/${boxId}/media/albums/${albumName}/${mediaName}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
+      __binaryResponse: true,
+    });
   }
 
   /**
@@ -124,7 +131,7 @@ export class Media extends APIResource {
    * );
    * ```
    */
-  listAlbums(boxID: string, options?: RequestOptions): APIPromise<unknown> {
+  listAlbums(boxID: string, options?: RequestOptions): APIPromise<MediaListAlbumsResponse> {
     return this._client.get(path`/boxes/${boxID}/media/albums`, options);
   }
 
@@ -248,31 +255,6 @@ export namespace MediaCreateAlbumResponse {
 }
 
 /**
- * Media file representation for download
- */
-export interface MediaDownloadMediaResponse {
-  /**
-   * Content of the media file (base64 encoded)
-   */
-  content: string;
-
-  /**
-   * MIME type of the media file
-   */
-  mimeType: string;
-
-  /**
-   * Name of the media file
-   */
-  name: string;
-
-  /**
-   * Size of the media file
-   */
-  size: string;
-}
-
-/**
  * Detailed album information with media files
  */
 export interface MediaGetAlbumDetailResponse {
@@ -364,7 +346,42 @@ export namespace MediaGetAlbumDetailResponse {
   }
 }
 
-export type MediaListAlbumsResponse = unknown;
+/**
+ * List albums
+ */
+export interface MediaListAlbumsResponse {
+  /**
+   * List of albums
+   */
+  data: Array<MediaListAlbumsResponse.Data>;
+}
+
+export namespace MediaListAlbumsResponse {
+  /**
+   * Album representation
+   */
+  export interface Data {
+    /**
+     * Last modified time of the album
+     */
+    lastModified: string;
+
+    /**
+     * Name of the album
+     */
+    name: string;
+
+    /**
+     * Full path to the album in the box
+     */
+    path: string;
+
+    /**
+     * Size of the album
+     */
+    size: string;
+  }
+}
 
 /**
  * Detailed album information with media files
@@ -517,7 +534,6 @@ export interface MediaUpdateAlbumParams {
 export declare namespace Media {
   export {
     type MediaCreateAlbumResponse as MediaCreateAlbumResponse,
-    type MediaDownloadMediaResponse as MediaDownloadMediaResponse,
     type MediaGetAlbumDetailResponse as MediaGetAlbumDetailResponse,
     type MediaListAlbumsResponse as MediaListAlbumsResponse,
     type MediaUpdateAlbumResponse as MediaUpdateAlbumResponse,
