@@ -33,7 +33,7 @@ describe('resource media', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('deleteAlbum: only required params', async () => {
-    const responsePromise = client.v1.boxes.media.deleteAlbum('albumName', {
+    const responsePromise = client.v1.boxes.media.deleteAlbum('Pictures', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -47,16 +47,16 @@ describe('resource media', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('deleteAlbum: required and optional params', async () => {
-    const response = await client.v1.boxes.media.deleteAlbum('albumName', {
+    const response = await client.v1.boxes.media.deleteAlbum('Pictures', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('deleteMedia: only required params', async () => {
-    const responsePromise = client.v1.boxes.media.deleteMedia('mediaName', {
+    const responsePromise = client.v1.boxes.media.deleteMedia('IMG_001.jpg', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-      albumName: 'albumName',
+      albumName: 'Pictures',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -69,23 +69,23 @@ describe('resource media', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('deleteMedia: required and optional params', async () => {
-    const response = await client.v1.boxes.media.deleteMedia('mediaName', {
+    const response = await client.v1.boxes.media.deleteMedia('IMG_001.jpg', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-      albumName: 'albumName',
+      albumName: 'Pictures',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('downloadMedia: required and optional params', async () => {
-    const response = await client.v1.boxes.media.downloadMedia('mediaName', {
+    const response = await client.v1.boxes.media.downloadMedia('IMG_001.jpg', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-      albumName: 'albumName',
+      albumName: 'Pictures',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('getAlbumDetail: only required params', async () => {
-    const responsePromise = client.v1.boxes.media.getAlbumDetail('albumName', {
+    const responsePromise = client.v1.boxes.media.getAlbumDetail('Pictures', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -99,7 +99,7 @@ describe('resource media', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('getAlbumDetail: required and optional params', async () => {
-    const response = await client.v1.boxes.media.getAlbumDetail('albumName', {
+    const response = await client.v1.boxes.media.getAlbumDetail('Pictures', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
   });
@@ -118,7 +118,7 @@ describe('resource media', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('updateAlbum: only required params', async () => {
-    const responsePromise = client.v1.boxes.media.updateAlbum('albumName', {
+    const responsePromise = client.v1.boxes.media.updateAlbum('Pictures', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
       media: [await toFile(Buffer.from('# my file contents'), 'README.md')],
     });
@@ -133,7 +133,7 @@ describe('resource media', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('updateAlbum: required and optional params', async () => {
-    const response = await client.v1.boxes.media.updateAlbum('albumName', {
+    const response = await client.v1.boxes.media.updateAlbum('Pictures', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
       media: [await toFile(Buffer.from('# my file contents'), 'README.md')],
     });
