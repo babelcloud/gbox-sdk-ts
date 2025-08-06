@@ -124,7 +124,7 @@ export class Media extends APIResource {
    * );
    * ```
    */
-  listAlbums(boxID: string, options?: RequestOptions): APIPromise<MediaListAlbumsResponse> {
+  listAlbums(boxID: string, options?: RequestOptions): APIPromise<unknown> {
     return this._client.get(path`/boxes/${boxID}/media/albums`, options);
   }
 
@@ -364,34 +364,7 @@ export namespace MediaGetAlbumDetailResponse {
   }
 }
 
-export type MediaListAlbumsResponse = Array<MediaListAlbumsResponse.MediaListAlbumsResponseItem>;
-
-export namespace MediaListAlbumsResponse {
-  /**
-   * Album representation
-   */
-  export interface MediaListAlbumsResponseItem {
-    /**
-     * Last modified time of the album
-     */
-    lastModified: string;
-
-    /**
-     * Name of the album
-     */
-    name: string;
-
-    /**
-     * Full path to the album in the box
-     */
-    path: string;
-
-    /**
-     * Size of the album
-     */
-    size: string;
-  }
-}
+export type MediaListAlbumsResponse = unknown;
 
 /**
  * Detailed album information with media files
