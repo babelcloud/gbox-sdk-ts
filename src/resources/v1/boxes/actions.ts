@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -129,6 +130,42 @@ export class Actions extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ActionPressKeyResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/press-key`, { body, ...options });
+  }
+
+  /**
+   * Start recording the box screen. Only one recording can be active at a time. If a
+   * recording is already in progress, starting a new recording will stop the
+   * previous one and keep only the latest recording.
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.actions.recordingStart(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  recordingStart(boxID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/start`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Stop recording the box screen
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.actions.recordingStop(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  recordingStop(boxID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/stop`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
