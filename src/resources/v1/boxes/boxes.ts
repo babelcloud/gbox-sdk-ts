@@ -97,7 +97,6 @@ import {
   MediaDeleteAlbumParams,
   MediaDeleteMediaParams,
   MediaDownloadMediaParams,
-  MediaDownloadMediaResponse,
   MediaGetAlbumDetailParams,
   MediaGetAlbumDetailResponse,
   MediaListAlbumsResponse,
@@ -1160,7 +1159,6 @@ export declare namespace Boxes {
   export {
     Media as Media,
     type MediaCreateAlbumResponse as MediaCreateAlbumResponse,
-    type MediaDownloadMediaResponse as MediaDownloadMediaResponse,
     type MediaGetAlbumDetailResponse as MediaGetAlbumDetailResponse,
     type MediaListAlbumsResponse as MediaListAlbumsResponse,
     type MediaUpdateAlbumResponse as MediaUpdateAlbumResponse,

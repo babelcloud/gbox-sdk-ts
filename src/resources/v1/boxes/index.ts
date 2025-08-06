@@ -114,7 +114,6 @@ export {
 export {
   Media,
   type MediaCreateAlbumResponse,
-  type MediaDownloadMediaResponse,
   type MediaGetAlbumDetailResponse,
   type MediaListAlbumsResponse,
   type MediaUpdateAlbumResponse,
