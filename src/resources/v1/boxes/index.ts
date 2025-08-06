@@ -125,4 +125,5 @@ export {
   type MediaGetAlbumDetailParams,
   type MediaUpdateAlbumParams,
 } from './media';
+export { Proxy, type ProxySetParams } from './proxy';
 export { Storage, type StoragePresignedURLResponse, type StoragePresignedURLParams } from './storage';
