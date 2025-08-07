@@ -16,10 +16,7 @@ export class Media extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.media.createAlbum(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   {
-   *     media: [fs.createReadStream('path/to/file')],
-   *     name: 'Vacation Photos',
-   *   },
+   *   { name: 'Vacation Photos' },
    * );
    * ```
    */
@@ -230,6 +227,11 @@ export interface MediaCreateAlbumResponse {
   lastModified: string;
 
   /**
+   * Number of media files in the album
+   */
+  mediaCount: number;
+
+  /**
    * Name of the album
    */
   name: string;
@@ -248,6 +250,11 @@ export interface MediaGetAlbumDetailResponse {
    * Last modified time of the album
    */
   lastModified: string;
+
+  /**
+   * Number of media files in the album
+   */
+  mediaCount: number;
 
   /**
    * Name of the album
@@ -373,6 +380,11 @@ export namespace MediaListAlbumsResponse {
     lastModified: string;
 
     /**
+     * Number of media files in the album
+     */
+    mediaCount: number;
+
+    /**
      * Name of the album
      */
     name: string;
@@ -476,6 +488,11 @@ export interface MediaUpdateAlbumResponse {
   lastModified: string;
 
   /**
+   * Number of media files in the album
+   */
+  mediaCount: number;
+
+  /**
    * Name of the album
    */
   name: string;
@@ -488,14 +505,14 @@ export interface MediaUpdateAlbumResponse {
 
 export interface MediaCreateAlbumParams {
   /**
-   * Media files to include in the album (max size: 512MB per file)
-   */
-  media: Array<Uploadable>;
-
-  /**
    * Name of the album to create
    */
   name: string;
+
+  /**
+   * Media files to include in the album (max size: 512MB per file)
+   */
+  media?: Array<Uploadable>;
 }
 
 export interface MediaDeleteAlbumParams {

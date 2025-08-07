@@ -11,7 +11,6 @@ describe('resource media', () => {
   // skipped: tests are disabled for the time being
   test.skip('createAlbum: only required params', async () => {
     const responsePromise = client.v1.boxes.media.createAlbum('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      media: [await toFile(Buffer.from('# my file contents'), 'README.md')],
       name: 'Vacation Photos',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,8 +25,8 @@ describe('resource media', () => {
   // skipped: tests are disabled for the time being
   test.skip('createAlbum: required and optional params', async () => {
     const response = await client.v1.boxes.media.createAlbum('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      media: [await toFile(Buffer.from('# my file contents'), 'README.md')],
       name: 'Vacation Photos',
+      media: [await toFile(Buffer.from('# my file contents'), 'README.md')],
     });
   });
 
