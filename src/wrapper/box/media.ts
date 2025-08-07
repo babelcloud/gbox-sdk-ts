@@ -334,9 +334,14 @@ export class MediaItemOperator {
   private client: GboxClient;
   private boxId: string;
   private albumName: string;
-  private data: MediaListAlbumsResponse.Data;
+  private data: MediaListMediaResponse.Photo | MediaListMediaResponse.Video;
 
-  constructor(client: GboxClient, boxId: string, albumName: string, data: MediaListAlbumsResponse.Data) {
+  constructor(
+    client: GboxClient,
+    boxId: string,
+    albumName: string,
+    data: MediaListMediaResponse.Photo | MediaListMediaResponse.Video,
+  ) {
     this.client = client;
     this.boxId = boxId;
     this.albumName = albumName;
