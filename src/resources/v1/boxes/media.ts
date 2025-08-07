@@ -145,6 +145,21 @@ export class Media extends APIResource {
   }
 
   /**
+   * Get supported media file extensions for photos and videos
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.media.getMediaSupport(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  getMediaSupport(boxID: string, options?: RequestOptions): APIPromise<MediaGetMediaSupportResponse> {
+    return this._client.get(path`/boxes/${boxID}/media/support`, options);
+  }
+
+  /**
    * Get a list of albums in the box
    *
    * @example
@@ -320,6 +335,21 @@ export namespace MediaGetMediaResponse {
      */
     type: 'video';
   }
+}
+
+/**
+ * Supported media extensions
+ */
+export interface MediaGetMediaSupportResponse {
+  /**
+   * Supported photo extensions
+   */
+  photo: Array<string>;
+
+  /**
+   * Supported video extensions
+   */
+  video: Array<string>;
 }
 
 /**
@@ -542,6 +572,7 @@ export declare namespace Media {
     type MediaCreateAlbumResponse as MediaCreateAlbumResponse,
     type MediaGetAlbumDetailResponse as MediaGetAlbumDetailResponse,
     type MediaGetMediaResponse as MediaGetMediaResponse,
+    type MediaGetMediaSupportResponse as MediaGetMediaSupportResponse,
     type MediaListAlbumsResponse as MediaListAlbumsResponse,
     type MediaListMediaResponse as MediaListMediaResponse,
     type MediaUpdateAlbumResponse as MediaUpdateAlbumResponse,
