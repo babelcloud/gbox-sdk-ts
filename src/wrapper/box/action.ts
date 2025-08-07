@@ -291,6 +291,22 @@ export class ActionOperator {
   }
 
   /**
+   * @example
+   * const response = await myBox.action.screenRecordingStart();
+   */
+  async screenRecordingStart() {
+    return this.client.v1.boxes.actions.recordingStart(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.screenRecordingStop();
+   */
+  async screenRecordingStop() {
+    return this.client.v1.boxes.actions.recordingStop(this.boxId);
+  }
+
+  /**
    * Save base64 data in data URL format to a file
    * @param dataUrl - data URL string, format like "data:image/png;base64,iVBORw0KGgoAAAA..."
    * @param filePath - the file path to save to
