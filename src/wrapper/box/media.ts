@@ -1,10 +1,8 @@
 import {
   MediaGetMediaSupportResponse,
   MediaListAlbumsResponse,
-  MediaCreateAlbumResponse,
   MediaGetAlbumDetailResponse,
   MediaGetMediaResponse,
-  MediaUpdateAlbumResponse,
   MediaListMediaResponse,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
@@ -156,9 +154,11 @@ export class MediaOperator {
    * or
    * const response = await myBox.media.createAlbum({ name: 'My Album', media: ['path/to/your/folder'] });
    */
-  async createAlbum(body: CreateMediaAlbum): Promise<MediaCreateAlbumResponse> {
+  async createAlbum(body: CreateMediaAlbum): Promise<MediaAlbumOperator> {
     const processedMedia = await this.processMediaArray(body.media);
-    return this.client.v1.boxes.media.createAlbum(this.boxId, { ...body, media: processedMedia });
+    const res = await this.client.v1.boxes.media.createAlbum(this.boxId, { ...body, media: processedMedia });
+
+    return new MediaAlbumOperator(this.client, this.boxId, res);
   }
 
   /**
@@ -291,12 +291,14 @@ export class MediaAlbumOperator {
    * or
    * const response = await myBox.media.appendMedia(['path/to/your/folder']);
    */
-  async appendMedia(media: (Uploadable | string)[]): Promise<MediaUpdateAlbumResponse> {
+  async appendMedia(media: (Uploadable | string)[]): Promise<MediaAlbumOperator> {
     const processedMedia = await this.processMediaArray(media);
-    return this.client.v1.boxes.media.updateAlbum(this.data.name, {
+    await this.client.v1.boxes.media.updateAlbum(this.data.name, {
       boxId: this.boxId,
       media: processedMedia,
     });
+
+    return this;
   }
 
   /**
