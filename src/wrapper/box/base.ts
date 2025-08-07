@@ -20,6 +20,7 @@ import { TimeString } from '../types';
 import { BoxTerminate } from '../sdk';
 import WebSocket from 'ws';
 import { StorageOperator } from './storage';
+import { MediaOperator } from './media';
 
 export interface BoxStop extends BoxStopParams {}
 
@@ -44,6 +45,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
   public fs: FileSystemOperator;
   public browser: BrowserOperator;
   public storage: StorageOperator;
+  public media: MediaOperator;
 
   constructor(client: GboxClient, data: T) {
     this.client = client;
@@ -53,6 +55,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
     this.fs = new FileSystemOperator(this.client, this.data.id);
     this.browser = new BrowserOperator(this.client, this.data.id);
     this.storage = new StorageOperator(this.client, this.data.id);
+    this.media = new MediaOperator(this.client, this.data.id);
   }
 
   private async syncData() {
