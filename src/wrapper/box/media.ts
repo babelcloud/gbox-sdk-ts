@@ -1,4 +1,12 @@
-import { MediaListAlbumsResponse } from '../../resources/v1/boxes';
+import {
+  MediaGetMediaSupportResponse,
+  MediaListAlbumsResponse,
+  MediaCreateAlbumResponse,
+  MediaGetAlbumDetailResponse,
+  MediaGetMediaResponse,
+  MediaUpdateAlbumResponse,
+  MediaListMediaResponse,
+} from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { Uploadable } from '../../internal/uploads';
 import fs from 'fs';
@@ -11,12 +19,12 @@ export interface CreateMediaAlbum {
 }
 
 // Cache for media support to avoid repeated API calls
-let mediaSupportCache: { photo: string[]; video: string[] } | null = null;
+let mediaSupportCache: MediaGetMediaSupportResponse | null = null;
 
 /**
  * Get supported media extensions from the API
  */
-async function getMediaSupport(client: GboxClient, boxId: string) {
+async function getMediaSupport(client: GboxClient, boxId: string): Promise<MediaGetMediaSupportResponse> {
   if (!mediaSupportCache) {
     const response = await client.v1.boxes.media.getMediaSupport(boxId);
     mediaSupportCache = response;
@@ -126,7 +134,7 @@ export class MediaOperator {
    * @example
    * const response = await myBox.media.listAlbums();
    */
-  async listAlbums() {
+  async listAlbums(): Promise<MediaAlbumOperator[]> {
     const res = await this.client.v1.boxes.media.listAlbums(this.boxId);
     return res.data.map((album) => new MediaAlbumOperator(this.client, this.boxId, album));
   }
@@ -135,7 +143,7 @@ export class MediaOperator {
    * @example
    * const response = await myBox.media.listAlbumsInfo();
    */
-  listAlbumsInfo() {
+  listAlbumsInfo(): Promise<MediaListAlbumsResponse> {
     return this.client.v1.boxes.media.listAlbums(this.boxId);
   }
   /**
@@ -148,7 +156,7 @@ export class MediaOperator {
    * or
    * const response = await myBox.media.createAlbum({ name: 'My Album', media: ['path/to/your/folder'] });
    */
-  async createAlbum(body: CreateMediaAlbum) {
+  async createAlbum(body: CreateMediaAlbum): Promise<MediaCreateAlbumResponse> {
     const processedMedia = await this.processMediaArray(body.media);
     return this.client.v1.boxes.media.createAlbum(this.boxId, { ...body, media: processedMedia });
   }
@@ -157,7 +165,7 @@ export class MediaOperator {
    * @example
    * const response = await myBox.media.deleteAlbum('My Album');
    */
-  deleteAlbum(albumName: string) {
+  deleteAlbum(albumName: string): Promise<void> {
     return this.client.v1.boxes.media.deleteAlbum(albumName, { boxId: this.boxId });
   }
 
@@ -165,7 +173,7 @@ export class MediaOperator {
    * @example
    * const response = await myBox.media.getAlbumInfo('My Album');
    */
-  getAlbumInfo(albumName: string) {
+  getAlbumInfo(albumName: string): Promise<MediaGetAlbumDetailResponse> {
     return this.client.v1.boxes.media.getAlbumDetail(albumName, { boxId: this.boxId });
   }
 
@@ -173,7 +181,7 @@ export class MediaOperator {
    * @example
    * const response = await myBox.media.getAlbum('My Album');
    */
-  async getAlbum(albumName: string) {
+  async getAlbum(albumName: string): Promise<MediaAlbumOperator> {
     const res = await this.client.v1.boxes.media.getAlbumDetail(albumName, { boxId: this.boxId });
     return new MediaAlbumOperator(this.client, this.boxId, res);
   }
@@ -182,7 +190,7 @@ export class MediaOperator {
    * @example
    * const response = await myBox.media.getMediaSupport();
    */
-  async getMediaSupport() {
+  async getMediaSupport(): Promise<MediaGetMediaSupportResponse> {
     return this.client.v1.boxes.media.getMediaSupport(this.boxId);
   }
 
@@ -219,7 +227,7 @@ export class MediaAlbumOperator {
    * @example
    * const response = await myBox.media.listMediaInfo();
    */
-  listMediaInfo() {
+  listMediaInfo(): Promise<MediaListMediaResponse> {
     return this.client.v1.boxes.media.listMedia(this.data.name, { boxId: this.boxId });
   }
 
@@ -227,7 +235,7 @@ export class MediaAlbumOperator {
    * @example
    * const response = await myBox.media.listMedia();
    */
-  async listMedia() {
+  async listMedia(): Promise<MediaItemOperator[]> {
     const res = await this.client.v1.boxes.media.listMedia(this.data.name, { boxId: this.boxId });
     return res.data.map((media) => new MediaItemOperator(this.client, this.boxId, this.data.name, media));
   }
@@ -283,7 +291,7 @@ export class MediaAlbumOperator {
    * or
    * const response = await myBox.media.appendMedia(['path/to/your/folder']);
    */
-  async appendMedia(media: (Uploadable | string)[]) {
+  async appendMedia(media: (Uploadable | string)[]): Promise<MediaUpdateAlbumResponse> {
     const processedMedia = await this.processMediaArray(media);
     return this.client.v1.boxes.media.updateAlbum(this.data.name, {
       boxId: this.boxId,
@@ -295,7 +303,7 @@ export class MediaAlbumOperator {
    * @example
    * const response = await myBox.media.deleteMedia('My Media');
    */
-  deleteMedia(mediaName: string) {
+  deleteMedia(mediaName: string): Promise<void> {
     return this.client.v1.boxes.media.deleteMedia(mediaName, {
       boxId: this.boxId,
       albumName: this.data.name,
@@ -337,7 +345,7 @@ export class MediaItemOperator {
    * @example
    * const response = await media.getInfo();
    */
-  async getInfo() {
+  async getInfo(): Promise<MediaGetMediaResponse> {
     return this.client.v1.boxes.media.getMedia(this.data.name, {
       boxId: this.boxId,
       albumName: this.albumName,
@@ -349,7 +357,7 @@ export class MediaItemOperator {
    * const blob = await media.download(); // Return blob only
    * const blob = await media.download("path/to/your/file"); // Download and save to file, then return blob
    */
-  async download(filePath?: string) {
+  async download(filePath?: string): Promise<Blob> {
     const res = await this.client.v1.boxes.media.downloadMedia(this.data.name, {
       boxId: this.boxId,
       albumName: this.albumName,
