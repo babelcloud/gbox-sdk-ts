@@ -141,11 +141,17 @@ export class Actions extends APIResource {
    * ```ts
    * await client.v1.boxes.actions.recordingStart(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { duration: '10s' },
    * );
    * ```
    */
-  recordingStart(boxID: string, options?: RequestOptions): APIPromise<void> {
+  recordingStart(
+    boxID: string,
+    body: ActionRecordingStartParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
     return this._client.post(path`/boxes/${boxID}/actions/recording/start`, {
+      body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -156,16 +162,14 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.actions.recordingStop(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
+   * const response =
+   *   await client.v1.boxes.actions.recordingStop(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
    * ```
    */
-  recordingStop(boxID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${boxID}/actions/recording/stop`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  recordingStop(boxID: string, options?: RequestOptions): APIPromise<ActionRecordingStopResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/stop`, options);
   }
 
   /**
@@ -3366,6 +3370,24 @@ export namespace ActionPressKeyResponse {
 }
 
 /**
+ * Recording stop result
+ */
+export interface ActionRecordingStopResponse {
+  /**
+   * Presigned URL of the recording. This is a temporary downloadable URL with an
+   * expiration time for accessing the recording file.
+   */
+  presignedUrl: string;
+
+  /**
+   * Storage key of the recording. Before the box is deleted, you can use this
+   * storageKey with the endpoint `box/:boxId/storage/presigned-url` to get a
+   * downloadable URL for the recording.
+   */
+  storageKey: string;
+}
+
+/**
  * Screen layout content.
  *
  * Android boxes (XML):
@@ -4484,6 +4506,17 @@ export interface ActionPressKeyParams {
   screenshotDelay?: string;
 }
 
+export interface ActionRecordingStartParams {
+  /**
+   * Duration of the recording. Default is 30m, max is 30m. The recording will
+   * automatically stop when the duration time is reached.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 30m
+   */
+  duration?: string;
+}
+
 export interface ActionScreenRotationParams {
   /**
    * Target screen orientation
@@ -4958,6 +4991,7 @@ export declare namespace Actions {
     type ActionMoveResponse as ActionMoveResponse,
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
+    type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
@@ -4972,6 +5006,7 @@ export declare namespace Actions {
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
+    type ActionRecordingStartParams as ActionRecordingStartParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,

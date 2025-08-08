@@ -199,7 +199,10 @@ describe('resource actions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('recordingStart', async () => {
-    const responsePromise = client.v1.boxes.actions.recordingStart('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const responsePromise = client.v1.boxes.actions.recordingStart(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      {},
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
