@@ -1,6 +1,6 @@
 {
   "name": "gbox-sdk",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "description": "The official TypeScript library for the Gbox Client API",
   "author": "Gbox Client <>",
   "types": "dist/index.d.ts",
@@ -13,6 +13,9 @@
     "**/*"
   ],
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "./scripts/test",
     "build": "./scripts/build",
@@ -50,10 +53,6 @@
     "tsconfig-paths": "^4.0.0",
     "typescript": "5.8.3",
     "typescript-eslint": "8.31.1"
-  },
-  "imports": {
-    "gbox-sdk": ".",
-    "gbox-sdk/*": "./src/*"
   },
   "exports": {
     ".": {

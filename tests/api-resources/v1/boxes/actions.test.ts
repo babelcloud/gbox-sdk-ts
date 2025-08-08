@@ -36,6 +36,7 @@ describe('resource actions', () => {
         systemPrompt:
           'You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.',
       },
+      stream: false,
     });
   });
 
@@ -194,6 +195,30 @@ describe('resource actions', () => {
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
     });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('recordingStart', async () => {
+    const responsePromise = client.v1.boxes.actions.recordingStart('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('recordingStop', async () => {
+    const responsePromise = client.v1.boxes.actions.recordingStop('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // skipped: tests are disabled for the time being

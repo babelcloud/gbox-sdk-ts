@@ -89,6 +89,27 @@ import {
   FWriteResponse,
   Fs,
 } from './fs';
+import * as MediaAPI from './media';
+import {
+  Media,
+  MediaCreateAlbumParams,
+  MediaCreateAlbumResponse,
+  MediaDeleteAlbumParams,
+  MediaDeleteMediaParams,
+  MediaDownloadMediaParams,
+  MediaGetAlbumDetailParams,
+  MediaGetAlbumDetailResponse,
+  MediaGetMediaParams,
+  MediaGetMediaResponse,
+  MediaGetMediaSupportResponse,
+  MediaListAlbumsResponse,
+  MediaListMediaParams,
+  MediaListMediaResponse,
+  MediaUpdateAlbumParams,
+  MediaUpdateAlbumResponse,
+} from './media';
+import * as ProxyAPI from './proxy';
+import { Proxy, ProxySetParams } from './proxy';
 import * as StorageAPI from './storage';
 import { Storage, StoragePresignedURLParams, StoragePresignedURLResponse } from './storage';
 import { APIPromise } from '../../../core/api-promise';
@@ -99,6 +120,8 @@ import { path } from '../../../internal/utils/path';
 export class Boxes extends APIResource {
   storage: StorageAPI.Storage = new StorageAPI.Storage(this._client);
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
+  proxy: ProxyAPI.Proxy = new ProxyAPI.Proxy(this._client);
+  media: MediaAPI.Media = new MediaAPI.Media(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
   browser: BrowserAPI.Browser = new BrowserAPI.Browser(this._client);
   android: AndroidAPI.Android = new AndroidAPI.Android(this._client);
@@ -1065,6 +1088,8 @@ export interface BoxWebTerminalURLParams {
 
 Boxes.Storage = Storage;
 Boxes.Actions = Actions;
+Boxes.Proxy = Proxy;
+Boxes.Media = Media;
 Boxes.Fs = Fs;
 Boxes.Browser = Browser;
 Boxes.Android = Android;
@@ -1132,6 +1157,27 @@ export declare namespace Boxes {
     type ActionSwipeParams as ActionSwipeParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
+  };
+
+  export { Proxy as Proxy, type ProxySetParams as ProxySetParams };
+
+  export {
+    Media as Media,
+    type MediaCreateAlbumResponse as MediaCreateAlbumResponse,
+    type MediaGetAlbumDetailResponse as MediaGetAlbumDetailResponse,
+    type MediaGetMediaResponse as MediaGetMediaResponse,
+    type MediaGetMediaSupportResponse as MediaGetMediaSupportResponse,
+    type MediaListAlbumsResponse as MediaListAlbumsResponse,
+    type MediaListMediaResponse as MediaListMediaResponse,
+    type MediaUpdateAlbumResponse as MediaUpdateAlbumResponse,
+    type MediaCreateAlbumParams as MediaCreateAlbumParams,
+    type MediaDeleteAlbumParams as MediaDeleteAlbumParams,
+    type MediaDeleteMediaParams as MediaDeleteMediaParams,
+    type MediaDownloadMediaParams as MediaDownloadMediaParams,
+    type MediaGetAlbumDetailParams as MediaGetAlbumDetailParams,
+    type MediaGetMediaParams as MediaGetMediaParams,
+    type MediaListMediaParams as MediaListMediaParams,
+    type MediaUpdateAlbumParams as MediaUpdateAlbumParams,
   };
 
   export {

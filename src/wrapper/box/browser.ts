@@ -58,6 +58,14 @@ export class BrowserOperator {
   async switchTab(tabId: string) {
     return this.client.v1.boxes.browser.switchTab(tabId, { boxId: this.boxId });
   }
+
+  /**
+   * @example
+   * const response = await myBox.browser.openTab('https://www.google.com');
+   */
+  async openTab(url: string) {
+    return this.client.v1.boxes.browser.openTab(this.boxId, { url });
+  }
 }
 
 export class BrowserTabOperator {
