@@ -1,5 +1,49 @@
 # Changelog
 
+## 0.26.0 (2025-08-08)
+
+Full Changelog: [v0.25.0...v0.26.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.25.0...v0.26.0)
+
+### Features
+
+* add browser open tab method ([fc1b19e](https://github.com/babelcloud/gbox-sdk-ts/commit/fc1b19e22fb326c08551bee402622581421827af))
+* **api:** api update ([befd4fe](https://github.com/babelcloud/gbox-sdk-ts/commit/befd4fe42fceb766560f7ee3174dc74994beb35c))
+* **api:** api update ([59dce96](https://github.com/babelcloud/gbox-sdk-ts/commit/59dce963b5bcb3d92055cf2b1e6ab6f3d60bf34d))
+* **api:** api update ([80abe24](https://github.com/babelcloud/gbox-sdk-ts/commit/80abe2478a60788d89fc9d570950fd74da6afac0))
+* **api:** api update ([888f48a](https://github.com/babelcloud/gbox-sdk-ts/commit/888f48a30c8989da260815ac2be634f920beaa25))
+* **api:** api update ([12eecf0](https://github.com/babelcloud/gbox-sdk-ts/commit/12eecf035f04cf9aa153d6589445b2532370394f))
+* **api:** api update ([a66e384](https://github.com/babelcloud/gbox-sdk-ts/commit/a66e384fcbea268bb675a74fcca9bdcc4bef3a36))
+* **api:** api update ([177d682](https://github.com/babelcloud/gbox-sdk-ts/commit/177d68253b31296855e38538e019642ecf3619b1))
+* **api:** api update ([384d772](https://github.com/babelcloud/gbox-sdk-ts/commit/384d7726ee5430996b3eb7438f5f73f29d3ce245))
+* **api:** api update ([8ec180d](https://github.com/babelcloud/gbox-sdk-ts/commit/8ec180d050565605c3f7054d198748b546add2c9))
+* **api:** api update ([5dcdf9d](https://github.com/babelcloud/gbox-sdk-ts/commit/5dcdf9d717b0f3297ea6f93a20409c89aacb9ca7))
+* **api:** api update ([6b73a66](https://github.com/babelcloud/gbox-sdk-ts/commit/6b73a66d8bd8463facbc7e13f9948c1ae4cf6478))
+* **api:** api update ([ee99c92](https://github.com/babelcloud/gbox-sdk-ts/commit/ee99c92265f3954f5559f4c5dd75e7b343e8e672))
+* **api:** enhance media operations with new methods and examples ([07400d0](https://github.com/babelcloud/gbox-sdk-ts/commit/07400d0abebd5d6646e434185deb56fbf721d510))
+* **box:** add MediaOperator to BaseBox for enhanced media handling ([d6d46b4](https://github.com/babelcloud/gbox-sdk-ts/commit/d6d46b4c18cfa5e1c6a3ba3c5ad94013a452bbf3))
+* **box:** add screen recording start and stop methods to ActionOperator ([32eb7c2](https://github.com/babelcloud/gbox-sdk-ts/commit/32eb7c24519612a83123f697d6acc54f14044919))
+* **media:** enhance MediaOperator and MediaAlbumOperator with additional response types and method signatures ([e734571](https://github.com/babelcloud/gbox-sdk-ts/commit/e73457180b9bed6075f8bbf0e7d0a9146b81b7e2))
+* **media:** implement media support caching and enhance media file processing ([7d310bf](https://github.com/babelcloud/gbox-sdk-ts/commit/7d310bff2f6924eaf8f4d79004382dcae66555f8))
+* support ai action event ([b288865](https://github.com/babelcloud/gbox-sdk-ts/commit/b288865c2efbc5d0c04447a3f611a9f8f8ce27e8))
+* support ai action event ([0f1be14](https://github.com/babelcloud/gbox-sdk-ts/commit/0f1be14a6ab9408e51acf112ff7cf002c3eabe1c))
+
+
+### Bug Fixes
+
+* lint ([d07a46d](https://github.com/babelcloud/gbox-sdk-ts/commit/d07a46da36381cb9be47479b8f59dd36a804c171))
+
+
+### Chores
+
+* **internal:** move publish config ([db9ca42](https://github.com/babelcloud/gbox-sdk-ts/commit/db9ca42051103465de7c4c3c3d1233e7ad2fdae0))
+* **internal:** remove redundant imports config ([966913b](https://github.com/babelcloud/gbox-sdk-ts/commit/966913bd986e40cd6bc78a9e493354fa1ac48cb2))
+
+
+### Refactors
+
+* **media:** update createAlbum and appendMedia methods to return MediaAlbumOperator instances ([d6e4619](https://github.com/babelcloud/gbox-sdk-ts/commit/d6e46192d9fabe25995b88eb31ec586f51e4bef7))
+* **media:** update MediaItemOperator to accept MediaListMediaResponse types in constructor ([ddda6ce](https://github.com/babelcloud/gbox-sdk-ts/commit/ddda6ce7d89ef4691719cc96abc5daf03f8505b8))
+
 ## 0.25.0 (2025-07-29)
 
 Full Changelog: [v0.24.0...v0.25.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.24.0...v0.25.0)
