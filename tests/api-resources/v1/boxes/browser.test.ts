@@ -8,7 +8,7 @@ const client = new GboxClient({
 });
 
 describe('resource browser', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('cdpURL', async () => {
     const responsePromise = client.v1.boxes.browser.cdpURL('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('cdpURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -32,7 +32,7 @@ describe('resource browser', () => {
     ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('closeTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.closeTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -46,14 +46,14 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('closeTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.closeTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getTabs', async () => {
     const responsePromise = client.v1.boxes.browser.getTabs('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -65,7 +65,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('openTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.openTab('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       url: 'https://www.google.com',
@@ -79,14 +79,14 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('openTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.openTab('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       url: 'https://www.google.com',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('switchTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.switchTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -100,14 +100,14 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('switchTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.switchTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.updateTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -122,7 +122,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.updateTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',

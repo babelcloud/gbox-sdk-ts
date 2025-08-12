@@ -8,7 +8,7 @@ const client = new GboxClient({
 });
 
 describe('resource actions', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ai: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.ai('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       instruction: 'click the login button',
@@ -22,7 +22,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ai: required and optional params', async () => {
     const response = await client.v1.boxes.actions.ai('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       instruction: 'click the login button',
@@ -40,7 +40,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('click: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.click('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 100,
@@ -55,7 +55,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('click: required and optional params', async () => {
     const response = await client.v1.boxes.actions.click('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 100,
@@ -69,7 +69,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('drag: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.drag('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       end: { x: 400, y: 300 },
@@ -84,7 +84,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('drag: required and optional params', async () => {
     const response = await client.v1.boxes.actions.drag('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       end: { x: 400, y: 300 },
@@ -97,7 +97,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('extract: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.extract('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       instruction: 'Extract the email address from the UI interface',
@@ -111,7 +111,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('extract: required and optional params', async () => {
     const response = await client.v1.boxes.actions.extract('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       instruction: 'Extract the email address from the UI interface',
@@ -119,7 +119,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('move: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.move('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 200,
@@ -134,7 +134,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('move: required and optional params', async () => {
     const response = await client.v1.boxes.actions.move('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 200,
@@ -146,7 +146,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('pressButton: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.pressButton('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       buttons: ['power'],
@@ -160,7 +160,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('pressButton: required and optional params', async () => {
     const response = await client.v1.boxes.actions.pressButton('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       buttons: ['power'],
@@ -171,7 +171,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('pressKey: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.pressKey('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       keys: ['enter'],
@@ -185,7 +185,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('pressKey: required and optional params', async () => {
     const response = await client.v1.boxes.actions.pressKey('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       keys: ['enter'],
@@ -197,7 +197,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('recordingStart', async () => {
     const responsePromise = client.v1.boxes.actions.recordingStart(
       'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -212,7 +212,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('recordingStop', async () => {
     const responsePromise = client.v1.boxes.actions.recordingStop('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -224,7 +224,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('screenLayout', async () => {
     const responsePromise = client.v1.boxes.actions.screenLayout('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -236,7 +236,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('screenRotation: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.screenRotation('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       orientation: 'landscapeLeft',
@@ -250,7 +250,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('screenRotation: required and optional params', async () => {
     const response = await client.v1.boxes.actions.screenRotation('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       orientation: 'landscapeLeft',
@@ -261,7 +261,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('screenshot', async () => {
     const responsePromise = client.v1.boxes.actions.screenshot('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
     const rawResponse = await responsePromise.asResponse();
@@ -273,7 +273,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('scroll: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.scroll('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       scrollX: 0,
@@ -290,7 +290,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('scroll: required and optional params', async () => {
     const response = await client.v1.boxes.actions.scroll('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       scrollX: 0,
@@ -304,7 +304,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('swipe: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.swipe('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       direction: 'up',
@@ -318,7 +318,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('swipe: required and optional params', async () => {
     const response = await client.v1.boxes.actions.swipe('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       direction: 'up',
@@ -331,7 +331,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('touch: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       points: [{ start: { x: 100, y: 150 } }],
@@ -345,7 +345,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('touch: required and optional params', async () => {
     const response = await client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       points: [{ start: { x: 100, y: 150 }, actions: [{ duration: '200ms', type: 'move', x: 400, y: 300 }] }],
@@ -356,7 +356,7 @@ describe('resource actions', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('type: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.type('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       text: 'Hello World',
@@ -370,7 +370,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('type: required and optional params', async () => {
     const response = await client.v1.boxes.actions.type('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       text: 'Hello World',

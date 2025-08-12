@@ -8,7 +8,7 @@ const client = new GboxClient({
 });
 
 describe('resource storage', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('presignedURL: only required params', async () => {
     const responsePromise = client.v1.boxes.storage.presignedURL('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       storageKey: 'storage://xxxxxx/xxxxxx/xxxxxxx',
@@ -22,7 +22,7 @@ describe('resource storage', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('presignedURL: required and optional params', async () => {
     const response = await client.v1.boxes.storage.presignedURL('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       storageKey: 'storage://xxxxxx/xxxxxx/xxxxxxx',

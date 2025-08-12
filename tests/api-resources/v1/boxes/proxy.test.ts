@@ -8,7 +8,7 @@ const client = new GboxClient({
 });
 
 describe('resource proxy', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('clear', async () => {
     const responsePromise = client.v1.boxes.proxy.clear('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource proxy', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('get', async () => {
     const responsePromise = client.v1.boxes.proxy.get('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource proxy', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('set: only required params', async () => {
     const responsePromise = client.v1.boxes.proxy.set('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       auth: { password: 'password', username: 'admin' },
@@ -48,7 +48,7 @@ describe('resource proxy', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('set: required and optional params', async () => {
     const response = await client.v1.boxes.proxy.set('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       auth: { password: 'password', username: 'admin' },
