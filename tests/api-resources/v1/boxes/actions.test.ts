@@ -378,6 +378,7 @@ describe('resource actions', () => {
       mode: 'append',
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
+      pressEnter: false,
       screenshotDelay: '500ms',
     });
   });
