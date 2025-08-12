@@ -1199,6 +1199,11 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * Whether to press Enter after typing the text
+         */
+        pressEnter?: boolean;
+
+        /**
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2509,6 +2514,11 @@ export namespace ActionAIResponse {
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
          */
         presignedExpiresIn?: string;
+
+        /**
+         * Whether to press Enter after typing the text
+         */
+        pressEnter?: boolean;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -4962,6 +4972,11 @@ export interface ActionTypeParams {
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
    */
   presignedExpiresIn?: string;
+
+  /**
+   * Whether to press Enter after typing the text
+   */
+  pressEnter?: boolean;
 
   /**
    * Delay after performing the action, before taking the final screenshot.
