@@ -120,6 +120,34 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
+  test.skip('longPress: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.longPress('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      x: 350,
+      y: 250,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('longPress: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.longPress('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      x: 350,
+      y: 250,
+      duration: '1s',
+      includeScreenshot: false,
+      outputFormat: 'base64',
+      presignedExpiresIn: '30m',
+      screenshotDelay: '500ms',
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('move: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.move('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 200,

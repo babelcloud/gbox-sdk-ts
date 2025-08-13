@@ -77,6 +77,27 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Perform a long press action at specified coordinates for a specified duration.
+   * Useful for triggering context menus, drag operations, or other long-press
+   * interactions.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.longPress(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { x: 350, y: 250, duration: '1s' },
+   * );
+   * ```
+   */
+  longPress(
+    boxID: string,
+    body: ActionLongPressParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionLongPressResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/long-press`, { body, ...options });
+  }
+
+  /**
    * Move to position
    *
    * @example
@@ -92,8 +113,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Press button on the device. like power button, volume up button, volume down
-   * button, etc.
+   * Press device buttons like power, volume, home, back, etc.
    *
    * @example
    * ```ts
@@ -357,6 +377,7 @@ export namespace ActionAIResponse {
         | AIResponse.TypedSwipeAdvancedAction
         | AIResponse.TypedPressKeyAction
         | AIResponse.TypedPressButtonAction
+        | AIResponse.TypedLongPressAction
         | AIResponse.TypedTypeAction
         | AIResponse.TypedMoveAction
         | AIResponse.TypedScreenRotationAction
@@ -1125,6 +1146,66 @@ export namespace ActionAIResponse {
         buttons: Array<
           'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'
         >;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed long press action
+       */
+      export interface TypedLongPressAction {
+        /**
+         * X coordinate of the long press
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the long press
+         */
+        y: number;
+
+        /**
+         * Duration to hold the press (e.g. '1s', '500ms')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+         */
+        duration?: string;
 
         /**
          * Whether to include screenshots in the action response. If false, the screenshot
@@ -1674,6 +1755,7 @@ export namespace ActionAIResponse {
         | AIResponse.TypedSwipeAdvancedAction
         | AIResponse.TypedPressKeyAction
         | AIResponse.TypedPressButtonAction
+        | AIResponse.TypedLongPressAction
         | AIResponse.TypedTypeAction
         | AIResponse.TypedMoveAction
         | AIResponse.TypedScreenRotationAction
@@ -2442,6 +2524,66 @@ export namespace ActionAIResponse {
         buttons: Array<
           'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'
         >;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed long press action
+       */
+      export interface TypedLongPressAction {
+        /**
+         * X coordinate of the long press
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the long press
+         */
+        y: number;
+
+        /**
+         * Duration to hold the press (e.g. '1s', '500ms')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+         */
+        duration?: string;
 
         /**
          * Whether to include screenshots in the action response. If false, the screenshot
@@ -3098,6 +3240,99 @@ export interface ActionExtractResponse {
    * Base64-encoded screenshot of the UI interface at the time of extraction
    */
   screenshot: string;
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionLongPressResponse =
+  | ActionLongPressResponse.ActionIncludeScreenshotResult
+  | ActionLongPressResponse.ActionCommonResult;
+
+export namespace ActionLongPressResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
 }
 
 /**
@@ -4260,6 +4495,63 @@ export interface ActionExtractParams {
   schema?: unknown;
 }
 
+export interface ActionLongPressParams {
+  /**
+   * X coordinate of the long press
+   */
+  x: number;
+
+  /**
+   * Y coordinate of the long press
+   */
+  y: number;
+
+  /**
+   * Duration to hold the press (e.g. '1s', '500ms')
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+   */
+  duration?: string;
+
+  /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
+   * Type of the URI. default is base64.
+   */
+  outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+   */
+  screenshotDelay?: string;
+}
+
 export interface ActionMoveParams {
   /**
    * X coordinate to move to
@@ -5003,6 +5295,7 @@ export declare namespace Actions {
     type ActionClickResponse as ActionClickResponse,
     type ActionDragResponse as ActionDragResponse,
     type ActionExtractResponse as ActionExtractResponse,
+    type ActionLongPressResponse as ActionLongPressResponse,
     type ActionMoveResponse as ActionMoveResponse,
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
@@ -5018,6 +5311,7 @@ export declare namespace Actions {
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionExtractParams as ActionExtractParams,
+    type ActionLongPressParams as ActionLongPressParams,
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
