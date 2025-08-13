@@ -360,6 +360,33 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
+  test.skip('tap: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.tap('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      x: 100,
+      y: 100,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('tap: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.tap('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      x: 100,
+      y: 100,
+      includeScreenshot: false,
+      outputFormat: 'base64',
+      presignedExpiresIn: '30m',
+      screenshotDelay: '500ms',
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('touch: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       points: [{ start: { x: 100, y: 150 } }],

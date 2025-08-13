@@ -16,6 +16,7 @@ export {
   type ActionScreenshotResponse,
   type ActionScrollResponse,
   type ActionSwipeResponse,
+  type ActionTapResponse,
   type ActionTouchResponse,
   type ActionTypeResponse,
   type ActionAIParams,
@@ -31,6 +32,7 @@ export {
   type ActionScreenshotParams,
   type ActionScrollParams,
   type ActionSwipeParams,
+  type ActionTapParams,
   type ActionTouchParams,
   type ActionTypeParams,
 } from './actions';

@@ -287,6 +287,21 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Tap action for Android devices using ADB input tap command
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.tap(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { x: 100, y: 100 },
+   * );
+   * ```
+   */
+  tap(boxID: string, body: ActionTapParams, options?: RequestOptions): APIPromise<ActionTapResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/tap`, { body, ...options });
+  }
+
+  /**
    * Touch
    *
    * @example
@@ -3985,6 +4000,99 @@ export namespace ActionSwipeResponse {
 /**
  * Result of an UI action execution with screenshots
  */
+export type ActionTapResponse =
+  | ActionTapResponse.ActionIncludeScreenshotResult
+  | ActionTapResponse.ActionCommonResult;
+
+export namespace ActionTapResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
 export type ActionTouchResponse =
   | ActionTouchResponse.ActionIncludeScreenshotResult
   | ActionTouchResponse.ActionCommonResult;
@@ -5116,6 +5224,55 @@ export declare namespace ActionSwipeParams {
   }
 }
 
+export interface ActionTapParams {
+  /**
+   * X coordinate of the tap
+   */
+  x: number;
+
+  /**
+   * Y coordinate of the tap
+   */
+  y: number;
+
+  /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
+   * Type of the URI. default is base64.
+   */
+  outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+   */
+  screenshotDelay?: string;
+}
+
 export interface ActionTouchParams {
   /**
    * Array of touch points and their actions
@@ -5308,6 +5465,7 @@ export declare namespace Actions {
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionScrollResponse as ActionScrollResponse,
     type ActionSwipeResponse as ActionSwipeResponse,
+    type ActionTapResponse as ActionTapResponse,
     type ActionTouchResponse as ActionTouchResponse,
     type ActionTypeResponse as ActionTypeResponse,
     type ActionAIParams as ActionAIParams,
@@ -5323,6 +5481,7 @@ export declare namespace Actions {
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionSwipeParams as ActionSwipeParams,
+    type ActionTapParams as ActionTapParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
   };
