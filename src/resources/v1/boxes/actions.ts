@@ -827,10 +827,11 @@ export namespace ActionAIResponse {
         direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
 
         /**
-         * Distance of the swipe in pixels. If not provided, the swipe will be performed
+         * Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the swipe will be performed
          * from the center of the screen to the screen edge
          */
-        distance?: number;
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
 
         /**
          * Duration of the swipe
@@ -2205,10 +2206,11 @@ export namespace ActionAIResponse {
         direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
 
         /**
-         * Distance of the swipe in pixels. If not provided, the swipe will be performed
+         * Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the swipe will be performed
          * from the center of the screen to the screen edge
          */
-        distance?: number;
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
 
         /**
          * Duration of the swipe
@@ -4972,10 +4974,11 @@ export declare namespace ActionSwipeParams {
     direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
 
     /**
-     * Distance of the swipe in pixels. If not provided, the swipe will be performed
+     * Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+     * value (tiny, short, medium, long). If not provided, the swipe will be performed
      * from the center of the screen to the screen edge
      */
-    distance?: number;
+    distance?: number | 'tiny' | 'short' | 'medium' | 'long';
 
     /**
      * Duration of the swipe
