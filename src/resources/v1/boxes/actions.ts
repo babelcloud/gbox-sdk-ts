@@ -253,22 +253,24 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Scroll
+   * Performs a scroll action. Supports both advanced scroll with coordinates and
+   * simple scroll with direction.
    *
    * @example
    * ```ts
    * const response = await client.v1.boxes.actions.scroll(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
+   *   { body: { x: 100, y: 100, scrollX: 0, scrollY: 100 } },
    * );
    * ```
    */
   scroll(
     boxID: string,
-    body: ActionScrollParams,
+    params: ActionScrollParams,
     options?: RequestOptions,
   ): APIPromise<ActionScrollResponse> {
-    return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body, ...options });
+    const { body } = params;
+    return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body: body, ...options });
   }
 
   /**
@@ -388,6 +390,7 @@ export namespace ActionAIResponse {
         | AIResponse.TypedDragAdvancedAction
         | AIResponse.TypedDragSimpleAction
         | AIResponse.TypedScrollAction
+        | AIResponse.TypedScrollSimpleAction
         | AIResponse.TypedSwipeSimpleAction
         | AIResponse.TypedSwipeAdvancedAction
         | AIResponse.TypedPressKeyAction
@@ -774,12 +777,15 @@ export namespace ActionAIResponse {
        */
       export interface TypedScrollAction {
         /**
-         * Horizontal scroll amount
+         * Horizontal scroll amount. Positive values scroll content rightward (reveals
+         * content on the left), negative values scroll content leftward (reveals content
+         * on the right).
          */
         scrollX: number;
 
         /**
-         * Vertical scroll amount
+         * Vertical scroll amount. Positive values scroll content downward (reveals content
+         * above), negative values scroll content upward (reveals content below).
          */
         scrollY: number;
 
@@ -792,6 +798,72 @@ export namespace ActionAIResponse {
          * Y coordinate of the scroll position
          */
         y: number;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed scroll simple action
+       */
+      export interface TypedScrollSimpleAction {
+        /**
+         * Direction to scroll. The scroll will be performed from the center of the screen
+         * towards this direction. 'up' scrolls content upward (reveals content below),
+         * 'down' scrolls content downward (reveals content above), 'left' scrolls content
+         * leftward (reveals content on the right), 'right' scrolls content rightward
+         * (reveals content on the left).
+         */
+        direction: 'up' | 'down' | 'left' | 'right';
+
+        /**
+         * Distance of the scroll. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the scroll will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
+
+        /**
+         * Duration of the scroll
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
 
         /**
          * Whether to include screenshots in the action response. If false, the screenshot
@@ -1767,6 +1839,7 @@ export namespace ActionAIResponse {
         | AIResponse.TypedDragAdvancedAction
         | AIResponse.TypedDragSimpleAction
         | AIResponse.TypedScrollAction
+        | AIResponse.TypedScrollSimpleAction
         | AIResponse.TypedSwipeSimpleAction
         | AIResponse.TypedSwipeAdvancedAction
         | AIResponse.TypedPressKeyAction
@@ -2153,12 +2226,15 @@ export namespace ActionAIResponse {
        */
       export interface TypedScrollAction {
         /**
-         * Horizontal scroll amount
+         * Horizontal scroll amount. Positive values scroll content rightward (reveals
+         * content on the left), negative values scroll content leftward (reveals content
+         * on the right).
          */
         scrollX: number;
 
         /**
-         * Vertical scroll amount
+         * Vertical scroll amount. Positive values scroll content downward (reveals content
+         * above), negative values scroll content upward (reveals content below).
          */
         scrollY: number;
 
@@ -2171,6 +2247,72 @@ export namespace ActionAIResponse {
          * Y coordinate of the scroll position
          */
         y: number;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed scroll simple action
+       */
+      export interface TypedScrollSimpleAction {
+        /**
+         * Direction to scroll. The scroll will be performed from the center of the screen
+         * towards this direction. 'up' scrolls content upward (reveals content below),
+         * 'down' scrolls content downward (reveals content above), 'left' scrolls content
+         * leftward (reveals content on the right), 'right' scrolls content rightward
+         * (reveals content on the left).
+         */
+        direction: 'up' | 'down' | 'left' | 'right';
+
+        /**
+         * Distance of the scroll. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the scroll will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
+
+        /**
+         * Duration of the scroll
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
 
         /**
          * Whether to include screenshots in the action response. If false, the screenshot
@@ -5013,62 +5155,7 @@ export namespace ActionScreenshotParams {
 }
 
 export interface ActionScrollParams {
-  /**
-   * Horizontal scroll amount
-   */
-  scrollX: number;
-
-  /**
-   * Vertical scroll amount
-   */
-  scrollY: number;
-
-  /**
-   * X coordinate of the scroll position
-   */
-  x: number;
-
-  /**
-   * Y coordinate of the scroll position
-   */
-  y: number;
-
-  /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
-   */
-  includeScreenshot?: boolean;
-
-  /**
-   * Type of the URI. default is base64.
-   */
-  outputFormat?: 'base64' | 'storageKey';
-
-  /**
-   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-   */
-  presignedExpiresIn?: string;
-
-  /**
-   * Delay after performing the action, before taking the final screenshot.
-   *
-   * Execution flow:
-   *
-   * 1. Take screenshot before action
-   * 2. Perform the action
-   * 3. Wait for screenshotDelay (this parameter)
-   * 4. Take screenshot after action
-   *
-   * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-   */
-  screenshotDelay?: string;
+  body: unknown;
 }
 
 export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.SwipeAdvanced;
