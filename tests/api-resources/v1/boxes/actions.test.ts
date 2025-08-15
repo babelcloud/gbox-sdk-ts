@@ -304,7 +304,10 @@ describe('resource actions', () => {
   // Prism tests are disabled
   test.skip('scroll: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.scroll('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      body: { x: 100, y: 100, scrollX: 0, scrollY: 100 },
+      scrollX: 0,
+      scrollY: -100,
+      x: 400,
+      y: 300,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -318,7 +321,14 @@ describe('resource actions', () => {
   // Prism tests are disabled
   test.skip('scroll: required and optional params', async () => {
     const response = await client.v1.boxes.actions.scroll('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      body: { x: 100, y: 100, scrollX: 0, scrollY: 100 },
+      scrollX: 0,
+      scrollY: -100,
+      x: 400,
+      y: 300,
+      includeScreenshot: false,
+      outputFormat: 'base64',
+      presignedExpiresIn: '30m',
+      screenshotDelay: '500ms',
     });
   });
 
