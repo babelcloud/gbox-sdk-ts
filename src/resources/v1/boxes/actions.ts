@@ -77,6 +77,27 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Perform a long press action at specified coordinates for a specified duration.
+   * Useful for triggering context menus, drag operations, or other long-press
+   * interactions.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.longPress(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { x: 350, y: 250, duration: '1s' },
+   * );
+   * ```
+   */
+  longPress(
+    boxID: string,
+    body: ActionLongPressParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionLongPressResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/long-press`, { body, ...options });
+  }
+
+  /**
    * Move to position
    *
    * @example
@@ -92,8 +113,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Press button on the device. like power button, volume up button, volume down
-   * button, etc.
+   * Press device buttons like power, volume, home, back, etc.
    *
    * @example
    * ```ts
@@ -141,11 +161,17 @@ export class Actions extends APIResource {
    * ```ts
    * await client.v1.boxes.actions.recordingStart(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { duration: '10s' },
    * );
    * ```
    */
-  recordingStart(boxID: string, options?: RequestOptions): APIPromise<void> {
+  recordingStart(
+    boxID: string,
+    body: ActionRecordingStartParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
     return this._client.post(path`/boxes/${boxID}/actions/recording/start`, {
+      body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -156,16 +182,14 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.actions.recordingStop(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
+   * const response =
+   *   await client.v1.boxes.actions.recordingStop(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
    * ```
    */
-  recordingStop(boxID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${boxID}/actions/recording/stop`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  recordingStop(boxID: string, options?: RequestOptions): APIPromise<ActionRecordingStopResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/stop`, options);
   }
 
   /**
@@ -229,7 +253,8 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Scroll
+   * Performs a scroll action. Supports both advanced scroll with coordinates and
+   * simple scroll with direction.
    *
    * @example
    * ```ts
@@ -260,6 +285,21 @@ export class Actions extends APIResource {
    */
   swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionSwipeResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/swipe`, { body, ...options });
+  }
+
+  /**
+   * Tap action for Android devices using ADB input tap command
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.tap(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { x: 100, y: 100 },
+   * );
+   * ```
+   */
+  tap(boxID: string, body: ActionTapParams, options?: RequestOptions): APIPromise<ActionTapResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/tap`, { body, ...options });
   }
 
   /**
@@ -349,10 +389,12 @@ export namespace ActionAIResponse {
         | AIResponse.TypedDragAdvancedAction
         | AIResponse.TypedDragSimpleAction
         | AIResponse.TypedScrollAction
+        | AIResponse.TypedScrollSimpleAction
         | AIResponse.TypedSwipeSimpleAction
         | AIResponse.TypedSwipeAdvancedAction
         | AIResponse.TypedPressKeyAction
         | AIResponse.TypedPressButtonAction
+        | AIResponse.TypedLongPressAction
         | AIResponse.TypedTypeAction
         | AIResponse.TypedMoveAction
         | AIResponse.TypedScreenRotationAction
@@ -734,12 +776,15 @@ export namespace ActionAIResponse {
        */
       export interface TypedScrollAction {
         /**
-         * Horizontal scroll amount
+         * Horizontal scroll amount. Positive values scroll content rightward (reveals
+         * content on the left), negative values scroll content leftward (reveals content
+         * on the right).
          */
         scrollX: number;
 
         /**
-         * Vertical scroll amount
+         * Vertical scroll amount. Positive values scroll content downward (reveals content
+         * above), negative values scroll content upward (reveals content below).
          */
         scrollY: number;
 
@@ -792,6 +837,72 @@ export namespace ActionAIResponse {
       }
 
       /**
+       * Typed scroll simple action
+       */
+      export interface TypedScrollSimpleAction {
+        /**
+         * Direction to scroll. The scroll will be performed from the center of the screen
+         * towards this direction. 'up' scrolls content upward (reveals content below),
+         * 'down' scrolls content downward (reveals content above), 'left' scrolls content
+         * leftward (reveals content on the right), 'right' scrolls content rightward
+         * (reveals content on the left).
+         */
+        direction: 'up' | 'down' | 'left' | 'right';
+
+        /**
+         * Distance of the scroll. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the scroll will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
+
+        /**
+         * Duration of the scroll
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
        * Typed swipe simple action
        */
       export interface TypedSwipeSimpleAction {
@@ -802,10 +913,11 @@ export namespace ActionAIResponse {
         direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
 
         /**
-         * Distance of the swipe in pixels. If not provided, the swipe will be performed
+         * Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the swipe will be performed
          * from the center of the screen to the screen edge
          */
-        distance?: number;
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
 
         /**
          * Duration of the swipe
@@ -1161,6 +1273,66 @@ export namespace ActionAIResponse {
       }
 
       /**
+       * Typed long press action
+       */
+      export interface TypedLongPressAction {
+        /**
+         * X coordinate of the long press
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the long press
+         */
+        y: number;
+
+        /**
+         * Duration to hold the press (e.g. '1s', '500ms')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
        * Typed type action
        */
       export interface TypedTypeAction {
@@ -1193,6 +1365,11 @@ export namespace ActionAIResponse {
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
          */
         presignedExpiresIn?: string;
+
+        /**
+         * Whether to press Enter after typing the text
+         */
+        pressEnter?: boolean;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -1661,10 +1838,12 @@ export namespace ActionAIResponse {
         | AIResponse.TypedDragAdvancedAction
         | AIResponse.TypedDragSimpleAction
         | AIResponse.TypedScrollAction
+        | AIResponse.TypedScrollSimpleAction
         | AIResponse.TypedSwipeSimpleAction
         | AIResponse.TypedSwipeAdvancedAction
         | AIResponse.TypedPressKeyAction
         | AIResponse.TypedPressButtonAction
+        | AIResponse.TypedLongPressAction
         | AIResponse.TypedTypeAction
         | AIResponse.TypedMoveAction
         | AIResponse.TypedScreenRotationAction
@@ -2046,12 +2225,15 @@ export namespace ActionAIResponse {
        */
       export interface TypedScrollAction {
         /**
-         * Horizontal scroll amount
+         * Horizontal scroll amount. Positive values scroll content rightward (reveals
+         * content on the left), negative values scroll content leftward (reveals content
+         * on the right).
          */
         scrollX: number;
 
         /**
-         * Vertical scroll amount
+         * Vertical scroll amount. Positive values scroll content downward (reveals content
+         * above), negative values scroll content upward (reveals content below).
          */
         scrollY: number;
 
@@ -2104,6 +2286,72 @@ export namespace ActionAIResponse {
       }
 
       /**
+       * Typed scroll simple action
+       */
+      export interface TypedScrollSimpleAction {
+        /**
+         * Direction to scroll. The scroll will be performed from the center of the screen
+         * towards this direction. 'up' scrolls content upward (reveals content below),
+         * 'down' scrolls content downward (reveals content above), 'left' scrolls content
+         * leftward (reveals content on the right), 'right' scrolls content rightward
+         * (reveals content on the left).
+         */
+        direction: 'up' | 'down' | 'left' | 'right';
+
+        /**
+         * Distance of the scroll. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the scroll will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
+
+        /**
+         * Duration of the scroll
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
        * Typed swipe simple action
        */
       export interface TypedSwipeSimpleAction {
@@ -2114,10 +2362,11 @@ export namespace ActionAIResponse {
         direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
 
         /**
-         * Distance of the swipe in pixels. If not provided, the swipe will be performed
+         * Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the swipe will be performed
          * from the center of the screen to the screen edge
          */
-        distance?: number;
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
 
         /**
          * Duration of the swipe
@@ -2473,6 +2722,66 @@ export namespace ActionAIResponse {
       }
 
       /**
+       * Typed long press action
+       */
+      export interface TypedLongPressAction {
+        /**
+         * X coordinate of the long press
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the long press
+         */
+        y: number;
+
+        /**
+         * Duration to hold the press (e.g. '1s', '500ms')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+         */
+        duration?: string;
+
+        /**
+         * Whether to include screenshots in the action response. If false, the screenshot
+         * object will still be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
        * Typed type action
        */
       export interface TypedTypeAction {
@@ -2505,6 +2814,11 @@ export namespace ActionAIResponse {
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
          */
         presignedExpiresIn?: string;
+
+        /**
+         * Whether to press Enter after typing the text
+         */
+        pressEnter?: boolean;
 
         /**
          * Delay after performing the action, before taking the final screenshot.
@@ -3089,6 +3403,99 @@ export interface ActionExtractResponse {
 /**
  * Result of an UI action execution with screenshots
  */
+export type ActionLongPressResponse =
+  | ActionLongPressResponse.ActionIncludeScreenshotResult
+  | ActionLongPressResponse.ActionCommonResult;
+
+export namespace ActionLongPressResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
 export type ActionMoveResponse =
   | ActionMoveResponse.ActionIncludeScreenshotResult
   | ActionMoveResponse.ActionCommonResult;
@@ -3366,6 +3773,24 @@ export namespace ActionPressKeyResponse {
 }
 
 /**
+ * Recording stop result
+ */
+export interface ActionRecordingStopResponse {
+  /**
+   * Presigned URL of the recording. This is a temporary downloadable URL with an
+   * expiration time for accessing the recording file.
+   */
+  presignedUrl: string;
+
+  /**
+   * Storage key of the recording. Before the box is deleted, you can use this
+   * storageKey with the endpoint `box/:boxId/storage/presigned-url` to get a
+   * downloadable URL for the recording.
+   */
+  storageKey: string;
+}
+
+/**
  * Screen layout content.
  *
  * Android boxes (XML):
@@ -3628,6 +4053,99 @@ export type ActionSwipeResponse =
   | ActionSwipeResponse.ActionCommonResult;
 
 export namespace ActionSwipeResponse {
+  /**
+   * Result of an UI action execution with screenshots
+   */
+  export interface ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot: ActionIncludeScreenshotResult.Screenshot;
+  }
+
+  export namespace ActionIncludeScreenshotResult {
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of an UI action execution
+   */
+  export interface ActionCommonResult {
+    /**
+     * message
+     */
+    message: string;
+  }
+}
+
+/**
+ * Result of an UI action execution with screenshots
+ */
+export type ActionTapResponse =
+  | ActionTapResponse.ActionIncludeScreenshotResult
+  | ActionTapResponse.ActionCommonResult;
+
+export namespace ActionTapResponse {
   /**
    * Result of an UI action execution with screenshots
    */
@@ -4228,6 +4746,63 @@ export interface ActionExtractParams {
   schema?: unknown;
 }
 
+export interface ActionLongPressParams {
+  /**
+   * X coordinate of the long press
+   */
+  x: number;
+
+  /**
+   * Y coordinate of the long press
+   */
+  y: number;
+
+  /**
+   * Duration to hold the press (e.g. '1s', '500ms')
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+   */
+  duration?: string;
+
+  /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
+   * Type of the URI. default is base64.
+   */
+  outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+   */
+  screenshotDelay?: string;
+}
+
 export interface ActionMoveParams {
   /**
    * X coordinate to move to
@@ -4484,6 +5059,17 @@ export interface ActionPressKeyParams {
   screenshotDelay?: string;
 }
 
+export interface ActionRecordingStartParams {
+  /**
+   * Duration of the recording. Default is 30m, max is 30m. The recording will
+   * automatically stop when the duration time is reached.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 30m
+   */
+  duration?: string;
+}
+
 export interface ActionScreenRotationParams {
   /**
    * Target screen orientation
@@ -4567,63 +5153,133 @@ export namespace ActionScreenshotParams {
   }
 }
 
-export interface ActionScrollParams {
-  /**
-   * Horizontal scroll amount
-   */
-  scrollX: number;
+export type ActionScrollParams = ActionScrollParams.Scroll | ActionScrollParams.ScrollSimple;
 
-  /**
-   * Vertical scroll amount
-   */
-  scrollY: number;
+export declare namespace ActionScrollParams {
+  export interface Scroll {
+    /**
+     * Horizontal scroll amount. Positive values scroll content rightward (reveals
+     * content on the left), negative values scroll content leftward (reveals content
+     * on the right).
+     */
+    scrollX: number;
 
-  /**
-   * X coordinate of the scroll position
-   */
-  x: number;
+    /**
+     * Vertical scroll amount. Positive values scroll content downward (reveals content
+     * above), negative values scroll content upward (reveals content below).
+     */
+    scrollY: number;
 
-  /**
-   * Y coordinate of the scroll position
-   */
-  y: number;
+    /**
+     * X coordinate of the scroll position
+     */
+    x: number;
 
-  /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
-   */
-  includeScreenshot?: boolean;
+    /**
+     * Y coordinate of the scroll position
+     */
+    y: number;
 
-  /**
-   * Type of the URI. default is base64.
-   */
-  outputFormat?: 'base64' | 'storageKey';
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
 
-  /**
-   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-   */
-  presignedExpiresIn?: string;
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
 
-  /**
-   * Delay after performing the action, before taking the final screenshot.
-   *
-   * Execution flow:
-   *
-   * 1. Take screenshot before action
-   * 2. Perform the action
-   * 3. Wait for screenshotDelay (this parameter)
-   * 4. Take screenshot after action
-   *
-   * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-   */
-  screenshotDelay?: string;
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
+
+  export interface ScrollSimple {
+    /**
+     * Direction to scroll. The scroll will be performed from the center of the screen
+     * towards this direction. 'up' scrolls content upward (reveals content below),
+     * 'down' scrolls content downward (reveals content above), 'left' scrolls content
+     * leftward (reveals content on the right), 'right' scrolls content rightward
+     * (reveals content on the left).
+     */
+    direction: 'up' | 'down' | 'left' | 'right';
+
+    /**
+     * Distance of the scroll. Can be either a number (in pixels) or a predefined enum
+     * value (tiny, short, medium, long). If not provided, the scroll will be performed
+     * from the center of the screen to the screen edge
+     */
+    distance?: number | 'tiny' | 'short' | 'medium' | 'long';
+
+    /**
+     * Duration of the scroll
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+     */
+    duration?: string;
+
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
 }
 
 export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.SwipeAdvanced;
@@ -4637,10 +5293,11 @@ export declare namespace ActionSwipeParams {
     direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
 
     /**
-     * Distance of the swipe in pixels. If not provided, the swipe will be performed
+     * Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+     * value (tiny, short, medium, long). If not provided, the swipe will be performed
      * from the center of the screen to the screen edge
      */
-    distance?: number;
+    distance?: number | 'tiny' | 'short' | 'medium' | 'long';
 
     /**
      * Duration of the swipe
@@ -4776,6 +5433,55 @@ export declare namespace ActionSwipeParams {
       y: number;
     }
   }
+}
+
+export interface ActionTapParams {
+  /**
+   * X coordinate of the tap
+   */
+  x: number;
+
+  /**
+   * Y coordinate of the tap
+   */
+  y: number;
+
+  /**
+   * Whether to include screenshots in the action response. If false, the screenshot
+   * object will still be returned but with empty URIs. Default is false.
+   */
+  includeScreenshot?: boolean;
+
+  /**
+   * Type of the URI. default is base64.
+   */
+  outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+   */
+  screenshotDelay?: string;
 }
 
 export interface ActionTouchParams {
@@ -4931,6 +5637,11 @@ export interface ActionTypeParams {
   presignedExpiresIn?: string;
 
   /**
+   * Whether to press Enter after typing the text
+   */
+  pressEnter?: boolean;
+
+  /**
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -4955,27 +5666,33 @@ export declare namespace Actions {
     type ActionClickResponse as ActionClickResponse,
     type ActionDragResponse as ActionDragResponse,
     type ActionExtractResponse as ActionExtractResponse,
+    type ActionLongPressResponse as ActionLongPressResponse,
     type ActionMoveResponse as ActionMoveResponse,
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
+    type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionScrollResponse as ActionScrollResponse,
     type ActionSwipeResponse as ActionSwipeResponse,
+    type ActionTapResponse as ActionTapResponse,
     type ActionTouchResponse as ActionTouchResponse,
     type ActionTypeResponse as ActionTypeResponse,
     type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
     type ActionExtractParams as ActionExtractParams,
+    type ActionLongPressParams as ActionLongPressParams,
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
+    type ActionRecordingStartParams as ActionRecordingStartParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
     type ActionSwipeParams as ActionSwipeParams,
+    type ActionTapParams as ActionTapParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
   };

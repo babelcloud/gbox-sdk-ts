@@ -12,6 +12,9 @@ import type {
   ActionScreenRotationParams,
   ActionAIParams,
   ActionAIResponse,
+  ActionRecordingStartParams,
+  ActionTapParams,
+  ActionLongPressParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -36,7 +39,21 @@ export interface ActionMove extends ActionMoveParams {
   screenshotDelay?: TimeString;
 }
 
-export interface ActionScroll extends ActionScrollParams {
+export interface ActionScrollAdvanced extends ActionScrollParams.Scroll {
+  screenshotDelay?: TimeString;
+}
+
+export interface ActionScrollSimple extends ActionScrollParams.ScrollSimple {
+  screenshotDelay?: TimeString;
+}
+
+export type ActionScroll = ActionScrollSimple | ActionScrollAdvanced;
+
+export interface ActionTap extends ActionTapParams {
+  screenshotDelay?: TimeString;
+}
+
+export interface ActionLongPress extends ActionLongPressParams {
   screenshotDelay?: TimeString;
 }
 
@@ -235,6 +252,23 @@ export class ActionOperator {
 
   /**
    * @example
+   * const response = await myBox.action.tap({ x: 100, y: 100 });
+   */
+  async tap(body: ActionTap) {
+    return this.client.v1.boxes.actions.tap(this.boxId, body);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.longPress({ x: 100, y: 100 });
+   */
+  async longPress(body: ActionLongPress) {
+    return this.client.v1.boxes.actions.longPress(this.boxId, body);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.scroll({ direction: 'up' });
    * const response = await myBox.action.scroll({ scrollX: 0, scrollY: 100, x: 100, y: 100 });
    */
   async scroll(body: ActionScroll) {
@@ -294,8 +328,8 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.screenRecordingStart();
    */
-  async screenRecordingStart() {
-    return this.client.v1.boxes.actions.recordingStart(this.boxId);
+  async screenRecordingStart(body: ActionRecordingStartParams) {
+    return this.client.v1.boxes.actions.recordingStart(this.boxId, body);
   }
 
   /**

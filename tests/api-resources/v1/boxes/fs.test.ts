@@ -8,7 +8,7 @@ const client = new GboxClient({
 });
 
 describe('resource fs', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.v1.boxes.fs.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents',
@@ -22,7 +22,7 @@ describe('resource fs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.v1.boxes.fs.list('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents',
@@ -31,7 +31,7 @@ describe('resource fs', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('exists: only required params', async () => {
     const responsePromise = client.v1.boxes.fs.exists('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/output.txt',
@@ -45,7 +45,7 @@ describe('resource fs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('exists: required and optional params', async () => {
     const response = await client.v1.boxes.fs.exists('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/output.txt',
@@ -53,7 +53,7 @@ describe('resource fs', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('info: only required params', async () => {
     const responsePromise = client.v1.boxes.fs.info('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/output.txt',
@@ -67,7 +67,7 @@ describe('resource fs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('info: required and optional params', async () => {
     const response = await client.v1.boxes.fs.info('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/output.txt',
@@ -75,7 +75,7 @@ describe('resource fs', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('read: only required params', async () => {
     const responsePromise = client.v1.boxes.fs.read('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/config.json',
@@ -89,7 +89,7 @@ describe('resource fs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('read: required and optional params', async () => {
     const response = await client.v1.boxes.fs.read('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/config.json',
@@ -97,7 +97,7 @@ describe('resource fs', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('remove: only required params', async () => {
     const responsePromise = client.v1.boxes.fs.remove('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/output.txt',
@@ -111,7 +111,7 @@ describe('resource fs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('remove: required and optional params', async () => {
     const response = await client.v1.boxes.fs.remove('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       path: '/home/user/documents/output.txt',
@@ -119,7 +119,7 @@ describe('resource fs', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('rename: only required params', async () => {
     const responsePromise = client.v1.boxes.fs.rename('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       newPath: '/home/user/documents/new-name.txt',
@@ -134,7 +134,7 @@ describe('resource fs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('rename: required and optional params', async () => {
     const response = await client.v1.boxes.fs.rename('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       newPath: '/home/user/documents/new-name.txt',
@@ -143,7 +143,7 @@ describe('resource fs', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('write: only required params', async () => {
     const responsePromise = client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       content: 'Hello, World!\nThis is file content.',
@@ -158,7 +158,7 @@ describe('resource fs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('write: required and optional params', async () => {
     const response = await client.v1.boxes.fs.write('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       content: 'Hello, World!\nThis is file content.',
