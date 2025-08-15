@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.27.0 (2025-08-15)
+
+Full Changelog: [v0.26.0...v0.27.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.26.0...v0.27.0)
+
+### Features
+
+* **api:** add tap and long press actions, enhance scroll interfaces, and update screen recording method ([f2f0627](https://github.com/babelcloud/gbox-sdk-ts/commit/f2f06274edf337b8caf5318c3dacdb1da0ec682a))
+* **api:** api update ([936903e](https://github.com/babelcloud/gbox-sdk-ts/commit/936903e8836d47d7a55dda3906474c285d9ad64b))
+* **api:** api update ([3f50ca6](https://github.com/babelcloud/gbox-sdk-ts/commit/3f50ca6ccae032cc1e1c3b99a4398543b85a3069))
+* **api:** api update ([c11b150](https://github.com/babelcloud/gbox-sdk-ts/commit/c11b150ab2d4bf680d8947b4946447bdb6b31ccb))
+* **api:** api update ([49356f8](https://github.com/babelcloud/gbox-sdk-ts/commit/49356f8e4e7226e1486de1c27868584124dde068))
+* **api:** api update ([3bd3285](https://github.com/babelcloud/gbox-sdk-ts/commit/3bd3285f661e8d2592bb57e32d12552af2b8b15d))
+* **api:** api update ([6e507e2](https://github.com/babelcloud/gbox-sdk-ts/commit/6e507e2d0fa6bdadc72e827a8c3308a15a780a2d))
+* **api:** api update ([30470ec](https://github.com/babelcloud/gbox-sdk-ts/commit/30470ec0b19972780cbe668f95d4863a6c3ee02f))
+
+
+### Chores
+
+* **internal:** codegen related update ([243512d](https://github.com/babelcloud/gbox-sdk-ts/commit/243512d1b475c311d1f1770c7b64b9a496546174))
+* **internal:** update comment in script ([b3b384f](https://github.com/babelcloud/gbox-sdk-ts/commit/b3b384f246489cf357253132d0a19ad61b613dda))
+* update @stainless-api/prism-cli to v5.15.0 ([e1ea6e1](https://github.com/babelcloud/gbox-sdk-ts/commit/e1ea6e14c6dcbf9dfde3e931e4ebfc0c3328def4))
+
 ## 0.26.0 (2025-08-08)
 
 Full Changelog: [v0.25.0...v0.26.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.25.0...v0.26.0)
