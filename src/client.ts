@@ -727,7 +727,9 @@ export class GboxClient {
 
   v1: API.V1 = new API.V1(this);
 }
+
 GboxClient.V1 = V1;
+
 export declare namespace GboxClient {
   export type RequestOptions = Opts.RequestOptions;
 
