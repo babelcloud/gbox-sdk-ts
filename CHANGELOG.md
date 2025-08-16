@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.27.1 (2025-08-16)
+
+Full Changelog: [v0.27.0...v0.27.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.27.0...v0.27.1)
+
+### Chores
+
+* **deps:** update dependency @types/node to v20.17.58 ([e180809](https://github.com/babelcloud/gbox-sdk-ts/commit/e180809e084a6b0add081efaa7edbcf86fac6cea))
+* **internal:** formatting change ([4ca2a0e](https://github.com/babelcloud/gbox-sdk-ts/commit/4ca2a0e1555c8138f275b41cdb42aa23fbd0dbfc))
+
 ## 0.27.0 (2025-08-15)
 
 Full Changelog: [v0.26.0...v0.27.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.26.0...v0.27.0)
