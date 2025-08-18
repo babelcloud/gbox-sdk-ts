@@ -4753,61 +4753,120 @@ export interface ActionExtractParams {
   schema?: unknown;
 }
 
-export interface ActionLongPressParams {
-  /**
-   * X coordinate of the long press
-   */
-  x: number;
+export type ActionLongPressParams =
+  | ActionLongPressParams.LongPress
+  | ActionLongPressParams.LongPressByNaturalLanguage;
 
-  /**
-   * Y coordinate of the long press
-   */
-  y: number;
+export declare namespace ActionLongPressParams {
+  export interface LongPress {
+    /**
+     * X coordinate of the long press
+     */
+    x: number;
 
-  /**
-   * Duration to hold the press (e.g. '1s', '500ms')
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
-   */
-  duration?: string;
+    /**
+     * Y coordinate of the long press
+     */
+    y: number;
 
-  /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
-   */
-  includeScreenshot?: boolean;
+    /**
+     * Duration to hold the press (e.g. '1s', '500ms')
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+     */
+    duration?: string;
 
-  /**
-   * Type of the URI. default is base64.
-   */
-  outputFormat?: 'base64' | 'storageKey';
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
 
-  /**
-   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-   */
-  presignedExpiresIn?: string;
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
 
-  /**
-   * Delay after performing the action, before taking the final screenshot.
-   *
-   * Execution flow:
-   *
-   * 1. Take screenshot before action
-   * 2. Perform the action
-   * 3. Wait for screenshotDelay (this parameter)
-   * 4. Take screenshot after action
-   *
-   * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-   */
-  screenshotDelay?: string;
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
+
+  export interface LongPressByNaturalLanguage {
+    /**
+     * Describe the target to operate using natural language, e.g., 'Chrome icon',
+     * 'login button'
+     */
+    target: string;
+
+    /**
+     * Duration to hold the press (e.g. '1s', '500ms')
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+     */
+    duration?: string;
+
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
 }
 
 export interface ActionMoveParams {
