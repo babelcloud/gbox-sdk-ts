@@ -65,9 +65,15 @@ export interface ActionTapByNaturalLanguage extends ActionTapParams.TapByNatural
 
 export type ActionTap = ActionTapByPoint | ActionTapByNaturalLanguage;
 
-export interface ActionLongPress extends ActionLongPressParams {
+export interface ActionLongPressByPoint extends ActionLongPressParams.LongPress {
   screenshotDelay?: TimeString;
 }
+
+export interface ActionLongPressByNaturalLanguage extends ActionLongPressParams.LongPressByNaturalLanguage {
+  screenshotDelay?: TimeString;
+}
+
+export type ActionLongPress = ActionLongPressByPoint | ActionLongPressByNaturalLanguage;
 
 export interface ActionTouch extends ActionTouchParams {
   screenshotDelay?: TimeString;
