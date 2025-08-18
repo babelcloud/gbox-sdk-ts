@@ -978,12 +978,12 @@ export namespace ActionAIResponse {
         /**
          * End point of the swipe path (coordinates or natural language)
          */
-        end: unknown | string;
+        end: TypedSwipeAdvancedAction.SwipePath | string;
 
         /**
          * Start point of the swipe path (coordinates or natural language)
          */
-        start: unknown | string;
+        start: TypedSwipeAdvancedAction.SwipePath | string;
 
         /**
          * Duration of the swipe
@@ -1029,6 +1029,38 @@ export namespace ActionAIResponse {
          * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
          */
         screenshotDelay?: string;
+      }
+
+      export namespace TypedSwipeAdvancedAction {
+        /**
+         * Swipe path
+         */
+        export interface SwipePath {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+
+        /**
+         * Swipe path
+         */
+        export interface SwipePath {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
       }
 
       /**
@@ -2401,12 +2433,12 @@ export namespace ActionAIResponse {
         /**
          * End point of the swipe path (coordinates or natural language)
          */
-        end: unknown | string;
+        end: TypedSwipeAdvancedAction.SwipePath | string;
 
         /**
          * Start point of the swipe path (coordinates or natural language)
          */
-        start: unknown | string;
+        start: TypedSwipeAdvancedAction.SwipePath | string;
 
         /**
          * Duration of the swipe
@@ -2452,6 +2484,38 @@ export namespace ActionAIResponse {
          * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
          */
         screenshotDelay?: string;
+      }
+
+      export namespace TypedSwipeAdvancedAction {
+        /**
+         * Swipe path
+         */
+        export interface SwipePath {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+
+        /**
+         * Swipe path
+         */
+        export interface SwipePath {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
       }
 
       /**
@@ -5421,12 +5485,12 @@ export declare namespace ActionSwipeParams {
     /**
      * End point of the swipe path (coordinates or natural language)
      */
-    end: unknown | string;
+    end: SwipeAdvanced.SwipePath | string;
 
     /**
      * Start point of the swipe path (coordinates or natural language)
      */
-    start: unknown | string;
+    start: SwipeAdvanced.SwipePath | string;
 
     /**
      * Duration of the swipe
@@ -5472,6 +5536,38 @@ export declare namespace ActionSwipeParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
+  }
+
+  export namespace SwipeAdvanced {
+    /**
+     * Swipe path
+     */
+    export interface SwipePath {
+      /**
+       * Start/end x coordinate of the swipe path
+       */
+      x: number;
+
+      /**
+       * Start/end y coordinate of the swipe path
+       */
+      y: number;
+    }
+
+    /**
+     * Swipe path
+     */
+    export interface SwipePath {
+      /**
+       * Start/end x coordinate of the swipe path
+       */
+      x: number;
+
+      /**
+       * Start/end y coordinate of the swipe path
+       */
+      y: number;
+    }
   }
 }
 
