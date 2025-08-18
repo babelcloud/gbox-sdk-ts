@@ -21,9 +21,15 @@ import { TimeString } from '../types';
 import path from 'path';
 import fs from 'fs';
 
-export interface ActionClick extends ActionClickParams {
+export interface ActionClickByPoint extends ActionClickParams.Click {
   screenshotDelay?: TimeString;
 }
+
+export interface ActionClickByNaturalLanguage extends ActionClickParams.ClickByNaturalLanguage {
+  screenshotDelay?: TimeString;
+}
+
+export type ActionClick = ActionClickByPoint | ActionClickByNaturalLanguage;
 
 export interface ActionDragSimple extends ActionDragParams.DragSimple {
   screenshotDelay?: TimeString;
@@ -49,9 +55,15 @@ export interface ActionScrollSimple extends ActionScrollParams.ScrollSimple {
 
 export type ActionScroll = ActionScrollSimple | ActionScrollAdvanced;
 
-export interface ActionTap extends ActionTapParams {
+export interface ActionTapByPoint extends ActionTapParams.Tap {
   screenshotDelay?: TimeString;
 }
+
+export interface ActionTapByNaturalLanguage extends ActionTapParams.TapByNaturalLanguage {
+  screenshotDelay?: TimeString;
+}
+
+export type ActionTap = ActionTapByPoint | ActionTapByNaturalLanguage;
 
 export interface ActionLongPress extends ActionLongPressParams {
   screenshotDelay?: TimeString;
