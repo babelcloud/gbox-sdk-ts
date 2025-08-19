@@ -72,12 +72,12 @@ export interface ProxySetParams {
   auth: ProxySetParams.Auth;
 
   /**
-   * Exclude IPs from the proxy. Default is ['127.0.0.1', 'localhost']
+   * Exclude IPs and domains from the proxy. Default is ['127.0.0.1', 'localhost']
    */
   excludes: Array<string>;
 
   /**
-   * Proxy URL
+   * The URL of the proxy server
    */
   url: string;
 }
