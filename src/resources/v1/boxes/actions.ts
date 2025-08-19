@@ -241,6 +241,7 @@ export class Actions extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.actions.screenshot(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { scale: 1 },
    * );
    * ```
    */
@@ -270,6 +271,54 @@ export class Actions extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ActionScrollResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body, ...options });
+  }
+
+  /**
+   * Get the box action setting
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.setting(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  setting(boxID: string, options?: RequestOptions): APIPromise<ActionSettingResponse> {
+    return this._client.get(path`/boxes/${boxID}/actions/setting`, options);
+  }
+
+  /**
+   * Reset the box setting
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.settingReset(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  settingReset(boxID: string, options?: RequestOptions): APIPromise<ActionSettingResetResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/setting/reset`, options);
+  }
+
+  /**
+   * Setting the box action setting
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.settingUpdate(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { scale: 1 },
+   *   );
+   * ```
+   */
+  settingUpdate(
+    boxID: string,
+    body: ActionSettingUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionSettingUpdateResponse> {
+    return this._client.put(path`/boxes/${boxID}/actions/setting`, { body, ...options });
   }
 
   /**
@@ -1499,6 +1548,20 @@ export namespace ActionAIResponse {
        * Typed screenshot action
        */
       export interface TypedScreenshotAction {
+        /**
+         * The scale of the action to be performed. Must be greater than 0.1 and less than
+         * or equal to 1.
+         *
+         * Notes:
+         *
+         * - Scale does not change the box's actual screen resolution.
+         * - It affects the size of the output screenshot and the coordinates/distances of
+         *   actions. Coordinates and distances are scaled by this factor. Example: when
+         *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+         *   Click({x:50, y:50}).
+         */
+        scale: number;
+
         /**
          * Clipping region for screenshot capture
          */
@@ -2955,6 +3018,20 @@ export namespace ActionAIResponse {
        */
       export interface TypedScreenshotAction {
         /**
+         * The scale of the action to be performed. Must be greater than 0.1 and less than
+         * or equal to 1.
+         *
+         * Notes:
+         *
+         * - Scale does not change the box's actual screen resolution.
+         * - It affects the size of the output screenshot and the coordinates/distances of
+         *   actions. Coordinates and distances are scaled by this factor. Example: when
+         *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+         *   Click({x:50, y:50}).
+         */
+        scale: number;
+
+        /**
          * Clipping region for screenshot capture
          */
         clip?: TypedScreenshotAction.Clip;
@@ -4055,6 +4132,63 @@ export namespace ActionScrollResponse {
      */
     message: string;
   }
+}
+
+/**
+ * Action setting
+ */
+export interface ActionSettingResponse {
+  /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   */
+  scale: number;
+}
+
+/**
+ * Action setting
+ */
+export interface ActionSettingResetResponse {
+  /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   */
+  scale: number;
+}
+
+/**
+ * Action setting
+ */
+export interface ActionSettingUpdateResponse {
+  /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   */
+  scale: number;
 }
 
 /**
@@ -5246,6 +5380,20 @@ export interface ActionScreenRotationParams {
 
 export interface ActionScreenshotParams {
   /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   */
+  scale: number;
+
+  /**
    * Clipping region for screenshot capture
    */
   clip?: ActionScreenshotParams.Clip;
@@ -5410,6 +5558,22 @@ export declare namespace ActionScrollParams {
      */
     screenshotDelay?: string;
   }
+}
+
+export interface ActionSettingUpdateParams {
+  /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   */
+  scale: number;
 }
 
 export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.SwipeAdvanced;
@@ -5860,6 +6024,9 @@ export declare namespace Actions {
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionScrollResponse as ActionScrollResponse,
+    type ActionSettingResponse as ActionSettingResponse,
+    type ActionSettingResetResponse as ActionSettingResetResponse,
+    type ActionSettingUpdateResponse as ActionSettingUpdateResponse,
     type ActionSwipeResponse as ActionSwipeResponse,
     type ActionTapResponse as ActionTapResponse,
     type ActionTouchResponse as ActionTouchResponse,
@@ -5876,6 +6043,7 @@ export declare namespace Actions {
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
+    type ActionSettingUpdateParams as ActionSettingUpdateParams,
     type ActionSwipeParams as ActionSwipeParams,
     type ActionTapParams as ActionTapParams,
     type ActionTouchParams as ActionTouchParams,
