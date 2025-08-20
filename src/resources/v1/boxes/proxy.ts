@@ -85,8 +85,7 @@ export interface ProxySetParams {
   excludes?: Array<string>;
 
   /**
-   * PAC (Proxy Auto-Configuration) URL. Either this or url should be provided, but
-   * not both.
+   * PAC (Proxy Auto-Configuration) URL.
    */
   pacUrl?: string;
 }
