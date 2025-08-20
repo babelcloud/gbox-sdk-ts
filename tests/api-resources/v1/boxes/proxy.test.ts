@@ -35,9 +35,8 @@ describe('resource proxy', () => {
   // Prism tests are disabled
   test.skip('set: only required params', async () => {
     const responsePromise = client.v1.boxes.proxy.set('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      auth: { password: 'password', username: 'admin' },
-      excludes: ['127.0.0.1', 'localhost'],
-      url: 'http://127.0.0.1:8080',
+      host: '127.0.0.1',
+      port: 8080,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -51,9 +50,11 @@ describe('resource proxy', () => {
   // Prism tests are disabled
   test.skip('set: required and optional params', async () => {
     const response = await client.v1.boxes.proxy.set('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      host: '127.0.0.1',
+      port: 8080,
       auth: { password: 'password', username: 'admin' },
       excludes: ['127.0.0.1', 'localhost'],
-      url: 'http://127.0.0.1:8080',
+      pacUrl: 'http://proxy.company.com/proxy.pac',
     });
   });
 });

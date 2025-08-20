@@ -48,11 +48,7 @@ export class Proxy extends APIResource {
    * ```ts
    * await client.v1.boxes.proxy.set(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   {
-   *     auth: { password: 'password', username: 'admin' },
-   *     excludes: ['127.0.0.1', 'localhost'],
-   *     url: 'http://127.0.0.1:8080',
-   *   },
+   *   { host: '127.0.0.1', port: 8080 },
    * );
    * ```
    */
@@ -67,19 +63,32 @@ export class Proxy extends APIResource {
 
 export interface ProxySetParams {
   /**
+   * The host address of the proxy server
+   */
+  host: string;
+
+  /**
+   * The port number of the proxy server
+   */
+  port: number;
+
+  /**
    * Box Proxy Auth
    */
-  auth: ProxySetParams.Auth;
+  auth?: ProxySetParams.Auth;
 
   /**
-   * Exclude IPs and domains from the proxy. Default is ['127.0.0.1', 'localhost']
+   * List of IP addresses and domains that should bypass the proxy. These addresses
+   * will be accessed directly without going through the proxy server. Default is
+   * ['127.0.0.1', 'localhost']
    */
-  excludes: Array<string>;
+  excludes?: Array<string>;
 
   /**
-   * The URL of the proxy server
+   * PAC (Proxy Auto-Configuration) URL. Either this or url should be provided, but
+   * not both.
    */
-  url: string;
+  pacUrl?: string;
 }
 
 export namespace ProxySetParams {
