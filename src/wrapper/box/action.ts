@@ -15,6 +15,7 @@ import type {
   ActionRecordingStartParams,
   ActionTapParams,
   ActionLongPressParams,
+  ActionSettingUpdateParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -356,6 +357,30 @@ export class ActionOperator {
    */
   async screenRecordingStop() {
     return this.client.v1.boxes.actions.recordingStop(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.getSetting();
+   */
+  async getSetting() {
+    return this.client.v1.boxes.actions.setting(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.updateSetting({ scale: 0.5 });
+   */
+  async updateSetting(body: ActionSettingUpdateParams) {
+    return this.client.v1.boxes.actions.settingUpdate(this.boxId, body);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.resetSetting();
+   */
+  async resetSetting() {
+    return this.client.v1.boxes.actions.settingReset(this.boxId);
   }
 
   /**
