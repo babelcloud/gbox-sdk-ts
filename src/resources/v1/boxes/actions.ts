@@ -241,7 +241,6 @@ export class Actions extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.actions.screenshot(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { scale: 1 },
    * );
    * ```
    */
@@ -309,7 +308,6 @@ export class Actions extends APIResource {
    * const response =
    *   await client.v1.boxes.actions.settingUpdate(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     { scale: 1 },
    *   );
    * ```
    */
@@ -1549,6 +1547,16 @@ export namespace ActionAIResponse {
        */
       export interface TypedScreenshotAction {
         /**
+         * Clipping region for screenshot capture
+         */
+        clip?: TypedScreenshotAction.Clip;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
          * The scale of the action to be performed. Must be greater than 0.1 and less than
          * or equal to 1.
          *
@@ -1560,17 +1568,7 @@ export namespace ActionAIResponse {
          *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
          *   Click({x:50, y:50}).
          */
-        scale: number;
-
-        /**
-         * Clipping region for screenshot capture
-         */
-        clip?: TypedScreenshotAction.Clip;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
+        scale?: number;
       }
 
       export namespace TypedScreenshotAction {
@@ -3018,6 +3016,16 @@ export namespace ActionAIResponse {
        */
       export interface TypedScreenshotAction {
         /**
+         * Clipping region for screenshot capture
+         */
+        clip?: TypedScreenshotAction.Clip;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
          * The scale of the action to be performed. Must be greater than 0.1 and less than
          * or equal to 1.
          *
@@ -3029,17 +3037,7 @@ export namespace ActionAIResponse {
          *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
          *   Click({x:50, y:50}).
          */
-        scale: number;
-
-        /**
-         * Clipping region for screenshot capture
-         */
-        clip?: TypedScreenshotAction.Clip;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
+        scale?: number;
       }
 
       export namespace TypedScreenshotAction {
@@ -4150,7 +4148,7 @@ export interface ActionSettingResponse {
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
    */
-  scale: number;
+  scale?: number;
 }
 
 /**
@@ -4169,7 +4167,7 @@ export interface ActionSettingResetResponse {
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
    */
-  scale: number;
+  scale?: number;
 }
 
 /**
@@ -4188,7 +4186,7 @@ export interface ActionSettingUpdateResponse {
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
    */
-  scale: number;
+  scale?: number;
 }
 
 /**
@@ -5380,6 +5378,16 @@ export interface ActionScreenRotationParams {
 
 export interface ActionScreenshotParams {
   /**
+   * Clipping region for screenshot capture
+   */
+  clip?: ActionScreenshotParams.Clip;
+
+  /**
+   * Type of the URI. default is base64.
+   */
+  outputFormat?: 'base64' | 'storageKey';
+
+  /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
    * or equal to 1.
    *
@@ -5391,17 +5399,7 @@ export interface ActionScreenshotParams {
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
    */
-  scale: number;
-
-  /**
-   * Clipping region for screenshot capture
-   */
-  clip?: ActionScreenshotParams.Clip;
-
-  /**
-   * Type of the URI. default is base64.
-   */
-  outputFormat?: 'base64' | 'storageKey';
+  scale?: number;
 }
 
 export namespace ActionScreenshotParams {
@@ -5573,7 +5571,7 @@ export interface ActionSettingUpdateParams {
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
    */
-  scale: number;
+  scale?: number;
 }
 
 export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.SwipeAdvanced;
