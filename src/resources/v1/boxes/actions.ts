@@ -3882,25 +3882,19 @@ export interface ActionRecordingStopResponse {
  *
  * Android boxes (XML):
  *
- * ```xml
  * <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
  * <hierarchy rotation="0">
  *   <node ... />
  * </hierarchy>
- * ```
  *
  * Browser (Linux) boxes (HTML):
  *
- * ```html
  * <html>
- *   <head>
- *     <title>Example</title>
- *   </head>
+ *   <head><title>Example</title></head>
  *   <body>
  *     <h1>Hello World</h1>
  *   </body>
  * </html>
- * ```
  */
 export interface ActionScreenLayoutResponse {
   /**
