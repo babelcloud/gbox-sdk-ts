@@ -253,6 +253,57 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
+  test.skip('replayRecordingGet: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.replayRecordingGet(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      { seconds: 0 },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('replayRecordingGet: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.replayRecordingGet(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      { seconds: 0 },
+    );
+  });
+
+  // Prism tests are disabled
+  test.skip('replayRecordingStart', async () => {
+    const responsePromise = client.v1.boxes.actions.replayRecordingStart(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('replayRecordingStop', async () => {
+    const responsePromise = client.v1.boxes.actions.replayRecordingStop(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('screenLayout', async () => {
     const responsePromise = client.v1.boxes.actions.screenLayout('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();

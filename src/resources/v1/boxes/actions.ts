@@ -193,6 +193,50 @@ export class Actions extends APIResource {
   }
 
   /**
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.replayRecordingGet(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { seconds: 0 },
+   *   );
+   * ```
+   */
+  replayRecordingGet(
+    boxID: string,
+    query: ActionReplayRecordingGetParams,
+    options?: RequestOptions,
+  ): APIPromise<string> {
+    return this._client.get(path`/boxes/${boxID}/actions/recording/replay`, { query, ...options });
+  }
+
+  /**
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.replayRecordingStart(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  replayRecordingStart(boxID: string, options?: RequestOptions): APIPromise<string> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/replay`, options);
+  }
+
+  /**
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.replayRecordingStop(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  replayRecordingStop(boxID: string, options?: RequestOptions): APIPromise<string> {
+    return this._client.delete(path`/boxes/${boxID}/actions/recording/replay`, options);
+  }
+
+  /**
    * Get the current structured screen layout information. This endpoint returns
    * detailed structural information about the UI elements currently displayed on the
    * screen, which can be used for UI automation, element analysis, and accessibility
@@ -3877,6 +3921,12 @@ export interface ActionRecordingStopResponse {
   storageKey: string;
 }
 
+export type ActionReplayRecordingGetResponse = string;
+
+export type ActionReplayRecordingStartResponse = string;
+
+export type ActionReplayRecordingStopResponse = string;
+
 /**
  * Screen layout content.
  *
@@ -5326,6 +5376,10 @@ export interface ActionRecordingStartParams {
   duration?: string;
 }
 
+export interface ActionReplayRecordingGetParams {
+  seconds: number;
+}
+
 export interface ActionScreenRotationParams {
   /**
    * Target screen orientation
@@ -6012,6 +6066,9 @@ export declare namespace Actions {
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
+    type ActionReplayRecordingGetResponse as ActionReplayRecordingGetResponse,
+    type ActionReplayRecordingStartResponse as ActionReplayRecordingStartResponse,
+    type ActionReplayRecordingStopResponse as ActionReplayRecordingStopResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
@@ -6032,6 +6089,7 @@ export declare namespace Actions {
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
     type ActionRecordingStartParams as ActionRecordingStartParams,
+    type ActionReplayRecordingGetParams as ActionReplayRecordingGetParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
