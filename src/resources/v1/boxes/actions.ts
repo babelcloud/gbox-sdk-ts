@@ -352,6 +352,7 @@ export class Actions extends APIResource {
    * const response =
    *   await client.v1.boxes.actions.settingUpdate(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { scale: 1 },
    *   );
    * ```
    */
@@ -1611,6 +1612,8 @@ export namespace ActionAIResponse {
          *   actions. Coordinates and distances are scaled by this factor. Example: when
          *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
          *   Click({x:50, y:50}).
+         * - If not provided, uses the scale value from UI action settings; otherwise uses
+         *   the passed value.
          */
         scale?: number;
       }
@@ -3080,6 +3083,8 @@ export namespace ActionAIResponse {
          *   actions. Coordinates and distances are scaled by this factor. Example: when
          *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
          *   Click({x:50, y:50}).
+         * - If not provided, uses the scale value from UI action settings; otherwise uses
+         *   the passed value.
          */
         scale?: number;
       }
@@ -4192,7 +4197,7 @@ export interface ActionSettingResponse {
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
    */
-  scale?: number;
+  scale: number;
 }
 
 /**
@@ -4211,7 +4216,7 @@ export interface ActionSettingResetResponse {
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
    */
-  scale?: number;
+  scale: number;
 }
 
 /**
@@ -4230,7 +4235,7 @@ export interface ActionSettingUpdateResponse {
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
    */
-  scale?: number;
+  scale: number;
 }
 
 /**
@@ -5446,6 +5451,8 @@ export interface ActionScreenshotParams {
    *   actions. Coordinates and distances are scaled by this factor. Example: when
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
+   * - If not provided, uses the scale value from UI action settings; otherwise uses
+   *   the passed value.
    */
   scale?: number;
 }
@@ -5619,7 +5626,7 @@ export interface ActionSettingUpdateParams {
    *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
    *   Click({x:50, y:50}).
    */
-  scale?: number;
+  scale: number;
 }
 
 export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.SwipeAdvanced;
