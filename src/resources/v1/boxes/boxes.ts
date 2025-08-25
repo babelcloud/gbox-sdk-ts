@@ -123,7 +123,7 @@ import {
   MediaUpdateAlbumResponse,
 } from './media';
 import * as ProxyAPI from './proxy';
-import { Proxy, ProxySetParams } from './proxy';
+import { Proxy, ProxyGetResponse, ProxySetParams, ProxySetResponse } from './proxy';
 import * as StorageAPI from './storage';
 import { Storage, StoragePresignedURLParams, StoragePresignedURLResponse } from './storage';
 import { APIPromise } from '../../../core/api-promise';
@@ -1187,7 +1187,12 @@ export declare namespace Boxes {
     type ActionTypeParams as ActionTypeParams,
   };
 
-  export { Proxy as Proxy, type ProxySetParams as ProxySetParams };
+  export {
+    Proxy as Proxy,
+    type ProxyGetResponse as ProxyGetResponse,
+    type ProxySetResponse as ProxySetResponse,
+    type ProxySetParams as ProxySetParams,
+  };
 
   export {
     Media as Media,
