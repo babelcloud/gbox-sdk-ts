@@ -43,8 +43,8 @@ describe('resource actions', () => {
   // Prism tests are disabled
   test.skip('click: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.click('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      x: 100,
-      y: 100,
+      x: 350,
+      y: 250,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -58,8 +58,8 @@ describe('resource actions', () => {
   // Prism tests are disabled
   test.skip('click: required and optional params', async () => {
     const response = await client.v1.boxes.actions.click('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      x: 100,
-      y: 100,
+      x: 350,
+      y: 250,
       button: 'left',
       double: false,
       includeScreenshot: false,
@@ -253,6 +253,57 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
+  test.skip('replayRecordingGet: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.replayRecordingGet(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      { seconds: 0 },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('replayRecordingGet: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.replayRecordingGet(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      { seconds: 0 },
+    );
+  });
+
+  // Prism tests are disabled
+  test.skip('replayRecordingStart', async () => {
+    const responsePromise = client.v1.boxes.actions.replayRecordingStart(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('replayRecordingStop', async () => {
+    const responsePromise = client.v1.boxes.actions.replayRecordingStop(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('screenLayout', async () => {
     const responsePromise = client.v1.boxes.actions.screenLayout('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -333,6 +384,51 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
+  test.skip('setting', async () => {
+    const responsePromise = client.v1.boxes.actions.setting('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('settingReset', async () => {
+    const responsePromise = client.v1.boxes.actions.settingReset('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('settingUpdate: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.settingUpdate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      scale: 1,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('settingUpdate: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.settingUpdate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      scale: 1,
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('swipe: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.swipe('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       direction: 'up',
@@ -353,6 +449,7 @@ describe('resource actions', () => {
       distance: 300,
       duration: '500ms',
       includeScreenshot: false,
+      location: 'Chrome App',
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -362,8 +459,8 @@ describe('resource actions', () => {
   // Prism tests are disabled
   test.skip('tap: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.tap('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      x: 100,
-      y: 100,
+      x: 350,
+      y: 250,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -377,8 +474,8 @@ describe('resource actions', () => {
   // Prism tests are disabled
   test.skip('tap: required and optional params', async () => {
     const response = await client.v1.boxes.actions.tap('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      x: 100,
-      y: 100,
+      x: 350,
+      y: 250,
       includeScreenshot: false,
       outputFormat: 'base64',
       presignedExpiresIn: '30m',

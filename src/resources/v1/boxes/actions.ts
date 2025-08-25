@@ -193,6 +193,50 @@ export class Actions extends APIResource {
   }
 
   /**
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.replayRecordingGet(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { seconds: 0 },
+   *   );
+   * ```
+   */
+  replayRecordingGet(
+    boxID: string,
+    query: ActionReplayRecordingGetParams,
+    options?: RequestOptions,
+  ): APIPromise<string> {
+    return this._client.get(path`/boxes/${boxID}/actions/recording/replay`, { query, ...options });
+  }
+
+  /**
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.replayRecordingStart(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  replayRecordingStart(boxID: string, options?: RequestOptions): APIPromise<string> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/replay`, options);
+  }
+
+  /**
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.replayRecordingStop(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  replayRecordingStop(boxID: string, options?: RequestOptions): APIPromise<string> {
+    return this._client.delete(path`/boxes/${boxID}/actions/recording/replay`, options);
+  }
+
+  /**
    * Get the current structured screen layout information. This endpoint returns
    * detailed structural information about the UI elements currently displayed on the
    * screen, which can be used for UI automation, element analysis, and accessibility
@@ -270,6 +314,54 @@ export class Actions extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ActionScrollResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body, ...options });
+  }
+
+  /**
+   * Get the box action setting
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.setting(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  setting(boxID: string, options?: RequestOptions): APIPromise<ActionSettingResponse> {
+    return this._client.get(path`/boxes/${boxID}/actions/setting`, options);
+  }
+
+  /**
+   * Reset the box setting
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.settingReset(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  settingReset(boxID: string, options?: RequestOptions): APIPromise<ActionSettingResetResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/setting/reset`, options);
+  }
+
+  /**
+   * Setting the box action setting
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.settingUpdate(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { scale: 1 },
+   *   );
+   * ```
+   */
+  settingUpdate(
+    boxID: string,
+    body: ActionSettingUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionSettingUpdateResponse> {
+    return this._client.put(path`/boxes/${boxID}/actions/setting`, { body, ...options });
   }
 
   /**
@@ -684,14 +776,14 @@ export namespace ActionAIResponse {
        */
       export interface TypedDragSimpleAction {
         /**
-         * Single point in a drag path
+         * End point of the drag path (coordinates or natural language)
          */
-        end: TypedDragSimpleAction.End;
+        end: TypedDragSimpleAction.DragPathPoint | string;
 
         /**
-         * Single point in a drag path
+         * Start point of the drag path (coordinates or natural language)
          */
-        start: TypedDragSimpleAction.Start;
+        start: TypedDragSimpleAction.DragPathPoint | string;
 
         /**
          * Duration to complete the movement from start to end coordinates
@@ -743,7 +835,7 @@ export namespace ActionAIResponse {
         /**
          * Single point in a drag path
          */
-        export interface End {
+        export interface DragPathPoint {
           /**
            * X coordinate of a point in the drag path
            */
@@ -758,7 +850,7 @@ export namespace ActionAIResponse {
         /**
          * Single point in a drag path
          */
-        export interface Start {
+        export interface DragPathPoint {
           /**
            * X coordinate of a point in the drag path
            */
@@ -777,14 +869,14 @@ export namespace ActionAIResponse {
       export interface TypedScrollAction {
         /**
          * Horizontal scroll amount. Positive values scroll content rightward (reveals
-         * content on the left), negative values scroll content leftward (reveals content
-         * on the right).
+         * content on the right), negative values scroll content leftward (reveals content
+         * on the left).
          */
         scrollX: number;
 
         /**
          * Vertical scroll amount. Positive values scroll content downward (reveals content
-         * above), negative values scroll content upward (reveals content below).
+         * below), negative values scroll content upward (reveals content above).
          */
         scrollY: number;
 
@@ -934,6 +1026,12 @@ export namespace ActionAIResponse {
         includeScreenshot?: boolean;
 
         /**
+         * Natural language description of the location where the swipe should originate.
+         * If not provided, the swipe will be performed from the center of the screen.
+         */
+        location?: string;
+
+        /**
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
@@ -970,14 +1068,14 @@ export namespace ActionAIResponse {
        */
       export interface TypedSwipeAdvancedAction {
         /**
-         * Swipe path
+         * End point of the swipe path (coordinates or natural language)
          */
-        end: TypedSwipeAdvancedAction.End;
+        end: TypedSwipeAdvancedAction.SwipePath | string;
 
         /**
-         * Swipe path
+         * Start point of the swipe path (coordinates or natural language)
          */
-        start: TypedSwipeAdvancedAction.Start;
+        start: TypedSwipeAdvancedAction.SwipePath | string;
 
         /**
          * Duration of the swipe
@@ -1029,7 +1127,7 @@ export namespace ActionAIResponse {
         /**
          * Swipe path
          */
-        export interface End {
+        export interface SwipePath {
           /**
            * Start/end x coordinate of the swipe path
            */
@@ -1044,7 +1142,7 @@ export namespace ActionAIResponse {
         /**
          * Swipe path
          */
-        export interface Start {
+        export interface SwipePath {
           /**
            * Start/end x coordinate of the swipe path
            */
@@ -1502,6 +1600,22 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * The scale of the action to be performed. Must be greater than 0.1 and less than
+         * or equal to 1.
+         *
+         * Notes:
+         *
+         * - Scale does not change the box's actual screen resolution.
+         * - It affects the size of the output screenshot and the coordinates/distances of
+         *   actions. Coordinates and distances are scaled by this factor. Example: when
+         *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+         *   Click({x:50, y:50}).
+         * - If not provided, uses the scale value from UI action settings; otherwise uses
+         *   the passed value.
+         */
+        scale?: number;
       }
 
       export namespace TypedScreenshotAction {
@@ -1536,14 +1650,14 @@ export namespace ActionAIResponse {
        */
       export interface TypedDragSimpleAction {
         /**
-         * Single point in a drag path
+         * End point of the drag path (coordinates or natural language)
          */
-        end: TypedDragSimpleAction.End;
+        end: TypedDragSimpleAction.DragPathPoint | string;
 
         /**
-         * Single point in a drag path
+         * Start point of the drag path (coordinates or natural language)
          */
-        start: TypedDragSimpleAction.Start;
+        start: TypedDragSimpleAction.DragPathPoint | string;
 
         /**
          * Duration to complete the movement from start to end coordinates
@@ -1595,7 +1709,7 @@ export namespace ActionAIResponse {
         /**
          * Single point in a drag path
          */
-        export interface End {
+        export interface DragPathPoint {
           /**
            * X coordinate of a point in the drag path
            */
@@ -1610,7 +1724,7 @@ export namespace ActionAIResponse {
         /**
          * Single point in a drag path
          */
-        export interface Start {
+        export interface DragPathPoint {
           /**
            * X coordinate of a point in the drag path
            */
@@ -2133,14 +2247,14 @@ export namespace ActionAIResponse {
        */
       export interface TypedDragSimpleAction {
         /**
-         * Single point in a drag path
+         * End point of the drag path (coordinates or natural language)
          */
-        end: TypedDragSimpleAction.End;
+        end: TypedDragSimpleAction.DragPathPoint | string;
 
         /**
-         * Single point in a drag path
+         * Start point of the drag path (coordinates or natural language)
          */
-        start: TypedDragSimpleAction.Start;
+        start: TypedDragSimpleAction.DragPathPoint | string;
 
         /**
          * Duration to complete the movement from start to end coordinates
@@ -2192,7 +2306,7 @@ export namespace ActionAIResponse {
         /**
          * Single point in a drag path
          */
-        export interface End {
+        export interface DragPathPoint {
           /**
            * X coordinate of a point in the drag path
            */
@@ -2207,7 +2321,7 @@ export namespace ActionAIResponse {
         /**
          * Single point in a drag path
          */
-        export interface Start {
+        export interface DragPathPoint {
           /**
            * X coordinate of a point in the drag path
            */
@@ -2226,14 +2340,14 @@ export namespace ActionAIResponse {
       export interface TypedScrollAction {
         /**
          * Horizontal scroll amount. Positive values scroll content rightward (reveals
-         * content on the left), negative values scroll content leftward (reveals content
-         * on the right).
+         * content on the right), negative values scroll content leftward (reveals content
+         * on the left).
          */
         scrollX: number;
 
         /**
          * Vertical scroll amount. Positive values scroll content downward (reveals content
-         * above), negative values scroll content upward (reveals content below).
+         * below), negative values scroll content upward (reveals content above).
          */
         scrollY: number;
 
@@ -2383,6 +2497,12 @@ export namespace ActionAIResponse {
         includeScreenshot?: boolean;
 
         /**
+         * Natural language description of the location where the swipe should originate.
+         * If not provided, the swipe will be performed from the center of the screen.
+         */
+        location?: string;
+
+        /**
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
@@ -2419,14 +2539,14 @@ export namespace ActionAIResponse {
        */
       export interface TypedSwipeAdvancedAction {
         /**
-         * Swipe path
+         * End point of the swipe path (coordinates or natural language)
          */
-        end: TypedSwipeAdvancedAction.End;
+        end: TypedSwipeAdvancedAction.SwipePath | string;
 
         /**
-         * Swipe path
+         * Start point of the swipe path (coordinates or natural language)
          */
-        start: TypedSwipeAdvancedAction.Start;
+        start: TypedSwipeAdvancedAction.SwipePath | string;
 
         /**
          * Duration of the swipe
@@ -2478,7 +2598,7 @@ export namespace ActionAIResponse {
         /**
          * Swipe path
          */
-        export interface End {
+        export interface SwipePath {
           /**
            * Start/end x coordinate of the swipe path
            */
@@ -2493,7 +2613,7 @@ export namespace ActionAIResponse {
         /**
          * Swipe path
          */
-        export interface Start {
+        export interface SwipePath {
           /**
            * Start/end x coordinate of the swipe path
            */
@@ -2951,6 +3071,22 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * The scale of the action to be performed. Must be greater than 0.1 and less than
+         * or equal to 1.
+         *
+         * Notes:
+         *
+         * - Scale does not change the box's actual screen resolution.
+         * - It affects the size of the output screenshot and the coordinates/distances of
+         *   actions. Coordinates and distances are scaled by this factor. Example: when
+         *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+         *   Click({x:50, y:50}).
+         * - If not provided, uses the scale value from UI action settings; otherwise uses
+         *   the passed value.
+         */
+        scale?: number;
       }
 
       export namespace TypedScreenshotAction {
@@ -2985,14 +3121,14 @@ export namespace ActionAIResponse {
        */
       export interface TypedDragSimpleAction {
         /**
-         * Single point in a drag path
+         * End point of the drag path (coordinates or natural language)
          */
-        end: TypedDragSimpleAction.End;
+        end: TypedDragSimpleAction.DragPathPoint | string;
 
         /**
-         * Single point in a drag path
+         * Start point of the drag path (coordinates or natural language)
          */
-        start: TypedDragSimpleAction.Start;
+        start: TypedDragSimpleAction.DragPathPoint | string;
 
         /**
          * Duration to complete the movement from start to end coordinates
@@ -3044,7 +3180,7 @@ export namespace ActionAIResponse {
         /**
          * Single point in a drag path
          */
-        export interface End {
+        export interface DragPathPoint {
           /**
            * X coordinate of a point in the drag path
            */
@@ -3059,7 +3195,7 @@ export namespace ActionAIResponse {
         /**
          * Single point in a drag path
          */
-        export interface Start {
+        export interface DragPathPoint {
           /**
            * X coordinate of a point in the drag path
            */
@@ -3790,30 +3926,30 @@ export interface ActionRecordingStopResponse {
   storageKey: string;
 }
 
+export type ActionReplayRecordingGetResponse = string;
+
+export type ActionReplayRecordingStartResponse = string;
+
+export type ActionReplayRecordingStopResponse = string;
+
 /**
  * Screen layout content.
  *
  * Android boxes (XML):
  *
- * ```xml
  * <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
  * <hierarchy rotation="0">
  *   <node ... />
  * </hierarchy>
- * ```
  *
  * Browser (Linux) boxes (HTML):
  *
- * ```html
  * <html>
- *   <head>
- *     <title>Example</title>
- *   </head>
+ *   <head><title>Example</title></head>
  *   <body>
  *     <h1>Hello World</h1>
  *   </body>
  * </html>
- * ```
  */
 export interface ActionScreenLayoutResponse {
   /**
@@ -4043,6 +4179,63 @@ export namespace ActionScrollResponse {
      */
     message: string;
   }
+}
+
+/**
+ * Action setting
+ */
+export interface ActionSettingResponse {
+  /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   */
+  scale: number;
+}
+
+/**
+ * Action setting
+ */
+export interface ActionSettingResetResponse {
+  /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   */
+  scale: number;
+}
+
+/**
+ * Action setting
+ */
+export interface ActionSettingUpdateResponse {
+  /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   */
+  scale: number;
 }
 
 /**
@@ -4504,63 +4697,122 @@ export namespace ActionAIParams {
   }
 }
 
-export interface ActionClickParams {
-  /**
-   * X coordinate of the click
-   */
-  x: number;
+export type ActionClickParams = ActionClickParams.Click | ActionClickParams.ClickByNaturalLanguage;
 
-  /**
-   * Y coordinate of the click
-   */
-  y: number;
+export declare namespace ActionClickParams {
+  export interface Click {
+    /**
+     * X coordinate of the click
+     */
+    x: number;
 
-  /**
-   * Mouse button to click
-   */
-  button?: 'left' | 'right' | 'middle';
+    /**
+     * Y coordinate of the click
+     */
+    y: number;
 
-  /**
-   * Whether to perform a double click
-   */
-  double?: boolean;
+    /**
+     * Mouse button to click
+     */
+    button?: 'left' | 'right' | 'middle';
 
-  /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
-   */
-  includeScreenshot?: boolean;
+    /**
+     * Whether to perform a double click
+     */
+    double?: boolean;
 
-  /**
-   * Type of the URI. default is base64.
-   */
-  outputFormat?: 'base64' | 'storageKey';
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
 
-  /**
-   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-   */
-  presignedExpiresIn?: string;
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
 
-  /**
-   * Delay after performing the action, before taking the final screenshot.
-   *
-   * Execution flow:
-   *
-   * 1. Take screenshot before action
-   * 2. Perform the action
-   * 3. Wait for screenshotDelay (this parameter)
-   * 4. Take screenshot after action
-   *
-   * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-   */
-  screenshotDelay?: string;
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
+
+  export interface ClickByNaturalLanguage {
+    /**
+     * Describe the target to operate using natural language, e.g., 'login button' or
+     * 'Chrome'.
+     */
+    target: string;
+
+    /**
+     * Mouse button to click
+     */
+    button?: 'left' | 'right' | 'middle';
+
+    /**
+     * Whether to perform a double click
+     */
+    double?: boolean;
+
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
 }
 
 export type ActionDragParams = ActionDragParams.DragSimple | ActionDragParams.DragAdvanced;
@@ -4568,14 +4820,14 @@ export type ActionDragParams = ActionDragParams.DragSimple | ActionDragParams.Dr
 export declare namespace ActionDragParams {
   export interface DragSimple {
     /**
-     * Single point in a drag path
+     * End point of the drag path (coordinates or natural language)
      */
-    end: DragSimple.End;
+    end: DragSimple.DragPathPoint | string;
 
     /**
-     * Single point in a drag path
+     * Start point of the drag path (coordinates or natural language)
      */
-    start: DragSimple.Start;
+    start: DragSimple.DragPathPoint | string;
 
     /**
      * Duration to complete the movement from start to end coordinates
@@ -4627,7 +4879,7 @@ export declare namespace ActionDragParams {
     /**
      * Single point in a drag path
      */
-    export interface End {
+    export interface DragPathPoint {
       /**
        * X coordinate of a point in the drag path
        */
@@ -4642,7 +4894,7 @@ export declare namespace ActionDragParams {
     /**
      * Single point in a drag path
      */
-    export interface Start {
+    export interface DragPathPoint {
       /**
        * X coordinate of a point in the drag path
        */
@@ -4746,61 +4998,120 @@ export interface ActionExtractParams {
   schema?: unknown;
 }
 
-export interface ActionLongPressParams {
-  /**
-   * X coordinate of the long press
-   */
-  x: number;
+export type ActionLongPressParams =
+  | ActionLongPressParams.LongPress
+  | ActionLongPressParams.LongPressByNaturalLanguage;
 
-  /**
-   * Y coordinate of the long press
-   */
-  y: number;
+export declare namespace ActionLongPressParams {
+  export interface LongPress {
+    /**
+     * X coordinate of the long press
+     */
+    x: number;
 
-  /**
-   * Duration to hold the press (e.g. '1s', '500ms')
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
-   */
-  duration?: string;
+    /**
+     * Y coordinate of the long press
+     */
+    y: number;
 
-  /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
-   */
-  includeScreenshot?: boolean;
+    /**
+     * Duration to hold the press (e.g. '1s', '500ms')
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+     */
+    duration?: string;
 
-  /**
-   * Type of the URI. default is base64.
-   */
-  outputFormat?: 'base64' | 'storageKey';
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
 
-  /**
-   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-   */
-  presignedExpiresIn?: string;
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
 
-  /**
-   * Delay after performing the action, before taking the final screenshot.
-   *
-   * Execution flow:
-   *
-   * 1. Take screenshot before action
-   * 2. Perform the action
-   * 3. Wait for screenshotDelay (this parameter)
-   * 4. Take screenshot after action
-   *
-   * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-   */
-  screenshotDelay?: string;
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
+
+  export interface LongPressByNaturalLanguage {
+    /**
+     * Describe the target to operate using natural language, e.g., 'Chrome icon',
+     * 'login button'
+     */
+    target: string;
+
+    /**
+     * Duration to hold the press (e.g. '1s', '500ms')
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+     */
+    duration?: string;
+
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
 }
 
 export interface ActionMoveParams {
@@ -5070,6 +5381,10 @@ export interface ActionRecordingStartParams {
   duration?: string;
 }
 
+export interface ActionReplayRecordingGetParams {
+  seconds: number;
+}
+
 export interface ActionScreenRotationParams {
   /**
    * Target screen orientation
@@ -5124,6 +5439,22 @@ export interface ActionScreenshotParams {
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   * - If not provided, uses the scale value from UI action settings; otherwise uses
+   *   the passed value.
+   */
+  scale?: number;
 }
 
 export namespace ActionScreenshotParams {
@@ -5159,14 +5490,14 @@ export declare namespace ActionScrollParams {
   export interface Scroll {
     /**
      * Horizontal scroll amount. Positive values scroll content rightward (reveals
-     * content on the left), negative values scroll content leftward (reveals content
-     * on the right).
+     * content on the right), negative values scroll content leftward (reveals content
+     * on the left).
      */
     scrollX: number;
 
     /**
      * Vertical scroll amount. Positive values scroll content downward (reveals content
-     * above), negative values scroll content upward (reveals content below).
+     * below), negative values scroll content upward (reveals content above).
      */
     scrollY: number;
 
@@ -5282,6 +5613,22 @@ export declare namespace ActionScrollParams {
   }
 }
 
+export interface ActionSettingUpdateParams {
+  /**
+   * The scale of the action to be performed. Must be greater than 0.1 and less than
+   * or equal to 1.
+   *
+   * Notes:
+   *
+   * - Scale does not change the box's actual screen resolution.
+   * - It affects the size of the output screenshot and the coordinates/distances of
+   *   actions. Coordinates and distances are scaled by this factor. Example: when
+   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+   *   Click({x:50, y:50}).
+   */
+  scale: number;
+}
+
 export type ActionSwipeParams = ActionSwipeParams.SwipeSimple | ActionSwipeParams.SwipeAdvanced;
 
 export declare namespace ActionSwipeParams {
@@ -5312,6 +5659,12 @@ export declare namespace ActionSwipeParams {
      * object will still be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
+
+    /**
+     * Natural language description of the location where the swipe should originate.
+     * If not provided, the swipe will be performed from the center of the screen.
+     */
+    location?: string;
 
     /**
      * Type of the URI. default is base64.
@@ -5347,14 +5700,14 @@ export declare namespace ActionSwipeParams {
 
   export interface SwipeAdvanced {
     /**
-     * Swipe path
+     * End point of the swipe path (coordinates or natural language)
      */
-    end: SwipeAdvanced.End;
+    end: SwipeAdvanced.SwipePath | string;
 
     /**
-     * Swipe path
+     * Start point of the swipe path (coordinates or natural language)
      */
-    start: SwipeAdvanced.Start;
+    start: SwipeAdvanced.SwipePath | string;
 
     /**
      * Duration of the swipe
@@ -5406,7 +5759,7 @@ export declare namespace ActionSwipeParams {
     /**
      * Swipe path
      */
-    export interface End {
+    export interface SwipePath {
       /**
        * Start/end x coordinate of the swipe path
        */
@@ -5421,7 +5774,7 @@ export declare namespace ActionSwipeParams {
     /**
      * Swipe path
      */
-    export interface Start {
+    export interface SwipePath {
       /**
        * Start/end x coordinate of the swipe path
        */
@@ -5435,53 +5788,102 @@ export declare namespace ActionSwipeParams {
   }
 }
 
-export interface ActionTapParams {
-  /**
-   * X coordinate of the tap
-   */
-  x: number;
+export type ActionTapParams = ActionTapParams.Tap | ActionTapParams.TapByNaturalLanguage;
 
-  /**
-   * Y coordinate of the tap
-   */
-  y: number;
+export declare namespace ActionTapParams {
+  export interface Tap {
+    /**
+     * X coordinate of the tap
+     */
+    x: number;
 
-  /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
-   */
-  includeScreenshot?: boolean;
+    /**
+     * Y coordinate of the tap
+     */
+    y: number;
 
-  /**
-   * Type of the URI. default is base64.
-   */
-  outputFormat?: 'base64' | 'storageKey';
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
 
-  /**
-   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-   */
-  presignedExpiresIn?: string;
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
 
-  /**
-   * Delay after performing the action, before taking the final screenshot.
-   *
-   * Execution flow:
-   *
-   * 1. Take screenshot before action
-   * 2. Perform the action
-   * 3. Wait for screenshotDelay (this parameter)
-   * 4. Take screenshot after action
-   *
-   * Example: '500ms' means wait 500ms after the action before capturing the final
-   * screenshot.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-   */
-  screenshotDelay?: string;
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
+
+  export interface TapByNaturalLanguage {
+    /**
+     * Describe the target to operate using natural language, e.g., 'login button' or
+     * 'Chrome'.
+     */
+    target: string;
+
+    /**
+     * Whether to include screenshots in the action response. If false, the screenshot
+     * object will still be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
 }
 
 export interface ActionTouchParams {
@@ -5671,10 +6073,16 @@ export declare namespace Actions {
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
+    type ActionReplayRecordingGetResponse as ActionReplayRecordingGetResponse,
+    type ActionReplayRecordingStartResponse as ActionReplayRecordingStartResponse,
+    type ActionReplayRecordingStopResponse as ActionReplayRecordingStopResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionScrollResponse as ActionScrollResponse,
+    type ActionSettingResponse as ActionSettingResponse,
+    type ActionSettingResetResponse as ActionSettingResetResponse,
+    type ActionSettingUpdateResponse as ActionSettingUpdateResponse,
     type ActionSwipeResponse as ActionSwipeResponse,
     type ActionTapResponse as ActionTapResponse,
     type ActionTouchResponse as ActionTouchResponse,
@@ -5688,9 +6096,11 @@ export declare namespace Actions {
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
     type ActionRecordingStartParams as ActionRecordingStartParams,
+    type ActionReplayRecordingGetParams as ActionReplayRecordingGetParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
+    type ActionSettingUpdateParams as ActionSettingUpdateParams,
     type ActionSwipeParams as ActionSwipeParams,
     type ActionTapParams as ActionTapParams,
     type ActionTouchParams as ActionTouchParams,

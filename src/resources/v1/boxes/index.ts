@@ -11,10 +11,16 @@ export {
   type ActionPressButtonResponse,
   type ActionPressKeyResponse,
   type ActionRecordingStopResponse,
+  type ActionReplayRecordingGetResponse,
+  type ActionReplayRecordingStartResponse,
+  type ActionReplayRecordingStopResponse,
   type ActionScreenLayoutResponse,
   type ActionScreenRotationResponse,
   type ActionScreenshotResponse,
   type ActionScrollResponse,
+  type ActionSettingResponse,
+  type ActionSettingResetResponse,
+  type ActionSettingUpdateResponse,
   type ActionSwipeResponse,
   type ActionTapResponse,
   type ActionTouchResponse,
@@ -28,9 +34,11 @@ export {
   type ActionPressButtonParams,
   type ActionPressKeyParams,
   type ActionRecordingStartParams,
+  type ActionReplayRecordingGetParams,
   type ActionScreenRotationParams,
   type ActionScreenshotParams,
   type ActionScrollParams,
+  type ActionSettingUpdateParams,
   type ActionSwipeParams,
   type ActionTapParams,
   type ActionTouchParams,
@@ -135,5 +143,5 @@ export {
   type MediaListMediaParams,
   type MediaUpdateAlbumParams,
 } from './media';
-export { Proxy, type ProxySetParams } from './proxy';
+export { Proxy, type ProxyGetResponse, type ProxySetResponse, type ProxySetParams } from './proxy';
 export { Storage, type StoragePresignedURLResponse, type StoragePresignedURLParams } from './storage';

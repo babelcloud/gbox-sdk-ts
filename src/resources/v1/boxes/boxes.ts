@@ -21,6 +21,10 @@ import {
   ActionPressKeyResponse,
   ActionRecordingStartParams,
   ActionRecordingStopResponse,
+  ActionReplayRecordingGetParams,
+  ActionReplayRecordingGetResponse,
+  ActionReplayRecordingStartResponse,
+  ActionReplayRecordingStopResponse,
   ActionScreenLayoutResponse,
   ActionScreenRotationParams,
   ActionScreenRotationResponse,
@@ -28,6 +32,10 @@ import {
   ActionScreenshotResponse,
   ActionScrollParams,
   ActionScrollResponse,
+  ActionSettingResetResponse,
+  ActionSettingResponse,
+  ActionSettingUpdateParams,
+  ActionSettingUpdateResponse,
   ActionSwipeParams,
   ActionSwipeResponse,
   ActionTapParams,
@@ -115,7 +123,7 @@ import {
   MediaUpdateAlbumResponse,
 } from './media';
 import * as ProxyAPI from './proxy';
-import { Proxy, ProxySetParams } from './proxy';
+import { Proxy, ProxyGetResponse, ProxySetParams, ProxySetResponse } from './proxy';
 import * as StorageAPI from './storage';
 import { Storage, StoragePresignedURLParams, StoragePresignedURLResponse } from './storage';
 import { APIPromise } from '../../../core/api-promise';
@@ -1145,10 +1153,16 @@ export declare namespace Boxes {
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
+    type ActionReplayRecordingGetResponse as ActionReplayRecordingGetResponse,
+    type ActionReplayRecordingStartResponse as ActionReplayRecordingStartResponse,
+    type ActionReplayRecordingStopResponse as ActionReplayRecordingStopResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionScrollResponse as ActionScrollResponse,
+    type ActionSettingResponse as ActionSettingResponse,
+    type ActionSettingResetResponse as ActionSettingResetResponse,
+    type ActionSettingUpdateResponse as ActionSettingUpdateResponse,
     type ActionSwipeResponse as ActionSwipeResponse,
     type ActionTapResponse as ActionTapResponse,
     type ActionTouchResponse as ActionTouchResponse,
@@ -1162,16 +1176,23 @@ export declare namespace Boxes {
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
     type ActionRecordingStartParams as ActionRecordingStartParams,
+    type ActionReplayRecordingGetParams as ActionReplayRecordingGetParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
+    type ActionSettingUpdateParams as ActionSettingUpdateParams,
     type ActionSwipeParams as ActionSwipeParams,
     type ActionTapParams as ActionTapParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
   };
 
-  export { Proxy as Proxy, type ProxySetParams as ProxySetParams };
+  export {
+    Proxy as Proxy,
+    type ProxyGetResponse as ProxyGetResponse,
+    type ProxySetResponse as ProxySetResponse,
+    type ProxySetParams as ProxySetParams,
+  };
 
   export {
     Media as Media,

@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.28.0 (2025-08-25)
+
+Full Changelog: [v0.27.0...v0.28.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.27.0...v0.28.0)
+
+### Features
+
+* **api:** add new settings management methods to ActionOperator ([297adb6](https://github.com/babelcloud/gbox-sdk-ts/commit/297adb62de4d9c18ea2ca033fd2ed429408a986f))
+* **api:** api update ([e06295e](https://github.com/babelcloud/gbox-sdk-ts/commit/e06295e22dfa860904f65caabc3930c7030407d3))
+* **api:** api update ([503014a](https://github.com/babelcloud/gbox-sdk-ts/commit/503014afc0d4f440d32e91ad048371f8f145d39c))
+* **api:** api update ([ecfd2a8](https://github.com/babelcloud/gbox-sdk-ts/commit/ecfd2a8a1d3df4e53a13d5e9e1b3fc871914e0f8))
+* **api:** api update ([0a278dd](https://github.com/babelcloud/gbox-sdk-ts/commit/0a278dddfe6bf780738239d2868631228c4e069a))
+* **api:** api update ([7dd2c0c](https://github.com/babelcloud/gbox-sdk-ts/commit/7dd2c0cfd6f62db734bf4889405c2f21304319c1))
+* **api:** api update ([3808a5d](https://github.com/babelcloud/gbox-sdk-ts/commit/3808a5ddc43dc5dcfe3c85668db22f79abdf823e))
+* **api:** api update ([00d833b](https://github.com/babelcloud/gbox-sdk-ts/commit/00d833b027f1cb674d80eae7c02b891e127cbfe4))
+* **api:** api update ([608de18](https://github.com/babelcloud/gbox-sdk-ts/commit/608de1847f0edc9c925c966945ebb02edcd1210e))
+* **api:** api update ([c8c1679](https://github.com/babelcloud/gbox-sdk-ts/commit/c8c16792d0368a768bf8695ce0ded917c4a80fb9))
+* **api:** api update ([8b2f82f](https://github.com/babelcloud/gbox-sdk-ts/commit/8b2f82f207a54406da791a9bc6a28ab8eb11cab8))
+* **api:** api update ([ed7cf7b](https://github.com/babelcloud/gbox-sdk-ts/commit/ed7cf7bdfe641631e02df7f551e6437bf9aeacaf))
+* **api:** api update ([a7b2ddf](https://github.com/babelcloud/gbox-sdk-ts/commit/a7b2ddf2e8b48619dde5dce36bc055836eca49b0))
+* **api:** api update ([b5f5b29](https://github.com/babelcloud/gbox-sdk-ts/commit/b5f5b29cac7932e1662875d7c3e3b62087170709))
+* **api:** extend long press action types to include natural language support ([879cf27](https://github.com/babelcloud/gbox-sdk-ts/commit/879cf2702ed6ab7f1a07c50be32fdb50ec5ec250))
+* **mcp:** add code execution tool ([e818600](https://github.com/babelcloud/gbox-sdk-ts/commit/e81860068be152a5b16ab9e9a48424bb4c409854))
+* **proxy:** add ProxyOperator with set and get methods for managing proxy settings ([d102e63](https://github.com/babelcloud/gbox-sdk-ts/commit/d102e6300da87fe55fd6d3fbcd439c05294b4caa))
+
+
+### Bug Fixes
+
+* lint ([682dcb1](https://github.com/babelcloud/gbox-sdk-ts/commit/682dcb1cafa9a25f2f5316cb878f2624724cec0a))
+* proxy return ([70c31e0](https://github.com/babelcloud/gbox-sdk-ts/commit/70c31e0a5daac921de06fc7ca7853ff44b3bd7c5))
+* type ([09566df](https://github.com/babelcloud/gbox-sdk-ts/commit/09566df58649a446bf0307b1ddee89261e44a723))
+
+
+### Chores
+
+* add package to package.json ([a70a95e](https://github.com/babelcloud/gbox-sdk-ts/commit/a70a95eeaaca21ed6cbde39c68ffa002185d12a2))
+* **client:** qualify global Blob ([2a08673](https://github.com/babelcloud/gbox-sdk-ts/commit/2a08673cab7554095ed5d7bb7cebfeeb1851b43f))
+* **deps:** update dependency @types/node to v20.17.58 ([e180809](https://github.com/babelcloud/gbox-sdk-ts/commit/e180809e084a6b0add081efaa7edbcf86fac6cea))
+* **internal:** formatting change ([4ca2a0e](https://github.com/babelcloud/gbox-sdk-ts/commit/4ca2a0e1555c8138f275b41cdb42aa23fbd0dbfc))
+* update CI script ([d7082c6](https://github.com/babelcloud/gbox-sdk-ts/commit/d7082c618adaf71203d0011298f5ebd907479aaf))
+
 ## 0.27.0 (2025-08-15)
 
 Full Changelog: [v0.26.0...v0.27.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.26.0...v0.27.0)

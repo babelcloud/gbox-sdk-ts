@@ -15,15 +15,22 @@ import type {
   ActionRecordingStartParams,
   ActionTapParams,
   ActionLongPressParams,
+  ActionSettingUpdateParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
 import path from 'path';
 import fs from 'fs';
 
-export interface ActionClick extends ActionClickParams {
+export interface ActionClickByPoint extends ActionClickParams.Click {
   screenshotDelay?: TimeString;
 }
+
+export interface ActionClickByNaturalLanguage extends ActionClickParams.ClickByNaturalLanguage {
+  screenshotDelay?: TimeString;
+}
+
+export type ActionClick = ActionClickByPoint | ActionClickByNaturalLanguage;
 
 export interface ActionDragSimple extends ActionDragParams.DragSimple {
   screenshotDelay?: TimeString;
@@ -49,13 +56,25 @@ export interface ActionScrollSimple extends ActionScrollParams.ScrollSimple {
 
 export type ActionScroll = ActionScrollSimple | ActionScrollAdvanced;
 
-export interface ActionTap extends ActionTapParams {
+export interface ActionTapByPoint extends ActionTapParams.Tap {
   screenshotDelay?: TimeString;
 }
 
-export interface ActionLongPress extends ActionLongPressParams {
+export interface ActionTapByNaturalLanguage extends ActionTapParams.TapByNaturalLanguage {
   screenshotDelay?: TimeString;
 }
+
+export type ActionTap = ActionTapByPoint | ActionTapByNaturalLanguage;
+
+export interface ActionLongPressByPoint extends ActionLongPressParams.LongPress {
+  screenshotDelay?: TimeString;
+}
+
+export interface ActionLongPressByNaturalLanguage extends ActionLongPressParams.LongPressByNaturalLanguage {
+  screenshotDelay?: TimeString;
+}
+
+export type ActionLongPress = ActionLongPressByPoint | ActionLongPressByNaturalLanguage;
 
 export interface ActionTouch extends ActionTouchParams {
   screenshotDelay?: TimeString;
@@ -338,6 +357,30 @@ export class ActionOperator {
    */
   async screenRecordingStop() {
     return this.client.v1.boxes.actions.recordingStop(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.getSetting();
+   */
+  async getSetting() {
+    return this.client.v1.boxes.actions.setting(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.updateSetting({ scale: 0.5 });
+   */
+  async updateSetting(body: ActionSettingUpdateParams) {
+    return this.client.v1.boxes.actions.settingUpdate(this.boxId, body);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.action.resetSetting();
+   */
+  async resetSetting() {
+    return this.client.v1.boxes.actions.settingReset(this.boxId);
   }
 
   /**
