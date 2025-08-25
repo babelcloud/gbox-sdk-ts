@@ -29,16 +29,13 @@ export class Proxy extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.proxy.get(
+   * const proxy = await client.v1.boxes.proxy.get(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
-  get(boxID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.get(path`/boxes/${boxID}/proxy`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  get(boxID: string, options?: RequestOptions): APIPromise<ProxyGetResponse> {
+    return this._client.get(path`/boxes/${boxID}/proxy`, options);
   }
 
   /**
@@ -46,18 +43,112 @@ export class Proxy extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.proxy.set(
+   * const response = await client.v1.boxes.proxy.set(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { host: '127.0.0.1', port: 8080 },
    * );
    * ```
    */
-  set(boxID: string, body: ProxySetParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${boxID}/proxy`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  set(boxID: string, body: ProxySetParams, options?: RequestOptions): APIPromise<ProxySetResponse> {
+    return this._client.post(path`/boxes/${boxID}/proxy`, { body, ...options });
+  }
+}
+
+/**
+ * Box Http Proxy
+ */
+export interface ProxyGetResponse {
+  /**
+   * The host address of the proxy server
+   */
+  host: string;
+
+  /**
+   * The port number of the proxy server
+   */
+  port: number;
+
+  /**
+   * Box Proxy Auth
+   */
+  auth?: ProxyGetResponse.Auth;
+
+  /**
+   * List of IP addresses and domains that should bypass the proxy. These addresses
+   * will be accessed directly without going through the proxy server. Default is
+   * ['127.0.0.1', 'localhost']
+   */
+  excludes?: Array<string>;
+
+  /**
+   * PAC (Proxy Auto-Configuration) URL.
+   */
+  pacUrl?: string;
+}
+
+export namespace ProxyGetResponse {
+  /**
+   * Box Proxy Auth
+   */
+  export interface Auth {
+    /**
+     * Password for the proxy
+     */
+    password: string;
+
+    /**
+     * Username for the proxy
+     */
+    username: string;
+  }
+}
+
+/**
+ * Box Http Proxy
+ */
+export interface ProxySetResponse {
+  /**
+   * The host address of the proxy server
+   */
+  host: string;
+
+  /**
+   * The port number of the proxy server
+   */
+  port: number;
+
+  /**
+   * Box Proxy Auth
+   */
+  auth?: ProxySetResponse.Auth;
+
+  /**
+   * List of IP addresses and domains that should bypass the proxy. These addresses
+   * will be accessed directly without going through the proxy server. Default is
+   * ['127.0.0.1', 'localhost']
+   */
+  excludes?: Array<string>;
+
+  /**
+   * PAC (Proxy Auto-Configuration) URL.
+   */
+  pacUrl?: string;
+}
+
+export namespace ProxySetResponse {
+  /**
+   * Box Proxy Auth
+   */
+  export interface Auth {
+    /**
+     * Password for the proxy
+     */
+    password: string;
+
+    /**
+     * Username for the proxy
+     */
+    username: string;
   }
 }
 
@@ -108,5 +199,9 @@ export namespace ProxySetParams {
 }
 
 export declare namespace Proxy {
-  export { type ProxySetParams as ProxySetParams };
+  export {
+    type ProxyGetResponse as ProxyGetResponse,
+    type ProxySetResponse as ProxySetResponse,
+    type ProxySetParams as ProxySetParams,
+  };
 }

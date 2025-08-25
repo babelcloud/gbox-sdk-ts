@@ -102,11 +102,16 @@ Methods:
 
 ### Proxy
 
+Types:
+
+- <code><a href="./src/resources/v1/boxes/proxy.ts">ProxyGetResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/proxy.ts">ProxySetResponse</a></code>
+
 Methods:
 
 - <code title="delete /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/resources/v1/boxes/proxy.ts">clear</a>(boxID) -> void</code>
-- <code title="get /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/resources/v1/boxes/proxy.ts">get</a>(boxID) -> void</code>
-- <code title="post /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/resources/v1/boxes/proxy.ts">set</a>(boxID, { ...params }) -> void</code>
+- <code title="get /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/resources/v1/boxes/proxy.ts">get</a>(boxID) -> ProxyGetResponse</code>
+- <code title="post /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/resources/v1/boxes/proxy.ts">set</a>(boxID, { ...params }) -> ProxySetResponse</code>
 
 ### Media
 
