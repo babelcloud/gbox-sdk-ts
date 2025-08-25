@@ -869,14 +869,14 @@ export namespace ActionAIResponse {
       export interface TypedScrollAction {
         /**
          * Horizontal scroll amount. Positive values scroll content rightward (reveals
-         * content on the left), negative values scroll content leftward (reveals content
-         * on the right).
+         * content on the right), negative values scroll content leftward (reveals content
+         * on the left).
          */
         scrollX: number;
 
         /**
          * Vertical scroll amount. Positive values scroll content downward (reveals content
-         * above), negative values scroll content upward (reveals content below).
+         * below), negative values scroll content upward (reveals content above).
          */
         scrollY: number;
 
@@ -2340,14 +2340,14 @@ export namespace ActionAIResponse {
       export interface TypedScrollAction {
         /**
          * Horizontal scroll amount. Positive values scroll content rightward (reveals
-         * content on the left), negative values scroll content leftward (reveals content
-         * on the right).
+         * content on the right), negative values scroll content leftward (reveals content
+         * on the left).
          */
         scrollX: number;
 
         /**
          * Vertical scroll amount. Positive values scroll content downward (reveals content
-         * above), negative values scroll content upward (reveals content below).
+         * below), negative values scroll content upward (reveals content above).
          */
         scrollY: number;
 
@@ -5490,14 +5490,14 @@ export declare namespace ActionScrollParams {
   export interface Scroll {
     /**
      * Horizontal scroll amount. Positive values scroll content rightward (reveals
-     * content on the left), negative values scroll content leftward (reveals content
-     * on the right).
+     * content on the right), negative values scroll content leftward (reveals content
+     * on the left).
      */
     scrollX: number;
 
     /**
      * Vertical scroll amount. Positive values scroll content downward (reveals content
-     * above), negative values scroll content upward (reveals content below).
+     * below), negative values scroll content upward (reveals content above).
      */
     scrollY: number;
 
