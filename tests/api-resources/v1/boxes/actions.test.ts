@@ -408,8 +408,10 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('settingUpdate', async () => {
-    const responsePromise = client.v1.boxes.actions.settingUpdate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
+  test.skip('settingUpdate: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.settingUpdate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      scale: 1,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -417,6 +419,13 @@ describe('resource actions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('settingUpdate: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.settingUpdate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      scale: 1,
+    });
   });
 
   // Prism tests are disabled
