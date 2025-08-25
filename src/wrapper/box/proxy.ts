@@ -33,7 +33,7 @@ export class ProxyOperator {
    * @example
    * const response = await myBox.proxy.clear();
    */
-  clear() {
+  clear(): Promise<void> {
     return this.client.v1.boxes.proxy.clear(this.boxId);
   }
 }
