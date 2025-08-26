@@ -25,6 +25,7 @@ describe('instantiate client', () => {
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
       apiKey: 'My API Key',
+      baseURL: 'My Base URL',
     });
 
     test('they are used in the request', async () => {
@@ -88,14 +89,19 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new GboxClient({ logger: logger, logLevel: 'debug', apiKey: 'My API Key' });
+      const client = new GboxClient({
+        logger: logger,
+        logLevel: 'debug',
+        apiKey: 'My API Key',
+        baseURL: 'My Base URL',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).toHaveBeenCalled();
     });
 
     test('default logLevel is warn', async () => {
-      const client = new GboxClient({ apiKey: 'My API Key' });
+      const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
       expect(client.logLevel).toBe('warn');
     });
 
@@ -108,7 +114,12 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new GboxClient({ logger: logger, logLevel: 'info', apiKey: 'My API Key' });
+      const client = new GboxClient({
+        logger: logger,
+        logLevel: 'info',
+        apiKey: 'My API Key',
+        baseURL: 'My Base URL',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -124,7 +135,7 @@ describe('instantiate client', () => {
       };
 
       process.env['GBOX_CLIENT_LOG'] = 'debug';
-      const client = new GboxClient({ logger: logger, apiKey: 'My API Key' });
+      const client = new GboxClient({ logger: logger, apiKey: 'My API Key', baseURL: 'My Base URL' });
       expect(client.logLevel).toBe('debug');
 
       await forceAPIResponseForClient(client);
@@ -141,7 +152,7 @@ describe('instantiate client', () => {
       };
 
       process.env['GBOX_CLIENT_LOG'] = 'not a log level';
-      const client = new GboxClient({ logger: logger, apiKey: 'My API Key' });
+      const client = new GboxClient({ logger: logger, apiKey: 'My API Key', baseURL: 'My Base URL' });
       expect(client.logLevel).toBe('warn');
       expect(warnMock).toHaveBeenCalledWith(
         'process.env[\'GBOX_CLIENT_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
@@ -158,7 +169,12 @@ describe('instantiate client', () => {
       };
 
       process.env['GBOX_CLIENT_LOG'] = 'debug';
-      const client = new GboxClient({ logger: logger, logLevel: 'off', apiKey: 'My API Key' });
+      const client = new GboxClient({
+        logger: logger,
+        logLevel: 'off',
+        apiKey: 'My API Key',
+        baseURL: 'My Base URL',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -174,7 +190,12 @@ describe('instantiate client', () => {
       };
 
       process.env['GBOX_CLIENT_LOG'] = 'not a log level';
-      const client = new GboxClient({ logger: logger, logLevel: 'debug', apiKey: 'My API Key' });
+      const client = new GboxClient({
+        logger: logger,
+        logLevel: 'debug',
+        apiKey: 'My API Key',
+        baseURL: 'My Base URL',
+      });
       expect(client.logLevel).toBe('debug');
       expect(warnMock).not.toHaveBeenCalled();
     });
@@ -186,6 +207,7 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
         apiKey: 'My API Key',
+        baseURL: 'My Base URL',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -195,6 +217,7 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
         apiKey: 'My API Key',
+        baseURL: 'My Base URL',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
@@ -204,6 +227,7 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
         apiKey: 'My API Key',
+        baseURL: 'My Base URL',
       });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
@@ -213,6 +237,7 @@ describe('instantiate client', () => {
     const client = new GboxClient({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
+      baseURL: 'My Base URL',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -231,6 +256,7 @@ describe('instantiate client', () => {
     const client = new GboxClient({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
+      baseURL: 'My Base URL',
       fetch: defaultFetch,
     });
   });
@@ -239,6 +265,7 @@ describe('instantiate client', () => {
     const client = new GboxClient({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
       apiKey: 'My API Key',
+      baseURL: 'My Base URL',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -271,6 +298,7 @@ describe('instantiate client', () => {
     const client = new GboxClient({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
+      baseURL: 'My Base URL',
       fetch: testFetch,
     });
 
@@ -280,12 +308,20 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new GboxClient({ baseURL: 'http://localhost:5000/custom/path/', apiKey: 'My API Key' });
+      const client = new GboxClient({
+        baseURL: 'http://localhost:5000/custom/path/',
+        apiKey: 'My API Key',
+        baseURL: 'My Base URL',
+      });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
     test('no trailing slash', () => {
-      const client = new GboxClient({ baseURL: 'http://localhost:5000/custom/path', apiKey: 'My API Key' });
+      const client = new GboxClient({
+        baseURL: 'http://localhost:5000/custom/path',
+        apiKey: 'My API Key',
+        baseURL: 'My Base URL',
+      });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
@@ -294,25 +330,29 @@ describe('instantiate client', () => {
     });
 
     test('explicit option', () => {
-      const client = new GboxClient({ baseURL: 'https://example.com', apiKey: 'My API Key' });
+      const client = new GboxClient({
+        baseURL: 'https://example.com',
+        apiKey: 'My API Key',
+        baseURL: 'My Base URL',
+      });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = 'https://example.com/from_env';
-      const client = new GboxClient({ apiKey: 'My API Key' });
+      const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = ''; // empty
-      const client = new GboxClient({ apiKey: 'My API Key' });
+      const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
       expect(client.baseURL).toEqual('https://gbox.ai/api/v1/');
     });
 
     test('blank env variable', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = '  '; // blank
-      const client = new GboxClient({ apiKey: 'My API Key' });
+      const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
       expect(client.baseURL).toEqual('https://gbox.ai/api/v1/');
     });
 
@@ -320,24 +360,33 @@ describe('instantiate client', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = 'https://example.com/from_env';
 
       expect(
-        () => new GboxClient({ apiKey: 'My API Key', environment: 'production' }),
+        () => new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL', environment: 'production' }),
       ).toThrowErrorMatchingInlineSnapshot(
         `"Ambiguous URL; The \`baseURL\` option (or GBOX_CLIENT_BASE_URL env var) and the \`environment\` option are given. If you want to use the environment you must pass baseURL: null"`,
       );
 
-      const client = new GboxClient({ apiKey: 'My API Key', baseURL: null, environment: 'production' });
+      const client = new GboxClient({
+        apiKey: 'My API Key',
+        baseURL: 'My Base URL',
+        baseURL: null,
+        environment: 'production',
+      });
       expect(client.baseURL).toEqual('https://gbox.ai/api/v1/');
     });
 
     test('in request options', () => {
-      const client = new GboxClient({ apiKey: 'My API Key' });
+      const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/option/foo',
       );
     });
 
     test('in request options overridden by client options', () => {
-      const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'http://localhost:5000/client' });
+      const client = new GboxClient({
+        apiKey: 'My API Key',
+        baseURL: 'My Base URL',
+        baseURL: 'http://localhost:5000/client',
+      });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/client/foo',
       );
@@ -345,7 +394,7 @@ describe('instantiate client', () => {
 
     test('in request options overridden by env variable', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new GboxClient({ apiKey: 'My API Key' });
+      const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/env/foo',
       );
@@ -353,11 +402,11 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new GboxClient({ maxRetries: 0, apiKey: 'My API Key' });
+    const client = new GboxClient({ maxRetries: 0, apiKey: 'My API Key', baseURL: 'My Base URL' });
     expect(client.maxRetries).toEqual(0);
 
     // default
-    const client2 = new GboxClient({ apiKey: 'My API Key' });
+    const client2 = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
     expect(client2.maxRetries).toEqual(0);
   });
 
@@ -367,6 +416,7 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         maxRetries: 3,
         apiKey: 'My API Key',
+        baseURL: 'My Base URL',
       });
 
       const newClient = client.withOptions({
@@ -393,6 +443,7 @@ describe('instantiate client', () => {
         defaultHeaders: { 'X-Test-Header': 'test-value' },
         defaultQuery: { 'test-param': 'test-value' },
         apiKey: 'My API Key',
+        baseURL: 'My Base URL',
       });
 
       const newClient = client.withOptions({
@@ -411,6 +462,7 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         timeout: 1000,
         apiKey: 'My API Key',
+        baseURL: 'My Base URL',
       });
 
       // Modify the client properties directly after creation
@@ -440,20 +492,24 @@ describe('instantiate client', () => {
   test('with environment variable arguments', () => {
     // set options via env var
     process.env['GBOX_API_KEY'] = 'My API Key';
+    process.env['GBOX_BASE_URL'] = 'My Base URL';
     const client = new GboxClient();
     expect(client.apiKey).toBe('My API Key');
+    expect(client.baseURL).toBe('My Base URL');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
     process.env['GBOX_API_KEY'] = 'another My API Key';
-    const client = new GboxClient({ apiKey: 'My API Key' });
+    process.env['GBOX_BASE_URL'] = 'another My Base URL';
+    const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
     expect(client.apiKey).toBe('My API Key');
+    expect(client.baseURL).toBe('My Base URL');
   });
 });
 
 describe('request building', () => {
-  const client = new GboxClient({ apiKey: 'My API Key' });
+  const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
 
   describe('custom headers', () => {
     test('handles undefined', async () => {
@@ -472,7 +528,7 @@ describe('request building', () => {
 });
 
 describe('default encoder', () => {
-  const client = new GboxClient({ apiKey: 'My API Key' });
+  const client = new GboxClient({ apiKey: 'My API Key', baseURL: 'My Base URL' });
 
   class Serializable {
     toJSON() {
@@ -560,7 +616,12 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GboxClient({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
+    const client = new GboxClient({
+      apiKey: 'My API Key',
+      baseURL: 'My Base URL',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
 
@@ -584,7 +645,12 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new GboxClient({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
+    const client = new GboxClient({
+      apiKey: 'My API Key',
+      baseURL: 'My Base URL',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -615,6 +681,7 @@ describe('retries', () => {
     };
     const client = new GboxClient({
       apiKey: 'My API Key',
+      baseURL: 'My Base URL',
       fetch: testFetch,
       maxRetries: 4,
       defaultHeaders: { 'X-Stainless-Retry-Count': null },
@@ -646,7 +713,12 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new GboxClient({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
+    const client = new GboxClient({
+      apiKey: 'My API Key',
+      baseURL: 'My Base URL',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -676,7 +748,12 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GboxClient({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 3 });
+    const client = new GboxClient({
+      apiKey: 'My API Key',
+      baseURL: 'My Base URL',
+      fetch: testFetch,
+      maxRetries: 3,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -706,7 +783,12 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GboxClient({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 3 });
+    const client = new GboxClient({
+      apiKey: 'My API Key',
+      baseURL: 'My Base URL',
+      fetch: testFetch,
+      maxRetries: 3,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
