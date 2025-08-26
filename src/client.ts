@@ -45,11 +45,6 @@ export interface ClientOptions {
   apiKey?: string | undefined;
 
   /**
-   * Defaults to process.env['GBOX_BASE_URL'].
-   */
-  baseURL?: string | undefined;
-
-  /**
    * Specifies the environment to use for the API.
    *
    * Each environment maps to a different base URL:
@@ -133,7 +128,6 @@ export interface ClientOptions {
  */
 export class GboxClient {
   apiKey: string;
-  baseURL: string;
 
   baseURL: string;
   maxRetries: number;
@@ -151,7 +145,6 @@ export class GboxClient {
    * API Client for interfacing with the Gbox Client API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['GBOX_API_KEY'] ?? undefined]
-   * @param {string | undefined} [opts.baseURL=process.env['GBOX_BASE_URL'] ?? undefined]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['GBOX_CLIENT_BASE_URL'] ?? https://gbox.ai/api/v1/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -164,7 +157,6 @@ export class GboxClient {
   constructor({
     baseURL = readEnv('GBOX_CLIENT_BASE_URL'),
     apiKey = readEnv('GBOX_API_KEY'),
-    baseURL = readEnv('GBOX_BASE_URL'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -172,15 +164,9 @@ export class GboxClient {
         "The GBOX_API_KEY environment variable is missing or empty; either provide it, or instantiate the GboxClient client with an apiKey option, like new GboxClient({ apiKey: 'My API Key' }).",
       );
     }
-    if (baseURL === undefined) {
-      throw new Errors.GboxClientError(
-        "The GBOX_BASE_URL environment variable is missing or empty; either provide it, or instantiate the GboxClient client with an baseURL option, like new GboxClient({ baseURL: 'My Base URL' }).",
-      );
-    }
 
     const options: ClientOptions = {
       apiKey,
-      baseURL,
       ...opts,
       baseURL,
       environment: opts.environment ?? 'production',
@@ -210,7 +196,6 @@ export class GboxClient {
     this._options = options;
 
     this.apiKey = apiKey;
-    this.baseURL = baseURL;
   }
 
   /**
@@ -228,7 +213,6 @@ export class GboxClient {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
-      baseURL: this.baseURL,
       ...options,
     });
     return client;
