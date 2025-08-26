@@ -312,51 +312,52 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Get the box action setting
+   * Get the box action settings
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.setting(
+   * const response = await client.v1.boxes.actions.settings(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
-  setting(boxID: string, options?: RequestOptions): APIPromise<ActionSettingResponse> {
-    return this._client.get(path`/boxes/${boxID}/actions/setting`, options);
+  settings(boxID: string, options?: RequestOptions): APIPromise<ActionSettingsResponse> {
+    return this._client.get(path`/boxes/${boxID}/actions/settings`, options);
   }
 
   /**
-   * Reset the box setting
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.boxes.actions.settingReset(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
-   * ```
-   */
-  settingReset(boxID: string, options?: RequestOptions): APIPromise<ActionSettingResetResponse> {
-    return this._client.post(path`/boxes/${boxID}/actions/setting/reset`, options);
-  }
-
-  /**
-   * Setting the box action setting
+   * Reset the box settings to default
    *
    * @example
    * ```ts
    * const response =
-   *   await client.v1.boxes.actions.settingUpdate(
+   *   await client.v1.boxes.actions.settingsReset(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  settingsReset(boxID: string, options?: RequestOptions): APIPromise<ActionSettingsResetResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/settings/reset`, options);
+  }
+
+  /**
+   * Update the box action settings
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.settingsUpdate(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *     { scale: 1 },
    *   );
    * ```
    */
-  settingUpdate(
+  settingsUpdate(
     boxID: string,
-    body: ActionSettingUpdateParams,
+    body: ActionSettingsUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ActionSettingUpdateResponse> {
-    return this._client.put(path`/boxes/${boxID}/actions/setting`, { body, ...options });
+  ): APIPromise<ActionSettingsUpdateResponse> {
+    return this._client.put(path`/boxes/${boxID}/actions/settings`, { body, ...options });
   }
 
   /**
@@ -4179,7 +4180,7 @@ export namespace ActionScrollResponse {
 /**
  * Action setting
  */
-export interface ActionSettingResponse {
+export interface ActionSettingsResponse {
   /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
    * or equal to 1.
@@ -4198,7 +4199,7 @@ export interface ActionSettingResponse {
 /**
  * Action setting
  */
-export interface ActionSettingResetResponse {
+export interface ActionSettingsResetResponse {
   /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
    * or equal to 1.
@@ -4217,7 +4218,7 @@ export interface ActionSettingResetResponse {
 /**
  * Action setting
  */
-export interface ActionSettingUpdateResponse {
+export interface ActionSettingsUpdateResponse {
   /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
    * or equal to 1.
@@ -5475,10 +5476,10 @@ export namespace ActionScreenshotParams {
   }
 }
 
-export type ActionScrollParams = ActionScrollParams.Scroll | ActionScrollParams.ScrollSimple;
+export type ActionScrollParams = ActionScrollParams.ScrollAdvanced | ActionScrollParams.ScrollSimple;
 
 export declare namespace ActionScrollParams {
-  export interface Scroll {
+  export interface ScrollAdvanced {
     /**
      * Horizontal scroll amount. Positive values scroll content rightward (reveals
      * content on the right), negative values scroll content leftward (reveals content
@@ -5604,7 +5605,7 @@ export declare namespace ActionScrollParams {
   }
 }
 
-export interface ActionSettingUpdateParams {
+export interface ActionSettingsUpdateParams {
   /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
    * or equal to 1.
@@ -6071,9 +6072,9 @@ export declare namespace Actions {
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionScrollResponse as ActionScrollResponse,
-    type ActionSettingResponse as ActionSettingResponse,
-    type ActionSettingResetResponse as ActionSettingResetResponse,
-    type ActionSettingUpdateResponse as ActionSettingUpdateResponse,
+    type ActionSettingsResponse as ActionSettingsResponse,
+    type ActionSettingsResetResponse as ActionSettingsResetResponse,
+    type ActionSettingsUpdateResponse as ActionSettingsUpdateResponse,
     type ActionSwipeResponse as ActionSwipeResponse,
     type ActionTapResponse as ActionTapResponse,
     type ActionTouchResponse as ActionTouchResponse,
@@ -6090,7 +6091,7 @@ export declare namespace Actions {
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
-    type ActionSettingUpdateParams as ActionSettingUpdateParams,
+    type ActionSettingsUpdateParams as ActionSettingsUpdateParams,
     type ActionSwipeParams as ActionSwipeParams,
     type ActionTapParams as ActionTapParams,
     type ActionTouchParams as ActionTouchParams,
