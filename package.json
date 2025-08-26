@@ -9,6 +9,11 @@
   "repository": "github:babelcloud/gbox-sdk-ts",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": ">=16.0.0",
+    "yarn": ">=1.22.0",
+    "npm": "please-use-yarn"
+  },
   "files": [
     "**/*"
   ],
