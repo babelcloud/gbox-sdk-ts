@@ -352,8 +352,8 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.screenRecordingStart();
    */
-  async screenRecordingStart(body: ActionRecordingStartParams) {
-    return this.client.v1.boxes.actions.recordingStart(this.boxId, body);
+  async screenRecordingStart(body?: ActionRecordingStartParams) {
+    return this.client.v1.boxes.actions.recordingStart(this.boxId, body || {});
   }
 
   /**
@@ -432,8 +432,8 @@ export class RecordingOperator {
    * @example
    * const response = await myBox.recording.start();
    */
-  async start(body: ActionRecordingStartParams) {
-    return this.client.v1.boxes.actions.recordingStart(this.boxId, body);
+  async start(body?: ActionRecordingStartParams) {
+    return this.client.v1.boxes.actions.recordingStart(this.boxId, body || {});
   }
 
   /**
@@ -474,7 +474,7 @@ export class RecordingRewindOperator {
    * @example
    * const response = await myBox.recording.rewind.extract();
    */
-  async extract(body: ActionRewindExtractParams): Promise<ActionRewindExtractResponse> {
-    return this.client.v1.boxes.actions.rewindExtract(this.boxId, body);
+  async extract(body?: ActionRewindExtractParams): Promise<ActionRewindExtractResponse> {
+    return this.client.v1.boxes.actions.rewindExtract(this.boxId, body || {});
   }
 }
