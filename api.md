@@ -65,9 +65,9 @@ Types:
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenRotationResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenshotResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScrollResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionSettingResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionSettingResetResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionSettingUpdateResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionSettingsResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionSettingsResetResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionSettingsUpdateResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionSwipeResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionTapResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionTouchResponse</a></code>
@@ -92,9 +92,9 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/screen-rotation">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenRotation</a>(boxID, { ...params }) -> ActionScreenRotationResponse</code>
 - <code title="post /boxes/{boxId}/actions/screenshot">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenshot</a>(boxID, { ...params }) -> ActionScreenshotResponse</code>
 - <code title="post /boxes/{boxId}/actions/scroll">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">scroll</a>(boxID, { ...params }) -> ActionScrollResponse</code>
-- <code title="get /boxes/{boxId}/actions/setting">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">setting</a>(boxID) -> ActionSettingResponse</code>
-- <code title="post /boxes/{boxId}/actions/setting/reset">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">settingReset</a>(boxID) -> ActionSettingResetResponse</code>
-- <code title="put /boxes/{boxId}/actions/setting">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">settingUpdate</a>(boxID, { ...params }) -> ActionSettingUpdateResponse</code>
+- <code title="get /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">settings</a>(boxID) -> ActionSettingsResponse</code>
+- <code title="post /boxes/{boxId}/actions/settings/reset">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">settingsReset</a>(boxID) -> ActionSettingsResetResponse</code>
+- <code title="put /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">settingsUpdate</a>(boxID, { ...params }) -> ActionSettingsUpdateResponse</code>
 - <code title="post /boxes/{boxId}/actions/swipe">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">swipe</a>(boxID, { ...params }) -> ActionSwipeResponse</code>
 - <code title="post /boxes/{boxId}/actions/tap">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">tap</a>(boxID, { ...params }) -> ActionTapResponse</code>
 - <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">touch</a>(boxID, { ...params }) -> ActionTouchResponse</code>

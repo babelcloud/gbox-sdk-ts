@@ -375,8 +375,8 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('setting', async () => {
-    const responsePromise = client.v1.boxes.actions.setting('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+  test.skip('settings', async () => {
+    const responsePromise = client.v1.boxes.actions.settings('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -387,8 +387,8 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('settingReset', async () => {
-    const responsePromise = client.v1.boxes.actions.settingReset('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+  test.skip('settingsReset', async () => {
+    const responsePromise = client.v1.boxes.actions.settingsReset('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -399,8 +399,8 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('settingUpdate: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.settingUpdate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+  test.skip('settingsUpdate: only required params', async () => {
+    const responsePromise = client.v1.boxes.actions.settingsUpdate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       scale: 1,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -413,8 +413,8 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('settingUpdate: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.settingUpdate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+  test.skip('settingsUpdate: required and optional params', async () => {
+    const response = await client.v1.boxes.actions.settingsUpdate('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       scale: 1,
     });
   });
