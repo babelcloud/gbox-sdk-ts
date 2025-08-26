@@ -253,10 +253,8 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('replayRecordingDisable', async () => {
-    const responsePromise = client.v1.boxes.actions.replayRecordingDisable(
-      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-    );
+  test.skip('rewindDisable', async () => {
+    const responsePromise = client.v1.boxes.actions.rewindDisable('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -267,10 +265,8 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('replayRecordingEnable', async () => {
-    const responsePromise = client.v1.boxes.actions.replayRecordingEnable(
-      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-    );
+  test.skip('rewindEnable', async () => {
+    const responsePromise = client.v1.boxes.actions.rewindEnable('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -281,10 +277,8 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('replayRecordingGet', async () => {
-    const responsePromise = client.v1.boxes.actions.replayRecordingGet(
-      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-    );
+  test.skip('rewindExtract', async () => {
+    const responsePromise = client.v1.boxes.actions.rewindExtract('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
