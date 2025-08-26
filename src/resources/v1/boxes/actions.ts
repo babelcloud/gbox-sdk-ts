@@ -193,47 +193,57 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Stop the device's background screen rewind recording.
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.actions.rewindDisable(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  rewindDisable(boxID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/boxes/${boxID}/actions/recording/rewind`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Start the device's background screen rewind recording.
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.actions.rewindEnable(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  rewindEnable(boxID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/rewind`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Rewind and capture the device's background screen recording from a specified
+   * time period.
+   *
    * @example
    * ```ts
    * const response =
-   *   await client.v1.boxes.actions.replayRecordingGet(
+   *   await client.v1.boxes.actions.rewindExtract(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     { seconds: 0 },
    *   );
    * ```
    */
-  replayRecordingGet(
+  rewindExtract(
     boxID: string,
-    query: ActionReplayRecordingGetParams,
+    body: ActionRewindExtractParams,
     options?: RequestOptions,
-  ): APIPromise<string> {
-    return this._client.get(path`/boxes/${boxID}/actions/recording/replay`, { query, ...options });
-  }
-
-  /**
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1.boxes.actions.replayRecordingStart(
-   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   );
-   * ```
-   */
-  replayRecordingStart(boxID: string, options?: RequestOptions): APIPromise<string> {
-    return this._client.post(path`/boxes/${boxID}/actions/recording/replay`, options);
-  }
-
-  /**
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1.boxes.actions.replayRecordingStop(
-   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   );
-   * ```
-   */
-  replayRecordingStop(boxID: string, options?: RequestOptions): APIPromise<string> {
-    return this._client.delete(path`/boxes/${boxID}/actions/recording/replay`, options);
+  ): APIPromise<ActionRewindExtractResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/rewind/extract`, { body, ...options });
   }
 
   /**
@@ -317,51 +327,52 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Get the box action setting
+   * Get the box action settings
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.setting(
+   * const response = await client.v1.boxes.actions.settings(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    * );
    * ```
    */
-  setting(boxID: string, options?: RequestOptions): APIPromise<ActionSettingResponse> {
-    return this._client.get(path`/boxes/${boxID}/actions/setting`, options);
+  settings(boxID: string, options?: RequestOptions): APIPromise<ActionSettingsResponse> {
+    return this._client.get(path`/boxes/${boxID}/actions/settings`, options);
   }
 
   /**
-   * Reset the box setting
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.boxes.actions.settingReset(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
-   * ```
-   */
-  settingReset(boxID: string, options?: RequestOptions): APIPromise<ActionSettingResetResponse> {
-    return this._client.post(path`/boxes/${boxID}/actions/setting/reset`, options);
-  }
-
-  /**
-   * Setting the box action setting
+   * Reset the box settings to default
    *
    * @example
    * ```ts
    * const response =
-   *   await client.v1.boxes.actions.settingUpdate(
+   *   await client.v1.boxes.actions.settingsReset(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
+   * ```
+   */
+  settingsReset(boxID: string, options?: RequestOptions): APIPromise<ActionSettingsResetResponse> {
+    return this._client.delete(path`/boxes/${boxID}/actions/settings`, options);
+  }
+
+  /**
+   * Update the box action settings
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.boxes.actions.settingsUpdate(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *     { scale: 1 },
    *   );
    * ```
    */
-  settingUpdate(
+  settingsUpdate(
     boxID: string,
-    body: ActionSettingUpdateParams,
+    body: ActionSettingsUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ActionSettingUpdateResponse> {
-    return this._client.put(path`/boxes/${boxID}/actions/setting`, { body, ...options });
+  ): APIPromise<ActionSettingsUpdateResponse> {
+    return this._client.put(path`/boxes/${boxID}/actions/settings`, { body, ...options });
   }
 
   /**
@@ -3926,11 +3937,23 @@ export interface ActionRecordingStopResponse {
   storageKey: string;
 }
 
-export type ActionReplayRecordingGetResponse = string;
+/**
+ * Result of extracting the recording rewind
+ */
+export interface ActionRewindExtractResponse {
+  /**
+   * Presigned URL of the recording. This is a temporary downloadable URL with an
+   * expiration time for accessing the recording file.
+   */
+  presignedUrl: string;
 
-export type ActionReplayRecordingStartResponse = string;
-
-export type ActionReplayRecordingStopResponse = string;
+  /**
+   * Storage key of the recording. Before the box is deleted, you can use this
+   * storageKey with the endpoint `box/:boxId/storage/presigned-url` to get a
+   * downloadable URL for the recording.
+   */
+  storageKey: string;
+}
 
 /**
  * Screen layout content.
@@ -4184,7 +4207,7 @@ export namespace ActionScrollResponse {
 /**
  * Action setting
  */
-export interface ActionSettingResponse {
+export interface ActionSettingsResponse {
   /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
    * or equal to 1.
@@ -4203,7 +4226,7 @@ export interface ActionSettingResponse {
 /**
  * Action setting
  */
-export interface ActionSettingResetResponse {
+export interface ActionSettingsResetResponse {
   /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
    * or equal to 1.
@@ -4222,7 +4245,7 @@ export interface ActionSettingResetResponse {
 /**
  * Action setting
  */
-export interface ActionSettingUpdateResponse {
+export interface ActionSettingsUpdateResponse {
   /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
    * or equal to 1.
@@ -5381,8 +5404,16 @@ export interface ActionRecordingStartParams {
   duration?: string;
 }
 
-export interface ActionReplayRecordingGetParams {
-  seconds: number;
+export interface ActionRewindExtractParams {
+  /**
+   * How far back in time to rewind for extracting recorded video. This specifies the
+   * duration to go back from the current moment (e.g., '30s' rewinds 30 seconds to
+   * get recent recorded activity). Default is 30s, max is 5m.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 5m
+   */
+  duration?: string;
 }
 
 export interface ActionScreenRotationParams {
@@ -5484,10 +5515,10 @@ export namespace ActionScreenshotParams {
   }
 }
 
-export type ActionScrollParams = ActionScrollParams.Scroll | ActionScrollParams.ScrollSimple;
+export type ActionScrollParams = ActionScrollParams.ScrollAdvanced | ActionScrollParams.ScrollSimple;
 
 export declare namespace ActionScrollParams {
-  export interface Scroll {
+  export interface ScrollAdvanced {
     /**
      * Horizontal scroll amount. Positive values scroll content rightward (reveals
      * content on the right), negative values scroll content leftward (reveals content
@@ -5613,7 +5644,7 @@ export declare namespace ActionScrollParams {
   }
 }
 
-export interface ActionSettingUpdateParams {
+export interface ActionSettingsUpdateParams {
   /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
    * or equal to 1.
@@ -6073,16 +6104,14 @@ export declare namespace Actions {
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
-    type ActionReplayRecordingGetResponse as ActionReplayRecordingGetResponse,
-    type ActionReplayRecordingStartResponse as ActionReplayRecordingStartResponse,
-    type ActionReplayRecordingStopResponse as ActionReplayRecordingStopResponse,
+    type ActionRewindExtractResponse as ActionRewindExtractResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
     type ActionScrollResponse as ActionScrollResponse,
-    type ActionSettingResponse as ActionSettingResponse,
-    type ActionSettingResetResponse as ActionSettingResetResponse,
-    type ActionSettingUpdateResponse as ActionSettingUpdateResponse,
+    type ActionSettingsResponse as ActionSettingsResponse,
+    type ActionSettingsResetResponse as ActionSettingsResetResponse,
+    type ActionSettingsUpdateResponse as ActionSettingsUpdateResponse,
     type ActionSwipeResponse as ActionSwipeResponse,
     type ActionTapResponse as ActionTapResponse,
     type ActionTouchResponse as ActionTouchResponse,
@@ -6096,11 +6125,11 @@ export declare namespace Actions {
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
     type ActionRecordingStartParams as ActionRecordingStartParams,
-    type ActionReplayRecordingGetParams as ActionReplayRecordingGetParams,
+    type ActionRewindExtractParams as ActionRewindExtractParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
-    type ActionSettingUpdateParams as ActionSettingUpdateParams,
+    type ActionSettingsUpdateParams as ActionSettingsUpdateParams,
     type ActionSwipeParams as ActionSwipeParams,
     type ActionTapParams as ActionTapParams,
     type ActionTouchParams as ActionTouchParams,

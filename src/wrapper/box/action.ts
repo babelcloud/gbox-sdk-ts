@@ -15,7 +15,9 @@ import type {
   ActionRecordingStartParams,
   ActionTapParams,
   ActionLongPressParams,
-  ActionSettingUpdateParams,
+  ActionSettingsUpdateParams,
+  ActionRewindExtractParams,
+  ActionRewindExtractResponse,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -46,7 +48,7 @@ export interface ActionMove extends ActionMoveParams {
   screenshotDelay?: TimeString;
 }
 
-export interface ActionScrollAdvanced extends ActionScrollParams.Scroll {
+export interface ActionScrollAdvanced extends ActionScrollParams.ScrollAdvanced {
   screenshotDelay?: TimeString;
 }
 
@@ -117,10 +119,12 @@ export interface ActionAI extends ActionAIParams {
 export class ActionOperator {
   private client: GboxClient;
   private boxId: string;
+  public recording: RecordingOperator;
 
   constructor(client: GboxClient, boxId: string) {
     this.client = client;
     this.boxId = boxId;
+    this.recording = new RecordingOperator(client, boxId);
   }
 
   /**
@@ -344,14 +348,16 @@ export class ActionOperator {
   }
 
   /**
+   * @deprecated please use {@link ActionOperator.screenRecordingStart} instead.
    * @example
    * const response = await myBox.action.screenRecordingStart();
    */
-  async screenRecordingStart(body: ActionRecordingStartParams) {
-    return this.client.v1.boxes.actions.recordingStart(this.boxId, body);
+  async screenRecordingStart(body?: ActionRecordingStartParams) {
+    return this.client.v1.boxes.actions.recordingStart(this.boxId, body || {});
   }
 
   /**
+   * @deprecated please use {@link ActionOperator.screenRecordingStart} instead.
    * @example
    * const response = await myBox.action.screenRecordingStop();
    */
@@ -363,24 +369,24 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.getSetting();
    */
-  async getSetting() {
-    return this.client.v1.boxes.actions.setting(this.boxId);
+  async getSettings() {
+    return this.client.v1.boxes.actions.settings(this.boxId);
   }
 
   /**
    * @example
    * const response = await myBox.action.updateSetting({ scale: 0.5 });
    */
-  async updateSetting(body: ActionSettingUpdateParams) {
-    return this.client.v1.boxes.actions.settingUpdate(this.boxId, body);
+  async updateSettings(body: ActionSettingsUpdateParams) {
+    return this.client.v1.boxes.actions.settingsUpdate(this.boxId, body);
   }
 
   /**
    * @example
    * const response = await myBox.action.resetSetting();
    */
-  async resetSetting() {
-    return this.client.v1.boxes.actions.settingReset(this.boxId);
+  async resetSettings() {
+    return this.client.v1.boxes.actions.settingsReset(this.boxId);
   }
 
   /**
@@ -408,5 +414,67 @@ export class ActionOperator {
 
     // Write to file
     fs.writeFileSync(filePath, base64Data, 'base64');
+  }
+}
+
+export class RecordingOperator {
+  private client: GboxClient;
+  private boxId: string;
+  public rewind: RecordingRewindOperator;
+
+  constructor(client: GboxClient, boxId: string) {
+    this.client = client;
+    this.boxId = boxId;
+    this.rewind = new RecordingRewindOperator(client, boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.recording.start();
+   */
+  async start(body?: ActionRecordingStartParams) {
+    return this.client.v1.boxes.actions.recordingStart(this.boxId, body || {});
+  }
+
+  /**
+   * @example
+   * const response = await myBox.recording.stop();
+   */
+  async stop() {
+    return this.client.v1.boxes.actions.recordingStop(this.boxId);
+  }
+}
+
+export class RecordingRewindOperator {
+  private client: GboxClient;
+  private boxId: string;
+
+  constructor(client: GboxClient, boxId: string) {
+    this.client = client;
+    this.boxId = boxId;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.recording.rewind.enable();
+   */
+  async enable() {
+    return this.client.v1.boxes.actions.rewindEnable(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.recording.rewind.disable();
+   */
+  async disable() {
+    return this.client.v1.boxes.actions.rewindDisable(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.recording.rewind.extract();
+   */
+  async extract(body?: ActionRewindExtractParams): Promise<ActionRewindExtractResponse> {
+    return this.client.v1.boxes.actions.rewindExtract(this.boxId, body || {});
   }
 }

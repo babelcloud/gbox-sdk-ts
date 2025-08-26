@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.29.0 (2025-08-26)
+
+Full Changelog: [v0.28.0...v0.29.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.28.0...v0.29.0)
+
+### Features
+
+* **api:** api update ([89244d2](https://github.com/babelcloud/gbox-sdk-ts/commit/89244d26c5bdb480046e8a40fc0c09aab7d30819))
+* **api:** api update ([a41b631](https://github.com/babelcloud/gbox-sdk-ts/commit/a41b631e6d606292246c55cedd2a84ac0cf177bd))
+* **api:** api update ([b5b4ab5](https://github.com/babelcloud/gbox-sdk-ts/commit/b5b4ab5ea1885c48655f4d2784b12ccd508cf90c))
+
+
+### Refactors
+
+* **action:** make body parameter optional in screenRecordingStart and start methods, and update extract method signature ([eb65cf6](https://github.com/babelcloud/gbox-sdk-ts/commit/eb65cf63225fb76d56a95a9f94bfe55c255e4499))
+* **action:** rename replay recording methods to rewind and update extract method signature ([80e8b3b](https://github.com/babelcloud/gbox-sdk-ts/commit/80e8b3b72b61532945bc649408744260530ab8d5))
+* **action:** update action settings methods and introduce RecordingOperator class ([1b8218b](https://github.com/babelcloud/gbox-sdk-ts/commit/1b8218beed5be3834c6f520569b8405cd4d918bf))
+
 ## 0.28.0 (2025-08-25)
 
 Full Changelog: [v0.27.0...v0.28.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.27.0...v0.28.0)
