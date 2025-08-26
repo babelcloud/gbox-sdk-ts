@@ -4,7 +4,6 @@ import GboxClient, { toFile } from 'gbox-sdk';
 
 const client = new GboxClient({
   apiKey: 'My API Key',
-  baseURL: 'My Base URL',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
