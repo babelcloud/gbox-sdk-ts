@@ -16,6 +16,8 @@ import type {
   ActionTapParams,
   ActionLongPressParams,
   ActionSettingsUpdateParams,
+  ActionRewindExtractParams,
+  ActionRewindExtractResponse,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -457,7 +459,7 @@ export class RecordingRewindOperator {
    * const response = await myBox.recording.rewind.enable();
    */
   async enable() {
-    return this.client.v1.boxes.actions.replayRecordingEnable(this.boxId);
+    return this.client.v1.boxes.actions.rewindEnable(this.boxId);
   }
 
   /**
@@ -465,14 +467,14 @@ export class RecordingRewindOperator {
    * const response = await myBox.recording.rewind.disable();
    */
   async disable() {
-    return this.client.v1.boxes.actions.replayRecordingDisable(this.boxId);
+    return this.client.v1.boxes.actions.rewindDisable(this.boxId);
   }
 
   /**
    * @example
    * const response = await myBox.recording.rewind.extract();
    */
-  async extract() {
-    return this.client.v1.boxes.actions.replayRecordingGet(this.boxId);
+  async extract(body: ActionRewindExtractParams): Promise<ActionRewindExtractResponse> {
+    return this.client.v1.boxes.actions.rewindExtract(this.boxId, body);
   }
 }
