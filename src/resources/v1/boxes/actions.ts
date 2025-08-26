@@ -193,42 +193,57 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Stop the device's background screen rewind recording.
+   *
    * @example
    * ```ts
-   * const response =
-   *   await client.v1.boxes.actions.replayRecordingDisable(
-   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   );
+   * await client.v1.boxes.actions.rewindDisable(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
-  replayRecordingDisable(boxID: string, options?: RequestOptions): APIPromise<string> {
-    return this._client.delete(path`/boxes/${boxID}/actions/recording/replay`, options);
+  rewindDisable(boxID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/boxes/${boxID}/actions/recording/rewind`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
+   * Start the device's background screen rewind recording.
+   *
    * @example
    * ```ts
-   * const response =
-   *   await client.v1.boxes.actions.replayRecordingEnable(
-   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   );
+   * await client.v1.boxes.actions.rewindEnable(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
    * ```
    */
-  replayRecordingEnable(boxID: string, options?: RequestOptions): APIPromise<string> {
-    return this._client.post(path`/boxes/${boxID}/actions/recording/replay`, options);
+  rewindEnable(boxID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/rewind`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
+   * Rewind and capture the device's background screen recording from a specified
+   * time period.
+   *
    * @example
    * ```ts
    * const response =
-   *   await client.v1.boxes.actions.replayRecordingGet(
+   *   await client.v1.boxes.actions.rewindExtract(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   );
    * ```
    */
-  replayRecordingGet(boxID: string, options?: RequestOptions): APIPromise<string> {
-    return this._client.post(path`/boxes/${boxID}/actions/recording/replay/clip`, options);
+  rewindExtract(
+    boxID: string,
+    body: ActionRewindExtractParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionRewindExtractResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/recording/rewind/extract`, { body, ...options });
   }
 
   /**
@@ -337,7 +352,7 @@ export class Actions extends APIResource {
    * ```
    */
   settingsReset(boxID: string, options?: RequestOptions): APIPromise<ActionSettingsResetResponse> {
-    return this._client.post(path`/boxes/${boxID}/actions/settings/reset`, options);
+    return this._client.delete(path`/boxes/${boxID}/actions/settings`, options);
   }
 
   /**
@@ -3922,11 +3937,23 @@ export interface ActionRecordingStopResponse {
   storageKey: string;
 }
 
-export type ActionReplayRecordingDisableResponse = string;
+/**
+ * Result of extracting the recording rewind
+ */
+export interface ActionRewindExtractResponse {
+  /**
+   * Presigned URL of the recording. This is a temporary downloadable URL with an
+   * expiration time for accessing the recording file.
+   */
+  presignedUrl: string;
 
-export type ActionReplayRecordingEnableResponse = string;
-
-export type ActionReplayRecordingGetResponse = string;
+  /**
+   * Storage key of the recording. Before the box is deleted, you can use this
+   * storageKey with the endpoint `box/:boxId/storage/presigned-url` to get a
+   * downloadable URL for the recording.
+   */
+  storageKey: string;
+}
 
 /**
  * Screen layout content.
@@ -5377,6 +5404,18 @@ export interface ActionRecordingStartParams {
   duration?: string;
 }
 
+export interface ActionRewindExtractParams {
+  /**
+   * How far back in time to rewind for extracting recorded video. This specifies the
+   * duration to go back from the current moment (e.g., '30s' rewinds 30 seconds to
+   * get recent recorded activity). Default is 30s, max is 5m.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 5m
+   */
+  duration?: string;
+}
+
 export interface ActionScreenRotationParams {
   /**
    * Target screen orientation
@@ -6065,9 +6104,7 @@ export declare namespace Actions {
     type ActionPressButtonResponse as ActionPressButtonResponse,
     type ActionPressKeyResponse as ActionPressKeyResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
-    type ActionReplayRecordingDisableResponse as ActionReplayRecordingDisableResponse,
-    type ActionReplayRecordingEnableResponse as ActionReplayRecordingEnableResponse,
-    type ActionReplayRecordingGetResponse as ActionReplayRecordingGetResponse,
+    type ActionRewindExtractResponse as ActionRewindExtractResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
@@ -6088,6 +6125,7 @@ export declare namespace Actions {
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
     type ActionRecordingStartParams as ActionRecordingStartParams,
+    type ActionRewindExtractParams as ActionRewindExtractParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,
     type ActionScrollParams as ActionScrollParams,
