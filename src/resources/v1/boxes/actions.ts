@@ -1689,9 +1689,9 @@ export interface ActionAIParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-   * url expires in. Only takes effect when outputFormat is storageKey. This field
-   * will be ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1699,8 +1699,8 @@ export interface ActionAIParams {
   presignedExpiresIn?: string;
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-   * ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
    *
    * Delay after performing the action, before taking the final screenshot.
    *
@@ -1909,9 +1909,9 @@ export declare namespace ActionClickParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1919,8 +1919,8 @@ export declare namespace ActionClickParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -2089,9 +2089,9 @@ export declare namespace ActionClickParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2099,8 +2099,8 @@ export declare namespace ActionClickParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -2275,9 +2275,9 @@ export declare namespace ActionDragParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2285,8 +2285,8 @@ export declare namespace ActionDragParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -2482,9 +2482,9 @@ export declare namespace ActionDragParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2492,8 +2492,8 @@ export declare namespace ActionDragParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -2706,9 +2706,9 @@ export declare namespace ActionLongPressParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2716,8 +2716,8 @@ export declare namespace ActionLongPressParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -2884,9 +2884,9 @@ export declare namespace ActionLongPressParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2894,8 +2894,8 @@ export declare namespace ActionLongPressParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -3059,9 +3059,9 @@ export interface ActionMoveParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-   * url expires in. Only takes effect when outputFormat is storageKey. This field
-   * will be ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3069,8 +3069,8 @@ export interface ActionMoveParams {
   presignedExpiresIn?: string;
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-   * ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
    *
    * Delay after performing the action, before taking the final screenshot.
    *
@@ -3228,9 +3228,9 @@ export interface ActionPressButtonParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-   * url expires in. Only takes effect when outputFormat is storageKey. This field
-   * will be ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3238,8 +3238,8 @@ export interface ActionPressButtonParams {
   presignedExpiresIn?: string;
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-   * ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
    *
    * Delay after performing the action, before taking the final screenshot.
    *
@@ -3516,9 +3516,9 @@ export interface ActionPressKeyParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-   * url expires in. Only takes effect when outputFormat is storageKey. This field
-   * will be ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3526,8 +3526,8 @@ export interface ActionPressKeyParams {
   presignedExpiresIn?: string;
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-   * ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
    *
    * Delay after performing the action, before taking the final screenshot.
    *
@@ -3708,9 +3708,9 @@ export interface ActionScreenRotationParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-   * url expires in. Only takes effect when outputFormat is storageKey. This field
-   * will be ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3718,8 +3718,8 @@ export interface ActionScreenRotationParams {
   presignedExpiresIn?: string;
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-   * ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
    *
    * Delay after performing the action, before taking the final screenshot.
    *
@@ -3961,9 +3961,9 @@ export declare namespace ActionScrollParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3971,8 +3971,8 @@ export declare namespace ActionScrollParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -4149,9 +4149,9 @@ export declare namespace ActionScrollParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4159,8 +4159,8 @@ export declare namespace ActionScrollParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -4360,9 +4360,9 @@ export declare namespace ActionSwipeParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4370,8 +4370,8 @@ export declare namespace ActionSwipeParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -4542,9 +4542,9 @@ export declare namespace ActionSwipeParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4552,8 +4552,8 @@ export declare namespace ActionSwipeParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -4750,9 +4750,9 @@ export declare namespace ActionTapParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4760,8 +4760,8 @@ export declare namespace ActionTapParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -4920,9 +4920,9 @@ export declare namespace ActionTapParams {
     outputFormat?: 'base64' | 'storageKey';
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-     * url expires in. Only takes effect when outputFormat is storageKey. This field
-     * will be ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4930,8 +4930,8 @@ export declare namespace ActionTapParams {
     presignedExpiresIn?: string;
 
     /**
-     * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-     * ignored when `options.screenshot` is provided.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
      *
      * Delay after performing the action, before taking the final screenshot.
      *
@@ -5090,9 +5090,9 @@ export interface ActionTouchParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-   * url expires in. Only takes effect when outputFormat is storageKey. This field
-   * will be ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5100,8 +5100,8 @@ export interface ActionTouchParams {
   presignedExpiresIn?: string;
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-   * ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
    *
    * Delay after performing the action, before taking the final screenshot.
    *
@@ -5340,9 +5340,9 @@ export interface ActionTypeParams {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-   * url expires in. Only takes effect when outputFormat is storageKey. This field
-   * will be ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5355,8 +5355,8 @@ export interface ActionTypeParams {
   pressEnter?: boolean;
 
   /**
-   * ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-   * ignored when `options.screenshot` is provided.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
    *
    * Delay after performing the action, before taking the final screenshot.
    *
