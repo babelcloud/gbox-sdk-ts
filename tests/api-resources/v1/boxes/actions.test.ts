@@ -28,6 +28,14 @@ describe('resource actions', () => {
       instruction: 'click the login button',
       background: 'The user is on the login page',
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -63,6 +71,14 @@ describe('resource actions', () => {
       button: 'left',
       double: false,
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -91,6 +107,14 @@ describe('resource actions', () => {
       start: { x: 100, y: 150 },
       duration: '500ms',
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -141,6 +165,14 @@ describe('resource actions', () => {
       y: 250,
       duration: '1s',
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -168,6 +200,14 @@ describe('resource actions', () => {
       x: 200,
       y: 300,
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -193,6 +233,14 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.pressButton('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       buttons: ['power'],
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -219,6 +267,14 @@ describe('resource actions', () => {
       keys: ['enter'],
       combination: true,
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -319,6 +375,14 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.screenRotation('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       orientation: 'landscapeLeft',
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -362,6 +426,14 @@ describe('resource actions', () => {
       x: 400,
       y: 300,
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -435,6 +507,14 @@ describe('resource actions', () => {
       duration: '500ms',
       includeScreenshot: false,
       location: 'Chrome App',
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -462,6 +542,14 @@ describe('resource actions', () => {
       x: 350,
       y: 250,
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -487,6 +575,14 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       points: [{ start: { x: 100, y: 150 }, actions: [{ duration: '200ms', type: 'move', x: 400, y: 300 }] }],
       includeScreenshot: false,
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       screenshotDelay: '500ms',
@@ -513,6 +609,14 @@ describe('resource actions', () => {
       text: 'Hello World',
       includeScreenshot: false,
       mode: 'append',
+      options: {
+        screenshot: {
+          delay: '500ms',
+          outputFormat: 'base64',
+          presignedExpiresIn: '30m',
+          range: ['before', 'after'],
+        },
+      },
       outputFormat: 'base64',
       presignedExpiresIn: '30m',
       pressEnter: false,
