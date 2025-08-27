@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as ActionsAPI from './actions';
 import {
   ActionAIParams,
+  ActionAIResponse,
   ActionClickParams,
   ActionCommonOptions,
   ActionDragParams,
@@ -1136,6 +1137,7 @@ export declare namespace Boxes {
     type ActionCommonOptions as ActionCommonOptions,
     type ActionResult as ActionResult,
     type ActionScreenshotOptions as ActionScreenshotOptions,
+    type ActionAIResponse as ActionAIResponse,
     type ActionExtractResponse as ActionExtractResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionRewindExtractResponse as ActionRewindExtractResponse,
