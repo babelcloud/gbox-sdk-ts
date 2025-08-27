@@ -1739,57 +1739,14 @@ export namespace ActionAIParams {
      * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
      * to configure screenshot options.
      */
-    screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+    screenshot?: boolean | Options.ActionScreenshotOption;
   }
 
   export namespace Options {
-    export interface UnionMember0 {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-
-    export interface ActionScreenshotOptionDto {
+    /**
+     * Action screenshot option
+     */
+    export interface ActionScreenshotOption {
       /**
        * Delay after performing the action, before taking the final screenshot.
        *
@@ -1943,57 +1900,14 @@ export declare namespace ActionClickParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -2119,57 +2033,14 @@ export declare namespace ActionClickParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -2331,57 +2202,14 @@ export declare namespace ActionDragParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -2519,57 +2347,14 @@ export declare namespace ActionDragParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -2724,57 +2509,14 @@ export declare namespace ActionLongPressParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -2898,57 +2640,14 @@ export declare namespace ActionLongPressParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -3069,57 +2768,14 @@ export namespace ActionMoveParams {
      * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
      * to configure screenshot options.
      */
-    screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+    screenshot?: boolean | Options.ActionScreenshotOption;
   }
 
   export namespace Options {
-    export interface UnionMember0 {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-
-    export interface ActionScreenshotOptionDto {
+    /**
+     * Action screenshot option
+     */
+    export interface ActionScreenshotOption {
       /**
        * Delay after performing the action, before taking the final screenshot.
        *
@@ -3234,57 +2890,14 @@ export namespace ActionPressButtonParams {
      * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
      * to configure screenshot options.
      */
-    screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+    screenshot?: boolean | Options.ActionScreenshotOption;
   }
 
   export namespace Options {
-    export interface UnionMember0 {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-
-    export interface ActionScreenshotOptionDto {
+    /**
+     * Action screenshot option
+     */
+    export interface ActionScreenshotOption {
       /**
        * Delay after performing the action, before taking the final screenshot.
        *
@@ -3518,57 +3131,14 @@ export namespace ActionPressKeyParams {
      * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
      * to configure screenshot options.
      */
-    screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+    screenshot?: boolean | Options.ActionScreenshotOption;
   }
 
   export namespace Options {
-    export interface UnionMember0 {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-
-    export interface ActionScreenshotOptionDto {
+    /**
+     * Action screenshot option
+     */
+    export interface ActionScreenshotOption {
       /**
        * Delay after performing the action, before taking the final screenshot.
        *
@@ -3706,57 +3276,14 @@ export namespace ActionScreenRotationParams {
      * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
      * to configure screenshot options.
      */
-    screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+    screenshot?: boolean | Options.ActionScreenshotOption;
   }
 
   export namespace Options {
-    export interface UnionMember0 {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-
-    export interface ActionScreenshotOptionDto {
+    /**
+     * Action screenshot option
+     */
+    export interface ActionScreenshotOption {
       /**
        * Delay after performing the action, before taking the final screenshot.
        *
@@ -3955,57 +3482,14 @@ export declare namespace ActionScrollParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -4139,57 +3623,14 @@ export declare namespace ActionScrollParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -4346,57 +3787,14 @@ export declare namespace ActionSwipeParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -4554,57 +3952,14 @@ export declare namespace ActionSwipeParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -4728,57 +4083,14 @@ export declare namespace ActionTapParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -4894,57 +4206,14 @@ export declare namespace ActionTapParams {
        * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
        * to configure screenshot options.
        */
-      screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+      screenshot?: boolean | Options.ActionScreenshotOption;
     }
 
     export namespace Options {
-      export interface UnionMember0 {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-
-      export interface ActionScreenshotOptionDto {
+      /**
+       * Action screenshot option
+       */
+      export interface ActionScreenshotOption {
         /**
          * Delay after performing the action, before taking the final screenshot.
          *
@@ -5064,7 +4333,7 @@ export namespace ActionTouchParams {
     /**
      * Sequence of actions to perform after initial touch
      */
-    actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitActionDto>;
+    actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitAction>;
   }
 
   export namespace Point {
@@ -5111,7 +4380,10 @@ export namespace ActionTouchParams {
       y: number;
     }
 
-    export interface TouchPointWaitActionDto {
+    /**
+     * Touch point wait action configuration
+     */
+    export interface TouchPointWaitAction {
       /**
        * Duration to wait (e.g. "500ms")
        *
@@ -5135,57 +4407,14 @@ export namespace ActionTouchParams {
      * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
      * to configure screenshot options.
      */
-    screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+    screenshot?: boolean | Options.ActionScreenshotOption;
   }
 
   export namespace Options {
-    export interface UnionMember0 {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-
-    export interface ActionScreenshotOptionDto {
+    /**
+     * Action screenshot option
+     */
+    export interface ActionScreenshotOption {
       /**
        * Delay after performing the action, before taking the final screenshot.
        *
@@ -5311,57 +4540,14 @@ export namespace ActionTypeParams {
      * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
      * to configure screenshot options.
      */
-    screenshot?: Options.UnionMember0 | Options.ActionScreenshotOptionDto;
+    screenshot?: boolean | Options.ActionScreenshotOption;
   }
 
   export namespace Options {
-    export interface UnionMember0 {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-
-    export interface ActionScreenshotOptionDto {
+    /**
+     * Action screenshot option
+     */
+    export interface ActionScreenshotOption {
       /**
        * Delay after performing the action, before taking the final screenshot.
        *
