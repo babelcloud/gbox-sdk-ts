@@ -5,6 +5,7 @@ export {
   type ActionCommonOptions,
   type ActionResult,
   type ActionScreenshotOptions,
+  type ActionAIResponse,
   type ActionExtractResponse,
   type ActionRecordingStopResponse,
   type ActionRewindExtractResponse,

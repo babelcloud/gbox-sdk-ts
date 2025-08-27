@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as ActionsAPI from './actions';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -14,13 +15,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.ai(
+   * const response = await client.v1.boxes.actions.ai(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { instruction: 'click the login button' },
    * );
    * ```
    */
-  ai(boxID: string, body: ActionAIParams, options?: RequestOptions): APIPromise<ActionResult> {
+  ai(boxID: string, body: ActionAIParams, options?: RequestOptions): APIPromise<ActionAIResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/ai`, { body, ...options });
   }
 
@@ -579,6 +580,3401 @@ export interface ActionScreenshotOptions {
    * Default captures all three types. Can specify one or multiple in an array.
    */
   range?: Array<'before' | 'after' | 'trace'>;
+}
+
+/**
+ * Result of AI action execution with screenshot
+ */
+export type ActionAIResponse = ActionAIResponse.AIActionScreenshotResult | ActionAIResponse.AIActionResult;
+
+export namespace ActionAIResponse {
+  /**
+   * Result of AI action execution with screenshot
+   */
+  export interface AIActionScreenshotResult {
+    /**
+     * Response of AI action execution
+     */
+    aiResponse: AIActionScreenshotResult.AIResponse;
+
+    /**
+     * message
+     */
+    message: string;
+
+    /**
+     * output
+     */
+    output: string;
+
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    screenshot?: AIActionScreenshotResult.Screenshot;
+  }
+
+  export namespace AIActionScreenshotResult {
+    /**
+     * Response of AI action execution
+     */
+    export interface AIResponse {
+      /**
+       * Actions to be executed by the AI with type identifier
+       */
+      actions: Array<
+        | AIResponse.TypedClickAction
+        | AIResponse.TypedTouchAction
+        | AIResponse.TypedDragAdvancedAction
+        | AIResponse.TypedDragSimpleAction
+        | AIResponse.TypedScrollAction
+        | AIResponse.TypedScrollSimpleAction
+        | AIResponse.TypedSwipeSimpleAction
+        | AIResponse.TypedSwipeAdvancedAction
+        | AIResponse.TypedPressKeyAction
+        | AIResponse.TypedPressButtonAction
+        | AIResponse.TypedLongPressAction
+        | AIResponse.TypedTypeAction
+        | AIResponse.TypedMoveAction
+        | AIResponse.TypedScreenRotationAction
+        | AIResponse.TypedScreenshotAction
+        | AIResponse.TypedDragSimpleAction
+        | AIResponse.TypedDragAdvancedAction
+        | AIResponse.TypedWaitAction
+      >;
+
+      /**
+       * messages returned by the model
+       */
+      messages: Array<string>;
+
+      /**
+       * The name of the model that processed this request
+       */
+      model: string;
+
+      /**
+       * reasoning
+       */
+      reasoning?: string;
+    }
+
+    export namespace AIResponse {
+      /**
+       * Typed click action
+       */
+      export interface TypedClickAction {
+        /**
+         * X coordinate of the click
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the click
+         */
+        y: number;
+
+        /**
+         * Mouse button to click
+         */
+        button?: 'left' | 'right' | 'middle';
+
+        /**
+         * Whether to perform a double click
+         */
+        double?: boolean;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed touch action
+       */
+      export interface TypedTouchAction {
+        /**
+         * Array of touch points and their actions
+         */
+        points: Array<TypedTouchAction.Point>;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedTouchAction {
+        /**
+         * Touch point configuration with start position and actions
+         */
+        export interface Point {
+          /**
+           * Initial touch point position
+           */
+          start: Point.Start;
+
+          /**
+           * Sequence of actions to perform after initial touch
+           */
+          actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitAction>;
+        }
+
+        export namespace Point {
+          /**
+           * Initial touch point position
+           */
+          export interface Start {
+            /**
+             * Starting X coordinate
+             */
+            x: number;
+
+            /**
+             * Starting Y coordinate
+             */
+            y: number;
+          }
+
+          /**
+           * Touch point movement action configuration
+           */
+          export interface TouchPointMoveAction {
+            /**
+             * Duration of the movement (e.g. "200ms")
+             *
+             * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+             * Example formats: "500ms", "30s", "5m", "1h" Default: 200ms
+             */
+            duration: string;
+
+            /**
+             * Type of the action
+             */
+            type: string;
+
+            /**
+             * Target X coordinate
+             */
+            x: number;
+
+            /**
+             * Target Y coordinate
+             */
+            y: number;
+          }
+
+          /**
+           * Touch point wait action configuration
+           */
+          export interface TouchPointWaitAction {
+            /**
+             * Duration to wait (e.g. "500ms")
+             *
+             * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+             * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+             */
+            duration: string;
+
+            /**
+             * Type of the action
+             */
+            type: string;
+          }
+        }
+      }
+
+      /**
+       * Typed drag advanced action
+       */
+      export interface TypedDragAdvancedAction {
+        /**
+         * Path of the drag action as a series of coordinates
+         */
+        path: Array<TypedDragAdvancedAction.Path>;
+
+        /**
+         * Time interval between points (e.g. "50ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragAdvancedAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag simple action
+       */
+      export interface TypedDragSimpleAction {
+        /**
+         * End point of the drag path (coordinates or natural language)
+         */
+        end: TypedDragSimpleAction.DragPathPoint | string;
+
+        /**
+         * Start point of the drag path (coordinates or natural language)
+         */
+        start: TypedDragSimpleAction.DragPathPoint | string;
+
+        /**
+         * Duration to complete the movement from start to end coordinates
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface DragPathPoint {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+
+        /**
+         * Single point in a drag path
+         */
+        export interface DragPathPoint {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed scroll action
+       */
+      export interface TypedScrollAction {
+        /**
+         * Horizontal scroll amount. Positive values scroll content rightward (reveals
+         * content on the right), negative values scroll content leftward (reveals content
+         * on the left).
+         */
+        scrollX: number;
+
+        /**
+         * Vertical scroll amount. Positive values scroll content downward (reveals content
+         * below), negative values scroll content upward (reveals content above).
+         */
+        scrollY: number;
+
+        /**
+         * X coordinate of the scroll position
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the scroll position
+         */
+        y: number;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed scroll simple action
+       */
+      export interface TypedScrollSimpleAction {
+        /**
+         * Direction to scroll. The scroll will be performed from the center of the screen
+         * towards this direction. 'up' scrolls content upward (reveals content below),
+         * 'down' scrolls content downward (reveals content above), 'left' scrolls content
+         * leftward (reveals content on the right), 'right' scrolls content rightward
+         * (reveals content on the left).
+         */
+        direction: 'up' | 'down' | 'left' | 'right';
+
+        /**
+         * Distance of the scroll. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the scroll will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
+
+        /**
+         * Duration of the scroll
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed swipe simple action
+       */
+      export interface TypedSwipeSimpleAction {
+        /**
+         * Direction to swipe. The gesture will be performed from the center of the screen
+         * towards this direction.
+         */
+        direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
+
+        /**
+         * Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the swipe will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
+
+        /**
+         * Duration of the swipe
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Natural language description of the location where the swipe should originate.
+         * If not provided, the swipe will be performed from the center of the screen.
+         */
+        location?: string;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed swipe advanced action
+       */
+      export interface TypedSwipeAdvancedAction {
+        /**
+         * End point of the swipe path (coordinates or natural language)
+         */
+        end: TypedSwipeAdvancedAction.SwipePath | string;
+
+        /**
+         * Start point of the swipe path (coordinates or natural language)
+         */
+        start: TypedSwipeAdvancedAction.SwipePath | string;
+
+        /**
+         * Duration of the swipe
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedSwipeAdvancedAction {
+        /**
+         * Swipe path
+         */
+        export interface SwipePath {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+
+        /**
+         * Swipe path
+         */
+        export interface SwipePath {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed press key action
+       */
+      export interface TypedPressKeyAction {
+        /**
+         * This is an array of keyboard keys to press. Supports cross-platform
+         * compatibility.
+         */
+        keys: Array<
+          | 'a'
+          | 'b'
+          | 'c'
+          | 'd'
+          | 'e'
+          | 'f'
+          | 'g'
+          | 'h'
+          | 'i'
+          | 'j'
+          | 'k'
+          | 'l'
+          | 'm'
+          | 'n'
+          | 'o'
+          | 'p'
+          | 'q'
+          | 'r'
+          | 's'
+          | 't'
+          | 'u'
+          | 'v'
+          | 'w'
+          | 'x'
+          | 'y'
+          | 'z'
+          | '0'
+          | '1'
+          | '2'
+          | '3'
+          | '4'
+          | '5'
+          | '6'
+          | '7'
+          | '8'
+          | '9'
+          | 'f1'
+          | 'f2'
+          | 'f3'
+          | 'f4'
+          | 'f5'
+          | 'f6'
+          | 'f7'
+          | 'f8'
+          | 'f9'
+          | 'f10'
+          | 'f11'
+          | 'f12'
+          | 'control'
+          | 'alt'
+          | 'shift'
+          | 'meta'
+          | 'win'
+          | 'cmd'
+          | 'option'
+          | 'arrowUp'
+          | 'arrowDown'
+          | 'arrowLeft'
+          | 'arrowRight'
+          | 'home'
+          | 'end'
+          | 'pageUp'
+          | 'pageDown'
+          | 'enter'
+          | 'space'
+          | 'tab'
+          | 'escape'
+          | 'backspace'
+          | 'delete'
+          | 'insert'
+          | 'capsLock'
+          | 'numLock'
+          | 'scrollLock'
+          | 'pause'
+          | 'printScreen'
+          | ';'
+          | '='
+          | ','
+          | '-'
+          | '.'
+          | '/'
+          | '`'
+          | '['
+          | '\\'
+          | ']'
+          | "'"
+          | 'numpad0'
+          | 'numpad1'
+          | 'numpad2'
+          | 'numpad3'
+          | 'numpad4'
+          | 'numpad5'
+          | 'numpad6'
+          | 'numpad7'
+          | 'numpad8'
+          | 'numpad9'
+          | 'numpadAdd'
+          | 'numpadSubtract'
+          | 'numpadMultiply'
+          | 'numpadDivide'
+          | 'numpadDecimal'
+          | 'numpadEnter'
+          | 'numpadEqual'
+          | 'volumeUp'
+          | 'volumeDown'
+          | 'volumeMute'
+          | 'mediaPlayPause'
+          | 'mediaStop'
+          | 'mediaNextTrack'
+          | 'mediaPreviousTrack'
+        >;
+
+        /**
+         * Whether to press keys as combination (simultaneously) or sequentially. When
+         * true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+         * keys are pressed one by one in sequence.
+         */
+        combination?: boolean;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed press button action
+       */
+      export interface TypedPressButtonAction {
+        /**
+         * Button to press
+         */
+        buttons: Array<
+          'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'
+        >;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed long press action
+       */
+      export interface TypedLongPressAction {
+        /**
+         * X coordinate of the long press
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the long press
+         */
+        y: number;
+
+        /**
+         * Duration to hold the press (e.g. '1s', '500ms')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed type action
+       */
+      export interface TypedTypeAction {
+        /**
+         * Text to type
+         */
+        text: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Text input mode: 'append' to add text to existing content, 'replace' to replace
+         * all existing text
+         */
+        mode?: 'append' | 'replace';
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Whether to press Enter after typing the text
+         */
+        pressEnter?: boolean;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed move action
+       */
+      export interface TypedMoveAction {
+        /**
+         * X coordinate to move to
+         */
+        x: number;
+
+        /**
+         * Y coordinate to move to
+         */
+        y: number;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed screen rotation action
+       */
+      export interface TypedScreenRotationAction {
+        /**
+         * Target screen orientation
+         */
+        orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed screenshot action
+       */
+      export interface TypedScreenshotAction {
+        /**
+         * Clipping region for screenshot capture
+         */
+        clip?: TypedScreenshotAction.Clip;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * The scale of the action to be performed. Must be greater than 0.1 and less than
+         * or equal to 1.
+         *
+         * Notes:
+         *
+         * - Scale does not change the box's actual screen resolution.
+         * - It affects the size of the output screenshot and the coordinates/distances of
+         *   actions. Coordinates and distances are scaled by this factor. Example: when
+         *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+         *   Click({x:50, y:50}).
+         * - If not provided, uses the scale value from UI action settings; otherwise uses
+         *   the passed value.
+         */
+        scale?: number;
+      }
+
+      export namespace TypedScreenshotAction {
+        /**
+         * Clipping region for screenshot capture
+         */
+        export interface Clip {
+          /**
+           * Height of the clip
+           */
+          height: number;
+
+          /**
+           * Width of the clip
+           */
+          width: number;
+
+          /**
+           * X coordinate of the clip
+           */
+          x: number;
+
+          /**
+           * Y coordinate of the clip
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag simple action
+       */
+      export interface TypedDragSimpleAction {
+        /**
+         * End point of the drag path (coordinates or natural language)
+         */
+        end: TypedDragSimpleAction.DragPathPoint | string;
+
+        /**
+         * Start point of the drag path (coordinates or natural language)
+         */
+        start: TypedDragSimpleAction.DragPathPoint | string;
+
+        /**
+         * Duration to complete the movement from start to end coordinates
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface DragPathPoint {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+
+        /**
+         * Single point in a drag path
+         */
+        export interface DragPathPoint {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag advanced action
+       */
+      export interface TypedDragAdvancedAction {
+        /**
+         * Path of the drag action as a series of coordinates
+         */
+        path: Array<TypedDragAdvancedAction.Path>;
+
+        /**
+         * Time interval between points (e.g. "50ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragAdvancedAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed wait action
+       */
+      export interface TypedWaitAction {
+        /**
+         * Duration of the wait (e.g. '3s')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 3s
+         */
+        duration: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+    }
+
+    /**
+     * Complete screenshot result with operation trace, before and after images
+     */
+    export interface Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      after?: Screenshot.After;
+
+      /**
+       * Screenshot taken before action execution
+       */
+      before?: Screenshot.Before;
+
+      /**
+       * Screenshot with action operation trace
+       */
+      trace?: Screenshot.Trace;
+    }
+
+    export namespace Screenshot {
+      /**
+       * Screenshot taken after action execution
+       */
+      export interface After {
+        /**
+         * URI of the screenshot after the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot taken before action execution
+       */
+      export interface Before {
+        /**
+         * URI of the screenshot before the action
+         */
+        uri: string;
+
+        /**
+         * Presigned url of the screenshot before the action
+         */
+        presignedUrl?: string;
+      }
+
+      /**
+       * Screenshot with action operation trace
+       */
+      export interface Trace {
+        /**
+         * URI of the screenshot with operation trace
+         */
+        uri: string;
+      }
+    }
+  }
+
+  /**
+   * Result of AI action execution
+   */
+  export interface AIActionResult {
+    /**
+     * Response of AI action execution
+     */
+    aiResponse: AIActionResult.AIResponse;
+
+    /**
+     * output
+     */
+    output: string;
+  }
+
+  export namespace AIActionResult {
+    /**
+     * Response of AI action execution
+     */
+    export interface AIResponse {
+      /**
+       * Actions to be executed by the AI with type identifier
+       */
+      actions: Array<
+        | AIResponse.TypedClickAction
+        | AIResponse.TypedTouchAction
+        | AIResponse.TypedDragAdvancedAction
+        | AIResponse.TypedDragSimpleAction
+        | AIResponse.TypedScrollAction
+        | AIResponse.TypedScrollSimpleAction
+        | AIResponse.TypedSwipeSimpleAction
+        | AIResponse.TypedSwipeAdvancedAction
+        | AIResponse.TypedPressKeyAction
+        | AIResponse.TypedPressButtonAction
+        | AIResponse.TypedLongPressAction
+        | AIResponse.TypedTypeAction
+        | AIResponse.TypedMoveAction
+        | AIResponse.TypedScreenRotationAction
+        | AIResponse.TypedScreenshotAction
+        | AIResponse.TypedDragSimpleAction
+        | AIResponse.TypedDragAdvancedAction
+        | AIResponse.TypedWaitAction
+      >;
+
+      /**
+       * messages returned by the model
+       */
+      messages: Array<string>;
+
+      /**
+       * The name of the model that processed this request
+       */
+      model: string;
+
+      /**
+       * reasoning
+       */
+      reasoning?: string;
+    }
+
+    export namespace AIResponse {
+      /**
+       * Typed click action
+       */
+      export interface TypedClickAction {
+        /**
+         * X coordinate of the click
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the click
+         */
+        y: number;
+
+        /**
+         * Mouse button to click
+         */
+        button?: 'left' | 'right' | 'middle';
+
+        /**
+         * Whether to perform a double click
+         */
+        double?: boolean;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed touch action
+       */
+      export interface TypedTouchAction {
+        /**
+         * Array of touch points and their actions
+         */
+        points: Array<TypedTouchAction.Point>;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedTouchAction {
+        /**
+         * Touch point configuration with start position and actions
+         */
+        export interface Point {
+          /**
+           * Initial touch point position
+           */
+          start: Point.Start;
+
+          /**
+           * Sequence of actions to perform after initial touch
+           */
+          actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitAction>;
+        }
+
+        export namespace Point {
+          /**
+           * Initial touch point position
+           */
+          export interface Start {
+            /**
+             * Starting X coordinate
+             */
+            x: number;
+
+            /**
+             * Starting Y coordinate
+             */
+            y: number;
+          }
+
+          /**
+           * Touch point movement action configuration
+           */
+          export interface TouchPointMoveAction {
+            /**
+             * Duration of the movement (e.g. "200ms")
+             *
+             * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+             * Example formats: "500ms", "30s", "5m", "1h" Default: 200ms
+             */
+            duration: string;
+
+            /**
+             * Type of the action
+             */
+            type: string;
+
+            /**
+             * Target X coordinate
+             */
+            x: number;
+
+            /**
+             * Target Y coordinate
+             */
+            y: number;
+          }
+
+          /**
+           * Touch point wait action configuration
+           */
+          export interface TouchPointWaitAction {
+            /**
+             * Duration to wait (e.g. "500ms")
+             *
+             * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+             * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+             */
+            duration: string;
+
+            /**
+             * Type of the action
+             */
+            type: string;
+          }
+        }
+      }
+
+      /**
+       * Typed drag advanced action
+       */
+      export interface TypedDragAdvancedAction {
+        /**
+         * Path of the drag action as a series of coordinates
+         */
+        path: Array<TypedDragAdvancedAction.Path>;
+
+        /**
+         * Time interval between points (e.g. "50ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragAdvancedAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag simple action
+       */
+      export interface TypedDragSimpleAction {
+        /**
+         * End point of the drag path (coordinates or natural language)
+         */
+        end: TypedDragSimpleAction.DragPathPoint | string;
+
+        /**
+         * Start point of the drag path (coordinates or natural language)
+         */
+        start: TypedDragSimpleAction.DragPathPoint | string;
+
+        /**
+         * Duration to complete the movement from start to end coordinates
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface DragPathPoint {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+
+        /**
+         * Single point in a drag path
+         */
+        export interface DragPathPoint {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed scroll action
+       */
+      export interface TypedScrollAction {
+        /**
+         * Horizontal scroll amount. Positive values scroll content rightward (reveals
+         * content on the right), negative values scroll content leftward (reveals content
+         * on the left).
+         */
+        scrollX: number;
+
+        /**
+         * Vertical scroll amount. Positive values scroll content downward (reveals content
+         * below), negative values scroll content upward (reveals content above).
+         */
+        scrollY: number;
+
+        /**
+         * X coordinate of the scroll position
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the scroll position
+         */
+        y: number;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed scroll simple action
+       */
+      export interface TypedScrollSimpleAction {
+        /**
+         * Direction to scroll. The scroll will be performed from the center of the screen
+         * towards this direction. 'up' scrolls content upward (reveals content below),
+         * 'down' scrolls content downward (reveals content above), 'left' scrolls content
+         * leftward (reveals content on the right), 'right' scrolls content rightward
+         * (reveals content on the left).
+         */
+        direction: 'up' | 'down' | 'left' | 'right';
+
+        /**
+         * Distance of the scroll. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the scroll will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
+
+        /**
+         * Duration of the scroll
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed swipe simple action
+       */
+      export interface TypedSwipeSimpleAction {
+        /**
+         * Direction to swipe. The gesture will be performed from the center of the screen
+         * towards this direction.
+         */
+        direction: 'up' | 'down' | 'left' | 'right' | 'upLeft' | 'upRight' | 'downLeft' | 'downRight';
+
+        /**
+         * Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+         * value (tiny, short, medium, long). If not provided, the swipe will be performed
+         * from the center of the screen to the screen edge
+         */
+        distance?: number | 'tiny' | 'short' | 'medium' | 'long';
+
+        /**
+         * Duration of the swipe
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Natural language description of the location where the swipe should originate.
+         * If not provided, the swipe will be performed from the center of the screen.
+         */
+        location?: string;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed swipe advanced action
+       */
+      export interface TypedSwipeAdvancedAction {
+        /**
+         * End point of the swipe path (coordinates or natural language)
+         */
+        end: TypedSwipeAdvancedAction.SwipePath | string;
+
+        /**
+         * Start point of the swipe path (coordinates or natural language)
+         */
+        start: TypedSwipeAdvancedAction.SwipePath | string;
+
+        /**
+         * Duration of the swipe
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedSwipeAdvancedAction {
+        /**
+         * Swipe path
+         */
+        export interface SwipePath {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+
+        /**
+         * Swipe path
+         */
+        export interface SwipePath {
+          /**
+           * Start/end x coordinate of the swipe path
+           */
+          x: number;
+
+          /**
+           * Start/end y coordinate of the swipe path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed press key action
+       */
+      export interface TypedPressKeyAction {
+        /**
+         * This is an array of keyboard keys to press. Supports cross-platform
+         * compatibility.
+         */
+        keys: Array<
+          | 'a'
+          | 'b'
+          | 'c'
+          | 'd'
+          | 'e'
+          | 'f'
+          | 'g'
+          | 'h'
+          | 'i'
+          | 'j'
+          | 'k'
+          | 'l'
+          | 'm'
+          | 'n'
+          | 'o'
+          | 'p'
+          | 'q'
+          | 'r'
+          | 's'
+          | 't'
+          | 'u'
+          | 'v'
+          | 'w'
+          | 'x'
+          | 'y'
+          | 'z'
+          | '0'
+          | '1'
+          | '2'
+          | '3'
+          | '4'
+          | '5'
+          | '6'
+          | '7'
+          | '8'
+          | '9'
+          | 'f1'
+          | 'f2'
+          | 'f3'
+          | 'f4'
+          | 'f5'
+          | 'f6'
+          | 'f7'
+          | 'f8'
+          | 'f9'
+          | 'f10'
+          | 'f11'
+          | 'f12'
+          | 'control'
+          | 'alt'
+          | 'shift'
+          | 'meta'
+          | 'win'
+          | 'cmd'
+          | 'option'
+          | 'arrowUp'
+          | 'arrowDown'
+          | 'arrowLeft'
+          | 'arrowRight'
+          | 'home'
+          | 'end'
+          | 'pageUp'
+          | 'pageDown'
+          | 'enter'
+          | 'space'
+          | 'tab'
+          | 'escape'
+          | 'backspace'
+          | 'delete'
+          | 'insert'
+          | 'capsLock'
+          | 'numLock'
+          | 'scrollLock'
+          | 'pause'
+          | 'printScreen'
+          | ';'
+          | '='
+          | ','
+          | '-'
+          | '.'
+          | '/'
+          | '`'
+          | '['
+          | '\\'
+          | ']'
+          | "'"
+          | 'numpad0'
+          | 'numpad1'
+          | 'numpad2'
+          | 'numpad3'
+          | 'numpad4'
+          | 'numpad5'
+          | 'numpad6'
+          | 'numpad7'
+          | 'numpad8'
+          | 'numpad9'
+          | 'numpadAdd'
+          | 'numpadSubtract'
+          | 'numpadMultiply'
+          | 'numpadDivide'
+          | 'numpadDecimal'
+          | 'numpadEnter'
+          | 'numpadEqual'
+          | 'volumeUp'
+          | 'volumeDown'
+          | 'volumeMute'
+          | 'mediaPlayPause'
+          | 'mediaStop'
+          | 'mediaNextTrack'
+          | 'mediaPreviousTrack'
+        >;
+
+        /**
+         * Whether to press keys as combination (simultaneously) or sequentially. When
+         * true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+         * keys are pressed one by one in sequence.
+         */
+        combination?: boolean;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed press button action
+       */
+      export interface TypedPressButtonAction {
+        /**
+         * Button to press
+         */
+        buttons: Array<
+          'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'
+        >;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed long press action
+       */
+      export interface TypedLongPressAction {
+        /**
+         * X coordinate of the long press
+         */
+        x: number;
+
+        /**
+         * Y coordinate of the long press
+         */
+        y: number;
+
+        /**
+         * Duration to hold the press (e.g. '1s', '500ms')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed type action
+       */
+      export interface TypedTypeAction {
+        /**
+         * Text to type
+         */
+        text: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Text input mode: 'append' to add text to existing content, 'replace' to replace
+         * all existing text
+         */
+        mode?: 'append' | 'replace';
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * Whether to press Enter after typing the text
+         */
+        pressEnter?: boolean;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed move action
+       */
+      export interface TypedMoveAction {
+        /**
+         * X coordinate to move to
+         */
+        x: number;
+
+        /**
+         * Y coordinate to move to
+         */
+        y: number;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed screen rotation action
+       */
+      export interface TypedScreenRotationAction {
+        /**
+         * Target screen orientation
+         */
+        orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      /**
+       * Typed screenshot action
+       */
+      export interface TypedScreenshotAction {
+        /**
+         * Clipping region for screenshot capture
+         */
+        clip?: TypedScreenshotAction.Clip;
+
+        /**
+         * Type of the URI. default is base64.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * The scale of the action to be performed. Must be greater than 0.1 and less than
+         * or equal to 1.
+         *
+         * Notes:
+         *
+         * - Scale does not change the box's actual screen resolution.
+         * - It affects the size of the output screenshot and the coordinates/distances of
+         *   actions. Coordinates and distances are scaled by this factor. Example: when
+         *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+         *   Click({x:50, y:50}).
+         * - If not provided, uses the scale value from UI action settings; otherwise uses
+         *   the passed value.
+         */
+        scale?: number;
+      }
+
+      export namespace TypedScreenshotAction {
+        /**
+         * Clipping region for screenshot capture
+         */
+        export interface Clip {
+          /**
+           * Height of the clip
+           */
+          height: number;
+
+          /**
+           * Width of the clip
+           */
+          width: number;
+
+          /**
+           * X coordinate of the clip
+           */
+          x: number;
+
+          /**
+           * Y coordinate of the clip
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag simple action
+       */
+      export interface TypedDragSimpleAction {
+        /**
+         * End point of the drag path (coordinates or natural language)
+         */
+        end: TypedDragSimpleAction.DragPathPoint | string;
+
+        /**
+         * Start point of the drag path (coordinates or natural language)
+         */
+        start: TypedDragSimpleAction.DragPathPoint | string;
+
+        /**
+         * Duration to complete the movement from start to end coordinates
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragSimpleAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface DragPathPoint {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+
+        /**
+         * Single point in a drag path
+         */
+        export interface DragPathPoint {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed drag advanced action
+       */
+      export interface TypedDragAdvancedAction {
+        /**
+         * Path of the drag action as a series of coordinates
+         */
+        path: Array<TypedDragAdvancedAction.Path>;
+
+        /**
+         * Time interval between points (e.g. "50ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+         */
+        duration?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+
+      export namespace TypedDragAdvancedAction {
+        /**
+         * Single point in a drag path
+         */
+        export interface Path {
+          /**
+           * X coordinate of a point in the drag path
+           */
+          x: number;
+
+          /**
+           * Y coordinate of a point in the drag path
+           */
+          y: number;
+        }
+      }
+
+      /**
+       * Typed wait action
+       */
+      export interface TypedWaitAction {
+        /**
+         * Duration of the wait (e.g. '3s')
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 3s
+         */
+        duration: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
+         */
+        includeScreenshot?: boolean;
+
+        /**
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
+         */
+        outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
+         * Delay after performing the action, before taking the final screenshot.
+         *
+         * Execution flow:
+         *
+         * 1. Take screenshot before action
+         * 2. Perform the action
+         * 3. Wait for screenshotDelay (this parameter)
+         * 4. Take screenshot after action
+         *
+         * Example: '500ms' means wait 500ms after the action before capturing the final
+         * screenshot.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+         */
+        screenshotDelay?: string;
+      }
+    }
+  }
 }
 
 /**
@@ -2496,6 +5892,7 @@ export declare namespace Actions {
     type ActionCommonOptions as ActionCommonOptions,
     type ActionResult as ActionResult,
     type ActionScreenshotOptions as ActionScreenshotOptions,
+    type ActionAIResponse as ActionAIResponse,
     type ActionExtractResponse as ActionExtractResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionRewindExtractResponse as ActionRewindExtractResponse,
