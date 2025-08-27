@@ -1,4 +1,4 @@
-import { AndroidBox, FListResponse, LinuxBox } from '../resources/v1/boxes';
+import { AndroidBox, Dir, File, LinuxBox } from '../resources/v1/boxes';
 import { AndroidBoxOperator } from './box/android';
 import { LinuxBoxOperator } from './box/linux';
 import { DirectoryOperator, FileOperator } from './box/file-system';
@@ -20,11 +20,11 @@ export function isLinuxOperator(operator: BoxOperator): operator is LinuxBoxOper
   return operator.data.type === 'linux';
 }
 
-export function isFile(item: FListResponse.File | FListResponse.Dir): item is FListResponse.File {
+export function isFile(item: File | Dir): item is File {
   return item.type === 'file';
 }
 
-export function isDirectory(item: FListResponse.File | FListResponse.Dir): item is FListResponse.Dir {
+export function isDirectory(item: File | Dir): item is Dir {
   return item.type === 'dir';
 }
 

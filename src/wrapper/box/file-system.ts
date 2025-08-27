@@ -2,7 +2,6 @@ import type {
   FListParams,
   FWriteParams,
   FListResponse,
-  FWriteResponse,
   FReadResponse,
   FReadParams,
   FRemoveParams,
@@ -12,6 +11,8 @@ import type {
   FRenameResponse,
   FInfoParams,
   FRemoveResponse,
+  File,
+  Dir,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 
@@ -107,11 +108,11 @@ export class FileSystemOperator {
    * @example
    * const response = await myBox.fs.getInfo({ path: '/tmp/file.txt' });
    */
-  async getInfo(body: FInfoParams): Promise<FListResponse.File | FListResponse.Dir> {
+  async getInfo(body: FInfoParams): Promise<File | Dir> {
     return this.client.v1.boxes.fs.info(this.boxId, body);
   }
 
-  private dataToOperator(data: FListResponse.File | FListResponse.Dir): FileOperator | DirectoryOperator {
+  private dataToOperator(data: File | Dir): FileOperator | DirectoryOperator {
     if (data.type === 'file') {
       return new FileOperator(this.client, this.boxId, data);
     } else if (data.type === 'dir') {
@@ -125,9 +126,9 @@ export class FileSystemOperator {
 export class FileOperator {
   private client: GboxClient;
   private boxId: string;
-  public data: FListResponse.File;
+  public data: File;
 
-  constructor(client: GboxClient, boxId: string, data: FListResponse.File) {
+  constructor(client: GboxClient, boxId: string, data: File) {
     this.client = client;
     this.boxId = boxId;
     this.data = data;
@@ -137,20 +138,24 @@ export class FileOperator {
    * @example
    * const response = await myFile.write({ content: 'Hello, World!' });
    */
-  write(body: Omit<FWriteParams, 'path'>): Promise<FWriteResponse> {
+  async write(body: Omit<FWriteParams, 'path'>): Promise<this> {
     const { content, ...rest } = body;
     if (typeof content === 'string') {
-      return this.client.v1.boxes.fs.write(this.boxId, {
+      this.data = await this.client.v1.boxes.fs.write(this.boxId, {
         path: this.data.path,
         ...rest,
         content,
       });
+
+      return this;
     } else {
-      return this.client.v1.boxes.fs.write(this.boxId, {
+      this.data = await this.client.v1.boxes.fs.write(this.boxId, {
         path: this.data.path,
         ...rest,
         content,
       });
+
+      return this;
     }
   }
 
@@ -174,9 +179,9 @@ export class FileOperator {
 export class DirectoryOperator {
   private client: GboxClient;
   private boxId: string;
-  public data: FListResponse.Dir;
+  public data: Dir;
 
-  constructor(client: GboxClient, boxId: string, data: FListResponse.Dir) {
+  constructor(client: GboxClient, boxId: string, data: Dir) {
     this.client = client;
     this.boxId = boxId;
     this.data = data;
