@@ -93,17 +93,13 @@ export class Android extends APIResource {
    *
    * @example
    * ```ts
-   * const android = await client.v1.boxes.android.get(
+   * const androidPkg = await client.v1.boxes.android.get(
    *   'com.example.myapp',
    *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
    * );
    * ```
    */
-  get(
-    packageName: string,
-    params: AndroidGetParams,
-    options?: RequestOptions,
-  ): APIPromise<AndroidGetResponse> {
+  get(packageName: string, params: AndroidGetParams, options?: RequestOptions): APIPromise<AndroidPkg> {
     const { boxId } = params;
     return this._client.get(path`/boxes/${boxId}/android/packages/${packageName}`, options);
   }
@@ -337,7 +333,7 @@ export interface AndroidApp {
 /**
  * Android pkg information
  */
-export interface AndroidGetResponse {
+export interface AndroidPkg {
   /**
    * Android apk path
    */
@@ -510,44 +506,7 @@ export interface AndroidListPkgResponse {
   /**
    * Android pkg list
    */
-  data: Array<AndroidListPkgResponse.Data>;
-}
-
-export namespace AndroidListPkgResponse {
-  /**
-   * Android pkg information
-   */
-  export interface Data {
-    /**
-     * Android apk path
-     */
-    apkPath: string;
-
-    /**
-     * Whether the pkg is currently running
-     */
-    isRunning: boolean;
-
-    /**
-     * Android pkg name
-     */
-    name: string;
-
-    /**
-     * Android package name
-     */
-    packageName: string;
-
-    /**
-     * system or thirdParty
-     */
-    pkgType: 'system' | 'thirdParty';
-
-    /**
-     * Android pkg version
-     */
-    version: string;
-  }
+  data: Array<AndroidPkg>;
 }
 
 /**
@@ -760,7 +719,7 @@ export interface AndroidUninstallParams {
 export declare namespace Android {
   export {
     type AndroidApp as AndroidApp,
-    type AndroidGetResponse as AndroidGetResponse,
+    type AndroidPkg as AndroidPkg,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidInstallResponse as AndroidInstallResponse,
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,

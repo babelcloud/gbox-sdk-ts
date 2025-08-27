@@ -14,13 +14,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.ai(
+   * const actionResult = await client.v1.boxes.actions.ai(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { instruction: 'click the login button' },
    * );
    * ```
    */
-  ai(boxID: string, body: ActionAIParams, options?: RequestOptions): APIPromise<ActionAIResponse> {
+  ai(boxID: string, body: ActionAIParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/ai`, { body, ...options });
   }
 
@@ -29,13 +29,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.click(
+   * const actionResult = await client.v1.boxes.actions.click(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 100, y: 100 },
    * );
    * ```
    */
-  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionClickResponse> {
+  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/click`, { body, ...options });
   }
 
@@ -44,13 +44,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.drag(
+   * const actionResult = await client.v1.boxes.actions.drag(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { end: { x: 200, y: 200 }, start: { x: 100, y: 100 } },
    * );
    * ```
    */
-  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionDragResponse> {
+  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/drag`, { body, ...options });
   }
 
@@ -83,17 +83,14 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.longPress(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { x: 350, y: 250, duration: '1s' },
-   * );
+   * const actionResult =
+   *   await client.v1.boxes.actions.longPress(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { x: 350, y: 250, duration: '1s' },
+   *   );
    * ```
    */
-  longPress(
-    boxID: string,
-    body: ActionLongPressParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionLongPressResponse> {
+  longPress(boxID: string, body: ActionLongPressParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/long-press`, { body, ...options });
   }
 
@@ -102,13 +99,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.move(
+   * const actionResult = await client.v1.boxes.actions.move(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 200, y: 300 },
    * );
    * ```
    */
-  move(boxID: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionMoveResponse> {
+  move(boxID: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/move`, { body, ...options });
   }
 
@@ -117,17 +114,18 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.pressButton(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { buttons: ['power'] },
-   * );
+   * const actionResult =
+   *   await client.v1.boxes.actions.pressButton(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { buttons: ['power'] },
+   *   );
    * ```
    */
   pressButton(
     boxID: string,
     body: ActionPressButtonParams,
     options?: RequestOptions,
-  ): APIPromise<ActionPressButtonResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/press-button`, { body, ...options });
   }
 
@@ -138,17 +136,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.pressKey(
+   * const actionResult = await client.v1.boxes.actions.pressKey(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { keys: ['enter'] },
    * );
    * ```
    */
-  pressKey(
-    boxID: string,
-    body: ActionPressKeyParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionPressKeyResponse> {
+  pressKey(boxID: string, body: ActionPressKeyParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/press-key`, { body, ...options });
   }
 
@@ -273,7 +267,7 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const actionResult =
    *   await client.v1.boxes.actions.screenRotation(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *     { orientation: 'landscapeLeft' },
@@ -284,7 +278,7 @@ export class Actions extends APIResource {
     boxID: string,
     body: ActionScreenRotationParams,
     options?: RequestOptions,
-  ): APIPromise<ActionScreenRotationResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/screen-rotation`, { body, ...options });
   }
 
@@ -312,17 +306,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.scroll(
+   * const actionResult = await client.v1.boxes.actions.scroll(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
    * );
    * ```
    */
-  scroll(
-    boxID: string,
-    body: ActionScrollParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionScrollResponse> {
+  scroll(boxID: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body, ...options });
   }
 
@@ -380,13 +370,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.swipe(
+   * const actionResult = await client.v1.boxes.actions.swipe(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { direction: 'up' },
    * );
    * ```
    */
-  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionSwipeResponse> {
+  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/swipe`, { body, ...options });
   }
 
@@ -395,13 +385,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.tap(
+   * const actionResult = await client.v1.boxes.actions.tap(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 100, y: 100 },
    * );
    * ```
    */
-  tap(boxID: string, body: ActionTapParams, options?: RequestOptions): APIPromise<ActionTapResponse> {
+  tap(boxID: string, body: ActionTapParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/tap`, { body, ...options });
   }
 
@@ -410,7 +400,7 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.touch(
+   * const actionResult = await client.v1.boxes.actions.touch(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   {
    *     points: [
@@ -430,7 +420,7 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionTouchResponse> {
+  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/touch`, { body, ...options });
   }
 
@@ -441,21 +431,32 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.type(
+   * const actionResult = await client.v1.boxes.actions.type(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { text: 'Hello World' },
    * );
    * ```
    */
-  type(boxID: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionTypeResponse> {
+  type(boxID: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/type`, { body, ...options });
   }
 }
 
 /**
+ * Action common options
+ */
+export interface ActionCommonOptions {
+  /**
+   * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
+   * to configure screenshot options.
+   */
+  screenshot?: boolean | ActionScreenshotOptions;
+}
+
+/**
  * Result of an UI action execution with optional screenshots
  */
-export interface ActionAIResponse {
+export interface ActionResult {
   /**
    * message
    */
@@ -464,10 +465,10 @@ export interface ActionAIResponse {
   /**
    * Complete screenshot result with operation trace, before and after images
    */
-  screenshot?: ActionAIResponse.Screenshot;
+  screenshot?: ActionResult.Screenshot;
 }
 
-export namespace ActionAIResponse {
+export namespace ActionResult {
   /**
    * Complete screenshot result with operation trace, before and after images
    */
@@ -532,161 +533,52 @@ export namespace ActionAIResponse {
 }
 
 /**
- * Result of an UI action execution with optional screenshots
+ * Action screenshot options
  */
-export interface ActionClickResponse {
+export interface ActionScreenshotOptions {
   /**
-   * message
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionClickResponse.Screenshot;
-}
-
-export namespace ActionClickResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
-}
-
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionDragResponse {
-  /**
-   * message
-   */
-  message: string;
+  delay?: string;
 
   /**
-   * Complete screenshot result with operation trace, before and after images
+   * Type of the URI. default is base64.
    */
-  screenshot?: ActionDragResponse.Screenshot;
-}
+  outputFormat?: 'base64' | 'storageKey';
 
-export namespace ActionDragResponse {
   /**
-   * Complete screenshot result with operation trace, before and after images
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
    */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
+  presignedExpiresIn?: string;
 
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
+  /**
+   * Specify which screenshots to capture.
+   *
+   * Available options:
+   *
+   * - before: Screenshot before the action
+   * - after: Screenshot after the action
+   * - trace: Screenshot with operation trace
+   *
+   * Default captures all three types. Can specify one or multiple in an array.
+   */
+  range?: Array<'before' | 'after' | 'trace'>;
 }
 
 /**
@@ -704,322 +596,6 @@ export interface ActionExtractResponse {
    * Base64-encoded screenshot of the UI interface at the time of extraction
    */
   screenshot: string;
-}
-
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionLongPressResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionLongPressResponse.Screenshot;
-}
-
-export namespace ActionLongPressResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
-}
-
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionMoveResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionMoveResponse.Screenshot;
-}
-
-export namespace ActionMoveResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
-}
-
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionPressButtonResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionPressButtonResponse.Screenshot;
-}
-
-export namespace ActionPressButtonResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
-}
-
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionPressKeyResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionPressKeyResponse.Screenshot;
-}
-
-export namespace ActionPressKeyResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
 }
 
 /**
@@ -1107,85 +683,6 @@ export interface ActionScreenLayoutResponse {
 }
 
 /**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionScreenRotationResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionScreenRotationResponse.Screenshot;
-}
-
-export namespace ActionScreenRotationResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
-}
-
-/**
  * Result of screenshot capture action
  */
 export interface ActionScreenshotResponse {
@@ -1198,85 +695,6 @@ export interface ActionScreenshotResponse {
    * Presigned url of the screenshot
    */
   presignedUrl?: string;
-}
-
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionScrollResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionScrollResponse.Screenshot;
-}
-
-export namespace ActionScrollResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
 }
 
 /**
@@ -1336,322 +754,6 @@ export interface ActionSettingsUpdateResponse {
   scale: number;
 }
 
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionSwipeResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionSwipeResponse.Screenshot;
-}
-
-export namespace ActionSwipeResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
-}
-
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionTapResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionTapResponse.Screenshot;
-}
-
-export namespace ActionTapResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
-}
-
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionTouchResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionTouchResponse.Screenshot;
-}
-
-export namespace ActionTouchResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
-}
-
-/**
- * Result of an UI action execution with optional screenshots
- */
-export interface ActionTypeResponse {
-  /**
-   * message
-   */
-  message: string;
-
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  screenshot?: ActionTypeResponse.Screenshot;
-}
-
-export namespace ActionTypeResponse {
-  /**
-   * Complete screenshot result with operation trace, before and after images
-   */
-  export interface Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    after?: Screenshot.After;
-
-    /**
-     * Screenshot taken before action execution
-     */
-    before?: Screenshot.Before;
-
-    /**
-     * Screenshot with action operation trace
-     */
-    trace?: Screenshot.Trace;
-  }
-
-  export namespace Screenshot {
-    /**
-     * Screenshot taken after action execution
-     */
-    export interface After {
-      /**
-       * URI of the screenshot after the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot taken before action execution
-     */
-    export interface Before {
-      /**
-       * URI of the screenshot before the action
-       */
-      uri: string;
-
-      /**
-       * Presigned url of the screenshot before the action
-       */
-      presignedUrl?: string;
-    }
-
-    /**
-     * Screenshot with action operation trace
-     */
-    export interface Trace {
-      /**
-       * URI of the screenshot with operation trace
-       */
-      uri: string;
-    }
-  }
-}
-
 export interface ActionAIParams {
   /**
    * Direct instruction of the UI action to perform (e.g., 'click the login button',
@@ -1675,9 +777,9 @@ export interface ActionAIParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action common option
+   * Action common options
    */
-  options?: ActionAIParams.Options;
+  options?: ActionCommonOptions;
 
   /**
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -1731,68 +833,6 @@ export interface ActionAIParams {
 }
 
 export namespace ActionAIParams {
-  /**
-   * Action common option
-   */
-  export interface Options {
-    /**
-     * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-     * to configure screenshot options.
-     */
-    screenshot?: boolean | Options.ActionScreenshotOption;
-  }
-
-  export namespace Options {
-    /**
-     * Action screenshot option
-     */
-    export interface ActionScreenshotOption {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-  }
-
   /**
    * AI action settings
    */
@@ -1848,9 +888,9 @@ export declare namespace ActionClickParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: Click.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -1889,70 +929,6 @@ export declare namespace ActionClickParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
-  }
-
-  export namespace Click {
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
   }
 
   export interface ClickByNaturalLanguage {
@@ -1981,9 +957,9 @@ export declare namespace ActionClickParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: ClickByNaturalLanguage.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -2022,70 +998,6 @@ export declare namespace ActionClickParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
-  }
-
-  export namespace ClickByNaturalLanguage {
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
   }
 }
 
@@ -2120,9 +1032,9 @@ export declare namespace ActionDragParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: DragSimple.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -2193,68 +1105,6 @@ export declare namespace ActionDragParams {
        */
       y: number;
     }
-
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
   }
 
   export interface DragAdvanced {
@@ -2280,9 +1130,9 @@ export declare namespace ActionDragParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: DragAdvanced.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -2337,68 +1187,6 @@ export declare namespace ActionDragParams {
        * Y coordinate of a point in the drag path
        */
       y: number;
-    }
-
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
     }
   }
 }
@@ -2457,9 +1245,9 @@ export declare namespace ActionLongPressParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: LongPress.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -2498,70 +1286,6 @@ export declare namespace ActionLongPressParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
-  }
-
-  export namespace LongPress {
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
   }
 
   export interface LongPressByNaturalLanguage {
@@ -2588,9 +1312,9 @@ export declare namespace ActionLongPressParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: LongPressByNaturalLanguage.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -2630,70 +1354,6 @@ export declare namespace ActionLongPressParams {
      */
     screenshotDelay?: string;
   }
-
-  export namespace LongPressByNaturalLanguage {
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
-  }
 }
 
 export interface ActionMoveParams {
@@ -2716,9 +1376,9 @@ export interface ActionMoveParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action common option
+   * Action common options
    */
-  options?: ActionMoveParams.Options;
+  options?: ActionCommonOptions;
 
   /**
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -2757,70 +1417,6 @@ export interface ActionMoveParams {
    * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
-}
-
-export namespace ActionMoveParams {
-  /**
-   * Action common option
-   */
-  export interface Options {
-    /**
-     * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-     * to configure screenshot options.
-     */
-    screenshot?: boolean | Options.ActionScreenshotOption;
-  }
-
-  export namespace Options {
-    /**
-     * Action screenshot option
-     */
-    export interface ActionScreenshotOption {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-  }
 }
 
 export interface ActionPressButtonParams {
@@ -2838,9 +1434,9 @@ export interface ActionPressButtonParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action common option
+   * Action common options
    */
-  options?: ActionPressButtonParams.Options;
+  options?: ActionCommonOptions;
 
   /**
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -2879,70 +1475,6 @@ export interface ActionPressButtonParams {
    * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
-}
-
-export namespace ActionPressButtonParams {
-  /**
-   * Action common option
-   */
-  export interface Options {
-    /**
-     * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-     * to configure screenshot options.
-     */
-    screenshot?: boolean | Options.ActionScreenshotOption;
-  }
-
-  export namespace Options {
-    /**
-     * Action screenshot option
-     */
-    export interface ActionScreenshotOption {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-  }
 }
 
 export interface ActionPressKeyParams {
@@ -3079,9 +1611,9 @@ export interface ActionPressKeyParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action common option
+   * Action common options
    */
-  options?: ActionPressKeyParams.Options;
+  options?: ActionCommonOptions;
 
   /**
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -3120,70 +1652,6 @@ export interface ActionPressKeyParams {
    * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
-}
-
-export namespace ActionPressKeyParams {
-  /**
-   * Action common option
-   */
-  export interface Options {
-    /**
-     * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-     * to configure screenshot options.
-     */
-    screenshot?: boolean | Options.ActionScreenshotOption;
-  }
-
-  export namespace Options {
-    /**
-     * Action screenshot option
-     */
-    export interface ActionScreenshotOption {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-  }
 }
 
 export interface ActionRecordingStartParams {
@@ -3224,9 +1692,9 @@ export interface ActionScreenRotationParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action common option
+   * Action common options
    */
-  options?: ActionScreenRotationParams.Options;
+  options?: ActionCommonOptions;
 
   /**
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -3265,70 +1733,6 @@ export interface ActionScreenRotationParams {
    * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
-}
-
-export namespace ActionScreenRotationParams {
-  /**
-   * Action common option
-   */
-  export interface Options {
-    /**
-     * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-     * to configure screenshot options.
-     */
-    screenshot?: boolean | Options.ActionScreenshotOption;
-  }
-
-  export namespace Options {
-    /**
-     * Action screenshot option
-     */
-    export interface ActionScreenshotOption {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-  }
 }
 
 export interface ActionScreenshotParams {
@@ -3430,9 +1834,9 @@ export declare namespace ActionScrollParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: ScrollAdvanced.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -3471,70 +1875,6 @@ export declare namespace ActionScrollParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
-  }
-
-  export namespace ScrollAdvanced {
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
   }
 
   export interface ScrollSimple {
@@ -3571,9 +1911,9 @@ export declare namespace ActionScrollParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: ScrollSimple.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -3612,70 +1952,6 @@ export declare namespace ActionScrollParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
-  }
-
-  export namespace ScrollSimple {
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
   }
 }
 
@@ -3735,9 +2011,9 @@ export declare namespace ActionSwipeParams {
     location?: string;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: SwipeSimple.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -3778,70 +2054,6 @@ export declare namespace ActionSwipeParams {
     screenshotDelay?: string;
   }
 
-  export namespace SwipeSimple {
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
-  }
-
   export interface SwipeAdvanced {
     /**
      * End point of the swipe path (coordinates or natural language)
@@ -3870,9 +2082,9 @@ export declare namespace ActionSwipeParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: SwipeAdvanced.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -3943,68 +2155,6 @@ export declare namespace ActionSwipeParams {
        */
       y: number;
     }
-
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
   }
 }
 
@@ -4031,9 +2181,9 @@ export declare namespace ActionTapParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: Tap.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -4072,70 +2222,6 @@ export declare namespace ActionTapParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
      */
     screenshotDelay?: string;
-  }
-
-  export namespace Tap {
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
   }
 
   export interface TapByNaturalLanguage {
@@ -4154,9 +2240,9 @@ export declare namespace ActionTapParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action common option
+     * Action common options
      */
-    options?: TapByNaturalLanguage.Options;
+    options?: ActionCommonOptions;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -4196,70 +2282,6 @@ export declare namespace ActionTapParams {
      */
     screenshotDelay?: string;
   }
-
-  export namespace TapByNaturalLanguage {
-    /**
-     * Action common option
-     */
-    export interface Options {
-      /**
-       * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-       * to configure screenshot options.
-       */
-      screenshot?: boolean | Options.ActionScreenshotOption;
-    }
-
-    export namespace Options {
-      /**
-       * Action screenshot option
-       */
-      export interface ActionScreenshotOption {
-        /**
-         * Delay after performing the action, before taking the final screenshot.
-         *
-         * Execution flow:
-         *
-         * 1. Take screenshot before action
-         * 2. Perform the action
-         * 3. Wait for screenshotDelay (this parameter)
-         * 4. Take screenshot after action
-         *
-         * Example: '500ms' means wait 500ms after the action before capturing the final
-         * screenshot.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-         */
-        delay?: string;
-
-        /**
-         * Type of the URI. default is base64.
-         */
-        outputFormat?: 'base64' | 'storageKey';
-
-        /**
-         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-         *
-         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-         */
-        presignedExpiresIn?: string;
-
-        /**
-         * Specify which screenshots to capture.
-         *
-         * Available options:
-         *
-         * - before: Screenshot before the action
-         * - after: Screenshot after the action
-         * - trace: Screenshot with operation trace
-         *
-         * Default captures all three types. Can specify one or multiple in an array.
-         */
-        range?: Array<'before' | 'after' | 'trace'>;
-      }
-    }
-  }
 }
 
 export interface ActionTouchParams {
@@ -4277,9 +2299,9 @@ export interface ActionTouchParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action common option
+   * Action common options
    */
-  options?: ActionTouchParams.Options;
+  options?: ActionCommonOptions;
 
   /**
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -4398,68 +2420,6 @@ export namespace ActionTouchParams {
       type: string;
     }
   }
-
-  /**
-   * Action common option
-   */
-  export interface Options {
-    /**
-     * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-     * to configure screenshot options.
-     */
-    screenshot?: boolean | Options.ActionScreenshotOption;
-  }
-
-  export namespace Options {
-    /**
-     * Action screenshot option
-     */
-    export interface ActionScreenshotOption {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-  }
 }
 
 export interface ActionTypeParams {
@@ -4483,9 +2443,9 @@ export interface ActionTypeParams {
   mode?: 'append' | 'replace';
 
   /**
-   * Action common option
+   * Action common options
    */
-  options?: ActionTypeParams.Options;
+  options?: ActionCommonOptions;
 
   /**
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
@@ -4531,93 +2491,19 @@ export interface ActionTypeParams {
   screenshotDelay?: string;
 }
 
-export namespace ActionTypeParams {
-  /**
-   * Action common option
-   */
-  export interface Options {
-    /**
-     * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
-     * to configure screenshot options.
-     */
-    screenshot?: boolean | Options.ActionScreenshotOption;
-  }
-
-  export namespace Options {
-    /**
-     * Action screenshot option
-     */
-    export interface ActionScreenshotOption {
-      /**
-       * Delay after performing the action, before taking the final screenshot.
-       *
-       * Execution flow:
-       *
-       * 1. Take screenshot before action
-       * 2. Perform the action
-       * 3. Wait for screenshotDelay (this parameter)
-       * 4. Take screenshot after action
-       *
-       * Example: '500ms' means wait 500ms after the action before capturing the final
-       * screenshot.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-       */
-      delay?: string;
-
-      /**
-       * Type of the URI. default is base64.
-       */
-      outputFormat?: 'base64' | 'storageKey';
-
-      /**
-       * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-       *
-       * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-       * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-       */
-      presignedExpiresIn?: string;
-
-      /**
-       * Specify which screenshots to capture.
-       *
-       * Available options:
-       *
-       * - before: Screenshot before the action
-       * - after: Screenshot after the action
-       * - trace: Screenshot with operation trace
-       *
-       * Default captures all three types. Can specify one or multiple in an array.
-       */
-      range?: Array<'before' | 'after' | 'trace'>;
-    }
-  }
-}
-
 export declare namespace Actions {
   export {
-    type ActionAIResponse as ActionAIResponse,
-    type ActionClickResponse as ActionClickResponse,
-    type ActionDragResponse as ActionDragResponse,
+    type ActionCommonOptions as ActionCommonOptions,
+    type ActionResult as ActionResult,
+    type ActionScreenshotOptions as ActionScreenshotOptions,
     type ActionExtractResponse as ActionExtractResponse,
-    type ActionLongPressResponse as ActionLongPressResponse,
-    type ActionMoveResponse as ActionMoveResponse,
-    type ActionPressButtonResponse as ActionPressButtonResponse,
-    type ActionPressKeyResponse as ActionPressKeyResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionRewindExtractResponse as ActionRewindExtractResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
-    type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
-    type ActionScrollResponse as ActionScrollResponse,
     type ActionSettingsResponse as ActionSettingsResponse,
     type ActionSettingsResetResponse as ActionSettingsResetResponse,
     type ActionSettingsUpdateResponse as ActionSettingsUpdateResponse,
-    type ActionSwipeResponse as ActionSwipeResponse,
-    type ActionTapResponse as ActionTapResponse,
-    type ActionTouchResponse as ActionTouchResponse,
-    type ActionTypeResponse as ActionTypeResponse,
     type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,
