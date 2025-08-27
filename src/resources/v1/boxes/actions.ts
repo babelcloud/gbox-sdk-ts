@@ -1675,9 +1675,7 @@ export interface ActionAIParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   options?: ActionAIParams.Options;
 
@@ -1734,9 +1732,7 @@ export interface ActionAIParams {
 
 export namespace ActionAIParams {
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   export interface Options {
     /**
@@ -1895,9 +1891,7 @@ export declare namespace ActionClickParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: Click.Options;
 
@@ -1942,9 +1936,7 @@ export declare namespace ActionClickParams {
 
   export namespace Click {
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -2075,9 +2067,7 @@ export declare namespace ActionClickParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: ClickByNaturalLanguage.Options;
 
@@ -2122,9 +2112,7 @@ export declare namespace ActionClickParams {
 
   export namespace ClickByNaturalLanguage {
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -2261,9 +2249,7 @@ export declare namespace ActionDragParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: DragSimple.Options;
 
@@ -2338,9 +2324,7 @@ export declare namespace ActionDragParams {
     }
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -2468,9 +2452,7 @@ export declare namespace ActionDragParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: DragAdvanced.Options;
 
@@ -2530,9 +2512,7 @@ export declare namespace ActionDragParams {
     }
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -2692,9 +2672,7 @@ export declare namespace ActionLongPressParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: LongPress.Options;
 
@@ -2739,9 +2717,7 @@ export declare namespace ActionLongPressParams {
 
   export namespace LongPress {
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -2870,9 +2846,7 @@ export declare namespace ActionLongPressParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: LongPressByNaturalLanguage.Options;
 
@@ -2917,9 +2891,7 @@ export declare namespace ActionLongPressParams {
 
   export namespace LongPressByNaturalLanguage {
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -3045,9 +3017,7 @@ export interface ActionMoveParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   options?: ActionMoveParams.Options;
 
@@ -3092,9 +3062,7 @@ export interface ActionMoveParams {
 
 export namespace ActionMoveParams {
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   export interface Options {
     /**
@@ -3214,9 +3182,7 @@ export interface ActionPressButtonParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   options?: ActionPressButtonParams.Options;
 
@@ -3261,9 +3227,7 @@ export interface ActionPressButtonParams {
 
 export namespace ActionPressButtonParams {
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   export interface Options {
     /**
@@ -3502,9 +3466,7 @@ export interface ActionPressKeyParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   options?: ActionPressKeyParams.Options;
 
@@ -3549,9 +3511,7 @@ export interface ActionPressKeyParams {
 
 export namespace ActionPressKeyParams {
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   export interface Options {
     /**
@@ -3694,9 +3654,7 @@ export interface ActionScreenRotationParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   options?: ActionScreenRotationParams.Options;
 
@@ -3741,9 +3699,7 @@ export interface ActionScreenRotationParams {
 
 export namespace ActionScreenRotationParams {
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   export interface Options {
     /**
@@ -3947,9 +3903,7 @@ export declare namespace ActionScrollParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: ScrollAdvanced.Options;
 
@@ -3994,9 +3948,7 @@ export declare namespace ActionScrollParams {
 
   export namespace ScrollAdvanced {
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -4135,9 +4087,7 @@ export declare namespace ActionScrollParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: ScrollSimple.Options;
 
@@ -4182,9 +4132,7 @@ export declare namespace ActionScrollParams {
 
   export namespace ScrollSimple {
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -4346,9 +4294,7 @@ export declare namespace ActionSwipeParams {
     location?: string;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: SwipeSimple.Options;
 
@@ -4393,9 +4339,7 @@ export declare namespace ActionSwipeParams {
 
   export namespace SwipeSimple {
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -4528,9 +4472,7 @@ export declare namespace ActionSwipeParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: SwipeAdvanced.Options;
 
@@ -4605,9 +4547,7 @@ export declare namespace ActionSwipeParams {
     }
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -4736,9 +4676,7 @@ export declare namespace ActionTapParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: Tap.Options;
 
@@ -4783,9 +4721,7 @@ export declare namespace ActionTapParams {
 
   export namespace Tap {
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -4906,9 +4842,7 @@ export declare namespace ActionTapParams {
     includeScreenshot?: boolean;
 
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     options?: TapByNaturalLanguage.Options;
 
@@ -4953,9 +4887,7 @@ export declare namespace ActionTapParams {
 
   export namespace TapByNaturalLanguage {
     /**
-     * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-     * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-     * includeScreenshot) will be completely ignored.
+     * Action common option
      */
     export interface Options {
       /**
@@ -5076,9 +5008,7 @@ export interface ActionTouchParams {
   includeScreenshot?: boolean;
 
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   options?: ActionTouchParams.Options;
 
@@ -5198,9 +5128,7 @@ export namespace ActionTouchParams {
   }
 
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   export interface Options {
     /**
@@ -5326,9 +5254,7 @@ export interface ActionTypeParams {
   mode?: 'append' | 'replace';
 
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   options?: ActionTypeParams.Options;
 
@@ -5378,9 +5304,7 @@ export interface ActionTypeParams {
 
 export namespace ActionTypeParams {
   /**
-   * Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-   * fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-   * includeScreenshot) will be completely ignored.
+   * Action common option
    */
   export interface Options {
     /**
