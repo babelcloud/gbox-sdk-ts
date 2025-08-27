@@ -14,17 +14,13 @@ export class Media extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.media.createAlbum(
+   * const mediaAlbum = await client.v1.boxes.media.createAlbum(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { name: 'Vacation Photos' },
    * );
    * ```
    */
-  createAlbum(
-    boxID: string,
-    body: MediaCreateAlbumParams,
-    options?: RequestOptions,
-  ): APIPromise<MediaCreateAlbumResponse> {
+  createAlbum(boxID: string, body: MediaCreateAlbumParams, options?: RequestOptions): APIPromise<MediaAlbum> {
     return this._client.post(
       path`/boxes/${boxID}/media/albums`,
       multipartFormRequestOptions({ body, ...options }, this._client),
@@ -103,17 +99,17 @@ export class Media extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.media.getAlbumDetail(
-   *   'Pictures',
-   *   { boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d' },
-   * );
+   * const mediaAlbum =
+   *   await client.v1.boxes.media.getAlbumDetail('Pictures', {
+   *     boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   });
    * ```
    */
   getAlbumDetail(
     albumName: string,
     params: MediaGetAlbumDetailParams,
     options?: RequestOptions,
-  ): APIPromise<MediaGetAlbumDetailResponse> {
+  ): APIPromise<MediaAlbum> {
     const { boxId } = params;
     return this._client.get(path`/boxes/${boxId}/media/albums/${albumName}`, options);
   }
@@ -195,7 +191,7 @@ export class Media extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.media.updateAlbum(
+   * const mediaAlbum = await client.v1.boxes.media.updateAlbum(
    *   'Pictures',
    *   {
    *     boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -208,7 +204,7 @@ export class Media extends APIResource {
     albumName: string,
     params: MediaUpdateAlbumParams,
     options?: RequestOptions,
-  ): APIPromise<MediaUpdateAlbumResponse> {
+  ): APIPromise<MediaAlbum> {
     const { boxId, ...body } = params;
     return this._client.patch(
       path`/boxes/${boxId}/media/albums/${albumName}`,
@@ -220,32 +216,7 @@ export class Media extends APIResource {
 /**
  * Album representation
  */
-export interface MediaCreateAlbumResponse {
-  /**
-   * Last modified time of the album
-   */
-  lastModified: string;
-
-  /**
-   * Number of media files in the album
-   */
-  mediaCount: number;
-
-  /**
-   * Name of the album
-   */
-  name: string;
-
-  /**
-   * Full path to the album in the box
-   */
-  path: string;
-}
-
-/**
- * Album representation
- */
-export interface MediaGetAlbumDetailResponse {
+export interface MediaAlbum {
   /**
    * Last modified time of the album
    */
@@ -270,79 +241,77 @@ export interface MediaGetAlbumDetailResponse {
 /**
  * Photo representation
  */
-export type MediaGetMediaResponse = MediaGetMediaResponse.Photo | MediaGetMediaResponse.Video;
-
-export namespace MediaGetMediaResponse {
+export interface MediaPhoto {
   /**
-   * Photo representation
+   * Last modified time of the photo
    */
-  export interface Photo {
-    /**
-     * Last modified time of the photo
-     */
-    lastModified: string;
-
-    /**
-     * MIME type of the photo
-     */
-    mimeType: string;
-
-    /**
-     * Name of the photo
-     */
-    name: string;
-
-    /**
-     * Full path to the photo in the box
-     */
-    path: string;
-
-    /**
-     * Size of the photo
-     */
-    size: string;
-
-    /**
-     * Photo type indicator
-     */
-    type: 'photo';
-  }
+  lastModified: string;
 
   /**
-   * Video representation
+   * MIME type of the photo
    */
-  export interface Video {
-    /**
-     * Last modified time of the video
-     */
-    lastModified: string;
+  mimeType: string;
 
-    /**
-     * MIME type of the video
-     */
-    mimeType: string;
+  /**
+   * Name of the photo
+   */
+  name: string;
 
-    /**
-     * Name of the video
-     */
-    name: string;
+  /**
+   * Full path to the photo in the box
+   */
+  path: string;
 
-    /**
-     * Full path to the video in the box
-     */
-    path: string;
+  /**
+   * Size of the photo
+   */
+  size: string;
 
-    /**
-     * Size of the video
-     */
-    size: string;
-
-    /**
-     * Video type indicator
-     */
-    type: 'video';
-  }
+  /**
+   * Photo type indicator
+   */
+  type: 'photo';
 }
+
+/**
+ * Video representation
+ */
+export interface MediaVideo {
+  /**
+   * Last modified time of the video
+   */
+  lastModified: string;
+
+  /**
+   * MIME type of the video
+   */
+  mimeType: string;
+
+  /**
+   * Name of the video
+   */
+  name: string;
+
+  /**
+   * Full path to the video in the box
+   */
+  path: string;
+
+  /**
+   * Size of the video
+   */
+  size: string;
+
+  /**
+   * Video type indicator
+   */
+  type: 'video';
+}
+
+/**
+ * Photo representation
+ */
+export type MediaGetMediaResponse = MediaPhoto | MediaVideo;
 
 /**
  * Supported media extensions
@@ -366,34 +335,7 @@ export interface MediaListAlbumsResponse {
   /**
    * List of albums
    */
-  data: Array<MediaListAlbumsResponse.Data>;
-}
-
-export namespace MediaListAlbumsResponse {
-  /**
-   * Album representation
-   */
-  export interface Data {
-    /**
-     * Last modified time of the album
-     */
-    lastModified: string;
-
-    /**
-     * Number of media files in the album
-     */
-    mediaCount: number;
-
-    /**
-     * Name of the album
-     */
-    name: string;
-
-    /**
-     * Full path to the album in the box
-     */
-    path: string;
-  }
+  data: Array<MediaAlbum>;
 }
 
 /**
@@ -403,104 +345,7 @@ export interface MediaListMediaResponse {
   /**
    * List of media files (photos and videos) in the album
    */
-  data: Array<MediaListMediaResponse.Photo | MediaListMediaResponse.Video>;
-}
-
-export namespace MediaListMediaResponse {
-  /**
-   * Photo representation
-   */
-  export interface Photo {
-    /**
-     * Last modified time of the photo
-     */
-    lastModified: string;
-
-    /**
-     * MIME type of the photo
-     */
-    mimeType: string;
-
-    /**
-     * Name of the photo
-     */
-    name: string;
-
-    /**
-     * Full path to the photo in the box
-     */
-    path: string;
-
-    /**
-     * Size of the photo
-     */
-    size: string;
-
-    /**
-     * Photo type indicator
-     */
-    type: 'photo';
-  }
-
-  /**
-   * Video representation
-   */
-  export interface Video {
-    /**
-     * Last modified time of the video
-     */
-    lastModified: string;
-
-    /**
-     * MIME type of the video
-     */
-    mimeType: string;
-
-    /**
-     * Name of the video
-     */
-    name: string;
-
-    /**
-     * Full path to the video in the box
-     */
-    path: string;
-
-    /**
-     * Size of the video
-     */
-    size: string;
-
-    /**
-     * Video type indicator
-     */
-    type: 'video';
-  }
-}
-
-/**
- * Album representation
- */
-export interface MediaUpdateAlbumResponse {
-  /**
-   * Last modified time of the album
-   */
-  lastModified: string;
-
-  /**
-   * Number of media files in the album
-   */
-  mediaCount: number;
-
-  /**
-   * Name of the album
-   */
-  name: string;
-
-  /**
-   * Full path to the album in the box
-   */
-  path: string;
+  data: Array<MediaPhoto | MediaVideo>;
 }
 
 export interface MediaCreateAlbumParams {
@@ -586,13 +431,13 @@ export interface MediaUpdateAlbumParams {
 
 export declare namespace Media {
   export {
-    type MediaCreateAlbumResponse as MediaCreateAlbumResponse,
-    type MediaGetAlbumDetailResponse as MediaGetAlbumDetailResponse,
+    type MediaAlbum as MediaAlbum,
+    type MediaPhoto as MediaPhoto,
+    type MediaVideo as MediaVideo,
     type MediaGetMediaResponse as MediaGetMediaResponse,
     type MediaGetMediaSupportResponse as MediaGetMediaSupportResponse,
     type MediaListAlbumsResponse as MediaListAlbumsResponse,
     type MediaListMediaResponse as MediaListMediaResponse,
-    type MediaUpdateAlbumResponse as MediaUpdateAlbumResponse,
     type MediaCreateAlbumParams as MediaCreateAlbumParams,
     type MediaDeleteAlbumParams as MediaDeleteAlbumParams,
     type MediaDeleteMediaParams as MediaDeleteMediaParams,
