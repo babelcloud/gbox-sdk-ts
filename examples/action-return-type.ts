@@ -14,6 +14,16 @@ async function main() {
   console.log('Test 1 - Basic click:', result1.message);
   console.log('Test 1 - Has screenshot:', !!result1.screenshot);
 
+  // Test 1.1: options provided without screenshot -> should return ActionResult
+  const result1_1 = await box.action.click({
+    x: 100,
+    y: 100,
+    options: {},
+  });
+  console.log('Test 1.1 - Options without screenshot:', result1_1.message);
+  // Accessing optional screenshot must type-check if return type is ActionResult
+  console.log(result1_1.screenshot?.before?.uri);
+
   // Test 2: Click with screenshot: false - should return { message: string }
   const result2 = await box.action.click({
     x: 100,
