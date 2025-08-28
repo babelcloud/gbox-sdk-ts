@@ -188,7 +188,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Stop the device's background screen rewind recording.
+   * Disable the device's background screen rewind recording.
    *
    * @example
    * ```ts
@@ -205,7 +205,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Start the device's background screen rewind recording.
+   * Enable the device's background screen rewind recording.
    *
    * @example
    * ```ts
