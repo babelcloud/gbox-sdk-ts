@@ -684,7 +684,7 @@ export namespace ActionAIResponse {
         double?: boolean;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -745,7 +745,7 @@ export namespace ActionAIResponse {
         points: Array<TypedTouchAction.Point>;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -894,7 +894,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -985,7 +985,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1096,7 +1096,7 @@ export namespace ActionAIResponse {
         y: number;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1176,7 +1176,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1253,7 +1253,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1333,7 +1333,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1545,7 +1545,7 @@ export namespace ActionAIResponse {
         combination?: boolean;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1608,7 +1608,7 @@ export namespace ActionAIResponse {
         >;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1682,7 +1682,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1743,7 +1743,7 @@ export namespace ActionAIResponse {
         text: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1820,7 +1820,7 @@ export namespace ActionAIResponse {
         y: number;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -1881,7 +1881,7 @@ export namespace ActionAIResponse {
         orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2021,7 +2021,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2122,7 +2122,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2203,7 +2203,7 @@ export namespace ActionAIResponse {
         duration: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2404,7 +2404,7 @@ export namespace ActionAIResponse {
         double?: boolean;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2465,7 +2465,7 @@ export namespace ActionAIResponse {
         points: Array<TypedTouchAction.Point>;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2614,7 +2614,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2705,7 +2705,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2816,7 +2816,7 @@ export namespace ActionAIResponse {
         y: number;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2896,7 +2896,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -2973,7 +2973,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3053,7 +3053,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3265,7 +3265,7 @@ export namespace ActionAIResponse {
         combination?: boolean;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3328,7 +3328,7 @@ export namespace ActionAIResponse {
         >;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3402,7 +3402,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3463,7 +3463,7 @@ export namespace ActionAIResponse {
         text: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3540,7 +3540,7 @@ export namespace ActionAIResponse {
         y: number;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3601,7 +3601,7 @@ export namespace ActionAIResponse {
         orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3741,7 +3741,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3842,7 +3842,7 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -3923,7 +3923,7 @@ export namespace ActionAIResponse {
         duration: string;
 
         /**
-         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
          * will be ignored when `options.screenshot` is provided. Whether to include
          * screenshots in the action response. If false, the screenshot object will still
          * be returned but with empty URIs. Default is false.
@@ -4165,7 +4165,7 @@ export interface ActionAIParams {
   background?: string;
 
   /**
-   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
    * will be ignored when `options.screenshot` is provided. Whether to include
    * screenshots in the action response. If false, the screenshot object will still
    * be returned but with empty URIs. Default is false.
@@ -4276,7 +4276,7 @@ export declare namespace ActionClickParams {
     double?: boolean;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -4345,7 +4345,7 @@ export declare namespace ActionClickParams {
     double?: boolean;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -4420,7 +4420,7 @@ export declare namespace ActionDragParams {
     duration?: string;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -4518,7 +4518,7 @@ export declare namespace ActionDragParams {
     duration?: string;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -4633,7 +4633,7 @@ export declare namespace ActionLongPressParams {
     duration?: string;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -4700,7 +4700,7 @@ export declare namespace ActionLongPressParams {
     duration?: string;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -4764,7 +4764,7 @@ export interface ActionMoveParams {
   y: number;
 
   /**
-   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
    * will be ignored when `options.screenshot` is provided. Whether to include
    * screenshots in the action response. If false, the screenshot object will still
    * be returned but with empty URIs. Default is false.
@@ -4822,7 +4822,7 @@ export interface ActionPressButtonParams {
   buttons: Array<'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'>;
 
   /**
-   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
    * will be ignored when `options.screenshot` is provided. Whether to include
    * screenshots in the action response. If false, the screenshot object will still
    * be returned but with empty URIs. Default is false.
@@ -4999,7 +4999,7 @@ export interface ActionPressKeyParams {
   combination?: boolean;
 
   /**
-   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
    * will be ignored when `options.screenshot` is provided. Whether to include
    * screenshots in the action response. If false, the screenshot object will still
    * be returned but with empty URIs. Default is false.
@@ -5080,7 +5080,7 @@ export interface ActionScreenRotationParams {
   orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
   /**
-   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
    * will be ignored when `options.screenshot` is provided. Whether to include
    * screenshots in the action response. If false, the screenshot object will still
    * be returned but with empty URIs. Default is false.
@@ -5222,7 +5222,7 @@ export declare namespace ActionScrollParams {
     y: number;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -5299,7 +5299,7 @@ export declare namespace ActionScrollParams {
     duration?: string;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -5393,7 +5393,7 @@ export declare namespace ActionSwipeParams {
     duration?: string;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -5470,7 +5470,7 @@ export declare namespace ActionSwipeParams {
     duration?: string;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -5569,7 +5569,7 @@ export declare namespace ActionTapParams {
     y: number;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -5628,7 +5628,7 @@ export declare namespace ActionTapParams {
     target: string;
 
     /**
-     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
      * will be ignored when `options.screenshot` is provided. Whether to include
      * screenshots in the action response. If false, the screenshot object will still
      * be returned but with empty URIs. Default is false.
@@ -5687,7 +5687,7 @@ export interface ActionTouchParams {
   points: Array<ActionTouchParams.Point>;
 
   /**
-   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
    * will be ignored when `options.screenshot` is provided. Whether to include
    * screenshots in the action response. If false, the screenshot object will still
    * be returned but with empty URIs. Default is false.
@@ -5825,7 +5825,7 @@ export interface ActionTypeParams {
   text: string;
 
   /**
-   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
    * will be ignored when `options.screenshot` is provided. Whether to include
    * screenshots in the action response. If false, the screenshot object will still
    * be returned but with empty URIs. Default is false.
