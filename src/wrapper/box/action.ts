@@ -54,7 +54,7 @@ type ActionOptionsOverride = {
 // Common overload patterns to reduce repetition
 type ActionBodyWithOptions<T> = T & { options?: undefined };
 type ActionBodyWithScreenshotUndefined<T> = T & { options: { screenshot?: undefined } };
-type ActionBodyWithScreenshotFalse<T> = T & { options: { screenshot?: false } };
+type ActionBodyWithScreenshotFalse<T> = T & { options: { screenshot: false } };
 type ActionBodyWithScreenshotTrue<T> = T & { options: { screenshot: true } };
 type ActionBodyWithScreenshotObject<T> = T & { options: { screenshot: ActionScreenshotOptionOverride } };
 type ActionBodyWithScreenshotPhases<T, K extends ReadonlyArray<'before' | 'after' | 'trace'>> = T & {
@@ -304,7 +304,7 @@ export class ActionOperator {
    * const response = await myBox.action.click({ x: 100, y: 100 });
    */
   async click(body: ActionBodyWithScreenshotFalse<ActionClick>): Promise<{ message: string }>;
-  async click(body: ActionBodyWithScreenshotUndefined<ActionClick>): Promise<{ message: string }>;
+  async click(body: ActionBodyWithScreenshotUndefined<ActionClick>): Promise<ActionResult>;
   async click(body: ActionBodyWithScreenshotTrue<ActionClick>): Promise<ActionResultWithScreenshot>;
   async click<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionClick, K>,
@@ -331,7 +331,7 @@ export class ActionOperator {
    */
   async drag(body: ActionDrag & { includeScreenshot: false }): Promise<{ message: string }>;
   async drag(body: ActionBodyWithScreenshotFalse<ActionDrag>): Promise<{ message: string }>;
-  async drag(body: ActionBodyWithScreenshotUndefined<ActionDrag>): Promise<{ message: string }>;
+  async drag(body: ActionBodyWithScreenshotUndefined<ActionDrag>): Promise<ActionResult>;
   async drag(body: ActionBodyWithScreenshotTrue<ActionDrag>): Promise<ActionResultWithScreenshot>;
   async drag<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionDrag, K>,
@@ -351,7 +351,7 @@ export class ActionOperator {
    */
   async swipe(body: ActionSwipe & { includeScreenshot: false }): Promise<{ message: string }>;
   async swipe(body: ActionBodyWithScreenshotFalse<ActionSwipe>): Promise<{ message: string }>;
-  async swipe(body: ActionBodyWithScreenshotUndefined<ActionSwipe>): Promise<{ message: string }>;
+  async swipe(body: ActionBodyWithScreenshotUndefined<ActionSwipe>): Promise<ActionResult>;
   async swipe(body: ActionBodyWithScreenshotTrue<ActionSwipe>): Promise<ActionResultWithScreenshot>;
   async swipe<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionSwipe, K>,
@@ -371,7 +371,7 @@ export class ActionOperator {
    */
   async pressKey(body: ActionPressKey & { includeScreenshot: false }): Promise<{ message: string }>;
   async pressKey(body: ActionBodyWithScreenshotFalse<ActionPressKey>): Promise<{ message: string }>;
-  async pressKey(body: ActionBodyWithScreenshotUndefined<ActionPressKey>): Promise<{ message: string }>;
+  async pressKey(body: ActionBodyWithScreenshotUndefined<ActionPressKey>): Promise<ActionResult>;
   async pressKey(body: ActionBodyWithScreenshotTrue<ActionPressKey>): Promise<ActionResultWithScreenshot>;
   async pressKey<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionPressKey, K>,
@@ -391,7 +391,7 @@ export class ActionOperator {
    */
   async pressButton(body: ActionPressButton & { includeScreenshot: false }): Promise<{ message: string }>;
   async pressButton(body: ActionBodyWithScreenshotFalse<ActionPressButton>): Promise<{ message: string }>;
-  async pressButton(body: ActionBodyWithScreenshotUndefined<ActionPressButton>): Promise<{ message: string }>;
+  async pressButton(body: ActionBodyWithScreenshotUndefined<ActionPressButton>): Promise<ActionResult>;
   async pressButton(
     body: ActionBodyWithScreenshotTrue<ActionPressButton>,
   ): Promise<ActionResultWithScreenshot>;
@@ -414,7 +414,7 @@ export class ActionOperator {
    */
   async move(body: ActionMove & { includeScreenshot: false }): Promise<{ message: string }>;
   async move(body: ActionBodyWithScreenshotFalse<ActionMove>): Promise<{ message: string }>;
-  async move(body: ActionBodyWithScreenshotUndefined<ActionMove>): Promise<{ message: string }>;
+  async move(body: ActionBodyWithScreenshotUndefined<ActionMove>): Promise<ActionResult>;
   async move(body: ActionBodyWithScreenshotTrue<ActionMove>): Promise<ActionResultWithScreenshot>;
   async move<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionMove, K>,
@@ -434,7 +434,7 @@ export class ActionOperator {
    */
   async tap(body: ActionTap & { includeScreenshot: false }): Promise<{ message: string }>;
   async tap(body: ActionBodyWithScreenshotFalse<ActionTap>): Promise<{ message: string }>;
-  async tap(body: ActionBodyWithScreenshotUndefined<ActionTap>): Promise<{ message: string }>;
+  async tap(body: ActionBodyWithScreenshotUndefined<ActionTap>): Promise<ActionResult>;
   async tap(body: ActionBodyWithScreenshotTrue<ActionTap>): Promise<ActionResultWithScreenshot>;
   async tap<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionTap, K>,
@@ -454,7 +454,7 @@ export class ActionOperator {
    */
   async longPress(body: ActionLongPress & { includeScreenshot: false }): Promise<{ message: string }>;
   async longPress(body: ActionBodyWithScreenshotFalse<ActionLongPress>): Promise<{ message: string }>;
-  async longPress(body: ActionBodyWithScreenshotUndefined<ActionLongPress>): Promise<{ message: string }>;
+  async longPress(body: ActionBodyWithScreenshotUndefined<ActionLongPress>): Promise<ActionResult>;
   async longPress(body: ActionBodyWithScreenshotTrue<ActionLongPress>): Promise<ActionResultWithScreenshot>;
   async longPress<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionLongPress, K>,
@@ -475,7 +475,7 @@ export class ActionOperator {
    */
   async scroll(body: ActionScroll & { includeScreenshot: false }): Promise<{ message: string }>;
   async scroll(body: ActionBodyWithScreenshotFalse<ActionScroll>): Promise<{ message: string }>;
-  async scroll(body: ActionBodyWithScreenshotUndefined<ActionScroll>): Promise<{ message: string }>;
+  async scroll(body: ActionBodyWithScreenshotUndefined<ActionScroll>): Promise<ActionResult>;
   async scroll(body: ActionBodyWithScreenshotTrue<ActionScroll>): Promise<ActionResultWithScreenshot>;
   async scroll<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionScroll, K>,
@@ -495,7 +495,7 @@ export class ActionOperator {
    */
   async touch(body: ActionTouch & { includeScreenshot: false }): Promise<{ message: string }>;
   async touch(body: ActionBodyWithScreenshotFalse<ActionTouch>): Promise<{ message: string }>;
-  async touch(body: ActionBodyWithScreenshotUndefined<ActionTouch>): Promise<{ message: string }>;
+  async touch(body: ActionBodyWithScreenshotUndefined<ActionTouch>): Promise<ActionResult>;
   async touch(body: ActionBodyWithScreenshotTrue<ActionTouch>): Promise<ActionResultWithScreenshot>;
   async touch<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionTouch, K>,
@@ -515,7 +515,7 @@ export class ActionOperator {
    */
   async type(body: ActionType & { includeScreenshot: false }): Promise<{ message: string }>;
   async type(body: ActionBodyWithScreenshotFalse<ActionType>): Promise<{ message: string }>;
-  async type(body: ActionBodyWithScreenshotUndefined<ActionType>): Promise<{ message: string }>;
+  async type(body: ActionBodyWithScreenshotUndefined<ActionType>): Promise<ActionResult>;
   async type(body: ActionBodyWithScreenshotTrue<ActionType>): Promise<ActionResultWithScreenshot>;
   async type<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
     body: ActionBodyWithScreenshotPhases<ActionType, K>,
