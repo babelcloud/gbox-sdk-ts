@@ -56,119 +56,119 @@ async function main() {
   console.log('Test 4 - After URI:', result4.screenshot.after.uri);
   console.log('Test 4 - Trace URI:', result4.screenshot.trace.uri);
 
-  // Test 5: Click with screenshot range ['before'] - should return specific shape
+  // Test 5: Click with screenshot phases ['before'] - should return specific shape
   const result5 = await box.action.click({
     x: 100,
     y: 100,
     options: {
       screenshot: {
-        range: ['before'],
+        phases: ['before'],
         outputFormat: 'storageKey',
       },
     },
   });
-  console.log('Test 5 - Range before:', result5.message);
+  console.log('Test 5 - phases before:', result5.message);
   console.log('Test 5 - Before URI:', result5.screenshot.before.uri);
-  // @ts-expect-error - should not have after property when range is ['before']
+  // @ts-expect-error - should not have after property when phases is ['before']
   console.log(result5.screenshot.after.uri);
-  // @ts-expect-error - should not have trace property when range is ['before']
+  // @ts-expect-error - should not have trace property when phases is ['before']
   console.log(result5.screenshot.trace.uri);
 
-  // Test 6: Click with screenshot range ['after'] - should return specific shape
+  // Test 6: Click with screenshot phases ['after'] - should return specific shape
   const result6 = await box.action.click({
     x: 100,
     y: 100,
     options: {
       screenshot: {
-        range: ['after'],
+        phases: ['after'],
         outputFormat: 'base64',
       },
     },
   });
-  console.log('Test 6 - Range after:', result6.message);
+  console.log('Test 6 - phases after:', result6.message);
   console.log('Test 6 - After URI:', result6.screenshot.after.uri);
-  // @ts-expect-error - should not have before property when range is ['after']
+  // @ts-expect-error - should not have before property when phases is ['after']
   console.log(result6.screenshot.before.uri);
-  // @ts-expect-error - should not have trace property when range is ['after']
+  // @ts-expect-error - should not have trace property when phases is ['after']
   console.log(result6.screenshot.trace.uri);
 
-  // Test 7: Click with screenshot range ['trace'] - should return specific shape
+  // Test 7: Click with screenshot phases ['trace'] - should return specific shape
   const result7 = await box.action.click({
     x: 100,
     y: 100,
     options: {
       screenshot: {
-        range: ['trace'],
+        phases: ['trace'],
       },
     },
   });
-  console.log('Test 7 - Range trace:', result7.message);
+  console.log('Test 7 - phases trace:', result7.message);
   console.log('Test 7 - Trace URI:', result7.screenshot.trace.uri);
-  // @ts-expect-error - should not have before property when range is ['trace']
+  // @ts-expect-error - should not have before property when phases is ['trace']
   console.log(result7.screenshot.before.uri);
-  // @ts-expect-error - should not have after property when range is ['trace']
+  // @ts-expect-error - should not have after property when phases is ['trace']
   console.log(result7.screenshot.after.uri);
 
-  // Test 8: Click with screenshot range ['before', 'after'] - should return specific shape
+  // Test 8: Click with screenshot phases ['before', 'after'] - should return specific shape
   const result8 = await box.action.click({
     x: 100,
     y: 100,
     options: {
       screenshot: {
-        range: ['before', 'after'],
+        phases: ['before', 'after'],
         outputFormat: 'storageKey',
       },
     },
   });
-  console.log('Test 8 - Range before,after:', result8.message);
+  console.log('Test 8 - phases before,after:', result8.message);
   console.log('Test 8 - Before URI:', result8.screenshot.before.uri);
   console.log('Test 8 - After URI:', result8.screenshot.after.uri);
-  // @ts-expect-error - should not have trace property when range is ['before', 'after']
+  // @ts-expect-error - should not have trace property when phases is ['before', 'after']
   console.log(result8.screenshot.trace.uri);
 
-  // Test 9: Click with screenshot range ['before', 'trace'] - should return specific shape
+  // Test 9: Click with screenshot phases ['before', 'trace'] - should return specific shape
   const result9 = await box.action.click({
     x: 100,
     y: 100,
     options: {
       screenshot: {
-        range: ['before', 'trace'],
+        phases: ['before', 'trace'],
       },
     },
   });
-  console.log('Test 9 - Range before,trace:', result9.message);
+  console.log('Test 9 - phases before,trace:', result9.message);
   console.log('Test 9 - Before URI:', result9.screenshot.before.uri);
   console.log('Test 9 - Trace URI:', result9.screenshot.trace.uri);
-  // @ts-expect-error - should not have after property when range is ['before', 'trace']
+  // @ts-expect-error - should not have after property when phases is ['before', 'trace']
   console.log(result9.screenshot.after.uri);
 
-  // Test 10: Click with screenshot range ['after', 'trace'] - should return specific shape
+  // Test 10: Click with screenshot phases ['after', 'trace'] - should return specific shape
   const result10 = await box.action.click({
     x: 100,
     y: 100,
     options: {
       screenshot: {
-        range: ['after', 'trace'],
+        phases: ['after', 'trace'],
       },
     },
   });
-  console.log('Test 10 - Range after,trace:', result10.message);
+  console.log('Test 10 - phases after,trace:', result10.message);
   console.log('Test 10 - After URI:', result10.screenshot.after.uri);
   console.log('Test 10 - Trace URI:', result10.screenshot.trace.uri);
-  // @ts-expect-error - should not have before property when range is ['after', 'trace']
+  // @ts-expect-error - should not have before property when phases is ['after', 'trace']
   console.log(result10.screenshot.before.uri);
 
-  // Test 11: Click with screenshot range ['before', 'after', 'trace'] - should return ActionResultWithScreenshot
+  // Test 11: Click with screenshot phases ['before', 'after', 'trace'] - should return ActionResultWithScreenshot
   const result11 = await box.action.click({
     x: 100,
     y: 100,
     options: {
       screenshot: {
-        range: ['before', 'after', 'trace'],
+        phases: ['before', 'after', 'trace'],
       },
     },
   });
-  console.log('Test 11 - Range all:', result11.message);
+  console.log('Test 11 - phases all:', result11.message);
   console.log('Test 11 - Before URI:', result11.screenshot.before.uri);
   console.log('Test 11 - After URI:', result11.screenshot.after.uri);
   console.log('Test 11 - Trace URI:', result11.screenshot.trace.uri);
@@ -192,20 +192,20 @@ async function main() {
   console.log('Test 13 - After URI:', result13.screenshot.after.uri);
   console.log('Test 13 - Trace URI:', result13.screenshot.trace.uri);
 
-  // Test 14: Click by natural language with screenshot range ['before'] - should return specific shape
+  // Test 14: Click by natural language with screenshot phases ['before'] - should return specific shape
   const result14 = await box.action.click({
     target: 'login button',
     options: {
       screenshot: {
-        range: ['before'],
+        phases: ['before'],
       },
     },
   });
-  console.log('Test 14 - Natural language range before:', result14.message);
+  console.log('Test 14 - Natural language phases before:', result14.message);
   console.log('Test 14 - Before URI:', result14.screenshot.before.uri);
-  // @ts-expect-error - should not have after property when range is ['before']
+  // @ts-expect-error - should not have after property when phases is ['before']
   console.log(result14.screenshot.after.uri);
-  // @ts-expect-error - should not have trace property when range is ['before']
+  // @ts-expect-error - should not have trace property when phases is ['before']
   console.log(result14.screenshot.trace.uri);
 
   // Test 15: Click with button option - should return ActionResult

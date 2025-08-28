@@ -57,8 +57,8 @@ type ActionBodyWithScreenshotUndefined<T> = T & { options: { screenshot?: undefi
 type ActionBodyWithScreenshotFalse<T> = T & { options: { screenshot?: false } };
 type ActionBodyWithScreenshotTrue<T> = T & { options: { screenshot: true } };
 type ActionBodyWithScreenshotObject<T> = T & { options: { screenshot: ActionScreenshotOptionOverride } };
-type ActionBodyWithScreenshotRange<T, K extends ReadonlyArray<'before' | 'after' | 'trace'>> = T & {
-  options: { screenshot: { range: K } & Partial<ActionScreenshotOptionOverride> };
+type ActionBodyWithScreenshotPhases<T, K extends ReadonlyArray<'before' | 'after' | 'trace'>> = T & {
+  options: { screenshot: { phases: K } & Partial<ActionScreenshotOptionOverride> };
 };
 
 // Common return types
@@ -307,7 +307,7 @@ export class ActionOperator {
   async click(body: ActionBodyWithScreenshotUndefined<ActionClick>): Promise<{ message: string }>;
   async click(body: ActionBodyWithScreenshotTrue<ActionClick>): Promise<ActionResultWithScreenshot>;
   async click<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionClick, K>,
+    body: ActionBodyWithScreenshotPhases<ActionClick, K>,
   ): Promise<{
     message: string;
     screenshot: { [P in K[number]]: NonNullable<ClickScreenshotShape[P]> };
@@ -334,7 +334,7 @@ export class ActionOperator {
   async drag(body: ActionBodyWithScreenshotUndefined<ActionDrag>): Promise<{ message: string }>;
   async drag(body: ActionBodyWithScreenshotTrue<ActionDrag>): Promise<ActionResultWithScreenshot>;
   async drag<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionDrag, K>,
+    body: ActionBodyWithScreenshotPhases<ActionDrag, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
@@ -354,7 +354,7 @@ export class ActionOperator {
   async swipe(body: ActionBodyWithScreenshotUndefined<ActionSwipe>): Promise<{ message: string }>;
   async swipe(body: ActionBodyWithScreenshotTrue<ActionSwipe>): Promise<ActionResultWithScreenshot>;
   async swipe<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionSwipe, K>,
+    body: ActionBodyWithScreenshotPhases<ActionSwipe, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
@@ -374,7 +374,7 @@ export class ActionOperator {
   async pressKey(body: ActionBodyWithScreenshotUndefined<ActionPressKey>): Promise<{ message: string }>;
   async pressKey(body: ActionBodyWithScreenshotTrue<ActionPressKey>): Promise<ActionResultWithScreenshot>;
   async pressKey<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionPressKey, K>,
+    body: ActionBodyWithScreenshotPhases<ActionPressKey, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
@@ -396,7 +396,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotTrue<ActionPressButton>,
   ): Promise<ActionResultWithScreenshot>;
   async pressButton<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionPressButton, K>,
+    body: ActionBodyWithScreenshotPhases<ActionPressButton, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
@@ -417,7 +417,7 @@ export class ActionOperator {
   async move(body: ActionBodyWithScreenshotUndefined<ActionMove>): Promise<{ message: string }>;
   async move(body: ActionBodyWithScreenshotTrue<ActionMove>): Promise<ActionResultWithScreenshot>;
   async move<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionMove, K>,
+    body: ActionBodyWithScreenshotPhases<ActionMove, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
@@ -437,7 +437,7 @@ export class ActionOperator {
   async tap(body: ActionBodyWithScreenshotUndefined<ActionTap>): Promise<{ message: string }>;
   async tap(body: ActionBodyWithScreenshotTrue<ActionTap>): Promise<ActionResultWithScreenshot>;
   async tap<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionTap, K>,
+    body: ActionBodyWithScreenshotPhases<ActionTap, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
@@ -457,7 +457,7 @@ export class ActionOperator {
   async longPress(body: ActionBodyWithScreenshotUndefined<ActionLongPress>): Promise<{ message: string }>;
   async longPress(body: ActionBodyWithScreenshotTrue<ActionLongPress>): Promise<ActionResultWithScreenshot>;
   async longPress<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionLongPress, K>,
+    body: ActionBodyWithScreenshotPhases<ActionLongPress, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
@@ -478,7 +478,7 @@ export class ActionOperator {
   async scroll(body: ActionBodyWithScreenshotUndefined<ActionScroll>): Promise<{ message: string }>;
   async scroll(body: ActionBodyWithScreenshotTrue<ActionScroll>): Promise<ActionResultWithScreenshot>;
   async scroll<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionScroll, K>,
+    body: ActionBodyWithScreenshotPhases<ActionScroll, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
@@ -498,7 +498,7 @@ export class ActionOperator {
   async touch(body: ActionBodyWithScreenshotUndefined<ActionTouch>): Promise<{ message: string }>;
   async touch(body: ActionBodyWithScreenshotTrue<ActionTouch>): Promise<ActionResultWithScreenshot>;
   async touch<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionTouch, K>,
+    body: ActionBodyWithScreenshotPhases<ActionTouch, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
@@ -518,7 +518,7 @@ export class ActionOperator {
   async type(body: ActionBodyWithScreenshotUndefined<ActionType>): Promise<{ message: string }>;
   async type(body: ActionBodyWithScreenshotTrue<ActionType>): Promise<ActionResultWithScreenshot>;
   async type<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
-    body: ActionBodyWithScreenshotRange<ActionType, K>,
+    body: ActionBodyWithScreenshotPhases<ActionType, K>,
   ): Promise<{
     message: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
