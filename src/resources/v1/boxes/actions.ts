@@ -561,15 +561,7 @@ export interface ActionScreenshotOptions {
   outputFormat?: 'base64' | 'storageKey';
 
   /**
-   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-   */
-  presignedExpiresIn?: string;
-
-  /**
-   * Specify which screenshots to capture.
+   * Specify which screenshot phases to capture.
    *
    * Available options:
    *
@@ -577,9 +569,17 @@ export interface ActionScreenshotOptions {
    * - after: Screenshot after the action
    * - trace: Screenshot with operation trace
    *
-   * Default captures all three types. Can specify one or multiple in an array.
+   * Default captures all three phases. Can specify one or multiple in an array.
    */
-  range?: Array<'before' | 'after' | 'trace'>;
+  phases?: Array<'before' | 'after' | 'trace'>;
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
 }
 
 /**

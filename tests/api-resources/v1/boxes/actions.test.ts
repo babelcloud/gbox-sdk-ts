@@ -32,8 +32,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -75,8 +75,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -111,8 +111,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -169,8 +169,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -204,8 +204,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -237,8 +237,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -271,8 +271,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -379,8 +379,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -430,8 +430,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -511,8 +511,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -546,8 +546,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -579,8 +579,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
@@ -613,8 +613,8 @@ describe('resource actions', () => {
         screenshot: {
           delay: '500ms',
           outputFormat: 'base64',
+          phases: ['before', 'after'],
           presignedExpiresIn: '30m',
-          range: ['before', 'after'],
         },
       },
       outputFormat: 'base64',
