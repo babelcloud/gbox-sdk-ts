@@ -451,7 +451,7 @@ export interface ActionCommonOptions {
    * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
    * to configure screenshot options.
    */
-  screenshot?: boolean | ActionScreenshotOptions;
+  screenshot?: ActionScreenshotOptions | boolean;
 }
 
 /**
