@@ -27,4 +27,5 @@ export {
   type BoxTerminateParams,
   type BoxWebTerminalURLParams,
 } from './boxes/index';
+export { Devices, type DeviceInfo, type GetDeviceListResponse } from './devices';
 export { V1 } from './v1';

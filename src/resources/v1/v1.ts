@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as DevicesAPI from './devices';
+import { DeviceInfo, Devices, GetDeviceListResponse } from './devices';
 import * as BoxesAPI from './boxes/boxes';
 import {
   AndroidBox,
@@ -31,12 +33,20 @@ import {
 } from './boxes/boxes';
 
 export class V1 extends APIResource {
+  devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
   boxes: BoxesAPI.Boxes = new BoxesAPI.Boxes(this._client);
 }
 
+V1.Devices = Devices;
 V1.Boxes = Boxes;
 
 export declare namespace V1 {
+  export {
+    Devices as Devices,
+    type DeviceInfo as DeviceInfo,
+    type GetDeviceListResponse as GetDeviceListResponse,
+  };
+
   export {
     Boxes as Boxes,
     type AndroidBox as AndroidBox,
