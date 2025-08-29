@@ -6,15 +6,15 @@ import {
   AndroidCloseParams,
   AndroidBackupParams,
   AndroidListActivitiesResponse,
-  AndroidGetResponse,
+  AndroidPkg,
 } from '../../../resources/v1/boxes';
 
 export class AndroidPkgOperator {
   private client: GboxClient;
-  public data: AndroidGetResponse;
+  public data: AndroidPkg;
   public box: AndroidBox;
 
-  constructor(client: GboxClient, box: AndroidBox, data: AndroidGetResponse) {
+  constructor(client: GboxClient, box: AndroidBox, data: AndroidPkg) {
     this.client = client;
     this.data = data;
     this.box = box;

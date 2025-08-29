@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as ActionsAPI from './actions';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -29,13 +30,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.click(
+   * const actionResult = await client.v1.boxes.actions.click(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 100, y: 100 },
    * );
    * ```
    */
-  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionClickResponse> {
+  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/click`, { body, ...options });
   }
 
@@ -44,13 +45,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.drag(
+   * const actionResult = await client.v1.boxes.actions.drag(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { end: { x: 200, y: 200 }, start: { x: 100, y: 100 } },
    * );
    * ```
    */
-  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionDragResponse> {
+  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/drag`, { body, ...options });
   }
 
@@ -83,17 +84,14 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.longPress(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { x: 350, y: 250, duration: '1s' },
-   * );
+   * const actionResult =
+   *   await client.v1.boxes.actions.longPress(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { x: 350, y: 250, duration: '1s' },
+   *   );
    * ```
    */
-  longPress(
-    boxID: string,
-    body: ActionLongPressParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionLongPressResponse> {
+  longPress(boxID: string, body: ActionLongPressParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/long-press`, { body, ...options });
   }
 
@@ -102,13 +100,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.move(
+   * const actionResult = await client.v1.boxes.actions.move(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 200, y: 300 },
    * );
    * ```
    */
-  move(boxID: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionMoveResponse> {
+  move(boxID: string, body: ActionMoveParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/move`, { body, ...options });
   }
 
@@ -117,17 +115,18 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.pressButton(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { buttons: ['power'] },
-   * );
+   * const actionResult =
+   *   await client.v1.boxes.actions.pressButton(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *     { buttons: ['power'] },
+   *   );
    * ```
    */
   pressButton(
     boxID: string,
     body: ActionPressButtonParams,
     options?: RequestOptions,
-  ): APIPromise<ActionPressButtonResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/press-button`, { body, ...options });
   }
 
@@ -138,17 +137,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.pressKey(
+   * const actionResult = await client.v1.boxes.actions.pressKey(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { keys: ['enter'] },
    * );
    * ```
    */
-  pressKey(
-    boxID: string,
-    body: ActionPressKeyParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionPressKeyResponse> {
+  pressKey(boxID: string, body: ActionPressKeyParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/press-key`, { body, ...options });
   }
 
@@ -193,7 +188,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Stop the device's background screen rewind recording.
+   * Disable the device's background screen rewind recording.
    *
    * @example
    * ```ts
@@ -210,7 +205,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Start the device's background screen rewind recording.
+   * Enable the device's background screen rewind recording.
    *
    * @example
    * ```ts
@@ -273,7 +268,7 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const actionResult =
    *   await client.v1.boxes.actions.screenRotation(
    *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *     { orientation: 'landscapeLeft' },
@@ -284,7 +279,7 @@ export class Actions extends APIResource {
     boxID: string,
     body: ActionScreenRotationParams,
     options?: RequestOptions,
-  ): APIPromise<ActionScreenRotationResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/screen-rotation`, { body, ...options });
   }
 
@@ -312,17 +307,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.scroll(
+   * const actionResult = await client.v1.boxes.actions.scroll(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
    * );
    * ```
    */
-  scroll(
-    boxID: string,
-    body: ActionScrollParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionScrollResponse> {
+  scroll(boxID: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body, ...options });
   }
 
@@ -380,13 +371,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.swipe(
+   * const actionResult = await client.v1.boxes.actions.swipe(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { direction: 'up' },
    * );
    * ```
    */
-  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionSwipeResponse> {
+  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/swipe`, { body, ...options });
   }
 
@@ -395,13 +386,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.tap(
+   * const actionResult = await client.v1.boxes.actions.tap(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 100, y: 100 },
    * );
    * ```
    */
-  tap(boxID: string, body: ActionTapParams, options?: RequestOptions): APIPromise<ActionTapResponse> {
+  tap(boxID: string, body: ActionTapParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/tap`, { body, ...options });
   }
 
@@ -410,7 +401,7 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.touch(
+   * const actionResult = await client.v1.boxes.actions.touch(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   {
    *     points: [
@@ -430,7 +421,7 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionTouchResponse> {
+  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/touch`, { body, ...options });
   }
 
@@ -441,15 +432,154 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.actions.type(
+   * const actionResult = await client.v1.boxes.actions.type(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { text: 'Hello World' },
    * );
    * ```
    */
-  type(boxID: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionTypeResponse> {
+  type(boxID: string, body: ActionTypeParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/boxes/${boxID}/actions/type`, { body, ...options });
   }
+}
+
+/**
+ * Action common options
+ */
+export interface ActionCommonOptions {
+  /**
+   * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
+   * to configure screenshot options.
+   */
+  screenshot?: ActionScreenshotOptions | boolean;
+}
+
+/**
+ * Result of an UI action execution with optional screenshots
+ */
+export interface ActionResult {
+  /**
+   * message
+   */
+  message: string;
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  screenshot?: ActionResult.Screenshot;
+}
+
+export namespace ActionResult {
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  export interface Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    after?: Screenshot.After;
+
+    /**
+     * Screenshot taken before action execution
+     */
+    before?: Screenshot.Before;
+
+    /**
+     * Screenshot with action operation trace
+     */
+    trace?: Screenshot.Trace;
+  }
+
+  export namespace Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    export interface After {
+      /**
+       * URI of the screenshot after the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot taken before action execution
+     */
+    export interface Before {
+      /**
+       * URI of the screenshot before the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot with action operation trace
+     */
+    export interface Trace {
+      /**
+       * URI of the screenshot with operation trace
+       */
+      uri: string;
+    }
+  }
+}
+
+/**
+ * Action screenshot options
+ */
+export interface ActionScreenshotOptions {
+  /**
+   * Delay after performing the action, before taking the final screenshot.
+   *
+   * Execution flow:
+   *
+   * 1. Take screenshot before action
+   * 2. Perform the action
+   * 3. Wait for screenshotDelay (this parameter)
+   * 4. Take screenshot after action
+   *
+   * Example: '500ms' means wait 500ms after the action before capturing the final
+   * screenshot.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+   */
+  delay?: string;
+
+  /**
+   * Type of the URI. default is base64.
+   */
+  outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Specify which screenshot phases to capture.
+   *
+   * Available options:
+   *
+   * - before: Screenshot before the action
+   * - after: Screenshot after the action
+   * - trace: Screenshot with operation trace
+   *
+   * Default captures all three phases. Can specify one or multiple in an array.
+   */
+  phases?: Array<'before' | 'after' | 'trace'>;
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
 }
 
 /**
@@ -468,6 +598,11 @@ export namespace ActionAIResponse {
     aiResponse: AIActionScreenshotResult.AIResponse;
 
     /**
+     * message
+     */
+    message: string;
+
+    /**
      * output
      */
     output: string;
@@ -475,7 +610,7 @@ export namespace ActionAIResponse {
     /**
      * Complete screenshot result with operation trace, before and after images
      */
-    screenshot: AIActionScreenshotResult.Screenshot;
+    screenshot?: AIActionScreenshotResult.Screenshot;
   }
 
   export namespace AIActionScreenshotResult {
@@ -549,18 +684,29 @@ export namespace ActionAIResponse {
         double?: boolean;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -568,6 +714,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -596,18 +745,29 @@ export namespace ActionAIResponse {
         points: Array<TypedTouchAction.Point>;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -615,6 +775,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -646,7 +809,7 @@ export namespace ActionAIResponse {
           /**
            * Sequence of actions to perform after initial touch
            */
-          actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitActionDto>;
+          actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitAction>;
         }
 
         export namespace Point {
@@ -693,7 +856,10 @@ export namespace ActionAIResponse {
             y: number;
           }
 
-          export interface TouchPointWaitActionDto {
+          /**
+           * Touch point wait action configuration
+           */
+          export interface TouchPointWaitAction {
             /**
              * Duration to wait (e.g. "500ms")
              *
@@ -728,18 +894,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -747,6 +924,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -805,18 +985,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -824,6 +1015,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -902,18 +1096,29 @@ export namespace ActionAIResponse {
         y: number;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -921,6 +1126,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -968,18 +1176,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -987,6 +1206,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1031,8 +1253,10 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
@@ -1043,12 +1267,21 @@ export namespace ActionAIResponse {
         location?: string;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1056,6 +1289,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1097,18 +1333,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1116,6 +1363,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1295,18 +1545,29 @@ export namespace ActionAIResponse {
         combination?: boolean;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1314,6 +1575,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1344,18 +1608,29 @@ export namespace ActionAIResponse {
         >;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1363,6 +1638,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1404,18 +1682,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1423,6 +1712,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1451,8 +1743,10 @@ export namespace ActionAIResponse {
         text: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
@@ -1463,12 +1757,21 @@ export namespace ActionAIResponse {
         mode?: 'append' | 'replace';
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1481,6 +1784,9 @@ export namespace ActionAIResponse {
         pressEnter?: boolean;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1514,18 +1820,29 @@ export namespace ActionAIResponse {
         y: number;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1533,6 +1850,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1561,18 +1881,29 @@ export namespace ActionAIResponse {
         orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1580,6 +1911,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1611,6 +1945,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * The scale of the action to be performed. Must be greater than 0.1 and less than
@@ -1679,18 +2021,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1698,6 +2051,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1766,18 +2122,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1785,6 +2152,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1833,18 +2203,29 @@ export namespace ActionAIResponse {
         duration: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1852,6 +2233,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -1878,17 +2262,17 @@ export namespace ActionAIResponse {
       /**
        * Screenshot taken after action execution
        */
-      after: Screenshot.After;
+      after?: Screenshot.After;
 
       /**
        * Screenshot taken before action execution
        */
-      before: Screenshot.Before;
+      before?: Screenshot.Before;
 
       /**
        * Screenshot with action operation trace
        */
-      trace: Screenshot.Trace;
+      trace?: Screenshot.Trace;
     }
 
     export namespace Screenshot {
@@ -2020,18 +2404,29 @@ export namespace ActionAIResponse {
         double?: boolean;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2039,6 +2434,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2067,18 +2465,29 @@ export namespace ActionAIResponse {
         points: Array<TypedTouchAction.Point>;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2086,6 +2495,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2117,7 +2529,7 @@ export namespace ActionAIResponse {
           /**
            * Sequence of actions to perform after initial touch
            */
-          actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitActionDto>;
+          actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitAction>;
         }
 
         export namespace Point {
@@ -2164,7 +2576,10 @@ export namespace ActionAIResponse {
             y: number;
           }
 
-          export interface TouchPointWaitActionDto {
+          /**
+           * Touch point wait action configuration
+           */
+          export interface TouchPointWaitAction {
             /**
              * Duration to wait (e.g. "500ms")
              *
@@ -2199,18 +2614,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2218,6 +2644,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2276,18 +2705,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2295,6 +2735,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2373,18 +2816,29 @@ export namespace ActionAIResponse {
         y: number;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2392,6 +2846,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2439,18 +2896,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2458,6 +2926,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2502,8 +2973,10 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
@@ -2514,12 +2987,21 @@ export namespace ActionAIResponse {
         location?: string;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2527,6 +3009,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2568,18 +3053,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2587,6 +3083,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2766,18 +3265,29 @@ export namespace ActionAIResponse {
         combination?: boolean;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2785,6 +3295,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2815,18 +3328,29 @@ export namespace ActionAIResponse {
         >;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2834,6 +3358,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2875,18 +3402,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2894,6 +3432,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2922,8 +3463,10 @@ export namespace ActionAIResponse {
         text: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
@@ -2934,12 +3477,21 @@ export namespace ActionAIResponse {
         mode?: 'append' | 'replace';
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2952,6 +3504,9 @@ export namespace ActionAIResponse {
         pressEnter?: boolean;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -2985,18 +3540,29 @@ export namespace ActionAIResponse {
         y: number;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3004,6 +3570,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -3032,18 +3601,29 @@ export namespace ActionAIResponse {
         orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3051,6 +3631,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -3082,6 +3665,14 @@ export namespace ActionAIResponse {
          * Type of the URI. default is base64.
          */
         outputFormat?: 'base64' | 'storageKey';
+
+        /**
+         * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+         */
+        presignedExpiresIn?: string;
 
         /**
          * The scale of the action to be performed. Must be greater than 0.1 and less than
@@ -3150,18 +3741,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3169,6 +3771,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -3237,18 +3842,29 @@ export namespace ActionAIResponse {
         duration?: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3256,6 +3872,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -3304,18 +3923,29 @@ export namespace ActionAIResponse {
         duration: string;
 
         /**
-         * Whether to include screenshots in the action response. If false, the screenshot
-         * object will still be returned but with empty URIs. Default is false.
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+         * will be ignored when `options.screenshot` is provided. Whether to include
+         * screenshots in the action response. If false, the screenshot object will still
+         * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
 
         /**
-         * Type of the URI. default is base64.
+         * Action common options
+         */
+        options?: ActionsAPI.ActionCommonOptions;
+
+        /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+         * of the URI. default is base64. This field will be ignored when
+         * `options.screenshot` is provided.
          */
         outputFormat?: 'base64' | 'storageKey';
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
          * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+         * This field will be ignored when `options.screenshot` is provided.
          *
          * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
          * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3323,6 +3953,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
+         * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+         * will be ignored when `options.screenshot` is provided.
+         *
          * Delay after performing the action, before taking the final screenshot.
          *
          * Execution flow:
@@ -3345,192 +3978,6 @@ export namespace ActionAIResponse {
 }
 
 /**
- * Result of an UI action execution with screenshots
- */
-export type ActionClickResponse =
-  | ActionClickResponse.ActionIncludeScreenshotResult
-  | ActionClickResponse.ActionCommonResult;
-
-export namespace ActionClickResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionDragResponse =
-  | ActionDragResponse.ActionIncludeScreenshotResult
-  | ActionDragResponse.ActionCommonResult;
-
-export namespace ActionDragResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
-/**
  * Result of extract action execution
  */
 export interface ActionExtractResponse {
@@ -3545,378 +3992,6 @@ export interface ActionExtractResponse {
    * Base64-encoded screenshot of the UI interface at the time of extraction
    */
   screenshot: string;
-}
-
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionLongPressResponse =
-  | ActionLongPressResponse.ActionIncludeScreenshotResult
-  | ActionLongPressResponse.ActionCommonResult;
-
-export namespace ActionLongPressResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionMoveResponse =
-  | ActionMoveResponse.ActionIncludeScreenshotResult
-  | ActionMoveResponse.ActionCommonResult;
-
-export namespace ActionMoveResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionPressButtonResponse =
-  | ActionPressButtonResponse.ActionIncludeScreenshotResult
-  | ActionPressButtonResponse.ActionCommonResult;
-
-export namespace ActionPressButtonResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionPressKeyResponse =
-  | ActionPressKeyResponse.ActionIncludeScreenshotResult
-  | ActionPressKeyResponse.ActionCommonResult;
-
-export namespace ActionPressKeyResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
 }
 
 /**
@@ -4004,99 +4079,6 @@ export interface ActionScreenLayoutResponse {
 }
 
 /**
- * Result of an UI action execution with screenshots
- */
-export type ActionScreenRotationResponse =
-  | ActionScreenRotationResponse.ActionIncludeScreenshotResult
-  | ActionScreenRotationResponse.ActionCommonResult;
-
-export namespace ActionScreenRotationResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
-/**
  * Result of screenshot capture action
  */
 export interface ActionScreenshotResponse {
@@ -4109,99 +4091,6 @@ export interface ActionScreenshotResponse {
    * Presigned url of the screenshot
    */
   presignedUrl?: string;
-}
-
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionScrollResponse =
-  | ActionScrollResponse.ActionIncludeScreenshotResult
-  | ActionScrollResponse.ActionCommonResult;
-
-export namespace ActionScrollResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
 }
 
 /**
@@ -4261,378 +4150,6 @@ export interface ActionSettingsUpdateResponse {
   scale: number;
 }
 
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionSwipeResponse =
-  | ActionSwipeResponse.ActionIncludeScreenshotResult
-  | ActionSwipeResponse.ActionCommonResult;
-
-export namespace ActionSwipeResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionTapResponse =
-  | ActionTapResponse.ActionIncludeScreenshotResult
-  | ActionTapResponse.ActionCommonResult;
-
-export namespace ActionTapResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionTouchResponse =
-  | ActionTouchResponse.ActionIncludeScreenshotResult
-  | ActionTouchResponse.ActionCommonResult;
-
-export namespace ActionTouchResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
-/**
- * Result of an UI action execution with screenshots
- */
-export type ActionTypeResponse =
-  | ActionTypeResponse.ActionIncludeScreenshotResult
-  | ActionTypeResponse.ActionCommonResult;
-
-export namespace ActionTypeResponse {
-  /**
-   * Result of an UI action execution with screenshots
-   */
-  export interface ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    screenshot: ActionIncludeScreenshotResult.Screenshot;
-  }
-
-  export namespace ActionIncludeScreenshotResult {
-    /**
-     * Complete screenshot result with operation trace, before and after images
-     */
-    export interface Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      after: Screenshot.After;
-
-      /**
-       * Screenshot taken before action execution
-       */
-      before: Screenshot.Before;
-
-      /**
-       * Screenshot with action operation trace
-       */
-      trace: Screenshot.Trace;
-    }
-
-    export namespace Screenshot {
-      /**
-       * Screenshot taken after action execution
-       */
-      export interface After {
-        /**
-         * URI of the screenshot after the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot taken before action execution
-       */
-      export interface Before {
-        /**
-         * URI of the screenshot before the action
-         */
-        uri: string;
-
-        /**
-         * Presigned url of the screenshot before the action
-         */
-        presignedUrl?: string;
-      }
-
-      /**
-       * Screenshot with action operation trace
-       */
-      export interface Trace {
-        /**
-         * URI of the screenshot with operation trace
-         */
-        uri: string;
-      }
-    }
-  }
-
-  /**
-   * Result of an UI action execution
-   */
-  export interface ActionCommonResult {
-    /**
-     * message
-     */
-    message: string;
-  }
-}
-
 export interface ActionAIParams {
   /**
    * Direct instruction of the UI action to perform (e.g., 'click the login button',
@@ -4648,18 +4165,29 @@ export interface ActionAIParams {
   background?: string;
 
   /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+   * will be ignored when `options.screenshot` is provided. Whether to include
+   * screenshots in the action response. If false, the screenshot object will still
+   * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
 
   /**
-   * Type of the URI. default is base64.
+   * Action common options
+   */
+  options?: ActionCommonOptions;
+
+  /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+   * of the URI. default is base64. This field will be ignored when
+   * `options.screenshot` is provided.
    */
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4667,6 +4195,9 @@ export interface ActionAIParams {
   presignedExpiresIn?: string;
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
+   *
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -4745,18 +4276,29 @@ export declare namespace ActionClickParams {
     double?: boolean;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4764,6 +4306,9 @@ export declare namespace ActionClickParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -4800,18 +4345,29 @@ export declare namespace ActionClickParams {
     double?: boolean;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4819,6 +4375,9 @@ export declare namespace ActionClickParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -4861,18 +4420,29 @@ export declare namespace ActionDragParams {
     duration?: string;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4880,6 +4450,9 @@ export declare namespace ActionDragParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -4945,18 +4518,29 @@ export declare namespace ActionDragParams {
     duration?: string;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4964,6 +4548,9 @@ export declare namespace ActionDragParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -5046,18 +4633,29 @@ export declare namespace ActionLongPressParams {
     duration?: string;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5065,6 +4663,9 @@ export declare namespace ActionLongPressParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -5099,18 +4700,29 @@ export declare namespace ActionLongPressParams {
     duration?: string;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5118,6 +4730,9 @@ export declare namespace ActionLongPressParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -5149,18 +4764,29 @@ export interface ActionMoveParams {
   y: number;
 
   /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+   * will be ignored when `options.screenshot` is provided. Whether to include
+   * screenshots in the action response. If false, the screenshot object will still
+   * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
 
   /**
-   * Type of the URI. default is base64.
+   * Action common options
+   */
+  options?: ActionCommonOptions;
+
+  /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+   * of the URI. default is base64. This field will be ignored when
+   * `options.screenshot` is provided.
    */
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5168,6 +4794,9 @@ export interface ActionMoveParams {
   presignedExpiresIn?: string;
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
+   *
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -5193,18 +4822,29 @@ export interface ActionPressButtonParams {
   buttons: Array<'power' | 'volumeUp' | 'volumeDown' | 'volumeMute' | 'home' | 'back' | 'menu' | 'appSwitch'>;
 
   /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+   * will be ignored when `options.screenshot` is provided. Whether to include
+   * screenshots in the action response. If false, the screenshot object will still
+   * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
 
   /**
-   * Type of the URI. default is base64.
+   * Action common options
+   */
+  options?: ActionCommonOptions;
+
+  /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+   * of the URI. default is base64. This field will be ignored when
+   * `options.screenshot` is provided.
    */
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5212,6 +4852,9 @@ export interface ActionPressButtonParams {
   presignedExpiresIn?: string;
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
+   *
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -5356,18 +4999,29 @@ export interface ActionPressKeyParams {
   combination?: boolean;
 
   /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+   * will be ignored when `options.screenshot` is provided. Whether to include
+   * screenshots in the action response. If false, the screenshot object will still
+   * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
 
   /**
-   * Type of the URI. default is base64.
+   * Action common options
+   */
+  options?: ActionCommonOptions;
+
+  /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+   * of the URI. default is base64. This field will be ignored when
+   * `options.screenshot` is provided.
    */
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5375,6 +5029,9 @@ export interface ActionPressKeyParams {
   presignedExpiresIn?: string;
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
+   *
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -5423,18 +5080,29 @@ export interface ActionScreenRotationParams {
   orientation: 'portrait' | 'landscapeLeft' | 'portraitUpsideDown' | 'landscapeRight';
 
   /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+   * will be ignored when `options.screenshot` is provided. Whether to include
+   * screenshots in the action response. If false, the screenshot object will still
+   * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
 
   /**
-   * Type of the URI. default is base64.
+   * Action common options
+   */
+  options?: ActionCommonOptions;
+
+  /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+   * of the URI. default is base64. This field will be ignored when
+   * `options.screenshot` is provided.
    */
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5442,6 +5110,9 @@ export interface ActionScreenRotationParams {
   presignedExpiresIn?: string;
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
+   *
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -5470,6 +5141,14 @@ export interface ActionScreenshotParams {
    * Type of the URI. default is base64.
    */
   outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
 
   /**
    * The scale of the action to be performed. Must be greater than 0.1 and less than
@@ -5543,18 +5222,29 @@ export declare namespace ActionScrollParams {
     y: number;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5562,6 +5252,9 @@ export declare namespace ActionScrollParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -5606,18 +5299,29 @@ export declare namespace ActionScrollParams {
     duration?: string;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5625,6 +5329,9 @@ export declare namespace ActionScrollParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -5686,8 +5393,10 @@ export declare namespace ActionSwipeParams {
     duration?: string;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
@@ -5698,12 +5407,21 @@ export declare namespace ActionSwipeParams {
     location?: string;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5711,6 +5429,9 @@ export declare namespace ActionSwipeParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -5749,18 +5470,29 @@ export declare namespace ActionSwipeParams {
     duration?: string;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5768,6 +5500,9 @@ export declare namespace ActionSwipeParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -5834,18 +5569,29 @@ export declare namespace ActionTapParams {
     y: number;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5853,6 +5599,9 @@ export declare namespace ActionTapParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -5879,18 +5628,29 @@ export declare namespace ActionTapParams {
     target: string;
 
     /**
-     * Whether to include screenshots in the action response. If false, the screenshot
-     * object will still be returned but with empty URIs. Default is false.
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
 
     /**
-     * Type of the URI. default is base64.
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
      */
     outputFormat?: 'base64' | 'storageKey';
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5898,6 +5658,9 @@ export declare namespace ActionTapParams {
     presignedExpiresIn?: string;
 
     /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
      * Delay after performing the action, before taking the final screenshot.
      *
      * Execution flow:
@@ -5924,18 +5687,29 @@ export interface ActionTouchParams {
   points: Array<ActionTouchParams.Point>;
 
   /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+   * will be ignored when `options.screenshot` is provided. Whether to include
+   * screenshots in the action response. If false, the screenshot object will still
+   * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
 
   /**
-   * Type of the URI. default is base64.
+   * Action common options
+   */
+  options?: ActionCommonOptions;
+
+  /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+   * of the URI. default is base64. This field will be ignored when
+   * `options.screenshot` is provided.
    */
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5943,6 +5717,9 @@ export interface ActionTouchParams {
   presignedExpiresIn?: string;
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
+   *
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -5974,7 +5751,7 @@ export namespace ActionTouchParams {
     /**
      * Sequence of actions to perform after initial touch
      */
-    actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitActionDto>;
+    actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitAction>;
   }
 
   export namespace Point {
@@ -6021,7 +5798,10 @@ export namespace ActionTouchParams {
       y: number;
     }
 
-    export interface TouchPointWaitActionDto {
+    /**
+     * Touch point wait action configuration
+     */
+    export interface TouchPointWaitAction {
       /**
        * Duration to wait (e.g. "500ms")
        *
@@ -6045,8 +5825,10 @@ export interface ActionTypeParams {
   text: string;
 
   /**
-   * Whether to include screenshots in the action response. If false, the screenshot
-   * object will still be returned but with empty URIs. Default is false.
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+   * will be ignored when `options.screenshot` is provided. Whether to include
+   * screenshots in the action response. If false, the screenshot object will still
+   * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
 
@@ -6057,12 +5839,21 @@ export interface ActionTypeParams {
   mode?: 'append' | 'replace';
 
   /**
-   * Type of the URI. default is base64.
+   * Action common options
+   */
+  options?: ActionCommonOptions;
+
+  /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+   * of the URI. default is base64. This field will be ignored when
+   * `options.screenshot` is provided.
    */
   outputFormat?: 'base64' | 'storageKey';
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   * This field will be ignored when `options.screenshot` is provided.
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -6075,6 +5866,9 @@ export interface ActionTypeParams {
   pressEnter?: boolean;
 
   /**
+   * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+   * will be ignored when `options.screenshot` is provided.
+   *
    * Delay after performing the action, before taking the final screenshot.
    *
    * Execution flow:
@@ -6095,27 +5889,18 @@ export interface ActionTypeParams {
 
 export declare namespace Actions {
   export {
+    type ActionCommonOptions as ActionCommonOptions,
+    type ActionResult as ActionResult,
+    type ActionScreenshotOptions as ActionScreenshotOptions,
     type ActionAIResponse as ActionAIResponse,
-    type ActionClickResponse as ActionClickResponse,
-    type ActionDragResponse as ActionDragResponse,
     type ActionExtractResponse as ActionExtractResponse,
-    type ActionLongPressResponse as ActionLongPressResponse,
-    type ActionMoveResponse as ActionMoveResponse,
-    type ActionPressButtonResponse as ActionPressButtonResponse,
-    type ActionPressKeyResponse as ActionPressKeyResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionRewindExtractResponse as ActionRewindExtractResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
-    type ActionScreenRotationResponse as ActionScreenRotationResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
-    type ActionScrollResponse as ActionScrollResponse,
     type ActionSettingsResponse as ActionSettingsResponse,
     type ActionSettingsResetResponse as ActionSettingsResetResponse,
     type ActionSettingsUpdateResponse as ActionSettingsUpdateResponse,
-    type ActionSwipeResponse as ActionSwipeResponse,
-    type ActionTapResponse as ActionTapResponse,
-    type ActionTouchResponse as ActionTouchResponse,
-    type ActionTypeResponse as ActionTypeResponse,
     type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionDragParams as ActionDragParams,

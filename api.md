@@ -1,5 +1,16 @@
 # V1
 
+## Devices
+
+Types:
+
+- <code><a href="./src/resources/v1/devices.ts">DeviceInfo</a></code>
+- <code><a href="./src/resources/v1/devices.ts">GetDeviceListResponse</a></code>
+
+Methods:
+
+- <code title="get /devices">client.v1.devices.<a href="./src/resources/v1/devices.ts">list</a>() -> GetDeviceListResponse</code>
+
 ## Boxes
 
 Types:
@@ -49,54 +60,45 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionCommonOptions</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionResult</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenshotOptions</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionAIResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionClickResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionDragResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionExtractResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionLongPressResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionMoveResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionPressButtonResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionPressKeyResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionRecordingStopResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionRewindExtractResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenLayoutResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenRotationResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenshotResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionScrollResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionSettingsResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionSettingsResetResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionSettingsUpdateResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionSwipeResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionTapResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionTouchResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionTypeResponse</a></code>
 
 Methods:
 
 - <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">ai</a>(boxID, { ...params }) -> ActionAIResponse</code>
-- <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">click</a>(boxID, { ...params }) -> ActionClickResponse</code>
-- <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">drag</a>(boxID, { ...params }) -> ActionDragResponse</code>
+- <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">click</a>(boxID, { ...params }) -> ActionResult</code>
+- <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">drag</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/extract">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">extract</a>(boxID, { ...params }) -> ActionExtractResponse</code>
-- <code title="post /boxes/{boxId}/actions/long-press">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">longPress</a>(boxID, { ...params }) -> ActionLongPressResponse</code>
-- <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(boxID, { ...params }) -> ActionMoveResponse</code>
-- <code title="post /boxes/{boxId}/actions/press-button">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressButton</a>(boxID, { ...params }) -> ActionPressButtonResponse</code>
-- <code title="post /boxes/{boxId}/actions/press-key">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressKey</a>(boxID, { ...params }) -> ActionPressKeyResponse</code>
+- <code title="post /boxes/{boxId}/actions/long-press">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">longPress</a>(boxID, { ...params }) -> ActionResult</code>
+- <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(boxID, { ...params }) -> ActionResult</code>
+- <code title="post /boxes/{boxId}/actions/press-button">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressButton</a>(boxID, { ...params }) -> ActionResult</code>
+- <code title="post /boxes/{boxId}/actions/press-key">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressKey</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/recording/start">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">recordingStart</a>(boxID, { ...params }) -> void</code>
 - <code title="post /boxes/{boxId}/actions/recording/stop">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">recordingStop</a>(boxID) -> ActionRecordingStopResponse</code>
 - <code title="delete /boxes/{boxId}/actions/recording/rewind">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">rewindDisable</a>(boxID) -> void</code>
 - <code title="post /boxes/{boxId}/actions/recording/rewind">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">rewindEnable</a>(boxID) -> void</code>
 - <code title="post /boxes/{boxId}/actions/recording/rewind/extract">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">rewindExtract</a>(boxID, { ...params }) -> ActionRewindExtractResponse</code>
 - <code title="get /boxes/{boxId}/actions/screen-layout">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenLayout</a>(boxID) -> ActionScreenLayoutResponse</code>
-- <code title="post /boxes/{boxId}/actions/screen-rotation">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenRotation</a>(boxID, { ...params }) -> ActionScreenRotationResponse</code>
+- <code title="post /boxes/{boxId}/actions/screen-rotation">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenRotation</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/screenshot">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">screenshot</a>(boxID, { ...params }) -> ActionScreenshotResponse</code>
-- <code title="post /boxes/{boxId}/actions/scroll">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">scroll</a>(boxID, { ...params }) -> ActionScrollResponse</code>
+- <code title="post /boxes/{boxId}/actions/scroll">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">scroll</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="get /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">settings</a>(boxID) -> ActionSettingsResponse</code>
 - <code title="delete /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">settingsReset</a>(boxID) -> ActionSettingsResetResponse</code>
 - <code title="put /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">settingsUpdate</a>(boxID, { ...params }) -> ActionSettingsUpdateResponse</code>
-- <code title="post /boxes/{boxId}/actions/swipe">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">swipe</a>(boxID, { ...params }) -> ActionSwipeResponse</code>
-- <code title="post /boxes/{boxId}/actions/tap">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">tap</a>(boxID, { ...params }) -> ActionTapResponse</code>
-- <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">touch</a>(boxID, { ...params }) -> ActionTouchResponse</code>
-- <code title="post /boxes/{boxId}/actions/type">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">type</a>(boxID, { ...params }) -> ActionTypeResponse</code>
+- <code title="post /boxes/{boxId}/actions/swipe">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">swipe</a>(boxID, { ...params }) -> ActionResult</code>
+- <code title="post /boxes/{boxId}/actions/tap">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">tap</a>(boxID, { ...params }) -> ActionResult</code>
+- <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">touch</a>(boxID, { ...params }) -> ActionResult</code>
+- <code title="post /boxes/{boxId}/actions/type">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">type</a>(boxID, { ...params }) -> ActionResult</code>
 
 ### Proxy
 
@@ -115,38 +117,39 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/boxes/media.ts">MediaCreateAlbumResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/media.ts">MediaGetAlbumDetailResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/media.ts">MediaAlbum</a></code>
+- <code><a href="./src/resources/v1/boxes/media.ts">MediaPhoto</a></code>
+- <code><a href="./src/resources/v1/boxes/media.ts">MediaVideo</a></code>
 - <code><a href="./src/resources/v1/boxes/media.ts">MediaGetMediaResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/media.ts">MediaGetMediaSupportResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/media.ts">MediaListAlbumsResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/media.ts">MediaListMediaResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/media.ts">MediaUpdateAlbumResponse</a></code>
 
 Methods:
 
-- <code title="post /boxes/{boxId}/media/albums">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">createAlbum</a>(boxID, { ...params }) -> MediaCreateAlbumResponse</code>
+- <code title="post /boxes/{boxId}/media/albums">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">createAlbum</a>(boxID, { ...params }) -> MediaAlbum</code>
 - <code title="delete /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">deleteAlbum</a>(albumName, { ...params }) -> void</code>
 - <code title="delete /boxes/{boxId}/media/albums/{albumName}/media/{mediaName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">deleteMedia</a>(mediaName, { ...params }) -> void</code>
 - <code title="get /boxes/{boxId}/media/albums/{albumName}/media/{mediaName}/download">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">downloadMedia</a>(mediaName, { ...params }) -> Response</code>
-- <code title="get /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">getAlbumDetail</a>(albumName, { ...params }) -> MediaGetAlbumDetailResponse</code>
+- <code title="get /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">getAlbumDetail</a>(albumName, { ...params }) -> MediaAlbum</code>
 - <code title="get /boxes/{boxId}/media/albums/{albumName}/media/{mediaName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">getMedia</a>(mediaName, { ...params }) -> MediaGetMediaResponse</code>
 - <code title="get /boxes/{boxId}/media/support">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">getMediaSupport</a>(boxID) -> MediaGetMediaSupportResponse</code>
 - <code title="get /boxes/{boxId}/media/albums">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">listAlbums</a>(boxID) -> MediaListAlbumsResponse</code>
 - <code title="get /boxes/{boxId}/media/albums/{albumName}/media">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">listMedia</a>(albumName, { ...params }) -> MediaListMediaResponse</code>
-- <code title="patch /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">updateAlbum</a>(albumName, { ...params }) -> MediaUpdateAlbumResponse</code>
+- <code title="patch /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/resources/v1/boxes/media.ts">updateAlbum</a>(albumName, { ...params }) -> MediaAlbum</code>
 
 ### Fs
 
 Types:
 
+- <code><a href="./src/resources/v1/boxes/fs.ts">Dir</a></code>
+- <code><a href="./src/resources/v1/boxes/fs.ts">File</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FListResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FExistsResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FInfoResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FReadResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FRemoveResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/fs.ts">FRenameResponse</a></code>
-- <code><a href="./src/resources/v1/boxes/fs.ts">FWriteResponse</a></code>
 
 Methods:
 
@@ -156,7 +159,7 @@ Methods:
 - <code title="get /boxes/{boxId}/fs/read">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">read</a>(boxID, { ...params }) -> FReadResponse</code>
 - <code title="delete /boxes/{boxId}/fs">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">remove</a>(boxID, { ...params }) -> FRemoveResponse</code>
 - <code title="post /boxes/{boxId}/fs/rename">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">rename</a>(boxID, { ...params }) -> FRenameResponse</code>
-- <code title="post /boxes/{boxId}/fs/write">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">write</a>(boxID, { ...params }) -> FWriteResponse</code>
+- <code title="post /boxes/{boxId}/fs/write">client.v1.boxes.fs.<a href="./src/resources/v1/boxes/fs.ts">write</a>(boxID, { ...params }) -> File</code>
 
 ### Browser
 
@@ -183,7 +186,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidApp</a></code>
-- <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidPkg</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetConnectAddressResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidInstallResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidListActivitiesResponse</a></code>
@@ -197,7 +200,7 @@ Methods:
 - <code title="post /boxes/{boxId}/android/packages/backup-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">backupAll</a>(boxID) -> Response</code>
 - <code title="post /boxes/{boxId}/android/packages/{packageName}/close">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">close</a>(packageName, { ...params }) -> void</code>
 - <code title="post /boxes/{boxId}/android/packages/close-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">closeAll</a>(boxID) -> void</code>
-- <code title="get /boxes/{boxId}/android/packages/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">get</a>(packageName, { ...params }) -> AndroidGetResponse</code>
+- <code title="get /boxes/{boxId}/android/packages/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">get</a>(packageName, { ...params }) -> AndroidPkg</code>
 - <code title="get /boxes/{boxId}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">getApp</a>(packageName, { ...params }) -> AndroidApp</code>
 - <code title="get /boxes/{boxId}/android/connect-address">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">getConnectAddress</a>(boxID) -> AndroidGetConnectAddressResponse</code>
 - <code title="post /boxes/{boxId}/android/packages">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">install</a>(boxID, { ...params }) -> AndroidInstallResponse</code>

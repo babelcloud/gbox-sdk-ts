@@ -108,7 +108,7 @@ export class Fs extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.fs.write(
+   * const file = await client.v1.boxes.fs.write(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   {
    *     content: 'Hello, World!\nThis is file content.',
@@ -117,12 +117,77 @@ export class Fs extends APIResource {
    * );
    * ```
    */
-  write(boxID: string, body: FWriteParams, options?: RequestOptions): APIPromise<FWriteResponse> {
+  write(boxID: string, body: FWriteParams, options?: RequestOptions): APIPromise<File> {
     return this._client.post(
       path`/boxes/${boxID}/fs/write`,
       multipartFormRequestOptions({ body, ...options }, this._client),
     );
   }
+}
+
+/**
+ * File system directory representation
+ */
+export interface Dir {
+  /**
+   * Last modified time of the directory
+   */
+  lastModified: string;
+
+  /**
+   * Directory metadata
+   */
+  mode: string;
+
+  /**
+   * Name of the directory
+   */
+  name: string;
+
+  /**
+   * Full path to the directory in the box
+   */
+  path: string;
+
+  /**
+   * Directory type indicator
+   */
+  type: 'dir';
+}
+
+/**
+ * File system file representation
+ */
+export interface File {
+  /**
+   * Last modified time of the file
+   */
+  lastModified: string;
+
+  /**
+   * File metadata
+   */
+  mode: string;
+
+  /**
+   * Name of the file
+   */
+  name: string;
+
+  /**
+   * Full path to the file in the box
+   */
+  path: string;
+
+  /**
+   * Size of the file
+   */
+  size: string;
+
+  /**
+   * File type indicator
+   */
+  type: 'file';
 }
 
 /**
@@ -132,74 +197,7 @@ export interface FListResponse {
   /**
    * Array of files and directories
    */
-  data: Array<FListResponse.File | FListResponse.Dir>;
-}
-
-export namespace FListResponse {
-  /**
-   * File system file representation
-   */
-  export interface File {
-    /**
-     * Last modified time of the file
-     */
-    lastModified: string;
-
-    /**
-     * File metadata
-     */
-    mode: string;
-
-    /**
-     * Name of the file
-     */
-    name: string;
-
-    /**
-     * Full path to the file in the box
-     */
-    path: string;
-
-    /**
-     * Size of the file
-     */
-    size: string;
-
-    /**
-     * File type indicator
-     */
-    type: 'file';
-  }
-
-  /**
-   * File system directory representation
-   */
-  export interface Dir {
-    /**
-     * Last modified time of the directory
-     */
-    lastModified: string;
-
-    /**
-     * Directory metadata
-     */
-    mode: string;
-
-    /**
-     * Name of the directory
-     */
-    name: string;
-
-    /**
-     * Full path to the directory in the box
-     */
-    path: string;
-
-    /**
-     * Directory type indicator
-     */
-    type: 'dir';
-  }
+  data: Array<File | Dir>;
 }
 
 /**
@@ -237,74 +235,7 @@ export namespace FExistsResponse {
 /**
  * File system file representation
  */
-export type FInfoResponse = FInfoResponse.File | FInfoResponse.Dir;
-
-export namespace FInfoResponse {
-  /**
-   * File system file representation
-   */
-  export interface File {
-    /**
-     * Last modified time of the file
-     */
-    lastModified: string;
-
-    /**
-     * File metadata
-     */
-    mode: string;
-
-    /**
-     * Name of the file
-     */
-    name: string;
-
-    /**
-     * Full path to the file in the box
-     */
-    path: string;
-
-    /**
-     * Size of the file
-     */
-    size: string;
-
-    /**
-     * File type indicator
-     */
-    type: 'file';
-  }
-
-  /**
-   * File system directory representation
-   */
-  export interface Dir {
-    /**
-     * Last modified time of the directory
-     */
-    lastModified: string;
-
-    /**
-     * Directory metadata
-     */
-    mode: string;
-
-    /**
-     * Name of the directory
-     */
-    name: string;
-
-    /**
-     * Full path to the directory in the box
-     */
-    path: string;
-
-    /**
-     * Directory type indicator
-     */
-    type: 'dir';
-  }
-}
+export type FInfoResponse = File | Dir;
 
 /**
  * Response containing file content
@@ -329,109 +260,7 @@ export interface FRemoveResponse {
 /**
  * File system file representation
  */
-export type FRenameResponse = FRenameResponse.File | FRenameResponse.Dir;
-
-export namespace FRenameResponse {
-  /**
-   * File system file representation
-   */
-  export interface File {
-    /**
-     * Last modified time of the file
-     */
-    lastModified: string;
-
-    /**
-     * File metadata
-     */
-    mode: string;
-
-    /**
-     * Name of the file
-     */
-    name: string;
-
-    /**
-     * Full path to the file in the box
-     */
-    path: string;
-
-    /**
-     * Size of the file
-     */
-    size: string;
-
-    /**
-     * File type indicator
-     */
-    type: 'file';
-  }
-
-  /**
-   * File system directory representation
-   */
-  export interface Dir {
-    /**
-     * Last modified time of the directory
-     */
-    lastModified: string;
-
-    /**
-     * Directory metadata
-     */
-    mode: string;
-
-    /**
-     * Name of the directory
-     */
-    name: string;
-
-    /**
-     * Full path to the directory in the box
-     */
-    path: string;
-
-    /**
-     * Directory type indicator
-     */
-    type: 'dir';
-  }
-}
-
-/**
- * File system file representation
- */
-export interface FWriteResponse {
-  /**
-   * Last modified time of the file
-   */
-  lastModified: string;
-
-  /**
-   * File metadata
-   */
-  mode: string;
-
-  /**
-   * Name of the file
-   */
-  name: string;
-
-  /**
-   * Full path to the file in the box
-   */
-  path: string;
-
-  /**
-   * Size of the file
-   */
-  size: string;
-
-  /**
-   * File type indicator
-   */
-  type: 'file';
-}
+export type FRenameResponse = File | Dir;
 
 export interface FListParams {
   /**
@@ -578,13 +407,14 @@ export declare namespace FWriteParams {
 
 export declare namespace Fs {
   export {
+    type Dir as Dir,
+    type File as File,
     type FListResponse as FListResponse,
     type FExistsResponse as FExistsResponse,
     type FInfoResponse as FInfoResponse,
     type FReadResponse as FReadResponse,
     type FRemoveResponse as FRemoveResponse,
     type FRenameResponse as FRenameResponse,
-    type FWriteResponse as FWriteResponse,
     type FListParams as FListParams,
     type FExistsParams as FExistsParams,
     type FInfoParams as FInfoParams,

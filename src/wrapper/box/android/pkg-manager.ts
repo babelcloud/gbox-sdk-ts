@@ -5,9 +5,9 @@ import {
   AndroidInstallResponse,
   AndroidListPkgResponse,
   AndroidListPkgSimpleResponse,
-  AndroidGetResponse,
   AndroidListPkgParams,
   AndroidListPkgSimpleParams,
+  AndroidPkg,
 } from '../../../resources/v1/boxes';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -112,7 +112,7 @@ export class AndroidPkgManager {
    * @example
    * const response = await myBox.pkg.getInfo('com.example.myapp');
    */
-  async getInfo(packageName: string): Promise<AndroidGetResponse> {
+  async getInfo(packageName: string): Promise<AndroidPkg> {
     return this.client.v1.boxes.android.get(packageName, { boxId: this.box.id });
   }
 

@@ -1,9 +1,11 @@
 import {
   MediaGetMediaSupportResponse,
   MediaListAlbumsResponse,
-  MediaGetAlbumDetailResponse,
   MediaGetMediaResponse,
   MediaListMediaResponse,
+  MediaAlbum,
+  MediaPhoto,
+  MediaVideo,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { Uploadable } from '../../internal/uploads';
@@ -173,7 +175,7 @@ export class MediaOperator {
    * @example
    * const response = await myBox.media.getAlbumInfo('My Album');
    */
-  getAlbumInfo(albumName: string): Promise<MediaGetAlbumDetailResponse> {
+  getAlbumInfo(albumName: string): Promise<MediaAlbum> {
     return this.client.v1.boxes.media.getAlbumDetail(albumName, { boxId: this.boxId });
   }
 
@@ -215,9 +217,9 @@ export class MediaOperator {
 export class MediaAlbumOperator {
   private client: GboxClient;
   private boxId: string;
-  private data: MediaListAlbumsResponse.Data;
+  private data: MediaAlbum;
 
-  constructor(client: GboxClient, boxId: string, data: MediaListAlbumsResponse.Data) {
+  constructor(client: GboxClient, boxId: string, data: MediaAlbum) {
     this.client = client;
     this.boxId = boxId;
     this.data = data;
@@ -334,14 +336,9 @@ export class MediaItemOperator {
   private client: GboxClient;
   private boxId: string;
   private albumName: string;
-  private data: MediaListMediaResponse.Photo | MediaListMediaResponse.Video;
+  private data: MediaPhoto | MediaVideo;
 
-  constructor(
-    client: GboxClient,
-    boxId: string,
-    albumName: string,
-    data: MediaListMediaResponse.Photo | MediaListMediaResponse.Video,
-  ) {
+  constructor(client: GboxClient, boxId: string, albumName: string, data: MediaPhoto | MediaVideo) {
     this.client = client;
     this.boxId = boxId;
     this.albumName = albumName;

@@ -10,6 +10,7 @@ import {
 import { CreateAndroid, AndroidBoxOperator } from './box/android';
 import { CreateLinux, LinuxBoxOperator } from './box/linux';
 import { isAndroidBox, isLinuxBox } from './utils';
+import { Profile } from './profile';
 
 /*
  * @example
@@ -20,10 +21,13 @@ import { isAndroidBox, isLinuxBox } from './utils';
  * });
  */
 export class GboxSDK {
-  private client: GboxClient;
+  readonly client: GboxClient;
 
   constructor(clientOptions?: ClientOptions) {
-    this.client = new GboxClient(clientOptions);
+    // Create enhanced client options with profile support
+    const profile = new Profile();
+    const enhancedOptions = profile.buildClientOptions(clientOptions);
+    this.client = new GboxClient(enhancedOptions);
   }
 
   /**

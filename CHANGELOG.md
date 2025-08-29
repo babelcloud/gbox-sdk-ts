@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.30.0 (2025-08-29)
+
+Full Changelog: [v0.29.0...v0.30.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.29.0...v0.30.0)
+
+### Features
+
+* **action:** add screenRotation method and ActionScreenRotation interface for enhanced screen manipulation ([ba9dded](https://github.com/babelcloud/gbox-sdk-ts/commit/ba9ddeddb2d2b5e4dffacf9ab0c727a4270cf255))
+* **api:** api update ([07490e4](https://github.com/babelcloud/gbox-sdk-ts/commit/07490e426d6bf45f2fd55da35141707f8fd1bd37))
+* **api:** api update ([819336e](https://github.com/babelcloud/gbox-sdk-ts/commit/819336e08f51725057fc6f10d2c27bf098855d6f))
+* **api:** api update ([8624271](https://github.com/babelcloud/gbox-sdk-ts/commit/862427137cb42ef3a7f20a75764cc1275493ed4b))
+* **api:** api update ([bbc3f7c](https://github.com/babelcloud/gbox-sdk-ts/commit/bbc3f7c0c13d2cd57860a62c7c3ac7f23326b620))
+* **api:** api update ([dd287eb](https://github.com/babelcloud/gbox-sdk-ts/commit/dd287eb40f3a137ca5016a9acd2874a729c61081))
+* **api:** api update ([679eb7e](https://github.com/babelcloud/gbox-sdk-ts/commit/679eb7eb053ad5fb1a73a3ce3470f660a6b2395e))
+* **api:** api update ([fd26422](https://github.com/babelcloud/gbox-sdk-ts/commit/fd26422b394b82904ad127ec2fe73b4f82b3189d))
+* **api:** api update ([93545a5](https://github.com/babelcloud/gbox-sdk-ts/commit/93545a5ffccd4e7f480547b7a9c3b5db0f342bd0))
+* **api:** api update ([356b6b1](https://github.com/babelcloud/gbox-sdk-ts/commit/356b6b1f9bed1a9937312125b7a62aec5011e15a))
+* **api:** api update ([2dfea41](https://github.com/babelcloud/gbox-sdk-ts/commit/2dfea41383ac31756ec463200cdedfac7c63e3c0))
+* **api:** api update ([8fbd2b2](https://github.com/babelcloud/gbox-sdk-ts/commit/8fbd2b2c63e9ca7b132805de168c79c2d12778f8))
+* **api:** api update ([32e4fd4](https://github.com/babelcloud/gbox-sdk-ts/commit/32e4fd4e4c9cb5510deb6487c3a89fd2bad3c0b4))
+* **api:** api update ([86a0e4c](https://github.com/babelcloud/gbox-sdk-ts/commit/86a0e4cf11fe841c06ab0a6aa72c37467fe5fcde))
+
+
+### Chores
+
+* **internal:** update global Error reference ([b4232e7](https://github.com/babelcloud/gbox-sdk-ts/commit/b4232e7e7bb49e0bbad5be516d1883b77de1e7c3))
+
+
+### Refactors
+
+* **action:** enhance action method overloads to include screenshot options and improve type definitions for better clarity and maintainability ([953945f](https://github.com/babelcloud/gbox-sdk-ts/commit/953945fc154d3a5873c595690cfb3013de2a1fbf))
+* **action:** remove deprecated parameters from action interfaces and update related tests ([58db526](https://github.com/babelcloud/gbox-sdk-ts/commit/58db5266b1ba51ad1d973a99324a47467950aed3))
+* **action:** rename screenshot range to phases for clarity in action methods ([2367c28](https://github.com/babelcloud/gbox-sdk-ts/commit/2367c283dc6514d5397f5784d8053f72ed994b0f))
+* **action:** streamline action method overloads with common type patterns for improved readability and maintainability; update write method in FileOperator to return 'this' for better chaining ([5561133](https://github.com/babelcloud/gbox-sdk-ts/commit/55611333603d89af2f866c2a9db83ecddd1cd702))
+* **action:** update action method return types to use ActionResult for better type safety and clarity ([7552713](https://github.com/babelcloud/gbox-sdk-ts/commit/7552713e5a6dda60a6108284f7570de2b4b14aae))
+
 ## 0.29.0 (2025-08-26)
 
 Full Changelog: [v0.28.0...v0.29.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.28.0...v0.29.0)
