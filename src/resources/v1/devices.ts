@@ -36,6 +36,11 @@ export interface DeviceInfo {
   isIdle: boolean;
 
   /**
+   * Product model from ro.product.model
+   */
+  productModel: string;
+
+  /**
    * Provider ID
    */
   providerId: string;
