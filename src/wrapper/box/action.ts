@@ -196,6 +196,12 @@ export interface ActionAI extends ActionAIParams {
   options?: Omit<ActionAIParams['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
+export interface ActionScreenRotation extends ActionScreenRotationParams {
+  screenshotDelay?: TimeString;
+
+  options?: Omit<ActionScreenRotationParams['options'], 'screenshot'> & ActionOptionsOverride;
+}
+
 export class ActionOperator {
   private client: GboxClient;
   private boxId: string;
@@ -531,6 +537,34 @@ export class ActionOperator {
 
   /**
    * @example
+   * const response = await myBox.action.screenRotation({ orientation: 'landscapeLeft' });
+   */
+  async screenRotation(
+    body: ActionScreenRotation & { includeScreenshot: false },
+  ): Promise<{ message: string }>;
+  async screenRotation(
+    body: ActionBodyWithScreenshotFalse<ActionScreenRotation>,
+  ): Promise<{ message: string }>;
+  async screenRotation(body: ActionBodyWithScreenshotUndefined<ActionScreenRotation>): Promise<ActionResult>;
+  async screenRotation(
+    body: ActionBodyWithScreenshotTrue<ActionScreenRotation>,
+  ): Promise<ActionResultWithScreenshot>;
+  async screenRotation<K extends ReadonlyArray<'before' | 'after' | 'trace'>>(
+    body: ActionBodyWithScreenshotPhases<ActionScreenRotation, K>,
+  ): Promise<{
+    message: string;
+    screenshot: ScreenshotPickOf<ActionResult, K[number]>;
+  }>;
+  async screenRotation(
+    body: ActionBodyWithScreenshotObject<ActionScreenRotation>,
+  ): Promise<ActionResultWithScreenshot>;
+  async screenRotation(body: ActionBodyWithOptions<ActionScreenRotation>): Promise<ActionResult>;
+  async screenRotation(body: ActionScreenRotation) {
+    return this.client.v1.boxes.actions.screenRotation(this.boxId, body);
+  }
+
+  /**
+   * @example
    * const response = await myBox.action.screenshot();
    * or
    * const response = await myBox.action.screenshot({ outputFormat: 'base64' });
@@ -552,14 +586,6 @@ export class ActionOperator {
    */
   async screenLayout() {
     return this.client.v1.boxes.actions.screenLayout(this.boxId);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.action.screenRotation({ angle: 90, direction: 'clockwise' });
-   */
-  async screenRotation(body: ActionScreenRotationParams) {
-    return this.client.v1.boxes.actions.screenRotation(this.boxId, body);
   }
 
   /**
