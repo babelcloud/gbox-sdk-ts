@@ -236,50 +236,52 @@ async function main() {
   console.log('Test 16 - Double click:', result16.message);
   console.log('Test 16 - Has screenshot:', !!result16.screenshot);
 
-  // Test 17: Click with deprecated includeScreenshot: false - should return { message: string }
-  const result17 = await box.action.click({
-    x: 100,
-    y: 100,
-    includeScreenshot: false,
-  });
-  console.log('Test 17 - Deprecated includeScreenshot false:', result17.message);
-  console.log('Test 17 - Has screenshot:', !!result17.screenshot);
+  // // Test 17: Click with deprecated includeScreenshot: false - should return { message: string }
+  // const result17 = await box.action.click({
+  //   x: 100,
+  //   y: 100,
+  //   // @ts-expect-error - includeScreenshot is deprecated
+  //   includeScreenshot: false,
+  // });
+  // console.log('Test 17 - Deprecated includeScreenshot false:', result17.message);
+  // console.log('Test 17 - Has screenshot:', !!result17.screenshot);
 
-  // Test 18: Click with deprecated includeScreenshot: true - should return ActionResult
-  const result18 = await box.action.click({
-    x: 100,
-    y: 100,
-    includeScreenshot: true,
-  });
-  console.log('Test 18 - Deprecated includeScreenshot true:', result18.message);
-  console.log('Test 18 - Has screenshot:', !!result18.screenshot);
+  // // Test 18: Click with deprecated includeScreenshot: true - should return ActionResult
+  // const result18 = await box.action.click({
+  //   x: 100,
+  //   y: 100,
+  //   // @ts-expect-error - includeScreenshot is deprecated
+  //   includeScreenshot: true,
+  // });
+  // console.log('Test 18 - Deprecated includeScreenshot true:', result18.message);
+  // console.log('Test 18 - Has screenshot:', !!result18.screenshot);
 
-  // Test 19: Click with deprecated outputFormat - should return ActionResult
-  const result19 = await box.action.click({
-    x: 100,
-    y: 100,
-    outputFormat: 'storageKey',
-  });
-  console.log('Test 19 - Deprecated outputFormat:', result19.message);
-  console.log('Test 19 - Has screenshot:', !!result19.screenshot);
+  // // Test 19: Click with deprecated outputFormat - should return ActionResult
+  // const result19 = await box.action.click({
+  //   x: 100,
+  //   y: 100,
+  //   outputFormat: 'storageKey',
+  // });
+  // console.log('Test 19 - Deprecated outputFormat:', result19.message);
+  // console.log('Test 19 - Has screenshot:', !!result19.screenshot);
 
-  // Test 20: Click with deprecated presignedExpiresIn - should return ActionResult
-  const result20 = await box.action.click({
-    x: 100,
-    y: 100,
-    presignedExpiresIn: '30m',
-  });
-  console.log('Test 20 - Deprecated presignedExpiresIn:', result20.message);
-  console.log('Test 20 - Has screenshot:', !!result20.screenshot);
+  // // Test 20: Click with deprecated presignedExpiresIn - should return ActionResult
+  // const result20 = await box.action.click({
+  //   x: 100,
+  //   y: 100,
+  //   presignedExpiresIn: '30m',
+  // });
+  // console.log('Test 20 - Deprecated presignedExpiresIn:', result20.message);
+  // console.log('Test 20 - Has screenshot:', !!result20.screenshot);
 
-  // Test 21: Click with deprecated screenshotDelay - should return ActionResult
-  const result21 = await box.action.click({
-    x: 100,
-    y: 100,
-    screenshotDelay: '500ms',
-  });
-  console.log('Test 21 - Deprecated screenshotDelay:', result21.message);
-  console.log('Test 21 - Has screenshot:', !!result21.screenshot);
+  // // Test 21: Click with deprecated screenshotDelay - should return ActionResult
+  // const result21 = await box.action.click({
+  //   x: 100,
+  //   y: 100,
+  //   screenshotDelay: '500ms',
+  // });
+  // console.log('Test 21 - Deprecated screenshotDelay:', result21.message);
+  // console.log('Test 21 - Has screenshot:', !!result21.screenshot);
 
   console.log('All click overload tests completed!');
 }

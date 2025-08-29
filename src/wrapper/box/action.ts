@@ -67,13 +67,20 @@ type ActionResultWithScreenshot = {
   screenshot: ScreenshotAllRequiredOf<ActionResult>;
 };
 
-export interface ActionClickByPoint extends ActionClickParams.Click {
+// Helper type to omit deprecated parameters from action params
+type OmitDeprecatedParams<T> = Omit<
+  T,
+  'includeScreenshot' | 'outputFormat' | 'presignedExpiresIn' | 'screenshotDelay'
+>;
+
+export interface ActionClickByPoint extends OmitDeprecatedParams<ActionClickParams.Click> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionClickParams.Click['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionClickByNaturalLanguage extends ActionClickParams.ClickByNaturalLanguage {
+export interface ActionClickByNaturalLanguage
+  extends OmitDeprecatedParams<ActionClickParams.ClickByNaturalLanguage> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionClickParams.ClickByNaturalLanguage['options'], 'screenshot'> & ActionOptionsOverride;
@@ -81,13 +88,13 @@ export interface ActionClickByNaturalLanguage extends ActionClickParams.ClickByN
 
 export type ActionClick = ActionClickByPoint | ActionClickByNaturalLanguage;
 
-export interface ActionDragSimple extends ActionDragParams.DragSimple {
+export interface ActionDragSimple extends OmitDeprecatedParams<ActionDragParams.DragSimple> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionDragParams.DragSimple['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionDragAdvanced extends ActionDragParams.DragAdvanced {
+export interface ActionDragAdvanced extends OmitDeprecatedParams<ActionDragParams.DragAdvanced> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionDragParams.DragAdvanced['options'], 'screenshot'> & ActionOptionsOverride;
@@ -95,19 +102,19 @@ export interface ActionDragAdvanced extends ActionDragParams.DragAdvanced {
 
 export type ActionDrag = ActionDragSimple | ActionDragAdvanced;
 
-export interface ActionMove extends ActionMoveParams {
+export interface ActionMove extends OmitDeprecatedParams<ActionMoveParams> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionMoveParams['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionScrollAdvanced extends ActionScrollParams.ScrollAdvanced {
+export interface ActionScrollAdvanced extends OmitDeprecatedParams<ActionScrollParams.ScrollAdvanced> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionScrollParams.ScrollAdvanced['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionScrollSimple extends ActionScrollParams.ScrollSimple {
+export interface ActionScrollSimple extends OmitDeprecatedParams<ActionScrollParams.ScrollSimple> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionScrollParams.ScrollSimple['options'], 'screenshot'> & ActionOptionsOverride;
@@ -115,13 +122,14 @@ export interface ActionScrollSimple extends ActionScrollParams.ScrollSimple {
 
 export type ActionScroll = ActionScrollSimple | ActionScrollAdvanced;
 
-export interface ActionTapByPoint extends ActionTapParams.Tap {
+export interface ActionTapByPoint extends OmitDeprecatedParams<ActionTapParams.Tap> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionTapParams.Tap['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionTapByNaturalLanguage extends ActionTapParams.TapByNaturalLanguage {
+export interface ActionTapByNaturalLanguage
+  extends OmitDeprecatedParams<ActionTapParams.TapByNaturalLanguage> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionTapParams.TapByNaturalLanguage['options'], 'screenshot'> & ActionOptionsOverride;
@@ -129,13 +137,14 @@ export interface ActionTapByNaturalLanguage extends ActionTapParams.TapByNatural
 
 export type ActionTap = ActionTapByPoint | ActionTapByNaturalLanguage;
 
-export interface ActionLongPressByPoint extends ActionLongPressParams.LongPress {
+export interface ActionLongPressByPoint extends OmitDeprecatedParams<ActionLongPressParams.LongPress> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionLongPressParams.LongPress['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionLongPressByNaturalLanguage extends ActionLongPressParams.LongPressByNaturalLanguage {
+export interface ActionLongPressByNaturalLanguage
+  extends OmitDeprecatedParams<ActionLongPressParams.LongPressByNaturalLanguage> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionLongPressParams.LongPressByNaturalLanguage['options'], 'screenshot'> &
@@ -144,37 +153,37 @@ export interface ActionLongPressByNaturalLanguage extends ActionLongPressParams.
 
 export type ActionLongPress = ActionLongPressByPoint | ActionLongPressByNaturalLanguage;
 
-export interface ActionTouch extends ActionTouchParams {
+export interface ActionTouch extends OmitDeprecatedParams<ActionTouchParams> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionTouchParams['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionType extends ActionTypeParams {
+export interface ActionType extends OmitDeprecatedParams<ActionTypeParams> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionTypeParams['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionPressButton extends ActionPressButtonParams {
+export interface ActionPressButton extends OmitDeprecatedParams<ActionPressButtonParams> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionPressButtonParams['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionPressKey extends ActionPressKeyParams {
+export interface ActionPressKey extends OmitDeprecatedParams<ActionPressKeyParams> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionPressKeyParams['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionSwipeSimple extends ActionSwipeParams.SwipeSimple {
+export interface ActionSwipeSimple extends OmitDeprecatedParams<ActionSwipeParams.SwipeSimple> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionSwipeParams.SwipeSimple['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionSwipeAdvanced extends ActionSwipeParams.SwipeAdvanced {
+export interface ActionSwipeAdvanced extends OmitDeprecatedParams<ActionSwipeParams.SwipeAdvanced> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionSwipeParams.SwipeAdvanced['options'], 'screenshot'> & ActionOptionsOverride;
@@ -190,13 +199,13 @@ export interface ActionScreenshot extends ActionScreenshotParams {
   path?: string;
 }
 
-export interface ActionAI extends ActionAIParams {
+export interface ActionAI extends OmitDeprecatedParams<ActionAIParams> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionAIParams['options'], 'screenshot'> & ActionOptionsOverride;
 }
 
-export interface ActionScreenRotation extends ActionScreenRotationParams {
+export interface ActionScreenRotation extends OmitDeprecatedParams<ActionScreenRotationParams> {
   screenshotDelay?: TimeString;
 
   options?: Omit<ActionScreenRotationParams['options'], 'screenshot'> & ActionOptionsOverride;
@@ -335,7 +344,6 @@ export class ActionOperator {
    *   }
    * );
    */
-  async drag(body: ActionDrag & { includeScreenshot: false }): Promise<{ message: string }>;
   async drag(body: ActionBodyWithScreenshotFalse<ActionDrag>): Promise<{ message: string }>;
   async drag(body: ActionBodyWithScreenshotUndefined<ActionDrag>): Promise<ActionResult>;
   async drag(body: ActionBodyWithScreenshotTrue<ActionDrag>): Promise<ActionResultWithScreenshot>;
@@ -355,7 +363,6 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.swipe({ direction: 'up' });
    */
-  async swipe(body: ActionSwipe & { includeScreenshot: false }): Promise<{ message: string }>;
   async swipe(body: ActionBodyWithScreenshotFalse<ActionSwipe>): Promise<{ message: string }>;
   async swipe(body: ActionBodyWithScreenshotUndefined<ActionSwipe>): Promise<ActionResult>;
   async swipe(body: ActionBodyWithScreenshotTrue<ActionSwipe>): Promise<ActionResultWithScreenshot>;
@@ -375,7 +382,6 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.pressKey({ keys: ['enter'] });
    */
-  async pressKey(body: ActionPressKey & { includeScreenshot: false }): Promise<{ message: string }>;
   async pressKey(body: ActionBodyWithScreenshotFalse<ActionPressKey>): Promise<{ message: string }>;
   async pressKey(body: ActionBodyWithScreenshotUndefined<ActionPressKey>): Promise<ActionResult>;
   async pressKey(body: ActionBodyWithScreenshotTrue<ActionPressKey>): Promise<ActionResultWithScreenshot>;
@@ -395,7 +401,6 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.pressButton({ buttons: ['power']});
    */
-  async pressButton(body: ActionPressButton & { includeScreenshot: false }): Promise<{ message: string }>;
   async pressButton(body: ActionBodyWithScreenshotFalse<ActionPressButton>): Promise<{ message: string }>;
   async pressButton(body: ActionBodyWithScreenshotUndefined<ActionPressButton>): Promise<ActionResult>;
   async pressButton(
@@ -418,7 +423,6 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.move({ x: 200, y: 300 });
    */
-  async move(body: ActionMove & { includeScreenshot: false }): Promise<{ message: string }>;
   async move(body: ActionBodyWithScreenshotFalse<ActionMove>): Promise<{ message: string }>;
   async move(body: ActionBodyWithScreenshotUndefined<ActionMove>): Promise<ActionResult>;
   async move(body: ActionBodyWithScreenshotTrue<ActionMove>): Promise<ActionResultWithScreenshot>;
@@ -438,7 +442,6 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.tap({ x: 100, y: 100 });
    */
-  async tap(body: ActionTap & { includeScreenshot: false }): Promise<{ message: string }>;
   async tap(body: ActionBodyWithScreenshotFalse<ActionTap>): Promise<{ message: string }>;
   async tap(body: ActionBodyWithScreenshotUndefined<ActionTap>): Promise<ActionResult>;
   async tap(body: ActionBodyWithScreenshotTrue<ActionTap>): Promise<ActionResultWithScreenshot>;
@@ -458,7 +461,6 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.longPress({ x: 100, y: 100 });
    */
-  async longPress(body: ActionLongPress & { includeScreenshot: false }): Promise<{ message: string }>;
   async longPress(body: ActionBodyWithScreenshotFalse<ActionLongPress>): Promise<{ message: string }>;
   async longPress(body: ActionBodyWithScreenshotUndefined<ActionLongPress>): Promise<ActionResult>;
   async longPress(body: ActionBodyWithScreenshotTrue<ActionLongPress>): Promise<ActionResultWithScreenshot>;
@@ -479,7 +481,6 @@ export class ActionOperator {
    * const response = await myBox.action.scroll({ direction: 'up' });
    * const response = await myBox.action.scroll({ scrollX: 0, scrollY: 100, x: 100, y: 100 });
    */
-  async scroll(body: ActionScroll & { includeScreenshot: false }): Promise<{ message: string }>;
   async scroll(body: ActionBodyWithScreenshotFalse<ActionScroll>): Promise<{ message: string }>;
   async scroll(body: ActionBodyWithScreenshotUndefined<ActionScroll>): Promise<ActionResult>;
   async scroll(body: ActionBodyWithScreenshotTrue<ActionScroll>): Promise<ActionResultWithScreenshot>;
@@ -499,7 +500,6 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.touch({ points: [{ start: { x: 0, y: 0 } }] });
    */
-  async touch(body: ActionTouch & { includeScreenshot: false }): Promise<{ message: string }>;
   async touch(body: ActionBodyWithScreenshotFalse<ActionTouch>): Promise<{ message: string }>;
   async touch(body: ActionBodyWithScreenshotUndefined<ActionTouch>): Promise<ActionResult>;
   async touch(body: ActionBodyWithScreenshotTrue<ActionTouch>): Promise<ActionResultWithScreenshot>;
@@ -539,9 +539,6 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.screenRotation({ orientation: 'landscapeLeft' });
    */
-  async screenRotation(
-    body: ActionScreenRotation & { includeScreenshot: false },
-  ): Promise<{ message: string }>;
   async screenRotation(
     body: ActionBodyWithScreenshotFalse<ActionScreenRotation>,
   ): Promise<{ message: string }>;
