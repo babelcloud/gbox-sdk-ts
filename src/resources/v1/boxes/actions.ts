@@ -1955,20 +1955,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
-         * The scale of the action to be performed. Must be greater than 0.1 and less than
-         * or equal to 1.
-         *
-         * Notes:
-         *
-         * - Scale does not change the box's actual screen resolution.
-         * - It affects the size of the output screenshot and the coordinates/distances of
-         *   actions. Coordinates and distances are scaled by this factor. Example: when
-         *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
-         *   Click({x:50, y:50}).
-         * - If not provided, uses the scale value from UI action settings; otherwise uses
-         *   the passed value.
+         * Whether to save the screenshot to the device screenshot album
          */
-        scale?: number;
+        saveToAlbum?: boolean;
       }
 
       export namespace TypedScreenshotAction {
@@ -3675,20 +3664,9 @@ export namespace ActionAIResponse {
         presignedExpiresIn?: string;
 
         /**
-         * The scale of the action to be performed. Must be greater than 0.1 and less than
-         * or equal to 1.
-         *
-         * Notes:
-         *
-         * - Scale does not change the box's actual screen resolution.
-         * - It affects the size of the output screenshot and the coordinates/distances of
-         *   actions. Coordinates and distances are scaled by this factor. Example: when
-         *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
-         *   Click({x:50, y:50}).
-         * - If not provided, uses the scale value from UI action settings; otherwise uses
-         *   the passed value.
+         * Whether to save the screenshot to the device screenshot album
          */
-        scale?: number;
+        saveToAlbum?: boolean;
       }
 
       export namespace TypedScreenshotAction {
@@ -5151,20 +5129,9 @@ export interface ActionScreenshotParams {
   presignedExpiresIn?: string;
 
   /**
-   * The scale of the action to be performed. Must be greater than 0.1 and less than
-   * or equal to 1.
-   *
-   * Notes:
-   *
-   * - Scale does not change the box's actual screen resolution.
-   * - It affects the size of the output screenshot and the coordinates/distances of
-   *   actions. Coordinates and distances are scaled by this factor. Example: when
-   *   scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
-   *   Click({x:50, y:50}).
-   * - If not provided, uses the scale value from UI action settings; otherwise uses
-   *   the passed value.
+   * Whether to save the screenshot to the device screenshot album
    */
-  scale?: number;
+  saveToAlbum?: boolean;
 }
 
 export namespace ActionScreenshotParams {
