@@ -69,7 +69,7 @@ export class Profile {
    */
   getAPIKey(): string | null {
     if (!this.config) {
-      this.load();
+      this.config = this.load();
     }
 
     if (!this.config || !this.config.profiles || !this.config.current) {
@@ -95,7 +95,7 @@ export class Profile {
    */
   getBaseURL(): string | null {
     if (!this.config) {
-      this.load();
+      this.config = this.load();
     }
 
     if (!this.config) {
@@ -121,7 +121,11 @@ export class Profile {
    * 3. Profile file values (lowest priority)
    */
   buildClientOptions(userOptions?: ProfileOptions): ProfileOptions {
+    // Load profile and update internal config
     const profile = this.load();
+    if (profile) {
+      this.config = profile;
+    }
     const options: ProfileOptions = { ...userOptions };
 
     // Get logger and logLevel from userOptions or defaults
