@@ -6,7 +6,8 @@ import { readEnv } from '../internal/utils/env';
 import type { Logger, LogLevel } from '../internal/utils/log';
 
 export interface ProfileData {
-  org: string;
+  org_name: string;
+  org_slug: string;
   key: string;
   base_url?: string | undefined;
 }
@@ -201,10 +202,13 @@ export class Profile {
       // Extract profiles
       if (parsed.profiles && typeof parsed.profiles === 'object') {
         for (const [key, profile] of Object.entries(parsed.profiles)) {
-          if (profile && typeof profile === 'object' && 'org' in profile && 'key' in profile) {
+          if (profile && typeof profile === 'object' && 'key' in profile) {
             const profileData = profile as any;
+            // Support both 'org' and 'org_name' fields for backward compatibility
+            const orgName = profileData.org_name || profileData.org || '';
             config.profiles[key] = {
-              org: String(profileData.org || ''),
+              org_name: orgName,
+              org_slug: String(profileData.org_slug || ''),
               key: String(profileData.key || ''),
               base_url: profileData.base_url ? String(profileData.base_url) : undefined,
             };
