@@ -12,6 +12,7 @@ export interface ProfileData {
 }
 
 export interface ProfileConfig {
+  current?: string;
   profiles: Record<string, ProfileData>;
   defaults?: {
     base_url?: string | undefined;
@@ -64,35 +65,33 @@ export class Profile {
   }
 
   /**
-   * Get API key from the first available profile
+   * Get API key from the current profile
    */
   getAPIKey(): string | null {
     if (!this.config) {
       this.load();
     }
 
-    if (!this.config || !this.config.profiles) {
+    if (!this.config || !this.config.profiles || !this.config.current) {
       return null;
     }
 
-    // Get the first profile with an API key
-    for (const profile of Object.values(this.config.profiles)) {
-      if (profile && profile.key) {
-        try {
-          // Decode base64 encoded API key
-          return Buffer.from(profile.key, 'base64').toString('utf8');
-        } catch (error) {
-          console.warn(`Failed to decode API key: ${error}`);
-          continue;
-        }
-      }
+    const currentProfile = this.config.profiles[this.config.current];
+    if (!currentProfile || !currentProfile.key) {
+      return null;
     }
 
-    return null;
+    try {
+      // Decode base64 encoded API key
+      return Buffer.from(currentProfile.key, 'base64').toString('utf8');
+    } catch (error) {
+      console.warn(`Failed to decode API key: ${error}`);
+      return null;
+    }
   }
 
   /**
-   * Get base URL from the first available profile or defaults
+   * Get base URL from the current profile or defaults
    */
   getBaseURL(): string | null {
     if (!this.config) {
@@ -103,10 +102,11 @@ export class Profile {
       return null;
     }
 
-    // First try to get from profiles
-    for (const profile of Object.values(this.config.profiles)) {
-      if (profile && profile.base_url) {
-        return profile.base_url;
+    // First try to get from current profile
+    if (this.config.current && this.config.profiles[this.config.current]) {
+      const currentProfile = this.config.profiles[this.config.current];
+      if (currentProfile && currentProfile.base_url) {
+        return currentProfile.base_url;
       }
     }
 
@@ -188,6 +188,11 @@ export class Profile {
         profiles: {},
         defaults: {},
       };
+
+      // Set current if it exists
+      if (parsed.current) {
+        config.current = String(parsed.current);
+      }
 
       // Extract profiles
       if (parsed.profiles && typeof parsed.profiles === 'object') {
