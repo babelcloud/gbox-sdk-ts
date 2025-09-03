@@ -80,6 +80,8 @@ describe('Profile', () => {
 
     test('should return parsed profile config when file is valid', () => {
       const validToml = `
+        current = "default"
+        
         [profiles.default]
         org = "test-org"
         key = "test-key"
@@ -98,6 +100,7 @@ describe('Profile', () => {
 
       const result = profile.load();
       expect(result).toEqual({
+        current: 'default',
         profiles: {
           default: {
             org: 'test-org',
@@ -118,8 +121,9 @@ describe('Profile', () => {
   });
 
   describe('getAPIKey', () => {
-    test('should return first available API key from profiles', () => {
+    test('should return API key from current profile', () => {
       const mockConfig = {
+        current: 'profile1',
         profiles: {
           profile1: { org: 'org1', key: 'a2V5MQ==' }, // base64 encoded "key1"
           profile2: { org: 'org2', key: 'a2V5Mg==' }, // base64 encoded "key2"
@@ -135,15 +139,24 @@ describe('Profile', () => {
       expect(result).toBe('key1');
     });
 
-    test('should return null when no profiles exist', () => {
-      jest.spyOn(profile, 'load').mockReturnValue(null);
+    test('should return null when no current profile is set', () => {
+      const mockConfig = {
+        profiles: {
+          profile1: { org: 'org1', key: 'a2V5MQ==' },
+        },
+        defaults: {},
+      };
+
+      jest.spyOn(profile, 'load').mockReturnValue(mockConfig);
+      (profile as any).config = mockConfig;
 
       const result = profile.getAPIKey();
       expect(result).toBeNull();
     });
 
-    test('should return null when profiles have no keys', () => {
+    test('should return null when current profile has no key', () => {
       const mockConfig = {
+        current: 'profile1',
         profiles: {
           profile1: { org: 'org1', key: '' },
         },
@@ -151,6 +164,7 @@ describe('Profile', () => {
       };
 
       jest.spyOn(profile, 'load').mockReturnValue(mockConfig);
+      (profile as any).config = mockConfig;
 
       const result = profile.getAPIKey();
       expect(result).toBeNull();
@@ -158,8 +172,9 @@ describe('Profile', () => {
   });
 
   describe('getBaseURL', () => {
-    test('should return first available base URL from profiles', () => {
+    test('should return base URL from current profile', () => {
       const mockConfig = {
+        current: 'profile1',
         profiles: {
           profile1: { org: 'org1', key: 'key1', base_url: 'https://profile1.example.com' },
           profile2: { org: 'org2', key: 'key2', base_url: 'https://profile2.example.com' },
@@ -175,8 +190,9 @@ describe('Profile', () => {
       expect(result).toBe('https://profile1.example.com');
     });
 
-    test('should return default base URL when no profile has base_url', () => {
+    test('should return default base URL when current profile has no base_url', () => {
       const mockConfig = {
+        current: 'profile1',
         profiles: {
           profile1: { org: 'org1', key: 'key1' },
         },
@@ -195,6 +211,7 @@ describe('Profile', () => {
 
     test('should return null when no base URL is available', () => {
       const mockConfig = {
+        current: 'profile1',
         profiles: {
           profile1: { org: 'org1', key: 'key1' },
         },
@@ -202,6 +219,7 @@ describe('Profile', () => {
       };
 
       jest.spyOn(profile, 'load').mockReturnValue(mockConfig);
+      (profile as any).config = mockConfig;
 
       const result = profile.getBaseURL();
       expect(result).toBeNull();
@@ -235,6 +253,7 @@ describe('Profile', () => {
       process.env['GBOX_CLIENT_BASE_URL'] = 'https://env.example.com';
 
       const mockConfig = {
+        current: 'profile1',
         profiles: {
           profile1: { org: 'org1', key: 'profile-api-key', base_url: 'https://profile.example.com' },
         },
@@ -262,6 +281,7 @@ describe('Profile', () => {
 
     test('should use profile API key when neither user option nor environment variable is provided', () => {
       const mockConfig = {
+        current: 'profile1',
         profiles: {
           profile1: { org: 'org1', key: 'cHJvZmlsZS1hcGkta2V5' }, // base64 encoded "profile-api-key"
         },
@@ -303,6 +323,7 @@ describe('Profile', () => {
 
     test('should use profile base URL when no environment variables are set', () => {
       const mockConfig = {
+        current: 'profile1',
         profiles: {
           profile1: { org: 'org1', key: 'a2V5MQ==', base_url: 'https://profile.example.com' }, // base64 encoded "key1"
         },
