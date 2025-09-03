@@ -103,12 +103,14 @@ describe('Profile', () => {
         current: 'default',
         profiles: {
           default: {
-            org: 'test-org',
+            org_name: 'test-org',
+            org_slug: '',
             key: 'test-key',
             base_url: 'https://test.example.com',
           },
           production: {
-            org: 'prod-org',
+            org_name: 'prod-org',
+            org_slug: '',
             key: 'prod-key',
             base_url: undefined,
           },
@@ -125,8 +127,8 @@ describe('Profile', () => {
       const mockConfig = {
         current: 'profile1',
         profiles: {
-          profile1: { org: 'org1', key: 'a2V5MQ==' }, // base64 encoded "key1"
-          profile2: { org: 'org2', key: 'a2V5Mg==' }, // base64 encoded "key2"
+          profile1: { org_name: 'org1', org_slug: 'org1', key: 'a2V5MQ==' }, // base64 encoded "key1"
+          profile2: { org_name: 'org2', org_slug: 'org2', key: 'a2V5Mg==' }, // base64 encoded "key2"
         },
         defaults: {},
       };
@@ -142,7 +144,7 @@ describe('Profile', () => {
     test('should return null when no current profile is set', () => {
       const mockConfig = {
         profiles: {
-          profile1: { org: 'org1', key: 'a2V5MQ==' },
+          profile1: { org_name: 'org1', org_slug: 'org1', key: 'a2V5MQ==' },
         },
         defaults: {},
       };
@@ -158,7 +160,7 @@ describe('Profile', () => {
       const mockConfig = {
         current: 'profile1',
         profiles: {
-          profile1: { org: 'org1', key: '' },
+          profile1: { org_name: 'org1', org_slug: 'org1', key: '' },
         },
         defaults: {},
       };
@@ -176,8 +178,18 @@ describe('Profile', () => {
       const mockConfig = {
         current: 'profile1',
         profiles: {
-          profile1: { org: 'org1', key: 'key1', base_url: 'https://profile1.example.com' },
-          profile2: { org: 'org2', key: 'key2', base_url: 'https://profile2.example.com' },
+          profile1: {
+            org_name: 'org1',
+            org_slug: 'org1',
+            key: 'key1',
+            base_url: 'https://profile1.example.com',
+          },
+          profile2: {
+            org_name: 'org2',
+            org_slug: 'org2',
+            key: 'key2',
+            base_url: 'https://profile2.example.com',
+          },
         },
         defaults: {},
       };
@@ -194,7 +206,7 @@ describe('Profile', () => {
       const mockConfig = {
         current: 'profile1',
         profiles: {
-          profile1: { org: 'org1', key: 'key1' },
+          profile1: { org_name: 'org1', org_slug: 'org1', key: 'key1' },
         },
         defaults: {
           base_url: 'https://default.example.com',
@@ -213,7 +225,7 @@ describe('Profile', () => {
       const mockConfig = {
         current: 'profile1',
         profiles: {
-          profile1: { org: 'org1', key: 'key1' },
+          profile1: { org_name: 'org1', org_slug: 'org1', key: 'key1' },
         },
         defaults: {},
       };
@@ -255,7 +267,12 @@ describe('Profile', () => {
       const mockConfig = {
         current: 'profile1',
         profiles: {
-          profile1: { org: 'org1', key: 'profile-api-key', base_url: 'https://profile.example.com' },
+          profile1: {
+            org_name: 'org1',
+            org_slug: 'org1',
+            key: 'profile-api-key',
+            base_url: 'https://profile.example.com',
+          },
         },
         defaults: {},
       };
@@ -283,7 +300,7 @@ describe('Profile', () => {
       const mockConfig = {
         current: 'profile1',
         profiles: {
-          profile1: { org: 'org1', key: 'cHJvZmlsZS1hcGkta2V5' }, // base64 encoded "profile-api-key"
+          profile1: { org_name: 'org1', org_slug: 'org1', key: 'cHJvZmlsZS1hcGkta2V5' }, // base64 encoded "profile-api-key"
         },
         defaults: {},
       };
@@ -325,7 +342,12 @@ describe('Profile', () => {
       const mockConfig = {
         current: 'profile1',
         profiles: {
-          profile1: { org: 'org1', key: 'a2V5MQ==', base_url: 'https://profile.example.com' }, // base64 encoded "key1"
+          profile1: {
+            org_name: 'org1',
+            org_slug: 'org1',
+            key: 'a2V5MQ==',
+            base_url: 'https://profile.example.com',
+          }, // base64 encoded "key1"
         },
         defaults: {},
       };
@@ -405,7 +427,7 @@ describe('Profile', () => {
     });
 
     test('should handle missing defaults section', () => {
-      const parsed = { profiles: { profile1: { org: 'org1', key: 'key1' } } };
+      const parsed = { profiles: { profile1: { org_name: 'org1', org_slug: 'org1', key: 'key1' } } };
 
       const result = (profile as any).validateAndTransformConfig(parsed);
 
