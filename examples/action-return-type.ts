@@ -6,6 +6,44 @@ async function main() {
 
   console.log(`Android box created: ${box.data.id}`);
 
+  const g1 = await box.action.click({
+    x: 100,
+    y: 100,
+    options: {
+      screenshot: Math.random() > 0.5 ? true : false,
+    },
+  });
+  // g1 expects: union of { message } | ActionResultWithScreenshot
+  // @ts-expect-error - g1 is not guaranteed to have screenshot
+  console.log(g1.screenshot.before.uri);
+  if ('screenshot' in g1) {
+    console.log(g1.screenshot.before.uri);
+    console.log(g1.screenshot.after.uri);
+    console.log(g1.screenshot.trace.uri);
+  } else {
+    console.log(g1.message);
+  }
+
+  const g2 = await box.action.click({
+    x: 100,
+    y: 100,
+    options: {
+      screenshot:
+        Math.random() > 0.5 ?
+          {
+            phases: Math.random() > 0.5 ? ['before', 'after', 'trace'] : ['before', 'after'],
+            outputFormat: Math.random() > 0.5 ? 'base64' : 'storageKey',
+          }
+        : false,
+    },
+  });
+  // g2 expects: typed as ActionResult (broad generic overload)
+  // @ts-expect-error - screenshot may be undefined on ActionResult
+  console.log(g2.screenshot.before.uri);
+  // safe access with optional chaining should type-check
+  console.log(g2.screenshot?.before?.uri);
+  console.log(g2.message);
+
   // Test 1: Basic click without screenshot options - should return ActionResult
   const result1 = await box.action.click({
     x: 100,
