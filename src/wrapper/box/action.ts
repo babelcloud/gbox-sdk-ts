@@ -47,9 +47,13 @@ type ActionScreenshotOptionOverride = Omit<ActionScreenshotOptions, 'delay' | 'p
 };
 
 // Override options.screenshot in all action types
-type ActionOptionsOverride = {
+export type ActionCommonOptions = {
   screenshot?: boolean | ActionScreenshotOptionOverride;
 };
+
+// Helper to ensure options is an object type and not a primitive
+// This prevents {} from accepting primitives like strings
+type EnsureObject<T> = T & Record<string, unknown>;
 
 // Common overload patterns to reduce repetition
 type ActionBodyWithOptions<T> = T & { options?: undefined };
@@ -80,20 +84,20 @@ type ActionResultWithScreenshot = {
 // Helper type to omit deprecated parameters from action params
 type OmitDeprecatedParams<T> = Omit<
   T,
-  'includeScreenshot' | 'outputFormat' | 'presignedExpiresIn' | 'screenshotDelay'
+  'includeScreenshot' | 'outputFormat' | 'presignedExpiresIn' | 'screenshotDelay' | 'options'
 >;
 
 export interface ActionClickByPoint extends OmitDeprecatedParams<ActionClickParams.Click> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionClickParams.Click['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: EnsureObject<
+    ActionCommonOptions & Omit<NonNullable<ActionClickParams.Click['options']>, 'screenshot'>
+  >;
 }
 
 export interface ActionClickByNaturalLanguage
   extends OmitDeprecatedParams<ActionClickParams.ClickByNaturalLanguage> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionClickParams.ClickByNaturalLanguage['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: EnsureObject<
+    ActionCommonOptions & Omit<NonNullable<ActionClickParams.ClickByNaturalLanguage['options']>, 'screenshot'>
+  >;
 }
 
 export type ActionClick = ActionClickByPoint | ActionClickByNaturalLanguage;
@@ -101,64 +105,54 @@ export type ActionClick = ActionClickByPoint | ActionClickByNaturalLanguage;
 export interface ActionDragSimple extends OmitDeprecatedParams<ActionDragParams.DragSimple> {
   screenshotDelay?: TimeString;
 
-  options?: Omit<ActionDragParams.DragSimple['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionDragParams.DragSimple['options']>, 'screenshot'>;
 }
 
 export interface ActionDragAdvanced extends OmitDeprecatedParams<ActionDragParams.DragAdvanced> {
   screenshotDelay?: TimeString;
 
-  options?: Omit<ActionDragParams.DragAdvanced['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionDragParams.DragAdvanced['options']>, 'screenshot'>;
 }
 
 export type ActionDrag = ActionDragSimple | ActionDragAdvanced;
 
 export interface ActionMove extends OmitDeprecatedParams<ActionMoveParams> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionMoveParams['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionMoveParams['options']>, 'screenshot'>;
 }
 
 export interface ActionScrollAdvanced extends OmitDeprecatedParams<ActionScrollParams.ScrollAdvanced> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionScrollParams.ScrollAdvanced['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions &
+    Omit<NonNullable<ActionScrollParams.ScrollAdvanced['options']>, 'screenshot'>;
 }
 
 export interface ActionScrollSimple extends OmitDeprecatedParams<ActionScrollParams.ScrollSimple> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionScrollParams.ScrollSimple['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionScrollParams.ScrollSimple['options']>, 'screenshot'>;
 }
 
 export type ActionScroll = ActionScrollSimple | ActionScrollAdvanced;
 
 export interface ActionTapByPoint extends OmitDeprecatedParams<ActionTapParams.Tap> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionTapParams.Tap['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionTapParams.Tap['options']>, 'screenshot'>;
 }
 
 export interface ActionTapByNaturalLanguage
   extends OmitDeprecatedParams<ActionTapParams.TapByNaturalLanguage> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionTapParams.TapByNaturalLanguage['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions &
+    Omit<NonNullable<ActionTapParams.TapByNaturalLanguage['options']>, 'screenshot'>;
 }
 
 export type ActionTap = ActionTapByPoint | ActionTapByNaturalLanguage;
 
 export interface ActionLongPressByPoint extends OmitDeprecatedParams<ActionLongPressParams.LongPress> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionLongPressParams.LongPress['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionLongPressParams.LongPress['options']>, 'screenshot'>;
 }
 
 export interface ActionLongPressByNaturalLanguage
   extends OmitDeprecatedParams<ActionLongPressParams.LongPressByNaturalLanguage> {
   screenshotDelay?: TimeString;
 
-  options?: Omit<ActionLongPressParams.LongPressByNaturalLanguage['options'], 'screenshot'> &
-    ActionOptionsOverride;
+  options?: ActionCommonOptions &
+    Omit<NonNullable<ActionLongPressParams.LongPressByNaturalLanguage['options']>, 'screenshot'>;
 }
 
 export type ActionLongPress = ActionLongPressByPoint | ActionLongPressByNaturalLanguage;
@@ -166,37 +160,27 @@ export type ActionLongPress = ActionLongPressByPoint | ActionLongPressByNaturalL
 export interface ActionTouch extends OmitDeprecatedParams<ActionTouchParams> {
   screenshotDelay?: TimeString;
 
-  options?: Omit<ActionTouchParams['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionTouchParams['options']>, 'screenshot'>;
 }
 
 export interface ActionType extends OmitDeprecatedParams<ActionTypeParams> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionTypeParams['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionTypeParams['options']>, 'screenshot'>;
 }
 
 export interface ActionPressButton extends OmitDeprecatedParams<ActionPressButtonParams> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionPressButtonParams['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionPressButtonParams['options']>, 'screenshot'>;
 }
 
 export interface ActionPressKey extends OmitDeprecatedParams<ActionPressKeyParams> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionPressKeyParams['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionPressKeyParams['options']>, 'screenshot'>;
 }
 
 export interface ActionSwipeSimple extends OmitDeprecatedParams<ActionSwipeParams.SwipeSimple> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionSwipeParams.SwipeSimple['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionSwipeParams.SwipeSimple['options']>, 'screenshot'>;
 }
 
 export interface ActionSwipeAdvanced extends OmitDeprecatedParams<ActionSwipeParams.SwipeAdvanced> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionSwipeParams.SwipeAdvanced['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionSwipeParams.SwipeAdvanced['options']>, 'screenshot'>;
 }
 
 export type ActionSwipe = ActionSwipeSimple | ActionSwipeAdvanced;
@@ -210,15 +194,11 @@ export interface ActionScreenshot extends ActionScreenshotParams {
 }
 
 export interface ActionAI extends OmitDeprecatedParams<ActionAIParams> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionAIParams['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionAIParams['options']>, 'screenshot'>;
 }
 
 export interface ActionScreenRotation extends OmitDeprecatedParams<ActionScreenRotationParams> {
-  screenshotDelay?: TimeString;
-
-  options?: Omit<ActionScreenRotationParams['options'], 'screenshot'> & ActionOptionsOverride;
+  options?: ActionCommonOptions & Omit<NonNullable<ActionScreenRotationParams['options']>, 'screenshot'>;
 }
 
 export class ActionOperator {
