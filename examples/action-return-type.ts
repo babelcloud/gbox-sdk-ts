@@ -1,10 +1,114 @@
-import GboxSDK from '../src';
+import GboxSDK, { ActionCommonOptions } from '../src';
 
 async function main() {
   const gboxSDK = new GboxSDK();
   const box = await gboxSDK.create({ type: 'android' });
 
   console.log(`Android box created: ${box.data.id}`);
+
+  // invalid options
+  await box.action.click({
+    x: 100,
+    y: 100,
+    // @ts-expect-error - invalid options
+    options: 'something',
+  });
+
+  await box.action.click({
+    x: 100,
+    y: 100,
+    // @ts-expect-error - invalid options
+    options: false,
+  });
+
+  await box.action.click({
+    x: 100,
+    y: 100,
+    // @ts-expect-error - invalid options
+    options: null,
+  });
+
+  await box.action.click({
+    x: 100,
+    y: 100,
+    // @ts-expect-error - invalid options
+    options: 0,
+  });
+
+  // valid options
+  await box.action.click({
+    x: 100,
+    y: 100,
+    options: {},
+  });
+
+  await box.action.click({
+    x: 100,
+    y: 100,
+  });
+
+  const g1 = await box.action.click({
+    x: 100,
+    y: 100,
+    options: {
+      screenshot: Math.random() > 0.5 ? true : false,
+    },
+  });
+
+  const sp: ActionCommonOptions['screenshot'] = {
+    delay: '500ms',
+  };
+
+  await box.action.click({
+    x: 100,
+    y: 100,
+    options: {
+      screenshot: sp,
+    },
+  });
+
+  const o: ActionCommonOptions = {
+    screenshot: {
+      delay: '500ms',
+    },
+  };
+
+  await box.action.click({
+    x: 100,
+    y: 100,
+    options: o,
+  });
+
+  // g1 expects: union of { message } | ActionResultWithScreenshot
+  // @ts-expect-error - g1 is not guaranteed to have screenshot
+  console.log(g1.screenshot.before.uri);
+  if ('screenshot' in g1) {
+    console.log(g1.screenshot.before.uri);
+    console.log(g1.screenshot.after.uri);
+    console.log(g1.screenshot.trace.uri);
+  } else {
+    console.log(g1.message);
+  }
+
+  const g2 = await box.action.click({
+    x: 100,
+    y: 100,
+    options: {
+      screenshot:
+        Math.random() > 0.5 ?
+          {
+            phases: Math.random() > 0.5 ? ['before', 'after', 'trace'] : ['before', 'after'],
+            outputFormat: Math.random() > 0.5 ? 'base64' : 'storageKey',
+          }
+        : false,
+    },
+  });
+  // g2 expects: typed as ActionResult (broad generic overload)
+  // @ts-expect-error - screenshot may be undefined on ActionResult
+  console.log(g2.screenshot.before.uri);
+  // safe access with optional chaining should type-check
+  console.log(g2.screenshot?.before?.uri);
+  console.log(g2.message);
 
   // Test 1: Basic click without screenshot options - should return ActionResult
   const result1 = await box.action.click({
@@ -236,15 +340,19 @@ async function main() {
   console.log('Test 16 - Double click:', result16.message);
   console.log('Test 16 - Has screenshot:', !!result16.screenshot);
 
-  // // Test 17: Click with deprecated includeScreenshot: false - should return { message: string }
-  // const result17 = await box.action.click({
-  //   x: 100,
-  //   y: 100,
-  //   // @ts-expect-error - includeScreenshot is deprecated
-  //   includeScreenshot: false,
-  // });
-  // console.log('Test 17 - Deprecated includeScreenshot false:', result17.message);
-  // console.log('Test 17 - Has screenshot:', !!result17.screenshot);
+  await box.action.click({
+    x: 100,
+    y: 100,
+    // @ts-expect-error - includeScreenshot is deprecated
+    includeScreenshot: false,
+  });
+
+  await box.action.click({
+    x: 100,
+    y: 100,
+    // @ts-expect-error - screenshotDelay is deprecated
+    screenshotDelay: '500ms',
+  });
 
   // // Test 18: Click with deprecated includeScreenshot: true - should return ActionResult
   // const result18 = await box.action.click({

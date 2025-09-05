@@ -6,10 +6,13 @@ Types:
 
 - <code><a href="./src/resources/v1/devices.ts">DeviceInfo</a></code>
 - <code><a href="./src/resources/v1/devices.ts">GetDeviceListResponse</a></code>
+- <code><a href="./src/resources/v1/devices.ts">DeviceToBoxResponse</a></code>
 
 Methods:
 
 - <code title="get /devices">client.v1.devices.<a href="./src/resources/v1/devices.ts">list</a>() -> GetDeviceListResponse</code>
+- <code title="get /devices/{deviceId}">client.v1.devices.<a href="./src/resources/v1/devices.ts">get</a>(deviceID) -> DeviceInfo</code>
+- <code title="post /devices/{deviceId}/box">client.v1.devices.<a href="./src/resources/v1/devices.ts">toBox</a>(deviceID, { ...params }) -> string</code>
 
 ## Boxes
 

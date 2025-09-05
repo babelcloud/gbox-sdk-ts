@@ -15,7 +15,7 @@ import { fileURLToPath } from 'url';
 
 export interface CreateMediaAlbum {
   name: string;
-  media: (Uploadable | string)[];
+  media?: (Uploadable | string)[];
 }
 
 // Cache for media support to avoid repeated API calls
@@ -196,10 +196,10 @@ export class MediaOperator {
     return this.client.v1.boxes.media.getMediaSupport(this.boxId);
   }
 
-  private async processMediaArray(media: (Uploadable | string)[]): Promise<Uploadable[]> {
+  private async processMediaArray(media?: (Uploadable | string)[]): Promise<Uploadable[]> {
     const processedMedia: Uploadable[] = [];
 
-    for (const item of media) {
+    for (const item of media || []) {
       if (typeof item === 'string') {
         // Process string paths (files or directories)
         const mediaFiles = await processMediaItem(item, this.client, this.boxId);
@@ -300,6 +300,8 @@ export class MediaAlbumOperator {
       media: processedMedia,
     });
 
+    await this.syncData();
+
     return this;
   }
 
@@ -307,11 +309,15 @@ export class MediaAlbumOperator {
    * @example
    * const response = await myBox.media.deleteMedia('My Media');
    */
-  deleteMedia(mediaName: string): Promise<void> {
-    return this.client.v1.boxes.media.deleteMedia(mediaName, {
+  async deleteMedia(mediaName: string): Promise<void> {
+    const res = await this.client.v1.boxes.media.deleteMedia(mediaName, {
       boxId: this.boxId,
       albumName: this.data.name,
     });
+
+    await this.syncData();
+
+    return res;
   }
 
   private async processMediaArray(media: (Uploadable | string)[]): Promise<Uploadable[]> {
@@ -329,6 +335,11 @@ export class MediaAlbumOperator {
     }
 
     return processedMedia;
+  }
+
+  private async syncData() {
+    const res = await this.client.v1.boxes.media.getAlbumDetail(this.data.name, { boxId: this.boxId });
+    this.data = res;
   }
 }
 

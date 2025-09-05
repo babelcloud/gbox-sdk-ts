@@ -6,12 +6,14 @@ import { readEnv } from '../internal/utils/env';
 import type { Logger, LogLevel } from '../internal/utils/log';
 
 export interface ProfileData {
-  org: string;
+  org_name: string;
+  org_slug: string;
   key: string;
   base_url?: string | undefined;
 }
 
 export interface ProfileConfig {
+  current?: string;
   profiles: Record<string, ProfileData>;
   defaults?: {
     base_url?: string | undefined;
@@ -64,49 +66,48 @@ export class Profile {
   }
 
   /**
-   * Get API key from the first available profile
+   * Get API key from the current profile
    */
   getAPIKey(): string | null {
     if (!this.config) {
-      this.load();
+      this.config = this.load();
     }
 
-    if (!this.config || !this.config.profiles) {
+    if (!this.config || !this.config.profiles || !this.config.current) {
       return null;
     }
 
-    // Get the first profile with an API key
-    for (const profile of Object.values(this.config.profiles)) {
-      if (profile && profile.key) {
-        try {
-          // Decode base64 encoded API key
-          return Buffer.from(profile.key, 'base64').toString('utf8');
-        } catch (error) {
-          console.warn(`Failed to decode API key: ${error}`);
-          continue;
-        }
-      }
+    const currentProfile = this.config.profiles[this.config.current];
+    if (!currentProfile || !currentProfile.key) {
+      return null;
     }
 
-    return null;
+    try {
+      // Decode base64 encoded API key
+      return Buffer.from(currentProfile.key, 'base64').toString('utf8');
+    } catch (error) {
+      console.warn(`Failed to decode API key: ${error}`);
+      return null;
+    }
   }
 
   /**
-   * Get base URL from the first available profile or defaults
+   * Get base URL from the current profile or defaults
    */
   getBaseURL(): string | null {
     if (!this.config) {
-      this.load();
+      this.config = this.load();
     }
 
     if (!this.config) {
       return null;
     }
 
-    // First try to get from profiles
-    for (const profile of Object.values(this.config.profiles)) {
-      if (profile && profile.base_url) {
-        return profile.base_url;
+    // First try to get from current profile
+    if (this.config.current && this.config.profiles[this.config.current]) {
+      const currentProfile = this.config.profiles[this.config.current];
+      if (currentProfile && currentProfile.base_url) {
+        return currentProfile.base_url;
       }
     }
 
@@ -121,7 +122,11 @@ export class Profile {
    * 3. Profile file values (lowest priority)
    */
   buildClientOptions(userOptions?: ProfileOptions): ProfileOptions {
+    // Load profile and update internal config
     const profile = this.load();
+    if (profile) {
+      this.config = profile;
+    }
     const options: ProfileOptions = { ...userOptions };
 
     // Get logger and logLevel from userOptions or defaults
@@ -189,13 +194,21 @@ export class Profile {
         defaults: {},
       };
 
+      // Set current if it exists
+      if (parsed.current) {
+        config.current = String(parsed.current);
+      }
+
       // Extract profiles
       if (parsed.profiles && typeof parsed.profiles === 'object') {
         for (const [key, profile] of Object.entries(parsed.profiles)) {
-          if (profile && typeof profile === 'object' && 'org' in profile && 'key' in profile) {
+          if (profile && typeof profile === 'object' && 'key' in profile) {
             const profileData = profile as any;
+            // Support both 'org' and 'org_name' fields for backward compatibility
+            const orgName = profileData.org_name || profileData.org || '';
             config.profiles[key] = {
-              org: String(profileData.org || ''),
+              org_name: orgName,
+              org_slug: String(profileData.org_slug || ''),
               key: String(profileData.key || ''),
               base_url: profileData.base_url ? String(profileData.base_url) : undefined,
             };
