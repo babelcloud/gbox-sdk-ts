@@ -2,7 +2,13 @@
 
 import { APIResource } from '../../core/resource';
 import * as DevicesAPI from './devices';
-import { DeviceInfo, Devices, GetDeviceListResponse } from './devices';
+import {
+  DeviceInfo,
+  DeviceToBoxParams,
+  DeviceToBoxResponse,
+  Devices,
+  GetDeviceListResponse,
+} from './devices';
 import * as BoxesAPI from './boxes/boxes';
 import {
   AndroidBox,
@@ -45,6 +51,8 @@ export declare namespace V1 {
     Devices as Devices,
     type DeviceInfo as DeviceInfo,
     type GetDeviceListResponse as GetDeviceListResponse,
+    type DeviceToBoxResponse as DeviceToBoxResponse,
+    type DeviceToBoxParams as DeviceToBoxParams,
   };
 
   export {
