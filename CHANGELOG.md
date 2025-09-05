@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.31.0 (2025-09-05)
+
+Full Changelog: [v0.30.0...v0.31.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.30.0...v0.31.0)
+
+### Features
+
+* **action:** enhance action interfaces to support boolean screenshot options ([a770026](https://github.com/babelcloud/gbox-sdk-ts/commit/a770026dc2f919d5021a7bb4a1c302cdd40fb390))
+* **action:** enhance action options with common screenshot handling ([07583da](https://github.com/babelcloud/gbox-sdk-ts/commit/07583da532bd19bc6cc185d70ecbb74261f7cc60))
+* **api:** api update ([bc700b1](https://github.com/babelcloud/gbox-sdk-ts/commit/bc700b1d2e6b1d469cbfe72079c3c27ddef6c53a))
+* **api:** api update ([91b43bd](https://github.com/babelcloud/gbox-sdk-ts/commit/91b43bd5a0a262e579a5178a57fce27f2dcbdc1f))
+* **api:** api update ([498e2ea](https://github.com/babelcloud/gbox-sdk-ts/commit/498e2ea03156d06593e3905be79c278ead9ce2b3))
+* **api:** api update ([fcc7785](https://github.com/babelcloud/gbox-sdk-ts/commit/fcc77854c2fee6f5a86b0bfc237d62380308ebde))
+* **profile:** enhance profile tests to utilize current profile for key and base URL retrieval ([f22404f](https://github.com/babelcloud/gbox-sdk-ts/commit/f22404fb61bf514ed67c6cbcf9b71ae06ef26c98))
+
+
+### Bug Fixes
+
+* create album params ([4635493](https://github.com/babelcloud/gbox-sdk-ts/commit/4635493eb82f1c8007f9074f377738da198bc011))
+* update data after appending or deleting media from the album ([133de52](https://github.com/babelcloud/gbox-sdk-ts/commit/133de52cbdb8d79c327a39501f4f126c6c46b1b9))
+
 ## 0.30.0 (2025-08-29)
 
 Full Changelog: [v0.29.0...v0.30.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.29.0...v0.30.0)
