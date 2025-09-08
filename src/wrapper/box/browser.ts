@@ -22,7 +22,7 @@ export class BrowserOperator {
    * @example
    * const response = await myBox.browser.listTab();
    */
-  async listTab() {
+  async listTabs() {
     const tabInfo = await this.client.v1.boxes.browser.getTabs(this.boxId);
     return tabInfo.data.map((tab) => new BrowserTabOperator(this.client, this.boxId, tab));
   }
