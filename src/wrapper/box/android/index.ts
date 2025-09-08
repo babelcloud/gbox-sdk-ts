@@ -1,5 +1,5 @@
 import { GboxClient } from '../../../client';
-import { AndroidBox } from '../../../resources/v1/boxes';
+import { AndroidBox, AndroidGetConnectAddressResponse } from '../../../resources/v1/boxes';
 import { BaseBox } from '../base';
 import { AndroidAppManager } from './app-manager';
 import { AndroidPkgManager } from './pkg-manager';
@@ -12,6 +12,14 @@ export class AndroidBoxOperator extends BaseBox<AndroidBox> {
     super(client, data);
     this.app = new AndroidAppManager(client, data);
     this.pkg = new AndroidPkgManager(client, data);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.getConnectAddress();
+   */
+  async getConnectAddress(): Promise<AndroidGetConnectAddressResponse> {
+    return this.client.v1.boxes.android.getConnectAddress(this.data.id);
   }
 }
 

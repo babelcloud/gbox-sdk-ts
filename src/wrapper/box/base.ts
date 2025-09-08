@@ -179,14 +179,14 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    * @example
    * const response = await myBox.command('ls -l');
    * or
-   * const response = await myBox.command({ commands: ['ls -l'] } );
+   * const response = await myBox.command({ command: 'ls -l' } );
    */
-  command(body: BoxExecuteCommands | string | string[]): Promise<BoxExecuteCommandsResponse> {
+  command(body: BoxExecuteCommands | string): Promise<BoxExecuteCommandsResponse> {
     if (typeof body === 'object' && ('onStdout' in body || 'onStderr' in body)) {
       const { onStdout, onStderr, ...rest } = body;
       return this.executeViaWebSocket({ command: rest }, onStdout, onStderr, 'command');
-    } else if (typeof body === 'string' || Array.isArray(body)) {
-      return this.client.v1.boxes.executeCommands(this.data.id, { commands: body });
+    } else if (typeof body === 'string') {
+      return this.client.v1.boxes.executeCommands(this.data.id, { command: body });
     } else {
       return this.client.v1.boxes.executeCommands(this.data.id, body);
     }
