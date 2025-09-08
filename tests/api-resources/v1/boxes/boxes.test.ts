@@ -80,10 +80,8 @@ describe('resource boxes', () => {
   });
 
   // Prism tests are disabled
-  test.skip('executeCommands: only required params', async () => {
-    const responsePromise = client.v1.boxes.executeCommands('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      commands: ['ls', '-l'],
-    });
+  test.skip('executeCommands', async () => {
+    const responsePromise = client.v1.boxes.executeCommands('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -91,16 +89,6 @@ describe('resource boxes', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('executeCommands: required and optional params', async () => {
-    const response = await client.v1.boxes.executeCommands('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      commands: ['ls', '-l'],
-      envs: { PATH: '/usr/bin:/bin', NODE_ENV: 'production' },
-      timeout: '30s',
-      workingDir: '/home/user/projects',
-    });
   });
 
   // Prism tests are disabled
