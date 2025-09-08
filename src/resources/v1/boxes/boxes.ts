@@ -988,7 +988,7 @@ export interface BoxExecuteCommandsParams {
   /**
    * The command to run
    */
-  command?: string;
+  command: string;
 
   /**
    * The environment variables to run the command
