@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.32.0 (2025-09-09)
+
+Full Changelog: [v0.31.0...v0.32.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.31.0...v0.32.0)
+
+### Features
+
+* **api:** api update ([0731300](https://github.com/babelcloud/gbox-sdk-ts/commit/07313005428c0cfdc8985d6ff966ce076fbe1d3d))
+* **api:** api update ([a221389](https://github.com/babelcloud/gbox-sdk-ts/commit/a221389deb4f24543f9860a44ef9f060c35cdaa3))
+* **box:** update command method to accept single command string and add getConnectAddress method in AndroidBoxOperator ([9ffc27a](https://github.com/babelcloud/gbox-sdk-ts/commit/9ffc27ad89f6e6fde2dea03bdaccd112917d5884))
+* **browser:** enhance openTab method to accept BrowserOpenTabParams ([2ac2697](https://github.com/babelcloud/gbox-sdk-ts/commit/2ac269723ef2f2de454e59508507f8c603eb1003))
+
+
+### Bug Fixes
+
+* **android:** make params optional in uninstall method of AndroidAppManager ([8f68998](https://github.com/babelcloud/gbox-sdk-ts/commit/8f68998f6a01abce6e3480707ab95e2cd4ad9d7f))
+* coerce nullable values to undefined ([f181d7c](https://github.com/babelcloud/gbox-sdk-ts/commit/f181d7c2d132e455677476d8b71283bf38b9e8c8))
+* list tabs api name ([1a0807f](https://github.com/babelcloud/gbox-sdk-ts/commit/1a0807f7d6fb79338e32027a6e0eeafa5eef1a04))
+
+
+### Chores
+
+* ci build action ([0638a90](https://github.com/babelcloud/gbox-sdk-ts/commit/0638a908aa2cdcc46225177fbbdf18fd6b3cc773))
+
 ## 0.31.0 (2025-09-05)
 
 Full Changelog: [v0.30.0...v0.31.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.30.0...v0.31.0)
