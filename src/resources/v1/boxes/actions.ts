@@ -1959,6 +1959,11 @@ export namespace ActionAIResponse {
          * Whether to save the screenshot to the device screenshot album
          */
         saveToAlbum?: boolean;
+
+        /**
+         * Scroll capture parameters
+         */
+        scrollCapture?: TypedScreenshotAction.ScrollCapture;
       }
 
       export namespace TypedScreenshotAction {
@@ -1985,6 +1990,21 @@ export namespace ActionAIResponse {
            * Y coordinate of the clip
            */
           y: number;
+        }
+
+        /**
+         * Scroll capture parameters
+         */
+        export interface ScrollCapture {
+          /**
+           * Maximum height of the screenshot in pixels
+           */
+          maxHeight: number;
+
+          /**
+           * Whether to scroll back to the original position after capturing the screenshot
+           */
+          scrollBack: boolean;
         }
       }
 
@@ -3668,6 +3688,11 @@ export namespace ActionAIResponse {
          * Whether to save the screenshot to the device screenshot album
          */
         saveToAlbum?: boolean;
+
+        /**
+         * Scroll capture parameters
+         */
+        scrollCapture?: TypedScreenshotAction.ScrollCapture;
       }
 
       export namespace TypedScreenshotAction {
@@ -3694,6 +3719,21 @@ export namespace ActionAIResponse {
            * Y coordinate of the clip
            */
           y: number;
+        }
+
+        /**
+         * Scroll capture parameters
+         */
+        export interface ScrollCapture {
+          /**
+           * Maximum height of the screenshot in pixels
+           */
+          maxHeight: number;
+
+          /**
+           * Whether to scroll back to the original position after capturing the screenshot
+           */
+          scrollBack: boolean;
         }
       }
 
@@ -5133,6 +5173,11 @@ export interface ActionScreenshotParams {
    * Whether to save the screenshot to the device screenshot album
    */
   saveToAlbum?: boolean;
+
+  /**
+   * Scroll capture parameters
+   */
+  scrollCapture?: ActionScreenshotParams.ScrollCapture;
 }
 
 export namespace ActionScreenshotParams {
@@ -5159,6 +5204,21 @@ export namespace ActionScreenshotParams {
      * Y coordinate of the clip
      */
     y: number;
+  }
+
+  /**
+   * Scroll capture parameters
+   */
+  export interface ScrollCapture {
+    /**
+     * Maximum height of the screenshot in pixels
+     */
+    maxHeight: number;
+
+    /**
+     * Whether to scroll back to the original position after capturing the screenshot
+     */
+    scrollBack: boolean;
   }
 }
 
