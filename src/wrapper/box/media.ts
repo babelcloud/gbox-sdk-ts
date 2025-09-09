@@ -243,6 +243,29 @@ export class MediaAlbumOperator {
   }
 
   /**
+   * @example
+   * const response = await myBox.media.getMedia('IMG_001.jpg');
+   */
+  async getMedia(mediaName: string): Promise<MediaItemOperator> {
+    const res = await this.client.v1.boxes.media.getMedia(mediaName, {
+      boxId: this.boxId,
+      albumName: this.data.name,
+    });
+    return new MediaItemOperator(this.client, this.boxId, this.data.name, res);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.media.getMediaInfo('IMG_001.jpg');
+   */
+  async getMediaInfo(mediaName: string): Promise<MediaGetMediaResponse> {
+    return this.client.v1.boxes.media.getMedia(mediaName, {
+      boxId: this.boxId,
+      albumName: this.data.name,
+    });
+  }
+
+  /**
    * Download all media files from the album to the specified local folder
    * @example
    * await myAlbum.download("path/to/your/folder");

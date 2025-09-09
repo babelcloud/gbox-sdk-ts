@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.33.0 (2025-09-09)
+
+Full Changelog: [v0.32.0...v0.33.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.32.0...v0.33.0)
+
+### Features
+
+* **media:** add getMedia and getMediaInfo methods for media retrieval ([f16252c](https://github.com/babelcloud/gbox-sdk-ts/commit/f16252cca63d0891b40c795eb1ed1c55801ab7a3))
+
 ## 0.32.0 (2025-09-09)
 
 Full Changelog: [v0.31.0...v0.32.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.31.0...v0.32.0)
