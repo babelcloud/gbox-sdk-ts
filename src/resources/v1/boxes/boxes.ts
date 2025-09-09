@@ -204,7 +204,7 @@ export class Boxes extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.executeCommands(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { commands: ['ls', '-l'] },
+   *   { command: 'ls -l' },
    * );
    * ```
    */
@@ -986,9 +986,9 @@ export namespace BoxCreateLinuxParams {
 
 export interface BoxExecuteCommandsParams {
   /**
-   * The command to run. Can be a single string or an array of strings
+   * The command to run
    */
-  commands: string | Array<string>;
+  command: string;
 
   /**
    * The environment variables to run the command

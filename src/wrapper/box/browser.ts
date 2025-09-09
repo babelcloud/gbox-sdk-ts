@@ -1,4 +1,4 @@
-import { BrowserGetTabsResponse } from '../../resources/v1/boxes';
+import { BrowserGetTabsResponse, BrowserOpenTabParams } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 
 export class BrowserOperator {
@@ -22,7 +22,7 @@ export class BrowserOperator {
    * @example
    * const response = await myBox.browser.listTab();
    */
-  async listTab() {
+  async listTabs() {
     const tabInfo = await this.client.v1.boxes.browser.getTabs(this.boxId);
     return tabInfo.data.map((tab) => new BrowserTabOperator(this.client, this.boxId, tab));
   }
@@ -63,15 +63,16 @@ export class BrowserOperator {
    * @example
    * const response = await myBox.browser.openTab('https://www.google.com');
    */
-  async openTab(url: string) {
-    return this.client.v1.boxes.browser.openTab(this.boxId, { url });
+  async openTab(url: string | BrowserOpenTabParams) {
+    const params = typeof url === 'string' ? { url } : url;
+    return this.client.v1.boxes.browser.openTab(this.boxId, params);
   }
 }
 
 export class BrowserTabOperator {
   private client: GboxClient;
   private boxId: string;
-  private data: BrowserGetTabsResponse.Data;
+  public data: BrowserGetTabsResponse.Data;
 
   constructor(client: GboxClient, boxId: string, data: BrowserGetTabsResponse.Data) {
     this.client = client;

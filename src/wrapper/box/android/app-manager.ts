@@ -69,7 +69,7 @@ export class AndroidAppManager {
    * @example
    * const response = await myBox.app.uninstall('com.example.myapp');
    */
-  async uninstall(packageName: string, params: Omit<AndroidUninstallParams, 'boxId'>): Promise<void> {
+  async uninstall(packageName: string, params?: Omit<AndroidUninstallParams, 'boxId'>): Promise<void> {
     return this.client.v1.boxes.android.uninstall(packageName, { ...params, boxId: this.box.id });
   }
 

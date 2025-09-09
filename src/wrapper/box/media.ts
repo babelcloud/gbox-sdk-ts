@@ -217,7 +217,7 @@ export class MediaOperator {
 export class MediaAlbumOperator {
   private client: GboxClient;
   private boxId: string;
-  private data: MediaAlbum;
+  public data: MediaAlbum;
 
   constructor(client: GboxClient, boxId: string, data: MediaAlbum) {
     this.client = client;
@@ -347,7 +347,7 @@ export class MediaItemOperator {
   private client: GboxClient;
   private boxId: string;
   private albumName: string;
-  private data: MediaPhoto | MediaVideo;
+  public data: MediaPhoto | MediaVideo;
 
   constructor(client: GboxClient, boxId: string, albumName: string, data: MediaPhoto | MediaVideo) {
     this.client = client;
