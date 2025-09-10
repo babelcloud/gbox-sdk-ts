@@ -1997,14 +1997,16 @@ export namespace ActionAIResponse {
          */
         export interface ScrollCapture {
           /**
-           * Maximum height of the screenshot in pixels
+           * Maximum height of the screenshot in pixels. Limits the maximum height of the
+           * automatically scrolled content. Useful for managing memory usage when capturing
+           * tall content like long web pages. Default: 4000px
            */
-          maxHeight: number;
+          maxHeight?: number;
 
           /**
            * Whether to scroll back to the original position after capturing the screenshot
            */
-          scrollBack: boolean;
+          scrollBack?: boolean;
         }
       }
 
@@ -3726,14 +3728,16 @@ export namespace ActionAIResponse {
          */
         export interface ScrollCapture {
           /**
-           * Maximum height of the screenshot in pixels
+           * Maximum height of the screenshot in pixels. Limits the maximum height of the
+           * automatically scrolled content. Useful for managing memory usage when capturing
+           * tall content like long web pages. Default: 4000px
            */
-          maxHeight: number;
+          maxHeight?: number;
 
           /**
            * Whether to scroll back to the original position after capturing the screenshot
            */
-          scrollBack: boolean;
+          scrollBack?: boolean;
         }
       }
 
@@ -5211,14 +5215,16 @@ export namespace ActionScreenshotParams {
    */
   export interface ScrollCapture {
     /**
-     * Maximum height of the screenshot in pixels
+     * Maximum height of the screenshot in pixels. Limits the maximum height of the
+     * automatically scrolled content. Useful for managing memory usage when capturing
+     * tall content like long web pages. Default: 4000px
      */
-    maxHeight: number;
+    maxHeight?: number;
 
     /**
      * Whether to scroll back to the original position after capturing the screenshot
      */
-    scrollBack: boolean;
+    scrollBack?: boolean;
   }
 }
 
