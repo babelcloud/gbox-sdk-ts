@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -27,6 +28,21 @@ export class Browser extends APIResource {
   }
 
   /**
+   * @example
+   * ```ts
+   * await client.v1.boxes.browser.clearProxy(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  clearProxy(boxID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/boxes/${boxID}/browser/proxy`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Close a specific browser tab identified by its id. This endpoint will
    * permanently close the tab and free up the associated resources. After closing a
    * tab, the ids of subsequent tabs may change.
@@ -46,6 +62,18 @@ export class Browser extends APIResource {
   ): APIPromise<BrowserCloseTabResponse> {
     const { boxId } = params;
     return this._client.delete(path`/boxes/${boxId}/browser/tabs/${tabID}`, options);
+  }
+
+  /**
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.browser.getProxy(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  getProxy(boxID: string, options?: RequestOptions): APIPromise<BrowserGetProxyResponse> {
+    return this._client.get(path`/boxes/${boxID}/browser/proxy`, options);
   }
 
   /**
@@ -90,6 +118,27 @@ export class Browser extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BrowserOpenTabResponse> {
     return this._client.post(path`/boxes/${boxID}/browser/tabs`, { body, ...options });
+  }
+
+  /**
+   * @example
+   * ```ts
+   * await client.v1.boxes.browser.setProxy(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   {
+   *     httpServer: 'http://127.0.0.1:8080',
+   *     httpsServer: 'https://127.0.0.1:8080',
+   *     socks5Server: 'socks5://127.0.0.1:8080',
+   *   },
+   * );
+   * ```
+   */
+  setProxy(boxID: string, body: BrowserSetProxyParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/browser/proxy`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -149,6 +198,35 @@ export type BrowserCdpURLResponse = string;
 
 export interface BrowserCloseTabResponse {
   message?: string;
+}
+
+export interface BrowserGetProxyResponse {
+  /**
+   * HTTP proxy server, format: http://<username>:<password>@<host>:<port>
+   */
+  httpServer: string;
+
+  /**
+   * HTTPS proxy server, format: https://<username>:<password>@<host>:<port>
+   */
+  httpsServer: string;
+
+  /**
+   * SOCKS5 proxy server, format: socks5://<username>:<password>@<host>:<port>
+   */
+  socks5Server: string;
+
+  /**
+   * List of IP addresses and domains that should bypass the proxy. These addresses
+   * will be accessed directly without going through the proxy server. Default is
+   * ['127.0.0.1', 'localhost']
+   */
+  bypassList?: Array<string>;
+
+  /**
+   * PAC (Proxy Auto-Configuration) URL.
+   */
+  pacUrl?: string;
 }
 
 /**
@@ -347,6 +425,35 @@ export interface BrowserOpenTabParams {
   url: string;
 }
 
+export interface BrowserSetProxyParams {
+  /**
+   * HTTP proxy server, format: http://<username>:<password>@<host>:<port>
+   */
+  httpServer: string;
+
+  /**
+   * HTTPS proxy server, format: https://<username>:<password>@<host>:<port>
+   */
+  httpsServer: string;
+
+  /**
+   * SOCKS5 proxy server, format: socks5://<username>:<password>@<host>:<port>
+   */
+  socks5Server: string;
+
+  /**
+   * List of IP addresses and domains that should bypass the proxy. These addresses
+   * will be accessed directly without going through the proxy server. Default is
+   * ['127.0.0.1', 'localhost']
+   */
+  bypassList?: Array<string>;
+
+  /**
+   * PAC (Proxy Auto-Configuration) URL.
+   */
+  pacUrl?: string;
+}
+
 export interface BrowserSwitchTabParams {
   /**
    * Box ID
@@ -370,6 +477,7 @@ export declare namespace Browser {
   export {
     type BrowserCdpURLResponse as BrowserCdpURLResponse,
     type BrowserCloseTabResponse as BrowserCloseTabResponse,
+    type BrowserGetProxyResponse as BrowserGetProxyResponse,
     type BrowserGetTabsResponse as BrowserGetTabsResponse,
     type BrowserOpenTabResponse as BrowserOpenTabResponse,
     type BrowserSwitchTabResponse as BrowserSwitchTabResponse,
@@ -377,6 +485,7 @@ export declare namespace Browser {
     type BrowserCdpURLParams as BrowserCdpURLParams,
     type BrowserCloseTabParams as BrowserCloseTabParams,
     type BrowserOpenTabParams as BrowserOpenTabParams,
+    type BrowserSetProxyParams as BrowserSetProxyParams,
     type BrowserSwitchTabParams as BrowserSwitchTabParams,
     type BrowserUpdateTabParams as BrowserUpdateTabParams,
   };

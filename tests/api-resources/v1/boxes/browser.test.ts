@@ -33,6 +33,18 @@ describe('resource browser', () => {
   });
 
   // Prism tests are disabled
+  test.skip('clearProxy', async () => {
+    const responsePromise = client.v1.boxes.browser.clearProxy('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('closeTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.closeTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -51,6 +63,18 @@ describe('resource browser', () => {
     const response = await client.v1.boxes.browser.closeTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
+  });
+
+  // Prism tests are disabled
+  test.skip('getProxy', async () => {
+    const responsePromise = client.v1.boxes.browser.getProxy('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Prism tests are disabled
@@ -83,6 +107,42 @@ describe('resource browser', () => {
   test.skip('openTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.openTab('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       url: 'https://www.google.com',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('setProxy: only required params', async () => {
+    const responsePromise = client.v1.boxes.browser.setProxy('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      httpServer: 'http://127.0.0.1:8080',
+      httpsServer: 'https://127.0.0.1:8080',
+      socks5Server: 'socks5://127.0.0.1:8080',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('setProxy: required and optional params', async () => {
+    const response = await client.v1.boxes.browser.setProxy('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
+      httpServer: 'http://127.0.0.1:8080',
+      httpsServer: 'https://127.0.0.1:8080',
+      socks5Server: 'socks5://127.0.0.1:8080',
+      bypassList: [
+        '127.0.0.1',
+        'localhost',
+        'example.com',
+        '*.example.com',
+        '*.example.org',
+        'https://x.*.y.com:99',
+        '192.168.1.1/16',
+        'fefe:13::abc/33',
+      ],
+      pacUrl: 'http://proxy.company.com/proxy.pac',
     });
   });
 
