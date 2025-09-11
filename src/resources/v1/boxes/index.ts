@@ -87,6 +87,7 @@ export {
   Browser,
   type BrowserCdpURLResponse,
   type BrowserCloseTabResponse,
+  type BrowserGetProxyResponse,
   type BrowserGetTabsResponse,
   type BrowserOpenTabResponse,
   type BrowserSwitchTabResponse,
@@ -94,6 +95,7 @@ export {
   type BrowserCdpURLParams,
   type BrowserCloseTabParams,
   type BrowserOpenTabParams,
+  type BrowserSetProxyParams,
   type BrowserSwitchTabParams,
   type BrowserUpdateTabParams,
 } from './browser';
