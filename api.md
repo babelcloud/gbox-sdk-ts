@@ -86,7 +86,7 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/press-button">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressButton</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/press-key">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressKey</a>(boxID, { ...params }) -> ActionResult</code>
-- <code title="post /boxes/{boxId}/actions/recording/start">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">recordingStart</a>(boxID, { ...params }) -> void</code>
+- <code title="post /boxes/{boxId}/actions/recording/start">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">recordingStart</a>(boxID) -> void</code>
 - <code title="post /boxes/{boxId}/actions/recording/stop">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">recordingStop</a>(boxID) -> ActionRecordingStopResponse</code>
 - <code title="delete /boxes/{boxId}/actions/recording/rewind">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">rewindDisable</a>(boxID) -> void</code>
 - <code title="post /boxes/{boxId}/actions/recording/rewind">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">rewindEnable</a>(boxID) -> void</code>

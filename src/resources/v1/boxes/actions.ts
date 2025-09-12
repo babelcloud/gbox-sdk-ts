@@ -156,17 +156,11 @@ export class Actions extends APIResource {
    * ```ts
    * await client.v1.boxes.actions.recordingStart(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { duration: '10s' },
    * );
    * ```
    */
-  recordingStart(
-    boxID: string,
-    body: ActionRecordingStartParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
+  recordingStart(boxID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/boxes/${boxID}/actions/recording/start`, {
-      body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -5073,17 +5067,6 @@ export interface ActionPressKeyParams {
   screenshotDelay?: string;
 }
 
-export interface ActionRecordingStartParams {
-  /**
-   * Duration of the recording. Default is 30m, max is 30m. The recording will
-   * automatically stop when the duration time is reached.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 30m
-   */
-  duration?: string;
-}
-
 export interface ActionRewindExtractParams {
   /**
    * How far back in time to rewind for extracting recorded video. This specifies the
@@ -5943,7 +5926,6 @@ export declare namespace Actions {
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
-    type ActionRecordingStartParams as ActionRecordingStartParams,
     type ActionRewindExtractParams as ActionRewindExtractParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,

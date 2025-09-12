@@ -22,7 +22,6 @@ export {
   type ActionMoveParams,
   type ActionPressButtonParams,
   type ActionPressKeyParams,
-  type ActionRecordingStartParams,
   type ActionRewindExtractParams,
   type ActionScreenRotationParams,
   type ActionScreenshotParams,
