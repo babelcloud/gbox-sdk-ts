@@ -227,7 +227,7 @@ export class MediaAlbumOperator {
 
   /**
    * @example
-   * const response = await myBox.media.listMediaInfo();
+   * const response = await album.listMediaInfo();
    */
   listMediaInfo(): Promise<MediaListMediaResponse> {
     return this.client.v1.boxes.media.listMedia(this.data.name, { boxId: this.boxId });
@@ -235,7 +235,7 @@ export class MediaAlbumOperator {
 
   /**
    * @example
-   * const response = await myBox.media.listMedia();
+   * const response = await album.listMedia();
    */
   async listMedia(): Promise<MediaItemOperator[]> {
     const res = await this.client.v1.boxes.media.listMedia(this.data.name, { boxId: this.boxId });
@@ -244,7 +244,7 @@ export class MediaAlbumOperator {
 
   /**
    * @example
-   * const response = await myBox.media.getMedia('IMG_001.jpg');
+   * const response = await album.getMedia('IMG_001.jpg');
    */
   async getMedia(mediaName: string): Promise<MediaItemOperator> {
     const res = await this.client.v1.boxes.media.getMedia(mediaName, {
@@ -256,7 +256,7 @@ export class MediaAlbumOperator {
 
   /**
    * @example
-   * const response = await myBox.media.getMediaInfo('IMG_001.jpg');
+   * const response = await album.getMediaInfo('IMG_001.jpg');
    */
   async getMediaInfo(mediaName: string): Promise<MediaGetMediaResponse> {
     return this.client.v1.boxes.media.getMedia(mediaName, {
@@ -308,13 +308,13 @@ export class MediaAlbumOperator {
 
   /**
    * @example
-   * const response = await myBox.media.appendMedia([fs.createReadStream('path/to/file')]);
+   * const response = await album.appendMedia([fs.createReadStream('path/to/file')]);
    * or
-   * const response = await myBox.media.appendMedia(['path/to/your/file']);
+   * const response = await album.appendMedia(['path/to/your/file']);
    * or
-   * const response = await myBox.media.appendMedia(['file:///path/to/your/file']);
+   * const response = await album.appendMedia(['file:///path/to/your/file']);
    * or
-   * const response = await myBox.media.appendMedia(['path/to/your/folder']);
+   * const response = await album.appendMedia(['path/to/your/folder']);
    */
   async appendMedia(media: (Uploadable | string)[]): Promise<MediaAlbumOperator> {
     const processedMedia = await this.processMediaArray(media);
@@ -330,7 +330,7 @@ export class MediaAlbumOperator {
 
   /**
    * @example
-   * const response = await myBox.media.deleteMedia('My Media');
+   * const response = await album.deleteMedia('My Media');
    */
   async deleteMedia(mediaName: string): Promise<void> {
     const res = await this.client.v1.boxes.media.deleteMedia(mediaName, {

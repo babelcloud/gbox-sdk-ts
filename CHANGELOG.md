@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.34.0 (2025-09-11)
+
+Full Changelog: [v0.33.0...v0.34.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.33.0...v0.34.0)
+
+### Features
+
+* **api:** api update ([d57168a](https://github.com/babelcloud/gbox-sdk-ts/commit/d57168a9658f2eae8f23558dcd24ed6fdbbfa0bf))
+* **api:** api update ([1791d2d](https://github.com/babelcloud/gbox-sdk-ts/commit/1791d2debd91810c6bafef3b4b8d26ab892d44e3))
+* **api:** api update ([5607dd0](https://github.com/babelcloud/gbox-sdk-ts/commit/5607dd0e3f518a2c7317249f3662a42ec70aeade))
+
+
+### Bug Fixes
+
+* **media:** MediaAlbumOperator example ([7c90d35](https://github.com/babelcloud/gbox-sdk-ts/commit/7c90d3548cc5448163ea0b089eb02e158e3879a3))
+
 ## 0.33.0 (2025-09-09)
 
 Full Changelog: [v0.32.0...v0.33.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.32.0...v0.33.0)
