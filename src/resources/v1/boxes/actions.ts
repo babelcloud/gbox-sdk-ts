@@ -453,6 +453,12 @@ export interface ActionCommonOptions {
  */
 export interface ActionResult {
   /**
+   * Unique identifier for each action. Use this ID to locate the action and report
+   * issues.
+   */
+  actionId: string;
+
+  /**
    * message
    */
   message: string;
@@ -587,6 +593,12 @@ export namespace ActionAIResponse {
    * Result of AI action execution with screenshot
    */
   export interface AIActionScreenshotResult {
+    /**
+     * Unique identifier for each action. Use this ID to locate the action and report
+     * issues.
+     */
+    actionId: string;
+
     /**
      * Response of AI action execution
      */
