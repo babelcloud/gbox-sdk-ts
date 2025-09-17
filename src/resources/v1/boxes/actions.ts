@@ -41,6 +41,35 @@ export class Actions extends APIResource {
   }
 
   /**
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.clipboardGet(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  clipboardGet(boxID: string, options?: RequestOptions): APIPromise<string> {
+    return this._client.get(path`/boxes/${boxID}/actions/clipboard`, options);
+  }
+
+  /**
+   * @example
+   * ```ts
+   * await client.v1.boxes.actions.clipboardSet(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { content: 'Hello, world!' },
+   * );
+   * ```
+   */
+  clipboardSet(boxID: string, body: ActionClipboardSetParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/actions/clipboard`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Drag
    *
    * @example
@@ -4006,6 +4035,8 @@ export namespace ActionAIResponse {
   }
 }
 
+export type ActionClipboardGetResponse = string;
+
 /**
  * Result of extract action execution
  */
@@ -4424,6 +4455,13 @@ export declare namespace ActionClickParams {
      */
     screenshotDelay?: string;
   }
+}
+
+export interface ActionClipboardSetParams {
+  /**
+   * The content to set the clipboard content
+   */
+  content: string;
 }
 
 export type ActionDragParams = ActionDragParams.DragSimple | ActionDragParams.DragAdvanced;
@@ -5922,6 +5960,7 @@ export declare namespace Actions {
     type ActionResult as ActionResult,
     type ActionScreenshotOptions as ActionScreenshotOptions,
     type ActionAIResponse as ActionAIResponse,
+    type ActionClipboardGetResponse as ActionClipboardGetResponse,
     type ActionExtractResponse as ActionExtractResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionRewindExtractResponse as ActionRewindExtractResponse,
@@ -5932,6 +5971,7 @@ export declare namespace Actions {
     type ActionSettingsUpdateResponse as ActionSettingsUpdateResponse,
     type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
+    type ActionClipboardSetParams as ActionClipboardSetParams,
     type ActionDragParams as ActionDragParams,
     type ActionExtractParams as ActionExtractParams,
     type ActionLongPressParams as ActionLongPressParams,
