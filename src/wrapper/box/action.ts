@@ -19,6 +19,7 @@ import type {
   ActionResult,
   ActionScreenshotOptions,
   ActionAIResponse,
+  ActionClipboardSetParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -205,11 +206,13 @@ export class ActionOperator {
   private client: GboxClient;
   private boxId: string;
   public recording: RecordingOperator;
+  public clipboard: ClipboardOperator;
 
   constructor(client: GboxClient, boxId: string) {
     this.client = client;
     this.boxId = boxId;
     this.recording = new RecordingOperator(client, boxId);
+    this.clipboard = new ClipboardOperator(client, boxId);
   }
 
   /**
@@ -763,5 +766,34 @@ export class RecordingRewindOperator {
    */
   async extract(body?: ActionRewindExtractParams): Promise<ActionRewindExtractResponse> {
     return this.client.v1.boxes.actions.rewindExtract(this.boxId, body || {});
+  }
+}
+
+export class ClipboardOperator {
+  private client: GboxClient;
+  private boxId: string;
+
+  constructor(client: GboxClient, boxId: string) {
+    this.client = client;
+    this.boxId = boxId;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.clipboard.get();
+   */
+  async get() {
+    return this.client.v1.boxes.actions.clipboardGet(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.clipboard.set({ content: 'Hello, world!' });
+   */
+  async set(body: string | ActionClipboardSetParams) {
+    return this.client.v1.boxes.actions.clipboardSet(
+      this.boxId,
+      typeof body === 'string' ? { content: body } : body,
+    );
   }
 }
