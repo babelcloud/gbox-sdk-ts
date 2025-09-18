@@ -41,6 +41,8 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Get the clipboard content
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.actions.clipboardGet(
@@ -53,6 +55,8 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Set the clipboard content
+   *
    * @example
    * ```ts
    * await client.v1.boxes.actions.clipboardSet(
