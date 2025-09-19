@@ -8,7 +8,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Proxy extends APIResource {
   /**
-   * Clear the proxy for the box
+   * Clears the HTTP proxy for the box
    *
    * @example
    * ```ts
@@ -25,7 +25,8 @@ export class Proxy extends APIResource {
   }
 
   /**
-   * Get the proxy for the box
+   * Retrieves the HTTP proxy settings for a specific box. Use this endpoint to route
+   * traffic through the box's network.
    *
    * @example
    * ```ts
@@ -39,7 +40,8 @@ export class Proxy extends APIResource {
   }
 
   /**
-   * Set the proxy for the box
+   * Configures the HTTP proxy settings for a specific box. Use this endpoint when
+   * you need the box's outbound network traffic to pass through a proxy server.
    *
    * @example
    * ```ts
