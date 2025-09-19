@@ -240,6 +240,23 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * @example
+   * ```ts
+   * await client.v1.boxes.resolutionSet(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { height: 1080, width: 1920 },
+   * );
+   * ```
+   */
+  resolutionSet(boxID: string, body: BoxResolutionSetParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/resolution`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Run code on the box
    *
    * @example
@@ -1024,6 +1041,18 @@ export interface BoxLiveViewURLParams {
   expiresIn?: string;
 }
 
+export interface BoxResolutionSetParams {
+  /**
+   * The height of the screen
+   */
+  height: number;
+
+  /**
+   * The width of the screen
+   */
+  width: number;
+}
+
 export interface BoxRunCodeParams {
   /**
    * The code to run
@@ -1122,6 +1151,7 @@ export declare namespace Boxes {
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,
     type BoxLiveViewURLParams as BoxLiveViewURLParams,
+    type BoxResolutionSetParams as BoxResolutionSetParams,
     type BoxRunCodeParams as BoxRunCodeParams,
     type BoxStartParams as BoxStartParams,
     type BoxStopParams as BoxStopParams,
