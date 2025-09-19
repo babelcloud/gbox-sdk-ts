@@ -26,7 +26,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Click
+   * Simulates a click action on the box
    *
    * @example
    * ```ts
@@ -41,7 +41,42 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Drag
+   * Get the clipboard content
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.actions.clipboardGet(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  clipboardGet(boxID: string, options?: RequestOptions): APIPromise<string> {
+    return this._client.get(path`/boxes/${boxID}/actions/clipboard`, options);
+  }
+
+  /**
+   * Set the clipboard content
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.actions.clipboardSet(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { content: 'Hello, world!' },
+   * );
+   * ```
+   */
+  clipboardSet(boxID: string, body: ActionClipboardSetParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/actions/clipboard`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Simulates a drag gesture, moving from a start point to an end point over a set
+   * duration. Supports simple start/end coordinates, multi-point drag paths, and
+   * natural-language targets.
    *
    * @example
    * ```ts
@@ -96,7 +131,9 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Move to position
+   * Moves the focus to a specific coordinate on the box without performing a click
+   * or tap. Use this endpoint to position the cursor, hover over elements, or
+   * prepare for chained actions such as drag or swipe.
    *
    * @example
    * ```ts
@@ -156,17 +193,11 @@ export class Actions extends APIResource {
    * ```ts
    * await client.v1.boxes.actions.recordingStart(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { duration: '10s' },
    * );
    * ```
    */
-  recordingStart(
-    boxID: string,
-    body: ActionRecordingStartParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
+  recordingStart(boxID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/boxes/${boxID}/actions/recording/start`, {
-      body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -262,7 +293,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Rotate the screen orientation. Note that even after rotating the screen,
+   * Rotates the screen orientation. Note that even after rotating the screen,
    * applications or system layouts may not automatically adapt to the gravity sensor
    * changes, so visual changes may not always occur.
    *
@@ -284,7 +315,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Take screenshot
+   * Captures a screenshot of the current box screen
    *
    * @example
    * ```ts
@@ -318,7 +349,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Get the box action settings
+   * Get the action settings for the box
    *
    * @example
    * ```ts
@@ -332,7 +363,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Reset the box settings to default
+   * Resets the box settings to default
    *
    * @example
    * ```ts
@@ -347,7 +378,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Update the box action settings
+   * Update the action settings for the box
    *
    * @example
    * ```ts
@@ -397,7 +428,8 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Touch
+   * Performs more advanced touch gestures. Use this endpoint to simulate realistic
+   * behaviors.
    *
    * @example
    * ```ts
@@ -458,6 +490,12 @@ export interface ActionCommonOptions {
  * Result of an UI action execution with optional screenshots
  */
 export interface ActionResult {
+  /**
+   * Unique identifier for each action. Use this ID to locate the action and report
+   * issues.
+   */
+  actionId: string;
+
   /**
    * message
    */
@@ -593,6 +631,12 @@ export namespace ActionAIResponse {
    * Result of AI action execution with screenshot
    */
   export interface AIActionScreenshotResult {
+    /**
+     * Unique identifier for each action. Use this ID to locate the action and report
+     * issues.
+     */
+    actionId: string;
+
     /**
      * Response of AI action execution
      */
@@ -4000,6 +4044,8 @@ export namespace ActionAIResponse {
   }
 }
 
+export type ActionClipboardGetResponse = string;
+
 /**
  * Result of extract action execution
  */
@@ -4418,6 +4464,13 @@ export declare namespace ActionClickParams {
      */
     screenshotDelay?: string;
   }
+}
+
+export interface ActionClipboardSetParams {
+  /**
+   * The content to set the clipboard content
+   */
+  content: string;
 }
 
 export type ActionDragParams = ActionDragParams.DragSimple | ActionDragParams.DragAdvanced;
@@ -5071,17 +5124,6 @@ export interface ActionPressKeyParams {
    * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
    */
   screenshotDelay?: string;
-}
-
-export interface ActionRecordingStartParams {
-  /**
-   * Duration of the recording. Default is 30m, max is 30m. The recording will
-   * automatically stop when the duration time is reached.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 30m
-   */
-  duration?: string;
 }
 
 export interface ActionRewindExtractParams {
@@ -5927,6 +5969,7 @@ export declare namespace Actions {
     type ActionResult as ActionResult,
     type ActionScreenshotOptions as ActionScreenshotOptions,
     type ActionAIResponse as ActionAIResponse,
+    type ActionClipboardGetResponse as ActionClipboardGetResponse,
     type ActionExtractResponse as ActionExtractResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionRewindExtractResponse as ActionRewindExtractResponse,
@@ -5937,13 +5980,13 @@ export declare namespace Actions {
     type ActionSettingsUpdateResponse as ActionSettingsUpdateResponse,
     type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
+    type ActionClipboardSetParams as ActionClipboardSetParams,
     type ActionDragParams as ActionDragParams,
     type ActionExtractParams as ActionExtractParams,
     type ActionLongPressParams as ActionLongPressParams,
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
-    type ActionRecordingStartParams as ActionRecordingStartParams,
     type ActionRewindExtractParams as ActionRewindExtractParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,

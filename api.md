@@ -42,6 +42,7 @@ Methods:
 - <code title="get /boxes/{boxId}/display">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">display</a>(boxID) -> BoxDisplayResponse</code>
 - <code title="post /boxes/{boxId}/commands">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">executeCommands</a>(boxID, { ...params }) -> BoxExecuteCommandsResponse</code>
 - <code title="post /boxes/{boxId}/live-view-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">liveViewURL</a>(boxID, { ...params }) -> BoxLiveViewURLResponse</code>
+- <code title="post /boxes/{boxId}/resolution">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">resolutionSet</a>(boxID, { ...params }) -> void</code>
 - <code title="post /boxes/{boxId}/run-code">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">runCode</a>(boxID, { ...params }) -> BoxRunCodeResponse</code>
 - <code title="post /boxes/{boxId}/start">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">start</a>(boxID, { ...params }) -> BoxStartResponse</code>
 - <code title="post /boxes/{boxId}/stop">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">stop</a>(boxID, { ...params }) -> BoxStopResponse</code>
@@ -67,6 +68,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionResult</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenshotOptions</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionAIResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionClipboardGetResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionExtractResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionRecordingStopResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionRewindExtractResponse</a></code>
@@ -80,13 +82,15 @@ Methods:
 
 - <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">ai</a>(boxID, { ...params }) -> ActionAIResponse</code>
 - <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">click</a>(boxID, { ...params }) -> ActionResult</code>
+- <code title="get /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">clipboardGet</a>(boxID) -> string</code>
+- <code title="post /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">clipboardSet</a>(boxID, { ...params }) -> void</code>
 - <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">drag</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/extract">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">extract</a>(boxID, { ...params }) -> ActionExtractResponse</code>
 - <code title="post /boxes/{boxId}/actions/long-press">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">longPress</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/press-button">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressButton</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/press-key">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">pressKey</a>(boxID, { ...params }) -> ActionResult</code>
-- <code title="post /boxes/{boxId}/actions/recording/start">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">recordingStart</a>(boxID, { ...params }) -> void</code>
+- <code title="post /boxes/{boxId}/actions/recording/start">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">recordingStart</a>(boxID) -> void</code>
 - <code title="post /boxes/{boxId}/actions/recording/stop">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">recordingStop</a>(boxID) -> ActionRecordingStopResponse</code>
 - <code title="delete /boxes/{boxId}/actions/recording/rewind">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">rewindDisable</a>(boxID) -> void</code>
 - <code title="post /boxes/{boxId}/actions/recording/rewind">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">rewindEnable</a>(boxID) -> void</code>

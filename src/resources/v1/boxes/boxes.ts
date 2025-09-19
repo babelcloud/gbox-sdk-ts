@@ -6,6 +6,8 @@ import {
   ActionAIParams,
   ActionAIResponse,
   ActionClickParams,
+  ActionClipboardGetResponse,
+  ActionClipboardSetParams,
   ActionCommonOptions,
   ActionDragParams,
   ActionExtractParams,
@@ -14,7 +16,6 @@ import {
   ActionMoveParams,
   ActionPressButtonParams,
   ActionPressKeyParams,
-  ActionRecordingStartParams,
   ActionRecordingStopResponse,
   ActionResult,
   ActionRewindExtractParams,
@@ -133,7 +134,7 @@ export class Boxes extends APIResource {
   android: AndroidAPI.Android = new AndroidAPI.Android(this._client);
 
   /**
-   * Get box
+   * This endpoint retrieves information about a box
    *
    * @example
    * ```ts
@@ -147,7 +148,9 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * List box
+   * Returns a paginated list of box instances. Use this endpoint to monitor
+   * environments, filter by status or type, or retrieve boxes by labels or device
+   * type.
    *
    * @example
    * ```ts
@@ -159,7 +162,9 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Create android box
+   * Provisions a new Android box that you can operate through the GBOX SDK. Use this
+   * endpoint when you want to create a fresh Android environment for testing,
+   * automation, or agent execution.
    *
    * @example
    * ```ts
@@ -171,7 +176,9 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Create linux box
+   * Provisions a new Linux box that you can operate through the GBOX SDK. Use this
+   * endpoint when you want to create a fresh Linux environment for testing,
+   * automation, or agent execution.
    *
    * @example
    * ```ts
@@ -185,7 +192,7 @@ export class Boxes extends APIResource {
   /**
    * Retrieve the current display properties for a running box. This endpoint
    * provides details about the box's screen resolution, orientation, and other
-   * visual properties
+   * visual properties.
    *
    * @example
    * ```ts
@@ -221,7 +228,7 @@ export class Boxes extends APIResource {
   /**
    * This endpoint allows you to generate a pre-signed URL for accessing the live
    * view of a running box. The URL is valid for a limited time and can be used to
-   * view the box's live stream
+   * view the box's live stream.
    *
    * @example
    * ```ts
@@ -239,7 +246,26 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Run code on the box
+   * @example
+   * ```ts
+   * await client.v1.boxes.resolutionSet(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { height: 1080, width: 1920 },
+   * );
+   * ```
+   */
+  resolutionSet(boxID: string, body: BoxResolutionSetParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/resolution`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Executes code inside the specified box. Supports multiple languages (bash,
+   * Python, TypeScript) and allows you to configure environment variables,
+   * arguments, working directory, and timeouts.
    *
    * @example
    * ```ts
@@ -290,7 +316,8 @@ export class Boxes extends APIResource {
   }
 
   /**
-   * Terminate a running box. This action will stop the box and release its resources
+   * Terminate a running box. This action will stop the box and release its
+   * resources.
    *
    * @example
    * ```ts
@@ -314,7 +341,7 @@ export class Boxes extends APIResource {
   /**
    * This endpoint allows you to generate a pre-signed URL for accessing the web
    * terminal of a running box. The URL is valid for a limited time and can be used
-   * to access the box's terminal interface
+   * to access the box's terminal interface.
    *
    * @example
    * ```ts
@@ -1023,6 +1050,18 @@ export interface BoxLiveViewURLParams {
   expiresIn?: string;
 }
 
+export interface BoxResolutionSetParams {
+  /**
+   * The height of the screen
+   */
+  height: number;
+
+  /**
+   * The width of the screen
+   */
+  width: number;
+}
+
 export interface BoxRunCodeParams {
   /**
    * The code to run
@@ -1121,6 +1160,7 @@ export declare namespace Boxes {
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,
     type BoxLiveViewURLParams as BoxLiveViewURLParams,
+    type BoxResolutionSetParams as BoxResolutionSetParams,
     type BoxRunCodeParams as BoxRunCodeParams,
     type BoxStartParams as BoxStartParams,
     type BoxStopParams as BoxStopParams,
@@ -1140,6 +1180,7 @@ export declare namespace Boxes {
     type ActionResult as ActionResult,
     type ActionScreenshotOptions as ActionScreenshotOptions,
     type ActionAIResponse as ActionAIResponse,
+    type ActionClipboardGetResponse as ActionClipboardGetResponse,
     type ActionExtractResponse as ActionExtractResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionRewindExtractResponse as ActionRewindExtractResponse,
@@ -1150,13 +1191,13 @@ export declare namespace Boxes {
     type ActionSettingsUpdateResponse as ActionSettingsUpdateResponse,
     type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
+    type ActionClipboardSetParams as ActionClipboardSetParams,
     type ActionDragParams as ActionDragParams,
     type ActionExtractParams as ActionExtractParams,
     type ActionLongPressParams as ActionLongPressParams,
     type ActionMoveParams as ActionMoveParams,
     type ActionPressButtonParams as ActionPressButtonParams,
     type ActionPressKeyParams as ActionPressKeyParams,
-    type ActionRecordingStartParams as ActionRecordingStartParams,
     type ActionRewindExtractParams as ActionRewindExtractParams,
     type ActionScreenRotationParams as ActionScreenRotationParams,
     type ActionScreenshotParams as ActionScreenshotParams,

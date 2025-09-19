@@ -11,7 +11,6 @@ import type {
   ActionSwipeParams,
   ActionScreenRotationParams,
   ActionAIParams,
-  ActionRecordingStartParams,
   ActionTapParams,
   ActionLongPressParams,
   ActionSettingsUpdateParams,
@@ -20,6 +19,7 @@ import type {
   ActionResult,
   ActionScreenshotOptions,
   ActionAIResponse,
+  ActionClipboardSetParams,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -78,6 +78,7 @@ type ActionBodyGeneric<T> = T & {
 // Common return types
 type ActionResultWithScreenshot = {
   message: string;
+  actionId: string;
   screenshot: ScreenshotAllRequiredOf<ActionResult>;
 };
 
@@ -205,11 +206,13 @@ export class ActionOperator {
   private client: GboxClient;
   private boxId: string;
   public recording: RecordingOperator;
+  public clipboard: ClipboardOperator;
 
   constructor(client: GboxClient, boxId: string) {
     this.client = client;
     this.boxId = boxId;
     this.recording = new RecordingOperator(client, boxId);
+    this.clipboard = new ClipboardOperator(client, boxId);
   }
 
   /**
@@ -318,6 +321,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionClick, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: { [P in K[number]]: NonNullable<ClickScreenshotShape[P]> };
   }>;
   async click(body: ActionBodyWithScreenshotObject<ActionClick>): Promise<ActionResultWithScreenshot>;
@@ -348,6 +352,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionDrag, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async drag(body: ActionBodyWithScreenshotObject<ActionDrag>): Promise<ActionResultWithScreenshot>;
@@ -371,6 +376,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionSwipe, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async swipe(body: ActionBodyWithScreenshotObject<ActionSwipe>): Promise<ActionResultWithScreenshot>;
@@ -394,6 +400,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionPressKey, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async pressKey(body: ActionBodyWithScreenshotObject<ActionPressKey>): Promise<ActionResultWithScreenshot>;
@@ -419,6 +426,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionPressButton, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async pressButton(
@@ -443,6 +451,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionMove, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async move(body: ActionBodyWithScreenshotObject<ActionMove>): Promise<ActionResultWithScreenshot>;
@@ -466,6 +475,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionTap, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async tap(body: ActionBodyWithScreenshotObject<ActionTap>): Promise<ActionResultWithScreenshot>;
@@ -489,6 +499,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionLongPress, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async longPress(body: ActionBodyWithScreenshotObject<ActionLongPress>): Promise<ActionResultWithScreenshot>;
@@ -513,6 +524,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionScroll, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async scroll(body: ActionBodyWithScreenshotObject<ActionScroll>): Promise<ActionResultWithScreenshot>;
@@ -536,6 +548,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionTouch, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async touch(body: ActionBodyWithScreenshotObject<ActionTouch>): Promise<ActionResultWithScreenshot>;
@@ -559,6 +572,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionType, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async type(body: ActionBodyWithScreenshotObject<ActionType>): Promise<ActionResultWithScreenshot>;
@@ -586,6 +600,7 @@ export class ActionOperator {
     body: ActionBodyWithScreenshotPhases<ActionScreenRotation, K>,
   ): Promise<{
     message: string;
+    actionId: string;
     screenshot: ScreenshotPickOf<ActionResult, K[number]>;
   }>;
   async screenRotation(
@@ -627,8 +642,8 @@ export class ActionOperator {
    * @example
    * const response = await myBox.action.screenRecordingStart();
    */
-  async screenRecordingStart(body?: ActionRecordingStartParams) {
-    return this.client.v1.boxes.actions.recordingStart(this.boxId, body || {});
+  async screenRecordingStart() {
+    return this.client.v1.boxes.actions.recordingStart(this.boxId);
   }
 
   /**
@@ -707,8 +722,8 @@ export class RecordingOperator {
    * @example
    * const response = await myBox.recording.start();
    */
-  async start(body?: ActionRecordingStartParams) {
-    return this.client.v1.boxes.actions.recordingStart(this.boxId, body || {});
+  async start() {
+    return this.client.v1.boxes.actions.recordingStart(this.boxId);
   }
 
   /**
@@ -751,5 +766,34 @@ export class RecordingRewindOperator {
    */
   async extract(body?: ActionRewindExtractParams): Promise<ActionRewindExtractResponse> {
     return this.client.v1.boxes.actions.rewindExtract(this.boxId, body || {});
+  }
+}
+
+export class ClipboardOperator {
+  private client: GboxClient;
+  private boxId: string;
+
+  constructor(client: GboxClient, boxId: string) {
+    this.client = client;
+    this.boxId = boxId;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.clipboard.get();
+   */
+  async get() {
+    return this.client.v1.boxes.actions.clipboardGet(this.boxId);
+  }
+
+  /**
+   * @example
+   * const response = await myBox.clipboard.set({ content: 'Hello, world!' });
+   */
+  async set(body: string | ActionClipboardSetParams) {
+    return this.client.v1.boxes.actions.clipboardSet(
+      this.boxId,
+      typeof body === 'string' ? { content: body } : body,
+    );
   }
 }

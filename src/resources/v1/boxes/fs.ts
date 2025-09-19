@@ -9,7 +9,9 @@ import { path } from '../../../internal/utils/path';
 
 export class Fs extends APIResource {
   /**
-   * List box files
+   * Lists files and directories in a box. You can specify the directory path and
+   * depth, and optionally a working directory. The response includes metadata such
+   * as type, size, permissions, and last modified time.
    *
    * @example
    * ```ts
@@ -39,7 +41,7 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Get file/dir
+   * Retrieves metadata for a specific file or directory inside a box
    *
    * @example
    * ```ts
@@ -54,7 +56,8 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Read box file
+   * Reads the contents of a file inside the box and returns it as a string. Supports
+   * absolute or relative paths, with `workingDir` as the base for relative paths.
    *
    * @example
    * ```ts
@@ -69,7 +72,8 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Delete a file or dir. If target path is not exists, the delete will be failed.
+   * Deletes a file or a directory. If target path doesn't exist, the delete will
+   * fail.
    *
    * @example
    * ```ts
@@ -84,8 +88,8 @@ export class Fs extends APIResource {
   }
 
   /**
-   * Rename a file or dir. If target newPath is already exists, the rename will be
-   * failed.
+   * Renames a file or a directory. If the target newPath already exists, the rename
+   * will fail.
    *
    * @example
    * ```ts
@@ -104,7 +108,7 @@ export class Fs extends APIResource {
 
   /**
    * Creates or overwrites a file. Creates necessary directories in the path if they
-   * don't exist. If target path is already exists, the write will be failed.
+   * don't exist. If the target path already exists, the write will fail.
    *
    * @example
    * ```ts

@@ -21,6 +21,7 @@ export {
   type BoxCreateLinuxParams,
   type BoxExecuteCommandsParams,
   type BoxLiveViewURLParams,
+  type BoxResolutionSetParams,
   type BoxRunCodeParams,
   type BoxStartParams,
   type BoxStopParams,
