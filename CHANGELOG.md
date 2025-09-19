@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.35.0 (2025-09-19)
+
+Full Changelog: [v0.34.0...v0.35.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.34.0...v0.35.0)
+
+### Features
+
+* **api:** add actionId to action results and simplify screen recording methods ([7c517ee](https://github.com/babelcloud/gbox-sdk-ts/commit/7c517eed262f20cecced335e51ba3d9f110bd80b))
+* **api:** add ClipboardOperator for clipboard management ([0caf19b](https://github.com/babelcloud/gbox-sdk-ts/commit/0caf19b977c0df6f6314f99c95787c3b970f90df))
+* **api:** api update ([57bf81e](https://github.com/babelcloud/gbox-sdk-ts/commit/57bf81e8a73e756a497ee482d4f53622a2b7a243))
+* **api:** api update ([b99d27d](https://github.com/babelcloud/gbox-sdk-ts/commit/b99d27d45b5775eda9421bab8a8b07cafb897486))
+* **api:** api update ([2476fdc](https://github.com/babelcloud/gbox-sdk-ts/commit/2476fdc6f7b79a2c682fa9c82b77409f4abcbe5a))
+* **api:** api update ([d1889b2](https://github.com/babelcloud/gbox-sdk-ts/commit/d1889b2e5ab9ef8d8a65a0670f9bf1717b7ac1f5))
+* **api:** api update ([93803ab](https://github.com/babelcloud/gbox-sdk-ts/commit/93803ab668821a9f5f559ed59e80c549ba72a82b))
+* **api:** api update ([fa0c972](https://github.com/babelcloud/gbox-sdk-ts/commit/fa0c972bc733803fde073444e1178149bc36cc3a))
+
 ## 0.34.0 (2025-09-11)
 
 Full Changelog: [v0.33.0...v0.34.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.33.0...v0.34.0)
