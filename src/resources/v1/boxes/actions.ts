@@ -26,7 +26,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Click
+   * Simulates a click action on the box
    *
    * @example
    * ```ts
@@ -74,7 +74,9 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Drag
+   * Simulates a drag gesture, moving from a start point to an end point over a set
+   * duration. Supports simple start/end coordinates, multi-point drag paths, and
+   * natural-language targets.
    *
    * @example
    * ```ts
@@ -129,7 +131,9 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Move to position
+   * Moves the focus to a specific coordinate on the box without performing a click
+   * or tap. Use this endpoint to position the cursor, hover over elements, or
+   * prepare for chained actions such as drag or swipe.
    *
    * @example
    * ```ts
@@ -289,7 +293,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Rotate the screen orientation. Note that even after rotating the screen,
+   * Rotates the screen orientation. Note that even after rotating the screen,
    * applications or system layouts may not automatically adapt to the gravity sensor
    * changes, so visual changes may not always occur.
    *
@@ -311,7 +315,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Take screenshot
+   * Captures a screenshot of the current box screen
    *
    * @example
    * ```ts
@@ -345,7 +349,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Get the box action settings
+   * Get the action settings for the box
    *
    * @example
    * ```ts
@@ -359,7 +363,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Reset the box settings to default
+   * Resets the box settings to default
    *
    * @example
    * ```ts
@@ -374,7 +378,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Update the box action settings
+   * Update the action settings for the box
    *
    * @example
    * ```ts
@@ -424,7 +428,8 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Touch
+   * Performs more advanced touch gestures. Use this endpoint to simulate realistic
+   * behaviors.
    *
    * @example
    * ```ts

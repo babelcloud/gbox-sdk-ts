@@ -54,7 +54,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Close app
+   * Forces the specified Android application to close inside the box
    *
    * @example
    * ```ts
@@ -72,7 +72,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Close all apps
+   * Terminates all running Android applications inside the box
    *
    * @example
    * ```ts
@@ -136,7 +136,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Install app
+   * Install an Android app on the box
    *
    * @example
    * ```ts
@@ -158,7 +158,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Get pkg activities
+   * Retrieves the list of activities defined in a specific Android package
    *
    * @example
    * ```ts
@@ -193,8 +193,8 @@ export class Android extends APIResource {
   }
 
   /**
-   * Retrieve detailed information for all installed pkg. This endpoint provides
-   * comprehensive pkg details
+   * Retrieves detailed information for all installed pkgs. This endpoint provides
+   * comprehensive pkg details.
    *
    * @example
    * ```ts
@@ -214,7 +214,7 @@ export class Android extends APIResource {
   /**
    * A faster endpoint to quickly retrieve basic pkg information. This API provides
    * better performance for scenarios where you need to get essential pkg details
-   * quickly
+   * quickly.
    *
    * @example
    * ```ts
@@ -233,7 +233,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Open app
+   * Launches a specific Android application within the box
    *
    * @example
    * ```ts
@@ -252,7 +252,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Restart app
+   * Closes and immediately reopens the specified Android application inside the box
    *
    * @example
    * ```ts
@@ -290,7 +290,7 @@ export class Android extends APIResource {
   }
 
   /**
-   * Uninstall app
+   * Uninstalls an Android app from the box
    *
    * @example
    * ```ts
