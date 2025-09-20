@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.35.1 (2025-09-20)
+
+Full Changelog: [v0.35.0...v0.35.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.35.0...v0.35.1)
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([fd80967](https://github.com/babelcloud/gbox-sdk-ts/commit/fd8096785b5a029c62419e28471a5bf33420a4c6))
+
 ## 0.35.0 (2025-09-19)
 
 Full Changelog: [v0.34.0...v0.35.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.34.0...v0.35.0)
