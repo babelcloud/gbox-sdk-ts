@@ -19,6 +19,7 @@ export {
   type ActionClickParams,
   type ActionClipboardSetParams,
   type ActionDragParams,
+  type ActionElementsDetectParams,
   type ActionExtractParams,
   type ActionLongPressParams,
   type ActionMoveParams,

@@ -155,6 +155,21 @@ describe('resource actions', () => {
   });
 
   // Prism tests are disabled
+  test.skip('elementsDetect', async () => {
+    const responsePromise = client.v1.boxes.actions.elementsDetect(
+      'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('extract: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.extract('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       instruction: 'Extract the email address from the UI interface',
