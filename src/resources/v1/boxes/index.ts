@@ -7,6 +7,7 @@ export {
   type ActionScreenshotOptions,
   type ActionAIResponse,
   type ActionClipboardGetResponse,
+  type ActionElementsDetectResponse,
   type ActionExtractResponse,
   type ActionRecordingStopResponse,
   type ActionRewindExtractResponse,
