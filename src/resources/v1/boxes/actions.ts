@@ -97,21 +97,18 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.boxes.actions.elementsDetect(
-   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   * );
+   * const response =
+   *   await client.v1.boxes.actions.elementsDetect(
+   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   );
    * ```
    */
   elementsDetect(
     boxID: string,
     body: ActionElementsDetectParams,
     options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.post(path`/boxes/${boxID}/actions/elements/detect`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  ): APIPromise<ActionElementsDetectResponse> {
+    return this._client.post(path`/boxes/${boxID}/actions/elements/detect`, { body, ...options });
   }
 
   /**
@@ -4071,6 +4068,134 @@ export namespace ActionAIResponse {
 export type ActionClipboardGetResponse = string;
 
 /**
+ * Result containing original screenshot, annotated screenshot, and detected
+ * elements
+ */
+export interface ActionElementsDetectResponse {
+  /**
+   * Detected UI elements
+   */
+  elements: Array<ActionElementsDetectResponse.Element>;
+
+  /**
+   * Detected elements screenshot
+   */
+  screenshot: ActionElementsDetectResponse.Screenshot;
+}
+
+export namespace ActionElementsDetectResponse {
+  /**
+   * Detected UI element
+   */
+  export interface Element {
+    /**
+     * Element id
+     */
+    id: string;
+
+    /**
+     * Element center x coordinate relative to screen
+     */
+    centerX: number;
+
+    /**
+     * Element center y coordinate relative to screen
+     */
+    centerY: number;
+
+    /**
+     * Element height
+     */
+    height: number;
+
+    /**
+     * A human-readable identifier generated from the element's visible attributes to
+     * help understand what this element represents. For images, it uses alt text or
+     * filename; for links, it uses text content or href; for buttons, it uses text
+     * content or aria-label; for inputs, it uses placeholder or value; etc.
+     */
+    label: string;
+
+    /**
+     * Element path
+     */
+    path: string;
+
+    /**
+     * Element source
+     */
+    source: string;
+
+    /**
+     * Element type
+     */
+    type: string;
+
+    /**
+     * Element width
+     */
+    width: number;
+
+    /**
+     * Element x coordinate relative to screen
+     */
+    x: number;
+
+    /**
+     * Element y coordinate relative to screen
+     */
+    y: number;
+  }
+
+  /**
+   * Detected elements screenshot
+   */
+  export interface Screenshot {
+    /**
+     * Result of screenshot capture action
+     */
+    marked: Screenshot.Marked;
+
+    /**
+     * Result of screenshot capture action
+     */
+    source: Screenshot.Source;
+  }
+
+  export namespace Screenshot {
+    /**
+     * Result of screenshot capture action
+     */
+    export interface Marked {
+      /**
+       * URL of the screenshot
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Result of screenshot capture action
+     */
+    export interface Source {
+      /**
+       * URL of the screenshot
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot
+       */
+      presignedUrl?: string;
+    }
+  }
+}
+
+/**
  * Result of extract action execution
  */
 export interface ActionExtractResponse {
@@ -6021,6 +6146,7 @@ export declare namespace Actions {
     type ActionScreenshotOptions as ActionScreenshotOptions,
     type ActionAIResponse as ActionAIResponse,
     type ActionClipboardGetResponse as ActionClipboardGetResponse,
+    type ActionElementsDetectResponse as ActionElementsDetectResponse,
     type ActionExtractResponse as ActionExtractResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionRewindExtractResponse as ActionRewindExtractResponse,

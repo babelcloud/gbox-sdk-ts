@@ -69,6 +69,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenshotOptions</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionAIResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionClipboardGetResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">ActionElementsDetectResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionExtractResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionRecordingStopResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionRewindExtractResponse</a></code>
@@ -85,7 +86,7 @@ Methods:
 - <code title="get /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">clipboardGet</a>(boxID) -> string</code>
 - <code title="post /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">clipboardSet</a>(boxID, { ...params }) -> void</code>
 - <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">drag</a>(boxID, { ...params }) -> ActionResult</code>
-- <code title="post /boxes/{boxId}/actions/elements/detect">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">elementsDetect</a>(boxID, { ...params }) -> void</code>
+- <code title="post /boxes/{boxId}/actions/elements/detect">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">elementsDetect</a>(boxID, { ...params }) -> ActionElementsDetectResponse</code>
 - <code title="post /boxes/{boxId}/actions/extract">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">extract</a>(boxID, { ...params }) -> ActionExtractResponse</code>
 - <code title="post /boxes/{boxId}/actions/long-press">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">longPress</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">move</a>(boxID, { ...params }) -> ActionResult</code>
