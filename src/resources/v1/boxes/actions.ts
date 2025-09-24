@@ -4689,17 +4689,29 @@ export declare namespace ActionDragParams {
 
 export interface ActionElementsDetectParams {
   /**
-   * Type of the URI. default is base64.
+   * Detect elements screenshot options
    */
-  outputFormat?: 'base64' | 'storageKey';
+  screenshot?: ActionElementsDetectParams.Screenshot;
+}
 
+export namespace ActionElementsDetectParams {
   /**
-   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
-   *
-   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   * Detect elements screenshot options
    */
-  presignedExpiresIn?: string;
+  export interface Screenshot {
+    /**
+     * Type of the URI. default is base64.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+  }
 }
 
 export interface ActionExtractParams {
