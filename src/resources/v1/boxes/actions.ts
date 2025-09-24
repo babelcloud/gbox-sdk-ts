@@ -91,6 +91,30 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Detect and identify interactive UI elements in the current screen. Note: This
+   * feature currently only supports element detection within a running browser. If
+   * the browser is not running, the Elements array will be empty.
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.actions.elementsDetect(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  elementsDetect(
+    boxID: string,
+    body: ActionElementsDetectParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    return this._client.post(path`/boxes/${boxID}/actions/elements/detect`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Extract data from the UI interface using a JSON schema.
    *
    * @example
@@ -4663,6 +4687,21 @@ export declare namespace ActionDragParams {
   }
 }
 
+export interface ActionElementsDetectParams {
+  /**
+   * Type of the URI. default is base64.
+   */
+  outputFormat?: 'base64' | 'storageKey';
+
+  /**
+   * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+   */
+  presignedExpiresIn?: string;
+}
+
 export interface ActionExtractParams {
   /**
    * The instruction of the action to extract data from the UI interface
@@ -5982,6 +6021,7 @@ export declare namespace Actions {
     type ActionClickParams as ActionClickParams,
     type ActionClipboardSetParams as ActionClipboardSetParams,
     type ActionDragParams as ActionDragParams,
+    type ActionElementsDetectParams as ActionElementsDetectParams,
     type ActionExtractParams as ActionExtractParams,
     type ActionLongPressParams as ActionLongPressParams,
     type ActionMoveParams as ActionMoveParams,
