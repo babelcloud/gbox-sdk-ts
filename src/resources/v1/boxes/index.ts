@@ -71,6 +71,7 @@ export {
   type BoxDisplayResponse,
   type BoxExecuteCommandsResponse,
   type BoxLiveViewURLResponse,
+  type BoxResolutionSetResponse,
   type BoxRunCodeResponse,
   type BoxStartResponse,
   type BoxStopResponse,
