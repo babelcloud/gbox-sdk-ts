@@ -37,6 +37,7 @@ import {
   ActionTouchParams,
   ActionTypeParams,
   Actions,
+  DetectedElement,
 } from './actions';
 import * as AndroidAPI from './android';
 import {
@@ -1181,6 +1182,7 @@ export declare namespace Boxes {
     type ActionCommonOptions as ActionCommonOptions,
     type ActionResult as ActionResult,
     type ActionScreenshotOptions as ActionScreenshotOptions,
+    type DetectedElement as DetectedElement,
     type ActionAIResponse as ActionAIResponse,
     type ActionClipboardGetResponse as ActionClipboardGetResponse,
     type ActionElementsDetectResponse as ActionElementsDetectResponse,
