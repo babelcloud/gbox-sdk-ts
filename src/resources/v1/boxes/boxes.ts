@@ -249,20 +249,22 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Set the screen resolution
+   *
    * @example
    * ```ts
-   * await client.v1.boxes.resolutionSet(
+   * const response = await client.v1.boxes.resolutionSet(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { height: 1080, width: 1920 },
    * );
    * ```
    */
-  resolutionSet(boxID: string, body: BoxResolutionSetParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/boxes/${boxID}/resolution`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  resolutionSet(
+    boxID: string,
+    body: BoxResolutionSetParams,
+    options?: RequestOptions,
+  ): APIPromise<BoxResolutionSetResponse> {
+    return this._client.post(path`/boxes/${boxID}/resolution`, { body, ...options });
   }
 
   /**
@@ -811,6 +813,21 @@ export interface BoxLiveViewURLResponse {
 }
 
 /**
+ * Resolution configuration
+ */
+export interface BoxResolutionSetResponse {
+  /**
+   * Height of the screen
+   */
+  height: number;
+
+  /**
+   * Width of the screen
+   */
+  width: number;
+}
+
+/**
  * Result of code execution
  */
 export interface BoxRunCodeResponse {
@@ -1153,6 +1170,7 @@ export declare namespace Boxes {
     type BoxDisplayResponse as BoxDisplayResponse,
     type BoxExecuteCommandsResponse as BoxExecuteCommandsResponse,
     type BoxLiveViewURLResponse as BoxLiveViewURLResponse,
+    type BoxResolutionSetResponse as BoxResolutionSetResponse,
     type BoxRunCodeResponse as BoxRunCodeResponse,
     type BoxStartResponse as BoxStartResponse,
     type BoxStopResponse as BoxStopResponse,
