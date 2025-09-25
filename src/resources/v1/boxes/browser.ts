@@ -200,6 +200,9 @@ export interface BrowserCloseTabResponse {
   message?: string;
 }
 
+/**
+ * Browser proxy
+ */
 export interface BrowserGetProxyResponse {
   /**
    * HTTP proxy server, format: http://<username>:<password>@<host>:<port>
