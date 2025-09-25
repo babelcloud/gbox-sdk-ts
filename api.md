@@ -67,6 +67,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionCommonOptions</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionResult</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenshotOptions</a></code>
+- <code><a href="./src/resources/v1/boxes/actions.ts">DetectedElement</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionAIResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionClipboardGetResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionElementsDetectResponse</a></code>

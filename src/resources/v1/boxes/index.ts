@@ -5,6 +5,7 @@ export {
   type ActionCommonOptions,
   type ActionResult,
   type ActionScreenshotOptions,
+  type DetectedElement,
   type ActionAIResponse,
   type ActionClipboardGetResponse,
   type ActionElementsDetectResponse,
