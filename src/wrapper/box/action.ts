@@ -20,6 +20,8 @@ import type {
   ActionScreenshotOptions,
   ActionAIResponse,
   ActionClipboardSetParams,
+  ActionElementsDetectParams,
+  DetectedElement,
 } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 import { TimeString } from '../types';
@@ -101,7 +103,12 @@ export interface ActionClickByNaturalLanguage
   >;
 }
 
-export type ActionClick = ActionClickByPoint | ActionClickByNaturalLanguage;
+export interface ActionClickByElement extends OmitDeprecatedParams<ActionClickParams.ClickByElement> {
+  options?: EnsureObject<
+    ActionCommonOptions & Omit<NonNullable<ActionClickParams.ClickByElement['options']>, 'screenshot'>
+  >;
+}
+export type ActionClick = ActionClickByPoint | ActionClickByNaturalLanguage | ActionClickByElement;
 
 export interface ActionDragSimple extends OmitDeprecatedParams<ActionDragParams.DragSimple> {
   screenshotDelay?: TimeString;
@@ -142,7 +149,11 @@ export interface ActionTapByNaturalLanguage
     Omit<NonNullable<ActionTapParams.TapByNaturalLanguage['options']>, 'screenshot'>;
 }
 
-export type ActionTap = ActionTapByPoint | ActionTapByNaturalLanguage;
+export interface ActionTapByElement extends OmitDeprecatedParams<ActionTapParams.TapByElement> {
+  options?: ActionCommonOptions & Omit<NonNullable<ActionTapParams.TapByElement['options']>, 'screenshot'>;
+}
+
+export type ActionTap = ActionTapByPoint | ActionTapByNaturalLanguage | ActionTapByElement;
 
 export interface ActionLongPressByPoint extends OmitDeprecatedParams<ActionLongPressParams.LongPress> {
   options?: ActionCommonOptions & Omit<NonNullable<ActionLongPressParams.LongPress['options']>, 'screenshot'>;
@@ -156,7 +167,16 @@ export interface ActionLongPressByNaturalLanguage
     Omit<NonNullable<ActionLongPressParams.LongPressByNaturalLanguage['options']>, 'screenshot'>;
 }
 
-export type ActionLongPress = ActionLongPressByPoint | ActionLongPressByNaturalLanguage;
+export interface ActionLongPressByElement
+  extends OmitDeprecatedParams<ActionLongPressParams.LongPressByElement> {
+  options?: ActionCommonOptions &
+    Omit<NonNullable<ActionLongPressParams.LongPressByElement['options']>, 'screenshot'>;
+}
+
+export type ActionLongPress =
+  | ActionLongPressByPoint
+  | ActionLongPressByNaturalLanguage
+  | ActionLongPressByElement;
 
 export interface ActionTouch extends OmitDeprecatedParams<ActionTouchParams> {
   screenshotDelay?: TimeString;
@@ -207,12 +227,13 @@ export class ActionOperator {
   private boxId: string;
   public recording: RecordingOperator;
   public clipboard: ClipboardOperator;
-
+  public elements: ELementsOperator;
   constructor(client: GboxClient, boxId: string) {
     this.client = client;
     this.boxId = boxId;
     this.recording = new RecordingOperator(client, boxId);
     this.clipboard = new ClipboardOperator(client, boxId);
+    this.elements = new ELementsOperator(client, boxId);
   }
 
   /**
@@ -795,5 +816,52 @@ export class ClipboardOperator {
       this.boxId,
       typeof body === 'string' ? { content: body } : body,
     );
+  }
+}
+
+export class ELementsOperator {
+  private client: GboxClient;
+  private boxId: string;
+
+  constructor(client: GboxClient, boxId: string) {
+    this.client = client;
+    this.boxId = boxId;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.elements.detect();
+   */
+  async detect(params?: ActionElementsDetectParams) {
+    const result = await this.client.v1.boxes.actions.elementsDetect(this.boxId, params || {});
+    const elementManager = new ElementManager(this.client, this.boxId, result.elements);
+    return {
+      elements: elementManager,
+      screenshot: result.screenshot,
+    };
+  }
+}
+
+export class ElementManager {
+  private client: GboxClient;
+  private boxId: string;
+  public elements: DetectedElement[];
+
+  constructor(client: GboxClient, boxId: string, elements: DetectedElement[]) {
+    this.client = client;
+    this.boxId = boxId;
+    this.elements = elements;
+  }
+
+  get(id: string): DetectedElement {
+    const element = this.elements.find((element) => element.id === id);
+    if (!element) {
+      throw new Error(`Element with id ${id} not found`);
+    }
+    return element;
+  }
+
+  list(): DetectedElement[] {
+    return this.elements;
   }
 }
