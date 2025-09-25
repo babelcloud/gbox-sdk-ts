@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.36.0 (2025-09-25)
+
+Full Changelog: [v0.35.0...v0.36.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.35.0...v0.36.0)
+
+### Features
+
+* **api:** add ResolutionOperator to BaseBox for enhanced resolution handling ([6402f93](https://github.com/babelcloud/gbox-sdk-ts/commit/6402f9343fc76f4d0165240b62cedfbc4382f710))
+* **api:** api update ([8c2ed36](https://github.com/babelcloud/gbox-sdk-ts/commit/8c2ed36485c5c6f51cb22143008b7f10e9d74689))
+* **api:** api update ([85c3ca9](https://github.com/babelcloud/gbox-sdk-ts/commit/85c3ca90f801c52904d88e4cca1533a1e99099f0))
+* **api:** api update ([f9a51d8](https://github.com/babelcloud/gbox-sdk-ts/commit/f9a51d8b6d3f8ae7962c30b50b8f3ef49a548982))
+* **api:** api update ([823f354](https://github.com/babelcloud/gbox-sdk-ts/commit/823f354a5f562ab4c946dea87e73cc341c7c46f6))
+* **api:** api update ([325542d](https://github.com/babelcloud/gbox-sdk-ts/commit/325542df3c8b2d233295268f7a70c3271d0c02dc))
+* **api:** api update ([0b02bbb](https://github.com/babelcloud/gbox-sdk-ts/commit/0b02bbb11fef741e0eb4403579bcaad49ec63c1b))
+* **api:** enhance action handling with element-based interactions and add ELementsOperator for element detection ([b74c5b4](https://github.com/babelcloud/gbox-sdk-ts/commit/b74c5b4c5b31a3814b91c1a5a8b0bb65124dab47))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([fd80967](https://github.com/babelcloud/gbox-sdk-ts/commit/fd8096785b5a029c62419e28471a5bf33420a4c6))
+
 ## 0.35.0 (2025-09-19)
 
 Full Changelog: [v0.34.0...v0.35.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.34.0...v0.35.0)
