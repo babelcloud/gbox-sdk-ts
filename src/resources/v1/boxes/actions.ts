@@ -643,6 +643,69 @@ export interface ActionScreenshotOptions {
 }
 
 /**
+ * Detected UI element
+ */
+export interface DetectedElement {
+  /**
+   * Element id
+   */
+  id: string;
+
+  /**
+   * Element center x coordinate relative to screen
+   */
+  centerX: number;
+
+  /**
+   * Element center y coordinate relative to screen
+   */
+  centerY: number;
+
+  /**
+   * Element height
+   */
+  height: number;
+
+  /**
+   * A human-readable identifier generated from the element's visible attributes to
+   * help understand what this element represents. For images, it uses alt text or
+   * filename; for links, it uses text content or href; for buttons, it uses text
+   * content or aria-label; for inputs, it uses placeholder or value; etc.
+   */
+  label: string;
+
+  /**
+   * Element path
+   */
+  path: string;
+
+  /**
+   * Element source
+   */
+  source: string;
+
+  /**
+   * Element type
+   */
+  type: string;
+
+  /**
+   * Element width
+   */
+  width: number;
+
+  /**
+   * Element x coordinate relative to screen
+   */
+  x: number;
+
+  /**
+   * Element y coordinate relative to screen
+   */
+  y: number;
+}
+
+/**
  * Result of AI action execution with screenshot
  */
 export type ActionAIResponse = ActionAIResponse.AIActionScreenshotResult | ActionAIResponse.AIActionResult;
@@ -4075,7 +4138,7 @@ export interface ActionElementsDetectResponse {
   /**
    * Detected UI elements
    */
-  elements: Array<ActionElementsDetectResponse.Element>;
+  elements: Array<DetectedElement>;
 
   /**
    * Detected elements screenshot
@@ -4084,69 +4147,6 @@ export interface ActionElementsDetectResponse {
 }
 
 export namespace ActionElementsDetectResponse {
-  /**
-   * Detected UI element
-   */
-  export interface Element {
-    /**
-     * Element id
-     */
-    id: string;
-
-    /**
-     * Element center x coordinate relative to screen
-     */
-    centerX: number;
-
-    /**
-     * Element center y coordinate relative to screen
-     */
-    centerY: number;
-
-    /**
-     * Element height
-     */
-    height: number;
-
-    /**
-     * A human-readable identifier generated from the element's visible attributes to
-     * help understand what this element represents. For images, it uses alt text or
-     * filename; for links, it uses text content or href; for buttons, it uses text
-     * content or aria-label; for inputs, it uses placeholder or value; etc.
-     */
-    label: string;
-
-    /**
-     * Element path
-     */
-    path: string;
-
-    /**
-     * Element source
-     */
-    source: string;
-
-    /**
-     * Element type
-     */
-    type: string;
-
-    /**
-     * Element width
-     */
-    width: number;
-
-    /**
-     * Element x coordinate relative to screen
-     */
-    x: number;
-
-    /**
-     * Element y coordinate relative to screen
-     */
-    y: number;
-  }
-
   /**
    * Detected elements screenshot
    */
@@ -4469,7 +4469,10 @@ export namespace ActionAIParams {
   }
 }
 
-export type ActionClickParams = ActionClickParams.Click | ActionClickParams.ClickByNaturalLanguage;
+export type ActionClickParams =
+  | ActionClickParams.Click
+  | ActionClickParams.ClickByNaturalLanguage
+  | ActionClickParams.ClickByElementDto;
 
 export declare namespace ActionClickParams {
   export interface Click {
@@ -4551,6 +4554,74 @@ export declare namespace ActionClickParams {
      * 'Chrome'.
      */
     target: string;
+
+    /**
+     * Mouse button to click
+     */
+    button?: 'left' | 'right' | 'middle';
+
+    /**
+     * Whether to perform a double click
+     */
+    double?: boolean;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
+
+  export interface ClickByElementDto {
+    /**
+     * Detected UI element
+     */
+    target: DetectedElement;
 
     /**
      * Mouse button to click
@@ -4862,7 +4933,8 @@ export interface ActionExtractParams {
 
 export type ActionLongPressParams =
   | ActionLongPressParams.LongPress
-  | ActionLongPressParams.LongPressByNaturalLanguage;
+  | ActionLongPressParams.LongPressByNaturalLanguage
+  | ActionLongPressParams.LongPressByElementDto;
 
 export declare namespace ActionLongPressParams {
   export interface LongPress {
@@ -4942,6 +5014,72 @@ export declare namespace ActionLongPressParams {
      * 'login button'
      */
     target: string;
+
+    /**
+     * Duration to hold the press (e.g. '1s', '500ms')
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+     */
+    duration?: string;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
+
+  export interface LongPressByElementDto {
+    /**
+     * Detected UI element
+     */
+    target: DetectedElement;
 
     /**
      * Duration to hold the press (e.g. '1s', '500ms')
@@ -5806,7 +5944,10 @@ export declare namespace ActionSwipeParams {
   }
 }
 
-export type ActionTapParams = ActionTapParams.Tap | ActionTapParams.TapByNaturalLanguage;
+export type ActionTapParams =
+  | ActionTapParams.Tap
+  | ActionTapParams.TapByNaturalLanguage
+  | ActionTapParams.TapByElement;
 
 export declare namespace ActionTapParams {
   export interface Tap {
@@ -5878,6 +6019,64 @@ export declare namespace ActionTapParams {
      * 'Chrome'.
      */
     target: string;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
+     * will be ignored when `options.screenshot` is provided. Whether to include
+     * screenshots in the action response. If false, the screenshot object will still
+     * be returned but with empty URIs. Default is false.
+     */
+    includeScreenshot?: boolean;
+
+    /**
+     * Action common options
+     */
+    options?: ActionCommonOptions;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type
+     * of the URI. default is base64. This field will be ignored when
+     * `options.screenshot` is provided.
+     */
+    outputFormat?: 'base64' | 'storageKey';
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+     * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     * This field will be ignored when `options.screenshot` is provided.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+     */
+    presignedExpiresIn?: string;
+
+    /**
+     * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field
+     * will be ignored when `options.screenshot` is provided.
+     *
+     * Delay after performing the action, before taking the final screenshot.
+     *
+     * Execution flow:
+     *
+     * 1. Take screenshot before action
+     * 2. Perform the action
+     * 3. Wait for screenshotDelay (this parameter)
+     * 4. Take screenshot after action
+     *
+     * Example: '500ms' means wait 500ms after the action before capturing the final
+     * screenshot.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+     */
+    screenshotDelay?: string;
+  }
+
+  export interface TapByElement {
+    /**
+     * Detected UI element
+     */
+    target: DetectedElement;
 
     /**
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field
@@ -6144,6 +6343,7 @@ export declare namespace Actions {
     type ActionCommonOptions as ActionCommonOptions,
     type ActionResult as ActionResult,
     type ActionScreenshotOptions as ActionScreenshotOptions,
+    type DetectedElement as DetectedElement,
     type ActionAIResponse as ActionAIResponse,
     type ActionClipboardGetResponse as ActionClipboardGetResponse,
     type ActionElementsDetectResponse as ActionElementsDetectResponse,
