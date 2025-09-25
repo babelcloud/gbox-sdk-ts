@@ -4472,7 +4472,7 @@ export namespace ActionAIParams {
 export type ActionClickParams =
   | ActionClickParams.Click
   | ActionClickParams.ClickByNaturalLanguage
-  | ActionClickParams.ClickByElementDto;
+  | ActionClickParams.ClickByElement;
 
 export declare namespace ActionClickParams {
   export interface Click {
@@ -4617,7 +4617,7 @@ export declare namespace ActionClickParams {
     screenshotDelay?: string;
   }
 
-  export interface ClickByElementDto {
+  export interface ClickByElement {
     /**
      * Detected UI element
      */
@@ -4934,7 +4934,7 @@ export interface ActionExtractParams {
 export type ActionLongPressParams =
   | ActionLongPressParams.LongPress
   | ActionLongPressParams.LongPressByNaturalLanguage
-  | ActionLongPressParams.LongPressByElementDto;
+  | ActionLongPressParams.LongPressByElement;
 
 export declare namespace ActionLongPressParams {
   export interface LongPress {
@@ -5075,7 +5075,7 @@ export declare namespace ActionLongPressParams {
     screenshotDelay?: string;
   }
 
-  export interface LongPressByElementDto {
+  export interface LongPressByElement {
     /**
      * Detected UI element
      */
