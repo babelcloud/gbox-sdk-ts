@@ -27,6 +27,7 @@ Types:
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxDisplayResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxExecuteCommandsResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxLiveViewURLResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/boxes.ts">BoxResolutionSetResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxRunCodeResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStartResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/boxes.ts">BoxStopResponse</a></code>
@@ -42,7 +43,7 @@ Methods:
 - <code title="get /boxes/{boxId}/display">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">display</a>(boxID) -> BoxDisplayResponse</code>
 - <code title="post /boxes/{boxId}/commands">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">executeCommands</a>(boxID, { ...params }) -> BoxExecuteCommandsResponse</code>
 - <code title="post /boxes/{boxId}/live-view-url">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">liveViewURL</a>(boxID, { ...params }) -> BoxLiveViewURLResponse</code>
-- <code title="post /boxes/{boxId}/resolution">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">resolutionSet</a>(boxID, { ...params }) -> void</code>
+- <code title="post /boxes/{boxId}/resolution">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">resolutionSet</a>(boxID, { ...params }) -> BoxResolutionSetResponse</code>
 - <code title="post /boxes/{boxId}/run-code">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">runCode</a>(boxID, { ...params }) -> BoxRunCodeResponse</code>
 - <code title="post /boxes/{boxId}/start">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">start</a>(boxID, { ...params }) -> BoxStartResponse</code>
 - <code title="post /boxes/{boxId}/stop">client.v1.boxes.<a href="./src/resources/v1/boxes/boxes.ts">stop</a>(boxID, { ...params }) -> BoxStopResponse</code>
