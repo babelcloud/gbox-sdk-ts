@@ -22,6 +22,7 @@ import WebSocket from 'ws';
 import { StorageOperator } from './storage';
 import { MediaOperator } from './media';
 import { ProxyOperator } from './proxy';
+import { ResolutionOperator } from './resolution';
 
 export interface BoxStop extends BoxStopParams {}
 
@@ -48,6 +49,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
   public storage: StorageOperator;
   public media: MediaOperator;
   public proxy: ProxyOperator;
+  public resolution: ResolutionOperator;
 
   constructor(client: GboxClient, data: T) {
     this.client = client;
@@ -59,6 +61,7 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
     this.storage = new StorageOperator(this.client, this.data.id);
     this.media = new MediaOperator(this.client, this.data.id);
     this.proxy = new ProxyOperator(this.client, this.data.id);
+    this.resolution = new ResolutionOperator(this.client, this.data.id);
   }
 
   private async syncData() {
