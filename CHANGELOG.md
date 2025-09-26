@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.37.0 (2025-09-26)
+
+Full Changelog: [v0.36.0...v0.37.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.36.0...v0.37.0)
+
+### Features
+
+* **api:** add open and close methods to BrowserOperator for enhanced browser control ([8b6ab0d](https://github.com/babelcloud/gbox-sdk-ts/commit/8b6ab0d2a2b9dbe420053bc86c62fc78924a2603))
+* **api:** api update ([e56212e](https://github.com/babelcloud/gbox-sdk-ts/commit/e56212efa8777a1e72640e093bfc0ca5f27cd648))
+* **api:** api update ([b157f74](https://github.com/babelcloud/gbox-sdk-ts/commit/b157f74a39e82a7e32d3e309576e7a135fc9d8ba))
+
+
+### Bug Fixes
+
+* spelling issue ([12ebb08](https://github.com/babelcloud/gbox-sdk-ts/commit/12ebb08ff8e8ab7133dda17ede7498cd8ee982e5))
+
+
+### Performance Improvements
+
+* faster formatting ([b3e4f2c](https://github.com/babelcloud/gbox-sdk-ts/commit/b3e4f2c5f1fdd8019005beaf676aef55a634aa8c))
+
+
+### Chores
+
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([535ec31](https://github.com/babelcloud/gbox-sdk-ts/commit/535ec3141b1afd8c46e37066191562a766d60ba3))
+
 ## 0.36.0 (2025-09-25)
 
 Full Changelog: [v0.35.0...v0.36.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.35.0...v0.36.0)
