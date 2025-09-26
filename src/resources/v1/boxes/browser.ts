@@ -43,6 +43,8 @@ export class Browser extends APIResource {
   }
 
   /**
+   * Close the browser in the specified box
+   *
    * @example
    * ```ts
    * await client.v1.boxes.browser.close(
@@ -111,6 +113,9 @@ export class Browser extends APIResource {
   }
 
   /**
+   * Open the browser in the specified box. If the browser is already open, repeated
+   * calls will not open a new browser.
+   *
    * @example
    * ```ts
    * const response = await client.v1.boxes.browser.open(
@@ -118,7 +123,7 @@ export class Browser extends APIResource {
    * );
    * ```
    */
-  open(boxID: string, body: BrowserOpenParams, options?: RequestOptions): APIPromise<string> {
+  open(boxID: string, body: BrowserOpenParams, options?: RequestOptions): APIPromise<BrowserOpenResponse> {
     return this._client.post(path`/boxes/${boxID}/browser/open`, { body, ...options });
   }
 
@@ -311,7 +316,16 @@ export namespace BrowserGetTabsResponse {
   }
 }
 
-export type BrowserOpenResponse = string;
+/**
+ * Browser open result
+ */
+export interface BrowserOpenResponse {
+  /**
+   * The CDP url. You can use this URL with CDP libraries like
+   * puppeteer/playwright/etc.
+   */
+  cdpUrl: string;
+}
 
 /**
  * Browser tab
