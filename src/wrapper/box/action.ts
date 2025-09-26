@@ -227,13 +227,13 @@ export class ActionOperator {
   private boxId: string;
   public recording: RecordingOperator;
   public clipboard: ClipboardOperator;
-  public elements: ELementsOperator;
+  public elements: ElementsOperator;
   constructor(client: GboxClient, boxId: string) {
     this.client = client;
     this.boxId = boxId;
     this.recording = new RecordingOperator(client, boxId);
     this.clipboard = new ClipboardOperator(client, boxId);
-    this.elements = new ELementsOperator(client, boxId);
+    this.elements = new ElementsOperator(client, boxId);
   }
 
   /**
@@ -819,7 +819,7 @@ export class ClipboardOperator {
   }
 }
 
-export class ELementsOperator {
+export class ElementsOperator {
   private client: GboxClient;
   private boxId: string;
 

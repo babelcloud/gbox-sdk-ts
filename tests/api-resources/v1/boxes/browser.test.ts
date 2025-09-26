@@ -45,6 +45,18 @@ describe('resource browser', () => {
   });
 
   // Prism tests are disabled
+  test.skip('close', async () => {
+    const responsePromise = client.v1.boxes.browser.close('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('closeTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.closeTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -80,6 +92,18 @@ describe('resource browser', () => {
   // Prism tests are disabled
   test.skip('getTabs', async () => {
     const responsePromise = client.v1.boxes.browser.getTabs('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('open', async () => {
+    const responsePromise = client.v1.boxes.browser.open('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

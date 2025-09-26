@@ -1,4 +1,4 @@
-import { BrowserGetTabsResponse, BrowserOpenTabParams } from '../../resources/v1/boxes';
+import { BrowserGetTabsResponse, BrowserOpenParams, BrowserOpenTabParams } from '../../resources/v1/boxes';
 import { GboxClient } from '../../client';
 
 export class BrowserOperator {
@@ -8,6 +8,22 @@ export class BrowserOperator {
   constructor(client: GboxClient, boxId: string) {
     this.client = client;
     this.boxId = boxId;
+  }
+
+  /**
+   * @example
+   * const response = await myBox.browser.open();
+   */
+  async open(opt?: BrowserOpenParams) {
+    return this.client.v1.boxes.browser.open(this.boxId, opt || {});
+  }
+
+  /**
+   * @example
+   * const response = await myBox.browser.close();
+   */
+  async close() {
+    return this.client.v1.boxes.browser.close(this.boxId);
   }
 
   /**

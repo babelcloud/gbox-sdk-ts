@@ -43,6 +43,23 @@ export class Browser extends APIResource {
   }
 
   /**
+   * Close the browser in the specified box
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.browser.close(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  close(boxID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/boxes/${boxID}/browser/close`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Close a specific browser tab identified by its id. This endpoint will
    * permanently close the tab and free up the associated resources. After closing a
    * tab, the ids of subsequent tabs may change.
@@ -93,6 +110,21 @@ export class Browser extends APIResource {
    */
   getTabs(boxID: string, options?: RequestOptions): APIPromise<BrowserGetTabsResponse> {
     return this._client.get(path`/boxes/${boxID}/browser/tabs`, options);
+  }
+
+  /**
+   * Open the browser in the specified box. If the browser is already open, repeated
+   * calls will not open a new browser.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.browser.open(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  open(boxID: string, body: BrowserOpenParams, options?: RequestOptions): APIPromise<BrowserOpenResponse> {
+    return this._client.post(path`/boxes/${boxID}/browser/open`, { body, ...options });
   }
 
   /**
@@ -285,6 +317,17 @@ export namespace BrowserGetTabsResponse {
 }
 
 /**
+ * Browser open result
+ */
+export interface BrowserOpenResponse {
+  /**
+   * The CDP url. You can use this URL with CDP libraries like
+   * puppeteer/playwright/etc.
+   */
+  cdpUrl: string;
+}
+
+/**
  * Browser tab
  */
 export interface BrowserOpenTabResponse {
@@ -421,6 +464,26 @@ export interface BrowserCloseTabParams {
   boxId: string;
 }
 
+export interface BrowserOpenParams {
+  /**
+   * Whether to maximize the browser window.
+   */
+  maximize?: boolean;
+
+  /**
+   * Whether to show the browser's minimize, maximize and close buttons. Default is
+   * true.
+   */
+  showControls?: boolean;
+
+  /**
+   * The window size, format: <width>x<height>. If not specified, the browser will
+   * open with the default size. If both `maximize` and `size` are specified,
+   * `maximize` will take precedence.
+   */
+  size?: string;
+}
+
 export interface BrowserOpenTabParams {
   /**
    * The tab url
@@ -482,11 +545,13 @@ export declare namespace Browser {
     type BrowserCloseTabResponse as BrowserCloseTabResponse,
     type BrowserGetProxyResponse as BrowserGetProxyResponse,
     type BrowserGetTabsResponse as BrowserGetTabsResponse,
+    type BrowserOpenResponse as BrowserOpenResponse,
     type BrowserOpenTabResponse as BrowserOpenTabResponse,
     type BrowserSwitchTabResponse as BrowserSwitchTabResponse,
     type BrowserUpdateTabResponse as BrowserUpdateTabResponse,
     type BrowserCdpURLParams as BrowserCdpURLParams,
     type BrowserCloseTabParams as BrowserCloseTabParams,
+    type BrowserOpenParams as BrowserOpenParams,
     type BrowserOpenTabParams as BrowserOpenTabParams,
     type BrowserSetProxyParams as BrowserSetProxyParams,
     type BrowserSwitchTabParams as BrowserSwitchTabParams,
