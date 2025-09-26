@@ -193,7 +193,7 @@ Methods:
 - <code title="delete /boxes/{boxId}/browser/tabs/{tabId}">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">closeTab</a>(tabID, { ...params }) -> BrowserCloseTabResponse</code>
 - <code title="get /boxes/{boxId}/browser/proxy">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">getProxy</a>(boxID) -> BrowserGetProxyResponse</code>
 - <code title="get /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">getTabs</a>(boxID) -> BrowserGetTabsResponse</code>
-- <code title="post /boxes/{boxId}/browser/open">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">open</a>(boxID, { ...params }) -> string</code>
+- <code title="post /boxes/{boxId}/browser/open">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">open</a>(boxID, { ...params }) -> BrowserOpenResponse</code>
 - <code title="post /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">openTab</a>(boxID, { ...params }) -> BrowserOpenTabResponse</code>
 - <code title="post /boxes/{boxId}/browser/proxy">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">setProxy</a>(boxID, { ...params }) -> void</code>
 - <code title="post /boxes/{boxId}/browser/tabs/{tabId}/switch">client.v1.boxes.browser.<a href="./src/resources/v1/boxes/browser.ts">switchTab</a>(tabID, { ...params }) -> BrowserSwitchTabResponse</code>
