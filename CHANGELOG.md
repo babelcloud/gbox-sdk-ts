@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.37.1 (2025-09-27)
+
+Full Changelog: [v0.37.0...v0.37.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.37.0...v0.37.1)
+
+### Chores
+
+* **internal:** fix incremental formatting in some cases ([cd4f8b8](https://github.com/babelcloud/gbox-sdk-ts/commit/cd4f8b84c3cd5eaa81b81319e505e6e7171b7de2))
+
 ## 0.37.0 (2025-09-26)
 
 Full Changelog: [v0.36.0...v0.37.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.36.0...v0.37.0)
