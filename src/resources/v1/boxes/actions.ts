@@ -1313,6 +1313,12 @@ export namespace ActionAIResponse {
         includeScreenshot?: boolean;
 
         /**
+         * Natural language description of the location where the scroll should originate.
+         * If not provided, the scroll will be performed from the center of the screen.
+         */
+        location?: string;
+
+        /**
          * Action common options
          */
         options?: ActionsAPI.ActionCommonOptions;
@@ -3042,6 +3048,12 @@ export namespace ActionAIResponse {
          * be returned but with empty URIs. Default is false.
          */
         includeScreenshot?: boolean;
+
+        /**
+         * Natural language description of the location where the scroll should originate.
+         * If not provided, the scroll will be performed from the center of the screen.
+         */
+        location?: string;
 
         /**
          * Action common options
@@ -5695,6 +5707,12 @@ export declare namespace ActionScrollParams {
      * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
+
+    /**
+     * Natural language description of the location where the scroll should originate.
+     * If not provided, the scroll will be performed from the center of the screen.
+     */
+    location?: string;
 
     /**
      * Action common options
