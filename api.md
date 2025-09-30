@@ -69,7 +69,6 @@ Types:
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionResult</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionScreenshotOptions</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">DetectedElement</a></code>
-- <code><a href="./src/resources/v1/boxes/actions.ts">ActionAIResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionClipboardGetResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionElementsDetectResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/actions.ts">ActionExtractResponse</a></code>
@@ -83,7 +82,6 @@ Types:
 
 Methods:
 
-- <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">ai</a>(boxID, { ...params }) -> ActionAIResponse</code>
 - <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">click</a>(boxID, { ...params }) -> ActionResult</code>
 - <code title="get /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">clipboardGet</a>(boxID) -> string</code>
 - <code title="post /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">clipboardSet</a>(boxID, { ...params }) -> void</code>

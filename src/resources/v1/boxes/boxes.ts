@@ -3,8 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as ActionsAPI from './actions';
 import {
-  ActionAIParams,
-  ActionAIResponse,
   ActionClickParams,
   ActionClipboardGetResponse,
   ActionClipboardSetParams,
@@ -1203,7 +1201,6 @@ export declare namespace Boxes {
     type ActionResult as ActionResult,
     type ActionScreenshotOptions as ActionScreenshotOptions,
     type DetectedElement as DetectedElement,
-    type ActionAIResponse as ActionAIResponse,
     type ActionClipboardGetResponse as ActionClipboardGetResponse,
     type ActionElementsDetectResponse as ActionElementsDetectResponse,
     type ActionExtractResponse as ActionExtractResponse,
@@ -1214,7 +1211,6 @@ export declare namespace Boxes {
     type ActionSettingsResponse as ActionSettingsResponse,
     type ActionSettingsResetResponse as ActionSettingsResetResponse,
     type ActionSettingsUpdateResponse as ActionSettingsUpdateResponse,
-    type ActionAIParams as ActionAIParams,
     type ActionClickParams as ActionClickParams,
     type ActionClipboardSetParams as ActionClipboardSetParams,
     type ActionDragParams as ActionDragParams,
