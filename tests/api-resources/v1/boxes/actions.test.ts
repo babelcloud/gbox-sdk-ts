@@ -9,46 +9,6 @@ const client = new GboxClient({
 
 describe('resource actions', () => {
   // Prism tests are disabled
-  test.skip('ai: only required params', async () => {
-    const responsePromise = client.v1.boxes.actions.ai('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      instruction: 'click the login button',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('ai: required and optional params', async () => {
-    const response = await client.v1.boxes.actions.ai('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      instruction: 'click the login button',
-      background: 'The user is on the login page',
-      includeScreenshot: false,
-      options: {
-        screenshot: {
-          delay: '500ms',
-          outputFormat: 'base64',
-          phases: ['before', 'after'],
-          presignedExpiresIn: '30m',
-        },
-      },
-      outputFormat: 'base64',
-      presignedExpiresIn: '30m',
-      screenshotDelay: '500ms',
-      settings: {
-        disableActions: ['swipe'],
-        systemPrompt:
-          'You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.',
-      },
-      stream: false,
-    });
-  });
-
-  // Prism tests are disabled
   test.skip('click: only required params', async () => {
     const responsePromise = client.v1.boxes.actions.click('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       x: 350,
@@ -71,6 +31,7 @@ describe('resource actions', () => {
       button: 'left',
       double: false,
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -140,6 +101,7 @@ describe('resource actions', () => {
       start: { x: 100, y: 150 },
       duration: '500ms',
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -213,6 +175,7 @@ describe('resource actions', () => {
       y: 250,
       duration: '1s',
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -248,6 +211,7 @@ describe('resource actions', () => {
       x: 200,
       y: 300,
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -281,6 +245,7 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.pressButton('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       buttons: ['power'],
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -315,6 +280,7 @@ describe('resource actions', () => {
       keys: ['enter'],
       combination: true,
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -420,6 +386,7 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.screenRotation('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       orientation: 'landscapeLeft',
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -471,6 +438,7 @@ describe('resource actions', () => {
       x: 400,
       y: 300,
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -552,6 +520,7 @@ describe('resource actions', () => {
       duration: '500ms',
       includeScreenshot: false,
       location: 'Chrome App',
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -587,6 +556,7 @@ describe('resource actions', () => {
       x: 350,
       y: 250,
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -620,6 +590,7 @@ describe('resource actions', () => {
     const response = await client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       points: [{ start: { x: 100, y: 150 }, actions: [{ duration: '200ms', type: 'move', x: 400, y: 300 }] }],
       includeScreenshot: false,
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
@@ -654,6 +625,7 @@ describe('resource actions', () => {
       text: 'Hello World',
       includeScreenshot: false,
       mode: 'append',
+      model: 'gpt-5',
       options: {
         screenshot: {
           delay: '500ms',
