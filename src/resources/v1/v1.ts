@@ -4,6 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as DevicesAPI from './devices';
 import {
   DeviceInfo,
+  DeviceListParams,
   DeviceToBoxParams,
   DeviceToBoxResponse,
   Devices,
@@ -54,6 +55,7 @@ export declare namespace V1 {
     type DeviceInfo as DeviceInfo,
     type GetDeviceListResponse as GetDeviceListResponse,
     type DeviceToBoxResponse as DeviceToBoxResponse,
+    type DeviceListParams as DeviceListParams,
     type DeviceToBoxParams as DeviceToBoxParams,
   };
 

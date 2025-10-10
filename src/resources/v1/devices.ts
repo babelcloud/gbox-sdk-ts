@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -11,12 +12,18 @@ export class Devices extends APIResource {
    *
    * @example
    * ```ts
-   * const getDeviceListResponse =
-   *   await client.v1.devices.list();
+   * const getDeviceListResponse = await client.v1.devices.list({
+   *   'x-device-ap': 'x-device-ap',
+   * });
    * ```
    */
-  list(options?: RequestOptions): APIPromise<GetDeviceListResponse> {
-    return this._client.get('/devices', options);
+  list(params: DeviceListParams, options?: RequestOptions): APIPromise<GetDeviceListResponse> {
+    const { 'x-device-ap': xDeviceAp, ...query } = params;
+    return this._client.get('/devices', {
+      query,
+      ...options,
+      headers: buildHeaders([{ 'x-device-ap': xDeviceAp }, options?.headers]),
+    });
   }
 
   /**
@@ -104,6 +111,23 @@ export interface GetDeviceListResponse {
 
 export type DeviceToBoxResponse = string;
 
+export interface DeviceListParams {
+  /**
+   * Header param:
+   */
+  'x-device-ap': string;
+
+  /**
+   * Query param: Page number
+   */
+  page?: number;
+
+  /**
+   * Query param: Page size
+   */
+  pageSize?: number;
+}
+
 export interface DeviceToBoxParams {
   /**
    * If true, the device will be forcibly created as a new Box, which will forcibly
@@ -119,6 +143,7 @@ export declare namespace Devices {
     type DeviceInfo as DeviceInfo,
     type GetDeviceListResponse as GetDeviceListResponse,
     type DeviceToBoxResponse as DeviceToBoxResponse,
+    type DeviceListParams as DeviceListParams,
     type DeviceToBoxParams as DeviceToBoxParams,
   };
 }

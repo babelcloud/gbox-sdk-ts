@@ -9,8 +9,8 @@ const client = new GboxClient({
 
 describe('resource devices', () => {
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.v1.devices.list();
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.v1.devices.list({ 'x-device-ap': 'x-device-ap' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,6 +18,11 @@ describe('resource devices', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.v1.devices.list({ 'x-device-ap': 'x-device-ap', page: 1, pageSize: 10 });
   });
 
   // Prism tests are disabled
