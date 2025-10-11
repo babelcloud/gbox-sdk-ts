@@ -8,12 +8,6 @@ const client = new GboxClient({
 });
 
 describe('resource android', () => {
-  test('backup: required and optional params', async () => {
-    const response = await client.v1.boxes.android.backup('com.example.myapp', {
-      boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-    });
-  });
-
   // Prism tests are disabled
   test.skip('close: only required params', async () => {
     const responsePromise = client.v1.boxes.android.close('com.example.myapp', {
