@@ -34,6 +34,7 @@ export {
   type DeviceInfo,
   type GetDeviceListResponse,
   type DeviceToBoxResponse,
+  type DeviceListParams,
   type DeviceToBoxParams,
 } from './devices';
 export { V1 } from './v1';

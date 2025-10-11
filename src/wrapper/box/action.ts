@@ -10,7 +10,6 @@ import type {
   ActionPressButtonParams,
   ActionSwipeParams,
   ActionScreenRotationParams,
-  ActionAIParams,
   ActionTapParams,
   ActionLongPressParams,
   ActionSettingsUpdateParams,
@@ -18,7 +17,6 @@ import type {
   ActionRewindExtractResponse,
   ActionResult,
   ActionScreenshotOptions,
-  ActionAIResponse,
   ActionClipboardSetParams,
   ActionElementsDetectParams,
   DetectedElement,
@@ -214,10 +212,6 @@ export interface ActionScreenshot extends ActionScreenshotParams {
   path?: string;
 }
 
-export interface ActionAI extends OmitDeprecatedParams<ActionAIParams> {
-  options?: ActionCommonOptions & Omit<NonNullable<ActionAIParams['options']>, 'screenshot'>;
-}
-
 export interface ActionScreenRotation extends OmitDeprecatedParams<ActionScreenRotationParams> {
   options?: ActionCommonOptions & Omit<NonNullable<ActionScreenRotationParams['options']>, 'screenshot'>;
 }
@@ -236,98 +230,6 @@ export class ActionOperator {
     this.elements = new ElementsOperator(client, boxId);
   }
 
-  /**
-   * @example
-   * const response = await myBox.action.ai("Click on the login button");
-   */
-  async ai(
-    body: string | ActionAI,
-    { onActionStart, onActionEnd }: { onActionStart?: () => void; onActionEnd?: () => void } = {},
-  ): Promise<ActionAIResponse> {
-    const params: ActionAIParams = typeof body === 'string' ? { instruction: body } : body;
-
-    if (onActionStart || onActionEnd) {
-      const hooks: { onActionStart?: () => void; onActionEnd?: () => void } = {};
-      if (onActionStart) hooks.onActionStart = onActionStart;
-      if (onActionEnd) hooks.onActionEnd = onActionEnd;
-      return this.aiStream(params, hooks);
-    }
-
-    return this.client.post<ActionAIResponse>(`/boxes/${encodeURIComponent(this.boxId)}/actions/ai`, {
-      body: params,
-      headers: { Accept: '*/*' },
-    });
-  }
-
-  private async aiStream(
-    params: ActionAIParams,
-    { onActionStart, onActionEnd }: { onActionStart?: () => void; onActionEnd?: () => void },
-  ): Promise<ActionAIResponse> {
-    const apiPromise = this.client.post(`/boxes/${encodeURIComponent(this.boxId)}/actions/ai`, {
-      body: { ...params, stream: true },
-      headers: { Accept: 'text/event-stream' },
-      stream: true,
-    });
-
-    const response = await apiPromise.asResponse();
-
-    if (!response.body) {
-      throw new Error('Unable to obtain response body stream');
-    }
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
-    let result: ActionAIResponse | null = null;
-
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-
-      let separatorIndex: number;
-      while ((separatorIndex = buffer.indexOf('\n\n')) !== -1) {
-        const rawEvent = buffer.slice(0, separatorIndex).trim();
-        buffer = buffer.slice(separatorIndex + 2);
-
-        if (!rawEvent) continue;
-
-        let eventName = '';
-        const dataLines: string[] = [];
-
-        for (const line of rawEvent.split('\n')) {
-          if (line.startsWith('event:')) {
-            eventName = line.slice('event:'.length).trim();
-          } else if (line.startsWith('data:')) {
-            dataLines.push(line.slice('data:'.length).trim());
-          }
-        }
-
-        const dataStr = dataLines.join('\n');
-
-        switch (eventName) {
-          case 'before':
-            onActionStart?.();
-            break;
-          case 'after':
-            onActionEnd?.();
-            break;
-          case 'result':
-            result = JSON.parse(dataStr) as ActionAIResponse;
-            break;
-          case 'error':
-            const errorData = JSON.parse(dataStr);
-            throw new Error(`AI action error: ${errorData.message || 'Unknown error'}`);
-        }
-      }
-    }
-
-    if (result === null) {
-      throw new Error('No result event received from stream');
-    }
-
-    return result;
-  }
   /**
    * @example
    * const response = await myBox.action.click({ x: 100, y: 100 });

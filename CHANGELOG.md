@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.38.0 (2025-10-11)
+
+Full Changelog: [v0.37.0...v0.38.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.37.0...v0.38.0)
+
+### Features
+
+* **api:** api update ([0573f64](https://github.com/babelcloud/gbox-sdk-ts/commit/0573f64224e3e12cbb0fc218ccec6f4a87e66257))
+* **api:** api update ([7941b57](https://github.com/babelcloud/gbox-sdk-ts/commit/7941b57de73f196f641d951614827b0e1bba9c41))
+* **api:** api update ([6810966](https://github.com/babelcloud/gbox-sdk-ts/commit/6810966cc23d7f79e94d18c26ec40f66dfc33f41))
+
+
+### Chores
+
+* **internal:** codegen related update ([393466e](https://github.com/babelcloud/gbox-sdk-ts/commit/393466e1159337222cae7c569522262ddc0220d9))
+* **internal:** fix incremental formatting in some cases ([cd4f8b8](https://github.com/babelcloud/gbox-sdk-ts/commit/cd4f8b84c3cd5eaa81b81319e505e6e7171b7de2))
+* **internal:** ignore .eslintcache ([196cf09](https://github.com/babelcloud/gbox-sdk-ts/commit/196cf094b8590ff12721a924decf917a71772448))
+* **internal:** remove .eslintcache ([7e2dcfa](https://github.com/babelcloud/gbox-sdk-ts/commit/7e2dcfaaebe7f4d88903ecf7ba6f96b0f3186224))
+* **internal:** use npm pack for build uploads ([94e9e2b](https://github.com/babelcloud/gbox-sdk-ts/commit/94e9e2bf0db44ea09d56be9e8079a87356130152))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([b8c9773](https://github.com/babelcloud/gbox-sdk-ts/commit/b8c9773c5ec8a14a0d64254f69d5c1703e01e28e))
+
+
+### Refactors
+
+* **api:** remove ActionAI interface and related methods from ActionOperator ([6954f01](https://github.com/babelcloud/gbox-sdk-ts/commit/6954f011de8fd913d05e9b7b2284eadbce951f1c))
+
 ## 0.37.0 (2025-09-26)
 
 Full Changelog: [v0.36.0...v0.37.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.36.0...v0.37.0)
