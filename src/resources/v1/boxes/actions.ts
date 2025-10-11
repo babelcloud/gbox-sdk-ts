@@ -483,6 +483,11 @@ export class Actions extends APIResource {
  */
 export interface ActionCommonOptions {
   /**
+   * Model to use for natural-language target resolution. Defaults to 'uitars'.
+   */
+  model?: 'gpt-5' | 'gpt-4o' | 'ui-tars' | 'openai-computer-use';
+
+  /**
    * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
    * to configure screenshot options.
    */
@@ -963,11 +968,6 @@ export declare namespace ActionClickParams {
     includeScreenshot?: boolean;
 
     /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-    /**
      * Action common options
      */
     options?: ActionCommonOptions;
@@ -1037,11 +1037,6 @@ export declare namespace ActionClickParams {
     includeScreenshot?: boolean;
 
     /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-    /**
      * Action common options
      */
     options?: ActionCommonOptions;
@@ -1108,11 +1103,6 @@ export declare namespace ActionClickParams {
      * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
-
-    /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
     /**
      * Action common options
@@ -1195,11 +1185,6 @@ export declare namespace ActionDragParams {
      * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
-
-    /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
     /**
      * Action common options
@@ -1298,11 +1283,6 @@ export declare namespace ActionDragParams {
      * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
-
-    /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
     /**
      * Action common options
@@ -1448,11 +1428,6 @@ export declare namespace ActionLongPressParams {
     includeScreenshot?: boolean;
 
     /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-    /**
      * Action common options
      */
     options?: ActionCommonOptions;
@@ -1518,11 +1493,6 @@ export declare namespace ActionLongPressParams {
      * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
-
-    /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
     /**
      * Action common options
@@ -1591,11 +1561,6 @@ export declare namespace ActionLongPressParams {
     includeScreenshot?: boolean;
 
     /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-    /**
      * Action common options
      */
     options?: ActionCommonOptions;
@@ -1660,11 +1625,6 @@ export interface ActionMoveParams {
   includeScreenshot?: boolean;
 
   /**
-   * Model to use for natural-language target resolution. Defaults to 'uitars'.
-   */
-  model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-  /**
    * Action common options
    */
   options?: ActionCommonOptions;
@@ -1721,11 +1681,6 @@ export interface ActionPressButtonParams {
    * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
-
-  /**
-   * Model to use for natural-language target resolution. Defaults to 'uitars'.
-   */
-  model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
   /**
    * Action common options
@@ -1905,11 +1860,6 @@ export interface ActionPressKeyParams {
   includeScreenshot?: boolean;
 
   /**
-   * Model to use for natural-language target resolution. Defaults to 'uitars'.
-   */
-  model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-  /**
    * Action common options
    */
   options?: ActionCommonOptions;
@@ -1978,11 +1928,6 @@ export interface ActionScreenRotationParams {
    * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
-
-  /**
-   * Model to use for natural-language target resolution. Defaults to 'uitars'.
-   */
-  model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
   /**
    * Action common options
@@ -2138,11 +2083,6 @@ export declare namespace ActionScrollParams {
     includeScreenshot?: boolean;
 
     /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-    /**
      * Action common options
      */
     options?: ActionCommonOptions;
@@ -2224,11 +2164,6 @@ export declare namespace ActionScrollParams {
      * If not provided, the scroll will be performed from the center of the screen.
      */
     location?: string;
-
-    /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
     /**
      * Action common options
@@ -2331,11 +2266,6 @@ export declare namespace ActionSwipeParams {
     location?: string;
 
     /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-    /**
      * Action common options
      */
     options?: ActionCommonOptions;
@@ -2405,11 +2335,6 @@ export declare namespace ActionSwipeParams {
      * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
-
-    /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
     /**
      * Action common options
@@ -2514,11 +2439,6 @@ export declare namespace ActionTapParams {
     includeScreenshot?: boolean;
 
     /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-    /**
      * Action common options
      */
     options?: ActionCommonOptions;
@@ -2576,11 +2496,6 @@ export declare namespace ActionTapParams {
      * be returned but with empty URIs. Default is false.
      */
     includeScreenshot?: boolean;
-
-    /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
     /**
      * Action common options
@@ -2641,11 +2556,6 @@ export declare namespace ActionTapParams {
     includeScreenshot?: boolean;
 
     /**
-     * Model to use for natural-language target resolution. Defaults to 'uitars'.
-     */
-    model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
-
-    /**
      * Action common options
      */
     options?: ActionCommonOptions;
@@ -2703,11 +2613,6 @@ export interface ActionTouchParams {
    * be returned but with empty URIs. Default is false.
    */
   includeScreenshot?: boolean;
-
-  /**
-   * Model to use for natural-language target resolution. Defaults to 'uitars'.
-   */
-  model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
   /**
    * Action common options
@@ -2852,11 +2757,6 @@ export interface ActionTypeParams {
    * all existing text
    */
   mode?: 'append' | 'replace';
-
-  /**
-   * Model to use for natural-language target resolution. Defaults to 'uitars'.
-   */
-  model?: 'gpt-5' | 'gpt-4o' | 'uitars' | 'cua';
 
   /**
    * Action common options
