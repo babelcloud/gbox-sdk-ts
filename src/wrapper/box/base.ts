@@ -102,6 +102,16 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
 
   /**
    * @example
+   * const response = await myBox.end();
+   */
+  async end(body?: BoxTerminate): Promise<this> {
+    await this.client.v1.boxes.terminate(this.data.id, body);
+    await this.syncData();
+    return this;
+  }
+
+  /**
+   * @example
    * const response = await myBox.display();
    */
   async display(): Promise<BoxDisplayResponse> {
@@ -218,13 +228,5 @@ export class BaseBox<T extends LinuxBox | AndroidBox> {
    */
   async liveView(body?: BoxLiveViewURLParams) {
     return this.client.v1.boxes.liveViewURL(this.data.id, body);
-  }
-
-  /**
-   * @example
-   * const response = await myBox.webTerminal();
-   */
-  async webTerminal(body?: BoxWebTerminalURLParams) {
-    return this.client.v1.boxes.webTerminalURL(this.data.id, body);
   }
 }
