@@ -203,6 +203,7 @@ Types:
 
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidApp</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidPkg</a></code>
+- <code><a href="./src/resources/v1/boxes/android.ts">AndroidAppiumURLResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidGetConnectAddressResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidInstallResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/android.ts">AndroidListActivitiesResponse</a></code>
@@ -212,6 +213,7 @@ Types:
 
 Methods:
 
+- <code title="post /boxes/{boxId}/android/connect-url/appium">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">appiumURL</a>(boxID, { ...params }) -> AndroidAppiumURLResponse</code>
 - <code title="post /boxes/{boxId}/android/packages/{packageName}/backup">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">backup</a>(packageName, { ...params }) -> Response</code>
 - <code title="post /boxes/{boxId}/android/packages/backup-all">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">backupAll</a>(boxID) -> Response</code>
 - <code title="post /boxes/{boxId}/android/packages/{packageName}/close">client.v1.boxes.android.<a href="./src/resources/v1/boxes/android.ts">close</a>(packageName, { ...params }) -> void</code>
