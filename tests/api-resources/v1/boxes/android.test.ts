@@ -8,6 +8,30 @@ const client = new GboxClient({
 });
 
 describe('resource android', () => {
+  // Prism tests are disabled
+  test.skip('appiumURL', async () => {
+    const responsePromise = client.v1.boxes.android.appiumURL('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('appiumURL: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.boxes.android.appiumURL(
+        'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+        { expiresIn: '120m' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
+  });
+
   test('backup: required and optional params', async () => {
     const response = await client.v1.boxes.android.backup('com.example.myapp', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',

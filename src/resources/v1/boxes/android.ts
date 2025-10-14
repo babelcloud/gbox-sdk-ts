@@ -10,6 +10,24 @@ import { path } from '../../../internal/utils/path';
 
 export class Android extends APIResource {
   /**
+   * Generate a pre-signed proxy URL for Appium server of a running Android box.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.android.appiumURL(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   * );
+   * ```
+   */
+  appiumURL(
+    boxID: string,
+    body: AndroidAppiumURLParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AndroidAppiumURLResponse> {
+    return this._client.post(path`/boxes/${boxID}/android/connect-url/appium`, { body, ...options });
+  }
+
+  /**
    * Backup
    *
    * @example
@@ -366,6 +384,26 @@ export interface AndroidPkg {
 }
 
 /**
+ * Appium connection information
+ */
+export interface AndroidAppiumURLResponse {
+  /**
+   * A ready-to-use default WebdriverIO remote options object
+   */
+  defaultOption: unknown;
+
+  /**
+   * Device UDID for Appium connection
+   */
+  udid: string;
+
+  /**
+   * Appium connection URL
+   */
+  url: string;
+}
+
+/**
  * Android connection information
  */
 export interface AndroidGetConnectAddressResponse {
@@ -539,6 +577,16 @@ export namespace AndroidListPkgSimpleResponse {
      */
     pkgType: 'system' | 'thirdParty';
   }
+}
+
+export interface AndroidAppiumURLParams {
+  /**
+   * The Appium connection url will be alive for the given duration
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 120m
+   */
+  expiresIn?: string;
 }
 
 export interface AndroidBackupParams {
@@ -720,12 +768,14 @@ export declare namespace Android {
   export {
     type AndroidApp as AndroidApp,
     type AndroidPkg as AndroidPkg,
+    type AndroidAppiumURLResponse as AndroidAppiumURLResponse,
     type AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse,
     type AndroidInstallResponse as AndroidInstallResponse,
     type AndroidListActivitiesResponse as AndroidListActivitiesResponse,
     type AndroidListAppResponse as AndroidListAppResponse,
     type AndroidListPkgResponse as AndroidListPkgResponse,
     type AndroidListPkgSimpleResponse as AndroidListPkgSimpleResponse,
+    type AndroidAppiumURLParams as AndroidAppiumURLParams,
     type AndroidBackupParams as AndroidBackupParams,
     type AndroidCloseParams as AndroidCloseParams,
     type AndroidGetParams as AndroidGetParams,
