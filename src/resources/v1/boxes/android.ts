@@ -388,9 +388,9 @@ export interface AndroidPkg {
  */
 export interface AndroidAppiumURLResponse {
   /**
-   * A ready-to-use default WebdriverIO remote options object
+   * Ready-to-use WebdriverIO remote options
    */
-  defaultOption: unknown;
+  defaultOption: AndroidAppiumURLResponse.DefaultOption;
 
   /**
    * Device UDID for Appium connection
@@ -401,6 +401,65 @@ export interface AndroidAppiumURLResponse {
    * Appium connection URL
    */
   url: string;
+}
+
+export namespace AndroidAppiumURLResponse {
+  /**
+   * Ready-to-use WebdriverIO remote options
+   */
+  export interface DefaultOption {
+    /**
+     * Appium capabilities for WebdriverIO
+     */
+    capabilities: DefaultOption.Capabilities;
+
+    /**
+     * Hostname
+     */
+    hostname: string;
+
+    /**
+     * URL pathname
+     */
+    path: string;
+
+    /**
+     * Port number
+     */
+    port: number;
+
+    /**
+     * Protocol (http or https)
+     */
+    protocol: string;
+  }
+
+  export namespace DefaultOption {
+    /**
+     * Appium capabilities for WebdriverIO
+     */
+    export interface Capabilities {
+      /**
+       * Appium automation name
+       */
+      'appium:automationName': string;
+
+      /**
+       * Device name
+       */
+      'appium:deviceName': string;
+
+      /**
+       * Device UDID
+       */
+      'appium:udid': string;
+
+      /**
+       * Platform name
+       */
+      platformName: string;
+    }
+  }
 }
 
 /**
