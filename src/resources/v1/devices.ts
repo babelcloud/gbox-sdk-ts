@@ -12,17 +12,22 @@ export class Devices extends APIResource {
    *
    * @example
    * ```ts
-   * const getDeviceListResponse = await client.v1.devices.list({
-   *   'x-device-ap': 'x-device-ap',
-   * });
+   * const getDeviceListResponse =
+   *   await client.v1.devices.list();
    * ```
    */
-  list(params: DeviceListParams, options?: RequestOptions): APIPromise<GetDeviceListResponse> {
-    const { 'x-device-ap': xDeviceAp, ...query } = params;
+  list(
+    params: DeviceListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<GetDeviceListResponse> {
+    const { 'x-device-ap': xDeviceAp, ...query } = params ?? {};
     return this._client.get('/devices', {
       query,
       ...options,
-      headers: buildHeaders([{ 'x-device-ap': xDeviceAp }, options?.headers]),
+      headers: buildHeaders([
+        { ...(xDeviceAp != null ? { 'x-device-ap': xDeviceAp } : undefined) },
+        options?.headers,
+      ]),
     });
   }
 
@@ -113,11 +118,6 @@ export type DeviceToBoxResponse = string;
 
 export interface DeviceListParams {
   /**
-   * Header param:
-   */
-  'x-device-ap': string;
-
-  /**
    * Query param: Page number
    */
   page?: number;
@@ -126,6 +126,11 @@ export interface DeviceListParams {
    * Query param: Page size
    */
   pageSize?: number;
+
+  /**
+   * Header param: Filter devices by access point
+   */
+  'x-device-ap'?: string;
 }
 
 export interface DeviceToBoxParams {
