@@ -545,6 +545,14 @@ export namespace CreateAndroidBox {
     expiresIn?: string;
 
     /**
+     * Keep alive duration on activity; 0 disables keep alive
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 0ms
+     */
+    keepAlive?: string;
+
+    /**
      * Key-value pairs of labels for the box. Labels are used to add custom metadata to
      * help identify, categorize, and manage boxes. Common use cases include project
      * names, environments, teams, applications, or any other organizational tags that
@@ -598,6 +606,14 @@ export namespace CreateLinuxBox {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
      */
     expiresIn?: string;
+
+    /**
+     * Keep alive duration on activity; 0 disables keep alive
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 0ms
+     */
+    keepAlive?: string;
 
     /**
      * Key-value pairs of labels for the box. Labels are used to add custom metadata to
@@ -974,6 +990,14 @@ export namespace BoxCreateAndroidParams {
     expiresIn?: string;
 
     /**
+     * Keep alive duration on activity; 0 disables keep alive
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 0ms
+     */
+    keepAlive?: string;
+
+    /**
      * Key-value pairs of labels for the box. Labels are used to add custom metadata to
      * help identify, categorize, and manage boxes. Common use cases include project
      * names, environments, teams, applications, or any other organizational tags that
@@ -1024,6 +1048,14 @@ export namespace BoxCreateLinuxParams {
      * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
      */
     expiresIn?: string;
+
+    /**
+     * Keep alive duration on activity; 0 disables keep alive
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 0ms
+     */
+    keepAlive?: string;
 
     /**
      * Key-value pairs of labels for the box. Labels are used to add custom metadata to
