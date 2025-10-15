@@ -9,8 +9,8 @@ const client = new GboxClient({
 
 describe('resource devices', () => {
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.v1.devices.list({ 'x-device-ap': 'x-device-ap' });
+  test.skip('list', async () => {
+    const responsePromise = client.v1.devices.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,14 @@ describe('resource devices', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.v1.devices.list({ 'x-device-ap': 'x-device-ap', page: 1, pageSize: 10 });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.devices.list(
+        { page: 1, pageSize: 10, 'x-device-ap': 'x-device-ap' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
   // Prism tests are disabled
