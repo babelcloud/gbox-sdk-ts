@@ -393,6 +393,11 @@ export interface AndroidAppiumURLResponse {
   defaultOption: AndroidAppiumURLResponse.DefaultOption;
 
   /**
+   * Log level for WebdriverIO/Appium client
+   */
+  logLevel: 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'silent';
+
+  /**
    * Device UDID for Appium connection
    */
   udid: string;
