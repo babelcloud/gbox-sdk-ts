@@ -37,4 +37,5 @@ export {
   type DeviceListParams,
   type DeviceToBoxParams,
 } from './devices';
+export { Models, type ModelCallResponse, type ModelCallParams } from './models';
 export { V1 } from './v1';
