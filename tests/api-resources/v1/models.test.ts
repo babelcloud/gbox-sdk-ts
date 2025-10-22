@@ -11,7 +11,7 @@ describe('resource models', () => {
   // Prism tests are disabled
   test.skip('call: only required params', async () => {
     const responsePromise = client.v1.models.call({
-      action: { type: 'click', target: 'the VSCode app icon on the bottom dock' },
+      action: { target: 'the VSCode app icon on the bottom dock', type: 'click' },
       screenshot:
         'https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png',
     });
@@ -27,7 +27,7 @@ describe('resource models', () => {
   // Prism tests are disabled
   test.skip('call: required and optional params', async () => {
     const response = await client.v1.models.call({
-      action: { type: 'click', target: 'the VSCode app icon on the bottom dock' },
+      action: { target: 'the VSCode app icon on the bottom dock', type: 'click' },
       screenshot:
         'https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png',
       model: 'gbox-handy-1',
