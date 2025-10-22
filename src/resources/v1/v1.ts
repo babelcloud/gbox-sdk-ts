@@ -10,6 +10,8 @@ import {
   Devices,
   GetDeviceListResponse,
 } from './devices';
+import * as ModelsAPI from './models';
+import { ModelCallParams, ModelCallResponse, Models } from './models';
 import * as BoxesAPI from './boxes/boxes';
 import {
   AndroidBox,
@@ -43,10 +45,12 @@ import {
 
 export class V1 extends APIResource {
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
+  models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
   boxes: BoxesAPI.Boxes = new BoxesAPI.Boxes(this._client);
 }
 
 V1.Devices = Devices;
+V1.Models = Models;
 V1.Boxes = Boxes;
 
 export declare namespace V1 {
@@ -57,6 +61,12 @@ export declare namespace V1 {
     type DeviceToBoxResponse as DeviceToBoxResponse,
     type DeviceListParams as DeviceListParams,
     type DeviceToBoxParams as DeviceToBoxParams,
+  };
+
+  export {
+    Models as Models,
+    type ModelCallResponse as ModelCallResponse,
+    type ModelCallParams as ModelCallParams,
   };
 
   export {
