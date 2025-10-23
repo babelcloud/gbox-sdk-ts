@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.41.0 (2025-10-23)
+
+Full Changelog: [v0.40.0...v0.41.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.40.0...v0.41.0)
+
+### Features
+
+* **api:** add ModelOperator to GboxSDK for enhanced model management ([61d2618](https://github.com/babelcloud/gbox-sdk-ts/commit/61d26180c494ad174a147b8ecbad6aea10778018))
+* **api:** api update ([1644238](https://github.com/babelcloud/gbox-sdk-ts/commit/16442382f77a11e5a0c4169483b9c2e02bd658d3))
+* **api:** api update ([72409cc](https://github.com/babelcloud/gbox-sdk-ts/commit/72409cca740fe54d7ae9ff82287a6fb7f68480a4))
+* **api:** api update ([3e6d8e6](https://github.com/babelcloud/gbox-sdk-ts/commit/3e6d8e606ffb3698dccaff7f0e6b16369777f086))
+* **api:** api update ([18d3e0d](https://github.com/babelcloud/gbox-sdk-ts/commit/18d3e0ddb9d93d0b5603f4829f3049665aa20a90))
+* **api:** api update ([5b82441](https://github.com/babelcloud/gbox-sdk-ts/commit/5b8244156f0154a7ed534c6fa33712b9d9245fae))
+* **api:** enhance API functionality and improve performance ([2598ab6](https://github.com/babelcloud/gbox-sdk-ts/commit/2598ab66ebf150774273fe69de73d12b83c752a1))
+
 ## 0.40.0 (2025-10-15)
 
 Full Changelog: [v0.39.0...v0.40.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.39.0...v0.40.0)

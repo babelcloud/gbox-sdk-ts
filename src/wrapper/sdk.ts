@@ -11,6 +11,7 @@ import { CreateAndroid, AndroidBoxOperator } from './box/android';
 import { CreateLinux, LinuxBoxOperator } from './box/linux';
 import { isAndroidBox, isLinuxBox } from './utils';
 import { Profile } from './profile';
+import { ModelOperator } from './model';
 
 /*
  * @example
@@ -22,12 +23,14 @@ import { Profile } from './profile';
  */
 export class GboxSDK {
   readonly client: GboxClient;
+  public model: ModelOperator;
 
   constructor(clientOptions?: ClientOptions) {
     // Create enhanced client options with profile support
     const profile = new Profile();
     const enhancedOptions = profile.buildClientOptions(clientOptions);
     this.client = new GboxClient(enhancedOptions);
+    this.model = new ModelOperator(this.client);
   }
 
   /**
