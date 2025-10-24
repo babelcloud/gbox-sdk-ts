@@ -15,8 +15,7 @@ export class Models extends APIResource {
    *     target: 'the VSCode app icon on the bottom dock',
    *     type: 'click',
    *   },
-   *   screenshot:
-   *     'https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png',
+   *   screenshot: 'screenshot',
    * });
    * ```
    */
@@ -190,7 +189,10 @@ export interface ModelCallParams {
   action: ModelCallParams.ClickAction | ModelCallParams.DragAction | ModelCallParams.ScrollAction;
 
   /**
-   * HTTP(S) URL to screenshot image
+   * Screenshot image as HTTP(S) URL or base64-encoded data URI. Supports both
+   * formats: 1) HTTP(S) URL pointing to an image file; 2) Base64-encoded data URI
+   * with format 'data:image/png;base64,[data]' or 'data:image/jpeg;base64,[data]'.
+   * Only PNG and JPEG formats are supported for base64.
    */
   screenshot: string;
 
