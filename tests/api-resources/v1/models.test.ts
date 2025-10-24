@@ -12,8 +12,7 @@ describe('resource models', () => {
   test.skip('call: only required params', async () => {
     const responsePromise = client.v1.models.call({
       action: { target: 'the VSCode app icon on the bottom dock', type: 'click' },
-      screenshot:
-        'https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png',
+      screenshot: 'screenshot',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,8 +27,7 @@ describe('resource models', () => {
   test.skip('call: required and optional params', async () => {
     const response = await client.v1.models.call({
       action: { target: 'the VSCode app icon on the bottom dock', type: 'click' },
-      screenshot:
-        'https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png',
+      screenshot: 'screenshot',
       model: 'gbox-handy-1',
     });
   });
