@@ -12,13 +12,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.click(
+   * const response = await client.v1.boxes.actions.click(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 100, y: 100 },
    * );
    * ```
    */
-  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionResult> {
+  click(boxID: string, body: ActionClickParams, options?: RequestOptions): APIPromise<ActionClickResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/click`, { body, ...options });
   }
 
@@ -62,13 +62,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.drag(
+   * const response = await client.v1.boxes.actions.drag(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { end: { x: 200, y: 200 }, start: { x: 100, y: 100 } },
    * );
    * ```
    */
-  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionResult> {
+  drag(boxID: string, body: ActionDragParams, options?: RequestOptions): APIPromise<ActionDragResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/drag`, { body, ...options });
   }
 
@@ -122,14 +122,17 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult =
-   *   await client.v1.boxes.actions.longPress(
-   *     'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *     { x: 350, y: 250, duration: '1s' },
-   *   );
+   * const response = await client.v1.boxes.actions.longPress(
+   *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
+   *   { x: 350, y: 250, duration: '1s' },
+   * );
    * ```
    */
-  longPress(boxID: string, body: ActionLongPressParams, options?: RequestOptions): APIPromise<ActionResult> {
+  longPress(
+    boxID: string,
+    body: ActionLongPressParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionLongPressResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/long-press`, { body, ...options });
   }
 
@@ -341,13 +344,17 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.scroll(
+   * const response = await client.v1.boxes.actions.scroll(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
    * );
    * ```
    */
-  scroll(boxID: string, body: ActionScrollParams, options?: RequestOptions): APIPromise<ActionResult> {
+  scroll(
+    boxID: string,
+    body: ActionScrollParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionScrollResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/scroll`, { body, ...options });
   }
 
@@ -405,13 +412,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.swipe(
+   * const response = await client.v1.boxes.actions.swipe(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { direction: 'up' },
    * );
    * ```
    */
-  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionResult> {
+  swipe(boxID: string, body: ActionSwipeParams, options?: RequestOptions): APIPromise<ActionSwipeResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/swipe`, { body, ...options });
   }
 
@@ -420,13 +427,13 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.tap(
+   * const response = await client.v1.boxes.actions.tap(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   { x: 100, y: 100 },
    * );
    * ```
    */
-  tap(boxID: string, body: ActionTapParams, options?: RequestOptions): APIPromise<ActionResult> {
+  tap(boxID: string, body: ActionTapParams, options?: RequestOptions): APIPromise<ActionTapResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/tap`, { body, ...options });
   }
 
@@ -436,7 +443,7 @@ export class Actions extends APIResource {
    *
    * @example
    * ```ts
-   * const actionResult = await client.v1.boxes.actions.touch(
+   * const response = await client.v1.boxes.actions.touch(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
    *   {
    *     points: [
@@ -456,7 +463,7 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionResult> {
+  touch(boxID: string, body: ActionTouchParams, options?: RequestOptions): APIPromise<ActionTouchResponse> {
     return this._client.post(path`/boxes/${boxID}/actions/touch`, { body, ...options });
   }
 
@@ -692,7 +699,272 @@ export interface DetectedElement {
   y: number;
 }
 
+/**
+ * Result of click action execution with actual parameters used. The actual field
+ * shows the exact parameters used when performing the click, which is especially
+ * useful when using natural language or element-based targeting to understand
+ * exactly what action was performed.
+ */
+export interface ActionClickResponse {
+  /**
+   * Unique identifier for each action. Use this ID to locate the action and report
+   * issues.
+   */
+  actionId: string;
+
+  /**
+   * Actual parameters used when executing the click action, with the same field
+   * names as input parameters
+   */
+  actual: ActionClickResponse.Actual;
+
+  /**
+   * message
+   */
+  message: string;
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  screenshot?: ActionClickResponse.Screenshot;
+}
+
+export namespace ActionClickResponse {
+  /**
+   * Actual parameters used when executing the click action, with the same field
+   * names as input parameters
+   */
+  export interface Actual {
+    /**
+     * Mouse button that was clicked
+     */
+    button: 'left' | 'right' | 'middle';
+
+    /**
+     * Whether a double click was performed
+     */
+    double: boolean;
+
+    /**
+     * X coordinate where the click was executed
+     */
+    x: number;
+
+    /**
+     * Y coordinate where the click was executed
+     */
+    y: number;
+  }
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  export interface Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    after?: Screenshot.After;
+
+    /**
+     * Screenshot taken before action execution
+     */
+    before?: Screenshot.Before;
+
+    /**
+     * Screenshot with action operation trace
+     */
+    trace?: Screenshot.Trace;
+  }
+
+  export namespace Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    export interface After {
+      /**
+       * URI of the screenshot after the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot taken before action execution
+     */
+    export interface Before {
+      /**
+       * URI of the screenshot before the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot with action operation trace
+     */
+    export interface Trace {
+      /**
+       * URI of the screenshot with operation trace
+       */
+      uri: string;
+    }
+  }
+}
+
 export type ActionClipboardGetResponse = string;
+
+/**
+ * Result of drag action execution with actual parameters used
+ */
+export interface ActionDragResponse {
+  /**
+   * Unique identifier for each action. Use this ID to locate the action and report
+   * issues.
+   */
+  actionId: string;
+
+  /**
+   * Actual parameters used when executing the drag action
+   */
+  actual: ActionDragResponse.Actual;
+
+  /**
+   * message
+   */
+  message: string;
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  screenshot?: ActionDragResponse.Screenshot;
+}
+
+export namespace ActionDragResponse {
+  /**
+   * Actual parameters used when executing the drag action
+   */
+  export interface Actual {
+    /**
+     * Duration of the drag
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+     */
+    duration: string;
+
+    /**
+     * Single point in a drag path
+     */
+    end: Actual.End;
+
+    /**
+     * Single point in a drag path
+     */
+    start: Actual.Start;
+  }
+
+  export namespace Actual {
+    /**
+     * Single point in a drag path
+     */
+    export interface End {
+      /**
+       * X coordinate of a point in the drag path
+       */
+      x: number;
+
+      /**
+       * Y coordinate of a point in the drag path
+       */
+      y: number;
+    }
+
+    /**
+     * Single point in a drag path
+     */
+    export interface Start {
+      /**
+       * X coordinate of a point in the drag path
+       */
+      x: number;
+
+      /**
+       * Y coordinate of a point in the drag path
+       */
+      y: number;
+    }
+  }
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  export interface Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    after?: Screenshot.After;
+
+    /**
+     * Screenshot taken before action execution
+     */
+    before?: Screenshot.Before;
+
+    /**
+     * Screenshot with action operation trace
+     */
+    trace?: Screenshot.Trace;
+  }
+
+  export namespace Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    export interface After {
+      /**
+       * URI of the screenshot after the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot taken before action execution
+     */
+    export interface Before {
+      /**
+       * URI of the screenshot before the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot with action operation trace
+     */
+    export interface Trace {
+      /**
+       * URI of the screenshot with operation trace
+       */
+      uri: string;
+    }
+  }
+}
 
 /**
  * Result containing original screenshot, annotated screenshot, and detected
@@ -774,6 +1046,119 @@ export interface ActionExtractResponse {
    * Base64-encoded screenshot of the UI interface at the time of extraction
    */
   screenshot: string;
+}
+
+/**
+ * Result of long press action execution with actual parameters used
+ */
+export interface ActionLongPressResponse {
+  /**
+   * Unique identifier for each action. Use this ID to locate the action and report
+   * issues.
+   */
+  actionId: string;
+
+  /**
+   * Actual parameters used when executing the long press action
+   */
+  actual: ActionLongPressResponse.Actual;
+
+  /**
+   * message
+   */
+  message: string;
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  screenshot?: ActionLongPressResponse.Screenshot;
+}
+
+export namespace ActionLongPressResponse {
+  /**
+   * Actual parameters used when executing the long press action
+   */
+  export interface Actual {
+    /**
+     * Duration of the long press
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+     */
+    duration: string;
+
+    /**
+     * X coordinate where the long press was executed
+     */
+    x: number;
+
+    /**
+     * Y coordinate where the long press was executed
+     */
+    y: number;
+  }
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  export interface Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    after?: Screenshot.After;
+
+    /**
+     * Screenshot taken before action execution
+     */
+    before?: Screenshot.Before;
+
+    /**
+     * Screenshot with action operation trace
+     */
+    trace?: Screenshot.Trace;
+  }
+
+  export namespace Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    export interface After {
+      /**
+       * URI of the screenshot after the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot taken before action execution
+     */
+    export interface Before {
+      /**
+       * URI of the screenshot before the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot with action operation trace
+     */
+    export interface Trace {
+      /**
+       * URI of the screenshot with operation trace
+       */
+      uri: string;
+    }
+  }
 }
 
 /**
@@ -876,6 +1261,121 @@ export interface ActionScreenshotResponse {
 }
 
 /**
+ * Result of scroll action execution with actual parameters used
+ */
+export interface ActionScrollResponse {
+  /**
+   * Unique identifier for each action. Use this ID to locate the action and report
+   * issues.
+   */
+  actionId: string;
+
+  /**
+   * Actual parameters used when executing the scroll action
+   */
+  actual: ActionScrollResponse.Actual;
+
+  /**
+   * message
+   */
+  message: string;
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  screenshot?: ActionScrollResponse.Screenshot;
+}
+
+export namespace ActionScrollResponse {
+  /**
+   * Actual parameters used when executing the scroll action
+   */
+  export interface Actual {
+    /**
+     * Horizontal scroll amount
+     */
+    scrollX: number;
+
+    /**
+     * Vertical scroll amount
+     */
+    scrollY: number;
+
+    /**
+     * X coordinate of the scroll position
+     */
+    x: number;
+
+    /**
+     * Y coordinate of the scroll position
+     */
+    y: number;
+  }
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  export interface Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    after?: Screenshot.After;
+
+    /**
+     * Screenshot taken before action execution
+     */
+    before?: Screenshot.Before;
+
+    /**
+     * Screenshot with action operation trace
+     */
+    trace?: Screenshot.Trace;
+  }
+
+  export namespace Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    export interface After {
+      /**
+       * URI of the screenshot after the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot taken before action execution
+     */
+    export interface Before {
+      /**
+       * URI of the screenshot before the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot with action operation trace
+     */
+    export interface Trace {
+      /**
+       * URI of the screenshot with operation trace
+       */
+      uri: string;
+    }
+  }
+}
+
+/**
  * Action setting
  */
 export interface ActionSettingsResponse {
@@ -930,6 +1430,436 @@ export interface ActionSettingsUpdateResponse {
    *   Click({x:50, y:50}).
    */
   scale: number;
+}
+
+/**
+ * Result of swipe action execution with actual parameters used
+ */
+export interface ActionSwipeResponse {
+  /**
+   * Unique identifier for each action. Use this ID to locate the action and report
+   * issues.
+   */
+  actionId: string;
+
+  /**
+   * Actual parameters used when executing the swipe action
+   */
+  actual: ActionSwipeResponse.Actual;
+
+  /**
+   * message
+   */
+  message: string;
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  screenshot?: ActionSwipeResponse.Screenshot;
+}
+
+export namespace ActionSwipeResponse {
+  /**
+   * Actual parameters used when executing the swipe action
+   */
+  export interface Actual {
+    /**
+     * Duration of the swipe
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+     */
+    duration: string;
+
+    /**
+     * Swipe path
+     */
+    end: Actual.End;
+
+    /**
+     * Swipe path
+     */
+    start: Actual.Start;
+  }
+
+  export namespace Actual {
+    /**
+     * Swipe path
+     */
+    export interface End {
+      /**
+       * Start/end x coordinate of the swipe path
+       */
+      x: number;
+
+      /**
+       * Start/end y coordinate of the swipe path
+       */
+      y: number;
+    }
+
+    /**
+     * Swipe path
+     */
+    export interface Start {
+      /**
+       * Start/end x coordinate of the swipe path
+       */
+      x: number;
+
+      /**
+       * Start/end y coordinate of the swipe path
+       */
+      y: number;
+    }
+  }
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  export interface Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    after?: Screenshot.After;
+
+    /**
+     * Screenshot taken before action execution
+     */
+    before?: Screenshot.Before;
+
+    /**
+     * Screenshot with action operation trace
+     */
+    trace?: Screenshot.Trace;
+  }
+
+  export namespace Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    export interface After {
+      /**
+       * URI of the screenshot after the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot taken before action execution
+     */
+    export interface Before {
+      /**
+       * URI of the screenshot before the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot with action operation trace
+     */
+    export interface Trace {
+      /**
+       * URI of the screenshot with operation trace
+       */
+      uri: string;
+    }
+  }
+}
+
+/**
+ * Result of tap action execution with actual parameters used
+ */
+export interface ActionTapResponse {
+  /**
+   * Unique identifier for each action. Use this ID to locate the action and report
+   * issues.
+   */
+  actionId: string;
+
+  /**
+   * Actual parameters used when executing the tap action
+   */
+  actual: ActionTapResponse.Actual;
+
+  /**
+   * message
+   */
+  message: string;
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  screenshot?: ActionTapResponse.Screenshot;
+}
+
+export namespace ActionTapResponse {
+  /**
+   * Actual parameters used when executing the tap action
+   */
+  export interface Actual {
+    /**
+     * X coordinate where the tap was executed
+     */
+    x: number;
+
+    /**
+     * Y coordinate where the tap was executed
+     */
+    y: number;
+  }
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  export interface Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    after?: Screenshot.After;
+
+    /**
+     * Screenshot taken before action execution
+     */
+    before?: Screenshot.Before;
+
+    /**
+     * Screenshot with action operation trace
+     */
+    trace?: Screenshot.Trace;
+  }
+
+  export namespace Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    export interface After {
+      /**
+       * URI of the screenshot after the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot taken before action execution
+     */
+    export interface Before {
+      /**
+       * URI of the screenshot before the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot with action operation trace
+     */
+    export interface Trace {
+      /**
+       * URI of the screenshot with operation trace
+       */
+      uri: string;
+    }
+  }
+}
+
+/**
+ * Result of touch action execution with actual parameters used
+ */
+export interface ActionTouchResponse {
+  /**
+   * Unique identifier for each action. Use this ID to locate the action and report
+   * issues.
+   */
+  actionId: string;
+
+  /**
+   * Actual parameters used when executing the touch action
+   */
+  actual: ActionTouchResponse.Actual;
+
+  /**
+   * message
+   */
+  message: string;
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  screenshot?: ActionTouchResponse.Screenshot;
+}
+
+export namespace ActionTouchResponse {
+  /**
+   * Actual parameters used when executing the touch action
+   */
+  export interface Actual {
+    /**
+     * Array of touch points with their normalized coordinates and actions
+     */
+    points: Array<Actual.Point>;
+  }
+
+  export namespace Actual {
+    /**
+     * Touch point configuration with start position and actions
+     */
+    export interface Point {
+      /**
+       * Initial touch point position
+       */
+      start: Point.Start;
+
+      /**
+       * Sequence of actions to perform after initial touch
+       */
+      actions?: Array<Point.TouchPointMoveAction | Point.TouchPointWaitAction>;
+    }
+
+    export namespace Point {
+      /**
+       * Initial touch point position
+       */
+      export interface Start {
+        /**
+         * Starting X coordinate
+         */
+        x: number;
+
+        /**
+         * Starting Y coordinate
+         */
+        y: number;
+      }
+
+      /**
+       * Touch point movement action configuration
+       */
+      export interface TouchPointMoveAction {
+        /**
+         * Duration of the movement (e.g. "200ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 200ms
+         */
+        duration: string;
+
+        /**
+         * Type of the action
+         */
+        type: string;
+
+        /**
+         * Target X coordinate
+         */
+        x: number;
+
+        /**
+         * Target Y coordinate
+         */
+        y: number;
+      }
+
+      /**
+       * Touch point wait action configuration
+       */
+      export interface TouchPointWaitAction {
+        /**
+         * Duration to wait (e.g. "500ms")
+         *
+         * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+         * Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+         */
+        duration: string;
+
+        /**
+         * Type of the action
+         */
+        type: string;
+      }
+    }
+  }
+
+  /**
+   * Complete screenshot result with operation trace, before and after images
+   */
+  export interface Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    after?: Screenshot.After;
+
+    /**
+     * Screenshot taken before action execution
+     */
+    before?: Screenshot.Before;
+
+    /**
+     * Screenshot with action operation trace
+     */
+    trace?: Screenshot.Trace;
+  }
+
+  export namespace Screenshot {
+    /**
+     * Screenshot taken after action execution
+     */
+    export interface After {
+      /**
+       * URI of the screenshot after the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot taken before action execution
+     */
+    export interface Before {
+      /**
+       * URI of the screenshot before the action
+       */
+      uri: string;
+
+      /**
+       * Presigned url of the screenshot before the action
+       */
+      presignedUrl?: string;
+    }
+
+    /**
+     * Screenshot with action operation trace
+     */
+    export interface Trace {
+      /**
+       * URI of the screenshot with operation trace
+       */
+      uri: string;
+    }
+  }
 }
 
 export type ActionClickParams =
@@ -2813,16 +3743,23 @@ export declare namespace Actions {
     type ActionResult as ActionResult,
     type ActionScreenshotOptions as ActionScreenshotOptions,
     type DetectedElement as DetectedElement,
+    type ActionClickResponse as ActionClickResponse,
     type ActionClipboardGetResponse as ActionClipboardGetResponse,
+    type ActionDragResponse as ActionDragResponse,
     type ActionElementsDetectResponse as ActionElementsDetectResponse,
     type ActionExtractResponse as ActionExtractResponse,
+    type ActionLongPressResponse as ActionLongPressResponse,
     type ActionRecordingStopResponse as ActionRecordingStopResponse,
     type ActionRewindExtractResponse as ActionRewindExtractResponse,
     type ActionScreenLayoutResponse as ActionScreenLayoutResponse,
     type ActionScreenshotResponse as ActionScreenshotResponse,
+    type ActionScrollResponse as ActionScrollResponse,
     type ActionSettingsResponse as ActionSettingsResponse,
     type ActionSettingsResetResponse as ActionSettingsResetResponse,
     type ActionSettingsUpdateResponse as ActionSettingsUpdateResponse,
+    type ActionSwipeResponse as ActionSwipeResponse,
+    type ActionTapResponse as ActionTapResponse,
+    type ActionTouchResponse as ActionTouchResponse,
     type ActionClickParams as ActionClickParams,
     type ActionClipboardSetParams as ActionClipboardSetParams,
     type ActionDragParams as ActionDragParams,
