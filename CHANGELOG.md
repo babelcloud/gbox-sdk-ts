@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.42.0 (2025-11-04)
+
+Full Changelog: [v0.41.0...v0.42.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.41.0...v0.42.0)
+
+### Features
+
+* **api:** api update ([59f5f55](https://github.com/babelcloud/gbox-sdk-ts/commit/59f5f553a9ad58286afd8e6a2a3c746bda0f7d1d))
+* **api:** api update ([78487a2](https://github.com/babelcloud/gbox-sdk-ts/commit/78487a208db4cc4b13dcac8d65245307f6d2bc49))
+* **api:** update ActionOperator methods to return specific response types ([969a7a1](https://github.com/babelcloud/gbox-sdk-ts/commit/969a7a1d98c53d60fd03f33a2a2a14968da1e011))
+
 ## 0.41.0 (2025-10-23)
 
 Full Changelog: [v0.40.0...v0.41.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.40.0...v0.41.0)
