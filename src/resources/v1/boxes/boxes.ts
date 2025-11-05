@@ -129,6 +129,8 @@ import {
 } from './media';
 import * as ProxyAPI from './proxy';
 import { Proxy, ProxyGetResponse, ProxySetParams, ProxySetResponse } from './proxy';
+import * as SnapshotAPI from './snapshot';
+import { Snapshot, SnapshotCreateParams, SnapshotCreateResponse, SnapshotListResponse } from './snapshot';
 import * as StorageAPI from './storage';
 import { Storage, StoragePresignedURLParams, StoragePresignedURLResponse } from './storage';
 import { APIPromise } from '../../../core/api-promise';
@@ -139,6 +141,7 @@ import { path } from '../../../internal/utils/path';
 export class Boxes extends APIResource {
   storage: StorageAPI.Storage = new StorageAPI.Storage(this._client);
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
+  snapshot: SnapshotAPI.Snapshot = new SnapshotAPI.Snapshot(this._client);
   proxy: ProxyAPI.Proxy = new ProxyAPI.Proxy(this._client);
   media: MediaAPI.Media = new MediaAPI.Media(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
@@ -1226,6 +1229,7 @@ export interface BoxWebTerminalURLParams {
 
 Boxes.Storage = Storage;
 Boxes.Actions = Actions;
+Boxes.Snapshot = Snapshot;
 Boxes.Proxy = Proxy;
 Boxes.Media = Media;
 Boxes.Fs = Fs;
@@ -1309,6 +1313,13 @@ export declare namespace Boxes {
     type ActionTapParams as ActionTapParams,
     type ActionTouchParams as ActionTouchParams,
     type ActionTypeParams as ActionTypeParams,
+  };
+
+  export {
+    Snapshot as Snapshot,
+    type SnapshotCreateResponse as SnapshotCreateResponse,
+    type SnapshotListResponse as SnapshotListResponse,
+    type SnapshotCreateParams as SnapshotCreateParams,
   };
 
   export {
