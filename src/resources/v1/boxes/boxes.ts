@@ -612,6 +612,11 @@ export namespace CreateLinuxBox {
    */
   export interface Config {
     /**
+     * Device type - virtual or physical Linux device
+     */
+    deviceType?: 'virtual' | 'physical';
+
+    /**
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
      */
@@ -742,6 +747,11 @@ export namespace LinuxBox {
      * from this directory unless explicitly specified otherwise.
      */
     workingDir: string;
+
+    /**
+     * Device type - virtual or physical Linux device
+     */
+    deviceType?: 'virtual' | 'physical';
   }
 
   export namespace Config {
@@ -1069,6 +1079,11 @@ export namespace BoxCreateLinuxParams {
    * Configuration for a Linux box instance
    */
   export interface Config {
+    /**
+     * Device type - virtual or physical Linux device
+     */
+    deviceType?: 'virtual' | 'physical';
+
     /**
      * Environment variables for the box. These variables will be available in all
      * operations including command execution, code running, and other box behaviors
