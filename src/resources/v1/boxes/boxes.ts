@@ -612,9 +612,9 @@ export namespace CreateLinuxBox {
    */
   export interface Config {
     /**
-     * Device type - virtual or physical Linux device
+     * Device type - container or vm Linux device
      */
-    deviceType?: 'virtual' | 'physical';
+    deviceType?: 'container' | 'vm';
 
     /**
      * Environment variables for the box. These variables will be available in all
@@ -736,6 +736,11 @@ export namespace LinuxBox {
     os: Config.Os;
 
     /**
+     * Public IP allocated to the box.
+     */
+    publicIp: string;
+
+    /**
      * Storage allocated to the box in GiB.
      */
     storage: number;
@@ -749,9 +754,9 @@ export namespace LinuxBox {
     workingDir: string;
 
     /**
-     * Device type - virtual or physical Linux device
+     * Device type - container or vm Linux device
      */
-    deviceType?: 'virtual' | 'physical';
+    deviceType?: 'container' | 'vm';
   }
 
   export namespace Config {
@@ -1080,9 +1085,9 @@ export namespace BoxCreateLinuxParams {
    */
   export interface Config {
     /**
-     * Device type - virtual or physical Linux device
+     * Device type - container or vm Linux device
      */
-    deviceType?: 'virtual' | 'physical';
+    deviceType?: 'container' | 'vm';
 
     /**
      * Environment variables for the box. These variables will be available in all
