@@ -31,6 +31,7 @@ describe('resource actions', () => {
       button: 'left',
       double: false,
       includeScreenshot: false,
+      modifierKeys: ['control', 'shift'],
       options: {
         model: 'gpt-5',
         screenshot: {

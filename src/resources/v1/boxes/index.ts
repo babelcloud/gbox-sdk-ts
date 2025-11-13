@@ -151,4 +151,10 @@ export {
   type MediaUpdateAlbumParams,
 } from './media';
 export { Proxy, type ProxyGetResponse, type ProxySetResponse, type ProxySetParams } from './proxy';
+export {
+  Snapshot,
+  type SnapshotCreateResponse,
+  type SnapshotListResponse,
+  type SnapshotCreateParams,
+} from './snapshot';
 export { Storage, type StoragePresignedURLResponse, type StoragePresignedURLParams } from './storage';
