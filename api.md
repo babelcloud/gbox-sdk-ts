@@ -126,6 +126,18 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">touch</a>(boxID, { ...params }) -> ActionTouchResponse</code>
 - <code title="post /boxes/{boxId}/actions/type">client.v1.boxes.actions.<a href="./src/resources/v1/boxes/actions.ts">type</a>(boxID, { ...params }) -> ActionResult</code>
 
+### Snapshot
+
+Types:
+
+- <code><a href="./src/resources/v1/boxes/snapshot.ts">SnapshotCreateResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/snapshot.ts">SnapshotListResponse</a></code>
+
+Methods:
+
+- <code title="post /snapshots/{boxId}">client.v1.boxes.snapshot.<a href="./src/resources/v1/boxes/snapshot.ts">create</a>(boxID, { ...params }) -> SnapshotCreateResponse</code>
+- <code title="get /snapshots">client.v1.boxes.snapshot.<a href="./src/resources/v1/boxes/snapshot.ts">list</a>() -> SnapshotListResponse</code>
+
 ### Proxy
 
 Types:

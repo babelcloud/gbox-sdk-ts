@@ -50,14 +50,14 @@ export class GboxSDK {
    */
   async create(body: CreateLinux): Promise<LinuxBoxOperator>;
   async create(body: CreateAndroid | CreateLinux): Promise<BoxOperator> {
-    const { type, ...params } = body;
-
-    if (type === 'android') {
+    if (body.type === 'android') {
+      const { type, ...params } = body;
       const res = await this.client.v1.boxes.createAndroid(params);
       return new AndroidBoxOperator(this.client, res);
     }
 
-    if (type === 'linux') {
+    if (body.type === 'linux') {
+      const { type, ...params } = body;
       const res = await this.client.v1.boxes.createLinux(params);
       return new LinuxBoxOperator(this.client, res);
     }
