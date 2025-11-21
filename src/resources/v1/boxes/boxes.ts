@@ -130,7 +130,14 @@ import {
 import * as ProxyAPI from './proxy';
 import { Proxy, ProxyGetResponse, ProxySetParams, ProxySetResponse } from './proxy';
 import * as SnapshotAPI from './snapshot';
-import { Snapshot, SnapshotCreateParams, SnapshotCreateResponse, SnapshotListResponse } from './snapshot';
+import {
+  Snapshot,
+  SnapshotCreateParams,
+  SnapshotCreateResponse,
+  SnapshotGetResponse,
+  SnapshotListParams,
+  SnapshotListResponse,
+} from './snapshot';
 import * as StorageAPI from './storage';
 import { Storage, StoragePresignedURLParams, StoragePresignedURLResponse } from './storage';
 import { APIPromise } from '../../../core/api-promise';
@@ -653,6 +660,11 @@ export namespace CreateLinuxBox {
      * help you organize and filter your boxes.
      */
     labels?: { [key: string]: string };
+
+    /**
+     * Snapshot name - snapshot for creating vm linux box
+     */
+    snapshotName?: string;
   }
 }
 
@@ -757,6 +769,16 @@ export namespace LinuxBox {
      * Device type - container or vm Linux device
      */
     deviceType?: 'container' | 'vm';
+
+    /**
+     * Snapshot id
+     */
+    snapshotId?: string;
+
+    /**
+     * Snapshot name
+     */
+    snapshotName?: string;
   }
 
   export namespace Config {
@@ -1126,6 +1148,11 @@ export namespace BoxCreateLinuxParams {
      * help you organize and filter your boxes.
      */
     labels?: { [key: string]: string };
+
+    /**
+     * Snapshot name - snapshot for creating vm linux box
+     */
+    snapshotName?: string;
   }
 }
 
@@ -1339,7 +1366,9 @@ export declare namespace Boxes {
     Snapshot as Snapshot,
     type SnapshotCreateResponse as SnapshotCreateResponse,
     type SnapshotListResponse as SnapshotListResponse,
+    type SnapshotGetResponse as SnapshotGetResponse,
     type SnapshotCreateParams as SnapshotCreateParams,
+    type SnapshotListParams as SnapshotListParams,
   };
 
   export {

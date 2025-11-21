@@ -155,6 +155,8 @@ export {
   Snapshot,
   type SnapshotCreateResponse,
   type SnapshotListResponse,
+  type SnapshotGetResponse,
   type SnapshotCreateParams,
+  type SnapshotListParams,
 } from './snapshot';
 export { Storage, type StoragePresignedURLResponse, type StoragePresignedURLParams } from './storage';
