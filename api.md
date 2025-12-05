@@ -132,11 +132,14 @@ Types:
 
 - <code><a href="./src/resources/v1/boxes/snapshot.ts">SnapshotCreateResponse</a></code>
 - <code><a href="./src/resources/v1/boxes/snapshot.ts">SnapshotListResponse</a></code>
+- <code><a href="./src/resources/v1/boxes/snapshot.ts">SnapshotGetResponse</a></code>
 
 Methods:
 
 - <code title="post /snapshots/{boxId}">client.v1.boxes.snapshot.<a href="./src/resources/v1/boxes/snapshot.ts">create</a>(boxID, { ...params }) -> SnapshotCreateResponse</code>
-- <code title="get /snapshots">client.v1.boxes.snapshot.<a href="./src/resources/v1/boxes/snapshot.ts">list</a>() -> SnapshotListResponse</code>
+- <code title="get /snapshots">client.v1.boxes.snapshot.<a href="./src/resources/v1/boxes/snapshot.ts">list</a>({ ...params }) -> SnapshotListResponse</code>
+- <code title="get /snapshots/{snapshotName}">client.v1.boxes.snapshot.<a href="./src/resources/v1/boxes/snapshot.ts">get</a>(snapshotName) -> SnapshotGetResponse</code>
+- <code title="delete /snapshots/{snapshotName}">client.v1.boxes.snapshot.<a href="./src/resources/v1/boxes/snapshot.ts">remove</a>(snapshotName) -> void</code>
 
 ### Proxy
 

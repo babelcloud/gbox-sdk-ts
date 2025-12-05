@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -27,15 +28,47 @@ export class Snapshot extends APIResource {
   }
 
   /**
-   * List all snapshots for a given box.
+   * List all snapshots of current orginazation.
    *
    * @example
    * ```ts
    * const snapshots = await client.v1.boxes.snapshot.list();
    * ```
    */
-  list(options?: RequestOptions): APIPromise<SnapshotListResponse> {
-    return this._client.get('/snapshots', options);
+  list(
+    query: SnapshotListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SnapshotListResponse> {
+    return this._client.get('/snapshots', { query, ...options });
+  }
+
+  /**
+   * Get a snapshot with specified name
+   *
+   * @example
+   * ```ts
+   * const snapshot = await client.v1.boxes.snapshot.get(
+   *   'snapshotName',
+   * );
+   * ```
+   */
+  get(snapshotName: string, options?: RequestOptions): APIPromise<SnapshotGetResponse> {
+    return this._client.get(path`/snapshots/${snapshotName}`, options);
+  }
+
+  /**
+   * Remove a snapshot of specified id.
+   *
+   * @example
+   * ```ts
+   * await client.v1.boxes.snapshot.remove('snapshotName');
+   * ```
+   */
+  remove(snapshotName: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/snapshots/${snapshotName}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
@@ -62,6 +95,11 @@ export interface SnapshotCreateResponse {
    * The provider type of the snapshot
    */
   providerType: 'vm';
+
+  /**
+   * The status of the snapshot
+   */
+  status: 'Pending' | 'Available' | 'Error';
 }
 
 /**
@@ -113,7 +151,42 @@ export namespace SnapshotListResponse {
      * The provider type of the snapshot
      */
     providerType: 'vm';
+
+    /**
+     * The status of the snapshot
+     */
+    status: 'Pending' | 'Available' | 'Error';
   }
+}
+
+/**
+ * Snapshot configuration
+ */
+export interface SnapshotGetResponse {
+  /**
+   * Unique identifier for the snapshot
+   */
+  id: string;
+
+  /**
+   * The type of the box that the snapshot is taken from
+   */
+  boxType: 'linux' | 'android';
+
+  /**
+   * Name of the snapshot. This name must be unique within the organization.
+   */
+  name: string;
+
+  /**
+   * The provider type of the snapshot
+   */
+  providerType: 'vm';
+
+  /**
+   * The status of the snapshot
+   */
+  status: 'Pending' | 'Available' | 'Error';
 }
 
 export interface SnapshotCreateParams {
@@ -123,10 +196,24 @@ export interface SnapshotCreateParams {
   name: string;
 }
 
+export interface SnapshotListParams {
+  /**
+   * Page number
+   */
+  page?: number;
+
+  /**
+   * Page size
+   */
+  pageSize?: number;
+}
+
 export declare namespace Snapshot {
   export {
     type SnapshotCreateResponse as SnapshotCreateResponse,
     type SnapshotListResponse as SnapshotListResponse,
+    type SnapshotGetResponse as SnapshotGetResponse,
     type SnapshotCreateParams as SnapshotCreateParams,
+    type SnapshotListParams as SnapshotListParams,
   };
 }
