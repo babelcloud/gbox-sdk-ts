@@ -492,7 +492,7 @@ export interface ActionCommonOptions {
   /**
    * Model to use for natural-language target resolution. Defaults to 'uitars'.
    */
-  model?: 'gpt-5' | 'gpt-4o' | 'ui-tars' | 'openai-computer-use';
+  model?: 'gpt-5' | 'gpt-4o' | 'gelato' | 'ui-tars' | 'openai-computer-use';
 
   /**
    * Screenshot options. Can be a boolean to enable/disable screenshots, or an object
