@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.44.0 (2025-12-05)
+
+Full Changelog: [v0.43.0...v0.44.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.43.0...v0.44.0)
+
+### Features
+
+* **api:** api update ([c6c19dc](https://github.com/babelcloud/gbox-sdk-ts/commit/c6c19dcfd988f8e636eeeae54a21f76b8ef027e6))
+* **api:** api update ([a6336b7](https://github.com/babelcloud/gbox-sdk-ts/commit/a6336b734b654d4bb032ffab9a4514b7aa5448de))
+
+
+### Chores
+
+* **client:** fix logger property type ([57fa5fd](https://github.com/babelcloud/gbox-sdk-ts/commit/57fa5fd3835fa5d89d41b76ffc30c95d712c9f64))
+* **internal:** upgrade eslint ([80c16b5](https://github.com/babelcloud/gbox-sdk-ts/commit/80c16b5c7b540cb69ca3b5f36cdfe0a8818f5b90))
+
 ## 0.43.0 (2025-11-18)
 
 Full Changelog: [v0.42.0...v0.43.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.42.0...v0.43.0)
