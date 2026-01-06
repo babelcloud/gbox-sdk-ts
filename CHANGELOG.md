@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.44.1 (2026-01-06)
+
+Full Changelog: [v0.44.0...v0.44.1](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.44.0...v0.44.1)
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([bdb5d00](https://github.com/babelcloud/gbox-sdk-ts/commit/bdb5d00b20043652fe464091a275722938e3b1b8))
+* **mcp:** return correct lines on typescript errors ([93663d2](https://github.com/babelcloud/gbox-sdk-ts/commit/93663d22b59f1f2d200660383f20d24464ff878d))
+
+
+### Chores
+
+* **internal:** codegen related update ([dd7e1d8](https://github.com/babelcloud/gbox-sdk-ts/commit/dd7e1d8cffe811c052410e094032fca0c63438f1))
+* **internal:** codegen related update ([8b7d7a1](https://github.com/babelcloud/gbox-sdk-ts/commit/8b7d7a1bbc2777a0a9f8a096b9213204020dd5c7))
+* **internal:** codegen related update ([bef7606](https://github.com/babelcloud/gbox-sdk-ts/commit/bef760687f2e5d032ce3875666c42e2de9b6ca01))
+
 ## 0.44.0 (2025-12-05)
 
 Full Changelog: [v0.43.0...v0.44.0](https://github.com/babelcloud/gbox-sdk-ts/compare/v0.43.0...v0.44.0)
