@@ -64,7 +64,10 @@ export class Actions extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.actions.drag(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { end: { x: 200, y: 200 }, start: { x: 100, y: 100 } },
+   *   {
+   *     end: { x: 200, y: 200 },
+   *     start: { x: 100, y: 100 },
+   *   },
    * );
    * ```
    */
@@ -124,7 +127,11 @@ export class Actions extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.actions.longPress(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { x: 350, y: 250, duration: '1s' },
+   *   {
+   *     x: 350,
+   *     y: 250,
+   *     duration: '1s',
+   *   },
    * );
    * ```
    */
@@ -346,7 +353,12 @@ export class Actions extends APIResource {
    * ```ts
    * const response = await client.v1.boxes.actions.scroll(
    *   'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-   *   { scrollX: 0, scrollY: 100, x: 100, y: 100 },
+   *   {
+   *     scrollX: 0,
+   *     scrollY: 100,
+   *     x: 100,
+   *     y: 100,
+   *   },
    * );
    * ```
    */

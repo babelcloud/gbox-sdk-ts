@@ -25,7 +25,11 @@ describe('resource devices', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.devices.list(
-        { page: 1, pageSize: 10, 'x-device-ap': 'x-device-ap' },
+        {
+          page: 1,
+          pageSize: 10,
+          'x-device-ap': 'x-device-ap',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GboxClient.NotFoundError);

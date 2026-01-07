@@ -589,7 +589,19 @@ describe('resource actions', () => {
   // Prism tests are disabled
   test.skip('touch: required and optional params', async () => {
     const response = await client.v1.boxes.actions.touch('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      points: [{ start: { x: 100, y: 150 }, actions: [{ duration: '200ms', type: 'move', x: 400, y: 300 }] }],
+      points: [
+        {
+          start: { x: 100, y: 150 },
+          actions: [
+            {
+              duration: '200ms',
+              type: 'move',
+              x: 400,
+              y: 300,
+            },
+          ],
+        },
+      ],
       includeScreenshot: false,
       options: {
         model: 'gpt-5',
