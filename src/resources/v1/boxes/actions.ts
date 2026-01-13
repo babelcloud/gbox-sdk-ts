@@ -642,6 +642,9 @@ export interface ActionScreenshotOptions {
   /**
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
    *
+   * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+   * (never expires).
+   *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
    */
@@ -2160,6 +2163,9 @@ export declare namespace ActionClickParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -2346,6 +2352,9 @@ export declare namespace ActionClickParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -2531,6 +2540,9 @@ export declare namespace ActionClickParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -2612,6 +2624,9 @@ export declare namespace ActionDragParams {
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
+     *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2711,6 +2726,9 @@ export declare namespace ActionDragParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -2775,6 +2793,9 @@ export namespace ActionElementsDetectParams {
 
     /**
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+     *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2854,6 +2875,9 @@ export declare namespace ActionLongPressParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -2921,6 +2945,9 @@ export declare namespace ActionLongPressParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -2987,6 +3014,9 @@ export declare namespace ActionLongPressParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -3051,6 +3081,9 @@ export interface ActionMoveParams {
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
    * This field will be ignored when `options.screenshot` is provided.
    *
+   * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+   * (never expires).
+   *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
    */
@@ -3108,6 +3141,9 @@ export interface ActionPressButtonParams {
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
    * This field will be ignored when `options.screenshot` is provided.
+   *
+   * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+   * (never expires).
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3286,6 +3322,9 @@ export interface ActionPressKeyParams {
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
    * This field will be ignored when `options.screenshot` is provided.
    *
+   * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+   * (never expires).
+   *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
    */
@@ -3356,6 +3395,9 @@ export interface ActionScreenRotationParams {
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
    * This field will be ignored when `options.screenshot` is provided.
    *
+   * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+   * (never expires).
+   *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
    */
@@ -3396,6 +3438,9 @@ export interface ActionScreenshotParams {
 
   /**
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
+   *
+   * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+   * (never expires).
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3509,6 +3554,9 @@ export declare namespace ActionScrollParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -3591,6 +3639,9 @@ export declare namespace ActionScrollParams {
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
+     *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3692,6 +3743,9 @@ export declare namespace ActionSwipeParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -3762,6 +3816,9 @@ export declare namespace ActionSwipeParams {
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
+     *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3865,6 +3922,9 @@ export declare namespace ActionTapParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -3924,6 +3984,9 @@ export declare namespace ActionTapParams {
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
      *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
+     *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
      */
@@ -3981,6 +4044,9 @@ export declare namespace ActionTapParams {
      * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
      * Presigned url expires in. Only takes effect when outputFormat is storageKey.
      * This field will be ignored when `options.screenshot` is provided.
+     *
+     * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+     * (never expires).
      *
      * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
      * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4040,6 +4106,9 @@ export interface ActionTouchParams {
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
    * This field will be ignored when `options.screenshot` is provided.
+   *
+   * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+   * (never expires).
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4184,6 +4253,9 @@ export interface ActionTypeParams {
    * @deprecated ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
    * Presigned url expires in. Only takes effect when outputFormat is storageKey.
    * This field will be ignored when `options.screenshot` is provided.
+   *
+   * When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+   * (never expires).
    *
    * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
    * Example formats: "500ms", "30s", "5m", "1h" Default: 30m
