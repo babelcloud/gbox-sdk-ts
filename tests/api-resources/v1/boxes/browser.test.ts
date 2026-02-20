@@ -8,7 +8,7 @@ const client = new GboxClient({
 });
 
 describe('resource browser', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cdpURL', async () => {
     const responsePromise = client.v1.boxes.browser.cdpURL('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cdpURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -32,7 +32,7 @@ describe('resource browser', () => {
     ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('clearProxy', async () => {
     const responsePromise = client.v1.boxes.browser.clearProxy('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -44,7 +44,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('close', async () => {
     const responsePromise = client.v1.boxes.browser.close('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -56,7 +56,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('closeTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.closeTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -70,14 +70,14 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('closeTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.closeTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getProxy', async () => {
     const responsePromise = client.v1.boxes.browser.getProxy('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -89,7 +89,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getTabs', async () => {
     const responsePromise = client.v1.boxes.browser.getTabs('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();
@@ -101,7 +101,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('open', async () => {
     const responsePromise = client.v1.boxes.browser.open('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {});
     const rawResponse = await responsePromise.asResponse();
@@ -113,7 +113,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('openTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.openTab('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       url: 'https://www.google.com',
@@ -127,14 +127,14 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('openTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.openTab('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       url: 'https://www.google.com',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('setProxy: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.setProxy('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       httpServer: 'http://127.0.0.1:8080',
@@ -150,7 +150,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('setProxy: required and optional params', async () => {
     const response = await client.v1.boxes.browser.setProxy('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       httpServer: 'http://127.0.0.1:8080',
@@ -170,7 +170,7 @@ describe('resource browser', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('switchTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.switchTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -184,14 +184,14 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('switchTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.switchTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateTab: only required params', async () => {
     const responsePromise = client.v1.boxes.browser.updateTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
@@ -206,7 +206,7 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateTab: required and optional params', async () => {
     const response = await client.v1.boxes.browser.updateTab('tabId', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',

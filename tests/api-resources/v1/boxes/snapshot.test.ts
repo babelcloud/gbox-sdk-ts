@@ -8,7 +8,7 @@ const client = new GboxClient({
 });
 
 describe('resource snapshot', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.v1.boxes.snapshot.create('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       name: 'my-snapshot-1',
@@ -22,14 +22,14 @@ describe('resource snapshot', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.v1.boxes.snapshot.create('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       name: 'my-snapshot-1',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v1.boxes.snapshot.list();
     const rawResponse = await responsePromise.asResponse();
@@ -41,7 +41,7 @@ describe('resource snapshot', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -49,7 +49,7 @@ describe('resource snapshot', () => {
     ).rejects.toThrow(GboxClient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('get', async () => {
     const responsePromise = client.v1.boxes.snapshot.get('snapshotName');
     const rawResponse = await responsePromise.asResponse();
@@ -61,7 +61,7 @@ describe('resource snapshot', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('remove', async () => {
     const responsePromise = client.v1.boxes.snapshot.remove('snapshotName');
     const rawResponse = await responsePromise.asResponse();

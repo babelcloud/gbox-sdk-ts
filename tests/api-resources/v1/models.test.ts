@@ -8,7 +8,7 @@ const client = new GboxClient({
 });
 
 describe('resource models', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('call: only required params', async () => {
     const responsePromise = client.v1.models.call({
       action: { target: 'the VSCode app icon on the bottom dock', type: 'click' },
@@ -23,7 +23,7 @@ describe('resource models', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('call: required and optional params', async () => {
     const response = await client.v1.models.call({
       action: { target: 'the VSCode app icon on the bottom dock', type: 'click' },
