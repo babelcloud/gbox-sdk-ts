@@ -74,7 +74,8 @@ describe('resource media', () => {
     });
   });
 
-  test('downloadMedia: required and optional params', async () => {
+  // Mock server tests are disabled
+  test.skip('downloadMedia: required and optional params', async () => {
     const response = await client.v1.boxes.media.downloadMedia('IMG_001.jpg', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
       albumName: 'Pictures',
