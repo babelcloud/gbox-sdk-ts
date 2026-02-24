@@ -60,7 +60,7 @@ $ yarn link gbox-sdk
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global gbox-sdk
+$ pnpm link --global gbox-sdk
 ```
 
 ## Running tests
