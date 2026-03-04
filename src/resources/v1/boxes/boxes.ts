@@ -212,6 +212,23 @@ export class Boxes extends APIResource {
   }
 
   /**
+   * Provisions a new Windows box that you can operate through the GBOX SDK. Use this
+   * endpoint when you want to create a fresh Windows environment for testing,
+   * automation, or agent execution.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.boxes.createWindows();
+   * ```
+   */
+  createWindows(
+    body: BoxCreateWindowsParams,
+    options?: RequestOptions,
+  ): APIPromise<BoxCreateWindowsResponse> {
+    return this._client.post('/boxes/windows', { body, ...options });
+  }
+
+  /**
    * Retrieve the current display properties for a running box. This endpoint
    * provides details about the box's screen resolution, orientation, and other
    * visual properties.
@@ -797,16 +814,122 @@ export namespace LinuxBox {
 /**
  * Linux box instance with full configuration and status
  */
-export type BoxRetrieveResponse = LinuxBox | AndroidBox;
+export type BoxRetrieveResponse = LinuxBox | AndroidBox | BoxRetrieveResponse.WindowsBox;
+
+export namespace BoxRetrieveResponse {
+  /**
+   * Windows VM box instance with full configuration and status
+   */
+  export interface WindowsBox {
+    /**
+     * Unique identifier for the box
+     */
+    id: string;
+
+    /**
+     * Windows box instance configuration
+     */
+    config: WindowsBox.Config;
+
+    /**
+     * Creation timestamp of the box
+     */
+    createdAt: string;
+
+    /**
+     * Expiration timestamp of the box
+     */
+    expiresAt: string | null;
+
+    /**
+     * The current status of a box instance
+     */
+    status: 'pending' | 'running' | 'error' | 'terminated';
+
+    /**
+     * Box type is Windows
+     */
+    type: 'windows';
+
+    /**
+     * Last update timestamp of the box
+     */
+    updatedAt: string;
+
+    /**
+     * The reason for the current status, if any
+     */
+    reason?: string | null;
+  }
+
+  export namespace WindowsBox {
+    /**
+     * Windows box instance configuration
+     */
+    export interface Config {
+      /**
+       * Architecture of the box
+       */
+      arch: unknown;
+
+      /**
+       * CPU cores allocated to the box
+       */
+      cpu: number;
+
+      /**
+       * Memory allocated to the box in MiB
+       */
+      memory: number;
+
+      /**
+       * NOVNC URL of the box
+       */
+      novncUrl: unknown;
+
+      /**
+       * Windows operating system configuration
+       */
+      os: Config.Os;
+
+      /**
+       * Public IP address of the box
+       */
+      publicIp: unknown;
+
+      /**
+       * Storage allocated to the box in GiB
+       */
+      storage: number;
+
+      /**
+       * VNC URL of the box
+       */
+      vncUrl: unknown;
+    }
+
+    export namespace Config {
+      /**
+       * Windows operating system configuration
+       */
+      export interface Os {
+        /**
+         * Supported Windows versions
+         */
+        version: '10' | '11';
+      }
+    }
+  }
+}
 
 /**
  * Response containing paginated list of box instances
  */
 export interface BoxListResponse {
   /**
-   * A box instance that can be either Linux or Android type
+   * A box instance that can be Linux, Android, or Windows type
    */
-  data: Array<LinuxBox | AndroidBox>;
+  data: Array<LinuxBox | AndroidBox | BoxListResponse.WindowsBox>;
 
   /**
    * Page number
@@ -822,6 +945,216 @@ export interface BoxListResponse {
    * Total number of items
    */
   total: number;
+}
+
+export namespace BoxListResponse {
+  /**
+   * Windows VM box instance with full configuration and status
+   */
+  export interface WindowsBox {
+    /**
+     * Unique identifier for the box
+     */
+    id: string;
+
+    /**
+     * Windows box instance configuration
+     */
+    config: WindowsBox.Config;
+
+    /**
+     * Creation timestamp of the box
+     */
+    createdAt: string;
+
+    /**
+     * Expiration timestamp of the box
+     */
+    expiresAt: string | null;
+
+    /**
+     * The current status of a box instance
+     */
+    status: 'pending' | 'running' | 'error' | 'terminated';
+
+    /**
+     * Box type is Windows
+     */
+    type: 'windows';
+
+    /**
+     * Last update timestamp of the box
+     */
+    updatedAt: string;
+
+    /**
+     * The reason for the current status, if any
+     */
+    reason?: string | null;
+  }
+
+  export namespace WindowsBox {
+    /**
+     * Windows box instance configuration
+     */
+    export interface Config {
+      /**
+       * Architecture of the box
+       */
+      arch: unknown;
+
+      /**
+       * CPU cores allocated to the box
+       */
+      cpu: number;
+
+      /**
+       * Memory allocated to the box in MiB
+       */
+      memory: number;
+
+      /**
+       * NOVNC URL of the box
+       */
+      novncUrl: unknown;
+
+      /**
+       * Windows operating system configuration
+       */
+      os: Config.Os;
+
+      /**
+       * Public IP address of the box
+       */
+      publicIp: unknown;
+
+      /**
+       * Storage allocated to the box in GiB
+       */
+      storage: number;
+
+      /**
+       * VNC URL of the box
+       */
+      vncUrl: unknown;
+    }
+
+    export namespace Config {
+      /**
+       * Windows operating system configuration
+       */
+      export interface Os {
+        /**
+         * Supported Windows versions
+         */
+        version: '10' | '11';
+      }
+    }
+  }
+}
+
+/**
+ * Windows VM box instance with full configuration and status
+ */
+export interface BoxCreateWindowsResponse {
+  /**
+   * Unique identifier for the box
+   */
+  id: string;
+
+  /**
+   * Windows box instance configuration
+   */
+  config: BoxCreateWindowsResponse.Config;
+
+  /**
+   * Creation timestamp of the box
+   */
+  createdAt: string;
+
+  /**
+   * Expiration timestamp of the box
+   */
+  expiresAt: string | null;
+
+  /**
+   * The current status of a box instance
+   */
+  status: 'pending' | 'running' | 'error' | 'terminated';
+
+  /**
+   * Box type is Windows
+   */
+  type: 'windows';
+
+  /**
+   * Last update timestamp of the box
+   */
+  updatedAt: string;
+
+  /**
+   * The reason for the current status, if any
+   */
+  reason?: string | null;
+}
+
+export namespace BoxCreateWindowsResponse {
+  /**
+   * Windows box instance configuration
+   */
+  export interface Config {
+    /**
+     * Architecture of the box
+     */
+    arch: unknown;
+
+    /**
+     * CPU cores allocated to the box
+     */
+    cpu: number;
+
+    /**
+     * Memory allocated to the box in MiB
+     */
+    memory: number;
+
+    /**
+     * NOVNC URL of the box
+     */
+    novncUrl: unknown;
+
+    /**
+     * Windows operating system configuration
+     */
+    os: Config.Os;
+
+    /**
+     * Public IP address of the box
+     */
+    publicIp: unknown;
+
+    /**
+     * Storage allocated to the box in GiB
+     */
+    storage: number;
+
+    /**
+     * VNC URL of the box
+     */
+    vncUrl: unknown;
+  }
+
+  export namespace Config {
+    /**
+     * Windows operating system configuration
+     */
+    export interface Os {
+      /**
+       * Supported Windows versions
+       */
+      version: '10' | '11';
+    }
+  }
 }
 
 /**
@@ -1156,6 +1489,79 @@ export namespace BoxCreateLinuxParams {
   }
 }
 
+export interface BoxCreateWindowsParams {
+  /**
+   * Configuration for a Windows box instance
+   */
+  config?: BoxCreateWindowsParams.Config;
+
+  /**
+   * Timeout for waiting the box to transition from pending to running state, default
+   * is 30s. If the box doesn't reach running state within this timeout, the API will
+   * return HTTP status code 408. The timed-out box will be automatically deleted and
+   * will not count towards your quota.
+   *
+   * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+   * Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
+   */
+  timeout?: string;
+
+  /**
+   * Wait for the box operation to be completed, default is true
+   */
+  wait?: boolean;
+}
+
+export namespace BoxCreateWindowsParams {
+  /**
+   * Configuration for a Windows box instance
+   */
+  export interface Config {
+    /**
+     * Environment variables for the box. These variables will be available in all
+     * operations including command execution, code running, and other box behaviors
+     */
+    envs?: { [key: string]: string };
+
+    /**
+     * The box will be alive for the given duration
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 60m
+     */
+    expiresIn?: string;
+
+    /**
+     * Keep alive duration on activity. When set to a positive value (e.g., '5m'), the
+     * box expiration time (expiresIn) will be automatically extended to ensure at
+     * least this duration remains whenever there is an box operation on this specific
+     * box. For example, when calling UI Action, FS, Browser, Command, Media, or Run
+     * Code operations with this box's boxId, the box will be kept alive. If keepAlive
+     * is '5m' and the box has 2 minutes remaining, any operation on this boxId will
+     * extend the remaining time to 5 minutes. Set to '0ms' to disable automatic keep
+     * alive extension. This helps keep frequently-used boxes alive without manual
+     * intervention.
+     *
+     * Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+     * Example formats: "500ms", "30s", "5m", "1h" Default: 0ms
+     */
+    keepAlive?: string;
+
+    /**
+     * Key-value pairs of labels for the box. Labels are used to add custom metadata to
+     * help identify, categorize, and manage boxes. Common use cases include project
+     * names, environments, teams, applications, or any other organizational tags that
+     * help you organize and filter your boxes.
+     */
+    labels?: { [key: string]: string };
+
+    /**
+     * Windows operating system version
+     */
+    version?: '10' | '11';
+  }
+}
+
 export interface BoxExecuteCommandsParams {
   /**
    * The command to run
@@ -1291,6 +1697,7 @@ export declare namespace Boxes {
     type LinuxBox as LinuxBox,
     type BoxRetrieveResponse as BoxRetrieveResponse,
     type BoxListResponse as BoxListResponse,
+    type BoxCreateWindowsResponse as BoxCreateWindowsResponse,
     type BoxDisplayResponse as BoxDisplayResponse,
     type BoxExecuteCommandsResponse as BoxExecuteCommandsResponse,
     type BoxLiveViewURLResponse as BoxLiveViewURLResponse,
@@ -1303,6 +1710,7 @@ export declare namespace Boxes {
     type BoxListParams as BoxListParams,
     type BoxCreateAndroidParams as BoxCreateAndroidParams,
     type BoxCreateLinuxParams as BoxCreateLinuxParams,
+    type BoxCreateWindowsParams as BoxCreateWindowsParams,
     type BoxExecuteCommandsParams as BoxExecuteCommandsParams,
     type BoxLiveViewURLParams as BoxLiveViewURLParams,
     type BoxResolutionSetParams as BoxResolutionSetParams,

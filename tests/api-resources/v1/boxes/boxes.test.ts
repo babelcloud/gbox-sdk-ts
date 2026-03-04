@@ -75,6 +75,18 @@ describe('resource boxes', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('createWindows', async () => {
+    const responsePromise = client.v1.boxes.createWindows({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
   test.skip('display', async () => {
     const responsePromise = client.v1.boxes.display('c9bdc193-b54b-4ddb-a035-5ac0c598d32d');
     const rawResponse = await responsePromise.asResponse();

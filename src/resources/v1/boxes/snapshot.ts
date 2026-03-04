@@ -84,7 +84,7 @@ export interface SnapshotCreateResponse {
   /**
    * The type of the box that the snapshot is taken from
    */
-  boxType: 'linux' | 'android';
+  boxType: 'linux' | 'android' | 'windows';
 
   /**
    * Name of the snapshot. This name must be unique within the organization.
@@ -140,7 +140,7 @@ export namespace SnapshotListResponse {
     /**
      * The type of the box that the snapshot is taken from
      */
-    boxType: 'linux' | 'android';
+    boxType: 'linux' | 'android' | 'windows';
 
     /**
      * Name of the snapshot. This name must be unique within the organization.
@@ -171,7 +171,7 @@ export interface SnapshotGetResponse {
   /**
    * The type of the box that the snapshot is taken from
    */
-  boxType: 'linux' | 'android';
+  boxType: 'linux' | 'android' | 'windows';
 
   /**
    * Name of the snapshot. This name must be unique within the organization.
