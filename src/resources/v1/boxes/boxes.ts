@@ -1264,12 +1264,224 @@ export interface BoxRunCodeResponse {
 /**
  * Linux box instance with full configuration and status
  */
-export type BoxStartResponse = LinuxBox | AndroidBox;
+export type BoxStartResponse = LinuxBox | AndroidBox | BoxStartResponse.WindowsBox;
+
+export namespace BoxStartResponse {
+  /**
+   * Windows VM box instance with full configuration and status
+   */
+  export interface WindowsBox {
+    /**
+     * Unique identifier for the box
+     */
+    id: string;
+
+    /**
+     * Windows box instance configuration
+     */
+    config: WindowsBox.Config;
+
+    /**
+     * Creation timestamp of the box
+     */
+    createdAt: string;
+
+    /**
+     * Expiration timestamp of the box
+     */
+    expiresAt: string | null;
+
+    /**
+     * The current status of a box instance
+     */
+    status: 'pending' | 'running' | 'error' | 'terminated';
+
+    /**
+     * Box type is Windows
+     */
+    type: 'windows';
+
+    /**
+     * Last update timestamp of the box
+     */
+    updatedAt: string;
+
+    /**
+     * The reason for the current status, if any
+     */
+    reason?: string | null;
+  }
+
+  export namespace WindowsBox {
+    /**
+     * Windows box instance configuration
+     */
+    export interface Config {
+      /**
+       * Architecture of the box
+       */
+      arch: unknown;
+
+      /**
+       * CPU cores allocated to the box
+       */
+      cpu: number;
+
+      /**
+       * Memory allocated to the box in MiB
+       */
+      memory: number;
+
+      /**
+       * NOVNC URL of the box
+       */
+      novncUrl: unknown;
+
+      /**
+       * Windows operating system configuration
+       */
+      os: Config.Os;
+
+      /**
+       * Public IP address of the box
+       */
+      publicIp: unknown;
+
+      /**
+       * Storage allocated to the box in GiB
+       */
+      storage: number;
+
+      /**
+       * VNC URL of the box
+       */
+      vncUrl: unknown;
+    }
+
+    export namespace Config {
+      /**
+       * Windows operating system configuration
+       */
+      export interface Os {
+        /**
+         * Supported Windows versions
+         */
+        version: '10' | '11';
+      }
+    }
+  }
+}
 
 /**
  * Linux box instance with full configuration and status
  */
-export type BoxStopResponse = LinuxBox | AndroidBox;
+export type BoxStopResponse = LinuxBox | AndroidBox | BoxStopResponse.WindowsBox;
+
+export namespace BoxStopResponse {
+  /**
+   * Windows VM box instance with full configuration and status
+   */
+  export interface WindowsBox {
+    /**
+     * Unique identifier for the box
+     */
+    id: string;
+
+    /**
+     * Windows box instance configuration
+     */
+    config: WindowsBox.Config;
+
+    /**
+     * Creation timestamp of the box
+     */
+    createdAt: string;
+
+    /**
+     * Expiration timestamp of the box
+     */
+    expiresAt: string | null;
+
+    /**
+     * The current status of a box instance
+     */
+    status: 'pending' | 'running' | 'error' | 'terminated';
+
+    /**
+     * Box type is Windows
+     */
+    type: 'windows';
+
+    /**
+     * Last update timestamp of the box
+     */
+    updatedAt: string;
+
+    /**
+     * The reason for the current status, if any
+     */
+    reason?: string | null;
+  }
+
+  export namespace WindowsBox {
+    /**
+     * Windows box instance configuration
+     */
+    export interface Config {
+      /**
+       * Architecture of the box
+       */
+      arch: unknown;
+
+      /**
+       * CPU cores allocated to the box
+       */
+      cpu: number;
+
+      /**
+       * Memory allocated to the box in MiB
+       */
+      memory: number;
+
+      /**
+       * NOVNC URL of the box
+       */
+      novncUrl: unknown;
+
+      /**
+       * Windows operating system configuration
+       */
+      os: Config.Os;
+
+      /**
+       * Public IP address of the box
+       */
+      publicIp: unknown;
+
+      /**
+       * Storage allocated to the box in GiB
+       */
+      storage: number;
+
+      /**
+       * VNC URL of the box
+       */
+      vncUrl: unknown;
+    }
+
+    export namespace Config {
+      /**
+       * Windows operating system configuration
+       */
+      export interface Os {
+        /**
+         * Supported Windows versions
+         */
+        version: '10' | '11';
+      }
+    }
+  }
+}
 
 /**
  * Web terminal result
@@ -1332,10 +1544,10 @@ export interface BoxListParams {
   status?: Array<'all' | 'pending' | 'running' | 'error' | 'terminated'>;
 
   /**
-   * Filter boxes by their type (linux, android, all). Must be an array of types. Use
-   * 'all' to get boxes of any type.
+   * Filter boxes by their type (linux, android, windows, all). Must be an array of
+   * types. Use 'all' to get boxes of any type.
    */
-  type?: Array<'all' | 'linux' | 'android'>;
+  type?: Array<'all' | 'linux' | 'android' | 'windows'>;
 }
 
 export interface BoxCreateAndroidParams {
