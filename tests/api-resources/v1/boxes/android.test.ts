@@ -129,7 +129,7 @@ describe('resource android', () => {
   // Mock server tests are disabled
   test.skip('install: only required params', async () => {
     const responsePromise = client.v1.boxes.android.install('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      apk: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      apk: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -143,7 +143,7 @@ describe('resource android', () => {
   // Mock server tests are disabled
   test.skip('install: required and optional params', async () => {
     const response = await client.v1.boxes.android.install('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      apk: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      apk: await toFile(Buffer.from('Example data'), 'README.md'),
       open: false,
     });
   });
@@ -276,7 +276,7 @@ describe('resource android', () => {
   // Mock server tests are disabled
   test.skip('restore: only required params', async () => {
     const responsePromise = client.v1.boxes.android.restore('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      backup: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      backup: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -290,7 +290,7 @@ describe('resource android', () => {
   // Mock server tests are disabled
   test.skip('restore: required and optional params', async () => {
     const response = await client.v1.boxes.android.restore('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
-      backup: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      backup: await toFile(Buffer.from('Example data'), 'README.md'),
     });
   });
 

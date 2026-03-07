@@ -26,7 +26,7 @@ describe('resource media', () => {
   test.skip('createAlbum: required and optional params', async () => {
     const response = await client.v1.boxes.media.createAlbum('c9bdc193-b54b-4ddb-a035-5ac0c598d32d', {
       name: 'Vacation Photos',
-      media: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+      media: [await toFile(Buffer.from('Example data'), 'README.md')],
     });
   });
 
@@ -175,7 +175,7 @@ describe('resource media', () => {
   test.skip('updateAlbum: only required params', async () => {
     const responsePromise = client.v1.boxes.media.updateAlbum('Pictures', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-      media: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+      media: [await toFile(Buffer.from('Example data'), 'README.md')],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -190,7 +190,7 @@ describe('resource media', () => {
   test.skip('updateAlbum: required and optional params', async () => {
     const response = await client.v1.boxes.media.updateAlbum('Pictures', {
       boxId: 'c9bdc193-b54b-4ddb-a035-5ac0c598d32d',
-      media: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+      media: [await toFile(Buffer.from('Example data'), 'README.md')],
     });
   });
 });
