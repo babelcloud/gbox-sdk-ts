@@ -8,7 +8,6 @@ export {
   type LinuxBox,
   type BoxRetrieveResponse,
   type BoxListResponse,
-  type BoxCreateWindowsResponse,
   type BoxDisplayResponse,
   type BoxExecuteCommandsResponse,
   type BoxLiveViewURLResponse,

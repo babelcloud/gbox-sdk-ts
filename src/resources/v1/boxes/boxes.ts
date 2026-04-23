@@ -190,11 +190,15 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const androidBox = await client.v1.boxes.createAndroid();
+   * await client.v1.boxes.createAndroid();
    * ```
    */
-  createAndroid(body: BoxCreateAndroidParams, options?: RequestOptions): APIPromise<AndroidBox> {
-    return this._client.post('/boxes/android', { body, ...options });
+  createAndroid(body: BoxCreateAndroidParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/boxes/android', {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -204,11 +208,15 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const linuxBox = await client.v1.boxes.createLinux();
+   * await client.v1.boxes.createLinux();
    * ```
    */
-  createLinux(body: BoxCreateLinuxParams, options?: RequestOptions): APIPromise<LinuxBox> {
-    return this._client.post('/boxes/linux', { body, ...options });
+  createLinux(body: BoxCreateLinuxParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/boxes/linux', {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -218,14 +226,15 @@ export class Boxes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.boxes.createWindows();
+   * await client.v1.boxes.createWindows();
    * ```
    */
-  createWindows(
-    body: BoxCreateWindowsParams,
-    options?: RequestOptions,
-  ): APIPromise<BoxCreateWindowsResponse> {
-    return this._client.post('/boxes/windows', { body, ...options });
+  createWindows(body: BoxCreateWindowsParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/boxes/windows', {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -1054,110 +1063,6 @@ export namespace BoxListResponse {
 }
 
 /**
- * Windows VM box instance with full configuration and status
- */
-export interface BoxCreateWindowsResponse {
-  /**
-   * Unique identifier for the box
-   */
-  id: string;
-
-  /**
-   * Windows box instance configuration
-   */
-  config: BoxCreateWindowsResponse.Config;
-
-  /**
-   * Creation timestamp of the box
-   */
-  createdAt: string;
-
-  /**
-   * Expiration timestamp of the box
-   */
-  expiresAt: string | null;
-
-  /**
-   * The current status of a box instance
-   */
-  status: 'pending' | 'running' | 'error' | 'terminated';
-
-  /**
-   * Box type is Windows
-   */
-  type: 'windows';
-
-  /**
-   * Last update timestamp of the box
-   */
-  updatedAt: string;
-
-  /**
-   * The reason for the current status, if any
-   */
-  reason?: string | null;
-}
-
-export namespace BoxCreateWindowsResponse {
-  /**
-   * Windows box instance configuration
-   */
-  export interface Config {
-    /**
-     * Architecture of the box
-     */
-    arch: unknown;
-
-    /**
-     * CPU cores allocated to the box
-     */
-    cpu: number;
-
-    /**
-     * Memory allocated to the box in MiB
-     */
-    memory: number;
-
-    /**
-     * NOVNC URL of the box
-     */
-    novncUrl: unknown;
-
-    /**
-     * Windows operating system configuration
-     */
-    os: Config.Os;
-
-    /**
-     * Public IP address of the box
-     */
-    publicIp: unknown;
-
-    /**
-     * Storage allocated to the box in GiB
-     */
-    storage: number;
-
-    /**
-     * VNC URL of the box
-     */
-    vncUrl: unknown;
-  }
-
-  export namespace Config {
-    /**
-     * Windows operating system configuration
-     */
-    export interface Os {
-      /**
-       * Supported Windows versions
-       */
-      version: '10' | '11';
-    }
-  }
-}
-
-/**
  * Box display
  */
 export interface BoxDisplayResponse {
@@ -1909,7 +1814,6 @@ export declare namespace Boxes {
     type LinuxBox as LinuxBox,
     type BoxRetrieveResponse as BoxRetrieveResponse,
     type BoxListResponse as BoxListResponse,
-    type BoxCreateWindowsResponse as BoxCreateWindowsResponse,
     type BoxDisplayResponse as BoxDisplayResponse,
     type BoxExecuteCommandsResponse as BoxExecuteCommandsResponse,
     type BoxLiveViewURLResponse as BoxLiveViewURLResponse,

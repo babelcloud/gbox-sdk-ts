@@ -27,9 +27,7 @@ const client = new GboxClient({
   environment: 'selfHosting', // or 'production' | 'internal'; defaults to 'production'
 });
 
-const androidBox = await client.v1.boxes.createAndroid();
-
-console.log(androidBox.id);
+await client.v1.boxes.createAndroid();
 ```
 
 ### Request & Response types
@@ -45,7 +43,7 @@ const client = new GboxClient({
   environment: 'selfHosting', // or 'production' | 'internal'; defaults to 'production'
 });
 
-const androidBox: GboxClient.V1.AndroidBox = await client.v1.boxes.createAndroid();
+await client.v1.boxes.createAndroid();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -102,7 +100,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const androidBox = await client.v1.boxes.createAndroid().catch(async (err) => {
+const response = await client.v1.boxes.createAndroid().catch(async (err) => {
   if (err instanceof GboxClient.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -186,9 +184,9 @@ const response = await client.v1.boxes.createAndroid().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: androidBox, response: raw } = await client.v1.boxes.createAndroid().withResponse();
+const { data: result, response: raw } = await client.v1.boxes.createAndroid().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(androidBox.id);
+console.log(result);
 ```
 
 ### Logging
